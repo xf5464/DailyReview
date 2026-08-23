@@ -146,7 +146,8 @@
         'federalDebt', 'cpi', 'pce', 'treasurySpread', 'highYieldSpread',
         'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
-      group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil']
+      group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil'],
+      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs']
     },
     visibleChartIds: [
       'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
@@ -157,7 +158,8 @@
     groups: [
       { id: 'default', name: '默认' },
       { id: 'group_mt432xl1_kz1mx7', name: '美国' },
-      { id: 'group_mt49f5yl_pctlb6', name: '资源' }
+      { id: 'group_mt49f5yl_pctlb6', name: '资源' },
+      { id: 'group_a_share', name: 'A股' }
     ],
     chartGroups: {
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
@@ -170,9 +172,9 @@
       jpyUsd: ['default'],
       brentOil: ['default', 'group_mt49f5yl_pctlb6'],
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
-      aShareTurnover: ['default'],
-      aShareMarginBalance: ['default'],
-      aShareActiveMarketValueThs: ['default'],
+      aShareTurnover: ['default', 'group_a_share'],
+      aShareMarginBalance: ['default', 'group_a_share'],
+      aShareActiveMarketValueThs: ['default', 'group_a_share'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
       sp500: ['default', 'group_mt432xl1_kz1mx7'],
@@ -279,12 +281,21 @@
     var source = value && value.overallSituation ? value.overallSituation : value || {};
     var groups = [{ id: 'default', name: '默认' }];
     var groupIds = new Set(['default']);
+    var addedDefaultGroupIds = new Set();
     (Array.isArray(source.groups) ? source.groups : []).forEach(function (group) {
       var id = String(group && group.id || '').trim();
       var name = String(group && group.name || '').trim().slice(0, 40);
       if (!id || id === 'default' || groupIds.has(id) || !name) return;
       groups.push({ id: id, name: name });
       groupIds.add(id);
+    });
+    DEFAULT_CONFIG.groups.forEach(function (group) {
+      if (group.id === 'default' || groupIds.has(group.id)) return;
+      var hasSameName = groups.some(function (item) { return item.name === group.name; });
+      if (hasSameName) return;
+      groups.push({ id: group.id, name: group.name });
+      groupIds.add(group.id);
+      addedDefaultGroupIds.add(group.id);
     });
 
     var chartOrder = uniqueKnown(source.chartOrder);
@@ -304,7 +315,10 @@
       var memberships = Array.isArray(source.chartGroups && source.chartGroups[id])
         ? source.chartGroups[id].filter(function (groupId) { return groupIds.has(groupId); })
         : ['default'];
-      chartGroups[id] = Array.from(new Set(['default'].concat(memberships)));
+      var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {
+        return addedDefaultGroupIds.has(groupId);
+      });
+      chartGroups[id] = Array.from(new Set(['default'].concat(memberships, migratedMemberships)));
     });
 
     var groupChartOrder = {};
@@ -1085,9 +1099,10 @@
     config.groups.forEach(function (group) {
       var card = createElement('section', 'overall-group-item');
       var header = createElement('div', 'overall-group-item-header');
-      if (group.id === 'default') {
+      var isBuiltInGroup = DEFAULT_CONFIG.groups.some(function (item) { return item.id === group.id; });
+      if (isBuiltInGroup) {
         header.append(createElement('strong', '', group.name));
-        header.append(createElement('span', 'overall-group-fixed-badge', '固定分组'));
+        header.append(createElement('span', 'overall-group-fixed-badge', group.id === 'default' ? '固定分组' : '内置分组'));
       } else {
         var input = document.createElement('input');
         input.className = 'level-select overall-group-name-input';
