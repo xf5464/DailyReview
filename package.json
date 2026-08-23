@@ -2,13 +2,40 @@
   "name": "daily-review",
   "version": "1.0.0",
   "private": true,
-  "description": "Static global macro dashboard published on GitHub Pages.",
+  "author": "xf5464",
+  "description": "Global macro dashboard for Electron and GitHub Pages.",
+  "main": "desktop/main.js",
   "scripts": {
     "build": "node scripts/build.js",
     "preview": "node scripts/serve.js",
-    "test": "node --test && node --check site/app.js && node --check scripts/build.js"
+    "desktop": "npm run build && electron .",
+    "desktop:open": "electron .",
+    "desktop:pack": "npm run build && electron-builder --dir",
+    "desktop:dist": "npm run build && electron-builder",
+    "test": "node --test && node --check site/app.js && node --check scripts/build.js && node --check desktop/main.js"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "electron": "35.7.5",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.dailyreview.app",
+    "productName": "Daily Review",
+    "asar": true,
+    "files": [
+      "desktop/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "artifactName": "Daily-Review-Setup-${version}.${ext}"
+    }
   }
 }

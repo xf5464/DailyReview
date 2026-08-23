@@ -1,6 +1,25 @@
 # DailyReview
 
-全球宏观温度计静态站点。页面从 StockValueEstimate 的 Electron 桌面版“总体形势”分页迁移而来，可与桌面版同时维护和发布。
+全球宏观温度计，同时支持 Electron 桌面版和 GitHub Pages 网页版。两个版本共用页面与构建数据，各自保存浏览器端分组配置。
+
+## 桌面版
+
+首次使用先安装依赖，然后启动：
+
+~~~powershell
+npm install
+npm run desktop
+~~~
+
+`npm run desktop` 会先获取最新数据，再打开 Electron 窗口。若已经构建过数据，可用 `npm run desktop:open` 直接打开。
+
+生成 Windows 安装程序：
+
+~~~powershell
+npm run desktop:dist
+~~~
+
+安装程序输出到 `release/`。
 
 ## 本地验证
 
@@ -18,4 +37,4 @@ npm run preview
 
 推送 main 分支后，GitHub Actions 会构建并发布到 GitHub Pages。工作流也会在北京时间每周一至周六 06:15 自动刷新一次数据，并支持手动运行。
 
-桌面版仍由 StockValueEstimate 独立构建 Electron 安装包；两个发布渠道互不影响。
+推送只会自动更新 GitHub Pages。桌面安装包需要在本地运行 `npm run desktop:dist` 生成。
