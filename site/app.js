@@ -741,7 +741,7 @@
     var actions = createElement('div', 'overall-chart-card-header-actions');
     var latest = chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
     var latestBlock = createElement('div', 'overall-chart-latest');
-    latestBlock.append(createElement('strong', '', latest ? formatValue(chart, latest.value, true) : '--'));
+    latestBlock.append(createElement('strong', '', latest ? formatValue(chart, latest.value, false) : '--'));
     var latestDate = createElement('time', 'overall-chart-latest-date', latest ? formatDate(latest.date) : '暂无日期');
     if (latest) latestDate.dateTime = latest.date;
     latestBlock.append(latestDate);
