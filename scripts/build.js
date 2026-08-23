@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const crypto = require('node:crypto');
 const path = require('node:path');
 const { queryMacroOutlook } = require('./macro-outlook');
 
@@ -7,9 +8,25 @@ const siteDirectory = path.join(projectRoot, 'site');
 const outputDirectory = path.join(projectRoot, 'dist');
 const dataDirectory = path.join(outputDirectory, 'data');
 
+function addAssetVersions() {
+  const indexPath = path.join(outputDirectory, 'index.html');
+  const versionFor = (fileName) => crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(path.join(outputDirectory, fileName)))
+    .digest('hex')
+    .slice(0, 12);
+  const appVersion = versionFor('app.js');
+  const stylesVersion = versionFor('styles.css');
+  const html = fs.readFileSync(indexPath, 'utf8')
+    .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
+    .replace('src="app.js"', `src="app.js?v=${appVersion}"`);
+  fs.writeFileSync(indexPath, html, 'utf8');
+}
+
 async function build() {
   fs.rmSync(outputDirectory, { recursive: true, force: true });
   fs.cpSync(siteDirectory, outputDirectory, { recursive: true });
+  addAssetVersions();
   fs.mkdirSync(dataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
 

@@ -30,7 +30,7 @@ DailyReview/
 `npm run build` 执行以下流程：
 
 1. 清空并重建 `dist/`。
-2. 复制 `site/` 静态资源。
+2. 复制 `site/` 静态资源，并按 JS/CSS 内容哈希给资源 URL 加版本号，避免 GitHub Pages 的十分钟缓存继续运行旧前端。
 3. 并行请求各指标最近十年或数据源允许的最长可用历史。
 4. 单个数据源失败时保留对应错误，不阻断其他指标。
 5. 至少一个指标可用才写出 `dist/data/outlook.json`。
