@@ -116,6 +116,8 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
+  var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
+  var DEFAULT_LINE_WIDTH = 1;
   var DEFAULT_CONFIG = {
     chartsPerRow: 4,
     chartOrder: [
@@ -190,6 +192,7 @@
     refresh: document.querySelector('#overallRefreshButton'),
     viewToggle: document.querySelector('#overallViewToggleButton'),
     compareButton: document.querySelector('#overallCompareButton'),
+    displayButton: document.querySelector('#displayControlsButton'),
     groupsButton: document.querySelector('#overallManageGroupsButton'),
     manageButton: document.querySelector('#overallManageButton'),
     grid: document.querySelector('#overallChartGrid'),
@@ -206,6 +209,7 @@
     compareMessage: document.querySelector('#overallCompareMessage'),
     compareChart: document.querySelector('#overallCompareChart'),
     detailDialog: document.querySelector('#overallDetailDialog'),
+    detailClose: document.querySelector('#overallDetailCloseButton'),
     detailTitle: document.querySelector('#overallDetailTitle'),
     detailHelp: document.querySelector('#overallDetailHelpTooltip'),
     detailRange: document.querySelector('#overallDetailRangeSelect'),
@@ -219,11 +223,32 @@
     groupsDialog: document.querySelector('#overallGroupsDialog'),
     groupsList: document.querySelector('#overallGroupsList'),
     groupsMessage: document.querySelector('#overallGroupsMessage'),
-    newGroupName: document.querySelector('#overallNewGroupName')
+    newGroupName: document.querySelector('#overallNewGroupName'),
+    displayDialog: document.querySelector('#displayControlsDialog'),
+    lineWidth: document.querySelector('#chartLineWidthInput'),
+    lineWidthOutput: document.querySelector('#chartLineWidthOutput'),
+    displayFile: document.querySelector('#displayControlsConfigFileInput'),
+    displayMessage: document.querySelector('#displayControlsMessage')
   };
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
+  }
+
+  function normalizeLineWidth(value) {
+    if (value === null || value === undefined || value === '') return DEFAULT_LINE_WIDTH;
+    var parsed = Number(value);
+    if (!Number.isFinite(parsed)) return DEFAULT_LINE_WIDTH;
+    return Math.min(6, Math.max(1, Math.round(parsed * 2) / 2));
+  }
+
+  function applyLineWidth(value, persist) {
+    var width = normalizeLineWidth(value);
+    document.documentElement.style.setProperty('--chart-line-width', width + 'px');
+    refs.lineWidth.value = String(width);
+    refs.lineWidthOutput.value = width + ' px';
+    refs.lineWidthOutput.textContent = width + ' px';
+    if (persist !== false) localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(width));
   }
 
   function uniqueKnown(values) {
@@ -864,6 +889,7 @@
     refs.detailRange.value = refs.range.value;
     renderDetail();
     refs.detailDialog.showModal();
+    refs.detailClose.focus({ preventScroll: true });
   }
 
   function renderDetail() {
@@ -1118,6 +1144,35 @@
     }
   }
 
+  function exportDisplayConfig() {
+    var payload = { version: 1, displayControls: { chartLineWidth: normalizeLineWidth(refs.lineWidth.value) } };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'daily-review-display-config.json';
+    anchor.click();
+    URL.revokeObjectURL(url);
+    refs.displayMessage.textContent = '显示设置已导出。';
+  }
+
+  async function importDisplayConfig(file) {
+    try {
+      var parsed = JSON.parse(await file.text());
+      var source = parsed && parsed.displayControls || parsed;
+      var width = Number(source && source.chartLineWidth);
+      if (!Number.isFinite(width) || width < 1 || width > 6 || width * 2 % 1 !== 0) {
+        throw new Error('invalid line width');
+      }
+      applyLineWidth(width);
+      refs.displayMessage.textContent = '已上传显示设置：图表线条 ' + width + ' px。';
+    } catch (error) {
+      refs.displayMessage.textContent = '显示设置文件无效，线条粗细必须为 1–6，步进为 0.5。';
+    } finally {
+      refs.displayFile.value = '';
+    }
+  }
+
   function bindEvents() {
     refs.range.addEventListener('change', renderAll);
     refs.columns.addEventListener('change', function () {
@@ -1141,6 +1196,23 @@
       refs.configDialog.showModal();
     });
     refs.compareButton.addEventListener('click', showCompare);
+    refs.displayButton.addEventListener('click', function () {
+      refs.displayMessage.textContent = '';
+      refs.displayDialog.showModal();
+      refs.lineWidth.focus({ preventScroll: true });
+    });
+    refs.lineWidth.addEventListener('input', function () { applyLineWidth(refs.lineWidth.value); });
+    document.querySelector('#displayControlsResetButton').addEventListener('click', function () {
+      applyLineWidth(DEFAULT_LINE_WIDTH);
+      refs.displayMessage.textContent = '已恢复迁移后的默认显示设置。';
+    });
+    document.querySelector('#displayControlsImportButton').addEventListener('click', function () {
+      refs.displayFile.click();
+    });
+    refs.displayFile.addEventListener('change', function () {
+      if (refs.displayFile.files[0]) importDisplayConfig(refs.displayFile.files[0]);
+    });
+    document.querySelector('#displayControlsExportButton').addEventListener('click', exportDisplayConfig);
     refs.groupsButton.addEventListener('click', function () {
       renderGroups();
       refs.groupsMessage.textContent = '';
@@ -1178,6 +1250,7 @@
   }
 
   function initialize() {
+    applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
     syncGroups();
     refs.columns.value = String(config.chartsPerRow);
     populateRangeSelect(refs.compareRange, refs.range.value);

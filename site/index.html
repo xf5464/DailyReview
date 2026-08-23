@@ -65,6 +65,7 @@
             <button class="secondary-button" type="button" id="overallRefreshButton">刷新数据</button>
             <button class="secondary-button" type="button" id="overallViewToggleButton">表格视图</button>
             <button class="secondary-button" type="button" id="overallCompareButton">对比</button>
+            <button class="secondary-button" type="button" id="displayControlsButton">显示设置</button>
             <button class="secondary-button" type="button" id="overallManageGroupsButton">管理分组</button>
             <button class="primary-button" type="button" id="overallManageButton">管理图表</button>
           </div>
@@ -129,7 +130,7 @@
               </span>
             </div>
           </div>
-          <button class="dialog-close-button" type="button" data-close="overallDetailDialog" aria-label="关闭">×</button>
+          <button class="dialog-close-button" type="button" id="overallDetailCloseButton" data-close="overallDetailDialog" aria-label="关闭">×</button>
         </div>
         <div class="overall-compare-controls">
           <label>时间<select class="level-select" id="overallDetailRangeSelect"></select></label>
@@ -158,6 +159,35 @@
         <div class="overall-groups-list" id="overallGroupsList"></div>
         <div class="overall-config-actions"><button class="primary-button" type="button" data-close="overallGroupsDialog">完成</button></div>
         <p class="overall-config-message" id="overallGroupsMessage" role="status"></p>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog display-controls-dialog" id="displayControlsDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">VIEW</p><h2>显示设置</h2></div>
+          <button class="dialog-close-button" type="button" data-close="displayControlsDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="display-control-list">
+          <div class="display-control-item">
+            <div>
+              <label for="chartLineWidthInput">图表线条粗细</label>
+              <p>统一调整所有图表的数据曲线，不影响坐标轴、网格线和鼠标辅助线。</p>
+            </div>
+            <div class="display-line-width-control">
+              <input id="chartLineWidthInput" type="range" min="1" max="6" step="0.5" value="1" />
+              <output id="chartLineWidthOutput" for="chartLineWidthInput">1 px</output>
+            </div>
+          </div>
+        </div>
+        <input type="file" id="displayControlsConfigFileInput" accept=".json,application/json" hidden />
+        <div class="overall-config-actions">
+          <button class="secondary-button" type="button" id="displayControlsImportButton">上传配置</button>
+          <button class="secondary-button" type="button" id="displayControlsExportButton">导出配置</button>
+          <button class="secondary-button" type="button" id="displayControlsResetButton">恢复默认</button>
+          <button class="primary-button" type="button" data-close="displayControlsDialog">完成</button>
+        </div>
+        <p class="overall-config-message" id="displayControlsMessage" role="status"></p>
       </div>
     </dialog>
 
