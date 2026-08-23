@@ -115,19 +115,64 @@
     year10: { label: '10年', months: 120 }
   };
 
-  var STORAGE_KEY = 'daily-review.overall-situation-config.v1';
+  var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
   var DEFAULT_CONFIG = {
-    chartsPerRow: 3,
-    chartOrder: CHART_IDS.slice(),
-    groupChartOrder: { default: CHART_IDS.slice() },
-    visibleChartIds: CHART_IDS.slice(),
-    groups: [{ id: 'default', name: '默认' }],
-    chartGroups: {},
-    selectedGroupId: 'default'
+    chartsPerRow: 4,
+    chartOrder: [
+      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+      'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
+      'initialClaims', 'financialConditions', 'treasuryYield'
+    ],
+    groupChartOrder: {
+      default: [
+        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+        'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+        'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
+        'initialClaims', 'financialConditions', 'treasuryYield'
+      ],
+      group_mt432xl1_kz1mx7: [
+        'treasuryYield30', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
+        'federalDebt', 'cpi', 'pce', 'treasurySpread', 'highYieldSpread',
+        'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
+      ],
+      group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil']
+    },
+    visibleChartIds: [
+      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+      'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
+      'initialClaims', 'financialConditions'
+    ],
+    groups: [
+      { id: 'default', name: '默认' },
+      { id: 'group_mt432xl1_kz1mx7', name: '美国' },
+      { id: 'group_mt49f5yl_pctlb6', name: '资源' }
+    ],
+    chartGroups: {
+      treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
+      treasuryYield30: ['default', 'group_mt432xl1_kz1mx7'],
+      cpi: ['default', 'group_mt432xl1_kz1mx7'],
+      pce: ['default', 'group_mt432xl1_kz1mx7'],
+      gold: ['default', 'group_mt49f5yl_pctlb6'],
+      bitcoin: ['default'],
+      federalDebt: ['default', 'group_mt432xl1_kz1mx7'],
+      jpyUsd: ['default'],
+      brentOil: ['default', 'group_mt49f5yl_pctlb6'],
+      wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
+      aShareTurnover: ['default'],
+      nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
+      ndx: ['default', 'group_mt432xl1_kz1mx7'],
+      sp500: ['default', 'group_mt432xl1_kz1mx7'],
+      vix: ['default', 'group_mt432xl1_kz1mx7'],
+      treasurySpread: ['default', 'group_mt432xl1_kz1mx7'],
+      highYieldSpread: ['default', 'group_mt432xl1_kz1mx7'],
+      broadDollar: ['default', 'group_mt432xl1_kz1mx7'],
+      initialClaims: ['default', 'group_mt432xl1_kz1mx7'],
+      financialConditions: ['default', 'group_mt432xl1_kz1mx7']
+    },
+    selectedGroupId: 'group_mt432xl1_kz1mx7'
   };
-  CHART_IDS.forEach(function (id) {
-    DEFAULT_CONFIG.chartGroups[id] = ['default'];
-  });
 
   var data = null;
   var config = loadConfig();
