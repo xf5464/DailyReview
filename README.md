@@ -2,6 +2,8 @@
 
 全球宏观温度计，同时支持 Electron 桌面版和 GitHub Pages 网页版。两个版本共用页面与构建数据，各自保存浏览器端分组配置。
 
+完整架构、数据口径和变更约定见 [`docs/system-design.md`](docs/system-design.md)。
+
 ## 桌面版
 
 首次使用先安装依赖，然后启动：

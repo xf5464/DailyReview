@@ -241,6 +241,15 @@ const CHART_METADATA = {
     sourceName: '中证指数官网 / 中证全指（000985）',
     sourceUrl: 'https://www.csindex.com.cn/#/indices/family/detail?indexCode=000985',
   },
+  aShareMarginBalance: {
+    id: 'aShareMarginBalance',
+    title: 'A股融资余额（三市）',
+    unit: '亿元',
+    decimals: 0,
+    frequency: '日度',
+    sourceName: '东方财富 / 沪深北交易所汇总',
+    sourceUrl: 'https://data.eastmoney.com/rzrq/',
+  },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
     title: '纳斯达克100市盈率（NDX）',
@@ -499,6 +508,21 @@ function buildAShareTurnoverUrl(startDate, endDate) {
   return `https://www.csindex.com.cn/csindex-home/perf/index-perf?${params.toString()}`;
 }
 
+function buildAShareMarginBalanceUrl(startDate) {
+  const params = new URLSearchParams({
+    reportName: 'RPT_MARGIN_TOTALDATA',
+    columns: 'TRADE_DATE,FIN_BALANCE',
+    filter: `(TRADE_DATE>='${startDate}')`,
+    pageNumber: '1',
+    pageSize: '5000',
+    sortTypes: '1',
+    sortColumns: 'TRADE_DATE',
+    source: 'WEB',
+    client: 'WEB',
+  });
+  return `https://datacenter-web.eastmoney.com/api/data/v1/get?${params.toString()}`;
+}
+
 function parseTreasuryDebt(text) {
   const rows = JSON.parse(String(text ?? ''))?.data;
   if (!Array.isArray(rows)) throw new Error('美国财政部债务数据格式无效');
@@ -537,6 +561,22 @@ function parseAShareTurnover(text) {
     // 中证指数官网的 tradingValue 字段单位为亿元。
     const rawValue = row?.tradingValue;
     const value = rawValue === null || rawValue === undefined || rawValue === '' ? Number.NaN : Number(rawValue);
+    return date && Number.isFinite(value) ? { date, value } : null;
+  }).filter(Boolean);
+}
+
+function parseAShareMarginBalance(text) {
+  const payload = JSON.parse(String(text ?? ''));
+  if (payload?.success !== true) throw new Error(payload?.message || 'A股融资余额返回异常');
+  const rows = payload?.result?.data;
+  if (!Array.isArray(rows)) throw new Error('A股融资余额数据格式无效');
+  return rows.map((row) => {
+    const dateText = String(row?.TRADE_DATE ?? '').slice(0, 10);
+    const date = normalizeObservationDate(dateText);
+    const rawValue = row?.FIN_BALANCE;
+    const value = rawValue === null || rawValue === undefined || rawValue === ''
+      ? Number.NaN
+      : Number(rawValue) / 100_000_000;
     return date && Number.isFinite(value) ? { date, value } : null;
   }).filter(Boolean);
 }
@@ -694,6 +734,14 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    aShareMarginBalance: () => loadChart(CHART_METADATA.aShareMarginBalance, async () => {
+      const text = await fetchCsv(buildAShareMarginBalanceUrl(dailyStartDate), fetchImpl, {
+        Accept: 'application/json',
+        Referer: 'https://data.eastmoney.com/',
+      });
+      const availableItems = filterDateRange(parseAShareMarginBalance(text), dailyStartDate, endDate);
+      return filterRecentItems(availableItems, range);
+    }),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
       filterRecentItems(parseNasdaq100PeSnapshot(), range, 'monthly')
     )),
@@ -754,6 +802,7 @@ module.exports = {
   buildSinaGoldUrl,
   buildTreasuryDebtUrl,
   buildAShareTurnoverUrl,
+  buildAShareMarginBalanceUrl,
   calculateYearOverYear,
   filterRecentItems,
   normalizeObservationDate,
@@ -765,6 +814,7 @@ module.exports = {
   parseSinaGold,
   parseTreasuryDebt,
   parseAShareTurnover,
+  parseAShareMarginBalance,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 };

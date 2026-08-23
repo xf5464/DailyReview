@@ -3,7 +3,7 @@
 
   var CHART_IDS = [
     'treasuryYield', 'treasuryYield30', 'cpi', 'pce', 'gold', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'aShareTurnover',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'aShareTurnover', 'aShareMarginBalance',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions'
   ];
@@ -20,6 +20,7 @@
     brentOil: '布伦特原油价格',
     wtiOil: 'WTI 原油价格',
     aShareTurnover: 'A股全A成交额',
+    aShareMarginBalance: 'A股融资余额（三市）',
     nasdaq100Pe: '纳斯达克100市盈率（NDX）',
     ndx: 'NDX（纳斯达克100指数）',
     sp500: '标普500指数（SPX）',
@@ -43,6 +44,7 @@
     brentOil: '能源',
     wtiOil: '能源',
     aShareTurnover: 'A股市场',
+    aShareMarginBalance: 'A股杠杆资金',
     nasdaq100Pe: '美股估值',
     ndx: '美股指数',
     sp500: '美股指数',
@@ -66,6 +68,7 @@
     brentOil: '布伦特原油现货价格，是欧洲及全球原油定价的重要基准，受全球供需、库存和地缘风险影响。',
     wtiOil: '美国西得克萨斯中质原油现货价格，是美国原油定价基准，受美国供需、库存和全球油市影响。',
     aShareTurnover: 'A 股全市场当日成交金额，单位为亿元。它主要反映市场交易活跃度和资金参与度，不直接代表指数涨跌方向。',
+    aShareMarginBalance: '沪、深、北三市融资余额合计，单位为亿元，表示投资者尚未偿还的融资买入金额。余额上升通常代表杠杆资金净流入，但不等同于市场一定上涨。',
     nasdaq100Pe: '纳斯达克 100 指数的滚动市盈率（TTM），即指数市值相对过去 12 个月盈利的倍数，用于观察估值高低。',
     ndx: '纳斯达克 100 指数点位，覆盖纳斯达克上市的主要非金融公司，科技和成长型公司的权重较高。',
     sp500: '标普 500 指数点位，覆盖美国约 500 家大型上市公司，是衡量美国大盘股表现的核心基准之一。',
@@ -89,6 +92,7 @@
     brentOil: '#52606d',
     wtiOil: '#8a5a2b',
     aShareTurnover: '#b84f16',
+    aShareMarginBalance: '#0f766e',
     nasdaq100Pe: '#6a42c2',
     ndx: '#335cc7',
     sp500: '#16806a',
@@ -121,14 +125,14 @@
   var DEFAULT_CONFIG = {
     chartsPerRow: 4,
     chartOrder: [
-      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'federalDebt',
       'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions', 'treasuryYield'
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'federalDebt',
         'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
         'initialClaims', 'financialConditions', 'treasuryYield'
@@ -141,7 +145,7 @@
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil']
     },
     visibleChartIds: [
-      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'federalDebt',
+      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'federalDebt',
       'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions'
@@ -163,6 +167,7 @@
       brentOil: ['default', 'group_mt49f5yl_pctlb6'],
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
       aShareTurnover: ['default'],
+      aShareMarginBalance: ['default'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
       sp500: ['default', 'group_mt432xl1_kz1mx7'],
@@ -273,12 +278,16 @@
     });
 
     var chartOrder = uniqueKnown(source.chartOrder);
+    var newlyAddedChartIds = CHART_IDS.filter(function (id) { return !chartOrder.includes(id); });
     CHART_IDS.forEach(function (id) {
       if (!chartOrder.includes(id)) chartOrder.push(id);
     });
 
     var visible = uniqueKnown(source.visibleChartIds);
     if (!Array.isArray(source.visibleChartIds)) visible = CHART_IDS.slice();
+    else newlyAddedChartIds.forEach(function (id) {
+      if (!visible.includes(id)) visible.push(id);
+    });
 
     var chartGroups = {};
     CHART_IDS.forEach(function (id) {
@@ -756,7 +765,7 @@
       }).format(fetched);
     var failed = data.charts.filter(function (chart) { return chart.error && !chart.items.length; }).length;
     refs.meta.textContent = '数据更新时间：' + fetchedLabel +
-      (failed ? ' · ' + failed + ' 个数据源暂不可用' : ' · 20 个指标已就绪');
+      (failed ? ' · ' + failed + ' 个数据源暂不可用' : ' · ' + data.charts.length + ' 个指标已就绪');
   }
 
   function renderAll() {

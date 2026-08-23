@@ -13,6 +13,7 @@ const {
   parseSinaGold,
   parseTreasuryDebt,
   parseAShareTurnover,
+  parseAShareMarginBalance,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 } = require('../scripts/macro-outlook');
@@ -71,6 +72,16 @@ test('A-share all-market parser reads official turnover in 100 million yuan', ()
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 19346.8 }]);
 });
 
+test('A-share margin parser converts the three-market financing balance to 100 million yuan', () => {
+  const rows = parseAShareMarginBalance(JSON.stringify({
+    success: true,
+    result: { data: [
+      { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
+    ] },
+  }));
+  assert.deepEqual(rows, [{ date: '2026-08-20', value: 26305.15364858 }]);
+});
+
 test('Nasdaq-100 PE snapshot parser reads monthly trailing multiples', () => {
   assert.deepEqual(parseNasdaq100PeSnapshot('date,value\n2026-07,36.05\n2026-08,33.82'), [
     { date: '2026-07-01', value: 36.05 },
@@ -114,7 +125,7 @@ test('short ranges keep the latest monthly point while daily data uses elapsed t
   ]);
 });
 
-test('macro outlook query returns twenty independent chart payloads', async () => {
+test('macro outlook query returns twenty-one independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -143,6 +154,10 @@ test('macro outlook query returns twenty independent chart payloads', async () =
     { tradeDate: '20260820', tradingValue: 19346.8 },
     { tradeDate: '20260821', tradingValue: 20500.25 },
   ] });
+  const aShareMarginData = JSON.stringify({ success: true, result: { data: [
+    { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
+    { TRADE_DATE: '2026-08-21 00:00:00', FIN_BALANCE: 2640015364858 },
+  ] } });
   const fetchImpl = async (url) => {
     const seriesId = Object.keys(fredData).find((id) => url.includes(`id=${id}`));
     return {
@@ -150,6 +165,7 @@ test('macro outlook query returns twenty independent chart payloads', async () =
       status: 200,
       text: async () => url.includes('api.fiscaldata.treasury.gov')
         ? JSON.stringify({ data: [{ record_date: '2026-08-20', tot_pub_debt_out_amt: '39500000000000' }] })
+        : url.includes('RPT_MARGIN_TOTALDATA') ? aShareMarginData
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
     };
@@ -158,10 +174,10 @@ test('macro outlook query returns twenty independent chart payloads', async () =
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'cpi', 'pce', 'gold', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'aShareTurnover', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'aShareTurnover', 'aShareMarginBalance', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(20).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(21).fill(null));
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
   assert.equal(result.charts.find((chart) => chart.id === 'bitcoin').items.at(-1).value, 78000);
@@ -170,6 +186,7 @@ test('macro outlook query returns twenty independent chart payloads', async () =
   assert.equal(result.charts.find((chart) => chart.id === 'brentOil').items.at(-1).value, 95.3);
   assert.equal(result.charts.find((chart) => chart.id === 'wtiOil').items.at(-1).value, 86.5);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').items.at(-1).value, 20500.25);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').items.at(-1).value, 7780.45);
@@ -199,6 +216,11 @@ test('one failed source does not prevent the remaining charts from loading', asy
       return { ok: true, status: 200, text: async () => JSON.stringify({ code: '200', data: [
         { tradeDate: '20260820', tradingValue: 19346.8 },
       ] }) };
+    }
+    if (url.includes('RPT_MARGIN_TOTALDATA')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ success: true, result: { data: [
+        { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
+      ] } }) };
     }
     const id = ['DGS10', 'DGS30', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DCOILBRENTEU', 'DCOILWTICO', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'DTWEXBGS', 'ICSA', 'NFCI']
       .find((seriesId) => url.includes(`id=${seriesId}`));
@@ -233,6 +255,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'brentOil').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'wtiOil').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').error, null);
@@ -263,4 +286,3 @@ test('macro outlook only requests selected visible charts', async () => {
   assert.equal(urls.length, 1);
   assert.match(urls[0], /id=CBBTCUSD/);
 });
-
