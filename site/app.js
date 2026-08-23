@@ -192,6 +192,8 @@
   var activeDetailId = null;
   var draggedChartId = null;
   var tooltip = null;
+  var sharedConfigAvailable = false;
+  var sharedConfigSaveQueue = Promise.resolve();
 
   var refs = {
     meta: document.querySelector('#overallPageMeta'),
@@ -258,7 +260,10 @@
     refs.lineWidth.value = String(width);
     refs.lineWidthOutput.value = width + ' px';
     refs.lineWidthOutput.textContent = width + ' px';
-    if (persist !== false) localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(width));
+    if (persist !== false) {
+      localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(width));
+      persistSharedConfig();
+    }
   }
 
   function uniqueKnown(values) {
@@ -338,6 +343,58 @@
 
   function persistConfig() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+    persistSharedConfig();
+  }
+
+  function sharedConfigPayload() {
+    return {
+      overallSituation: config,
+      displayControls: {
+        chartLineWidth: normalizeLineWidth(refs.lineWidth && refs.lineWidth.value)
+      }
+    };
+  }
+
+  function persistSharedConfig() {
+    if (!sharedConfigAvailable) return;
+    var body = JSON.stringify(sharedConfigPayload());
+    sharedConfigSaveQueue = sharedConfigSaveQueue.catch(function () {}).then(function () {
+      return fetch('api/local-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+      });
+    }).catch(function () {
+      // GitHub Pages 等纯静态环境继续使用当前浏览器的 localStorage。
+    });
+  }
+
+  async function syncSharedLocalConfig() {
+    try {
+      var response = await fetch('api/local-config', { cache: 'no-store' });
+      if (!response.ok) return;
+      var payload = await response.json();
+      sharedConfigAvailable = true;
+      if (!payload || !payload.config) {
+        persistSharedConfig();
+        return;
+      }
+      var storedConfig = payload.config;
+      if (storedConfig.overallSituation) {
+        config = sanitizeConfig(storedConfig.overallSituation);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+      }
+      var storedWidth = storedConfig.displayControls && storedConfig.displayControls.chartLineWidth;
+      if (storedWidth !== undefined) {
+        applyLineWidth(storedWidth, false);
+        localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(normalizeLineWidth(storedWidth)));
+      }
+      syncGroups();
+      refs.columns.value = String(config.chartsPerRow);
+      renderAll();
+    } catch (error) {
+      // 未提供本机配置接口时保持浏览器本地配置。
+    }
   }
 
   function createElement(tag, className, text) {
@@ -520,11 +577,14 @@
     return best;
   }
 
-  function ensureTooltip() {
-    if (tooltip) return tooltip;
-    tooltip = createElement('div', 'floating-chart-tooltip');
-    tooltip.hidden = true;
-    document.body.append(tooltip);
+  function ensureTooltip(anchor) {
+    var dialogHost = anchor && anchor.closest ? anchor.closest('dialog[open]') : null;
+    var host = dialogHost || document.body;
+    if (!tooltip) {
+      tooltip = createElement('div', 'floating-chart-tooltip');
+      tooltip.hidden = true;
+    }
+    if (tooltip.parentNode !== host) host.append(tooltip);
     return tooltip;
   }
 
@@ -627,7 +687,7 @@
       point.setAttribute('cx', x);
       point.setAttribute('cy', y);
       point.setAttribute('opacity', '1');
-      var tip = ensureTooltip();
+      var tip = ensureTooltip(svg);
       tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value);
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
@@ -1277,6 +1337,7 @@
     bindEvents();
     syncView();
     loadData(false);
+    syncSharedLocalConfig();
   }
 
   initialize();

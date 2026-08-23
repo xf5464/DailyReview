@@ -1,6 +1,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const { handleLocalConfigRequest } = require('../desktop/local-config');
 
 const root = path.resolve(__dirname, '..', 'dist');
 const port = Number(process.env.DAILY_REVIEW_PORT || 4173);
@@ -14,6 +15,7 @@ const contentTypes = {
 
 const server = http.createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+  if (handleLocalConfigRequest(request, response, pathname)) return;
   const requested = pathname === '/' ? '/index.html' : pathname;
   const filePath = path.resolve(root, '.' + requested);
   if (!filePath.startsWith(root + path.sep)) {

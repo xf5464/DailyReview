@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, dialog, shell } = require('electron');
 const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
+const { handleLocalConfigRequest } = require('./local-config');
 
 let mainWindow = null;
 let staticServer = null;
@@ -35,6 +36,7 @@ function startStaticServer() {
   staticServer = http.createServer((request, response) => {
     try {
       const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+      if (handleLocalConfigRequest(request, response, pathname)) return;
       const requested = pathname === '/' ? '/index.html' : pathname;
       const filePath = path.resolve(root, '.' + requested);
 
