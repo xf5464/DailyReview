@@ -1,0 +1,14 @@
+{
+  "name": "daily-review",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static global macro dashboard published on GitHub Pages.",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "preview": "node scripts/serve.js",
+    "test": "node --test && node --check site/app.js && node --check scripts/build.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

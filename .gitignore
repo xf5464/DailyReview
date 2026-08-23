@@ -164,8 +164,7 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
-/site
+# Site source lives in /site for this repository.
 
 # mypy
 .mypy_cache/
@@ -202,6 +201,10 @@ cython_debug/
 # .vscode/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
+
+# Node / static-site output
+node_modules/
+dist/
 
 # Ruff stuff:
 .ruff_cache/

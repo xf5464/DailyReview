@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7fb" />
+    <meta name="description" content="汇总全球利率、通胀、资产、汇率与风险指标的宏观温度计。" />
+    <meta property="og:title" content="Daily Review · 全球宏观温度计" />
+    <meta property="og:description" content="一页查看全球利率、通胀、资产、汇率与风险指标。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xf5464.github.io/DailyReview/" />
+    <meta property="og:image" content="https://xf5464.github.io/DailyReview/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Daily Review · 全球宏观温度计" />
+    <meta name="twitter:description" content="一页查看全球利率、通胀、资产、汇率与风险指标。" />
+    <meta name="twitter:image" content="https://xf5464.github.io/DailyReview/og.png" />
+    <title>Daily Review · 全球宏观温度计</title>
+    <link rel="canonical" href="https://xf5464.github.io/DailyReview/" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">DAILY REVIEW</p>
+          <h1>全球宏观温度计</h1>
+          <p class="data-meta" id="overallPageMeta" aria-live="polite">正在加载宏观、资产与汇率数据...</p>
+        </div>
+        <span class="site-badge">总体形势</span>
+      </header>
+
+      <section class="overall-page" id="overallPage" aria-label="总体形势">
+        <div class="overall-header">
+          <div>
+            <p class="industry-detail-kicker" id="overallRangeKicker">最近 3个月</p>
+            <h2>市场指标</h2>
+            <p class="update-note">数据由 GitHub Actions 定时更新；刷新按钮会读取最近一次发布结果。</p>
+          </div>
+          <div class="overall-controls">
+            <label class="level-select-label" for="overallGroupSelect">分组</label>
+            <select class="level-select" id="overallGroupSelect"><option value="default">默认</option></select>
+            <label class="level-select-label" for="overallRangeSelect">时间</label>
+            <select class="level-select" id="overallRangeSelect">
+              <option value="day1">1天</option>
+              <option value="week1">1周</option>
+              <option value="week2">2周</option>
+              <option value="week4">4周</option>
+              <option value="month1">1个月</option>
+              <option value="month3" selected>3个月</option>
+              <option value="month6">6个月</option>
+              <option value="year1">1年</option>
+              <option value="year2">2年</option>
+              <option value="year3">3年</option>
+              <option value="year5">5年</option>
+              <option value="year10">10年</option>
+            </select>
+            <label class="level-select-label" for="overallColumnsSelect">每行图表</label>
+            <select class="level-select" id="overallColumnsSelect">
+              <option value="1">1 个</option>
+              <option value="2">2 个</option>
+              <option value="3" selected>3 个</option>
+              <option value="4">4 个</option>
+            </select>
+            <button class="secondary-button" type="button" id="overallRefreshButton">刷新数据</button>
+            <button class="secondary-button" type="button" id="overallViewToggleButton">表格视图</button>
+            <button class="secondary-button" type="button" id="overallCompareButton">对比</button>
+            <button class="secondary-button" type="button" id="overallManageGroupsButton">管理分组</button>
+            <button class="primary-button" type="button" id="overallManageButton">管理图表</button>
+          </div>
+        </div>
+
+        <div class="overall-chart-grid" id="overallChartGrid" aria-live="polite"></div>
+        <div class="overall-table-view" id="overallTableView" hidden>
+          <table>
+            <thead><tr><th>图表</th><th>最新数值</th><th>发布时间</th><th>频率</th><th>操作</th></tr></thead>
+            <tbody id="overallTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="overall-config-dialog" id="overallConfigDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">总体形势配置</p><h2>管理图表</h2></div>
+          <button class="dialog-close-button" type="button" data-close="overallConfigDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">调整当前分组的图表顺序和全局显示状态。配置保存在此浏览器中，也可通过 JSON 文件迁移。</p>
+        <ol class="overall-config-list" id="overallConfigList" aria-label="图表顺序"></ol>
+        <input type="file" id="overallConfigFileInput" accept=".json,application/json" hidden />
+        <div class="overall-config-actions">
+          <button class="secondary-button" type="button" id="overallImportConfigButton">上传配置</button>
+          <button class="secondary-button" type="button" id="overallExportConfigButton">导出配置</button>
+          <button class="secondary-button" type="button" id="overallResetConfigButton">恢复默认</button>
+          <button class="primary-button" type="button" data-close="overallConfigDialog">完成</button>
+        </div>
+        <p class="overall-config-message" id="overallConfigMessage" role="status"></p>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog overall-compare-dialog" id="overallCompareDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">总体形势</p><h2>双指标对比</h2></div>
+          <button class="dialog-close-button" type="button" data-close="overallCompareDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>时间<select class="level-select" id="overallCompareRangeSelect"></select></label>
+          <label>左轴<select class="level-select" id="overallCompareFirstSelect"></select></label>
+          <label>右轴<select class="level-select" id="overallCompareSecondSelect"></select></label>
+          <button class="primary-button" type="button" id="overallCompareRunButton">开始对比</button>
+        </div>
+        <p class="overall-config-message" id="overallCompareMessage" role="status">请选择两个不同的指标。</p>
+        <svg class="overall-compare-chart" id="overallCompareChart" role="img" aria-label="双指标对比图"></svg>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog overall-detail-dialog" id="overallDetailDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div>
+            <p class="industry-detail-kicker">单图详情</p>
+            <div class="overall-detail-title-row">
+              <h2 id="overallDetailTitle">--</h2>
+              <span class="overall-detail-help">
+                <button class="overall-detail-help-button" type="button" aria-label="查看图表说明">?</button>
+                <span class="overall-detail-help-tooltip" id="overallDetailHelpTooltip" role="tooltip">--</span>
+              </span>
+            </div>
+          </div>
+          <button class="dialog-close-button" type="button" data-close="overallDetailDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>时间<select class="level-select" id="overallDetailRangeSelect"></select></label>
+          <a class="secondary-button" id="overallDetailSourceLink" href="#" target="_blank" rel="noopener noreferrer">查看数据源</a>
+        </div>
+        <p class="overall-config-message" id="overallDetailMessage" role="status"></p>
+        <div class="overall-detail-extremes" aria-live="polite">
+          <div class="overall-detail-extreme overall-detail-high"><span>区间最高</span><strong id="overallDetailHighValue">--</strong><time id="overallDetailHighDate">--</time></div>
+          <div class="overall-detail-extreme overall-detail-low"><span>区间最低</span><strong id="overallDetailLowValue">--</strong><time id="overallDetailLowDate">--</time></div>
+        </div>
+        <svg class="overall-detail-chart overall-chart" id="overallDetailChart" role="img" aria-label="单指标详情图"></svg>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog overall-groups-dialog" id="overallGroupsDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">总体形势配置</p><h2>管理分组</h2></div>
+          <button class="dialog-close-button" type="button" data-close="overallGroupsDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">所有图表永久属于“默认”分组；自定义分组可以重命名、删除，同一图表也可加入多个分组。</p>
+        <div class="overall-group-create">
+          <input class="level-select" id="overallNewGroupName" maxlength="40" placeholder="输入新分组名称" />
+          <button class="primary-button" type="button" id="overallAddGroupButton">新增分组</button>
+        </div>
+        <div class="overall-groups-list" id="overallGroupsList"></div>
+        <div class="overall-config-actions"><button class="primary-button" type="button" data-close="overallGroupsDialog">完成</button></div>
+        <p class="overall-config-message" id="overallGroupsMessage" role="status"></p>
+      </div>
+    </dialog>
+
+    <noscript><p class="noscript-message">此页面需要启用 JavaScript 才能绘制图表。</p></noscript>
+  </body>
+</html>
