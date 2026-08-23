@@ -2448,6 +2448,20 @@ body {
   gap: 8px;
 }
 
+.overall-chart-latest {
+  display: grid;
+  justify-items: end;
+  gap: 1px;
+}
+
+.overall-chart-latest-date {
+  color: #7b8799;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .overall-chart-source a {
   color: inherit;
   text-underline-offset: 2px;

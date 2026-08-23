@@ -250,6 +250,15 @@ const CHART_METADATA = {
     sourceName: '东方财富 / 沪深北交易所汇总',
     sourceUrl: 'https://data.eastmoney.com/rzrq/',
   },
+  aShareActiveMarketValueThs: {
+    id: 'aShareActiveMarketValueThs',
+    title: 'A股活跃市值（同花顺公式版）',
+    unit: '亿元',
+    decimals: 0,
+    frequency: '日度',
+    sourceName: '同花顺指标平台公开公式 / 搜狐证券行情',
+    sourceUrl: 'https://poi.10jqka.com.cn/store/formula/detail/indexid/45424',
+  },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
     title: '纳斯达克100市盈率（NDX）',
@@ -508,19 +517,32 @@ function buildAShareTurnoverUrl(startDate, endDate) {
   return `https://www.csindex.com.cn/csindex-home/perf/index-perf?${params.toString()}`;
 }
 
-function buildAShareMarginBalanceUrl(startDate) {
+function buildAShareMarginBalanceUrl(startDate, pageNumber = 1) {
   const params = new URLSearchParams({
-    reportName: 'RPT_MARGIN_TOTALDATA',
-    columns: 'TRADE_DATE,FIN_BALANCE',
-    filter: `(TRADE_DATE>='${startDate}')`,
-    pageNumber: '1',
-    pageSize: '5000',
+    reportName: 'RPTA_WEB_MARGIN_DAILYTRADE',
+    columns: 'STATISTICS_DATE,FIN_BALANCE',
+    filter: `(STATISTICS_DATE>='${startDate}')`,
+    pageNumber: String(pageNumber),
+    pageSize: '500',
     sortTypes: '1',
-    sortColumns: 'TRADE_DATE',
+    sortColumns: 'STATISTICS_DATE',
     source: 'WEB',
     client: 'WEB',
   });
   return `https://datacenter-web.eastmoney.com/api/data/v1/get?${params.toString()}`;
+}
+
+function buildSohuIndexHistoryUrl(code, startDate, endDate) {
+  const params = new URLSearchParams({
+    code,
+    start: String(startDate).replaceAll('-', ''),
+    end: String(endDate).replaceAll('-', ''),
+    stat: '1',
+    order: 'D',
+    period: 'd',
+    rt: 'json',
+  });
+  return `https://q.stock.sohu.com/hisHq?${params.toString()}`;
 }
 
 function parseTreasuryDebt(text) {
@@ -571,14 +593,46 @@ function parseAShareMarginBalance(text) {
   const rows = payload?.result?.data;
   if (!Array.isArray(rows)) throw new Error('A股融资余额数据格式无效');
   return rows.map((row) => {
-    const dateText = String(row?.TRADE_DATE ?? '').slice(0, 10);
+    const dateText = String(row?.STATISTICS_DATE ?? row?.TRADE_DATE ?? '').slice(0, 10);
     const date = normalizeObservationDate(dateText);
     const rawValue = row?.FIN_BALANCE;
+    // RPTA_WEB_MARGIN_DAILYTRADE 的 FIN_BALANCE 已按亿元提供。
     const value = rawValue === null || rawValue === undefined || rawValue === ''
       ? Number.NaN
-      : Number(rawValue) / 100_000_000;
+      : Number(rawValue);
     return date && Number.isFinite(value) ? { date, value } : null;
   }).filter(Boolean);
+}
+
+function parseSohuIndexAmount(text) {
+  const payload = JSON.parse(String(text ?? ''));
+  const rows = payload?.[0]?.hq;
+  if (!Array.isArray(rows)) throw new Error('搜狐指数成交额数据格式无效');
+  return rows.map((row) => {
+    const date = normalizeObservationDate(row?.[0]);
+    // 搜狐指数历史行情的成交额字段单位为万元，统一换算成元。
+    const amount = Number(row?.[8]) * 10_000;
+    return date && Number.isFinite(amount) ? { date, value: amount } : null;
+  }).filter(Boolean);
+}
+
+function calculateTonghuashunActiveMarketValue(shanghaiItems, shenzhenItems) {
+  const shenzhenByDate = new Map(shenzhenItems.map((item) => [item.date, Number(item.value)]));
+  let previous;
+  return [...shanghaiItems]
+    .sort((left, right) => left.date.localeCompare(right.date))
+    .map((item) => {
+      const shanghaiAmount = Number(item.value);
+      const shenzhenAmount = shenzhenByDate.get(item.date);
+      if (!Number.isFinite(shanghaiAmount) || !Number.isFinite(shenzhenAmount)) return null;
+      const combinedAmountInHundredMillion = (shanghaiAmount + shenzhenAmount) / 100_000_000;
+      // 同花顺 SMA(X, 10, 1)：Y = (X + 9 * 上一期 Y) / 10。
+      previous = Number.isFinite(previous)
+        ? (combinedAmountInHundredMillion + 9 * previous) / 10
+        : combinedAmountInHundredMillion;
+      return { date: item.date, value: previous };
+    })
+    .filter(Boolean);
 }
 
 function parseNasdaq100PeSnapshot(text = NASDAQ_100_PE_MONTHLY_CSV) {
@@ -735,11 +789,36 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(availableItems, range);
     }),
     aShareMarginBalance: () => loadChart(CHART_METADATA.aShareMarginBalance, async () => {
-      const text = await fetchCsv(buildAShareMarginBalanceUrl(dailyStartDate), fetchImpl, {
+      const headers = {
         Accept: 'application/json',
         Referer: 'https://data.eastmoney.com/',
-      });
-      const availableItems = filterDateRange(parseAShareMarginBalance(text), dailyStartDate, endDate);
+      };
+      const firstText = await fetchCsv(buildAShareMarginBalanceUrl(dailyStartDate, 1), fetchImpl, headers);
+      const firstPayload = JSON.parse(firstText);
+      const pageCount = Math.max(1, Math.min(20, Number(firstPayload?.result?.pages) || 1));
+      const remainingTexts = await Promise.all(
+        Array.from({ length: pageCount - 1 }, (_, index) => (
+          fetchCsv(buildAShareMarginBalanceUrl(dailyStartDate, index + 2), fetchImpl, headers)
+        )),
+      );
+      const uniqueItems = [...new Map(
+        [firstText, ...remainingTexts].flatMap(parseAShareMarginBalance).map((item) => [item.date, item]),
+      ).values()];
+      const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
+      return filterRecentItems(availableItems, range);
+    }),
+    aShareActiveMarketValueThs: () => loadChart(CHART_METADATA.aShareActiveMarketValueThs, async () => {
+      const warmupStartDate = formatIsoDate(shiftUtcDays(requestedStartDate, -180));
+      const headers = { Accept: 'application/json', Referer: 'https://q.stock.sohu.com/' };
+      const [shanghaiText, shenzhenText] = await Promise.all([
+        fetchCsv(buildSohuIndexHistoryUrl('zs_000001', warmupStartDate, endDate), fetchImpl, headers),
+        fetchCsv(buildSohuIndexHistoryUrl('zs_399106', warmupStartDate, endDate), fetchImpl, headers),
+      ]);
+      const calculatedItems = calculateTonghuashunActiveMarketValue(
+        parseSohuIndexAmount(shanghaiText),
+        parseSohuIndexAmount(shenzhenText),
+      );
+      const availableItems = filterDateRange(calculatedItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
@@ -803,6 +882,7 @@ module.exports = {
   buildTreasuryDebtUrl,
   buildAShareTurnoverUrl,
   buildAShareMarginBalanceUrl,
+  buildSohuIndexHistoryUrl,
   calculateYearOverYear,
   filterRecentItems,
   normalizeObservationDate,
@@ -815,6 +895,8 @@ module.exports = {
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
+  parseSohuIndexAmount,
+  calculateTonghuashunActiveMarketValue,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 };

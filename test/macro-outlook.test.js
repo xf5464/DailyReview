@@ -14,6 +14,8 @@ const {
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
+  parseSohuIndexAmount,
+  calculateTonghuashunActiveMarketValue,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 } = require('../scripts/macro-outlook');
@@ -72,14 +74,29 @@ test('A-share all-market parser reads official turnover in 100 million yuan', ()
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 19346.8 }]);
 });
 
-test('A-share margin parser converts the three-market financing balance to 100 million yuan', () => {
+test('A-share margin parser reads the three-market financing balance in 100 million yuan', () => {
   const rows = parseAShareMarginBalance(JSON.stringify({
     success: true,
     result: { data: [
-      { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
-    ] },
+      { STATISTICS_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 26305.15364858 },
+    ], pages: 1 },
   }));
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 26305.15364858 }]);
+});
+
+test('Tonghuashun active-market-value formula combines both markets and applies SMA(10,1)', () => {
+  const shanghai = parseSohuIndexAmount(JSON.stringify([{ hq: [
+    ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
+    ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
+  ] }]));
+  const shenzhen = parseSohuIndexAmount(JSON.stringify([{ hq: [
+    ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
+    ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
+  ] }]));
+  assert.deepEqual(calculateTonghuashunActiveMarketValue(shanghai, shenzhen), [
+    { date: '2026-08-20', value: 20000 },
+    { date: '2026-08-21', value: 20200 },
+  ]);
 });
 
 test('Nasdaq-100 PE snapshot parser reads monthly trailing multiples', () => {
@@ -125,7 +142,7 @@ test('short ranges keep the latest monthly point while daily data uses elapsed t
   ]);
 });
 
-test('macro outlook query returns twenty-one independent chart payloads', async () => {
+test('macro outlook query returns twenty-two independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -155,9 +172,17 @@ test('macro outlook query returns twenty-one independent chart payloads', async 
     { tradeDate: '20260821', tradingValue: 20500.25 },
   ] });
   const aShareMarginData = JSON.stringify({ success: true, result: { data: [
-    { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
-    { TRADE_DATE: '2026-08-21 00:00:00', FIN_BALANCE: 2640015364858 },
-  ] } });
+    { STATISTICS_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 26305.15364858 },
+    { STATISTICS_DATE: '2026-08-21 00:00:00', FIN_BALANCE: 26400.15364858 },
+  ], pages: 1 } });
+  const shanghaiIndexData = JSON.stringify([{ hq: [
+    ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
+    ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
+  ] }]);
+  const shenzhenIndexData = JSON.stringify([{ hq: [
+    ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
+    ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
+  ] }]);
   const fetchImpl = async (url) => {
     const seriesId = Object.keys(fredData).find((id) => url.includes(`id=${id}`));
     return {
@@ -165,7 +190,9 @@ test('macro outlook query returns twenty-one independent chart payloads', async 
       status: 200,
       text: async () => url.includes('api.fiscaldata.treasury.gov')
         ? JSON.stringify({ data: [{ record_date: '2026-08-20', tot_pub_debt_out_amt: '39500000000000' }] })
-        : url.includes('RPT_MARGIN_TOTALDATA') ? aShareMarginData
+        : url.includes('RPTA_WEB_MARGIN_DAILYTRADE') ? aShareMarginData
+        : url.includes('code=zs_000001') ? shanghaiIndexData
+        : url.includes('code=zs_399106') ? shenzhenIndexData
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
     };
@@ -174,10 +201,10 @@ test('macro outlook query returns twenty-one independent chart payloads', async 
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'cpi', 'pce', 'gold', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'aShareTurnover', 'aShareMarginBalance', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(21).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(22).fill(null));
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
   assert.equal(result.charts.find((chart) => chart.id === 'bitcoin').items.at(-1).value, 78000);
@@ -187,6 +214,7 @@ test('macro outlook query returns twenty-one independent chart payloads', async 
   assert.equal(result.charts.find((chart) => chart.id === 'wtiOil').items.at(-1).value, 86.5);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').items.at(-1).value, 20500.25);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').items.at(-1).value, 7780.45);
@@ -217,10 +245,15 @@ test('one failed source does not prevent the remaining charts from loading', asy
         { tradeDate: '20260820', tradingValue: 19346.8 },
       ] }) };
     }
-    if (url.includes('RPT_MARGIN_TOTALDATA')) {
+    if (url.includes('RPTA_WEB_MARGIN_DAILYTRADE')) {
       return { ok: true, status: 200, text: async () => JSON.stringify({ success: true, result: { data: [
-        { TRADE_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 2630515364858 },
-      ] } }) };
+        { STATISTICS_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 26305.15364858 },
+      ], pages: 1 } }) };
+    }
+    if (url.includes('q.stock.sohu.com')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify([{ hq: [
+        ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
+      ] }]) };
     }
     const id = ['DGS10', 'DGS30', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DCOILBRENTEU', 'DCOILWTICO', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'DTWEXBGS', 'ICSA', 'NFCI']
       .find((seriesId) => url.includes(`id=${seriesId}`));
@@ -256,6 +289,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'wtiOil').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').error, null);
