@@ -1343,7 +1343,15 @@
     });
   }
 
+  function applyRuntimeCapabilities() {
+    var isLocalRuntime = ['127.0.0.1', 'localhost', '::1'].includes(window.location.hostname);
+    [refs.displayButton, refs.groupsButton, refs.manageButton].forEach(function (button) {
+      button.hidden = !isLocalRuntime;
+    });
+  }
+
   function initialize() {
+    applyRuntimeCapabilities();
     applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
     syncGroups();
     refs.columns.value = String(config.chartsPerRow);
