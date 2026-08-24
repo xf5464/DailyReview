@@ -2,8 +2,8 @@
   'use strict';
 
   var CHART_IDS = [
-    'treasuryYield', 'treasuryYield30', 'cpi', 'pce', 'gold', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+    'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions'
   ];
@@ -11,14 +11,19 @@
   var TITLES = {
     treasuryYield: '美国 10 年期国债收益率',
     treasuryYield30: '美国 30 年期国债收益率',
+    federalFundsRate: '美联储有效联邦基金利率',
     cpi: '美国 CPI 同比',
     pce: '美国 PCE 同比',
     gold: '黄金价格',
+    silver: '全球白银价格',
+    centralBankGoldPurchases: '全球央行净购金量',
     bitcoin: '比特币价格',
     federalDebt: '美国联邦债务总额',
     jpyUsd: '日元兑美元汇率',
     brentOil: '布伦特原油价格',
     wtiOil: 'WTI 原油价格',
+    copper: '全球铜价',
+    naturalGas: 'Henry Hub 天然气价格',
     aShareTurnover: 'A股全A成交额',
     aShareMarginBalance: 'A股融资余额（三市）',
     aShareActiveMarketValueThs: 'A股活跃市值（同花顺公式版）',
@@ -36,14 +41,19 @@
   var CATEGORIES = {
     treasuryYield: '利率',
     treasuryYield30: '长期利率',
+    federalFundsRate: '政策利率',
     cpi: '通胀',
     pce: '通胀',
     gold: '避险资产',
+    silver: '贵金属',
+    centralBankGoldPurchases: '官方黄金需求',
     bitcoin: '数字资产',
     federalDebt: '财政',
     jpyUsd: '外汇',
     brentOil: '能源',
     wtiOil: '能源',
+    copper: '工业金属',
+    naturalGas: '能源',
     aShareTurnover: 'A股市场',
     aShareMarginBalance: 'A股杠杆资金',
     aShareActiveMarketValueThs: 'A股市场活跃度',
@@ -61,14 +71,19 @@
   var DESCRIPTIONS = {
     treasuryYield: '美国 10 年期国债的市场收益率，是长期无风险利率和资产定价的重要基准。上升通常意味着融资成本与估值折现率提高。',
     treasuryYield30: '美国 30 年期国债的市场收益率，反映更长期的利率、通胀和期限风险预期，对长期资产的利率变化更敏感。',
+    federalFundsRate: '美国存款类机构隔夜无担保联邦基金交易的成交量加权中位利率，由纽约联储计算。本图使用日度有效联邦基金利率（EFFR），用于观察美联储政策利率实际运行水平。',
     cpi: '美国消费者价格指数（CPI）的同比涨幅，衡量居民购买的一篮子商品和服务相对一年前的价格变化。',
     pce: '美国个人消费支出价格指数（PCE）的同比涨幅。本图为总体 PCE，而非核心 PCE。',
     gold: '伦敦现货黄金的美元价格，单位为美元/盎司，常受实际利率、美元、通胀预期和避险需求影响。',
+    silver: 'IMF 全球白银基准价的月度平均值，单位为美元/盎司。白银同时具有贵金属与工业原料属性，价格会受到美元、实际利率和工业需求影响。',
+    centralBankGoldPurchases: '世界黄金协会按季度统计的全球央行及其他官方机构净购金量，即买入量减去卖出量，剔除互换与 Delta 对冲影响。正值表示净买入，负值表示净卖出，单位为吨。',
     bitcoin: '比特币兑美元的市场价格。该资产全天候交易、波动较大，通常受流动性、风险偏好、监管和资金流入影响。',
     federalDebt: '美国财政部记录的联邦债务总额，包括公众持有债务和政府内部持有债务，单位换算为万亿美元。',
     jpyUsd: '一美元可兑换的日元数量。数值上升表示美元兑日元走强、日元贬值；数值下降表示日元升值。',
-    brentOil: '布伦特原油现货价格，是欧洲及全球原油定价的重要基准，受全球供需、库存和地缘风险影响。',
-    wtiOil: '美国西得克萨斯中质原油现货价格，是美国原油定价基准，受美国供需、库存和全球油市影响。',
+    brentOil: '主序列为 EIA 布伦特原油日度现货价。现货数据尚未发布的最近日期，使用 Brent 近月期货相对最后重叠日的涨跌幅推算临时值，以虚线显示；EIA 发布后自动替换。',
+    wtiOil: '主序列为 EIA WTI 原油日度现货价。现货数据尚未发布的最近日期，使用 WTI 近月期货相对最后重叠日的涨跌幅推算临时值，以虚线显示；EIA 发布后自动替换。',
+    copper: 'IMF 全球铜基准价的月度平均值，单位为美元/吨。铜对制造业、建筑、电网和新能源需求较敏感，常用于观察全球工业周期。',
+    naturalGas: '美国路易斯安那州 Henry Hub 天然气日度现货价格，单位为美元/MMBtu，由美国能源信息署 EIA 发布。',
     aShareTurnover: 'A 股全市场当日成交金额，单位为亿元。它主要反映市场交易活跃度和资金参与度，不直接代表指数涨跌方向。',
     aShareMarginBalance: '沪、深、北三市融资余额合计，单位为亿元，表示投资者尚未偿还的融资买入金额。余额上升通常代表杠杆资金净流入，但不等同于市场一定上涨。',
     aShareActiveMarketValueThs: '按同花顺指标平台公开用户公式计算：上证指数与深证综指成交额之和，再取 SMA(10,1)，单位为亿元。它是可复现的成交活跃度平滑指标，并非指南针原版 0AMV，也不是同花顺官方统一指数。',
@@ -86,14 +101,19 @@
   var COLORS = {
     treasuryYield: '#1f5fd2',
     treasuryYield30: '#1685a9',
+    federalFundsRate: '#7048a8',
     cpi: '#c23b3b',
     pce: '#7c3aed',
     gold: '#b7791f',
+    silver: '#64748b',
+    centralBankGoldPurchases: '#9a6a16',
     bitcoin: '#e67e00',
     federalDebt: '#256f5b',
     jpyUsd: '#b3336f',
     brentOil: '#52606d',
     wtiOil: '#8a5a2b',
+    copper: '#b05a2a',
+    naturalGas: '#2d7d5f',
     aShareTurnover: '#b84f16',
     aShareMarginBalance: '#0f766e',
     aShareActiveMarketValueThs: '#c2410c',
@@ -120,38 +140,46 @@
     year2: { label: '2年', months: 24 },
     year3: { label: '3年', months: 36 },
     year5: { label: '5年', months: 60 },
-    year10: { label: '10年', months: 120 }
+    year7: { label: '7年', months: 84 },
+    year10: { label: '10年', months: 120 },
+    year15: { label: '15年', months: 180 },
+    year20: { label: '20年', months: 240 },
+    year25: { label: '25年', months: 300 },
+    year30: { label: '30年', months: 360 }
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
+  var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
+  var DEFAULT_QUARTER_POINT_SIZE = 4.5;
+  var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
     chartsPerRow: 4,
     chartOrder: [
-      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
+      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions', 'treasuryYield'
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-        'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
+        'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
         'initialClaims', 'financialConditions', 'treasuryYield'
       ],
       group_mt432xl1_kz1mx7: [
-        'treasuryYield30', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
+        'treasuryYield30', 'federalFundsRate', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
         'federalDebt', 'cpi', 'pce', 'treasurySpread', 'highYieldSpread',
         'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
-      group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil'],
+      group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
       group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs']
     },
     visibleChartIds: [
-      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
+      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions'
     ],
@@ -164,14 +192,19 @@
     chartGroups: {
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
       treasuryYield30: ['default', 'group_mt432xl1_kz1mx7'],
+      federalFundsRate: ['default', 'group_mt432xl1_kz1mx7'],
       cpi: ['default', 'group_mt432xl1_kz1mx7'],
       pce: ['default', 'group_mt432xl1_kz1mx7'],
       gold: ['default', 'group_mt49f5yl_pctlb6'],
+      silver: ['default', 'group_mt49f5yl_pctlb6'],
+      centralBankGoldPurchases: ['default', 'group_mt49f5yl_pctlb6'],
       bitcoin: ['default'],
       federalDebt: ['default', 'group_mt432xl1_kz1mx7'],
       jpyUsd: ['default'],
       brentOil: ['default', 'group_mt49f5yl_pctlb6'],
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
+      copper: ['default', 'group_mt49f5yl_pctlb6'],
+      naturalGas: ['default', 'group_mt49f5yl_pctlb6'],
       aShareTurnover: ['default', 'group_a_share'],
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
@@ -241,6 +274,8 @@
     displayDialog: document.querySelector('#displayControlsDialog'),
     lineWidth: document.querySelector('#chartLineWidthInput'),
     lineWidthOutput: document.querySelector('#chartLineWidthOutput'),
+    quarterPointSize: document.querySelector('#quarterPointSizeInput'),
+    quarterPointSizeOutput: document.querySelector('#quarterPointSizeOutput'),
     displayFile: document.querySelector('#displayControlsConfigFileInput'),
     displayMessage: document.querySelector('#displayControlsMessage')
   };
@@ -264,6 +299,25 @@
     refs.lineWidthOutput.textContent = width + ' px';
     if (persist !== false) {
       localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(width));
+      persistSharedConfig();
+    }
+  }
+
+  function normalizeQuarterPointSize(value) {
+    if (value === null || value === undefined || value === '') return DEFAULT_QUARTER_POINT_SIZE;
+    var parsed = Number(value);
+    if (!Number.isFinite(parsed)) return DEFAULT_QUARTER_POINT_SIZE;
+    return Math.min(10, Math.max(2, Math.round(parsed * 2) / 2));
+  }
+
+  function applyQuarterPointSize(value, persist) {
+    quarterlyPointSize = normalizeQuarterPointSize(value);
+    refs.quarterPointSize.value = String(quarterlyPointSize);
+    refs.quarterPointSizeOutput.value = quarterlyPointSize + ' px';
+    refs.quarterPointSizeOutput.textContent = quarterlyPointSize + ' px';
+    if (activeDetailId && refs.detailDialog.open) renderDetail();
+    if (persist !== false) {
+      localStorage.setItem(QUARTER_POINT_SIZE_STORAGE_KEY, String(quarterlyPointSize));
       persistSharedConfig();
     }
   }
@@ -316,7 +370,7 @@
         ? source.chartGroups[id].filter(function (groupId) { return groupIds.has(groupId); })
         : ['default'];
       var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {
-        return addedDefaultGroupIds.has(groupId);
+        return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId));
       });
       chartGroups[id] = Array.from(new Set(['default'].concat(memberships, migratedMemberships)));
     });
@@ -364,7 +418,8 @@
     return {
       overallSituation: config,
       displayControls: {
-        chartLineWidth: normalizeLineWidth(refs.lineWidth && refs.lineWidth.value)
+        chartLineWidth: normalizeLineWidth(refs.lineWidth && refs.lineWidth.value),
+        quarterPointSize: normalizeQuarterPointSize(refs.quarterPointSize && refs.quarterPointSize.value)
       }
     };
   }
@@ -402,6 +457,11 @@
       if (storedWidth !== undefined) {
         applyLineWidth(storedWidth, false);
         localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(normalizeLineWidth(storedWidth)));
+      }
+      var storedPointSize = storedConfig.displayControls && storedConfig.displayControls.quarterPointSize;
+      if (storedPointSize !== undefined) {
+        applyQuarterPointSize(storedPointSize, false);
+        localStorage.setItem(QUARTER_POINT_SIZE_STORAGE_KEY, String(normalizeQuarterPointSize(storedPointSize)));
       }
       syncGroups();
       refs.columns.value = String(config.chartsPerRow);
@@ -458,7 +518,7 @@
   function filterItems(chart, rangeKey) {
     var items = (chart && Array.isArray(chart.items) ? chart.items : [])
       .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
-      .map(function (item) { return { date: item.date, value: Number(item.value) }; })
+      .map(function (item) { return Object.assign({}, item, { value: Number(item.value) }); })
       .sort(function (left, right) { return left.date.localeCompare(right.date); });
     if (!items.length) return [];
 
@@ -468,7 +528,9 @@
       return Number.isInteger(range.months) ? items.slice(-range.months) : items.slice(-1);
     }
     if (frequency.includes('季')) {
-      return Number.isInteger(range.months) ? items.slice(-Math.ceil(range.months / 3)) : items.slice(-1);
+      return Number.isInteger(range.months)
+        ? items.slice(-(Math.ceil(range.months / 3) + 1))
+        : items.slice(-2);
     }
 
     var latest = new Date(items[items.length - 1].date + 'T00:00:00Z');
@@ -495,6 +557,9 @@
     if (!dateText) return '--';
     var date = new Date(dateText + 'T00:00:00Z');
     if (Number.isNaN(date.getTime())) return dateText;
+    if (frequency && frequency.includes('季')) {
+      return date.getUTCFullYear() + '年第' + (Math.floor(date.getUTCMonth() / 3) + 1) + '季度';
+    }
     var options = frequency && frequency.includes('月')
       ? { year: 'numeric', month: '2-digit', timeZone: 'UTC' }
       : { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' };
@@ -513,7 +578,13 @@
     return number.toLocaleString('zh-CN', options) + (chart.unit || '');
   }
 
-  function axisValue(value) {
+  function axisValue(value, decimals) {
+    if (decimals === 0) {
+      return Number(value).toLocaleString('zh-CN', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
+    }
     var absolute = Math.abs(value);
     if (absolute >= 1000000) return (value / 1000000).toFixed(1) + 'm';
     if (absolute >= 1000) return (value / 1000).toFixed(1) + 'k';
@@ -528,13 +599,16 @@
     if (!chart.items.length) return '当前时间范围暂无数据';
     var first = chart.items[0];
     var latest = chart.items[chart.items.length - 1];
+    var provisionalSuffix = chart.items.some(function (item) { return item.provisional; })
+      ? ' · 含期货推算临时值'
+      : '';
     if (chart.items.length === 1 || first.value === 0) {
-      return formatDate(latest.date, chart.frequency) + ' · 最近可用值';
+      return formatDate(latest.date, chart.frequency) + ' · 最近可用值' + provisionalSuffix;
     }
     var change = (latest.value / first.value - 1) * 100;
     var sign = change > 0 ? '+' : '';
     return formatDate(first.date, chart.frequency) + ' 至 ' +
-      formatDate(latest.date, chart.frequency) + ' · 区间 ' + sign + change.toFixed(2) + '%';
+      formatDate(latest.date, chart.frequency) + ' · 区间 ' + sign + change.toFixed(2) + '%' + provisionalSuffix;
   }
 
   function hexToRgba(hex, alpha) {
@@ -614,13 +688,19 @@
     var box = { left: 58, top: 28, width: 438, height: 198 };
     var values = items.map(function (item) { return item.value; });
     var domainY = extent(values);
+    var singleItem = items.length === 1;
+    var firstTimestamp = Date.parse(items[0].date + 'T00:00:00Z');
     var domainX = [
-      Date.parse(items[0].date + 'T00:00:00Z'),
+      firstTimestamp,
       Date.parse(items[items.length - 1].date + 'T00:00:00Z')
     ];
-    if (domainX[0] === domainX[1]) domainX[1] += 86400000;
+    if (singleItem) domainX = [firstTimestamp - 86400000, firstTimestamp + 86400000];
     var color = COLORS[chart.id] || '#1f5fd2';
     var path = linePath(items, box, domainX, domainY);
+    var firstProvisionalIndex = items.findIndex(function (item) { return item.provisional; });
+    var solidItems = firstProvisionalIndex > 0 ? items.slice(0, firstProvisionalIndex) : items;
+    var provisionalItems = firstProvisionalIndex > 0 ? items.slice(firstProvisionalIndex - 1) : [];
+    var solidPath = linePath(solidItems, box, domainX, domainY);
     var baseline = box.top + box.height;
 
     svg.replaceChildren();
@@ -637,7 +717,7 @@
       var yLabel = createSvg('text', {
         x: box.left - 9, y: y + 4, class: 'chart-label', 'text-anchor': 'end'
       });
-      yLabel.textContent = axisValue(value);
+      yLabel.textContent = axisValue(value, chart.decimals);
       svg.append(yLabel);
     }
 
@@ -654,22 +734,62 @@
         x: x,
         y: height - 15,
         class: 'chart-label',
-        'text-anchor': labelIndex === 0 ? 'start' : labelIndex === xIndexes.length - 1 ? 'end' : 'middle'
+        'text-anchor': xIndexes.length === 1 ? 'middle' : labelIndex === 0 ? 'start' : labelIndex === xIndexes.length - 1 ? 'end' : 'middle'
       });
       label.textContent = formatDate(item.date, chart.frequency);
       svg.append(label);
     });
 
-    var area = createSvg('path', {
-      d: path + ' L' + (box.left + box.width) + ' ' + baseline + ' L' + box.left + ' ' + baseline + ' Z',
-      class: 'overall-chart-area'
-    });
-    area.style.fill = hexToRgba(color, 0.12);
-    svg.append(area);
+    if (!singleItem) {
+      var area = createSvg('path', {
+        d: path + ' L' + (box.left + box.width) + ' ' + baseline + ' L' + box.left + ' ' + baseline + ' Z',
+        class: 'overall-chart-area'
+      });
+      area.style.fill = hexToRgba(color, 0.12);
+      svg.append(area);
+    }
 
-    var line = createSvg('path', { d: path, class: 'overall-chart-line' });
+    var line = createSvg('path', { d: solidPath, class: 'overall-chart-line' });
     line.style.stroke = color;
     svg.append(line);
+    if (provisionalItems.length > 1) {
+      var provisionalLine = createSvg('path', {
+        d: linePath(provisionalItems, box, domainX, domainY),
+        class: 'overall-chart-line overall-chart-provisional-line'
+      });
+      provisionalLine.style.stroke = color;
+      svg.append(provisionalLine);
+      provisionalItems.slice(1).forEach(function (item) {
+        var provisionalTime = Date.parse(item.date + 'T00:00:00Z');
+        var provisionalX = box.left + (provisionalTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        var provisionalY = box.top + (1 - (item.value - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
+        var provisionalPoint = createSvg('circle', {
+          cx: provisionalX, cy: provisionalY, r: 3.5, class: 'overall-chart-provisional-point'
+        });
+        provisionalPoint.style.fill = color;
+        svg.append(provisionalPoint);
+      });
+    }
+    var showQuarterlyPoints = chart.frequency && chart.frequency.includes('季') && svg === refs.detailChart;
+    if (showQuarterlyPoints) {
+      items.forEach(function (item) {
+        var itemTime = Date.parse(item.date + 'T00:00:00Z');
+        var pointX = box.left + (itemTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        var pointY = box.top + (1 - (item.value - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
+        var dataPoint = createSvg('circle', {
+          cx: pointX, cy: pointY, r: quarterlyPointSize, class: 'overall-chart-data-point'
+        });
+        dataPoint.style.fill = color;
+        svg.append(dataPoint);
+      });
+    } else if (singleItem) {
+      var singleY = box.top + (1 - (items[0].value - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
+      var singlePoint = createSvg('circle', {
+        cx: box.left + box.width / 2, cy: singleY, r: 4.5, class: 'overall-chart-tip-point'
+      });
+      singlePoint.style.fill = color;
+      svg.append(singlePoint);
+    }
 
     var guide = createSvg('line', {
       y1: box.top, y2: box.top + box.height, stroke: color,
@@ -702,7 +822,8 @@
       point.setAttribute('cy', y);
       point.setAttribute('opacity', '1');
       var tip = ensureTooltip(svg);
-      tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value);
+      tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) +
+        (item.provisional ? ' · 期货涨跌幅推算临时值' : '');
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
       tip.hidden = false;
@@ -736,13 +857,25 @@
         showDetail(chartId);
       }
     });
-    heading.append(title);
+    var titleRow = createElement('div', 'overall-detail-title-row overall-chart-title-row');
+    var help = createElement('span', 'overall-detail-help');
+    var helpButton = createElement('button', 'overall-detail-help-button', '?');
+    helpButton.type = 'button';
+    helpButton.setAttribute('aria-label', '查看' + TITLES[chartId] + '说明');
+    var helpTooltip = createElement('span', 'overall-detail-help-tooltip', DESCRIPTIONS[chartId] || '暂无说明。');
+    helpTooltip.id = 'overallCardHelp_' + chartId;
+    helpTooltip.setAttribute('role', 'tooltip');
+    helpButton.setAttribute('aria-describedby', helpTooltip.id);
+    help.append(helpButton, helpTooltip);
+    titleRow.append(title, help);
+    heading.append(titleRow);
 
     var actions = createElement('div', 'overall-chart-card-header-actions');
     var latest = chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
     var latestBlock = createElement('div', 'overall-chart-latest');
     latestBlock.append(createElement('strong', '', latest ? formatValue(chart, latest.value, false) : '--'));
-    var latestDate = createElement('time', 'overall-chart-latest-date', latest ? formatDate(latest.date) : '暂无日期');
+    if (latest && latest.provisional) latestBlock.append(createElement('span', 'overall-chart-provisional-badge', '临时补点'));
+    var latestDate = createElement('time', 'overall-chart-latest-date', latest ? formatDate(latest.date, chart.frequency) : '暂无日期');
     if (latest) latestDate.dateTime = latest.date;
     latestBlock.append(latestDate);
     actions.append(latestBlock);
@@ -769,6 +902,14 @@
       sourceLine.append(link);
     } else {
       sourceLine.append(document.createTextNode(chart && chart.sourceName || '--'));
+    }
+    if (chart && chart.supplementSourceUrl) {
+      sourceLine.append(document.createTextNode('；补点：'));
+      var supplementLink = createElement('a', '', chart.supplementSourceName || '查看补点来源');
+      supplementLink.href = chart.supplementSourceUrl;
+      supplementLink.target = '_blank';
+      supplementLink.rel = 'noopener noreferrer';
+      sourceLine.append(supplementLink);
     }
     card.append(header, summary, svg, sourceLine);
 
@@ -1059,11 +1200,11 @@
       var leftLabel = createSvg('text', {
         x: box.left - 10, y: y + 4, class: 'chart-label overall-compare-label-left', 'text-anchor': 'end'
       });
-      leftLabel.textContent = axisValue(firstY[1] - ratio * (firstY[1] - firstY[0]));
+      leftLabel.textContent = axisValue(firstY[1] - ratio * (firstY[1] - firstY[0]), first.decimals);
       var rightLabel = createSvg('text', {
         x: box.left + box.width + 10, y: y + 4, class: 'chart-label overall-compare-label-right', 'text-anchor': 'start'
       });
-      rightLabel.textContent = axisValue(secondY[1] - ratio * (secondY[1] - secondY[0]));
+      rightLabel.textContent = axisValue(secondY[1] - ratio * (secondY[1] - secondY[0]), second.decimals);
       refs.compareChart.append(leftLabel, rightLabel);
     }
     var leftTitle = createSvg('text', {
@@ -1091,6 +1232,63 @@
     });
     endLabel.textContent = formatDate(new Date(domainX[1]).toISOString().slice(0, 10));
     refs.compareChart.append(startLabel, endLabel);
+
+    var guide = createSvg('line', {
+      y1: box.top, y2: box.top + box.height, stroke: '#657089',
+      'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: 0
+    });
+    var leftPoint = createSvg('circle', {
+      r: 5, class: 'overall-compare-left-point', opacity: 0
+    });
+    var rightPoint = createSvg('circle', {
+      r: 5, class: 'overall-compare-right-point', opacity: 0
+    });
+    refs.compareChart.append(guide, leftPoint, rightPoint);
+
+    var overlay = createSvg('rect', {
+      x: box.left, y: box.top, width: box.width, height: box.height, fill: 'transparent'
+    });
+    overlay.style.cursor = 'crosshair';
+    overlay.addEventListener('pointermove', function (event) {
+      var rect = refs.compareChart.getBoundingClientRect();
+      var localX = (event.clientX - rect.left) / rect.width * width;
+      var positionRatio = Math.max(0, Math.min(1, (localX - box.left) / box.width));
+      var targetTime = domainX[0] + positionRatio * (domainX[1] - domainX[0]);
+      var firstItem = nearestItem(first.items, targetTime);
+      var secondItem = nearestItem(second.items, targetTime);
+      var cursorX = box.left + positionRatio * box.width;
+      var firstTime = Date.parse(firstItem.date + 'T00:00:00Z');
+      var secondTime = Date.parse(secondItem.date + 'T00:00:00Z');
+      var firstX = box.left + (firstTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+      var secondX = box.left + (secondTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+      var firstYPosition = box.top + (1 - (firstItem.value - firstY[0]) / (firstY[1] - firstY[0])) * box.height;
+      var secondYPosition = box.top + (1 - (secondItem.value - secondY[0]) / (secondY[1] - secondY[0])) * box.height;
+      guide.setAttribute('x1', cursorX);
+      guide.setAttribute('x2', cursorX);
+      guide.setAttribute('opacity', '0.65');
+      leftPoint.setAttribute('cx', firstX);
+      leftPoint.setAttribute('cy', firstYPosition);
+      leftPoint.setAttribute('opacity', '1');
+      rightPoint.setAttribute('cx', secondX);
+      rightPoint.setAttribute('cy', secondYPosition);
+      rightPoint.setAttribute('opacity', '1');
+      var tip = ensureTooltip(refs.compareChart);
+      tip.style.whiteSpace = 'pre-line';
+      tip.textContent = first.title + '：' + formatValue(first, firstItem.value) + ' · ' + formatDate(firstItem.date, first.frequency) +
+        (firstItem.provisional ? '（临时补点）' : '') + '\n' +
+        second.title + '：' + formatValue(second, secondItem.value) + ' · ' + formatDate(secondItem.date, second.frequency) +
+        (secondItem.provisional ? '（临时补点）' : '');
+      tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
+      tip.style.top = Math.max(12, event.clientY - 58) + 'px';
+      tip.hidden = false;
+    });
+    overlay.addEventListener('pointerleave', function () {
+      guide.setAttribute('opacity', '0');
+      leftPoint.setAttribute('opacity', '0');
+      rightPoint.setAttribute('opacity', '0');
+      if (tooltip) tooltip.hidden = true;
+    });
+    refs.compareChart.append(overlay);
     refs.compareMessage.textContent = RANGES[refs.compareRange.value].label + ' · 左右双轴独立缩放';
   }
 
@@ -1239,7 +1437,13 @@
   }
 
   function exportDisplayConfig() {
-    var payload = { version: 1, displayControls: { chartLineWidth: normalizeLineWidth(refs.lineWidth.value) } };
+    var payload = {
+      version: 2,
+      displayControls: {
+        chartLineWidth: normalizeLineWidth(refs.lineWidth.value),
+        quarterPointSize: normalizeQuarterPointSize(refs.quarterPointSize.value)
+      }
+    };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
     var anchor = document.createElement('a');
@@ -1255,13 +1459,23 @@
       var parsed = JSON.parse(await file.text());
       var source = parsed && parsed.displayControls || parsed;
       var width = Number(source && source.chartLineWidth);
+      var pointSize = source && source.quarterPointSize === undefined
+        ? normalizeQuarterPointSize(refs.quarterPointSize.value)
+        : Number(source && source.quarterPointSize);
       if (!Number.isFinite(width) || width < 1 || width > 6 || width * 2 % 1 !== 0) {
         throw new Error('invalid line width');
       }
-      applyLineWidth(width);
-      refs.displayMessage.textContent = '已上传显示设置：图表线条 ' + width + ' px。';
+      if (!Number.isFinite(pointSize) || pointSize < 2 || pointSize > 10 || pointSize * 2 % 1 !== 0) {
+        throw new Error('invalid quarter point size');
+      }
+      applyLineWidth(width, false);
+      applyQuarterPointSize(pointSize, false);
+      localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(width));
+      localStorage.setItem(QUARTER_POINT_SIZE_STORAGE_KEY, String(pointSize));
+      persistSharedConfig();
+      refs.displayMessage.textContent = '已上传显示设置：图表线条 ' + width + ' px，季度点 ' + pointSize + ' px。';
     } catch (error) {
-      refs.displayMessage.textContent = '显示设置文件无效，线条粗细必须为 1–6，步进为 0.5。';
+      refs.displayMessage.textContent = '显示设置文件无效：线条粗细须为 1–6，季度点须为 2–10，步进均为 0.5。';
     } finally {
       refs.displayFile.value = '';
     }
@@ -1296,8 +1510,13 @@
       refs.lineWidth.focus({ preventScroll: true });
     });
     refs.lineWidth.addEventListener('input', function () { applyLineWidth(refs.lineWidth.value); });
+    refs.quarterPointSize.addEventListener('input', function () { applyQuarterPointSize(refs.quarterPointSize.value); });
     document.querySelector('#displayControlsResetButton').addEventListener('click', function () {
-      applyLineWidth(DEFAULT_LINE_WIDTH);
+      applyLineWidth(DEFAULT_LINE_WIDTH, false);
+      applyQuarterPointSize(DEFAULT_QUARTER_POINT_SIZE, false);
+      localStorage.setItem(LINE_WIDTH_STORAGE_KEY, String(DEFAULT_LINE_WIDTH));
+      localStorage.setItem(QUARTER_POINT_SIZE_STORAGE_KEY, String(DEFAULT_QUARTER_POINT_SIZE));
+      persistSharedConfig();
       refs.displayMessage.textContent = '已恢复迁移后的默认显示设置。';
     });
     document.querySelector('#displayControlsImportButton').addEventListener('click', function () {
@@ -1353,6 +1572,7 @@
   function initialize() {
     applyRuntimeCapabilities();
     applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
+    applyQuarterPointSize(localStorage.getItem(QUARTER_POINT_SIZE_STORAGE_KEY), false);
     syncGroups();
     refs.columns.value = String(config.chartsPerRow);
     populateRangeSelect(refs.compareRange, refs.range.value);

@@ -23,7 +23,7 @@ test('local preview config API persists one shared settings file', async () => {
 
     const config = {
       overallSituation: { groups: [{ id: 'default', name: '默认' }] },
-      displayControls: { chartLineWidth: 2 },
+      displayControls: { chartLineWidth: 2, quarterPointSize: 6.5 },
     };
     const saveResponse = await fetch(origin + '/api/local-config', {
       method: 'POST',

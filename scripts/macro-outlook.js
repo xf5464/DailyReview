@@ -1,5 +1,9 @@
 const DEFAULT_MONTH_COUNT = 12;
 const REQUEST_TIMEOUT_MS = 20_000;
+const MAX_OIL_SUPPLEMENT_DAYS = 14;
+const WORLD_GOLD_COUNCIL_ORIGIN = 'https://www.gold.org';
+const WORLD_GOLD_COUNCIL_GDT_INDEX_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/research/gold-demand-trends`;
+const WORLD_GOLD_COUNCIL_DEMAND_SOURCE_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/data/gold-demand-by-country`;
 
 // Nasdaq-100 monthly trailing P/E snapshot. Public historical index valuation APIs are not reliably available
 // without a paid key, so the verified monthly series is bundled to keep the chart deterministic and usable offline.
@@ -138,7 +142,12 @@ const RANGE_CONFIG = {
   year2: { label: '2年', months: 24 },
   year3: { label: '3年', months: 36 },
   year5: { label: '5年', months: 60 },
+  year7: { label: '7年', months: 84 },
   year10: { label: '10年', months: 120 },
+  year15: { label: '15年', months: 180 },
+  year20: { label: '20年', months: 240 },
+  year25: { label: '25年', months: 300 },
+  year30: { label: '30年', months: 360 },
 };
 
 const CHART_METADATA = {
@@ -159,6 +168,15 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: 'FRED / 美联储 H.15',
     sourceUrl: 'https://fred.stlouisfed.org/series/DGS30',
+  },
+  federalFundsRate: {
+    id: 'federalFundsRate',
+    title: '美联储有效联邦基金利率',
+    unit: '%',
+    decimals: 2,
+    frequency: '日度',
+    sourceName: 'FRED / 纽约联储',
+    sourceUrl: 'https://fred.stlouisfed.org/series/DFF',
   },
   cpi: {
     id: 'cpi',
@@ -186,6 +204,24 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: '新浪财经 / 伦敦金现货',
     sourceUrl: 'https://finance.sina.com.cn/futures/quotes/XAU.shtml',
+  },
+  silver: {
+    id: 'silver',
+    title: '全球白银价格',
+    unit: '美元/盎司',
+    decimals: 2,
+    frequency: '月度',
+    sourceName: 'IMF Primary Commodity Price System',
+    sourceUrl: 'https://data.imf.org/en/datasets/IMF.RES:PCPS',
+  },
+  centralBankGoldPurchases: {
+    id: 'centralBankGoldPurchases',
+    title: '全球央行净购金量',
+    unit: '吨',
+    decimals: 0,
+    frequency: '季度',
+    sourceName: '世界黄金协会 / Gold Demand Trends',
+    sourceUrl: WORLD_GOLD_COUNCIL_DEMAND_SOURCE_URL,
   },
   bitcoin: {
     id: 'bitcoin',
@@ -222,6 +258,8 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: 'FRED / 美国能源信息署 EIA',
     sourceUrl: 'https://fred.stlouisfed.org/series/DCOILBRENTEU',
+    supplementSourceName: '新浪财经 / Brent 近月期货',
+    supplementSourceUrl: 'https://finance.sina.com.cn/futures/quotes/OIL.shtml',
   },
   wtiOil: {
     id: 'wtiOil',
@@ -231,6 +269,26 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: 'FRED / 美国能源信息署 EIA',
     sourceUrl: 'https://fred.stlouisfed.org/series/DCOILWTICO',
+    supplementSourceName: '新浪财经 / WTI 近月期货',
+    supplementSourceUrl: 'https://finance.sina.com.cn/futures/quotes/CL.shtml',
+  },
+  copper: {
+    id: 'copper',
+    title: '全球铜价',
+    unit: '美元/吨',
+    decimals: 2,
+    frequency: '月度',
+    sourceName: 'FRED / IMF Primary Commodity Prices',
+    sourceUrl: 'https://fred.stlouisfed.org/series/PCOPPUSDM',
+  },
+  naturalGas: {
+    id: 'naturalGas',
+    title: 'Henry Hub 天然气价格',
+    unit: '美元/MMBtu',
+    decimals: 2,
+    frequency: '日度',
+    sourceName: 'FRED / 美国能源信息署 EIA',
+    sourceUrl: 'https://fred.stlouisfed.org/series/DHHNGSP',
   },
   aShareTurnover: {
     id: 'aShareTurnover',
@@ -398,7 +456,7 @@ function parseImfCsv(text, indicator = 'PGOLD') {
   const valueIndex = header.indexOf('OBS_VALUE');
 
   if (indicatorIndex < 0 || dateIndex < 0 || valueIndex < 0) {
-    throw new Error('IMF 返回内容缺少黄金价格字段');
+    throw new Error('IMF 返回内容缺少商品价格字段');
   }
 
   return rows.slice(1).map((row) => {
@@ -489,13 +547,156 @@ function buildFredUrl(seriesId, startDate, endDate) {
   return `https://fred.stlouisfed.org/graph/fredgraph.csv?${params.toString()}`;
 }
 
-function buildImfGoldUrl(startMonth, endMonth) {
+function buildImfCommodityUrl(indicator, startMonth, endMonth) {
+  if (!/^[A-Z0-9_]+$/.test(indicator)) throw new Error('IMF 商品指标代码无效');
   const params = new URLSearchParams({ startPeriod: startMonth, endPeriod: endMonth });
-  return `https://api.imf.org/external/sdmx/2.1/data/IMF.RES,PCPS/G001.PGOLD.USD.M?${params.toString()}`;
+  return `https://api.imf.org/external/sdmx/2.1/data/IMF.RES,PCPS/G001.${indicator}.USD.M?${params.toString()}`;
+}
+
+function buildImfGoldUrl(startMonth, endMonth) {
+  return buildImfCommodityUrl('PGOLD', startMonth, endMonth);
 }
 
 function buildSinaGoldUrl() {
-  return 'https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_XAU=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=XAU';
+  return buildSinaGlobalFuturesUrl('XAU');
+}
+
+function buildSinaGlobalFuturesUrl(symbol) {
+  if (!/^[A-Z0-9]+$/.test(symbol)) throw new Error('新浪期货品种代码无效');
+  return `https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_${symbol}=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=${symbol}`;
+}
+
+function decodeHtmlEntities(value) {
+  return String(value ?? '')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#0*39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&#(\d+);/g, (_, codePoint) => String.fromCodePoint(Number(codePoint)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, codePoint) => String.fromCodePoint(Number.parseInt(codePoint, 16)));
+}
+
+function findLatestWorldGoldCouncilReport(text) {
+  const reports = [];
+  const hrefPattern = /href\s*=\s*(["'])(.*?)\1/gi;
+  let hrefMatch;
+
+  while ((hrefMatch = hrefPattern.exec(String(text ?? '')))) {
+    const href = decodeHtmlEntities(hrefMatch[2]);
+    let url;
+    try {
+      url = new URL(href, WORLD_GOLD_COUNCIL_ORIGIN);
+    } catch {
+      continue;
+    }
+
+    const path = url.pathname.replace(/\/$/, '');
+    const periodMatch = /^\/goldhub\/research\/gold-demand-trends\/gold-demand-trends-(?:q([1-4])-(\d{4})|full-year-(\d{4}))$/.exec(path);
+    if (!periodMatch) continue;
+    const year = Number(periodMatch[2] ?? periodMatch[3]);
+    const quarter = periodMatch[1] ? Number(periodMatch[1]) : 4;
+    reports.push({
+      url: `${WORLD_GOLD_COUNCIL_ORIGIN}${path}`,
+      centralBanksUrl: `${WORLD_GOLD_COUNCIL_ORIGIN}${path}/central-banks`,
+      year,
+      quarter,
+    });
+  }
+
+  reports.sort((left, right) => (right.year * 4 + right.quarter) - (left.year * 4 + left.quarter));
+  if (!reports.length) throw new Error('世界黄金协会页面未找到最新 Gold Demand Trends 报告');
+  return reports[0];
+}
+
+function getHtmlAttribute(tag, name) {
+  const escapedName = String(name).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = new RegExp(`${escapedName}\\s*=\\s*(["'])(.*?)\\1`, 'i').exec(tag);
+  return match ? decodeHtmlEntities(match[2]) : null;
+}
+
+function findWorldGoldCouncilCentralBankChartUrl(text) {
+  const source = String(text ?? '');
+  const containerPattern = /<div\b[^>]*class\s*=\s*(["'])[^"']*\bwgc-chart-container\b[^"']*\1[^>]*>/gi;
+  let containerMatch;
+
+  while ((containerMatch = containerPattern.exec(source))) {
+    const context = decodeHtmlEntities(source.slice(Math.max(0, containerMatch.index - 3500), containerMatch.index))
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ');
+    if (!/quarterly central bank net purchases,?\s*tonnes/i.test(context)) continue;
+    const chartUrl = getHtmlAttribute(containerMatch[0], 'data-chart-data-lib');
+    if (chartUrl) return new URL(chartUrl, WORLD_GOLD_COUNCIL_ORIGIN).href;
+  }
+
+  throw new Error('世界黄金协会报告未找到全球央行季度净购金图表');
+}
+
+function parseEmbeddedChartOptions(text) {
+  const source = String(text ?? '');
+  const assignment = /\b_self\._opt\s*=\s*/.exec(source);
+  const startIndex = assignment ? source.indexOf('{', assignment.index + assignment[0].length) : -1;
+  if (startIndex < 0) throw new Error('世界黄金协会图表缺少配置数据');
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = startIndex; index < source.length; index += 1) {
+    const character = source[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (character === '\\') escaped = true;
+      else if (character === '"') inString = false;
+      continue;
+    }
+    if (character === '"') {
+      inString = true;
+      continue;
+    }
+    if (character === '{') depth += 1;
+    else if (character === '}') {
+      depth -= 1;
+      if (depth === 0) return JSON.parse(source.slice(startIndex, index + 1));
+    }
+  }
+  throw new Error('世界黄金协会图表配置不完整');
+}
+
+function parseWorldGoldCouncilCentralBankChart(text, latestPeriod = {}) {
+  const options = parseEmbeddedChartOptions(text);
+  const categories = Array.isArray(options?.xAxis?.categories) ? options.xAxis.categories : [];
+  const series = Array.isArray(options?.series) ? options.series : [];
+  const maxYear = Number(latestPeriod.year);
+  const maxQuarter = Number(latestPeriod.quarter);
+  const hasPeriodLimit = Number.isInteger(maxYear) && Number.isInteger(maxQuarter);
+  const items = [];
+
+  series.forEach((entry) => {
+    const quarterMatch = /^Q([1-4])$/i.exec(String(entry?.name ?? '').trim());
+    if (!quarterMatch || !Array.isArray(entry.data)) return;
+    const quarter = Number(quarterMatch[1]);
+    categories.forEach((category, index) => {
+      const year = Number(category);
+      if (!Number.isInteger(year)) return;
+      if (hasPeriodLimit && (year > maxYear || (year === maxYear && quarter > maxQuarter))) return;
+      const rawValue = entry.data[index];
+      if (rawValue === null || rawValue === undefined || rawValue === '') return;
+      const normalizedValue = Array.isArray(rawValue) ? rawValue.at(-1) : rawValue?.y ?? rawValue;
+      if (normalizedValue === null || normalizedValue === undefined || normalizedValue === '') return;
+      const value = Number(normalizedValue);
+      if (!Number.isFinite(value)) return;
+      const quarterEnd = new Date(Date.UTC(year, quarter * 3, 0)).toISOString().slice(0, 10);
+      items.push({ date: quarterEnd, value });
+    });
+  });
+
+  const sortedItems = [...new Map(items.map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+  if (!sortedItems.length) throw new Error('世界黄金协会图表暂无可用的央行购金数据');
+
+  if (hasPeriodLimit) return sortedItems;
+  const lastObservedIndex = sortedItems.findLastIndex((item) => item.value !== 0);
+  return lastObservedIndex >= 0 ? sortedItems.slice(0, lastObservedIndex + 1) : sortedItems;
 }
 
 function buildTreasuryDebtUrl(startDate, endDate) {
@@ -560,7 +761,7 @@ function parseSinaGold(text) {
   const source = String(text ?? '');
   const startIndex = source.indexOf('[');
   const endIndex = source.lastIndexOf(']');
-  if (startIndex < 0 || endIndex <= startIndex) throw new Error('黄金数据格式无效');
+  if (startIndex < 0 || endIndex <= startIndex) throw new Error('新浪期货数据格式无效');
   const rows = JSON.parse(source.slice(startIndex, endIndex + 1));
   return rows.map((row) => {
     const date = normalizeObservationDate(row?.date);
@@ -682,6 +883,39 @@ function filterDateRange(items, startDate, endDate) {
     .sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function mergeSpotWithFuturesSupplement(spotItems, futuresItems, options = {}) {
+  const sortedSpotItems = [...spotItems]
+    .filter((item) => item?.date && Number.isFinite(Number(item.value)))
+    .map((item) => ({ ...item, value: Number(item.value) }))
+    .sort((left, right) => left.date.localeCompare(right.date));
+  if (!sortedSpotItems.length) return [];
+
+  const latestSpot = sortedSpotItems.at(-1);
+  const sortedFuturesItems = [...futuresItems]
+    .filter((item) => item?.date && Number.isFinite(Number(item.value)))
+    .map((item) => ({ ...item, value: Number(item.value) }))
+    .sort((left, right) => left.date.localeCompare(right.date));
+  const anchor = sortedFuturesItems.filter((item) => item.date <= latestSpot.date).at(-1);
+  if (!anchor || anchor.value === 0) return sortedSpotItems;
+
+  const maxDays = Number.isInteger(options.maxDays) ? options.maxDays : MAX_OIL_SUPPLEMENT_DAYS;
+  const cutoffDate = formatIsoDate(shiftUtcDays(latestSpot.date, maxDays));
+  const supplement = sortedFuturesItems
+    .filter((item) => item.date > latestSpot.date && item.date <= cutoffDate)
+    .map((item) => ({
+      date: item.date,
+      value: latestSpot.value * item.value / anchor.value,
+      provisional: true,
+      provisionalType: 'futuresChangeEstimate',
+      futuresSymbol: options.futuresSymbol || '',
+      futuresValue: item.value,
+      anchorDate: anchor.date,
+      supplementSourceName: options.sourceName || '',
+    }));
+
+  return sortedSpotItems.concat(supplement);
+}
+
 function filterRecentItems(items, range, frequency = 'daily') {
   const sortedItems = [...items].sort((left, right) => left.date.localeCompare(right.date));
   if (sortedItems.length === 0) return [];
@@ -692,7 +926,11 @@ function filterRecentItems(items, range, frequency = 'daily') {
   }
 
   if (frequency === 'quarterly') {
-    return Number.isInteger(config.months) ? sortedItems.slice(-Math.ceil(config.months / 3)) : sortedItems.slice(-1);
+    // A line covering N months needs both interval endpoints. For example, Q1 to Q2
+    // is the two-point representation of a three-month interval.
+    return Number.isInteger(config.months)
+      ? sortedItems.slice(-(Math.ceil(config.months / 3) + 1))
+      : sortedItems.slice(-2);
   }
 
   const latestDate = getUtcDate(sortedItems.at(-1).date);
@@ -730,6 +968,26 @@ async function queryMacroOutlook(options = {}) {
   const requestedStartDate = getRangeStart(now, range);
   const dailyStartDate = formatIsoDate(shiftUtcDays(requestedStartDate, -14));
   const inflationStartDate = formatIsoDate(shiftUtcMonths(requestedStartDate, -15));
+  const bitcoinStartDate = dailyStartDate < '2014-12-01' ? '2014-12-01' : dailyStartDate;
+
+  const loadSupplementedOil = async (metadata, fredSeriesId, futuresSymbol) => {
+    const spotText = await fetchCsv(buildFredUrl(fredSeriesId, dailyStartDate, endDate), fetchImpl);
+    const spotItems = filterDateRange(parseFredCsv(spotText, fredSeriesId), dailyStartDate, endDate);
+    let futuresItems = [];
+    try {
+      const futuresText = await fetchCsv(buildSinaGlobalFuturesUrl(futuresSymbol), fetchImpl, {
+        Referer: 'https://finance.sina.com.cn/',
+      });
+      futuresItems = filterDateRange(parseSinaGold(futuresText), dailyStartDate, endDate);
+    } catch {
+      // 补点源不可用时仍保留 EIA/FRED 现货主序列。
+    }
+    const combinedItems = mergeSpotWithFuturesSupplement(spotItems, futuresItems, {
+      futuresSymbol,
+      sourceName: metadata.supplementSourceName,
+    });
+    return filterRecentItems(combinedItems, range);
+  };
 
   const loaders = {
     treasuryYield: () => loadChart(CHART_METADATA.treasuryYield, async () => {
@@ -740,6 +998,11 @@ async function queryMacroOutlook(options = {}) {
     treasuryYield30: () => loadChart(CHART_METADATA.treasuryYield30, async () => {
       const text = await fetchCsv(buildFredUrl('DGS30', dailyStartDate, endDate), fetchImpl);
       const availableItems = filterDateRange(parseFredCsv(text, 'DGS30'), dailyStartDate, endDate);
+      return filterRecentItems(availableItems, range);
+    }),
+    federalFundsRate: () => loadChart(CHART_METADATA.federalFundsRate, async () => {
+      const text = await fetchCsv(buildFredUrl('DFF', dailyStartDate, endDate), fetchImpl);
+      const availableItems = filterDateRange(parseFredCsv(text, 'DFF'), dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
     cpi: () => loadChart(CHART_METADATA.cpi, async () => {
@@ -755,9 +1018,34 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(parseSinaGold(text), dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    silver: () => loadChart(CHART_METADATA.silver, async () => {
+      const text = await fetchCsv(
+        buildImfCommodityUrl('PSILVER', formatIsoMonth(inflationStartDate), formatIsoMonth(endDate)),
+        fetchImpl,
+      );
+      return filterRecentItems(parseImfCsv(text, 'PSILVER'), range, 'monthly');
+    }),
+    centralBankGoldPurchases: () => loadChart(CHART_METADATA.centralBankGoldPurchases, async () => {
+      const indexText = await fetchCsv(WORLD_GOLD_COUNCIL_GDT_INDEX_URL, fetchImpl, {
+        Accept: 'text/html',
+        Referer: WORLD_GOLD_COUNCIL_ORIGIN,
+      });
+      const report = findLatestWorldGoldCouncilReport(indexText);
+      const reportText = await fetchCsv(report.centralBanksUrl, fetchImpl, {
+        Accept: 'text/html',
+        Referer: report.url,
+      });
+      const chartUrl = findWorldGoldCouncilCentralBankChartUrl(reportText);
+      const chartText = await fetchCsv(chartUrl, fetchImpl, {
+        Accept: 'application/javascript',
+        Referer: report.centralBanksUrl,
+      });
+      const items = parseWorldGoldCouncilCentralBankChart(chartText, report);
+      return filterRecentItems(items, range, 'quarterly');
+    }),
     bitcoin: () => loadChart(CHART_METADATA.bitcoin, async () => {
-      const text = await fetchCsv(buildFredUrl('CBBTCUSD', dailyStartDate, endDate), fetchImpl);
-      const availableItems = filterDateRange(parseFredCsv(text, 'CBBTCUSD'), dailyStartDate, endDate);
+      const text = await fetchCsv(buildFredUrl('CBBTCUSD', bitcoinStartDate, endDate), fetchImpl);
+      const availableItems = filterDateRange(parseFredCsv(text, 'CBBTCUSD'), bitcoinStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
     federalDebt: () => loadChart(CHART_METADATA.federalDebt, async () => {
@@ -770,13 +1058,18 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(availableItems, range);
     }),
     brentOil: () => loadChart(CHART_METADATA.brentOil, async () => {
-      const text = await fetchCsv(buildFredUrl('DCOILBRENTEU', dailyStartDate, endDate), fetchImpl);
-      const availableItems = filterDateRange(parseFredCsv(text, 'DCOILBRENTEU'), dailyStartDate, endDate);
-      return filterRecentItems(availableItems, range);
+      return loadSupplementedOil(CHART_METADATA.brentOil, 'DCOILBRENTEU', 'OIL');
     }),
     wtiOil: () => loadChart(CHART_METADATA.wtiOil, async () => {
-      const text = await fetchCsv(buildFredUrl('DCOILWTICO', dailyStartDate, endDate), fetchImpl);
-      const availableItems = filterDateRange(parseFredCsv(text, 'DCOILWTICO'), dailyStartDate, endDate);
+      return loadSupplementedOil(CHART_METADATA.wtiOil, 'DCOILWTICO', 'CL');
+    }),
+    copper: () => loadChart(CHART_METADATA.copper, async () => {
+      const text = await fetchCsv(buildFredUrl('PCOPPUSDM', inflationStartDate, endDate), fetchImpl);
+      return filterRecentItems(parseFredCsv(text, 'PCOPPUSDM'), range, 'monthly');
+    }),
+    naturalGas: () => loadChart(CHART_METADATA.naturalGas, async () => {
+      const text = await fetchCsv(buildFredUrl('DHHNGSP', dailyStartDate, endDate), fetchImpl);
+      const availableItems = filterDateRange(parseFredCsv(text, 'DHHNGSP'), dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
     aShareTurnover: () => loadChart(CHART_METADATA.aShareTurnover, async () => {
@@ -877,14 +1170,20 @@ module.exports = {
   DEFAULT_MONTH_COUNT,
   RANGE_CONFIG,
   buildFredUrl,
+  buildImfCommodityUrl,
   buildImfGoldUrl,
   buildSinaGoldUrl,
+  buildSinaGlobalFuturesUrl,
+  findLatestWorldGoldCouncilReport,
+  findWorldGoldCouncilCentralBankChartUrl,
+  parseWorldGoldCouncilCentralBankChart,
   buildTreasuryDebtUrl,
   buildAShareTurnoverUrl,
   buildAShareMarginBalanceUrl,
   buildSohuIndexHistoryUrl,
   calculateYearOverYear,
   filterRecentItems,
+  mergeSpotWithFuturesSupplement,
   normalizeObservationDate,
   normalizeChartIds,
   normalizeRange,

@@ -53,7 +53,12 @@
               <option value="year2">2年</option>
               <option value="year3">3年</option>
               <option value="year5">5年</option>
+              <option value="year7">7年</option>
               <option value="year10">10年</option>
+              <option value="year15">15年</option>
+              <option value="year20">20年</option>
+              <option value="year25">25年</option>
+              <option value="year30">30年</option>
             </select>
             <label class="level-select-label" for="overallColumnsSelect">每行图表</label>
             <select class="level-select" id="overallColumnsSelect">
@@ -174,9 +179,19 @@
               <label for="chartLineWidthInput">图表线条粗细</label>
               <p>统一调整所有图表的数据曲线，不影响坐标轴、网格线和鼠标辅助线。</p>
             </div>
-            <div class="display-line-width-control">
+            <div class="display-slider-control">
               <input id="chartLineWidthInput" type="range" min="1" max="6" step="0.5" value="1" />
               <output id="chartLineWidthOutput" for="chartLineWidthInput">1 px</output>
+            </div>
+          </div>
+          <div class="display-control-item">
+            <div>
+              <label for="quarterPointSizeInput">季度点大小</label>
+              <p>调整季度频率图表在详情中的固定数据点，不影响折线和鼠标悬停提示点。</p>
+            </div>
+            <div class="display-slider-control">
+              <input id="quarterPointSizeInput" type="range" min="2" max="10" step="0.5" value="4.5" />
+              <output id="quarterPointSizeOutput" for="quarterPointSizeInput">4.5 px</output>
             </div>
           </div>
         </div>

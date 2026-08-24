@@ -30,8 +30,8 @@ async function build() {
   fs.mkdirSync(dataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
 
-  process.stdout.write('Fetching the 10-year macro dataset...\n');
-  const outlook = await queryMacroOutlook({ range: 'year10' });
+  process.stdout.write('Fetching the 30-year macro dataset...\n');
+  const outlook = await queryMacroOutlook({ range: 'year30' });
   const usableCharts = outlook.charts.filter((chart) => chart.items.length > 0);
   if (usableCharts.length === 0) {
     throw new Error('No macro chart returned usable data; refusing to publish an empty site.');
