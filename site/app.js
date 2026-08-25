@@ -175,7 +175,8 @@
         'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
-      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs']
+      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs'],
+      group_primary: ['treasuryYield30', 'cpi', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases']
     },
     visibleChartIds: [
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
@@ -187,30 +188,31 @@
       { id: 'default', name: '默认' },
       { id: 'group_mt432xl1_kz1mx7', name: '美国' },
       { id: 'group_mt49f5yl_pctlb6', name: '资源' },
-      { id: 'group_a_share', name: 'A股' }
+      { id: 'group_a_share', name: 'A股' },
+      { id: 'group_primary', name: '主要' }
     ],
     chartGroups: {
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
-      treasuryYield30: ['default', 'group_mt432xl1_kz1mx7'],
-      federalFundsRate: ['default', 'group_mt432xl1_kz1mx7'],
-      cpi: ['default', 'group_mt432xl1_kz1mx7'],
+      treasuryYield30: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
+      federalFundsRate: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
+      cpi: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       pce: ['default', 'group_mt432xl1_kz1mx7'],
-      gold: ['default', 'group_mt49f5yl_pctlb6'],
+      gold: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       silver: ['default', 'group_mt49f5yl_pctlb6'],
-      centralBankGoldPurchases: ['default', 'group_mt49f5yl_pctlb6'],
+      centralBankGoldPurchases: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       bitcoin: ['default'],
       federalDebt: ['default', 'group_mt432xl1_kz1mx7'],
       jpyUsd: ['default'],
-      brentOil: ['default', 'group_mt49f5yl_pctlb6'],
+      brentOil: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
-      copper: ['default', 'group_mt49f5yl_pctlb6'],
+      copper: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       naturalGas: ['default', 'group_mt49f5yl_pctlb6'],
       aShareTurnover: ['default', 'group_a_share'],
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
-      sp500: ['default', 'group_mt432xl1_kz1mx7'],
+      sp500: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       vix: ['default', 'group_mt432xl1_kz1mx7'],
       treasurySpread: ['default', 'group_mt432xl1_kz1mx7'],
       highYieldSpread: ['default', 'group_mt432xl1_kz1mx7'],
@@ -377,7 +379,10 @@
 
     var groupChartOrder = {};
     groups.forEach(function (group) {
-      var order = uniqueKnown(source.groupChartOrder && source.groupChartOrder[group.id]);
+      var sourceOrder = source.groupChartOrder && source.groupChartOrder[group.id];
+      var order = uniqueKnown(addedDefaultGroupIds.has(group.id)
+        ? DEFAULT_CONFIG.groupChartOrder[group.id]
+        : sourceOrder);
       var members = chartOrder.filter(function (id) { return chartGroups[id].includes(group.id); });
       members.forEach(function (id) {
         if (!order.includes(id)) order.push(id);
