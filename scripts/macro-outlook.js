@@ -414,6 +414,10 @@ const CHART_METADATA = {
     id: 'initialClaims', title: '美国初次申请失业金人数', unit: '万人', decimals: 1, frequency: '周度',
     sourceName: 'FRED / 美国劳工部', sourceUrl: 'https://fred.stlouisfed.org/series/ICSA',
   },
+  unemploymentRate: {
+    id: 'unemploymentRate', title: '美国失业率', unit: '%', decimals: 1, frequency: '月度',
+    sourceName: 'FRED / 美国劳工统计局', sourceUrl: 'https://fred.stlouisfed.org/series/UNRATE',
+  },
   financialConditions: {
     id: 'financialConditions', title: '美国金融状况指数', unit: '指数', decimals: 2, frequency: '周度',
     sourceName: 'FRED / 芝加哥联储', sourceUrl: 'https://fred.stlouisfed.org/series/NFCI',
@@ -1385,6 +1389,10 @@ async function queryMacroOutlook(options = {}) {
       const items = filterDateRange(parseFredCsv(text, 'ICSA'), dailyStartDate, endDate)
         .map((item) => ({ ...item, value: item.value / 10_000 }));
       return filterRecentItems(items, range);
+    }),
+    unemploymentRate: () => loadChart(CHART_METADATA.unemploymentRate, async () => {
+      const text = await fetchCsv(buildFredUrl('UNRATE', inflationStartDate, endDate), fetchImpl);
+      return filterRecentItems(parseFredCsv(text, 'UNRATE'), range, 'monthly');
     }),
     financialConditions: () => loadChart(CHART_METADATA.financialConditions, async () => {
       const text = await fetchCsv(buildFredUrl('NFCI', dailyStartDate, endDate), fetchImpl);

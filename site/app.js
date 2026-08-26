@@ -6,7 +6,7 @@
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-    'initialClaims', 'financialConditions'
+    'initialClaims', 'unemploymentRate', 'financialConditions'
   ];
 
   var TITLES = {
@@ -40,6 +40,7 @@
     ismNewOrders: '美国 ISM 新订单指数',
     ismBacklogOrders: '美国 ISM 订单积压指数',
     initialClaims: '美国初次申请失业金人数',
+    unemploymentRate: '美国失业率',
     financialConditions: '美国金融状况指数'
   };
 
@@ -74,6 +75,7 @@
     ismNewOrders: '制造业订单',
     ismBacklogOrders: '制造业订单',
     initialClaims: '就业',
+    unemploymentRate: '就业',
     financialConditions: '金融压力'
   };
 
@@ -108,6 +110,7 @@
     ismNewOrders: '美国 ISM 制造业新订单扩散指数，衡量受访企业新订单相对上月的变化。高于 50 表示新订单总体增加，低于 50 表示减少。',
     ismBacklogOrders: '美国 ISM 制造业订单积压扩散指数，衡量尚未完成订单相对上月的变化。高于 50 表示积压增加，低于 50 表示积压减少。',
     initialClaims: '美国每周首次申请失业保险的人数，是观察裁员和劳动力市场转弱的高频领先指标。',
+    unemploymentRate: '美国劳工统计局按月公布的季节调整失业率，表示失业人口占劳动力人口的比例。上升通常意味着劳动力市场走弱。',
     financialConditions: '芝加哥联储金融状况指数（NFCI）。零值附近代表历史平均，正值偏紧，负值偏松。'
   };
 
@@ -142,6 +145,7 @@
     ismNewOrders: '#2563eb',
     ismBacklogOrders: '#c2410c',
     initialClaims: '#7e57a6',
+    unemploymentRate: '#b45309',
     financialConditions: '#246b5e'
   };
 
@@ -180,7 +184,7 @@
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-      'initialClaims', 'financialConditions', 'treasuryYield'
+      'initialClaims', 'unemploymentRate', 'financialConditions', 'treasuryYield'
     ],
     groupChartOrder: {
       default: [
@@ -188,17 +192,17 @@
         'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
         'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-        'initialClaims', 'financialConditions', 'treasuryYield'
+        'initialClaims', 'unemploymentRate', 'financialConditions', 'treasuryYield'
       ],
       group_mt432xl1_kz1mx7: [
         'treasuryYield30', 'federalFundsRate', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
         'federalDebt', 'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
         'treasurySpread', 'highYieldSpread',
-        'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
+        'initialClaims', 'unemploymentRate', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
       group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs'],
-      group_primary: ['treasuryYield30', 'cpi', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_primary: ['treasuryYield30', 'cpi', 'unemploymentRate', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
@@ -206,7 +210,7 @@
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-      'initialClaims', 'financialConditions'
+      'initialClaims', 'unemploymentRate', 'financialConditions'
     ],
     groups: [
       { id: 'group_primary', name: '主要' },
@@ -247,6 +251,7 @@
       ismNewOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       ismBacklogOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       initialClaims: ['default', 'group_mt432xl1_kz1mx7'],
+      unemploymentRate: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       financialConditions: ['default', 'group_mt432xl1_kz1mx7']
     },
     selectedGroupId: 'group_mt432xl1_kz1mx7'
@@ -1613,8 +1618,8 @@
     control.disabled = true;
     if (!data) refs.meta.textContent = '正在加载宏观、资产与汇率数据...';
     try {
-      var url = 'data/outlook.json' + (fresh ? '?v=' + Date.now() : '');
-      var response = await fetch(url, { cache: fresh ? 'no-store' : 'default' });
+      var url = 'data/outlook.json?v=' + Date.now();
+      var response = await fetch(url, { cache: 'no-store' });
       if (!response.ok) throw new Error('HTTP ' + response.status);
       var payload = await response.json();
       if (!payload || !Array.isArray(payload.charts)) throw new Error('数据格式无效');
