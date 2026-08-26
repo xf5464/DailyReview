@@ -166,12 +166,14 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
+  var GROUP_ORDER_VERSION = 1;
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
+    groupOrderVersion: GROUP_ORDER_VERSION,
     chartsPerRow: 4,
     chartOrder: [
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
@@ -207,12 +209,12 @@
       'initialClaims', 'financialConditions'
     ],
     groups: [
+      { id: 'group_primary', name: '主要' },
+      { id: 'group_us_manufacturing', name: '美国制造' },
       { id: 'default', name: '默认' },
       { id: 'group_mt432xl1_kz1mx7', name: '美国' },
       { id: 'group_mt49f5yl_pctlb6', name: '资源' },
-      { id: 'group_a_share', name: 'A股' },
-      { id: 'group_primary', name: '主要' },
-      { id: 'group_us_manufacturing', name: '美国制造' }
+      { id: 'group_a_share', name: 'A股' }
     ],
     chartGroups: {
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
@@ -369,8 +371,9 @@
     (Array.isArray(source.groups) ? source.groups : []).forEach(function (group) {
       var id = String(group && group.id || '').trim();
       var name = String(group && group.name || '').trim();
-      if (id && id !== 'group_us_manufacturing' && name === '美国制造') {
-        groupIdAliases[id] = 'group_us_manufacturing';
+      var matchingBuiltIn = DEFAULT_CONFIG.groups.find(function (item) { return item.name === name; });
+      if (id && matchingBuiltIn && id !== matchingBuiltIn.id) {
+        groupIdAliases[id] = matchingBuiltIn.id;
       }
     });
     var groups = [];
@@ -397,6 +400,12 @@
       groupIds.add(group.id);
       addedDefaultGroupIds.add(group.id);
     });
+    if (Number(source.groupOrderVersion) !== GROUP_ORDER_VERSION) {
+      var defaultGroupIds = DEFAULT_CONFIG.groups.map(function (group) { return group.id; });
+      var groupById = new Map(groups.map(function (group) { return [group.id, group]; }));
+      groups = defaultGroupIds.map(function (id) { return groupById.get(id); }).filter(Boolean)
+        .concat(groups.filter(function (group) { return !defaultGroupIds.includes(group.id); }));
+    }
 
     var chartOrder = uniqueKnown(source.chartOrder);
     var newlyAddedChartIds = CHART_IDS.filter(function (id) { return !chartOrder.includes(id); });
@@ -442,6 +451,7 @@
     var selectedGroupId = groupIds.has(requestedGroupId) ? requestedGroupId : 'default';
 
     return {
+      groupOrderVersion: GROUP_ORDER_VERSION,
       chartsPerRow: columns,
       chartOrder: chartOrder,
       groupChartOrder: groupChartOrder,
