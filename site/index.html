@@ -156,14 +156,29 @@
           <div><p class="industry-detail-kicker">总体形势配置</p><h2>管理分组</h2></div>
           <button class="dialog-close-button" type="button" data-close="overallGroupsDialog" aria-label="关闭">×</button>
         </div>
-        <p class="overall-config-description">所有图表永久属于“默认”分组；自定义分组可以重命名、删除，同一图表也可加入多个分组。</p>
+        <p class="overall-config-description">“美国制造”等内置分组不可删除；每个分组可直接置顶，或进入专用排序界面拖拽调整。所有图表永久属于“默认”分组。</p>
         <div class="overall-group-create">
           <input class="level-select" id="overallNewGroupName" maxlength="40" placeholder="输入新分组名称" />
           <button class="primary-button" type="button" id="overallAddGroupButton">新增分组</button>
         </div>
         <div class="overall-groups-list" id="overallGroupsList"></div>
-        <div class="overall-config-actions"><button class="primary-button" type="button" data-close="overallGroupsDialog">完成</button></div>
+        <div class="overall-config-actions">
+          <button class="secondary-button" type="button" id="overallOpenGroupOrderButton">调整分组顺序</button>
+          <button class="primary-button" type="button" data-close="overallGroupsDialog">完成</button>
+        </div>
         <p class="overall-config-message" id="overallGroupsMessage" role="status"></p>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog" id="overallGroupOrderDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">总体形势配置</p><h2>调整分组顺序</h2></div>
+          <button class="dialog-close-button" type="button" data-close="overallGroupOrderDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">拖拽分组，或使用置顶、上移和下移按钮调整分组下拉框中的显示顺序。</p>
+        <ol class="overall-config-list overall-group-order-list" id="overallGroupOrderList" aria-label="分组顺序"></ol>
+        <div class="overall-config-actions"><button class="primary-button" type="button" data-close="overallGroupOrderDialog">完成</button></div>
       </div>
     </dialog>
 

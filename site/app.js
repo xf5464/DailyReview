@@ -5,7 +5,8 @@
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
-    'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions'
+    'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+    'initialClaims', 'financialConditions'
   ];
 
   var TITLES = {
@@ -33,7 +34,11 @@
     vix: 'VIX恐慌指数',
     treasurySpread: '美国10年-2年国债利差',
     highYieldSpread: '美国高收益债信用利差',
-    broadDollar: '广义美元指数',
+    broadDollar: '美元指数（DXY）',
+    ismManufacturingPmi: '美国 ISM 制造业 PMI',
+    ismSupplierDeliveries: '美国 ISM 供应商交付指数',
+    ismNewOrders: '美国 ISM 新订单指数',
+    ismBacklogOrders: '美国 ISM 订单积压指数',
     initialClaims: '美国初次申请失业金人数',
     financialConditions: '美国金融状况指数'
   };
@@ -64,6 +69,10 @@
     treasurySpread: '利率曲线',
     highYieldSpread: '信用风险',
     broadDollar: '美元流动性',
+    ismManufacturingPmi: '制造业景气',
+    ismSupplierDeliveries: '供应链',
+    ismNewOrders: '制造业订单',
+    ismBacklogOrders: '制造业订单',
     initialClaims: '就业',
     financialConditions: '金融压力'
   };
@@ -93,7 +102,11 @@
     vix: '由标普 500 期权价格推算的未来约 30 天预期波动率。数值越高，通常表示市场不确定性和避险情绪越强。',
     treasurySpread: '美国 10 年期与 2 年期国债收益率之差。负值代表收益率曲线倒挂。',
     highYieldSpread: '美国高收益债相对同期限美国国债的期权调整利差。利差扩大通常表示信用风险和融资压力上升。',
-    broadDollar: '美联储编制的贸易加权广义美元指数。指数上升表示美元对主要贸易伙伴货币整体走强。',
+    broadDollar: 'ICE 美元指数（DXY），由欧元、日元、英镑、加元、瑞典克朗和瑞士法郎六种货币构成，不含人民币。本图使用 FRED H.10 双边汇率按 ICE 固定权重公式重建，数值上升表示美元相对该货币篮子走强。',
+    ismManufacturingPmi: '美国供应管理协会（ISM）制造业采购经理人综合扩散指数。高于 50 通常表示制造业活动扩张，低于 50 表示收缩。',
+    ismSupplierDeliveries: '美国 ISM 制造业供应商交付扩散指数。该分项方向与一般速度指标相反：高于 50 表示交付变慢，低于 50 表示交付加快。',
+    ismNewOrders: '美国 ISM 制造业新订单扩散指数，衡量受访企业新订单相对上月的变化。高于 50 表示新订单总体增加，低于 50 表示减少。',
+    ismBacklogOrders: '美国 ISM 制造业订单积压扩散指数，衡量尚未完成订单相对上月的变化。高于 50 表示积压增加，低于 50 表示积压减少。',
     initialClaims: '美国每周首次申请失业保险的人数，是观察裁员和劳动力市场转弱的高频领先指标。',
     financialConditions: '芝加哥联储金融状况指数（NFCI）。零值附近代表历史平均，正值偏紧，负值偏松。'
   };
@@ -124,6 +137,10 @@
     treasurySpread: '#5b66c9',
     highYieldSpread: '#9a5c1f',
     broadDollar: '#367493',
+    ismManufacturingPmi: '#7c3aed',
+    ismSupplierDeliveries: '#0f766e',
+    ismNewOrders: '#2563eb',
+    ismBacklogOrders: '#c2410c',
     initialClaims: '#7e57a6',
     financialConditions: '#246b5e'
   };
@@ -158,29 +175,34 @@
     chartsPerRow: 4,
     chartOrder: [
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
+      'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+      'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions', 'treasuryYield'
     ],
     groupChartOrder: {
       default: [
         'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-        'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
+        'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+        'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
         'initialClaims', 'financialConditions', 'treasuryYield'
       ],
       group_mt432xl1_kz1mx7: [
         'treasuryYield30', 'federalFundsRate', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
-        'federalDebt', 'cpi', 'pce', 'treasurySpread', 'highYieldSpread',
+        'federalDebt', 'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+        'treasurySpread', 'highYieldSpread',
         'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
       group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs'],
-      group_primary: ['treasuryYield30', 'cpi', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases']
+      group_primary: ['treasuryYield30', 'cpi', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'federalDebt',
-      'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
+      'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+      'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
       'initialClaims', 'financialConditions'
     ],
@@ -189,7 +211,8 @@
       { id: 'group_mt432xl1_kz1mx7', name: '美国' },
       { id: 'group_mt49f5yl_pctlb6', name: '资源' },
       { id: 'group_a_share', name: 'A股' },
-      { id: 'group_primary', name: '主要' }
+      { id: 'group_primary', name: '主要' },
+      { id: 'group_us_manufacturing', name: '美国制造' }
     ],
     chartGroups: {
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
@@ -217,6 +240,10 @@
       treasurySpread: ['default', 'group_mt432xl1_kz1mx7'],
       highYieldSpread: ['default', 'group_mt432xl1_kz1mx7'],
       broadDollar: ['default', 'group_mt432xl1_kz1mx7'],
+      ismManufacturingPmi: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
+      ismSupplierDeliveries: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
+      ismNewOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
+      ismBacklogOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       initialClaims: ['default', 'group_mt432xl1_kz1mx7'],
       financialConditions: ['default', 'group_mt432xl1_kz1mx7']
     },
@@ -228,6 +255,7 @@
   var viewMode = 'charts';
   var activeDetailId = null;
   var draggedChartId = null;
+  var draggedGroupId = null;
   var tooltip = null;
   var sharedConfigAvailable = false;
   var sharedConfigSaveQueue = Promise.resolve();
@@ -273,6 +301,8 @@
     groupsList: document.querySelector('#overallGroupsList'),
     groupsMessage: document.querySelector('#overallGroupsMessage'),
     newGroupName: document.querySelector('#overallNewGroupName'),
+    groupOrderDialog: document.querySelector('#overallGroupOrderDialog'),
+    groupOrderList: document.querySelector('#overallGroupOrderList'),
     displayDialog: document.querySelector('#displayControlsDialog'),
     lineWidth: document.querySelector('#chartLineWidthInput'),
     lineWidthOutput: document.querySelector('#chartLineWidthOutput'),
@@ -335,18 +365,32 @@
 
   function sanitizeConfig(value) {
     var source = value && value.overallSituation ? value.overallSituation : value || {};
-    var groups = [{ id: 'default', name: '默认' }];
-    var groupIds = new Set(['default']);
-    var addedDefaultGroupIds = new Set();
+    var groupIdAliases = {};
     (Array.isArray(source.groups) ? source.groups : []).forEach(function (group) {
       var id = String(group && group.id || '').trim();
+      var name = String(group && group.name || '').trim();
+      if (id && id !== 'group_us_manufacturing' && name === '美国制造') {
+        groupIdAliases[id] = 'group_us_manufacturing';
+      }
+    });
+    var groups = [];
+    var groupIds = new Set();
+    var addedDefaultGroupIds = new Set();
+    (Array.isArray(source.groups) ? source.groups : []).forEach(function (group) {
+      var originalId = String(group && group.id || '').trim();
+      var id = groupIdAliases[originalId] || originalId;
       var name = String(group && group.name || '').trim().slice(0, 40);
-      if (!id || id === 'default' || groupIds.has(id) || !name) return;
-      groups.push({ id: id, name: name });
+      if (!id || groupIds.has(id) || !name) return;
+      var builtIn = DEFAULT_CONFIG.groups.find(function (item) { return item.id === id; });
+      groups.push({ id: id, name: builtIn ? builtIn.name : name });
       groupIds.add(id);
     });
+    if (!groupIds.has('default')) {
+      groups.unshift({ id: 'default', name: '默认' });
+      groupIds.add('default');
+    }
     DEFAULT_CONFIG.groups.forEach(function (group) {
-      if (group.id === 'default' || groupIds.has(group.id)) return;
+      if (groupIds.has(group.id)) return;
       var hasSameName = groups.some(function (item) { return item.name === group.name; });
       if (hasSameName) return;
       groups.push({ id: group.id, name: group.name });
@@ -369,7 +413,8 @@
     var chartGroups = {};
     CHART_IDS.forEach(function (id) {
       var memberships = Array.isArray(source.chartGroups && source.chartGroups[id])
-        ? source.chartGroups[id].filter(function (groupId) { return groupIds.has(groupId); })
+        ? source.chartGroups[id].map(function (groupId) { return groupIdAliases[groupId] || groupId; })
+          .filter(function (groupId) { return groupIds.has(groupId); })
         : ['default'];
       var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {
         return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId));
@@ -379,7 +424,8 @@
 
     var groupChartOrder = {};
     groups.forEach(function (group) {
-      var sourceOrder = source.groupChartOrder && source.groupChartOrder[group.id];
+      var legacyGroupId = Object.keys(groupIdAliases).find(function (id) { return groupIdAliases[id] === group.id; });
+      var sourceOrder = source.groupChartOrder && (source.groupChartOrder[group.id] || source.groupChartOrder[legacyGroupId]);
       var order = uniqueKnown(addedDefaultGroupIds.has(group.id)
         ? DEFAULT_CONFIG.groupChartOrder[group.id]
         : sourceOrder);
@@ -392,7 +438,8 @@
 
     var columns = Number(source.chartsPerRow);
     if (![1, 2, 3, 4].includes(columns)) columns = 3;
-    var selectedGroupId = groupIds.has(source.selectedGroupId) ? source.selectedGroupId : 'default';
+    var requestedGroupId = groupIdAliases[source.selectedGroupId] || source.selectedGroupId;
+    var selectedGroupId = groupIds.has(requestedGroupId) ? requestedGroupId : 'default';
 
     return {
       chartsPerRow: columns,
@@ -610,6 +657,14 @@
     if (chart.items.length === 1 || first.value === 0) {
       return formatDate(latest.date, chart.frequency) + ' · 最近可用值' + provisionalSuffix;
     }
+    if (chart.changeMode === 'difference') {
+      var difference = latest.value - first.value;
+      var differenceSign = difference > 0 ? '+' : '';
+      var differenceDigits = Number.isInteger(chart.decimals) ? chart.decimals : 1;
+      return formatDate(first.date, chart.frequency) + ' 至 ' +
+        formatDate(latest.date, chart.frequency) + ' · 区间 ' + differenceSign +
+        difference.toFixed(differenceDigits) + ' 点' + provisionalSuffix;
+    }
     var change = (latest.value / first.value - 1) * 100;
     var sign = change > 0 ? '+' : '';
     return formatDate(first.date, chart.frequency) + ' 至 ' +
@@ -692,6 +747,8 @@
     var height = 270;
     var box = { left: 58, top: 28, width: 438, height: 198 };
     var values = items.map(function (item) { return item.value; });
+    var referenceValue = Number(chart.referenceValue);
+    if (Number.isFinite(referenceValue)) values.push(referenceValue);
     var domainY = extent(values);
     var singleItem = items.length === 1;
     var firstTimestamp = Date.parse(items[0].date + 'T00:00:00Z');
@@ -730,20 +787,49 @@
     unit.textContent = chart.unit || '';
     svg.append(unit);
 
-    var xIndexes = Array.from(new Set([0, Math.floor((items.length - 1) / 2), items.length - 1]));
-    xIndexes.forEach(function (itemIndex, labelIndex) {
-      var item = items[itemIndex];
-      var timestamp = Date.parse(item.date + 'T00:00:00Z');
-      var x = box.left + (timestamp - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
-      var label = createSvg('text', {
-        x: x,
-        y: height - 15,
-        class: 'chart-label',
-        'text-anchor': xIndexes.length === 1 ? 'middle' : labelIndex === 0 ? 'start' : labelIndex === xIndexes.length - 1 ? 'end' : 'middle'
+    var longDetailRange = svg === refs.detailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
+    if (longDetailRange) {
+      var firstYear = new Date(domainX[0]).getUTCFullYear();
+      var lastYear = new Date(domainX[1]).getUTCFullYear();
+      var availableYears = [];
+      for (var year = firstYear; year <= lastYear; year += 1) {
+        var yearTimestamp = Date.UTC(year, 0, 1);
+        if (yearTimestamp >= domainX[0] && yearTimestamp <= domainX[1]) availableYears.push(year);
+      }
+      var rawYearStep = Math.max(1, Math.ceil(availableYears.length / 8));
+      var yearStep = [1, 2, 5, 10, 20, 50].find(function (step) { return step >= rawYearStep; }) || rawYearStep;
+      availableYears.filter(function (year) { return year % yearStep === 0; }).forEach(function (year) {
+        var yearTimestamp = Date.UTC(year, 0, 1);
+        var x = box.left + (yearTimestamp - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        svg.append(createSvg('line', {
+          x1: x, y1: baseline, x2: x, y2: baseline + 5, class: 'overall-chart-year-tick'
+        }));
+        var yearLabel = createSvg('text', {
+          x: x + 3,
+          y: height - 7,
+          class: 'chart-label overall-chart-year-label',
+          'text-anchor': 'start',
+          transform: 'rotate(-90 ' + (x + 3) + ' ' + (height - 7) + ')'
+        });
+        yearLabel.textContent = year + '年';
+        svg.append(yearLabel);
       });
-      label.textContent = formatDate(item.date, chart.frequency);
-      svg.append(label);
-    });
+    } else {
+      var xIndexes = Array.from(new Set([0, Math.floor((items.length - 1) / 2), items.length - 1]));
+      xIndexes.forEach(function (itemIndex, labelIndex) {
+        var item = items[itemIndex];
+        var timestamp = Date.parse(item.date + 'T00:00:00Z');
+        var x = box.left + (timestamp - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        var label = createSvg('text', {
+          x: x,
+          y: height - 15,
+          class: 'chart-label',
+          'text-anchor': xIndexes.length === 1 ? 'middle' : labelIndex === 0 ? 'start' : labelIndex === xIndexes.length - 1 ? 'end' : 'middle'
+        });
+        label.textContent = formatDate(item.date, chart.frequency);
+        svg.append(label);
+      });
+    }
 
     if (!singleItem) {
       var area = createSvg('path', {
@@ -752,6 +838,20 @@
       });
       area.style.fill = hexToRgba(color, 0.12);
       svg.append(area);
+    }
+
+    if (Number.isFinite(referenceValue)) {
+      var referenceY = box.top + (1 - (referenceValue - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
+      svg.append(createSvg('line', {
+        x1: box.left, y1: referenceY, x2: box.left + box.width, y2: referenceY,
+        class: 'overall-chart-reference-line'
+      }));
+      var referenceLabel = createSvg('text', {
+        x: box.left + box.width - 4, y: referenceY - 5,
+        class: 'overall-chart-reference-label', 'text-anchor': 'end'
+      });
+      referenceLabel.textContent = chart.referenceLabel || axisValue(referenceValue, chart.decimals);
+      svg.append(referenceLabel);
     }
 
     var line = createSvg('path', { d: solidPath, class: 'overall-chart-line' });
@@ -1299,13 +1399,14 @@
 
   function renderGroups() {
     refs.groupsList.replaceChildren();
-    config.groups.forEach(function (group) {
+    config.groups.forEach(function (group, groupIndex) {
       var card = createElement('section', 'overall-group-item');
       var header = createElement('div', 'overall-group-item-header');
+      var identity = createElement('div', 'overall-group-identity');
       var isBuiltInGroup = DEFAULT_CONFIG.groups.some(function (item) { return item.id === group.id; });
       if (isBuiltInGroup) {
-        header.append(createElement('strong', '', group.name));
-        header.append(createElement('span', 'overall-group-fixed-badge', group.id === 'default' ? '固定分组' : '内置分组'));
+        identity.append(createElement('strong', '', group.name));
+        identity.append(createElement('span', 'overall-group-fixed-badge', group.id === 'default' ? '固定分组' : '内置分组'));
       } else {
         var input = document.createElement('input');
         input.className = 'level-select overall-group-name-input';
@@ -1336,8 +1437,30 @@
           renderGroups();
           renderAll();
         });
-        header.append(input, remove);
+        identity.append(input);
+        identity.append(remove);
       }
+      var orderActions = createElement('div', 'overall-group-order-actions');
+      var top = createElement('button', 'secondary-button overall-group-top-button', '置顶');
+      top.type = 'button';
+      top.title = '将此分组移到最前面';
+      top.setAttribute('aria-label', '置顶分组“' + group.name + '”');
+      top.disabled = groupIndex === 0;
+      top.addEventListener('click', function () { moveGroupToTop(group.id); });
+      var up = createElement('button', 'config-order-button', '↑');
+      up.type = 'button';
+      up.title = '上移分组';
+      up.setAttribute('aria-label', '上移分组“' + group.name + '”');
+      up.disabled = groupIndex === 0;
+      up.addEventListener('click', function () { moveGroup(group.id, -1); });
+      var down = createElement('button', 'config-order-button', '↓');
+      down.type = 'button';
+      down.title = '下移分组';
+      down.setAttribute('aria-label', '下移分组“' + group.name + '”');
+      down.disabled = groupIndex === config.groups.length - 1;
+      down.addEventListener('click', function () { moveGroup(group.id, 1); });
+      orderActions.append(top, up, down);
+      header.append(identity, orderActions);
       card.append(header);
       card.append(createElement('p', 'overall-group-members-title', group.id === 'default' ? '默认分组包含全部图表' : '选择此分组包含的图表'));
       var members = createElement('div', 'overall-group-members');
@@ -1365,6 +1488,95 @@
       });
       card.append(members);
       refs.groupsList.append(card);
+    });
+  }
+
+  function moveGroup(id, offset) {
+    var index = config.groups.findIndex(function (group) { return group.id === id; });
+    var target = index + offset;
+    if (index < 0 || target < 0 || target >= config.groups.length) return;
+    var reordered = config.groups.slice();
+    var moved = reordered.splice(index, 1)[0];
+    reordered.splice(target, 0, moved);
+    config.groups = reordered;
+    persistConfig();
+    syncGroups();
+    renderGroups();
+    if (refs.groupOrderDialog.open) renderGroupOrderList();
+  }
+
+  function moveGroupToTop(id) {
+    var index = config.groups.findIndex(function (group) { return group.id === id; });
+    if (index <= 0) return;
+    var reordered = config.groups.slice();
+    var moved = reordered.splice(index, 1)[0];
+    reordered.unshift(moved);
+    config.groups = reordered;
+    persistConfig();
+    syncGroups();
+    renderGroups();
+    if (refs.groupOrderDialog.open) renderGroupOrderList();
+  }
+
+  function moveGroupBefore(sourceId, targetId) {
+    if (!sourceId || sourceId === targetId) return;
+    var reordered = config.groups.slice();
+    var sourceIndex = reordered.findIndex(function (group) { return group.id === sourceId; });
+    var targetIndex = reordered.findIndex(function (group) { return group.id === targetId; });
+    if (sourceIndex < 0 || targetIndex < 0) return;
+    var moved = reordered.splice(sourceIndex, 1)[0];
+    targetIndex = reordered.findIndex(function (group) { return group.id === targetId; });
+    reordered.splice(targetIndex, 0, moved);
+    config.groups = reordered;
+    persistConfig();
+    syncGroups();
+    renderGroups();
+    renderGroupOrderList();
+  }
+
+  function renderGroupOrderList() {
+    refs.groupOrderList.replaceChildren();
+    config.groups.forEach(function (group, index) {
+      var item = createElement('li');
+      item.draggable = true;
+      item.dataset.groupId = group.id;
+      item.tabIndex = 0;
+      item.append(createElement('span', 'overall-config-drag-handle', '⠿'));
+      item.append(createElement('span', 'overall-config-chart-name', group.name));
+
+      var top = createElement('button', 'secondary-button overall-group-top-button', '置顶');
+      top.type = 'button';
+      top.disabled = index === 0;
+      top.setAttribute('aria-label', '置顶分组“' + group.name + '”');
+      top.addEventListener('click', function () { moveGroupToTop(group.id); });
+      var up = createElement('button', 'config-order-button', '↑');
+      up.type = 'button';
+      up.title = '上移';
+      up.setAttribute('aria-label', '上移分组“' + group.name + '”');
+      up.disabled = index === 0;
+      up.addEventListener('click', function () { moveGroup(group.id, -1); });
+      var down = createElement('button', 'config-order-button', '↓');
+      down.type = 'button';
+      down.title = '下移';
+      down.setAttribute('aria-label', '下移分组“' + group.name + '”');
+      down.disabled = index === config.groups.length - 1;
+      down.addEventListener('click', function () { moveGroup(group.id, 1); });
+      item.append(top, up, down);
+
+      item.addEventListener('dragstart', function () {
+        draggedGroupId = group.id;
+        item.classList.add('is-dragging');
+      });
+      item.addEventListener('dragend', function () {
+        draggedGroupId = null;
+        item.classList.remove('is-dragging');
+      });
+      item.addEventListener('dragover', function (event) { event.preventDefault(); });
+      item.addEventListener('drop', function (event) {
+        event.preventDefault();
+        moveGroupBefore(draggedGroupId, group.id);
+      });
+      refs.groupOrderList.append(item);
     });
   }
 
@@ -1535,6 +1747,10 @@
       renderGroups();
       refs.groupsMessage.textContent = '';
       refs.groupsDialog.showModal();
+    });
+    document.querySelector('#overallOpenGroupOrderButton').addEventListener('click', function () {
+      renderGroupOrderList();
+      refs.groupOrderDialog.showModal();
     });
     document.querySelector('#overallCompareRunButton').addEventListener('click', renderComparison);
     refs.compareRange.addEventListener('change', renderComparison);

@@ -2,17 +2,22 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
   CHART_METADATA,
+  ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   RANGE_CONFIG,
+  calculateDxy,
   calculateYearOverYear,
   filterRecentItems,
   mergeSpotWithFuturesSupplement,
   normalizeRange,
   normalizeChartIds,
+  buildDbnomicsIsmUrl,
   buildImfCommodityUrl,
   parseCsv,
   parseFredCsv,
   parseImfCsv,
   parseSinaGold,
+  parseDbnomicsSeries,
+  parseIsmPmiSnapshot,
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
@@ -35,6 +40,25 @@ const WGC_REPORT_HTML = [
   '<div class="chart-description"><p>Quarterly central bank net purchases, tonnes*</p></div>',
   '<div class="wgc-chart-container" data-chart-data-lib="https://fsapi.gold.org/api/v12/charts/js/test/3430"></div>',
 ].join('');
+const ISM_PMI_SNAPSHOT_HTML = [
+  '<h3>THE LAST 12 MONTHS</h3>',
+  '<table>',
+  '<tr><th scope="row">Dec 2025</th><td class="text-center">47.9</td></tr>',
+  '<tr><th scope="row">Nov 2025</th><td class="text-center">48.2</td></tr>',
+  '</table>',
+  '<label>Average for 12 months -</label>',
+  '<table><tr><th scope="row">Dec 2025</th><td>10.3</td></tr></table>',
+].join('');
+
+function makeDbnomicsPayload(datasetCode, seriesCode, values) {
+  const periods = ['2026-06', '2026-07', '2026-08'].slice(0, values.length);
+  return JSON.stringify({ series: { docs: [{
+    dataset_code: datasetCode,
+    series_code: seriesCode,
+    period: periods,
+    value: values,
+  }] } });
+}
 const WGC_CHART_SCRIPT = '_self._opt = ' + JSON.stringify({
   series: [
     { name: 'Q1', data: [235.87, 56.52] },
@@ -74,6 +98,36 @@ test('FRED parser ignores dot and blank missing observations', () => {
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 4.69 }]);
 });
 
+test('ISM PMI snapshot parser reads only the latest twelve-month table', () => {
+  assert.deepEqual(parseIsmPmiSnapshot(ISM_PMI_SNAPSHOT_HTML), [
+    { date: '2025-11-01', value: 48.2 },
+    { date: '2025-12-01', value: 47.9 },
+  ]);
+});
+
+test('official ISM snapshot covers the four manufacturing indexes through July 2026', () => {
+  assert.deepEqual(ISM_OFFICIAL_MANUFACTURING_SNAPSHOT.at(-1), {
+    date: '2026-07-01',
+    pmi: 55.6,
+    supplierDeliveries: 58.9,
+    newOrders: 56.7,
+    backlogOrders: 55,
+  });
+});
+
+test('DXY calculation applies the ICE six-currency fixed-weight formula', () => {
+  const unitRate = [{ date: '2026-08-20', value: 1 }];
+  const result = calculateDxy({
+    DEXUSEU: unitRate,
+    DEXJPUS: unitRate,
+    DEXUSUK: unitRate,
+    DEXCAUS: unitRate,
+    DEXSDUS: unitRate,
+    DEXSZUS: unitRate,
+  });
+  assert.deepEqual(result, [{ date: '2026-08-20', value: 50.14348112 }]);
+});
+
 test('IMF parser reads only gold observations and normalizes month dates', () => {
   const csv = [
     'COUNTRY,INDICATOR,TIME_PERIOD,OBS_VALUE,SERIES_NAME',
@@ -88,6 +142,23 @@ test('IMF parser reads only gold observations and normalizes month dates', () =>
 test('Sina parser reads daily London gold closes and skips invalid values', () => {
   const rows = parseSinaGold('var _XAU=([{"date":"2026-08-03","close":"4500.5"},{"date":"2026-08-04","close":null}]);');
   assert.deepEqual(rows, [{ date: '2026-08-03', value: 4500.5 }]);
+});
+
+test('DBnomics parser reads ISM diffusion indexes and rejects malformed low values', () => {
+  assert.equal(
+    buildDbnomicsIsmUrl('neword', 'in'),
+    'https://api.db.nomics.world/v22/series/ISM/neword/in?observations=1',
+  );
+  assert.deepEqual(
+    parseDbnomicsSeries(makeDbnomicsPayload('pmi', 'pm', [48.5, 49.2, 10.3]), 'pmi', 'pm', {
+      minValue: 20,
+      maxValue: 80,
+    }),
+    [
+      { date: '2026-06-01', value: 48.5 },
+      { date: '2026-07-01', value: 49.2 },
+    ],
+  );
 });
 
 test('Treasury debt parser converts daily dollars to trillions', () => {
@@ -231,7 +302,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns twenty-seven independent chart payloads', async () => {
+test('macro outlook query returns thirty-one independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -240,6 +311,11 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
     PCEPI: 'observation_date,PCEPI\n2025-06-01,100\n2026-06-01,102.5\n',
     CBBTCUSD: 'observation_date,CBBTCUSD\n2026-08-20,73000\n2026-08-21,78000\n',
     DEXJPUS: 'observation_date,DEXJPUS\n2026-08-20,158.9\n2026-08-21,159.2\n',
+    DEXUSEU: 'observation_date,DEXUSEU\n2026-08-20,1.18\n2026-08-21,1.17\n',
+    DEXUSUK: 'observation_date,DEXUSUK\n2026-08-20,1.35\n2026-08-21,1.34\n',
+    DEXCAUS: 'observation_date,DEXCAUS\n2026-08-20,1.36\n2026-08-21,1.37\n',
+    DEXSDUS: 'observation_date,DEXSDUS\n2026-08-20,9.4\n2026-08-21,9.5\n',
+    DEXSZUS: 'observation_date,DEXSZUS\n2026-08-20,0.8\n2026-08-21,0.81\n',
     DCOILBRENTEU: 'observation_date,DCOILBRENTEU\n2026-08-20,94.2\n2026-08-21,95.3\n',
     DCOILWTICO: 'observation_date,DCOILWTICO\n2026-08-20,85.1\n2026-08-21,86.5\n',
     PCOPPUSDM: 'observation_date,PCOPPUSDM\n2026-06-01,9800.25\n2026-07-01,9950.75\n',
@@ -249,7 +325,6 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
     VIXCLS: 'observation_date,VIXCLS\n2026-08-20,16.01\n2026-08-21,15.80\n',
     T10Y2Y: 'observation_date,T10Y2Y\n2026-08-20,0.46\n2026-08-21,0.48\n',
     BAMLH0A0HYM2: 'observation_date,BAMLH0A0HYM2\n2026-08-20,2.90\n2026-08-21,2.88\n',
-    DTWEXBGS: 'observation_date,DTWEXBGS\n2026-08-20,119.1\n2026-08-21,118.9\n',
     ICSA: 'observation_date,ICSA\n2026-08-15,245000\n',
     NFCI: 'observation_date,NFCI\n2026-08-14,-0.50\n2026-08-21,-0.48\n',
   };
@@ -277,13 +352,26 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
     ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
   ] }]);
+  const ismData = {
+    '/pmi/pm': JSON.stringify({ series: { docs: [{
+      dataset_code: 'pmi',
+      series_code: 'pm',
+      period: ['2025-06', '2025-07', '2025-08'],
+      value: [48.5, 49.2, 10.3],
+    }] } }),
+    '/supdel/in': makeDbnomicsPayload('supdel', 'in', [51.1, 50.8]),
+    '/neword/in': makeDbnomicsPayload('neword', 'in', [47.4, 47.7]),
+    '/bacord/in': makeDbnomicsPayload('bacord', 'in', [44, 45.8]),
+  };
   const fetchImpl = async (url) => {
     const seriesId = Object.keys(fredData).find((id) => url.includes(`id=${id}`));
+    const ismPath = Object.keys(ismData).find((path) => url.includes(path));
     return {
       ok: true,
       status: 200,
       text: async () => url.includes('api.fiscaldata.treasury.gov')
         ? JSON.stringify({ data: [{ record_date: '2026-08-20', tot_pub_debt_out_amt: '39500000000000' }] })
+        : url.includes('git.nomics.world') ? ISM_PMI_SNAPSHOT_HTML
         : url === 'https://www.gold.org/goldhub/research/gold-demand-trends' ? WGC_INDEX_HTML
         : url.endsWith('/central-banks') ? WGC_REPORT_HTML
         : url.includes('fsapi.gold.org') ? WGC_CHART_SCRIPT
@@ -291,6 +379,7 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
         : url.includes('code=zs_000001') ? shanghaiIndexData
         : url.includes('code=zs_399106') ? shenzhenIndexData
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
+        : ismPath ? ismData[ismPath]
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
     };
   };
@@ -299,9 +388,10 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
     'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
-    'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions',
+    'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+    'initialClaims', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(27).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(31).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -323,7 +413,13 @@ test('macro outlook query returns twenty-seven independent chart payloads', asyn
   assert.equal(result.charts.find((chart) => chart.id === 'vix').items.at(-1).value, 15.8);
   assert.equal(result.charts.find((chart) => chart.id === 'treasurySpread').items.at(-1).value, 0.48);
   assert.equal(result.charts.find((chart) => chart.id === 'highYieldSpread').items.at(-1).value, 2.88);
-  assert.equal(result.charts.find((chart) => chart.id === 'broadDollar').items.at(-1).value, 118.9);
+  const expectedDxy = 50.14348112 * (1.17 ** -0.576) * (159.2 ** 0.136) * (1.34 ** -0.119) *
+    (1.37 ** 0.091) * (9.5 ** 0.042) * (0.81 ** 0.036);
+  assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'broadDollar').items.at(-1).value - expectedDxy) < 1e-9);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismManufacturingPmi').items.at(-1).value, 55.6);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismSupplierDeliveries').items.at(-1).value, 58.9);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismNewOrders').items.at(-1).value, 56.7);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismBacklogOrders').items.at(-1).value, 55);
   assert.equal(result.charts.find((chart) => chart.id === 'initialClaims').items.at(-1).value, 24.5);
   assert.equal(result.charts.find((chart) => chart.id === 'financialConditions').items.at(-1).value, -0.48);
 });
@@ -366,7 +462,20 @@ test('one failed source does not prevent the remaining charts from loading', asy
         ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
       ] }]) };
     }
-    const id = ['DGS10', 'DGS30', 'DFF', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DCOILBRENTEU', 'DCOILWTICO', 'PCOPPUSDM', 'DHHNGSP', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'DTWEXBGS', 'ICSA', 'NFCI']
+    const ismSeries = [
+      ['/pmi/pm', 'pmi', 'pm', [48.5, 49.2, 10.3]],
+      ['/supdel/in', 'supdel', 'in', [51.1, 50.8]],
+      ['/neword/in', 'neword', 'in', [47.4, 47.7]],
+      ['/bacord/in', 'bacord', 'in', [44, 45.8]],
+    ].find((entry) => url.includes(entry[0]));
+    if (ismSeries) {
+      return {
+        ok: true,
+        status: 200,
+        text: async () => makeDbnomicsPayload(ismSeries[1], ismSeries[2], ismSeries[3]),
+      };
+    }
+    const id = ['DGS10', 'DGS30', 'DFF', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DEXUSEU', 'DEXUSUK', 'DEXCAUS', 'DEXSDUS', 'DEXSZUS', 'DCOILBRENTEU', 'DCOILWTICO', 'PCOPPUSDM', 'DHHNGSP', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'ICSA', 'NFCI']
       .find((seriesId) => url.includes(`id=${seriesId}`));
     const rowsById = {
       DGS10: '2025-08-22,4.2\n2026-08-20,4.7',
@@ -375,6 +484,11 @@ test('one failed source does not prevent the remaining charts from loading', asy
       CPIAUCSL: '2025-07-01,100\n2026-07-01,103',
       CBBTCUSD: '2026-08-20,73000\n2026-08-21,78000',
       DEXJPUS: '2026-08-20,158.9\n2026-08-21,159.2',
+      DEXUSEU: '2026-08-20,1.18\n2026-08-21,1.17',
+      DEXUSUK: '2026-08-20,1.35\n2026-08-21,1.34',
+      DEXCAUS: '2026-08-20,1.36\n2026-08-21,1.37',
+      DEXSDUS: '2026-08-20,9.4\n2026-08-21,9.5',
+      DEXSZUS: '2026-08-20,0.8\n2026-08-21,0.81',
       DCOILBRENTEU: '2026-08-20,94.2\n2026-08-21,95.3',
       DCOILWTICO: '2026-08-20,85.1\n2026-08-21,86.5',
       PCOPPUSDM: '2026-06-01,9800.25\n2026-07-01,9950.75',
@@ -384,7 +498,6 @@ test('one failed source does not prevent the remaining charts from loading', asy
       VIXCLS: '2026-08-20,16.01\n2026-08-21,15.80',
       T10Y2Y: '2026-08-20,0.46\n2026-08-21,0.48',
       BAMLH0A0HYM2: '2026-08-20,2.90\n2026-08-21,2.88',
-      DTWEXBGS: '2026-08-20,119.1\n2026-08-21,118.9',
       ICSA: '2026-08-15,245000',
       NFCI: '2026-08-14,-0.50\n2026-08-21,-0.48',
     };
@@ -416,6 +529,10 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'treasurySpread').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'highYieldSpread').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'broadDollar').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismManufacturingPmi').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismSupplierDeliveries').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismNewOrders').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'ismBacklogOrders').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'initialClaims').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'financialConditions').error, null);
 });

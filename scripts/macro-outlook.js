@@ -4,6 +4,28 @@ const MAX_OIL_SUPPLEMENT_DAYS = 14;
 const WORLD_GOLD_COUNCIL_ORIGIN = 'https://www.gold.org';
 const WORLD_GOLD_COUNCIL_GDT_INDEX_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/research/gold-demand-trends`;
 const WORLD_GOLD_COUNCIL_DEMAND_SOURCE_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/data/gold-demand-by-country`;
+const ISM_PMI_SOURCE_SNAPSHOT_URL = 'https://git.nomics.world/api/v4/projects/201/repository/files/index_PMI.html/raw?ref=master';
+const ISM_OFFICIAL_REPORT_URL = 'https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/pmi/july/';
+// ISM 官方月报的 Manufacturing at a Glance 数值。DBnomics 提供长期历史，
+// 此快照覆盖镜像尚未同步的月份，避免最新图表停留在旧年份。
+const ISM_OFFICIAL_MANUFACTURING_SNAPSHOT = Object.freeze([
+  { date: '2026-01-01', pmi: 52.6, supplierDeliveries: 54.4, newOrders: 57.1, backlogOrders: 51.6 },
+  { date: '2026-02-01', pmi: 52.4, supplierDeliveries: 55.1, newOrders: 55.8, backlogOrders: 56.6 },
+  { date: '2026-03-01', pmi: 52.7, supplierDeliveries: 58.9, newOrders: 53.5, backlogOrders: 54.4 },
+  { date: '2026-04-01', pmi: 52.7, supplierDeliveries: 60.6, newOrders: 54.1, backlogOrders: 51.4 },
+  { date: '2026-05-01', pmi: 54.0, supplierDeliveries: 60.6, newOrders: 56.8, backlogOrders: 52.2 },
+  { date: '2026-06-01', pmi: 53.3, supplierDeliveries: 57.4, newOrders: 56.0, backlogOrders: 50.5 },
+  { date: '2026-07-01', pmi: 55.6, supplierDeliveries: 58.9, newOrders: 56.7, backlogOrders: 55.0 },
+]);
+const DXY_COMPONENTS = Object.freeze([
+  ['DEXUSEU', -0.576],
+  ['DEXJPUS', 0.136],
+  ['DEXUSUK', -0.119],
+  ['DEXCAUS', 0.091],
+  ['DEXSDUS', 0.042],
+  ['DEXSZUS', 0.036],
+]);
+const DXY_BASE = 50.14348112;
 
 // Nasdaq-100 monthly trailing P/E snapshot. Public historical index valuation APIs are not reliably available
 // without a paid key, so the verified monthly series is bundled to keep the chart deterministic and usable offline.
@@ -357,8 +379,28 @@ const CHART_METADATA = {
     sourceName: 'FRED / ICE BofA', sourceUrl: 'https://fred.stlouisfed.org/series/BAMLH0A0HYM2',
   },
   broadDollar: {
-    id: 'broadDollar', title: '广义美元指数', unit: '点', decimals: 2, frequency: '日度',
-    sourceName: 'FRED / 美联储 H.10', sourceUrl: 'https://fred.stlouisfed.org/series/DTWEXBGS',
+    id: 'broadDollar', title: '美元指数（DXY）', unit: '点', decimals: 2, frequency: '日度',
+    sourceName: 'FRED H.10 汇率 / ICE DXY 公式', sourceUrl: 'https://www.ice.com/products/194/US-Dollar-Index-Futures',
+  },
+  ismManufacturingPmi: {
+    id: 'ismManufacturingPmi', title: '美国 ISM 制造业 PMI', unit: '点', decimals: 1, frequency: '月度',
+    sourceName: 'ISM 官方月报 / DBnomics 历史', sourceUrl: ISM_OFFICIAL_REPORT_URL,
+    referenceValue: 50, referenceLabel: '50 荣枯线', changeMode: 'difference',
+  },
+  ismSupplierDeliveries: {
+    id: 'ismSupplierDeliveries', title: '美国 ISM 供应商交付指数', unit: '点', decimals: 1, frequency: '月度',
+    sourceName: 'ISM 官方月报 / DBnomics 历史', sourceUrl: ISM_OFFICIAL_REPORT_URL,
+    referenceValue: 50, referenceLabel: '50 分界线', changeMode: 'difference',
+  },
+  ismNewOrders: {
+    id: 'ismNewOrders', title: '美国 ISM 新订单指数', unit: '点', decimals: 1, frequency: '月度',
+    sourceName: 'ISM 官方月报 / DBnomics 历史', sourceUrl: ISM_OFFICIAL_REPORT_URL,
+    referenceValue: 50, referenceLabel: '50 荣枯线', changeMode: 'difference',
+  },
+  ismBacklogOrders: {
+    id: 'ismBacklogOrders', title: '美国 ISM 订单积压指数', unit: '点', decimals: 1, frequency: '月度',
+    sourceName: 'ISM 官方月报 / DBnomics 历史', sourceUrl: ISM_OFFICIAL_REPORT_URL,
+    referenceValue: 50, referenceLabel: '50 荣枯线', changeMode: 'difference',
   },
   initialClaims: {
     id: 'initialClaims', title: '美国初次申请失业金人数', unit: '万人', decimals: 1, frequency: '周度',
@@ -445,6 +487,23 @@ function parseFredCsv(text, seriesId) {
     const rawValue = String(row[valueIndex] ?? '').trim();
     const value = rawValue && rawValue !== '.' ? Number(rawValue) : Number.NaN;
     return date && Number.isFinite(value) ? { date, value } : null;
+  }).filter(Boolean);
+}
+
+function calculateDxy(seriesById) {
+  const valueMaps = new Map(DXY_COMPONENTS.map(([seriesId]) => [
+    seriesId,
+    new Map((seriesById?.[seriesId] || []).map((item) => [item.date, Number(item.value)])),
+  ]));
+  const baseDates = [...(valueMaps.get(DXY_COMPONENTS[0][0]) || new Map()).keys()].sort();
+  return baseDates.map((date) => {
+    let value = DXY_BASE;
+    for (const [seriesId, exponent] of DXY_COMPONENTS) {
+      const rate = valueMaps.get(seriesId)?.get(date);
+      if (!Number.isFinite(rate) || rate <= 0) return null;
+      value *= rate ** exponent;
+    }
+    return Number.isFinite(value) ? { date, value } : null;
   }).filter(Boolean);
 }
 
@@ -545,6 +604,13 @@ function buildFredUrl(seriesId, startDate, endDate) {
     coed: endDate,
   });
   return `https://fred.stlouisfed.org/graph/fredgraph.csv?${params.toString()}`;
+}
+
+function buildDbnomicsIsmUrl(datasetCode, seriesCode) {
+  if (!/^[a-z-]+$/.test(datasetCode) || !/^[a-z]+$/.test(seriesCode)) {
+    throw new Error('DBnomics ISM 序列代码无效');
+  }
+  return `https://api.db.nomics.world/v22/series/ISM/${datasetCode}/${seriesCode}?observations=1`;
 }
 
 function buildImfCommodityUrl(indicator, startMonth, endMonth) {
@@ -771,6 +837,55 @@ function parseSinaGold(text) {
   }).filter(Boolean);
 }
 
+function parseDbnomicsSeries(text, datasetCode, seriesCode, options = {}) {
+  const payload = JSON.parse(String(text ?? ''));
+  const docs = payload?.series?.docs;
+  if (!Array.isArray(docs)) throw new Error('DBnomics ISM 数据格式无效');
+  const series = docs.find((item) => (
+    item?.dataset_code === datasetCode && item?.series_code === seriesCode
+  ));
+  if (!series || !Array.isArray(series.period) || !Array.isArray(series.value)) {
+    throw new Error('DBnomics ISM 序列不存在');
+  }
+  const minValue = Number.isFinite(options.minValue) ? options.minValue : Number.NEGATIVE_INFINITY;
+  const maxValue = Number.isFinite(options.maxValue) ? options.maxValue : Number.POSITIVE_INFINITY;
+  return series.period.map((period, index) => {
+    const periodText = String(period ?? '');
+    const date = /^\d{4}-\d{2}$/.test(periodText)
+      ? `${periodText}-01`
+      : normalizeObservationDate(periodText);
+    const rawValue = series.value[index];
+    const value = rawValue === null || rawValue === undefined || rawValue === '' ? Number.NaN : Number(rawValue);
+    return date && Number.isFinite(value) && value >= minValue && value <= maxValue ? { date, value } : null;
+  }).filter(Boolean);
+}
+
+function parseIsmPmiSnapshot(text) {
+  const source = String(text ?? '');
+  const startIndex = source.search(/THE LAST 12 MONTHS/i);
+  if (startIndex < 0) throw new Error('ISM PMI 报告缺少最近 12 个月表格');
+  const endIndex = source.search(/Average for 12 months/i);
+  const section = source.slice(startIndex, endIndex > startIndex ? endIndex : undefined);
+  const monthNumbers = {
+    jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06',
+    jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12',
+  };
+  const items = [];
+  const rowPattern = /<th\b[^>]*scope\s*=\s*(["'])row\1[^>]*>\s*([a-z]{3})\s+(\d{4})\s*<\/th>\s*<td\b[^>]*>\s*([0-9]+(?:\.[0-9]+)?)\s*<\/td>/gi;
+  let match;
+  while ((match = rowPattern.exec(section))) {
+    const month = monthNumbers[match[2].toLowerCase()];
+    const value = Number(match[4]);
+    if (month && Number.isFinite(value) && value >= 20 && value <= 80) {
+      items.push({ date: `${match[3]}-${month}-01`, value });
+    }
+  }
+  const sortedItems = [...new Map(items.map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+  if (!sortedItems.length) throw new Error('ISM PMI 最近 12 个月表格暂无可用数据');
+  return sortedItems;
+}
+
 function parseAShareTurnover(text) {
   const payload = JSON.parse(String(text ?? ''));
   if (String(payload?.code) !== '200') throw new Error(payload?.msg || 'A股全A成交额返回异常');
@@ -989,6 +1104,41 @@ async function queryMacroOutlook(options = {}) {
     return filterRecentItems(combinedItems, range);
   };
 
+  const fetchIsmIndexItems = async (datasetCode, seriesCode) => {
+    const text = await fetchCsv(buildDbnomicsIsmUrl(datasetCode, seriesCode), fetchImpl, {
+      Accept: 'application/json',
+    });
+    return parseDbnomicsSeries(text, datasetCode, seriesCode, { minValue: 20, maxValue: 80 });
+  };
+
+  const officialIsmItems = (key) => ISM_OFFICIAL_MANUFACTURING_SNAPSHOT.map((item) => ({
+    date: item.date,
+    value: item[key],
+  }));
+
+  const mergeIsmItems = (...itemGroups) => [...new Map(itemGroups.flat().map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+
+  const loadIsmIndex = async (datasetCode, seriesCode, officialKey) => {
+    const historyItems = await fetchIsmIndexItems(datasetCode, seriesCode);
+    return filterRecentItems(mergeIsmItems(historyItems, officialIsmItems(officialKey)), range, 'monthly');
+  };
+
+  const loadIsmPmi = async () => {
+    const historyItems = await fetchIsmIndexItems('pmi', 'pm');
+    let snapshotItems = [];
+    try {
+      const snapshotText = await fetchCsv(ISM_PMI_SOURCE_SNAPSHOT_URL, fetchImpl, {
+        Accept: 'text/html',
+      });
+      snapshotItems = parseIsmPmiSnapshot(snapshotText);
+    } catch {
+      // 原始报告镜像暂不可用时仍保留经过范围校验的 DBnomics 历史序列。
+    }
+    const items = mergeIsmItems(historyItems, snapshotItems, officialIsmItems('pmi'));
+    return filterRecentItems(items, range, 'monthly');
+  };
+
   const loaders = {
     treasuryYield: () => loadChart(CHART_METADATA.treasuryYield, async () => {
       const text = await fetchCsv(buildFredUrl('DGS10', dailyStartDate, endDate), fetchImpl);
@@ -1140,9 +1290,23 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(filterDateRange(parseFredCsv(text, 'BAMLH0A0HYM2'), dailyStartDate, endDate), range);
     }),
     broadDollar: () => loadChart(CHART_METADATA.broadDollar, async () => {
-      const text = await fetchCsv(buildFredUrl('DTWEXBGS', dailyStartDate, endDate), fetchImpl);
-      return filterRecentItems(filterDateRange(parseFredCsv(text, 'DTWEXBGS'), dailyStartDate, endDate), range);
+      const entries = await Promise.all(DXY_COMPONENTS.map(async ([seriesId]) => {
+        const text = await fetchCsv(buildFredUrl(seriesId, dailyStartDate, endDate), fetchImpl);
+        return [seriesId, parseFredCsv(text, seriesId)];
+      }));
+      const items = calculateDxy(Object.fromEntries(entries));
+      return filterRecentItems(filterDateRange(items, dailyStartDate, endDate), range);
     }),
+    ismManufacturingPmi: () => loadChart(CHART_METADATA.ismManufacturingPmi, loadIsmPmi),
+    ismSupplierDeliveries: () => loadChart(CHART_METADATA.ismSupplierDeliveries, () => (
+      loadIsmIndex('supdel', 'in', 'supplierDeliveries')
+    )),
+    ismNewOrders: () => loadChart(CHART_METADATA.ismNewOrders, () => (
+      loadIsmIndex('neword', 'in', 'newOrders')
+    )),
+    ismBacklogOrders: () => loadChart(CHART_METADATA.ismBacklogOrders, () => (
+      loadIsmIndex('bacord', 'in', 'backlogOrders')
+    )),
     initialClaims: () => loadChart(CHART_METADATA.initialClaims, async () => {
       const text = await fetchCsv(buildFredUrl('ICSA', dailyStartDate, endDate), fetchImpl);
       const items = filterDateRange(parseFredCsv(text, 'ICSA'), dailyStartDate, endDate)
@@ -1169,6 +1333,7 @@ module.exports = {
   CHART_METADATA,
   DEFAULT_MONTH_COUNT,
   RANGE_CONFIG,
+  buildDbnomicsIsmUrl,
   buildFredUrl,
   buildImfCommodityUrl,
   buildImfGoldUrl,
@@ -1181,6 +1346,8 @@ module.exports = {
   buildAShareTurnoverUrl,
   buildAShareMarginBalanceUrl,
   buildSohuIndexHistoryUrl,
+  calculateDxy,
+  ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   calculateYearOverYear,
   filterRecentItems,
   mergeSpotWithFuturesSupplement,
@@ -1191,6 +1358,8 @@ module.exports = {
   parseFredCsv,
   parseImfCsv,
   parseSinaGold,
+  parseDbnomicsSeries,
+  parseIsmPmiSnapshot,
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
