@@ -2,6 +2,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
   CHART_METADATA,
+  BEA_NEWS_RSS_URL,
+  CBOE_VIX_HISTORY_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   RANGE_CONFIG,
   calculateDxy,
@@ -14,6 +16,9 @@ const {
   buildImfCommodityUrl,
   parseCsv,
   parseFredCsv,
+  parseCboeVixCsv,
+  findLatestBeaPceRelease,
+  parseBeaPceRelease,
   parseImfCsv,
   parseSinaGold,
   parseDbnomicsSeries,
@@ -48,6 +53,17 @@ const ISM_PMI_SNAPSHOT_HTML = [
   '</table>',
   '<label>Average for 12 months -</label>',
   '<table><tr><th scope="row">Dec 2025</th><td>10.3</td></tr></table>',
+].join('');
+const BEA_PCE_RSS_XML = [
+  '<rss><channel><item name="Personal Income and Outlays">',
+  '<title>Personal Income and Outlays, July 2026</title>',
+  '<link>https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026</link>',
+  '</item></channel></rss>',
+].join('');
+const BEA_PCE_RELEASE_HTML = [
+  '<p>From the preceding month, the PCE price index for July increased 0.2 percent.</p>',
+  '<p>From the same month one year ago, the <strong>PCE price index for July increased 3.7 percent</strong>.',
+  ' Excluding food and energy, the PCE price index increased 3.3 percent.</p>',
 ].join('');
 
 function makeDbnomicsPayload(datasetCode, seriesCode, values) {
@@ -96,6 +112,64 @@ test('CSV parser keeps quoted commas and escaped quotes intact', () => {
 test('FRED parser ignores dot and blank missing observations', () => {
   const rows = parseFredCsv('observation_date,DGS10\n2026-08-20,4.69\n2026-08-21,.\n2026-08-22,\n', 'DGS10');
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 4.69 }]);
+});
+
+test('CBOE VIX parser reads the official daily close and normalizes US dates', () => {
+  assert.equal(CBOE_VIX_HISTORY_URL, 'https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv');
+  assert.deepEqual(parseCboeVixCsv([
+    'DATE,OPEN,HIGH,LOW,CLOSE',
+    '08/24/2026,15.900000,16.060000,15.610000,15.850000',
+    '08/25/2026,15.710000,16.300000,15.130000,15.450000',
+  ].join('\n')), [
+    { date: '2026-08-24', value: 15.85 },
+    { date: '2026-08-25', value: 15.45 },
+  ]);
+});
+
+test('BEA PCE release discovery and parser supplement a newly published year-over-year value', () => {
+  assert.equal(BEA_NEWS_RSS_URL, 'https://apps.bea.gov/rss/rss.xml');
+  const release = findLatestBeaPceRelease(BEA_PCE_RSS_XML);
+  assert.deepEqual(release, {
+    date: '2026-07-01',
+    url: 'https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026',
+  });
+  assert.deepEqual(parseBeaPceRelease(BEA_PCE_RELEASE_HTML, release.date), {
+    date: '2026-07-01',
+    value: 3.7,
+  });
+});
+
+test('macro query supplements stale FRED PCE and VIX with official latest releases', async () => {
+  const fetchImpl = async (url) => ({
+    ok: true,
+    status: 200,
+    text: async () => url === BEA_NEWS_RSS_URL ? BEA_PCE_RSS_XML
+      : url.includes('personal-income-and-outlays-july-2026') ? BEA_PCE_RELEASE_HTML
+      : url === CBOE_VIX_HISTORY_URL ? [
+        'DATE,OPEN,HIGH,LOW,CLOSE',
+        '08/24/2026,15.90,16.06,15.61,15.85',
+        '08/25/2026,15.71,16.30,15.13,15.45',
+      ].join('\n')
+      : url.includes('id=PCEPI') ? [
+        'observation_date,PCEPI',
+        '2025-06-01,100',
+        '2026-06-01,103.6',
+      ].join('\n')
+      : 'observation_date,VIXCLS\n2026-08-24,15.85\n',
+  });
+  const result = await queryMacroOutlook({
+    fetchImpl,
+    now: new Date('2026-08-26T13:00:00Z'),
+    chartIds: ['pce', 'vix'],
+  });
+  assert.deepEqual(result.charts.find((chart) => chart.id === 'pce').items.at(-1), {
+    date: '2026-07-01',
+    value: 3.7,
+  });
+  assert.deepEqual(result.charts.find((chart) => chart.id === 'vix').items.at(-1), {
+    date: '2026-08-25',
+    value: 15.45,
+  });
 });
 
 test('ISM PMI snapshot parser reads only the latest twelve-month table', () => {

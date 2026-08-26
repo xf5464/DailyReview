@@ -4,6 +4,14 @@ const MAX_OIL_SUPPLEMENT_DAYS = 14;
 const WORLD_GOLD_COUNCIL_ORIGIN = 'https://www.gold.org';
 const WORLD_GOLD_COUNCIL_GDT_INDEX_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/research/gold-demand-trends`;
 const WORLD_GOLD_COUNCIL_DEMAND_SOURCE_URL = `${WORLD_GOLD_COUNCIL_ORIGIN}/goldhub/data/gold-demand-by-country`;
+const CBOE_VIX_HISTORY_URL = 'https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv';
+const CBOE_VIX_HISTORY_PAGE_URL = 'https://www.cboe.com/tradable-products/vix/vix-historical-data';
+const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
+const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
+const ENGLISH_MONTH_NUMBERS = Object.freeze({
+  january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
+  july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
+});
 const ISM_PMI_SOURCE_SNAPSHOT_URL = 'https://git.nomics.world/api/v4/projects/201/repository/files/index_PMI.html/raw?ref=master';
 const ISM_OFFICIAL_REPORT_URL = 'https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/pmi/july/';
 // ISM 官方月报的 Manufacturing at a Glance 数值。DBnomics 提供长期历史，
@@ -215,8 +223,8 @@ const CHART_METADATA = {
     unit: '%',
     decimals: 2,
     frequency: '月度',
-    sourceName: 'FRED / 美国经济分析局',
-    sourceUrl: 'https://fred.stlouisfed.org/series/PCEPI',
+    sourceName: '美国经济分析局（BEA）/ FRED',
+    sourceUrl: BEA_PCE_SOURCE_URL,
   },
   gold: {
     id: 'gold',
@@ -368,7 +376,7 @@ const CHART_METADATA = {
   },
   vix: {
     id: 'vix', title: 'VIX恐慌指数', unit: '点', decimals: 2, frequency: '日度',
-    sourceName: 'FRED / CBOE', sourceUrl: 'https://fred.stlouisfed.org/series/VIXCLS',
+    sourceName: 'CBOE 官方日线 / FRED', sourceUrl: CBOE_VIX_HISTORY_PAGE_URL,
   },
   treasurySpread: {
     id: 'treasurySpread', title: '美国10年-2年国债利差', unit: '%', decimals: 2, frequency: '日度',
@@ -488,6 +496,55 @@ function parseFredCsv(text, seriesId) {
     const value = rawValue && rawValue !== '.' ? Number(rawValue) : Number.NaN;
     return date && Number.isFinite(value) ? { date, value } : null;
   }).filter(Boolean);
+}
+
+function mergeDatedItems(...itemGroups) {
+  return [...new Map(itemGroups.flat().map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function parseCboeVixCsv(text) {
+  const rows = parseCsv(text);
+  const header = (rows[0] ?? []).map((value) => String(value).trim().toUpperCase());
+  const dateIndex = header.indexOf('DATE');
+  const closeIndex = header.indexOf('CLOSE');
+  if (dateIndex < 0 || closeIndex < 0) throw new Error('CBOE VIX 数据缺少 DATE/CLOSE 字段');
+
+  return rows.slice(1).map((row) => {
+    const dateMatch = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(row[dateIndex] ?? '').trim());
+    const value = Number(row[closeIndex]);
+    const date = dateMatch
+      ? `${dateMatch[3]}-${dateMatch[1].padStart(2, '0')}-${dateMatch[2].padStart(2, '0')}`
+      : null;
+    return date && Number.isFinite(value) && value > 0 && value < 200 ? { date, value } : null;
+  }).filter(Boolean);
+}
+
+function findLatestBeaPceRelease(text) {
+  const source = String(text ?? '');
+  const itemMatch = /<item\b[^>]*name\s*=\s*(["'])Personal Income and Outlays\1[^>]*>([\s\S]*?)<\/item>/i.exec(source);
+  if (!itemMatch) throw new Error('BEA RSS 未找到 Personal Income and Outlays 发布项');
+  const titleMatch = /<title>\s*Personal Income and Outlays,\s*([A-Za-z]+)\s+(\d{4})\s*<\/title>/i.exec(itemMatch[2]);
+  const linkMatch = /<link>\s*(https:\/\/www\.bea\.gov\/news\/[^<\s]+)\s*<\/link>/i.exec(itemMatch[2]);
+  const month = titleMatch ? ENGLISH_MONTH_NUMBERS[titleMatch[1].toLowerCase()] : null;
+  if (!titleMatch || !linkMatch || !month) throw new Error('BEA PCE 发布项格式无效');
+  return { date: `${titleMatch[2]}-${month}-01`, url: decodeHtmlEntities(linkMatch[1]) };
+}
+
+function parseBeaPceRelease(text, expectedDate) {
+  const plainText = decodeHtmlEntities(String(text ?? ''))
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ');
+  const match = /From the same month one year ago,\s*the PCE price index for\s+([A-Za-z]+)\s+(increased|decreased)\s+([0-9]+(?:\.[0-9]+)?)\s+percent/i.exec(plainText);
+  if (!match) throw new Error('BEA PCE 发布页缺少同比数据');
+  const releaseMonth = ENGLISH_MONTH_NUMBERS[match[1].toLowerCase()];
+  if (!/^\d{4}-\d{2}-01$/.test(String(expectedDate)) || releaseMonth !== expectedDate.slice(5, 7)) {
+    throw new Error('BEA PCE 发布月份不一致');
+  }
+  const value = Number(match[3]) * (match[2].toLowerCase() === 'decreased' ? -1 : 1);
+  return { date: expectedDate, value };
 }
 
 function calculateDxy(seriesById) {
@@ -1116,12 +1173,9 @@ async function queryMacroOutlook(options = {}) {
     value: item[key],
   }));
 
-  const mergeIsmItems = (...itemGroups) => [...new Map(itemGroups.flat().map((item) => [item.date, item])).values()]
-    .sort((left, right) => left.date.localeCompare(right.date));
-
   const loadIsmIndex = async (datasetCode, seriesCode, officialKey) => {
     const historyItems = await fetchIsmIndexItems(datasetCode, seriesCode);
-    return filterRecentItems(mergeIsmItems(historyItems, officialIsmItems(officialKey)), range, 'monthly');
+    return filterRecentItems(mergeDatedItems(historyItems, officialIsmItems(officialKey)), range, 'monthly');
   };
 
   const loadIsmPmi = async () => {
@@ -1135,7 +1189,7 @@ async function queryMacroOutlook(options = {}) {
     } catch {
       // 原始报告镜像暂不可用时仍保留经过范围校验的 DBnomics 历史序列。
     }
-    const items = mergeIsmItems(historyItems, snapshotItems, officialIsmItems('pmi'));
+    const items = mergeDatedItems(historyItems, snapshotItems, officialIsmItems('pmi'));
     return filterRecentItems(items, range, 'monthly');
   };
 
@@ -1160,8 +1214,19 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(calculateYearOverYear(parseFredCsv(text, 'CPIAUCSL'), null), range, 'monthly');
     }),
     pce: () => loadChart(CHART_METADATA.pce, async () => {
-      const text = await fetchCsv(buildFredUrl('PCEPI', inflationStartDate, endDate), fetchImpl);
-      return filterRecentItems(calculateYearOverYear(parseFredCsv(text, 'PCEPI'), null), range, 'monthly');
+      const officialReleasePromise = (async () => {
+        const rssText = await fetchCsv(BEA_NEWS_RSS_URL, fetchImpl, { Accept: 'application/xml,text/xml' });
+        const release = findLatestBeaPceRelease(rssText);
+        const releaseText = await fetchCsv(release.url, fetchImpl, { Accept: 'text/html' });
+        return parseBeaPceRelease(releaseText, release.date);
+      })().catch(() => null);
+      const [text, officialRelease] = await Promise.all([
+        fetchCsv(buildFredUrl('PCEPI', inflationStartDate, endDate), fetchImpl),
+        officialReleasePromise,
+      ]);
+      const fredItems = calculateYearOverYear(parseFredCsv(text, 'PCEPI'), null);
+      const items = mergeDatedItems(fredItems, officialRelease ? [officialRelease] : []);
+      return filterRecentItems(filterDateRange(items, inflationStartDate, endDate), range, 'monthly');
     }),
     gold: () => loadChart(CHART_METADATA.gold, async () => {
       const text = await fetchCsv(buildSinaGoldUrl(), fetchImpl, { Referer: 'https://finance.sina.com.cn/' });
@@ -1278,8 +1343,16 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(availableItems, range);
     }),
     vix: () => loadChart(CHART_METADATA.vix, async () => {
-      const text = await fetchCsv(buildFredUrl('VIXCLS', dailyStartDate, endDate), fetchImpl);
-      return filterRecentItems(filterDateRange(parseFredCsv(text, 'VIXCLS'), dailyStartDate, endDate), range);
+      const cboePromise = fetchCsv(CBOE_VIX_HISTORY_URL, fetchImpl)
+        .then(parseCboeVixCsv)
+        .catch(() => []);
+      const [text, cboeItems] = await Promise.all([
+        fetchCsv(buildFredUrl('VIXCLS', dailyStartDate, endDate), fetchImpl),
+        cboePromise,
+      ]);
+      const fredItems = parseFredCsv(text, 'VIXCLS');
+      const items = filterDateRange(mergeDatedItems(fredItems, cboeItems), dailyStartDate, endDate);
+      return filterRecentItems(items, range);
     }),
     treasurySpread: () => loadChart(CHART_METADATA.treasurySpread, async () => {
       const text = await fetchCsv(buildFredUrl('T10Y2Y', dailyStartDate, endDate), fetchImpl);
@@ -1347,6 +1420,8 @@ module.exports = {
   buildAShareMarginBalanceUrl,
   buildSohuIndexHistoryUrl,
   calculateDxy,
+  CBOE_VIX_HISTORY_URL,
+  BEA_NEWS_RSS_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   calculateYearOverYear,
   filterRecentItems,
@@ -1356,6 +1431,9 @@ module.exports = {
   normalizeRange,
   parseCsv,
   parseFredCsv,
+  parseCboeVixCsv,
+  findLatestBeaPceRelease,
+  parseBeaPceRelease,
   parseImfCsv,
   parseSinaGold,
   parseDbnomicsSeries,
