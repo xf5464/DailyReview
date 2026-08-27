@@ -13,6 +13,7 @@ const {
   normalizeRange,
   normalizeChartIds,
   buildDbnomicsIsmUrl,
+  buildTonghuashunSentimentUrl,
   buildImfCommodityUrl,
   parseCsv,
   parseFredCsv,
@@ -28,6 +29,8 @@ const {
   parseAShareMarginBalance,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
+  parseTonghuashunSentimentHistory,
+  parseTonghuashunSentimentYears,
   parseNasdaq100PeSnapshot,
   findLatestWorldGoldCouncilReport,
   findWorldGoldCouncilCentralBankChartUrl,
@@ -221,7 +224,7 @@ test('Sina parser reads daily London gold closes and skips invalid values', () =
 test('DBnomics parser reads ISM diffusion indexes and rejects malformed low values', () => {
   assert.equal(
     buildDbnomicsIsmUrl('neword', 'in'),
-    'https://api.db.nomics.world/v22/series/ISM/neword/in?observations=1',
+    'https://api.db.nomics.world/v22/series/ISM/neword?observations=1',
   );
   assert.deepEqual(
     parseDbnomicsSeries(makeDbnomicsPayload('pmi', 'pm', [48.5, 49.2, 10.3]), 'pmi', 'pm', {
@@ -233,6 +236,19 @@ test('DBnomics parser reads ISM diffusion indexes and rejects malformed low valu
       { date: '2026-07-01', value: 49.2 },
     ],
   );
+});
+
+test('Tonghuashun sentiment parser reads official 883404 daily closes and years', () => {
+  const text = 'quotebridge_v4_line_bk_883404_00_last({' +
+    '"year":{"2025":243,"2026":158},' +
+    '"data":"20260820,890.1,905.0,888.0,901.2,1,2,,,,0;20260821,901.2,910.0,899.0,905.6,1,2,,,,0"' +
+    '})';
+  assert.equal(buildTonghuashunSentimentUrl(), 'https://d.10jqka.com.cn/v4/line/bk_883404/00/last.js');
+  assert.deepEqual(parseTonghuashunSentimentYears(text), ['2025', '2026']);
+  assert.deepEqual(parseTonghuashunSentimentHistory(text), [
+    { date: '2026-08-20', value: 901.2 },
+    { date: '2026-08-21', value: 905.6 },
+  ]);
 });
 
 test('Treasury debt parser converts daily dollars to trillions', () => {
@@ -376,7 +392,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns thirty-two independent chart payloads', async () => {
+test('macro outlook query returns thirty-three independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -427,16 +443,20 @@ test('macro outlook query returns thirty-two independent chart payloads', async 
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
     ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
   ] }]);
+  const aShareSentimentData = 'quotebridge_v4_line_bk_883404_00_last({' +
+    '"year":{"2026":2},' +
+    '"data":"20260820,890.1,905.0,888.0,901.2,1,2,,,,0;20260821,901.2,910.0,899.0,905.6,1,2,,,,0"' +
+    '})';
   const ismData = {
-    '/pmi/pm': JSON.stringify({ series: { docs: [{
+    '/pmi?': JSON.stringify({ series: { docs: [{
       dataset_code: 'pmi',
       series_code: 'pm',
       period: ['2025-06', '2025-07', '2025-08'],
       value: [48.5, 49.2, 10.3],
     }] } }),
-    '/supdel/in': makeDbnomicsPayload('supdel', 'in', [51.1, 50.8]),
-    '/neword/in': makeDbnomicsPayload('neword', 'in', [47.4, 47.7]),
-    '/bacord/in': makeDbnomicsPayload('bacord', 'in', [44, 45.8]),
+    '/supdel?': makeDbnomicsPayload('supdel', 'in', [51.1, 50.8]),
+    '/neword?': makeDbnomicsPayload('neword', 'in', [47.4, 47.7]),
+    '/bacord?': makeDbnomicsPayload('bacord', 'in', [44, 45.8]),
   };
   const fetchImpl = async (url) => {
     const seriesId = Object.keys(fredData).find((id) => url.includes(`id=${id}`));
@@ -453,6 +473,7 @@ test('macro outlook query returns thirty-two independent chart payloads', async 
         : url.includes('RPTA_WEB_MARGIN_DAILYTRADE') ? aShareMarginData
         : url.includes('code=zs_000001') ? shanghaiIndexData
         : url.includes('code=zs_399106') ? shenzhenIndexData
+        : url.includes('d.10jqka.com.cn/v4/line/bk_883404/00') ? aShareSentimentData
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : ismPath ? ismData[ismPath]
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
@@ -462,11 +483,11 @@ test('macro outlook query returns thirty-two independent chart payloads', async 
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(32).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(33).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -482,6 +503,7 @@ test('macro outlook query returns thirty-two independent chart payloads', async 
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').items.at(-1).value, 20500.25);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').items.at(-1).value, 7780.45);
@@ -538,11 +560,15 @@ test('one failed source does not prevent the remaining charts from loading', asy
         ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
       ] }]) };
     }
+    if (url.includes('d.10jqka.com.cn/v4/line/bk_883404/00')) {
+      return { ok: true, status: 200, text: async () => 'quotebridge_v4_line_bk_883404_00_last({' +
+        '"year":{"2026":1},"data":"20260820,890.1,905.0,888.0,901.2,1,2,,,,0"})' };
+    }
     const ismSeries = [
-      ['/pmi/pm', 'pmi', 'pm', [48.5, 49.2, 10.3]],
-      ['/supdel/in', 'supdel', 'in', [51.1, 50.8]],
-      ['/neword/in', 'neword', 'in', [47.4, 47.7]],
-      ['/bacord/in', 'bacord', 'in', [44, 45.8]],
+      ['/pmi?', 'pmi', 'pm', [48.5, 49.2, 10.3]],
+      ['/supdel?', 'supdel', 'in', [51.1, 50.8]],
+      ['/neword?', 'neword', 'in', [47.4, 47.7]],
+      ['/bacord?', 'bacord', 'in', [44, 45.8]],
     ].find((entry) => url.includes(entry[0]));
     if (ismSeries) {
       return {
@@ -599,6 +625,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').error, null);

@@ -8,6 +8,8 @@ const CBOE_VIX_HISTORY_URL = 'https://cdn.cboe.com/api/global/us_indices/daily_p
 const CBOE_VIX_HISTORY_PAGE_URL = 'https://www.cboe.com/tradable-products/vix/vix-historical-data';
 const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
 const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
+const TONGHUASHUN_SENTIMENT_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/883404';
+const TONGHUASHUN_SENTIMENT_LINE_BASE_URL = 'https://d.10jqka.com.cn/v4/line/bk_883404/00';
 const ENGLISH_MONTH_NUMBERS = Object.freeze({
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
   july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
@@ -347,6 +349,15 @@ const CHART_METADATA = {
     sourceName: '同花顺指标平台公开公式 / 搜狐证券行情',
     sourceUrl: 'https://poi.10jqka.com.cn/store/formula/detail/indexid/45424',
   },
+  aShareSentimentThs: {
+    id: 'aShareSentimentThs',
+    title: '同花顺情绪指数',
+    unit: '点',
+    decimals: 2,
+    frequency: '日度',
+    sourceName: '同花顺官方行情 / 883404',
+    sourceUrl: TONGHUASHUN_SENTIMENT_PAGE_URL,
+  },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
     title: '纳斯达克100市盈率（NDX）',
@@ -671,7 +682,7 @@ function buildDbnomicsIsmUrl(datasetCode, seriesCode) {
   if (!/^[a-z-]+$/.test(datasetCode) || !/^[a-z]+$/.test(seriesCode)) {
     throw new Error('DBnomics ISM 序列代码无效');
   }
-  return `https://api.db.nomics.world/v22/series/ISM/${datasetCode}/${seriesCode}?observations=1`;
+  return `https://api.db.nomics.world/v22/series/ISM/${datasetCode}?observations=1`;
 }
 
 function buildImfCommodityUrl(indicator, startMonth, endMonth) {
@@ -873,6 +884,13 @@ function buildSohuIndexHistoryUrl(code, startDate, endDate) {
   return `https://q.stock.sohu.com/hisHq?${params.toString()}`;
 }
 
+function buildTonghuashunSentimentUrl(segment = 'last') {
+  if (!/^(?:last|\d{4})$/.test(String(segment))) {
+    throw new Error('同花顺情绪指数历史分段无效');
+  }
+  return `${TONGHUASHUN_SENTIMENT_LINE_BASE_URL}/${segment}.js`;
+}
+
 function parseTreasuryDebt(text) {
   const rows = JSON.parse(String(text ?? ''))?.data;
   if (!Array.isArray(rows)) throw new Error('美国财政部债务数据格式无效');
@@ -991,6 +1009,35 @@ function parseSohuIndexAmount(text) {
     const amount = Number(row?.[8]) * 10_000;
     return date && Number.isFinite(amount) ? { date, value: amount } : null;
   }).filter(Boolean);
+}
+
+function parseTonghuashunSentimentHistory(text) {
+  const source = String(text ?? '').trim();
+  const startIndex = source.indexOf('(');
+  const endIndex = source.lastIndexOf(')');
+  if (startIndex < 0 || endIndex <= startIndex) throw new Error('同花顺情绪指数数据格式无效');
+  const payload = JSON.parse(source.slice(startIndex + 1, endIndex));
+  if (typeof payload?.data !== 'string') throw new Error('同花顺情绪指数缺少日线数据');
+  return payload.data.split(';').map((row) => {
+    const fields = row.split(',');
+    const dateText = String(fields[0] ?? '');
+    const date = /^\d{8}$/.test(dateText)
+      ? `${dateText.slice(0, 4)}-${dateText.slice(4, 6)}-${dateText.slice(6, 8)}`
+      : null;
+    const value = Number(fields[4]);
+    return date && Number.isFinite(value) ? { date, value } : null;
+  }).filter(Boolean);
+}
+
+function parseTonghuashunSentimentYears(text) {
+  const source = String(text ?? '').trim();
+  const startIndex = source.indexOf('(');
+  const endIndex = source.lastIndexOf(')');
+  if (startIndex < 0 || endIndex <= startIndex) return [];
+  const years = JSON.parse(source.slice(startIndex + 1, endIndex))?.year;
+  return years && typeof years === 'object'
+    ? Object.keys(years).filter((year) => /^\d{4}$/.test(year)).sort()
+    : [];
 }
 
 function calculateTonghuashunActiveMarketValue(shanghaiItems, shenzhenItems) {
@@ -1333,6 +1380,29 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(calculatedItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    aShareSentimentThs: () => loadChart(CHART_METADATA.aShareSentimentThs, async () => {
+      const headers = {
+        Accept: 'application/javascript,text/javascript,*/*',
+        Referer: TONGHUASHUN_SENTIMENT_PAGE_URL,
+      };
+      const latestText = await fetchCsv(buildTonghuashunSentimentUrl(), fetchImpl, headers);
+      const startYear = Number(dailyStartDate.slice(0, 4));
+      const endYear = Number(endDate.slice(0, 4));
+      const historyYears = parseTonghuashunSentimentYears(latestText).filter((year) => {
+        const numericYear = Number(year);
+        return numericYear >= startYear && numericYear <= endYear;
+      });
+      const historyResults = await Promise.allSettled(historyYears.map((year) => (
+        fetchCsv(buildTonghuashunSentimentUrl(year), fetchImpl, headers)
+      )));
+      const allItems = [parseTonghuashunSentimentHistory(latestText)];
+      historyResults.forEach((result) => {
+        if (result.status === 'fulfilled') allItems.push(parseTonghuashunSentimentHistory(result.value));
+      });
+      const uniqueItems = [...new Map(allItems.flat().map((item) => [item.date, item])).values()];
+      const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
+      return filterRecentItems(availableItems, range);
+    }),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
       filterRecentItems(parseNasdaq100PeSnapshot(), range, 'monthly')
     )),
@@ -1427,6 +1497,7 @@ module.exports = {
   buildAShareTurnoverUrl,
   buildAShareMarginBalanceUrl,
   buildSohuIndexHistoryUrl,
+  buildTonghuashunSentimentUrl,
   calculateDxy,
   CBOE_VIX_HISTORY_URL,
   BEA_NEWS_RSS_URL,
@@ -1451,6 +1522,8 @@ module.exports = {
   parseAShareMarginBalance,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
+  parseTonghuashunSentimentHistory,
+  parseTonghuashunSentimentYears,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 };
