@@ -817,6 +817,23 @@ tbody tr:last-child td {
   stroke-width: 1.5;
 }
 
+.shareholder-price-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--chart-line-width);
+}
+
+.shareholder-price-point,
+.shareholder-price-tip-point {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+.shareholder-price-axis-label {
+  fill: #c2410c;
+}
+
 .overall-chart-unit {
   fill: #657089;
   font-size: 11px;
@@ -948,6 +965,239 @@ tbody tr:last-child td {
 
 .overall-detail-dialog {
   width: min(980px, calc(100vw - 36px));
+}
+
+.shareholder-history-dialog {
+  width: min(900px, calc(100vw - 36px));
+}
+
+.shareholder-bars-dialog {
+  width: min(1180px, calc(100vw - 28px));
+}
+
+.shareholder-bars-dialog .overall-config-card {
+  max-height: min(88vh, 920px);
+  overflow: auto;
+}
+
+.shareholder-bars-controls {
+  position: sticky;
+  z-index: 3;
+  top: -1px;
+  padding: 10px 0;
+  background: #ffffff;
+}
+
+.shareholder-bars-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--shareholder-bar-columns, 4), minmax(210px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.shareholder-bar-card {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #dfe6f1;
+  border-radius: 9px;
+  background: #f8fbff;
+}
+
+.shareholder-bar-card-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.shareholder-bar-card-title strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.shareholder-bar-card-title span {
+  color: #7a879b;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.shareholder-mini-bar-chart {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.shareholder-mini-bar {
+  fill: #7c3aed;
+  opacity: 0.82;
+}
+
+.shareholder-mini-bar-value {
+  fill: #34445d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.shareholder-mini-bar-quarter {
+  fill: #657089;
+  font-size: 11px;
+}
+
+.shareholder-mini-bar-axis {
+  stroke: #cbd5e1;
+  stroke-width: 1;
+}
+
+.shareholder-bar-empty {
+  min-height: 190px;
+  margin: 8px 0 0;
+  display: grid;
+  place-items: center;
+  color: #8b98ad;
+  font-size: 12px;
+}
+
+.shareholder-table-wrap {
+  border: 1px solid #dfe6f1;
+  border-radius: 9px;
+  overflow: auto;
+  background: #ffffff;
+}
+
+.shareholder-card-table-wrap {
+  max-height: 300px;
+}
+
+.shareholder-detail-table-wrap {
+  max-height: min(58vh, 620px);
+  margin-top: 12px;
+}
+
+.shareholder-table-quarter-browser {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #dfe6f1;
+  background: #f8fbff;
+}
+
+.shareholder-table-quarter-browser label {
+  display: grid;
+  min-width: 150px;
+  gap: 5px;
+  color: #52617a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.shareholder-table-quarter-browser .secondary-button:disabled,
+.shareholder-table-quarter-browser .secondary-button:disabled:hover {
+  border-color: #dfe6f1;
+  color: #8b98ad;
+  background: #edf1f6;
+  cursor: not-allowed;
+}
+
+.shareholder-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.shareholder-table th,
+.shareholder-table td {
+  padding: 9px 11px;
+  border-bottom: 1px solid #edf1f7;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.shareholder-table thead th {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background: #f5f8fc;
+  color: #52617a;
+  font-size: 11px;
+}
+
+.shareholder-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shareholder-sort-button:hover,
+.shareholder-sort-button:focus-visible {
+  color: #1f5fd2;
+  outline: none;
+}
+
+.shareholder-change-up {
+  color: #c23b3b;
+  font-weight: 700;
+}
+
+.shareholder-change-down {
+  color: #138a55;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .shareholder-table-quarter-browser {
+    flex-wrap: wrap;
+  }
+
+}
+
+.shareholder-table th:first-child,
+.shareholder-table td:first-child {
+  text-align: left;
+}
+
+.shareholder-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.shareholder-table tbody tr[role="button"] {
+  cursor: pointer;
+}
+
+.shareholder-table tbody tr[role="button"]:hover,
+.shareholder-table tbody tr[role="button"]:focus-visible {
+  outline: none;
+  background: #eef5ff;
+}
+
+.shareholder-table tbody th strong,
+.shareholder-table tbody th span {
+  display: block;
+}
+
+.shareholder-table tbody th strong {
+  color: #172033;
+  font-size: 12px;
+}
+
+.shareholder-table tbody th span {
+  margin-top: 2px;
+  color: #7a879b;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.shareholder-value-missing {
+  color: #b42318;
 }
 
 .overall-detail-title-row {

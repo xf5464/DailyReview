@@ -3,7 +3,7 @@
 
   var CHART_IDS = [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions'
@@ -29,6 +29,7 @@
     aShareMarginBalance: 'A股融资余额（三市）',
     aShareActiveMarketValueThs: 'A股活跃市值（同花顺公式版）',
     aShareSentimentThs: '同花顺情绪指数',
+    filmCinemaShareholders: '影视院线成分股股东人数',
     nasdaq100Pe: '纳斯达克100市盈率（NDX）',
     ndx: 'NDX（纳斯达克100指数）',
     sp500: '标普500指数（SPX）',
@@ -65,6 +66,7 @@
     aShareMarginBalance: 'A股杠杆资金',
     aShareActiveMarketValueThs: 'A股市场活跃度',
     aShareSentimentThs: 'A股市场情绪',
+    filmCinemaShareholders: '影视院线',
     nasdaq100Pe: '美股估值',
     ndx: '美股指数',
     sp500: '美股指数',
@@ -101,6 +103,7 @@
     aShareMarginBalance: '沪、深、北三市融资余额合计，单位为亿元，表示投资者尚未偿还的融资买入金额。余额上升通常代表杠杆资金净流入，但不等同于市场一定上涨。',
     aShareActiveMarketValueThs: '按同花顺指标平台公开用户公式计算：上证指数与深证综指成交额之和，再取 SMA(10,1)，单位为亿元。它是可复现的成交活跃度平滑指标，并非指南针原版 0AMV，也不是同花顺官方统一指数。',
     aShareSentimentThs: '同花顺官方情绪指数（883404）的日度收盘点位，用于观察 A 股市场情绪变化。该指数历史自 2022 年 8 月开始，点位高低应结合自身历史区间比较。',
+    filmCinemaShareholders: '同花顺影视院线（881274）全部成分股的季度股东人数和当前流通市值。总表支持季度翻页与排序；点击股票可查看股东人数及连续周线收盘价双轴历史。',
     nasdaq100Pe: '纳斯达克 100 指数的滚动市盈率（TTM），即指数市值相对过去 12 个月盈利的倍数，用于观察估值高低。',
     ndx: '纳斯达克 100 指数点位，覆盖纳斯达克上市的主要非金融公司，科技和成长型公司的权重较高。',
     sp500: '标普 500 指数点位，覆盖美国约 500 家大型上市公司，是衡量美国大盘股表现的核心基准之一。',
@@ -137,6 +140,7 @@
     aShareMarginBalance: '#0f766e',
     aShareActiveMarketValueThs: '#c2410c',
     aShareSentimentThs: '#d9465f',
+    filmCinemaShareholders: '#7c3aed',
     nasdaq100Pe: '#6a42c2',
     ndx: '#335cc7',
     sp500: '#16806a',
@@ -184,7 +188,7 @@
     groupOrderVersion: GROUP_ORDER_VERSION,
     chartsPerRow: 4,
     chartOrder: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'federalDebt',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -192,7 +196,7 @@
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'federalDebt',
+        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders', 'federalDebt',
         'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
         'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -205,12 +209,12 @@
         'initialClaims', 'unemploymentRate', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
-      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs'],
+      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders'],
       group_primary: ['treasuryYield30', 'cpi', 'unemploymentRate', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'federalDebt',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -244,6 +248,7 @@
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
       aShareSentimentThs: ['default', 'group_a_share'],
+      filmCinemaShareholders: ['default', 'group_a_share'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
       sp500: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
@@ -266,6 +271,10 @@
   var config = loadConfig();
   var viewMode = 'charts';
   var activeDetailId = null;
+  var activeShareholderCode = null;
+  var activeShareholderTableQuarterDate = null;
+  var shareholderSortKey = null;
+  var shareholderSortDirection = null;
   var draggedChartId = null;
   var draggedGroupId = null;
   var tooltip = null;
@@ -301,14 +310,40 @@
     detailClose: document.querySelector('#overallDetailCloseButton'),
     detailTitle: document.querySelector('#overallDetailTitle'),
     detailHelp: document.querySelector('#overallDetailHelpTooltip'),
+    detailRangeControl: document.querySelector('#overallDetailRangeControl'),
     detailRange: document.querySelector('#overallDetailRangeSelect'),
     detailMessage: document.querySelector('#overallDetailMessage'),
     detailHighValue: document.querySelector('#overallDetailHighValue'),
     detailHighDate: document.querySelector('#overallDetailHighDate'),
     detailLowValue: document.querySelector('#overallDetailLowValue'),
     detailLowDate: document.querySelector('#overallDetailLowDate'),
+    detailExtremes: document.querySelector('#overallDetailExtremes'),
+    detailStockTableWrap: document.querySelector('#overallDetailStockTableWrap'),
+    detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
+    shareholderTableQuarter: document.querySelector('#shareholderTableQuarterSelect'),
+    shareholderTablePreviousQuarter: document.querySelector('#shareholderTablePreviousQuarterButton'),
+    shareholderTableNextQuarter: document.querySelector('#shareholderTableNextQuarterButton'),
+    shareholderBarChartsButton: document.querySelector('#shareholderBarChartsButton'),
+    shareholderSortHeader: document.querySelector('#shareholderCountSortHeader'),
+    shareholderSortButton: document.querySelector('#shareholderCountSortButton'),
+    shareholderChangeSortHeader: document.querySelector('#shareholderChangeSortHeader'),
+    shareholderChangeSortButton: document.querySelector('#shareholderChangeSortButton'),
+    shareholderMarketCapSortHeader: document.querySelector('#shareholderMarketCapSortHeader'),
+    shareholderMarketCapSortButton: document.querySelector('#shareholderMarketCapSortButton'),
     detailChart: document.querySelector('#overallDetailChart'),
     detailSource: document.querySelector('#overallDetailSourceLink'),
+    shareholderDialog: document.querySelector('#shareholderHistoryDialog'),
+    shareholderClose: document.querySelector('#shareholderHistoryCloseButton'),
+    shareholderTitle: document.querySelector('#shareholderHistoryTitle'),
+    shareholderRange: document.querySelector('#shareholderHistoryRangeSelect'),
+    shareholderMessage: document.querySelector('#shareholderHistoryMessage'),
+    shareholderChart: document.querySelector('#shareholderHistoryChart'),
+    shareholderBarsDialog: document.querySelector('#shareholderBarChartsDialog'),
+    shareholderBarsClose: document.querySelector('#shareholderBarChartsCloseButton'),
+    shareholderBarsSort: document.querySelector('#shareholderBarChartsSortSelect'),
+    shareholderBarsColumns: document.querySelector('#shareholderBarChartsColumnsSelect'),
+    shareholderBarsMessage: document.querySelector('#shareholderBarChartsMessage'),
+    shareholderBarsGrid: document.querySelector('#shareholderBarChartsGrid'),
     groupsDialog: document.querySelector('#overallGroupsDialog'),
     groupsList: document.querySelector('#overallGroupsList'),
     groupsMessage: document.querySelector('#overallGroupsMessage'),
@@ -622,6 +657,9 @@
     if (!chart) return null;
     var result = Object.assign({}, chart);
     result.items = filterItems(chart, rangeKey);
+    if (Array.isArray(chart.rightAxisItems)) {
+      result.rightAxisItems = filterItems({ items: chart.rightAxisItems, frequency: '周度' }, rangeKey);
+    }
     return result;
   }
 
@@ -765,17 +803,23 @@
     var items = chart.items;
     var width = 520;
     var height = 270;
-    var box = { left: 58, top: 28, width: 438, height: 198 };
+    var denseRightAxis = Array.isArray(chart.rightAxisItems);
+    var rightAxisItems = (denseRightAxis ? chart.rightAxisItems : items.filter(function (item) {
+      return hasNumericValue(item.priceValue);
+    }).map(function (item) {
+      return { date: item.date, value: Number(item.priceValue), priceDate: item.priceDate };
+    })).filter(function (item) { return item && item.date && hasNumericValue(item.value); });
+    var hasRightAxis = rightAxisItems.length > 0;
+    var box = { left: 58, top: 28, width: hasRightAxis ? 382 : 438, height: 198 };
     var values = items.map(function (item) { return item.value; });
     var referenceValue = Number(chart.referenceValue);
     if (Number.isFinite(referenceValue)) values.push(referenceValue);
     var domainY = extent(values);
+    var rightDomainY = hasRightAxis ? extent(rightAxisItems.map(function (item) { return item.value; })) : null;
     var singleItem = items.length === 1;
     var firstTimestamp = Date.parse(items[0].date + 'T00:00:00Z');
-    var domainX = [
-      firstTimestamp,
-      Date.parse(items[items.length - 1].date + 'T00:00:00Z')
-    ];
+    var allTimestamps = items.concat(rightAxisItems).map(function (item) { return Date.parse(item.date + 'T00:00:00Z'); });
+    var domainX = [Math.min.apply(null, allTimestamps), Math.max.apply(null, allTimestamps)];
     if (singleItem) domainX = [firstTimestamp - 86400000, firstTimestamp + 86400000];
     var color = COLORS[chart.id] || '#1f5fd2';
     var path = linePath(items, box, domainX, domainY);
@@ -801,13 +845,29 @@
       });
       yLabel.textContent = axisValue(value, chart.decimals);
       svg.append(yLabel);
+      if (hasRightAxis) {
+        var rightValue = rightDomainY[1] - ratio * (rightDomainY[1] - rightDomainY[0]);
+        var rightLabel = createSvg('text', {
+          x: box.left + box.width + 9, y: y + 4, class: 'chart-label shareholder-price-axis-label', 'text-anchor': 'start'
+        });
+        rightLabel.textContent = axisValue(rightValue, 2);
+        svg.append(rightLabel);
+      }
     }
 
     var unit = createSvg('text', { x: box.left, y: 16, class: 'overall-chart-unit' });
     unit.textContent = chart.unit || '';
     svg.append(unit);
+    if (hasRightAxis) {
+      var rightUnit = createSvg('text', {
+        x: box.left + box.width, y: 16, class: 'overall-chart-unit shareholder-price-axis-label', 'text-anchor': 'end'
+      });
+      rightUnit.textContent = '股价（元）';
+      svg.append(rightUnit);
+    }
 
-    var longDetailRange = svg === refs.detailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
+    var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart;
+    var longDetailRange = isDetailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
     if (longDetailRange) {
       var firstYear = new Date(domainX[0]).getUTCFullYear();
       var lastYear = new Date(domainX[1]).getUTCFullYear();
@@ -895,7 +955,7 @@
         svg.append(provisionalPoint);
       });
     }
-    var showQuarterlyPoints = chart.frequency && chart.frequency.includes('季') && svg === refs.detailChart;
+    var showQuarterlyPoints = chart.frequency && chart.frequency.includes('季') && isDetailChart;
     if (showQuarterlyPoints) {
       items.forEach(function (item) {
         var itemTime = Date.parse(item.date + 'T00:00:00Z');
@@ -916,6 +976,27 @@
       svg.append(singlePoint);
     }
 
+    if (hasRightAxis) {
+      var priceColor = '#ea580c';
+      var priceLine = createSvg('path', {
+        d: linePath(rightAxisItems, box, domainX, rightDomainY), class: 'shareholder-price-line'
+      });
+      priceLine.style.stroke = priceColor;
+      svg.append(priceLine);
+      if (showQuarterlyPoints && !denseRightAxis) {
+        rightAxisItems.forEach(function (item) {
+          var priceTime = Date.parse(item.date + 'T00:00:00Z');
+          var priceX = box.left + (priceTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+          var priceY = box.top + (1 - (item.value - rightDomainY[0]) / (rightDomainY[1] - rightDomainY[0])) * box.height;
+          var pricePoint = createSvg('circle', {
+            cx: priceX, cy: priceY, r: Math.max(2.5, quarterlyPointSize - 1), class: 'shareholder-price-point'
+          });
+          pricePoint.style.fill = priceColor;
+          svg.append(pricePoint);
+        });
+      }
+    }
+
     var guide = createSvg('line', {
       y1: box.top, y2: box.top + box.height, stroke: color,
       'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: 0
@@ -924,7 +1005,12 @@
       r: 4.5, class: 'overall-chart-tip-point', opacity: 0
     });
     point.style.fill = color;
+    var rightPoint = hasRightAxis ? createSvg('circle', {
+      r: 4.5, class: 'overall-chart-tip-point shareholder-price-tip-point', opacity: 0
+    }) : null;
+    if (rightPoint) rightPoint.style.fill = '#ea580c';
     svg.append(guide, point);
+    if (rightPoint) svg.append(rightPoint);
 
     var overlay = createSvg('rect', {
       x: box.left, y: box.top, width: box.width, height: box.height,
@@ -946,8 +1032,20 @@
       point.setAttribute('cx', x);
       point.setAttribute('cy', y);
       point.setAttribute('opacity', '1');
+      var hoveredPriceItem = hasRightAxis ? nearestItem(rightAxisItems, target) : null;
+      if (rightPoint && hoveredPriceItem) {
+        var hoveredPriceTime = Date.parse(hoveredPriceItem.date + 'T00:00:00Z');
+        var rightX = box.left + (hoveredPriceTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        var rightY = box.top + (1 - (Number(hoveredPriceItem.value) - rightDomainY[0]) / (rightDomainY[1] - rightDomainY[0])) * box.height;
+        rightPoint.setAttribute('cx', rightX);
+        rightPoint.setAttribute('cy', rightY);
+        rightPoint.setAttribute('opacity', '1');
+      } else if (rightPoint) {
+        rightPoint.setAttribute('opacity', '0');
+      }
       var tip = ensureTooltip(svg);
       tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) +
+        (hoveredPriceItem ? ' · ' + formatDate(hoveredPriceItem.date, '周度') + ' 股价 ¥' + Number(hoveredPriceItem.value).toFixed(2) : '') +
         (item.provisional ? ' · 期货涨跌幅推算临时值' : '');
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
@@ -956,6 +1054,7 @@
     overlay.addEventListener('pointerleave', function () {
       guide.setAttribute('opacity', '0');
       point.setAttribute('opacity', '0');
+      if (rightPoint) rightPoint.setAttribute('opacity', '0');
       if (tooltip) tooltip.hidden = true;
     });
     svg.append(overlay);
@@ -1012,11 +1111,23 @@
     actions.append(refresh);
     header.append(heading, actions);
 
-    var summary = createElement('p', 'overall-chart-summary', rangeSummary(chart));
+    var stockTableChart = chart && chart.chartType === 'stockTable';
+    var availableStockRows = stockTableChart ? (chart.rows || []).filter(function (row) {
+      return hasNumericValue(row.latestValue);
+    }) : [];
+    var summary = createElement('p', 'overall-chart-summary', stockTableChart
+      ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
+      : rangeSummary(chart));
     var svg = createSvg('svg', {
       class: 'overall-chart', role: 'img', 'aria-label': TITLES[chartId] + '曲线'
     });
-    renderLineChart(svg, chart);
+    var cardStockTable = null;
+    if (stockTableChart) {
+      cardStockTable = createElement('div', 'shareholder-table-wrap shareholder-card-table-wrap');
+      renderShareholderTable(cardStockTable, chart.rows || [], false);
+    } else {
+      renderLineChart(svg, chart);
+    }
     var sourceLine = createElement('p', 'overall-chart-source');
     sourceLine.append(document.createTextNode('数据源：'));
     if (chart && chart.sourceUrl) {
@@ -1036,7 +1147,7 @@
       supplementLink.rel = 'noopener noreferrer';
       sourceLine.append(supplementLink);
     }
-    card.append(header, summary, svg, sourceLine);
+    card.append(header, summary, stockTableChart ? cardStockTable : svg, sourceLine);
 
     card.addEventListener('dragstart', function (event) {
       draggedChartId = chartId;
@@ -1240,6 +1351,9 @@
 
   function showDetail(id) {
     activeDetailId = id;
+    activeShareholderTableQuarterDate = null;
+    shareholderSortKey = null;
+    shareholderSortDirection = null;
     var chart = chartById(id);
     refs.detailTitle.textContent = chart && chart.title || TITLES[id];
     refs.detailHelp.textContent = DESCRIPTIONS[id] || '暂无说明。';
@@ -1252,7 +1366,57 @@
   }
 
   function renderDetail() {
-    var chart = filteredChart(chartById(activeDetailId), refs.detailRange.value);
+    var sourceChart = chartById(activeDetailId);
+    var stockTableChart = sourceChart && sourceChart.chartType === 'stockTable';
+    refs.detailRangeControl.hidden = Boolean(stockTableChart);
+    refs.detailExtremes.hidden = Boolean(stockTableChart);
+    refs.detailChart.hidden = Boolean(stockTableChart);
+    refs.detailStockTableWrap.hidden = !stockTableChart;
+    if (stockTableChart) {
+      var rows = sourceChart.rows || [];
+      var quarterDates = Array.from(new Set(rows.flatMap(function (row) {
+        return (row.quarterlyItems || []).map(function (item) { return item.date; });
+      }))).sort();
+      if (!quarterDates.includes(activeShareholderTableQuarterDate)) {
+        activeShareholderTableQuarterDate = quarterDates.at(-1) || null;
+      }
+      syncShareholderTableQuarterSelect(quarterDates);
+      var displayedRows = rows.map(function (row) {
+        var quarterItem = (row.quarterlyItems || []).find(function (item) {
+          return item.date === activeShareholderTableQuarterDate;
+        });
+        return Object.assign({}, row, {
+          latestDate: activeShareholderTableQuarterDate,
+          latestValue: quarterItem ? quarterItem.value : null,
+        });
+      });
+      if (shareholderSortKey && shareholderSortDirection) {
+        displayedRows.sort(function (left, right) {
+          var leftValue = shareholderSortKey === 'change'
+            ? shareholderQuarterChange(left).value
+            : shareholderSortKey === 'marketCap' && hasNumericValue(left.marketCap) ? Number(left.marketCap)
+            : hasNumericValue(left.latestValue) ? Number(left.latestValue) : Number.NaN;
+          var rightValue = shareholderSortKey === 'change'
+            ? shareholderQuarterChange(right).value
+            : shareholderSortKey === 'marketCap' && hasNumericValue(right.marketCap) ? Number(right.marketCap)
+            : hasNumericValue(right.latestValue) ? Number(right.latestValue) : Number.NaN;
+          var leftAvailable = Number.isFinite(leftValue);
+          var rightAvailable = Number.isFinite(rightValue);
+          if (leftAvailable !== rightAvailable) return leftAvailable ? -1 : 1;
+          if (!leftAvailable) return 0;
+          return shareholderSortDirection === 'ascending' ? leftValue - rightValue : rightValue - leftValue;
+        });
+      }
+      updateShareholderSortHeader('count', refs.shareholderSortHeader, refs.shareholderSortButton);
+      updateShareholderSortHeader('change', refs.shareholderChangeSortHeader, refs.shareholderChangeSortButton);
+      updateShareholderSortHeader('marketCap', refs.shareholderMarketCapSortHeader, refs.shareholderMarketCapSortButton);
+      renderShareholderTable(refs.detailStockTableBody, displayedRows, true);
+      var availableCount = displayedRows.filter(function (row) { return hasNumericValue(row.latestValue); }).length;
+      refs.detailMessage.textContent = (activeShareholderTableQuarterDate ? formatDate(activeShareholderTableQuarterDate, '季度') + ' · ' : '') +
+        availableCount + '/' + rows.length + ' 只成分股已有数据；可选择或左右翻季度，点击股票查看单股历史。';
+      return;
+    }
+    var chart = filteredChart(sourceChart, refs.detailRange.value);
     if (!chart || !chart.items.length) {
       refs.detailMessage.textContent = chart && chart.error || '当前时间范围暂无数据。';
       refs.detailHighValue.textContent = '--';
@@ -1272,8 +1436,250 @@
     renderLineChart(refs.detailChart, chart);
   }
 
+  function hasNumericValue(value) {
+    return value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
+  }
+
+  function formatHolderCount(value) {
+    return hasNumericValue(value)
+      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 户'
+      : '--';
+  }
+
+  function shareholderQuarterChange(stock) {
+    var latestValue = hasNumericValue(stock && stock.latestValue) ? Number(stock.latestValue) : Number.NaN;
+    var latestDate = stock && stock.latestDate;
+    var previous = (stock && stock.quarterlyItems || []).filter(function (item) {
+      return item.date < latestDate;
+    }).at(-1);
+    return Number.isFinite(latestValue) && previous
+      ? { value: latestValue - Number(previous.value), previousDate: previous.date }
+      : { value: Number.NaN, previousDate: null };
+  }
+
+  function formatHolderChange(value) {
+    if (!Number.isFinite(Number(value))) return '--';
+    var numericValue = Number(value);
+    return (numericValue > 0 ? '+' : '') + new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numericValue) + ' 户';
+  }
+
+  function formatMarketCap(value) {
+    return hasNumericValue(value)
+      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 2 }).format(Number(value)) + ' 亿元'
+      : '--';
+  }
+
+  function updateShareholderSortHeader(key, header, button) {
+    var active = shareholderSortKey === key ? shareholderSortDirection : null;
+    header.setAttribute('aria-sort', active || 'none');
+    button.querySelector('span').textContent = active === 'ascending' ? '↑' : active === 'descending' ? '↓' : '↕';
+  }
+
+  function toggleShareholderSort(key) {
+    shareholderSortDirection = shareholderSortKey === key && shareholderSortDirection === 'descending'
+      ? 'ascending' : 'descending';
+    shareholderSortKey = key;
+    renderDetail();
+  }
+
+  function syncShareholderTableQuarterSelect(quarterDates) {
+    var currentOptions = Array.from(refs.shareholderTableQuarter.options).map(function (option) { return option.value; });
+    if (currentOptions.join('|') !== quarterDates.join('|')) {
+      refs.shareholderTableQuarter.replaceChildren();
+      quarterDates.forEach(function (date) {
+        refs.shareholderTableQuarter.append(new Option(formatDate(date, '季度'), date));
+      });
+    }
+    refs.shareholderTableQuarter.value = activeShareholderTableQuarterDate || '';
+    var index = quarterDates.indexOf(activeShareholderTableQuarterDate);
+    refs.shareholderTablePreviousQuarter.disabled = index <= 0;
+    refs.shareholderTableNextQuarter.disabled = index < 0 || index >= quarterDates.length - 1;
+    refs.shareholderTablePreviousQuarter.title = refs.shareholderTablePreviousQuarter.disabled ? '已经是最早季度' : '查看上一季度';
+    refs.shareholderTableNextQuarter.title = refs.shareholderTableNextQuarter.disabled ? '已经是最新季度' : '查看下一季度';
+  }
+
+  function moveShareholderTableQuarter(offset) {
+    var chart = chartById('filmCinemaShareholders');
+    var quarterDates = Array.from(new Set((chart && chart.rows || []).flatMap(function (row) {
+      return (row.quarterlyItems || []).map(function (item) { return item.date; });
+    }))).sort();
+    var index = quarterDates.indexOf(activeShareholderTableQuarterDate);
+    var target = Math.min(quarterDates.length - 1, Math.max(0, index + offset));
+    if (target >= 0 && quarterDates[target]) activeShareholderTableQuarterDate = quarterDates[target];
+    renderDetail();
+  }
+
+  function shareholderValueAtQuarter(stock, quarterDate) {
+    var item = (stock && stock.quarterlyItems || []).find(function (entry) { return entry.date === quarterDate; });
+    return item && hasNumericValue(item.value) ? Number(item.value) : Number.NaN;
+  }
+
+  function compactHolderValue(value) {
+    return new Intl.NumberFormat('zh-CN', {
+      notation: 'compact', maximumFractionDigits: 1,
+    }).format(Number(value));
+  }
+
+  function renderShareholderMiniBarChart(stock) {
+    var card = createElement('article', 'shareholder-bar-card');
+    var title = createElement('div', 'shareholder-bar-card-title');
+    title.append(createElement('strong', '', stock.name), createElement('span', '', stock.code));
+    card.append(title);
+    var items = (stock.quarterlyItems || []).filter(function (item) {
+      return !activeShareholderTableQuarterDate || item.date <= activeShareholderTableQuarterDate;
+    }).slice(-4);
+    if (!items.length) {
+      card.append(createElement('p', 'shareholder-bar-empty', '所选季度前暂无数据'));
+      return card;
+    }
+    var svg = createSvg('svg', {
+      class: 'shareholder-mini-bar-chart', viewBox: '0 0 360 220', role: 'img',
+      'aria-label': stock.name + '最近四季度股东人数条状图',
+    });
+    var maximum = Math.max.apply(null, items.map(function (item) { return Number(item.value); }));
+    var chartTop = 30;
+    var baseline = 172;
+    var chartHeight = baseline - chartTop;
+    var slotWidth = 82;
+    var barWidth = 52;
+    items.forEach(function (item, index) {
+      var value = Number(item.value);
+      var height = maximum > 0 ? value / maximum * chartHeight : 0;
+      var x = 18 + index * slotWidth + (slotWidth - barWidth) / 2;
+      var y = baseline - height;
+      var bar = createSvg('rect', {
+        x: x, y: y, width: barWidth, height: Math.max(1, height), rx: 5, class: 'shareholder-mini-bar',
+      });
+      var valueLabel = createSvg('text', {
+        x: x + barWidth / 2, y: Math.max(16, y - 7), class: 'shareholder-mini-bar-value', 'text-anchor': 'middle',
+      });
+      valueLabel.textContent = compactHolderValue(value);
+      var date = new Date(item.date + 'T00:00:00Z');
+      var quarterLabel = createSvg('text', {
+        x: x + barWidth / 2, y: 197, class: 'shareholder-mini-bar-quarter', 'text-anchor': 'middle',
+      });
+      quarterLabel.textContent = date.getUTCFullYear() + ' Q' + (Math.floor(date.getUTCMonth() / 3) + 1);
+      svg.append(bar, valueLabel, quarterLabel);
+    });
+    svg.append(createSvg('line', { x1: 18, y1: baseline, x2: 346, y2: baseline, class: 'shareholder-mini-bar-axis' }));
+    card.append(svg);
+    return card;
+  }
+
+  function renderShareholderBarCharts() {
+    var chart = chartById('filmCinemaShareholders');
+    var rows = (chart && chart.rows || []).slice();
+    var sortDirection = refs.shareholderBarsSort.value;
+    if (sortDirection !== 'default') {
+      rows.sort(function (left, right) {
+        var leftValue = shareholderValueAtQuarter(left, activeShareholderTableQuarterDate);
+        var rightValue = shareholderValueAtQuarter(right, activeShareholderTableQuarterDate);
+        var leftAvailable = Number.isFinite(leftValue);
+        var rightAvailable = Number.isFinite(rightValue);
+        if (leftAvailable !== rightAvailable) return leftAvailable ? -1 : 1;
+        if (!leftAvailable) return 0;
+        return sortDirection === 'ascending' ? leftValue - rightValue : rightValue - leftValue;
+      });
+    }
+    refs.shareholderBarsGrid.style.setProperty('--shareholder-bar-columns', refs.shareholderBarsColumns.value);
+    refs.shareholderBarsGrid.replaceChildren();
+    rows.forEach(function (stock) { refs.shareholderBarsGrid.append(renderShareholderMiniBarChart(stock)); });
+    refs.shareholderBarsMessage.textContent = formatDate(activeShareholderTableQuarterDate, '季度') +
+      '为截止季度 · 每只股票显示截至该季度的最近四期数据 · 共 ' + rows.length + ' 只';
+  }
+
+  function showShareholderBarCharts() {
+    refs.shareholderBarsSort.value = 'descending';
+    refs.shareholderBarsColumns.value = '4';
+    renderShareholderBarCharts();
+    refs.shareholderBarsDialog.showModal();
+    refs.shareholderBarsClose.focus({ preventScroll: true });
+  }
+
+  function renderShareholderTable(container, rows, interactive) {
+    var body = container.tagName === 'TBODY' ? container : document.createElement('tbody');
+    body.replaceChildren();
+    (rows || []).forEach(function (stock) {
+      var row = document.createElement('tr');
+      if (interactive) {
+        row.tabIndex = 0;
+        row.setAttribute('role', 'button');
+        row.title = '查看' + stock.name + '季度股东人数';
+      }
+      var stockCell = document.createElement('th');
+      stockCell.scope = 'row';
+      stockCell.append(createElement('strong', '', stock.name), createElement('span', '', stock.code));
+      row.append(stockCell);
+      row.append(createElement('td', stock.error || !hasNumericValue(stock.latestValue) ? 'shareholder-value-missing' : '', formatHolderCount(stock.latestValue)));
+      if (interactive) {
+        var change = shareholderQuarterChange(stock);
+        var changeClass = Number.isFinite(change.value)
+          ? change.value > 0 ? 'shareholder-change-up' : change.value < 0 ? 'shareholder-change-down' : ''
+          : 'shareholder-value-missing';
+        var changeCell = createElement('td', changeClass, formatHolderChange(change.value));
+        if (change.previousDate) changeCell.title = '相对 ' + change.previousDate + ' 季末';
+        row.append(changeCell);
+        row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatMarketCap(stock.marketCap)));
+      }
+      row.append(createElement('td', '', stock.latestDate || '--'));
+      if (interactive) row.append(createElement('td', '', stock.historySource || '--'));
+      var open = function () { if (interactive) showShareholderHistory(stock.code); };
+      row.addEventListener('click', open);
+      row.addEventListener('keydown', function (event) {
+        if (interactive && (event.key === 'Enter' || event.key === ' ')) {
+          event.preventDefault();
+          open();
+        }
+      });
+      body.append(row);
+    });
+    if (container.tagName !== 'TBODY') {
+      var table = createElement('table', 'shareholder-table');
+      var head = document.createElement('thead');
+      var headerRow = document.createElement('tr');
+      ['股票', '最新股东人数', '截止日期'].forEach(function (label) { headerRow.append(createElement('th', '', label)); });
+      head.append(headerRow);
+      table.append(head, body);
+      container.replaceChildren(table);
+    }
+  }
+
+  function showShareholderHistory(code) {
+    activeShareholderCode = code;
+    refs.shareholderRange.value = 'year5';
+    renderShareholderHistory();
+    refs.shareholderDialog.showModal();
+    refs.shareholderClose.focus({ preventScroll: true });
+  }
+
+  function renderShareholderHistory() {
+    var chart = chartById('filmCinemaShareholders');
+    var stock = chart && (chart.rows || []).find(function (row) { return row.code === activeShareholderCode; });
+    if (!stock) {
+      refs.shareholderTitle.textContent = '--';
+      refs.shareholderMessage.textContent = '未找到该股票。';
+      renderEmpty(refs.shareholderChart, '暂无可绘制的数据');
+      return;
+    }
+    refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
+    var historyChart = filteredChart({
+      id: 'filmCinemaShareholders', title: stock.name + '股东人数', unit: '户', decimals: 0, frequency: '季度',
+      items: stock.quarterlyItems || [], rightAxisItems: stock.priceItems || [],
+    }, refs.shareholderRange.value);
+    if (!historyChart.items.length) {
+      refs.shareholderMessage.textContent = stock.error || '当前时间跨度暂无季末股东人数。';
+      renderEmpty(refs.shareholderChart, '暂无季度数据');
+      return;
+    }
+    refs.shareholderMessage.textContent = RANGES[refs.shareholderRange.value].label + ' · ' + stock.historySource + ' · 共 ' + historyChart.items.length + ' 个季度';
+    renderLineChart(refs.shareholderChart, historyChart);
+  }
+
   function showCompare() {
-    var ids = activeChartIds();
+    var ids = activeChartIds().filter(function (id) {
+      var chart = chartById(id);
+      return !(chart && chart.chartType === 'stockTable');
+    });
     refs.compareFirst.replaceChildren();
     refs.compareSecond.replaceChildren();
     ids.forEach(function (id) {
@@ -1775,6 +2181,21 @@
     document.querySelector('#overallCompareRunButton').addEventListener('click', renderComparison);
     refs.compareRange.addEventListener('change', renderComparison);
     refs.detailRange.addEventListener('change', renderDetail);
+    refs.shareholderSortButton.addEventListener('click', function () { toggleShareholderSort('count'); });
+    refs.shareholderChangeSortButton.addEventListener('click', function () { toggleShareholderSort('change'); });
+    refs.shareholderMarketCapSortButton.addEventListener('click', function () { toggleShareholderSort('marketCap'); });
+    refs.shareholderTableQuarter.addEventListener('change', function () {
+      activeShareholderTableQuarterDate = refs.shareholderTableQuarter.value;
+      renderDetail();
+    });
+    refs.shareholderTablePreviousQuarter.addEventListener('click', function () { moveShareholderTableQuarter(-1); });
+    refs.shareholderTableNextQuarter.addEventListener('click', function () { moveShareholderTableQuarter(1); });
+    refs.shareholderBarChartsButton.addEventListener('click', showShareholderBarCharts);
+    refs.shareholderBarsSort.addEventListener('change', renderShareholderBarCharts);
+    refs.shareholderBarsColumns.addEventListener('change', renderShareholderBarCharts);
+    refs.shareholderRange.addEventListener('change', function () {
+      renderShareholderHistory();
+    });
     document.querySelector('#overallAddGroupButton').addEventListener('click', addGroup);
     refs.newGroupName.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') addGroup();
@@ -1801,6 +2222,12 @@
         document.querySelector('#' + button.dataset.close).close();
       });
     });
+    refs.shareholderDialog.addEventListener('click', function (event) {
+      if (event.target === refs.shareholderDialog) refs.shareholderDialog.close();
+    });
+    refs.shareholderBarsDialog.addEventListener('click', function (event) {
+      if (event.target === refs.shareholderBarsDialog) refs.shareholderBarsDialog.close();
+    });
   }
 
   function applyRuntimeCapabilities() {
@@ -1818,6 +2245,11 @@
     refs.columns.value = String(config.chartsPerRow);
     populateRangeSelect(refs.compareRange, refs.range.value);
     populateRangeSelect(refs.detailRange, refs.range.value);
+    refs.shareholderRange.replaceChildren();
+    Object.keys(RANGES).filter(function (key) { return key.indexOf('year') === 0; }).forEach(function (key) {
+      refs.shareholderRange.append(new Option(RANGES[key].label, key));
+    });
+    refs.shareholderRange.value = 'year5';
     bindEvents();
     syncView();
     loadData(false);

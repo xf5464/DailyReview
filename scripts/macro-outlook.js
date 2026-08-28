@@ -10,6 +10,7 @@ const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
 const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
 const TONGHUASHUN_SENTIMENT_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/883404';
 const TONGHUASHUN_SENTIMENT_LINE_BASE_URL = 'https://d.10jqka.com.cn/v4/line/bk_883404/00';
+const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/881274/';
 const ENGLISH_MONTH_NUMBERS = Object.freeze({
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
   july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
@@ -358,6 +359,16 @@ const CHART_METADATA = {
     sourceName: '同花顺官方行情 / 883404',
     sourceUrl: TONGHUASHUN_SENTIMENT_PAGE_URL,
   },
+  filmCinemaShareholders: {
+    id: 'filmCinemaShareholders',
+    title: '影视院线成分股股东人数',
+    unit: '只',
+    decimals: 0,
+    frequency: '最新披露',
+    chartType: 'stockTable',
+    sourceName: '同花顺影视院线（881274）/ 同花顺 F10',
+    sourceUrl: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
+  },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
     title: '纳斯达克100市盈率（NDX）',
@@ -516,6 +527,128 @@ function parseFredCsv(text, seriesId) {
 function mergeDatedItems(...itemGroups) {
   return [...new Map(itemGroups.flat().map((item) => [item.date, item])).values()]
     .sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function decodeHtmlText(value) {
+  return String(value ?? '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;|&#160;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;|&#34;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .trim();
+}
+
+function parseTonghuashunIndustryConstituents(text) {
+  const source = String(text ?? '');
+  const stocks = new Map();
+  const pattern = /<a\b[^>]*href=["'][^"']*stockpage\.10jqka\.com\.cn\/(\d{6})\/?["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = pattern.exec(source)) !== null) {
+    const code = match[1];
+    const label = decodeHtmlText(match[2]);
+    const current = stocks.get(code) || { code, name: code };
+    if (label && label !== code) current.name = label;
+    stocks.set(code, current);
+  }
+  const rowPattern = /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi;
+  while ((match = rowPattern.exec(source)) !== null) {
+    const codeMatch = match[1].match(/stockpage\.10jqka\.com\.cn\/(\d{6})/i);
+    if (!codeMatch || !stocks.has(codeMatch[1])) continue;
+    const cells = [...match[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map((cell) => decodeHtmlText(cell[1]));
+    const marketCapMatch = String(cells[12] || '').replace(/,/g, '').match(/^([\d.]+)亿$/);
+    stocks.get(codeMatch[1]).marketCap = marketCapMatch ? Number(marketCapMatch[1]) : null;
+  }
+  return [...stocks.values()];
+}
+
+function parseTonghuashunHolderHistory(text) {
+  const source = String(text ?? '');
+  const dateMatch = source.match(/\bvar\s+lyear\s*=\s*(\[[\s\S]*?\])\s*;/);
+  const valueMatch = source.match(/\bvar\s+lholder\s*=\s*(\[[\s\S]*?\])\s*;/);
+  if (!dateMatch || !valueMatch) throw new Error('同花顺 F10 未返回股东人数历史');
+  const dates = JSON.parse(dateMatch[1]);
+  const values = JSON.parse(valueMatch[1]);
+  const items = [];
+  for (let index = 0; index < Math.min(dates.length, values.length); index += 1) {
+    const date = normalizeObservationDate(dates[index]);
+    const value = Number(String(values[index]).replace(/,/g, ''));
+    if (date && Number.isFinite(value) && value >= 0) items.push({ date, value });
+  }
+  return [...new Map(items.map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function parseEastmoneyHolderHistory(text) {
+  const payload = JSON.parse(String(text ?? ''));
+  if (payload?.success !== true || !Array.isArray(payload?.result?.data)) {
+    throw new Error(payload?.message || '东方财富未返回股东人数历史');
+  }
+  return [...new Map(payload.result.data.map((row) => ({
+    date: normalizeObservationDate(String(row.END_DATE ?? '').slice(0, 10)),
+    value: Number(row.HOLDER_NUM),
+  })).filter((item) => item.date && Number.isFinite(item.value) && item.value >= 0)
+    .map((item) => [item.date, item])).values()]
+    .sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function quarterlyHolderItems(items) {
+  return items.filter((item) => /-(?:03-31|06-30|09-30|12-31)$/.test(item.date));
+}
+
+function buildTonghuashunHolderUrl(code) {
+  return `https://basic.10jqka.com.cn/mobile/${code}/holder.html`;
+}
+
+function buildTonghuashunWeeklyPriceUrl(code) {
+  return `https://d.10jqka.com.cn/v6/line/hs_${code}/11/last.js`;
+}
+
+function parseTonghuashunWeeklyPriceHistory(text) {
+  const match = String(text ?? '').match(/\((\{[\s\S]*\})\)\s*;?\s*$/);
+  if (!match) throw new Error('同花顺未返回个股月线历史');
+  const payload = JSON.parse(match[1]);
+  return String(payload.data || '').split(';').map((record) => {
+    const fields = record.split(',');
+    const rawDate = fields[0];
+    const date = /^\d{8}$/.test(rawDate)
+      ? `${rawDate.slice(0, 4)}-${rawDate.slice(4, 6)}-${rawDate.slice(6, 8)}` : null;
+    const value = Number(fields[4]);
+    return date && Number.isFinite(value) && value > 0 ? { date, value } : null;
+  }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function attachQuarterlyPrices(holderItems, priceItems) {
+  return holderItems.map((holderItem) => {
+    const priceItem = priceItems.filter((item) => item.date <= holderItem.date).at(-1);
+    return priceItem ? { ...holderItem, priceValue: priceItem.value, priceDate: priceItem.date } : holderItem;
+  });
+}
+
+function buildEastmoneyHolderUrl(code) {
+  const parameters = new URLSearchParams({
+    reportName: 'RPT_HOLDERNUM_DET',
+    columns: 'SECURITY_CODE,SECURITY_NAME_ABBR,END_DATE,HOLDER_NUM,HOLD_NOTICE_DATE',
+    filter: `(SECURITY_CODE="${code}")`,
+    pageNumber: '1', pageSize: '500', sortColumns: 'END_DATE', sortTypes: '-1', source: 'WEB', client: 'WEB',
+  });
+  return `https://datacenter-web.eastmoney.com/api/data/v1/get?${parameters}`;
+}
+
+async function mapWithConcurrency(values, concurrency, mapper) {
+  const results = new Array(values.length);
+  let nextIndex = 0;
+  async function worker() {
+    while (nextIndex < values.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await mapper(values[index], index);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, values.length) }, worker));
+  return results;
 }
 
 function parseCboeVixCsv(text) {
@@ -1068,7 +1201,7 @@ function parseNasdaq100PeSnapshot(text = NASDAQ_100_PE_MONTHLY_CSV) {
   }).filter(Boolean);
 }
 
-async function fetchCsv(url, fetchImpl, extraHeaders = {}) {
+async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8') {
   let lastError;
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     const options = {
@@ -1087,7 +1220,9 @@ async function fetchCsv(url, fetchImpl, extraHeaders = {}) {
       if (!response?.ok) {
         throw new Error('数据源请求失败（HTTP ' + (response?.status ?? '--') + '）');
       }
-      const text = await response.text();
+      const text = encoding !== 'utf-8' && typeof response.arrayBuffer === 'function'
+        ? new TextDecoder(encoding).decode(await response.arrayBuffer())
+        : await response.text();
       if (!text.trim()) throw new Error('数据源返回空内容');
       return text;
     } catch (error) {
@@ -1168,9 +1303,10 @@ function filterRecentItems(items, range, frequency = 'daily') {
 
 async function loadChart(metadata, loader) {
   try {
-    const items = await loader();
+    const loaded = await loader();
+    const items = Array.isArray(loaded) ? loaded : loaded.items;
     if (items.length === 0) throw new Error('最近 12 个月暂无可用数据');
-    return { ...metadata, items, error: null };
+    return { ...metadata, ...(Array.isArray(loaded) ? {} : loaded), items, error: null };
   } catch (error) {
     return {
       ...metadata,
@@ -1403,6 +1539,59 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    filmCinemaShareholders: () => loadChart(CHART_METADATA.filmCinemaShareholders, async () => {
+      const industryText = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
+        Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
+      }, 'gb18030');
+      const constituents = parseTonghuashunIndustryConstituents(industryText);
+      if (!constituents.length) throw new Error('同花顺影视院线页面未返回成分股');
+      const rows = await mapWithConcurrency(constituents, 5, async (stock) => {
+        let history = [];
+        let historySource = '同花顺 F10';
+        let error = null;
+        let tonghuashunError = null;
+        const pricePromise = fetchCsv(buildTonghuashunWeeklyPriceUrl(stock.code), fetchImpl, {
+          Accept: 'application/javascript,text/javascript,*/*',
+          Referer: `https://stockpage.10jqka.com.cn/${stock.code}/`,
+        }).then(parseTonghuashunWeeklyPriceHistory).catch(() => []);
+        try {
+          const holderText = await fetchCsv(buildTonghuashunHolderUrl(stock.code), fetchImpl, {
+            Accept: 'text/html', Referer: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
+          });
+          history = parseTonghuashunHolderHistory(holderText);
+        } catch (caughtError) {
+          tonghuashunError = caughtError;
+        }
+        try {
+          const supplementalText = await fetchCsv(buildEastmoneyHolderUrl(stock.code), fetchImpl, {
+            Accept: 'application/json', Referer: 'https://data.eastmoney.com/',
+          });
+          const supplementalHistory = parseEastmoneyHolderHistory(supplementalText);
+          if (history.length) {
+            history = mergeDatedItems(supplementalHistory, history);
+            historySource = '同花顺 F10 / 东方财富历史补充';
+          } else {
+            history = supplementalHistory;
+            historySource = '东方财富公开数据（回退）';
+          }
+        } catch (supplementalError) {
+          if (!history.length) {
+            error = `${tonghuashunError instanceof Error ? tonghuashunError.message : tonghuashunError}；备用源：${supplementalError instanceof Error ? supplementalError.message : supplementalError}`;
+          }
+        }
+        const latest = history.at(-1) || null;
+        const priceItems = await pricePromise;
+        return {
+          ...stock, latestDate: latest?.date || null, latestValue: latest?.value ?? null,
+          quarterlyItems: attachQuarterlyPrices(quarterlyHolderItems(history), priceItems),
+          priceItems, historySource, error,
+        };
+      });
+      const availableRows = rows.filter((row) => Number.isFinite(row.latestValue));
+      if (!availableRows.length) throw new Error('影视院线成分股股东人数暂不可用');
+      const latestDate = availableRows.map((row) => row.latestDate).sort().at(-1);
+      return { items: [{ date: latestDate, value: availableRows.length }], rows };
+    }),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
       filterRecentItems(parseNasdaq100PeSnapshot(), range, 'monthly')
     )),
@@ -1498,6 +1687,9 @@ module.exports = {
   buildAShareMarginBalanceUrl,
   buildSohuIndexHistoryUrl,
   buildTonghuashunSentimentUrl,
+  buildTonghuashunHolderUrl,
+  buildTonghuashunWeeklyPriceUrl,
+  buildEastmoneyHolderUrl,
   calculateDxy,
   CBOE_VIX_HISTORY_URL,
   BEA_NEWS_RSS_URL,
@@ -1524,6 +1716,12 @@ module.exports = {
   calculateTonghuashunActiveMarketValue,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
+  parseTonghuashunIndustryConstituents,
+  parseTonghuashunHolderHistory,
+  parseTonghuashunWeeklyPriceHistory,
+  attachQuarterlyPrices,
+  parseEastmoneyHolderHistory,
+  quarterlyHolderItems,
   parseNasdaq100PeSnapshot,
   queryMacroOutlook,
 };

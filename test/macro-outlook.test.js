@@ -14,6 +14,8 @@ const {
   normalizeChartIds,
   buildDbnomicsIsmUrl,
   buildTonghuashunSentimentUrl,
+  buildEastmoneyHolderUrl,
+  buildTonghuashunWeeklyPriceUrl,
   buildImfCommodityUrl,
   parseCsv,
   parseFredCsv,
@@ -31,6 +33,12 @@ const {
   calculateTonghuashunActiveMarketValue,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
+  parseTonghuashunIndustryConstituents,
+  parseTonghuashunHolderHistory,
+  parseTonghuashunWeeklyPriceHistory,
+  attachQuarterlyPrices,
+  parseEastmoneyHolderHistory,
+  quarterlyHolderItems,
   parseNasdaq100PeSnapshot,
   findLatestWorldGoldCouncilReport,
   findWorldGoldCouncilCentralBankChartUrl,
@@ -68,6 +76,21 @@ const BEA_PCE_RELEASE_HTML = [
   '<p>From the same month one year ago, the <strong>PCE price index for July increased 3.7 percent</strong>.',
   ' Excluding food and energy, the PCE price index increased 3.3 percent.</p>',
 ].join('');
+const FILM_CINEMA_HTML = [
+  '<a href="https://stockpage.10jqka.com.cn/600088/">600088</a>',
+  '<a href="https://stockpage.10jqka.com.cn/600088/">中视传媒</a>',
+  '<a href="https://stockpage.10jqka.com.cn/600977/">600977</a>',
+  '<a href="https://stockpage.10jqka.com.cn/600977/">中国电影</a>',
+].join('');
+const TONGHUASHUN_HOLDER_HTML = [
+  'var lholder = [12000, 11000, 10000];',
+  'var lyear = ["2025-12-31", "2026-03-31", "2026-06-30"];',
+].join('');
+const EASTMONEY_HOLDER_JSON = JSON.stringify({ success: true, result: { data: [
+  { END_DATE: '2024-12-31 00:00:00', HOLDER_NUM: 13000 },
+] } });
+const TONGHUASHUN_WEEKLY_PRICE = 'quotebridge_v6_line_hs_600088_11_last({' +
+  '"data":"20251231,10,11,9,10.50,1,2;20260331,11,12,10,11.80,1,2;20260630,12,13,11,12.60,1,2"})';
 
 function makeDbnomicsPayload(datasetCode, seriesCode, values) {
   const periods = ['2026-06', '2026-07', '2026-08'].slice(0, values.length);
@@ -180,6 +203,32 @@ test('ISM PMI snapshot parser reads only the latest twelve-month table', () => {
     { date: '2025-11-01', value: 48.2 },
     { date: '2025-12-01', value: 47.9 },
   ]);
+});
+
+test('film and cinema constituent and shareholder parsers normalize public source data', () => {
+  assert.deepEqual(parseTonghuashunIndustryConstituents(FILM_CINEMA_HTML), [
+    { code: '600088', name: '中视传媒' },
+    { code: '600977', name: '中国电影' },
+  ]);
+  const history = parseTonghuashunHolderHistory(TONGHUASHUN_HOLDER_HTML);
+  assert.deepEqual(history.at(-1), { date: '2026-06-30', value: 10000 });
+  assert.deepEqual(quarterlyHolderItems(history), history);
+  assert.deepEqual(parseEastmoneyHolderHistory(JSON.stringify({ success: true, result: { data: [
+    { END_DATE: '2026-03-31 00:00:00', HOLDER_NUM: 11000 },
+  ] } })), [{ date: '2026-03-31', value: 11000 }]);
+  assert.match(buildEastmoneyHolderUrl('600088'), /RPT_HOLDERNUM_DET/);
+  assert.match(buildTonghuashunWeeklyPriceUrl('600088'), /hs_600088\/11\/last\.js/);
+  const priceItems = parseTonghuashunWeeklyPriceHistory(TONGHUASHUN_WEEKLY_PRICE);
+  assert.deepEqual(priceItems.at(-1), { date: '2026-06-30', value: 12.6 });
+  assert.deepEqual(attachQuarterlyPrices(history, priceItems).at(-1), {
+    date: '2026-06-30', value: 10000, priceValue: 12.6, priceDate: '2026-06-30',
+  });
+  const industryRow = '<tr>' + [
+    '1', '<a href="http://stockpage.10jqka.com.cn/600088/">600088</a>',
+    '<a href="http://stockpage.10jqka.com.cn/600088">中视传媒</a>',
+    '11.55', '0', '0', '0', '0', '0', '0', '0.28亿', '3.98亿', '45.94亿', '16.96',
+  ].map((value) => '<td>' + value + '</td>').join('') + '</tr>';
+  assert.equal(parseTonghuashunIndustryConstituents(industryRow)[0].marketCap, 45.94);
 });
 
 test('official ISM snapshot covers the four manufacturing indexes through July 2026', () => {
@@ -392,7 +441,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns thirty-three independent chart payloads', async () => {
+test('macro outlook query returns thirty-four independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -473,6 +522,10 @@ test('macro outlook query returns thirty-three independent chart payloads', asyn
         : url.includes('RPTA_WEB_MARGIN_DAILYTRADE') ? aShareMarginData
         : url.includes('code=zs_000001') ? shanghaiIndexData
         : url.includes('code=zs_399106') ? shenzhenIndexData
+        : url.includes('/11/last.js') ? TONGHUASHUN_WEEKLY_PRICE
+        : url.includes('RPT_HOLDERNUM_DET') ? EASTMONEY_HOLDER_JSON
+        : url.includes('/thshy/detail/code/881274') ? FILM_CINEMA_HTML
+        : url.includes('basic.10jqka.com.cn/mobile/') ? TONGHUASHUN_HOLDER_HTML
         : url.includes('d.10jqka.com.cn/v4/line/bk_883404/00') ? aShareSentimentData
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : ismPath ? ismData[ismPath]
@@ -483,11 +536,11 @@ test('macro outlook query returns thirty-three independent chart payloads', asyn
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(33).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(34).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -504,6 +557,7 @@ test('macro outlook query returns thirty-three independent chart payloads', asyn
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
+  assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').rows.length, 2);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').items.at(-1).value, 7780.45);
@@ -563,6 +617,18 @@ test('one failed source does not prevent the remaining charts from loading', asy
     if (url.includes('d.10jqka.com.cn/v4/line/bk_883404/00')) {
       return { ok: true, status: 200, text: async () => 'quotebridge_v4_line_bk_883404_00_last({' +
         '"year":{"2026":1},"data":"20260820,890.1,905.0,888.0,901.2,1,2,,,,0"})' };
+    }
+    if (url.includes('RPT_HOLDERNUM_DET')) {
+      return { ok: true, status: 200, text: async () => EASTMONEY_HOLDER_JSON };
+    }
+    if (url.includes('/11/last.js')) {
+      return { ok: true, status: 200, text: async () => TONGHUASHUN_WEEKLY_PRICE };
+    }
+    if (url.includes('/thshy/detail/code/881274')) {
+      return { ok: true, status: 200, text: async () => FILM_CINEMA_HTML };
+    }
+    if (url.includes('basic.10jqka.com.cn/mobile/')) {
+      return { ok: true, status: 200, text: async () => TONGHUASHUN_HOLDER_HTML };
     }
     const ismSeries = [
       ['/pmi?', 'pmi', 'pm', [48.5, 49.2, 10.3]],
@@ -626,6 +692,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').error, null);

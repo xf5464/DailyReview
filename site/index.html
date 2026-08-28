@@ -138,15 +138,63 @@
           <button class="dialog-close-button" type="button" id="overallDetailCloseButton" data-close="overallDetailDialog" aria-label="关闭">×</button>
         </div>
         <div class="overall-compare-controls">
-          <label>时间<select class="level-select" id="overallDetailRangeSelect"></select></label>
+          <label id="overallDetailRangeControl">时间<select class="level-select" id="overallDetailRangeSelect"></select></label>
           <a class="secondary-button" id="overallDetailSourceLink" href="#" target="_blank" rel="noopener noreferrer">查看数据源</a>
         </div>
         <p class="overall-config-message" id="overallDetailMessage" role="status"></p>
-        <div class="overall-detail-extremes" aria-live="polite">
+        <div class="overall-detail-extremes" id="overallDetailExtremes" aria-live="polite">
           <div class="overall-detail-extreme overall-detail-high"><span>区间最高</span><strong id="overallDetailHighValue">--</strong><time id="overallDetailHighDate">--</time></div>
           <div class="overall-detail-extreme overall-detail-low"><span>区间最低</span><strong id="overallDetailLowValue">--</strong><time id="overallDetailLowDate">--</time></div>
         </div>
+        <div class="shareholder-table-wrap shareholder-detail-table-wrap" id="overallDetailStockTableWrap" hidden>
+          <div class="shareholder-table-quarter-browser">
+            <button class="secondary-button" type="button" id="shareholderTablePreviousQuarterButton">← 上一季度</button>
+            <label>选择季度<select class="level-select" id="shareholderTableQuarterSelect"></select></label>
+            <button class="secondary-button" type="button" id="shareholderTableNextQuarterButton">下一季度 →</button>
+            <button class="secondary-button" type="button" id="shareholderBarChartsButton">查看四季度条状图</button>
+          </div>
+          <table class="shareholder-table">
+            <thead><tr><th>股票</th><th id="shareholderCountSortHeader" aria-sort="none"><button class="shareholder-sort-button" type="button" id="shareholderCountSortButton">股东人数 <span aria-hidden="true">↕</span></button></th><th id="shareholderChangeSortHeader" aria-sort="none"><button class="shareholder-sort-button" type="button" id="shareholderChangeSortButton" title="所选季度与上一季度相比">较上季度 <span aria-hidden="true">↕</span></button></th><th id="shareholderMarketCapSortHeader" aria-sort="none"><button class="shareholder-sort-button" type="button" id="shareholderMarketCapSortButton" title="同花顺行业页当前流通市值">流通市值 <span aria-hidden="true">↕</span></button></th><th>季度</th><th>来源</th></tr></thead>
+            <tbody id="overallDetailStockTableBody"></tbody>
+          </table>
+        </div>
         <svg class="overall-detail-chart overall-chart" id="overallDetailChart" role="img" aria-label="单指标详情图"></svg>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog shareholder-history-dialog" id="shareholderHistoryDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">季度股东人数</p><h2 id="shareholderHistoryTitle">--</h2></div>
+          <button class="dialog-close-button" type="button" id="shareholderHistoryCloseButton" data-close="shareholderHistoryDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>时间跨度<select class="level-select" id="shareholderHistoryRangeSelect"></select></label>
+        </div>
+        <p class="overall-config-message" id="shareholderHistoryMessage" role="status"></p>
+        <svg class="overall-detail-chart overall-chart" id="shareholderHistoryChart" role="img" aria-label="股票季度股东人数图"></svg>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog shareholder-bars-dialog" id="shareholderBarChartsDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">影视院线成分股</p><h2>最近四季度股东人数</h2></div>
+          <button class="dialog-close-button" type="button" id="shareholderBarChartsCloseButton" data-close="shareholderBarChartsDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls shareholder-bars-controls">
+          <label>排序<select class="level-select" id="shareholderBarChartsSortSelect">
+            <option value="default">成分股顺序</option>
+            <option value="descending" selected>股东人数从高到低</option>
+            <option value="ascending">股东人数从低到高</option>
+          </select></label>
+          <label>每行图表<select class="level-select" id="shareholderBarChartsColumnsSelect">
+            <option value="1">1 张</option><option value="2">2 张</option><option value="3">3 张</option>
+            <option value="4" selected>4 张</option><option value="5">5 张</option>
+          </select></label>
+        </div>
+        <p class="overall-config-message" id="shareholderBarChartsMessage" role="status"></p>
+        <div class="shareholder-bars-grid" id="shareholderBarChartsGrid"></div>
       </div>
     </dialog>
 
