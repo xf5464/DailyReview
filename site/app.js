@@ -1370,7 +1370,7 @@
     var stockTableChart = sourceChart && sourceChart.chartType === 'stockTable';
     refs.detailRangeControl.hidden = Boolean(stockTableChart);
     refs.detailExtremes.hidden = Boolean(stockTableChart);
-    refs.detailChart.hidden = Boolean(stockTableChart);
+    refs.detailChart.toggleAttribute('hidden', Boolean(stockTableChart));
     refs.detailStockTableWrap.hidden = !stockTableChart;
     if (stockTableChart) {
       var rows = sourceChart.rows || [];
@@ -1622,7 +1622,6 @@
         row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatMarketCap(stock.marketCap)));
       }
       row.append(createElement('td', '', stock.latestDate || '--'));
-      if (interactive) row.append(createElement('td', '', stock.historySource || '--'));
       var open = function () { if (interactive) showShareholderHistory(stock.code); };
       row.addEventListener('click', open);
       row.addEventListener('keydown', function (event) {
