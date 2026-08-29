@@ -206,7 +206,7 @@ npm run desktop:dist  # 生成 Windows NSIS 安装程序
 `.github/workflows/deploy-pages.yml` 在以下条件执行：
 
 - 推送到 `main`。
-- 北京时间每周一至周六 06:15 定时刷新。
+- 北京时间每周一至周六 06:15 和 18:00 定时刷新。
 - GitHub Actions 页面手动运行。
 
 工作流依次执行测试、构建、上传 Pages artifact 和部署。线上地址为 `https://xf5464.github.io/DailyReview/`。
