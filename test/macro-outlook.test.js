@@ -33,6 +33,8 @@ const {
   calculateTonghuashunActiveMarketValue,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
+  parseTonghuashunNewAccountHistory,
+  parseTonghuashunNewAccountArticleUrls,
   parseTonghuashunIndustryConstituents,
   parseTonghuashunHolderHistory,
   parseTonghuashunWeeklyPriceHistory,
@@ -75,6 +77,11 @@ const BEA_PCE_RELEASE_HTML = [
   '<p>From the preceding month, the PCE price index for July increased 0.2 percent.</p>',
   '<p>From the same month one year ago, the <strong>PCE price index for July increased 3.7 percent</strong>.',
   ' Excluding food and energy, the PCE price index increased 3.3 percent.</p>',
+].join('');
+const TONGHUASHUN_NEW_ACCOUNT_HTML = [
+  '<p>从今年月度数据来看，1月至10月，A股新开户总数分别为157.00万户、283.59万户、306.55万户、192.44万户、155.56万户、164.64万户、196.36万户、265.03万户、293.72万户、230.99万户。</p>',
+  '<p>2025年12月上交所A股新开户259.67万户，较11月的238.14万户环比上升9.04%。</p>',
+  '<p>具体来看今年的月度数据，2026年1月至6月，A股新开户总数分别为491.58万户、252.3万户、460.14万户、249.13万户、276.53万户、286.46万户，2026年7月A股新开户数为265.54万户。</p>',
 ].join('');
 const FILM_CINEMA_HTML = [
   '<a href="https://stockpage.10jqka.com.cn/600088/">600088</a>',
@@ -300,6 +307,18 @@ test('Tonghuashun sentiment parser reads official 883404 daily closes and years'
   ]);
 });
 
+test('Tonghuashun new-account parser reads monthly lists, single months, and news links', () => {
+  const items = parseTonghuashunNewAccountHistory(TONGHUASHUN_NEW_ACCOUNT_HTML);
+  assert.equal(items.find((item) => item.date === '2025-01-01').value, 157);
+  assert.equal(items.find((item) => item.date === '2025-11-01').value, 238.14);
+  assert.equal(items.find((item) => item.date === '2025-12-01').value, 259.67);
+  assert.equal(items.find((item) => item.date === '2026-07-01').value, 265.54);
+  assert.deepEqual(parseTonghuashunNewAccountArticleUrls([
+    '<a href="http://stock.10jqka.com.cn/20260804/c678670551.shtml">A股7月新开户数出炉</a>',
+    '<a href="https://news.10jqka.com.cn/20260804/c123.shtml">其他新闻</a>',
+  ].join('')), ['https://stock.10jqka.com.cn/20260804/c678670551.shtml']);
+});
+
 test('Treasury debt parser converts daily dollars to trillions', () => {
   const rows = parseTreasuryDebt(JSON.stringify({ data: [
     { record_date: '2026-08-20', tot_pub_debt_out_amt: '40033256786764.37' },
@@ -441,7 +460,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns thirty-four independent chart payloads', async () => {
+test('macro outlook query returns thirty-five independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -527,6 +546,8 @@ test('macro outlook query returns thirty-four independent chart payloads', async
         : url.includes('/thshy/detail/code/881274') ? FILM_CINEMA_HTML
         : url.includes('basic.10jqka.com.cn/mobile/') ? TONGHUASHUN_HOLDER_HTML
         : url.includes('d.10jqka.com.cn/v4/line/bk_883404/00') ? aShareSentimentData
+        : url.includes('10jqka.com.cn/today_list') ? '<html></html>'
+        : /10jqka\.com\.cn\/20\d{6}\/c\d+\.shtml/.test(url) ? TONGHUASHUN_NEW_ACCOUNT_HTML
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : ismPath ? ismData[ismPath]
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
@@ -536,11 +557,11 @@ test('macro outlook query returns thirty-four independent chart payloads', async
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'filmCinemaShareholders', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(34).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(35).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -557,6 +578,7 @@ test('macro outlook query returns thirty-four independent chart payloads', async
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').items.at(-1).value, 265.54);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').rows.length, 2);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
@@ -617,6 +639,12 @@ test('one failed source does not prevent the remaining charts from loading', asy
     if (url.includes('d.10jqka.com.cn/v4/line/bk_883404/00')) {
       return { ok: true, status: 200, text: async () => 'quotebridge_v4_line_bk_883404_00_last({' +
         '"year":{"2026":1},"data":"20260820,890.1,905.0,888.0,901.2,1,2,,,,0"})' };
+    }
+    if (url.includes('10jqka.com.cn/today_list')) {
+      return { ok: true, status: 200, text: async () => '<html></html>' };
+    }
+    if (/10jqka\.com\.cn\/20\d{6}\/c\d+\.shtml/.test(url)) {
+      return { ok: true, status: 200, text: async () => TONGHUASHUN_NEW_ACCOUNT_HTML };
     }
     if (url.includes('RPT_HOLDERNUM_DET')) {
       return { ok: true, status: 200, text: async () => EASTMONEY_HOLDER_JSON };
@@ -692,6 +720,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').error, null);

@@ -10,6 +10,13 @@ const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
 const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
 const TONGHUASHUN_SENTIMENT_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/883404';
 const TONGHUASHUN_SENTIMENT_LINE_BASE_URL = 'https://d.10jqka.com.cn/v4/line/bk_883404/00';
+const TONGHUASHUN_NEW_ACCOUNT_SOURCE_URL = 'https://stock.10jqka.com.cn/20260804/c678670551.shtml';
+const TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS = Object.freeze([
+  'https://stock.10jqka.com.cn/20251105/c672257388.shtml',
+  'https://news.10jqka.com.cn/20260106/c673798723.shtml',
+  TONGHUASHUN_NEW_ACCOUNT_SOURCE_URL,
+]);
+const TONGHUASHUN_TODAY_LIST_URL = 'https://news.10jqka.com.cn/today_list/';
 const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/881274/';
 const ENGLISH_MONTH_NUMBERS = Object.freeze({
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
@@ -359,6 +366,15 @@ const CHART_METADATA = {
     sourceName: '同花顺官方行情 / 883404',
     sourceUrl: TONGHUASHUN_SENTIMENT_PAGE_URL,
   },
+  aShareNewAccountsThs: {
+    id: 'aShareNewAccountsThs',
+    title: 'A股每月新增开户数',
+    unit: '万户',
+    decimals: 2,
+    frequency: '月度',
+    sourceName: '同花顺财经 / 上交所披露',
+    sourceUrl: TONGHUASHUN_NEW_ACCOUNT_SOURCE_URL,
+  },
   filmCinemaShareholders: {
     id: 'filmCinemaShareholders',
     title: '影视院线成分股股东人数',
@@ -527,6 +543,67 @@ function parseFredCsv(text, seriesId) {
 function mergeDatedItems(...itemGroups) {
   return [...new Map(itemGroups.flat().map((item) => [item.date, item])).values()]
     .sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function parseTonghuashunNewAccountHistory(text) {
+  const plainText = String(text ?? '')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;|&#160;/gi, ' ')
+    .replace(/&quot;|&#34;/gi, '"')
+    .replace(/\s+/g, ' ');
+  const items = new Map();
+  const put = (year, month, value) => {
+    const numericYear = Number(year);
+    const numericMonth = Number(month);
+    const numericValue = Number(value);
+    if (numericYear < 2014 || numericYear > 2100 || numericMonth < 1 || numericMonth > 12 ||
+        !Number.isFinite(numericValue) || numericValue <= 0 || numericValue > 2_000) return;
+    const date = `${numericYear}-${String(numericMonth).padStart(2, '0')}-01`;
+    items.set(date, { date, value: numericValue });
+  };
+
+  for (const match of plainText.matchAll(/(20\d{2})年(\d{1,2})月[^。；]{0,45}?A股[^。；]{0,20}?(?:新开户|新增开户)[^。；]{0,15}?([\d.]+)万户/g)) {
+    put(match[1], match[2], match[3]);
+  }
+  for (const match of plainText.matchAll(/(20\d{2})年(\d{1,2})月[（(]([\d.]+)万户[）)]/g)) {
+    put(match[1], match[2], match[3]);
+  }
+  for (const match of plainText.matchAll(/(20\d{2})年(\d{1,2})月至(\d{1,2})月[^。；]{0,50}?分别为([^。；]{10,260})/g)) {
+    const startMonth = Number(match[2]);
+    const endMonth = Number(match[3]);
+    const values = [...match[4].matchAll(/([\d.]+)万户/g)].map((valueMatch) => valueMatch[1]);
+    values.slice(0, endMonth - startMonth + 1).forEach((value, index) => put(match[1], startMonth + index, value));
+  }
+  for (const match of plainText.matchAll(/从今年[^。；]{0,30}?(\d{1,2})月至(\d{1,2})月[^。；]{0,50}?分别为([^。；]{10,260})/g)) {
+    const nearbyStart = Math.max(0, match.index - 500);
+    const nearby = plainText.slice(nearbyStart, match.index + match[0].length + 500);
+    const years = [...nearby.matchAll(/(20\d{2})年/g)].sort((left, right) => (
+      Math.abs((nearbyStart + left.index) - match.index) - Math.abs((nearbyStart + right.index) - match.index)
+    ));
+    const year = years[0]?.[1];
+    if (!year) continue;
+    const startMonth = Number(match[1]);
+    const endMonth = Number(match[2]);
+    const values = [...match[3].matchAll(/([\d.]+)万户/g)].map((valueMatch) => valueMatch[1]);
+    values.slice(0, endMonth - startMonth + 1).forEach((value, index) => put(year, startMonth + index, value));
+  }
+  for (const match of plainText.matchAll(/(20\d{2})年(\d{1,2})月[^。；]{0,45}?A股[^。；]{0,55}?较(\d{1,2})月的([\d.]+)万户/g)) {
+    put(match[1], match[3], match[4]);
+  }
+  return [...items.values()].sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function parseTonghuashunNewAccountArticleUrls(text) {
+  const urls = [];
+  const linkPattern = /<a\b[^>]*href=["'](https?:\/\/(?:news|stock|field)\.10jqka\.com\.cn\/20\d{6}\/c\d+\.shtml)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = linkPattern.exec(String(text ?? ''))) !== null) {
+    const title = match[2].replace(/<[^>]+>/g, '').replace(/\s+/g, '');
+    if (/A股.*新开户|新开户.*A股/.test(title)) urls.push(match[1].replace(/^http:/, 'https:'));
+  }
+  return [...new Set(urls)];
 }
 
 function decodeHtmlText(value) {
@@ -1539,6 +1616,27 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    aShareNewAccountsThs: () => loadChart(CHART_METADATA.aShareNewAccountsThs, async () => {
+      const headers = { Accept: 'text/html', Referer: 'https://news.10jqka.com.cn/' };
+      const historyTexts = await Promise.all(TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS.map((url) => (
+        fetchCsv(url, fetchImpl, headers)
+      )));
+      let discoveredUrls = [];
+      try {
+        const listTexts = await Promise.all(Array.from({ length: 20 }, (_, index) => (
+          fetchCsv(index === 0 ? TONGHUASHUN_TODAY_LIST_URL : `${TONGHUASHUN_TODAY_LIST_URL}index_${index + 1}.shtml`, fetchImpl, headers)
+        )));
+        discoveredUrls = [...new Set(listTexts.flatMap(parseTonghuashunNewAccountArticleUrls))]
+          .filter((url) => !TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS.includes(url))
+          .slice(0, 10);
+      } catch {
+        // 当日新闻列表不可用时，仍使用同花顺历史汇总报道。
+      }
+      const recentResults = await Promise.allSettled(discoveredUrls.map((url) => fetchCsv(url, fetchImpl, headers)));
+      const recentTexts = recentResults.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+      const items = mergeDatedItems(...[...historyTexts, ...recentTexts].map(parseTonghuashunNewAccountHistory));
+      return filterRecentItems(items, range, 'monthly');
+    }),
     filmCinemaShareholders: () => loadChart(CHART_METADATA.filmCinemaShareholders, async () => {
       const industryText = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
         Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
@@ -1716,6 +1814,8 @@ module.exports = {
   calculateTonghuashunActiveMarketValue,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
+  parseTonghuashunNewAccountHistory,
+  parseTonghuashunNewAccountArticleUrls,
   parseTonghuashunIndustryConstituents,
   parseTonghuashunHolderHistory,
   parseTonghuashunWeeklyPriceHistory,
