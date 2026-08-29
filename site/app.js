@@ -1621,7 +1621,7 @@
         row.append(changeCell);
         row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatMarketCap(stock.marketCap)));
       }
-      row.append(createElement('td', '', stock.latestDate || '--'));
+      if (!interactive) row.append(createElement('td', '', stock.latestDate || '--'));
       var open = function () { if (interactive) showShareholderHistory(stock.code); };
       row.addEventListener('click', open);
       row.addEventListener('keydown', function (event) {
