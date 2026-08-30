@@ -8,6 +8,16 @@ const siteDirectory = path.join(projectRoot, 'site');
 const outputDirectory = path.join(projectRoot, 'dist');
 const dataDirectory = path.join(outputDirectory, 'data');
 const chartDataDirectory = path.join(dataDirectory, 'charts');
+const offlineDataDirectory = path.join(dataDirectory, 'offline');
+
+function contentHash(content) {
+  return crypto.createHash('sha256').update(content).digest('hex').slice(0, 16);
+}
+
+function writeJson(filePath, value) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(value) + '\n', 'utf8');
+}
 
 function addAssetVersions() {
   const indexPath = path.join(outputDirectory, 'index.html');
@@ -30,6 +40,7 @@ async function build() {
   addAssetVersions();
   fs.mkdirSync(dataDirectory, { recursive: true });
   fs.mkdirSync(chartDataDirectory, { recursive: true });
+  fs.mkdirSync(offlineDataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');
@@ -39,12 +50,34 @@ async function build() {
     throw new Error('No macro chart returned usable data; refusing to publish an empty site.');
   }
 
-  outlook.charts.forEach((chart) => {
-    fs.writeFileSync(
-      path.join(chartDataDirectory, `${chart.id}.json`),
-      JSON.stringify(chart) + '\n',
-      'utf8',
-    );
+  const offlineCharts = outlook.charts.map((chart) => {
+    writeJson(path.join(chartDataDirectory, `${chart.id}.json`), chart);
+    const chunksByYear = new Map();
+    chart.items.forEach((item) => {
+      const year = /^\d{4}/.test(item.date || '') ? item.date.slice(0, 4) : 'undated';
+      if (!chunksByYear.has(year)) chunksByYear.set(year, []);
+      chunksByYear.get(year).push(item);
+    });
+    const chunks = [...chunksByYear.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([year, items]) => {
+      const content = JSON.stringify(items) + '\n';
+      const hash = contentHash(content);
+      const relativePath = `offline/${chart.id}/items-${year}.${hash}.json`;
+      fs.mkdirSync(path.dirname(path.join(dataDirectory, relativePath)), { recursive: true });
+      fs.writeFileSync(path.join(dataDirectory, relativePath), content, 'utf8');
+      return { year, path: `data/${relativePath}`, hash, bytes: Buffer.byteLength(content) };
+    });
+    const { items, ...extras } = chart;
+    const extrasContent = JSON.stringify(extras) + '\n';
+    const extrasHash = contentHash(extrasContent);
+    const extrasRelativePath = `offline/${chart.id}/extras.${extrasHash}.json`;
+    fs.mkdirSync(path.dirname(path.join(dataDirectory, extrasRelativePath)), { recursive: true });
+    fs.writeFileSync(path.join(dataDirectory, extrasRelativePath), extrasContent, 'utf8');
+    return {
+      id: chart.id,
+      signature: contentHash(extrasContent + chunks.map((chunk) => chunk.hash).join(':')),
+      extras: { path: `data/${extrasRelativePath}`, hash: extrasHash, bytes: Buffer.byteLength(extrasContent) },
+      chunks,
+    };
   });
   const payload = {
     ...outlook,
@@ -59,6 +92,11 @@ async function build() {
     JSON.stringify(payload) + '\n',
     'utf8',
   );
+  writeJson(path.join(dataDirectory, 'offline-manifest.json'), {
+    schemaVersion: 1,
+    fetchedAt: outlook.fetchedAt,
+    charts: offlineCharts,
+  });
 
   const failedCharts = outlook.charts.filter((chart) => chart.error && chart.items.length === 0);
   process.stdout.write(

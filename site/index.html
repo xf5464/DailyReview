@@ -16,6 +16,9 @@
     <meta name="twitter:image" content="https://xf5464.github.io/DailyReview/og.png" />
     <title>Daily Review · 全球宏观温度计</title>
     <link rel="canonical" href="https://xf5464.github.io/DailyReview/" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="og.png" />
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
@@ -28,6 +31,7 @@
           <p class="data-meta" id="overallPageMeta" aria-live="polite">正在加载宏观、资产与汇率数据...</p>
         </div>
         <div class="app-header-actions">
+          <button class="secondary-button offline-data-entry-button" type="button" id="offlineDataButton">离线数据</button>
           <button class="primary-button forecast-entry-button" type="button" id="forecastButton">预测</button>
           <span class="site-badge">总体形势</span>
         </div>
@@ -88,6 +92,25 @@
         </div>
       </section>
     </main>
+
+    <dialog class="overall-config-dialog offline-data-dialog" id="offlineDataDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">OFFLINE DATA</p><h2>iPhone 离线数据</h2></div>
+          <button class="dialog-close-button" type="button" id="offlineDataCloseButton" data-close="offlineDataDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">首次下载会保存全部指标；以后只下载新增或修订的年份数据。下载完成后可离线查看图表、预测和回测。</p>
+        <div class="offline-data-summary">
+          <div><span>本地状态</span><strong id="offlineDataState">尚未下载</strong></div>
+          <div><span>数据版本</span><strong id="offlineDataVersion">--</strong></div>
+        </div>
+        <progress class="offline-data-progress" id="offlineDataProgress" max="100" value="0" hidden></progress>
+        <p class="overall-config-message offline-data-message" id="offlineDataMessage" role="status">iPhone 请使用 Safari 的“分享 → 添加到主屏幕”安装。</p>
+        <div class="overall-config-actions">
+          <button class="primary-button" type="button" id="offlineDataDownloadButton">下载全部离线数据</button>
+        </div>
+      </div>
+    </dialog>
 
     <dialog class="overall-config-dialog forecast-dialog" id="forecastDialog">
       <div class="overall-config-card">

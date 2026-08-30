@@ -13,7 +13,7 @@
     "desktop:open": "electron .",
     "desktop:pack": "npm run build && electron-builder --dir",
     "desktop:dist": "npm run build && electron-builder",
-    "test": "node --test && node --check site/app.js && node --check scripts/build.js && node --check desktop/main.js"
+    "test": "node --test && node --check site/app.js && node --check site/service-worker.js && node --check scripts/build.js && node --check desktop/main.js"
   },
   "engines": {
     "node": ">=20"

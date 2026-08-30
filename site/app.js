@@ -187,6 +187,8 @@
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
+  var OFFLINE_DATA_CACHE = 'daily-review-data-v1';
+  var OFFLINE_STATE_PATH = 'data/offline-state.json';
   var DEFAULT_FORECAST_CONDITIONS = { ndxDrawdownPercent: 30, vixLevel: 30 };
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
@@ -300,6 +302,14 @@
     viewToggle: document.querySelector('#overallViewToggleButton'),
     compareButton: document.querySelector('#overallCompareButton'),
     forecastButton: document.querySelector('#forecastButton'),
+    offlineDataButton: document.querySelector('#offlineDataButton'),
+    offlineDataDialog: document.querySelector('#offlineDataDialog'),
+    offlineDataClose: document.querySelector('#offlineDataCloseButton'),
+    offlineDataState: document.querySelector('#offlineDataState'),
+    offlineDataVersion: document.querySelector('#offlineDataVersion'),
+    offlineDataProgress: document.querySelector('#offlineDataProgress'),
+    offlineDataMessage: document.querySelector('#offlineDataMessage'),
+    offlineDataDownloadButton: document.querySelector('#offlineDataDownloadButton'),
     forecastDialog: document.querySelector('#forecastDialog'),
     forecastSummary: document.querySelector('#forecastSummary'),
     forecastNdxCondition: document.querySelector('#forecastNdxCondition'),
@@ -592,6 +602,187 @@
       });
     }).catch(function () {
       // GitHub Pages 等纯静态环境继续使用当前浏览器的 localStorage。
+    });
+  }
+
+  function offlineDataSupported() {
+    return 'serviceWorker' in navigator && 'caches' in window;
+  }
+
+  function absoluteAppUrl(path) {
+    return new URL(path, document.baseURI).href;
+  }
+
+  async function readOfflineState(cache) {
+    var response = await cache.match(absoluteAppUrl(OFFLINE_STATE_PATH));
+    if (!response) return null;
+    try {
+      return await response.json();
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function formatOfflineVersion(value) {
+    var date = new Date(value);
+    return Number.isNaN(date.getTime()) ? '--' : new Intl.DateTimeFormat('zh-CN', {
+      year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
+      timeZone: 'Asia/Shanghai'
+    }).format(date);
+  }
+
+  async function refreshOfflineDataStatus() {
+    if (!offlineDataSupported()) {
+      refs.offlineDataState.textContent = '当前浏览器不支持';
+      refs.offlineDataVersion.textContent = '--';
+      refs.offlineDataDownloadButton.disabled = true;
+      refs.offlineDataMessage.textContent = '请在 iPhone Safari 或支持 PWA 的现代浏览器中使用。';
+      return;
+    }
+    var cache = await caches.open(OFFLINE_DATA_CACHE);
+    var state = await readOfflineState(cache);
+    refs.offlineDataState.textContent = state ? '全部数据可离线使用' : '尚未下载';
+    refs.offlineDataVersion.textContent = state ? formatOfflineVersion(state.fetchedAt) : '--';
+    refs.offlineDataDownloadButton.textContent = state ? '检查并增量更新' : '下载全部离线数据';
+    refs.offlineDataDownloadButton.disabled = false;
+  }
+
+  async function responseMatchesHash(response, expectedHash) {
+    if (!response || !response.ok || !window.crypto || !window.crypto.subtle) return Boolean(response && response.ok);
+    var bytes = await response.clone().arrayBuffer();
+    var digest = await window.crypto.subtle.digest('SHA-256', bytes);
+    var actual = Array.from(new Uint8Array(digest)).map(function (value) {
+      return value.toString(16).padStart(2, '0');
+    }).join('').slice(0, expectedHash.length);
+    return actual === expectedHash;
+  }
+
+  async function downloadOfflineFiles(files, cache, onProgress) {
+    var nextIndex = 0;
+    var completed = 0;
+    var downloadedBytes = 0;
+    async function worker() {
+      while (nextIndex < files.length) {
+        var file = files[nextIndex];
+        nextIndex += 1;
+        var url = absoluteAppUrl(file.path);
+        var cached = await cache.match(url);
+        if (!cached) {
+          var response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok || !(await responseMatchesHash(response, file.hash))) {
+            throw new Error('离线分块校验失败：' + file.path);
+          }
+          await cache.put(url, response.clone());
+          downloadedBytes += Number(file.bytes) || 0;
+        }
+        completed += 1;
+        onProgress(completed, files.length);
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(6, Math.max(1, files.length)) }, worker));
+    return downloadedBytes;
+  }
+
+  async function assembleOfflineChart(chartEntry, cache) {
+    var extrasResponse = await cache.match(absoluteAppUrl(chartEntry.extras.path));
+    if (!extrasResponse) throw new Error('缺少 ' + chartEntry.id + ' 元数据');
+    var extras = await extrasResponse.json();
+    var items = [];
+    for (var index = 0; index < chartEntry.chunks.length; index += 1) {
+      var chunkResponse = await cache.match(absoluteAppUrl(chartEntry.chunks[index].path));
+      if (!chunkResponse) throw new Error('缺少 ' + chartEntry.id + ' 历史分块');
+      items = items.concat(await chunkResponse.json());
+    }
+    var canonicalUrl = absoluteAppUrl('data/charts/' + chartEntry.id + '.json');
+    await cache.put(canonicalUrl, new Response(JSON.stringify(Object.assign({}, extras, { items: items })) + '\n', {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    }));
+  }
+
+  async function downloadAllOfflineData() {
+    if (!offlineDataSupported()) return;
+    refs.offlineDataDownloadButton.disabled = true;
+    refs.offlineDataProgress.hidden = false;
+    refs.offlineDataProgress.value = 0;
+    refs.offlineDataMessage.textContent = '正在读取增量更新清单...';
+    try {
+      await navigator.serviceWorker.ready;
+      var manifestResponse = await fetch('data/offline-manifest.json?v=' + Date.now(), { cache: 'no-store' });
+      if (!manifestResponse.ok) throw new Error('无法读取离线数据清单');
+      var manifest = await manifestResponse.json();
+      if (!manifest || manifest.schemaVersion !== 1 || !Array.isArray(manifest.charts)) {
+        throw new Error('离线数据清单格式无效');
+      }
+      var cache = await caches.open(OFFLINE_DATA_CACHE);
+      var previousState = await readOfflineState(cache);
+      var previousSignatures = new Map((previousState && previousState.charts || []).map(function (chart) {
+        return [chart.id, chart.signature];
+      }));
+      var files = manifest.charts.flatMap(function (chart) { return [chart.extras].concat(chart.chunks); });
+      var downloadedBytes = await downloadOfflineFiles(files, cache, function (completed, total) {
+        refs.offlineDataProgress.value = total ? completed / total * 75 : 75;
+        refs.offlineDataMessage.textContent = '正在下载或校验数据分块：' + completed + '/' + total;
+      });
+      var versionedChartRequests = (await cache.keys()).filter(function (request) {
+        var url = new URL(request.url);
+        return url.pathname.includes('/data/charts/') && Boolean(url.search);
+      });
+      await Promise.all(versionedChartRequests.map(function (request) { return cache.delete(request); }));
+      var changedCharts = 0;
+      for (var index = 0; index < manifest.charts.length; index += 1) {
+        var chartEntry = manifest.charts[index];
+        var canonicalUrl = absoluteAppUrl('data/charts/' + chartEntry.id + '.json');
+        var canonical = await cache.match(canonicalUrl);
+        if (!canonical || previousSignatures.get(chartEntry.id) !== chartEntry.signature) {
+          await assembleOfflineChart(chartEntry, cache);
+          changedCharts += 1;
+        }
+        refs.offlineDataProgress.value = 75 + (index + 1) / manifest.charts.length * 24;
+        refs.offlineDataMessage.textContent = '正在生成本地图表：' + (index + 1) + '/' + manifest.charts.length;
+      }
+      await cache.put(absoluteAppUrl('data/offline-manifest.json'), new Response(JSON.stringify(manifest) + '\n', {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      }));
+      var outlookResponse = await fetch('data/outlook.json?v=' + Date.now(), { cache: 'no-store' });
+      if (outlookResponse.ok) await cache.put(absoluteAppUrl('data/outlook.json'), outlookResponse.clone());
+      var state = {
+        schemaVersion: 1,
+        fetchedAt: manifest.fetchedAt,
+        updatedAt: new Date().toISOString(),
+        charts: manifest.charts.map(function (chart) { return { id: chart.id, signature: chart.signature }; })
+      };
+      await cache.put(absoluteAppUrl(OFFLINE_STATE_PATH), new Response(JSON.stringify(state), {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      }));
+      var requiredPaths = new Set(files.map(function (file) { return new URL(absoluteAppUrl(file.path)).pathname; }));
+      var cacheKeys = await cache.keys();
+      await Promise.all(cacheKeys.filter(function (request) {
+        var pathname = new URL(request.url).pathname;
+        return pathname.includes('/data/offline/') && !requiredPaths.has(pathname);
+      }).map(function (request) { return cache.delete(request); }));
+      refs.offlineDataProgress.value = 100;
+      refs.offlineDataMessage.textContent = downloadedBytes
+        ? '增量更新完成：下载 ' + (downloadedBytes / 1024 / 1024).toFixed(2) + ' MB，更新 ' + changedCharts + ' 个指标。'
+        : '已是最新版本，无需下载新的数据分块。';
+      await refreshOfflineDataStatus();
+    } catch (error) {
+      refs.offlineDataMessage.textContent = '离线数据更新失败，旧版缓存仍可继续使用：' + error.message;
+      refs.offlineDataDownloadButton.disabled = false;
+    } finally {
+      refs.offlineDataProgress.hidden = false;
+    }
+  }
+
+  async function showOfflineData() {
+    refs.offlineDataDialog.showModal();
+    refs.offlineDataClose.focus({ preventScroll: true });
+    await refreshOfflineDataStatus();
+  }
+
+  function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.register('service-worker.js').catch(function () {
+      // 不支持或注册失败时仍保留普通在线网页功能。
     });
   }
 
@@ -2483,6 +2674,8 @@
       refs.configDialog.showModal();
     });
     refs.compareButton.addEventListener('click', showCompare);
+    refs.offlineDataButton.addEventListener('click', showOfflineData);
+    refs.offlineDataDownloadButton.addEventListener('click', downloadAllOfflineData);
     refs.forecastButton.addEventListener('click', showForecast);
     refs.forecastNdxThreshold.addEventListener('input', renderForecast);
     refs.forecastVixThreshold.addEventListener('input', renderForecast);
@@ -2581,6 +2774,9 @@
     refs.forecastDialog.addEventListener('click', function (event) {
       if (event.target === refs.forecastDialog) refs.forecastDialog.close();
     });
+    refs.offlineDataDialog.addEventListener('click', function (event) {
+      if (event.target === refs.offlineDataDialog) refs.offlineDataDialog.close();
+    });
     refs.forecastBacktestDialog.addEventListener('click', function (event) {
       if (event.target === refs.forecastBacktestDialog) refs.forecastBacktestDialog.close();
     });
@@ -2594,6 +2790,7 @@
   }
 
   function initialize() {
+    registerServiceWorker();
     applyRuntimeCapabilities();
     applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
     applyQuarterPointSize(localStorage.getItem(QUARTER_POINT_SIZE_STORAGE_KEY), false);
