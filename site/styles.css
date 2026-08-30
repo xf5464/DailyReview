@@ -1202,6 +1202,20 @@ tbody tr:last-child td {
   opacity: 0.82;
 }
 
+.forecast-backtest-tip-point {
+  stroke: #ffffff;
+  stroke-width: 1.75;
+  pointer-events: none;
+}
+
+.forecast-backtest-condition-tip-point {
+  fill: #2f6fed;
+}
+
+.forecast-backtest-source-tip-point {
+  fill: #7c3aed;
+}
+
 .forecast-backtest-hit {
   fill: #e53e3e;
   stroke: #ffffff;

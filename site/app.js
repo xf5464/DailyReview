@@ -2638,6 +2638,70 @@
       endLabel.textContent = formatDate(items.at(-1).date, '日度');
       refs.forecastBacktestChart.append(startLabel, endLabel);
     }
+
+    var hoverGuide = createSvg('line', {
+      y1: box.top, y2: box.top + box.height, stroke: '#657089',
+      'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: 0
+    });
+    var conditionHoverPoint = createSvg('circle', {
+      r: 5, class: 'forecast-backtest-tip-point forecast-backtest-condition-tip-point', opacity: 0
+    });
+    var sourceHoverPoint = sourceItems.length ? createSvg('circle', {
+      r: 5, class: 'forecast-backtest-tip-point forecast-backtest-source-tip-point', opacity: 0
+    }) : null;
+    refs.forecastBacktestChart.append(hoverGuide, conditionHoverPoint);
+    if (sourceHoverPoint) refs.forecastBacktestChart.append(sourceHoverPoint);
+
+    var hoverOverlay = createSvg('rect', {
+      x: box.left, y: box.top, width: box.width, height: box.height, fill: 'transparent'
+    });
+    hoverOverlay.style.cursor = 'crosshair';
+    function showForecastBacktestTip(event) {
+      var rect = refs.forecastBacktestChart.getBoundingClientRect();
+      var localX = (event.clientX - rect.left) / rect.width * width;
+      var positionRatio = Math.max(0, Math.min(1, (localX - box.left) / box.width));
+      var targetTime = domainX[0] + positionRatio * (domainX[1] - domainX[0]);
+      var conditionItem = nearestItem(items, targetTime);
+      var conditionTime = Date.parse(conditionItem.date + 'T00:00:00Z');
+      var conditionX = box.left + (conditionTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+      var conditionY = yFor(conditionItem.value);
+      hoverGuide.setAttribute('x1', conditionX);
+      hoverGuide.setAttribute('x2', conditionX);
+      hoverGuide.setAttribute('opacity', '0.6');
+      conditionHoverPoint.setAttribute('cx', conditionX);
+      conditionHoverPoint.setAttribute('cy', conditionY);
+      conditionHoverPoint.setAttribute('opacity', '1');
+
+      var sourceItem = sourceItems.length ? nearestItem(sourceItems, targetTime) : null;
+      if (sourceHoverPoint && sourceItem) {
+        var sourceTime = Date.parse(sourceItem.date + 'T00:00:00Z');
+        var sourceX = box.left + (sourceTime - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        var sourceY = box.top + (1 - (sourceItem.value - sourceDomainY[0]) / (sourceDomainY[1] - sourceDomainY[0])) * box.height;
+        sourceHoverPoint.setAttribute('cx', sourceX);
+        sourceHoverPoint.setAttribute('cy', sourceY);
+        sourceHoverPoint.setAttribute('opacity', '1');
+      }
+
+      var tip = ensureTooltip(refs.forecastBacktestChart);
+      tip.style.whiteSpace = 'pre-line';
+      tip.textContent = kind === 'ndx'
+        ? formatDate(conditionItem.date, '日度') + '\n回撤：' + conditionItem.value.toFixed(2) + '%' +
+          '\nNDX：' + Number(sourceItem.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点'
+        : formatDate(conditionItem.date, '日度') + '\nVIX：' + conditionItem.value.toFixed(2) + ' 点';
+      if (conditionItem.value >= threshold) tip.textContent += '\n已达到条件';
+      tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
+      tip.style.top = Math.max(12, event.clientY - 70) + 'px';
+      tip.hidden = false;
+    }
+    hoverOverlay.addEventListener('pointermove', showForecastBacktestTip);
+    hoverOverlay.addEventListener('pointerdown', showForecastBacktestTip);
+    hoverOverlay.addEventListener('pointerleave', function () {
+      hoverGuide.setAttribute('opacity', '0');
+      conditionHoverPoint.setAttribute('opacity', '0');
+      if (sourceHoverPoint) sourceHoverPoint.setAttribute('opacity', '0');
+      if (tooltip) tooltip.hidden = true;
+    });
+    refs.forecastBacktestChart.append(hoverOverlay);
   }
 
   async function showForecastBacktest(kind) {
