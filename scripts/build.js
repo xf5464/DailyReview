@@ -7,6 +7,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const siteDirectory = path.join(projectRoot, 'site');
 const outputDirectory = path.join(projectRoot, 'dist');
 const dataDirectory = path.join(outputDirectory, 'data');
+const chartDataDirectory = path.join(dataDirectory, 'charts');
 
 function addAssetVersions() {
   const indexPath = path.join(outputDirectory, 'index.html');
@@ -28,6 +29,7 @@ async function build() {
   fs.cpSync(siteDirectory, outputDirectory, { recursive: true });
   addAssetVersions();
   fs.mkdirSync(dataDirectory, { recursive: true });
+  fs.mkdirSync(chartDataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');
@@ -37,8 +39,19 @@ async function build() {
     throw new Error('No macro chart returned usable data; refusing to publish an empty site.');
   }
 
+  outlook.charts.forEach((chart) => {
+    fs.writeFileSync(
+      path.join(chartDataDirectory, `${chart.id}.json`),
+      JSON.stringify(chart) + '\n',
+      'utf8',
+    );
+  });
   const payload = {
     ...outlook,
+    charts: outlook.charts.map((chart) => {
+      const { items, rows, ...metadata } = chart;
+      return { ...metadata, itemCount: items.length };
+    }),
     generatedBy: 'DailyReview GitHub Pages build',
   };
   fs.writeFileSync(

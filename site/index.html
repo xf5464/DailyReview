@@ -27,7 +27,10 @@
           <h1>全球宏观温度计</h1>
           <p class="data-meta" id="overallPageMeta" aria-live="polite">正在加载宏观、资产与汇率数据...</p>
         </div>
-        <span class="site-badge">总体形势</span>
+        <div class="app-header-actions">
+          <button class="primary-button forecast-entry-button" type="button" id="forecastButton">预测</button>
+          <span class="site-badge">总体形势</span>
+        </div>
       </header>
 
       <section class="overall-page" id="overallPage" aria-label="总体形势">
@@ -85,6 +88,66 @@
         </div>
       </section>
     </main>
+
+    <dialog class="overall-config-dialog forecast-dialog" id="forecastDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">MARKET SIGNAL</p><h2>预测条件</h2></div>
+          <button class="dialog-close-button" type="button" data-close="forecastDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">以下条件为“或者”关系，任意一项达到即视为预测条件已达到。数值以最近一次发布的数据为准。</p>
+        <div class="forecast-summary" id="forecastSummary" aria-live="polite">
+          <span>综合结果</span><strong>等待数据</strong>
+        </div>
+        <div class="forecast-condition-list">
+          <section class="forecast-condition" id="forecastNdxCondition">
+            <div class="forecast-condition-heading">
+              <div><h3>NDX 距历史最高点回撤</h3><p id="forecastNdxDetail">正在读取纳斯达克 100 指数...</p></div>
+              <span class="forecast-status" id="forecastNdxStatus">等待数据</span>
+            </div>
+            <div class="forecast-threshold">
+              <label for="forecastNdxThreshold">达到或超过</label>
+              <input class="level-select" id="forecastNdxThreshold" type="number" min="1" max="100" step="1" inputmode="decimal" disabled />
+              <span>%</span>
+              <button class="secondary-button forecast-edit-button" type="button" id="forecastNdxEditButton">编辑</button>
+              <button class="secondary-button forecast-backtest-button" type="button" id="forecastNdxBacktestButton">回测</button>
+            </div>
+          </section>
+          <section class="forecast-condition" id="forecastVixCondition">
+            <div class="forecast-condition-heading">
+              <div><h3>VIX 恐慌指数</h3><p id="forecastVixDetail">正在读取 VIX...</p></div>
+              <span class="forecast-status" id="forecastVixStatus">等待数据</span>
+            </div>
+            <div class="forecast-threshold">
+              <label for="forecastVixThreshold">达到或超过</label>
+              <input class="level-select" id="forecastVixThreshold" type="number" min="1" max="200" step="1" inputmode="decimal" disabled />
+              <span>点</span>
+              <button class="secondary-button forecast-edit-button" type="button" id="forecastVixEditButton">编辑</button>
+              <button class="secondary-button forecast-backtest-button" type="button" id="forecastVixBacktestButton">回测</button>
+            </div>
+          </section>
+        </div>
+        <div class="overall-config-actions">
+          <p class="overall-config-message forecast-message" id="forecastMessage" role="status"></p>
+          <button class="primary-button" type="button" id="forecastSaveButton">保存设置</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog forecast-backtest-dialog" id="forecastBacktestDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">CONDITION BACKTEST</p><h2 id="forecastBacktestTitle">条件回测</h2></div>
+          <button class="dialog-close-button" type="button" id="forecastBacktestCloseButton" data-close="forecastBacktestDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls forecast-backtest-controls">
+          <label>时间范围<select class="level-select" id="forecastBacktestRangeSelect"></select></label>
+          <div class="forecast-backtest-legend"><span class="forecast-backtest-line-key"></span>指标曲线 <span class="forecast-backtest-hit-key"></span>达到条件</div>
+        </div>
+        <p class="overall-config-message forecast-backtest-message" id="forecastBacktestMessage" role="status"></p>
+        <svg class="overall-detail-chart overall-chart forecast-backtest-chart" id="forecastBacktestChart" role="img" aria-label="预测条件历史回测图"></svg>
+      </div>
+    </dialog>
 
     <dialog class="overall-config-dialog" id="overallConfigDialog">
       <div class="overall-config-card">

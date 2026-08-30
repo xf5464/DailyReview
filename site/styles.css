@@ -967,6 +967,198 @@ tbody tr:last-child td {
   width: min(980px, calc(100vw - 36px));
 }
 
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.forecast-entry-button {
+  min-height: 38px;
+  padding-inline: 20px;
+}
+
+.forecast-dialog {
+  width: min(680px, calc(100vw - 36px));
+}
+
+.forecast-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border: 1px solid #dfe6f1;
+  border-radius: 10px;
+  color: #52617a;
+  background: #f8fbff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.forecast-summary strong {
+  color: #40506c;
+  font-size: 15px;
+}
+
+.forecast-summary.is-reached {
+  border-color: #85c79b;
+  background: #edf9f1;
+}
+
+.forecast-summary.is-reached strong {
+  color: #137333;
+}
+
+.forecast-condition-list {
+  display: grid;
+  gap: 12px;
+}
+
+.forecast-condition {
+  padding: 16px;
+  border: 1px solid #dfe6f1;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.forecast-condition.is-reached {
+  border-color: #85c79b;
+  box-shadow: inset 3px 0 #2d9b56;
+}
+
+.forecast-condition-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.forecast-condition h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.forecast-condition p {
+  margin: 6px 0 0;
+  color: #657089;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.forecast-status {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #52617a;
+  background: #edf1f6;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.forecast-status.is-reached {
+  color: #137333;
+  background: #dff3e5;
+}
+
+.forecast-threshold {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: #40506c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.forecast-threshold input {
+  width: 92px;
+  padding-right: 10px;
+  cursor: text;
+}
+
+.forecast-threshold input:disabled {
+  color: #40506c;
+  background: #f3f5f8;
+  cursor: default;
+  opacity: 1;
+}
+
+.forecast-edit-button {
+  min-height: 32px;
+  margin-left: auto;
+}
+
+.forecast-backtest-button {
+  min-height: 32px;
+}
+
+.forecast-backtest-dialog {
+  width: min(980px, calc(100vw - 36px));
+}
+
+.forecast-backtest-controls {
+  justify-content: space-between;
+}
+
+.forecast-backtest-legend {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #52617a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.forecast-backtest-line-key {
+  width: 24px;
+  border-top: 3px solid #2f6fed;
+}
+
+.forecast-backtest-hit-key {
+  width: 10px;
+  height: 10px;
+  margin-left: 8px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #e53e3e;
+  box-shadow: 0 0 0 2px #e53e3e;
+}
+
+.forecast-backtest-message {
+  margin: 12px 0 4px;
+}
+
+.forecast-backtest-line {
+  fill: none;
+  stroke: #2f6fed;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--chart-line-width);
+}
+
+.forecast-backtest-hit {
+  fill: #e53e3e;
+  stroke: #ffffff;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 3px rgba(229, 62, 62, 0.75));
+}
+
+.forecast-backtest-threshold-line {
+  stroke: #e53e3e;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+  opacity: 0.8;
+}
+
+.forecast-message {
+  flex: 1;
+  margin: 0;
+  align-self: center;
+}
+
 .shareholder-history-dialog {
   width: min(900px, calc(100vw - 36px));
 }
@@ -2609,6 +2801,15 @@ tbody tr:last-child td {
     align-items: flex-start;
     flex-direction: column;
     gap: 12px;
+  }
+
+  .app-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .forecast-entry-button {
+    flex: 1;
   }
 
   .header-actions {

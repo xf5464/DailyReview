@@ -187,10 +187,12 @@
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
+  var DEFAULT_FORECAST_CONDITIONS = { ndxDrawdownPercent: 30, vixLevel: 30 };
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
     groupOrderVersion: GROUP_ORDER_VERSION,
     chartsPerRow: 4,
+    forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     chartOrder: [
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
@@ -273,11 +275,13 @@
   };
 
   var data = null;
+  var chartLoadPromises = new Map();
   var config = loadConfig();
   var viewMode = 'charts';
   var activeDetailId = null;
   var activeShareholderCode = null;
   var activeShareholderTableQuarterDate = null;
+  var activeForecastBacktest = null;
   var shareholderSortKey = null;
   var shareholderSortDirection = null;
   var draggedChartId = null;
@@ -295,6 +299,28 @@
     refresh: document.querySelector('#overallRefreshButton'),
     viewToggle: document.querySelector('#overallViewToggleButton'),
     compareButton: document.querySelector('#overallCompareButton'),
+    forecastButton: document.querySelector('#forecastButton'),
+    forecastDialog: document.querySelector('#forecastDialog'),
+    forecastSummary: document.querySelector('#forecastSummary'),
+    forecastNdxCondition: document.querySelector('#forecastNdxCondition'),
+    forecastNdxDetail: document.querySelector('#forecastNdxDetail'),
+    forecastNdxStatus: document.querySelector('#forecastNdxStatus'),
+    forecastNdxThreshold: document.querySelector('#forecastNdxThreshold'),
+    forecastNdxEditButton: document.querySelector('#forecastNdxEditButton'),
+    forecastVixCondition: document.querySelector('#forecastVixCondition'),
+    forecastVixDetail: document.querySelector('#forecastVixDetail'),
+    forecastVixStatus: document.querySelector('#forecastVixStatus'),
+    forecastVixThreshold: document.querySelector('#forecastVixThreshold'),
+    forecastVixEditButton: document.querySelector('#forecastVixEditButton'),
+    forecastMessage: document.querySelector('#forecastMessage'),
+    forecastNdxBacktestButton: document.querySelector('#forecastNdxBacktestButton'),
+    forecastVixBacktestButton: document.querySelector('#forecastVixBacktestButton'),
+    forecastBacktestDialog: document.querySelector('#forecastBacktestDialog'),
+    forecastBacktestClose: document.querySelector('#forecastBacktestCloseButton'),
+    forecastBacktestTitle: document.querySelector('#forecastBacktestTitle'),
+    forecastBacktestRange: document.querySelector('#forecastBacktestRangeSelect'),
+    forecastBacktestMessage: document.querySelector('#forecastBacktestMessage'),
+    forecastBacktestChart: document.querySelector('#forecastBacktestChart'),
     displayButton: document.querySelector('#displayControlsButton'),
     groupsButton: document.querySelector('#overallManageGroupsButton'),
     manageButton: document.querySelector('#overallManageButton'),
@@ -415,6 +441,12 @@
     });
   }
 
+  function normalizeForecastThreshold(value, fallback, maximum) {
+    var parsed = Number(value);
+    if (!Number.isFinite(parsed)) return fallback;
+    return Math.min(maximum, Math.max(1, Math.round(parsed * 10) / 10));
+  }
+
   function sanitizeConfig(value) {
     var source = value && value.overallSituation ? value.overallSituation : value || {};
     var groupIdAliases = {};
@@ -499,6 +531,7 @@
     if (![1, 2, 3, 4].includes(columns)) columns = 3;
     var requestedGroupId = groupIdAliases[source.selectedGroupId] || source.selectedGroupId;
     var selectedGroupId = groupIds.has(requestedGroupId) ? requestedGroupId : 'default';
+    var forecastSource = source.forecastConditions || {};
 
     return {
       groupOrderVersion: GROUP_ORDER_VERSION,
@@ -508,7 +541,19 @@
       visibleChartIds: visible,
       groups: groups,
       chartGroups: chartGroups,
-      selectedGroupId: selectedGroupId
+      selectedGroupId: selectedGroupId,
+      forecastConditions: {
+        ndxDrawdownPercent: normalizeForecastThreshold(
+          forecastSource.ndxDrawdownPercent,
+          DEFAULT_FORECAST_CONDITIONS.ndxDrawdownPercent,
+          100
+        ),
+        vixLevel: normalizeForecastThreshold(
+          forecastSource.vixLevel,
+          DEFAULT_FORECAST_CONDITIONS.vixLevel,
+          200
+        )
+      }
     };
   }
 
@@ -577,6 +622,7 @@
       }
       syncGroups();
       refs.columns.value = String(config.chartsPerRow);
+      await loadCharts(activeChartIds());
       renderAll();
     } catch (error) {
       // 未提供本机配置接口时保持浏览器本地配置。
@@ -602,6 +648,53 @@
     return data && Array.isArray(data.charts)
       ? data.charts.find(function (chart) { return chart.id === id; })
       : null;
+  }
+
+  function chartCatalogById(id) {
+    var catalog = data && Array.isArray(data.chartCatalog) ? data.chartCatalog : [];
+    return catalog.find(function (chart) { return chart.id === id; }) || null;
+  }
+
+  function storeLoadedChart(chart) {
+    if (!data || !chart || !chart.id) return;
+    var index = data.charts.findIndex(function (item) { return item.id === chart.id; });
+    if (index >= 0) data.charts[index] = chart;
+    else data.charts.push(chart);
+  }
+
+  function loadChartById(id) {
+    var loaded = chartById(id);
+    if (loaded) return Promise.resolve(loaded);
+    if (!data || !Array.isArray(data.chartCatalog)) return Promise.resolve(null);
+    if (chartLoadPromises.has(id)) return chartLoadPromises.get(id);
+
+    var metadata = chartCatalogById(id) || { id: id, title: TITLES[id] || id };
+    var version = encodeURIComponent(data.fetchedAt || 'latest');
+    var promise = fetch('data/charts/' + encodeURIComponent(id) + '.json?v=' + version)
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
+      .then(function (chart) {
+        if (!chart || chart.id !== id || !Array.isArray(chart.items)) throw new Error('数据格式无效');
+        storeLoadedChart(chart);
+        return chart;
+      })
+      .catch(function (error) {
+        var failedChart = Object.assign({}, metadata, {
+          items: [],
+          error: '指标数据加载失败：' + error.message
+        });
+        storeLoadedChart(failedChart);
+        return failedChart;
+      })
+      .finally(function () { chartLoadPromises.delete(id); });
+    chartLoadPromises.set(id, promise);
+    return promise;
+  }
+
+  function loadCharts(ids) {
+    return Promise.all(Array.from(new Set(ids || [])).map(loadChartById));
   }
 
   function selectedGroupOrder() {
@@ -1229,9 +1322,10 @@
         year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai'
       }).format(fetched);
+    var catalog = Array.isArray(data.chartCatalog) ? data.chartCatalog : data.charts;
     var failed = data.charts.filter(function (chart) { return chart.error && !chart.items.length; }).length;
     refs.meta.textContent = '数据更新时间：' + fetchedLabel +
-      (failed ? ' · ' + failed + ' 个数据源暂不可用' : ' · ' + data.charts.length + ' 个指标已就绪');
+      (failed ? ' · ' + failed + ' 个已加载指标暂不可用' : ' · 已按需加载 ' + data.charts.length + '/' + catalog.length + ' 个指标');
   }
 
   function renderAll() {
@@ -1317,11 +1411,12 @@
       var checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = config.visibleChartIds.includes(id);
-      checkbox.addEventListener('change', function () {
+      checkbox.addEventListener('change', async function () {
         config.visibleChartIds = checkbox.checked
           ? Array.from(new Set(config.visibleChartIds.concat(id)))
           : config.visibleChartIds.filter(function (chartId) { return chartId !== id; });
         persistConfig();
+        if (checkbox.checked) await loadChartById(id);
         renderConfigList();
         renderAll();
       });
@@ -1854,7 +1949,7 @@
         });
         var remove = createElement('button', 'secondary-button danger-button', '删除');
         remove.type = 'button';
-        remove.addEventListener('click', function () {
+        remove.addEventListener('click', async function () {
           if (!window.confirm('删除分组“' + group.name + '”？图表本身不会被删除。')) return;
           config.groups = config.groups.filter(function (item) { return item.id !== group.id; });
           delete config.groupChartOrder[group.id];
@@ -1864,6 +1959,7 @@
           if (config.selectedGroupId === group.id) config.selectedGroupId = 'default';
           persistConfig();
           syncGroups();
+          await loadCharts(activeChartIds());
           renderGroups();
           renderAll();
         });
@@ -1900,7 +1996,7 @@
         checkbox.type = 'checkbox';
         checkbox.checked = config.chartGroups[id].includes(group.id);
         checkbox.disabled = group.id === 'default';
-        checkbox.addEventListener('change', function () {
+        checkbox.addEventListener('change', async function () {
           if (checkbox.checked) {
             config.chartGroups[id] = Array.from(new Set(config.chartGroups[id].concat(group.id)));
             var order = config.groupChartOrder[group.id] || [];
@@ -1911,6 +2007,9 @@
             config.groupChartOrder[group.id] = (config.groupChartOrder[group.id] || []).filter(function (chartId) { return chartId !== id; });
           }
           persistConfig();
+          if (checkbox.checked && group.id === config.selectedGroupId && config.visibleChartIds.includes(id)) {
+            await loadChartById(id);
+          }
           renderAll();
         });
         label.append(checkbox, document.createTextNode(TITLES[id]));
@@ -2028,6 +2127,223 @@
     renderAll();
   }
 
+  function forecastThresholdsFromInputs() {
+    return {
+      ndxDrawdownPercent: normalizeForecastThreshold(
+        refs.forecastNdxThreshold.value,
+        config.forecastConditions.ndxDrawdownPercent,
+        100
+      ),
+      vixLevel: normalizeForecastThreshold(
+        refs.forecastVixThreshold.value,
+        config.forecastConditions.vixLevel,
+        200
+      )
+    };
+  }
+
+  function setForecastCondition(condition, status, reached, available) {
+    condition.classList.toggle('is-reached', reached);
+    status.classList.toggle('is-reached', reached);
+    status.textContent = available ? (reached ? '已达到' : '未达到') : '暂无数据';
+  }
+
+  function renderForecast() {
+    var thresholds = forecastThresholdsFromInputs();
+    var ndx = chartById('ndx');
+    var ndxItems = (ndx && Array.isArray(ndx.items) ? ndx.items : [])
+      .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
+      .map(function (item) { return { date: item.date, value: Number(item.value) }; })
+      .sort(function (left, right) { return left.date.localeCompare(right.date); });
+    var ndxLatest = ndxItems.at(-1);
+    var ndxHigh = ndxItems.reduce(function (highest, item) {
+      return !highest || item.value > highest.value ? item : highest;
+    }, null);
+    var ndxDrawdown = ndxLatest && ndxHigh && ndxHigh.value > 0
+      ? Math.max(0, (ndxHigh.value - ndxLatest.value) / ndxHigh.value * 100)
+      : null;
+    var ndxReached = ndxDrawdown !== null && ndxDrawdown >= thresholds.ndxDrawdownPercent;
+    refs.forecastNdxDetail.textContent = ndxDrawdown === null
+      ? 'NDX 数据暂不可用。'
+      : '当前回撤 ' + ndxDrawdown.toFixed(2) + '%；最新 ' + ndxLatest.value.toLocaleString('zh-CN', { maximumFractionDigits: 2 }) +
+        ' 点（' + formatDate(ndxLatest.date, '日度') + '），历史最高 ' +
+        ndxHigh.value.toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点（' + formatDate(ndxHigh.date, '日度') + '）。';
+    setForecastCondition(refs.forecastNdxCondition, refs.forecastNdxStatus, ndxReached, ndxDrawdown !== null);
+
+    var vix = chartById('vix');
+    var vixItems = (vix && Array.isArray(vix.items) ? vix.items : [])
+      .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
+      .sort(function (left, right) { return left.date.localeCompare(right.date); });
+    var vixLatest = vixItems.at(-1);
+    var vixValue = vixLatest ? Number(vixLatest.value) : null;
+    var vixReached = vixValue !== null && vixValue >= thresholds.vixLevel;
+    refs.forecastVixDetail.textContent = vixLatest
+      ? '当前 ' + vixValue.toFixed(2) + ' 点（' + formatDate(vixLatest.date, '日度') + '）。'
+      : 'VIX 数据暂不可用。';
+    setForecastCondition(refs.forecastVixCondition, refs.forecastVixStatus, vixReached, vixValue !== null);
+
+    var available = ndxDrawdown !== null || vixValue !== null;
+    var reached = ndxReached || vixReached;
+    refs.forecastSummary.classList.toggle('is-reached', reached);
+    refs.forecastSummary.querySelector('strong').textContent = available
+      ? (reached ? '已有条件达到' : '尚无条件达到')
+      : '等待数据';
+  }
+
+  async function showForecast() {
+    refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
+    refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
+    refs.forecastNdxThreshold.disabled = true;
+    refs.forecastVixThreshold.disabled = true;
+    refs.forecastNdxEditButton.textContent = '编辑';
+    refs.forecastVixEditButton.textContent = '编辑';
+    refs.forecastMessage.textContent = '';
+    renderForecast();
+    refs.forecastDialog.showModal();
+    refs.forecastDialog.querySelector('.dialog-close-button').focus({ preventScroll: true });
+    await loadCharts(['ndx', 'vix']);
+    if (refs.forecastDialog.open) {
+      renderForecast();
+      renderMeta();
+    }
+  }
+
+  function editForecastThreshold(input, button) {
+    input.disabled = false;
+    button.textContent = '编辑中';
+    input.focus({ preventScroll: true });
+    input.select();
+  }
+
+  function saveForecastConditions() {
+    var ndxValue = Number(refs.forecastNdxThreshold.value);
+    var vixValue = Number(refs.forecastVixThreshold.value);
+    if (!Number.isFinite(ndxValue) || ndxValue < 1 || ndxValue > 100 ||
+        !Number.isFinite(vixValue) || vixValue < 1 || vixValue > 200) {
+      refs.forecastMessage.textContent = 'NDX 回撤阈值须为 1–100%，VIX 阈值须为 1–200 点。';
+      return;
+    }
+    config.forecastConditions = forecastThresholdsFromInputs();
+    refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
+    refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
+    persistConfig();
+    refs.forecastNdxThreshold.disabled = true;
+    refs.forecastVixThreshold.disabled = true;
+    refs.forecastNdxEditButton.textContent = '编辑';
+    refs.forecastVixEditButton.textContent = '编辑';
+    renderForecast();
+    refs.forecastMessage.textContent = '预测条件已保存到配置。';
+  }
+
+  function forecastBacktestSeries(kind) {
+    var source = chartById(kind === 'ndx' ? 'ndx' : 'vix');
+    var sourceItems = (source && Array.isArray(source.items) ? source.items : [])
+      .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
+      .map(function (item) { return { date: item.date, value: Number(item.value) }; })
+      .sort(function (left, right) { return left.date.localeCompare(right.date); });
+    if (kind !== 'ndx') return sourceItems;
+    var runningHigh = 0;
+    return sourceItems.map(function (item) {
+      runningHigh = Math.max(runningHigh, item.value);
+      return { date: item.date, value: runningHigh > 0 ? (runningHigh - item.value) / runningHigh * 100 : 0 };
+    });
+  }
+
+  function renderForecastBacktest() {
+    var kind = activeForecastBacktest;
+    var thresholds = forecastThresholdsFromInputs();
+    var threshold = kind === 'ndx' ? thresholds.ndxDrawdownPercent : thresholds.vixLevel;
+    var unit = kind === 'ndx' ? '%' : '点';
+    var series = forecastBacktestSeries(kind);
+    var items = filterItems({ items: series, frequency: '日度' }, refs.forecastBacktestRange.value);
+    if (!items.length) {
+      refs.forecastBacktestMessage.textContent = '当前时间范围暂无可用数据。';
+      renderEmpty(refs.forecastBacktestChart, '暂无可回测的数据');
+      return;
+    }
+
+    var hits = items.filter(function (item) { return item.value >= threshold; });
+    var episodes = 0;
+    var previousHit = false;
+    items.forEach(function (item) {
+      var hit = item.value >= threshold;
+      if (hit && !previousHit) episodes += 1;
+      previousHit = hit;
+    });
+    refs.forecastBacktestMessage.textContent = RANGES[refs.forecastBacktestRange.value].label +
+      ' · 阈值 ' + threshold + unit + ' · 共 ' + hits.length + ' 个交易日达到条件，分布在 ' + episodes + ' 个区段。';
+
+    var width = 900;
+    var height = 420;
+    var box = { left: 72, top: 42, width: 790, height: 310 };
+    var times = items.map(function (item) { return Date.parse(item.date + 'T00:00:00Z'); });
+    var domainX = [Math.min.apply(null, times), Math.max.apply(null, times)];
+    if (domainX[0] === domainX[1]) domainX[1] += 86400000;
+    var domainY = extent(items.map(function (item) { return item.value; }).concat(threshold));
+    var xFor = function (item) {
+      return box.left + (Date.parse(item.date + 'T00:00:00Z') - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+    };
+    var yFor = function (value) {
+      return box.top + (1 - (value - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
+    };
+
+    refs.forecastBacktestChart.replaceChildren();
+    refs.forecastBacktestChart.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+    refs.forecastBacktestChart.setAttribute('aria-label', refs.forecastBacktestTitle.textContent);
+    for (var index = 0; index <= 4; index += 1) {
+      var ratio = index / 4;
+      var y = box.top + ratio * box.height;
+      refs.forecastBacktestChart.append(createSvg('line', {
+        x1: box.left, y1: y, x2: box.left + box.width, y2: y, class: 'chart-grid'
+      }));
+      var yLabel = createSvg('text', {
+        x: box.left - 10, y: y + 4, class: 'chart-label', 'text-anchor': 'end'
+      });
+      yLabel.textContent = axisValue(domainY[1] - ratio * (domainY[1] - domainY[0]), 2);
+      refs.forecastBacktestChart.append(yLabel);
+    }
+    refs.forecastBacktestChart.append(createSvg('line', {
+      x1: box.left, y1: yFor(threshold), x2: box.left + box.width, y2: yFor(threshold),
+      class: 'forecast-backtest-threshold-line'
+    }));
+    refs.forecastBacktestChart.append(createSvg('path', {
+      d: linePath(items, box, domainX, domainY), class: 'forecast-backtest-line'
+    }));
+    hits.forEach(function (item) {
+      var point = createSvg('circle', {
+        cx: xFor(item), cy: yFor(item.value), r: 4.5, class: 'forecast-backtest-hit'
+      });
+      var title = createSvg('title');
+      title.textContent = formatDate(item.date, '日度') + ' · ' + item.value.toFixed(2) + unit + ' · 已达到条件';
+      point.append(title);
+      refs.forecastBacktestChart.append(point);
+    });
+    var startLabel = createSvg('text', {
+      x: box.left, y: height - 28, class: 'chart-label', 'text-anchor': 'start'
+    });
+    startLabel.textContent = formatDate(items[0].date, '日度');
+    var endLabel = createSvg('text', {
+      x: box.left + box.width, y: height - 28, class: 'chart-label', 'text-anchor': 'end'
+    });
+    endLabel.textContent = formatDate(items.at(-1).date, '日度');
+    refs.forecastBacktestChart.append(startLabel, endLabel);
+  }
+
+  async function showForecastBacktest(kind) {
+    activeForecastBacktest = kind;
+    refs.forecastBacktestTitle.textContent = kind === 'ndx'
+      ? 'NDX 历史回撤条件回测'
+      : 'VIX 点位条件回测';
+    refs.forecastBacktestMessage.textContent = '正在加载回测数据...';
+    refs.forecastBacktestDialog.showModal();
+    refs.forecastBacktestClose.focus({ preventScroll: true });
+    await loadChartById(kind === 'ndx' ? 'ndx' : 'vix');
+    if (refs.forecastBacktestDialog.open) {
+      renderForecastBacktest();
+      renderMeta();
+    }
+  }
+
   async function loadData(fresh, button) {
     var control = button || refs.refresh;
     control.disabled = true;
@@ -2038,8 +2354,19 @@
       if (!response.ok) throw new Error('HTTP ' + response.status);
       var payload = await response.json();
       if (!payload || !Array.isArray(payload.charts)) throw new Error('数据格式无效');
-      data = payload;
+      chartLoadPromises.clear();
+      var splitPayload = payload.charts.some(function (chart) { return !Array.isArray(chart.items); });
+      data = splitPayload
+        ? Object.assign({}, payload, { chartCatalog: payload.charts, charts: [] })
+        : payload;
+      await loadCharts(activeChartIds());
+      if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix']);
+      if (refs.forecastBacktestDialog.open && activeForecastBacktest) {
+        await loadChartById(activeForecastBacktest === 'ndx' ? 'ndx' : 'vix');
+      }
       renderAll();
+      if (refs.forecastDialog.open) renderForecast();
+      if (refs.forecastBacktestDialog.open) renderForecastBacktest();
     } catch (error) {
       refs.meta.textContent = data
         ? '刷新失败，继续显示上一次成功加载的数据。'
@@ -2073,6 +2400,7 @@
       persistConfig();
       syncGroups();
       refs.columns.value = String(config.chartsPerRow);
+      await loadCharts(activeChartIds());
       renderConfigList();
       renderAll();
       refs.configMessage.textContent = '配置已导入。';
@@ -2135,9 +2463,13 @@
       persistConfig();
       renderCards();
     });
-    refs.group.addEventListener('change', function () {
+    refs.group.addEventListener('change', async function () {
       config.selectedGroupId = refs.group.value;
       persistConfig();
+      refs.group.disabled = true;
+      refs.meta.textContent = '正在加载当前分组数据...';
+      await loadCharts(activeChartIds());
+      refs.group.disabled = false;
       renderAll();
     });
     refs.refresh.addEventListener('click', function () { loadData(true); });
@@ -2151,6 +2483,19 @@
       refs.configDialog.showModal();
     });
     refs.compareButton.addEventListener('click', showCompare);
+    refs.forecastButton.addEventListener('click', showForecast);
+    refs.forecastNdxThreshold.addEventListener('input', renderForecast);
+    refs.forecastVixThreshold.addEventListener('input', renderForecast);
+    refs.forecastNdxEditButton.addEventListener('click', function () {
+      editForecastThreshold(refs.forecastNdxThreshold, refs.forecastNdxEditButton);
+    });
+    refs.forecastVixEditButton.addEventListener('click', function () {
+      editForecastThreshold(refs.forecastVixThreshold, refs.forecastVixEditButton);
+    });
+    refs.forecastNdxBacktestButton.addEventListener('click', function () { showForecastBacktest('ndx'); });
+    refs.forecastVixBacktestButton.addEventListener('click', function () { showForecastBacktest('vix'); });
+    refs.forecastBacktestRange.addEventListener('change', renderForecastBacktest);
+    document.querySelector('#forecastSaveButton').addEventListener('click', saveForecastConditions);
     refs.displayButton.addEventListener('click', function () {
       refs.displayMessage.textContent = '';
       refs.displayDialog.showModal();
@@ -2211,12 +2556,13 @@
       if (refs.configFile.files[0]) importConfig(refs.configFile.files[0]);
     });
     document.querySelector('#overallExportConfigButton').addEventListener('click', exportConfig);
-    document.querySelector('#overallResetConfigButton').addEventListener('click', function () {
+    document.querySelector('#overallResetConfigButton').addEventListener('click', async function () {
       if (!window.confirm('恢复默认图表、顺序和分组设置？')) return;
       config = sanitizeConfig(clone(DEFAULT_CONFIG));
       persistConfig();
       syncGroups();
       refs.columns.value = String(config.chartsPerRow);
+      await loadCharts(activeChartIds());
       renderConfigList();
       renderAll();
       refs.configMessage.textContent = '已恢复默认配置。';
@@ -2231,6 +2577,12 @@
     });
     refs.shareholderBarsDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderBarsDialog) refs.shareholderBarsDialog.close();
+    });
+    refs.forecastDialog.addEventListener('click', function (event) {
+      if (event.target === refs.forecastDialog) refs.forecastDialog.close();
+    });
+    refs.forecastBacktestDialog.addEventListener('click', function (event) {
+      if (event.target === refs.forecastBacktestDialog) refs.forecastBacktestDialog.close();
     });
   }
 
@@ -2249,6 +2601,7 @@
     refs.columns.value = String(config.chartsPerRow);
     populateRangeSelect(refs.compareRange, refs.range.value);
     populateRangeSelect(refs.detailRange, refs.range.value);
+    populateRangeSelect(refs.forecastBacktestRange, 'year5');
     refs.shareholderRange.replaceChildren();
     Object.keys(RANGES).filter(function (key) { return key.indexOf('year') === 0; }).forEach(function (key) {
       refs.shareholderRange.append(new Option(RANGES[key].label, key));
