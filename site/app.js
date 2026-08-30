@@ -2489,9 +2489,8 @@
     var sourceSeries = forecastSourceSeries(kind);
     var series = forecastBacktestSeries(kind, sourceSeries);
     var items = filterItems({ items: series, frequency: '日度' }, refs.forecastBacktestRange.value);
-    var sourceItems = kind === 'ndx'
-      ? filterItems({ items: sourceSeries, frequency: '日度' }, refs.forecastBacktestRange.value)
-      : [];
+    var ndxSeries = kind === 'ndx' ? sourceSeries : forecastSourceSeries('ndx');
+    var sourceItems = filterItems({ items: ndxSeries, frequency: '日度' }, refs.forecastBacktestRange.value);
     if (!items.length) {
       refs.forecastBacktestMessage.textContent = '当前时间范围暂无可用数据。';
       renderEmpty(refs.forecastBacktestChart, '暂无可回测的数据');
@@ -2511,7 +2510,7 @@
 
     var width = 900;
     var height = 420;
-    var box = { left: kind === 'ndx' ? 72 : 42, top: 42, width: kind === 'ndx' ? 728 : 770, height: 310 };
+    var box = { left: 72, top: 42, width: 728, height: 310 };
     var times = items.map(function (item) { return Date.parse(item.date + 'T00:00:00Z'); });
     var domainX = [Math.min.apply(null, times), Math.max.apply(null, times)];
     if (domainX[0] === domainX[1]) domainX[1] += 86400000;
@@ -2533,10 +2532,10 @@
         x1: box.left, y1: y, x2: box.left + box.width, y2: y, class: 'chart-grid'
       }));
       var yLabel = createSvg('text', {
-        x: kind === 'ndx' ? box.left - 10 : box.left + box.width + 10,
+        x: box.left - 10,
         y: y + 4,
         class: 'chart-label forecast-backtest-condition-axis-label',
-        'text-anchor': kind === 'ndx' ? 'end' : 'start'
+        'text-anchor': 'end'
       });
       yLabel.textContent = axisValue(domainY[1] - ratio * (domainY[1] - domainY[0]), 2) + unit;
       refs.forecastBacktestChart.append(yLabel);
@@ -2552,10 +2551,10 @@
       }
     }
     var conditionAxisTitle = createSvg('text', {
-      x: kind === 'ndx' ? box.left : box.left + box.width,
+      x: box.left,
       y: 24,
       class: 'overall-chart-unit forecast-backtest-condition-axis-title',
-      'text-anchor': kind === 'ndx' ? 'start' : 'end'
+      'text-anchor': 'start'
     });
     conditionAxisTitle.textContent = kind === 'ndx' ? 'NDX 回撤（%）' : 'VIX（点）';
     refs.forecastBacktestChart.append(conditionAxisTitle);
@@ -2684,10 +2683,11 @@
 
       var tip = ensureTooltip(refs.forecastBacktestChart);
       tip.style.whiteSpace = 'pre-line';
-      tip.textContent = kind === 'ndx'
-        ? formatDate(conditionItem.date, '日度') + '\n回撤：' + conditionItem.value.toFixed(2) + '%' +
-          '\nNDX：' + Number(sourceItem.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点'
-        : formatDate(conditionItem.date, '日度') + '\nVIX：' + conditionItem.value.toFixed(2) + ' 点';
+      tip.textContent = formatDate(conditionItem.date, '日度') +
+        (kind === 'ndx'
+          ? '\n回撤：' + conditionItem.value.toFixed(2) + '%'
+          : '\nVIX：' + conditionItem.value.toFixed(2) + ' 点') +
+        (sourceItem ? '\nNDX：' + Number(sourceItem.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点' : '');
       if (conditionItem.value >= threshold) tip.textContent += '\n已达到条件';
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 70) + 'px';
@@ -2707,15 +2707,15 @@
   async function showForecastBacktest(kind) {
     activeForecastBacktest = kind;
     refs.forecastBacktestLineLabel.textContent = kind === 'ndx' ? '回撤比例' : 'VIX 点位';
-    refs.forecastBacktestSourceKey.hidden = kind !== 'ndx';
-    refs.forecastBacktestSourceLabel.hidden = kind !== 'ndx';
+    refs.forecastBacktestSourceKey.hidden = false;
+    refs.forecastBacktestSourceLabel.hidden = false;
     refs.forecastBacktestTitle.textContent = kind === 'ndx'
       ? 'NDX 历史回撤条件回测'
       : 'VIX 点位条件回测';
     refs.forecastBacktestMessage.textContent = '正在加载回测数据...';
     refs.forecastBacktestDialog.showModal();
     refs.forecastBacktestClose.focus({ preventScroll: true });
-    await loadChartById(kind === 'ndx' ? 'ndx' : 'vix');
+    await loadCharts(kind === 'ndx' ? ['ndx'] : ['vix', 'ndx']);
     if (refs.forecastBacktestDialog.open) {
       renderForecastBacktest();
       renderMeta();
@@ -2740,7 +2740,7 @@
       await loadCharts(activeChartIds());
       if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix']);
       if (refs.forecastBacktestDialog.open && activeForecastBacktest) {
-        await loadChartById(activeForecastBacktest === 'ndx' ? 'ndx' : 'vix');
+        await loadCharts(activeForecastBacktest === 'ndx' ? ['ndx'] : ['vix', 'ndx']);
       }
       renderAll();
       if (refs.forecastDialog.open) renderForecast();
