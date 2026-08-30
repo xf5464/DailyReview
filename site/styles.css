@@ -20,6 +20,15 @@ body {
   background: #f5f7fb;
 }
 
+html:has(#forecastDialog[open]),
+body:has(#forecastDialog[open]) {
+  overflow-x: hidden;
+}
+
+body:has(#forecastDialog[open]) {
+  min-width: 0;
+}
+
 button {
   font: inherit;
 }
@@ -1029,10 +1038,24 @@ tbody tr:last-child td {
 
 .forecast-dialog {
   width: min(680px, calc(100vw - 36px));
+  max-width: calc(100vw - 36px);
+  overflow-x: hidden;
+}
+
+.forecast-dialog .overall-config-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.forecast-dialog .industry-detail-header > div {
+  min-width: 0;
 }
 
 .forecast-summary {
   display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -1049,6 +1072,7 @@ tbody tr:last-child td {
 .forecast-summary strong {
   color: #40506c;
   font-size: 15px;
+  overflow-wrap: anywhere;
 }
 
 .forecast-summary.is-reached {
@@ -1062,10 +1086,12 @@ tbody tr:last-child td {
 
 .forecast-condition-list {
   display: grid;
+  min-width: 0;
   gap: 12px;
 }
 
 .forecast-condition {
+  min-width: 0;
   padding: 16px;
   border: 1px solid #dfe6f1;
   border-radius: 10px;
@@ -1079,21 +1105,33 @@ tbody tr:last-child td {
 
 .forecast-condition-heading {
   display: flex;
+  min-width: 0;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
 }
 
+.forecast-condition-heading > div {
+  min-width: 0;
+  flex: 1;
+}
+
 .forecast-condition h3 {
   margin: 0;
   font-size: 15px;
+  overflow-wrap: anywhere;
 }
 
 .forecast-condition-title-row {
   position: relative;
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 7px;
+}
+
+.forecast-condition-title-row > .forecast-help {
+  position: static;
 }
 
 .forecast-help .overall-detail-help-button {
@@ -1103,13 +1141,13 @@ tbody tr:last-child td {
   cursor: pointer;
 }
 
-.forecast-help .overall-detail-help-tooltip {
+.forecast-condition-title-row > .forecast-help .overall-detail-help-tooltip {
   left: 0;
-  width: min(360px, calc(100vw - 88px));
+  width: min(360px, 100%);
   transform: translate(0, -4px);
 }
 
-.forecast-help.is-open .overall-detail-help-tooltip {
+.forecast-condition-title-row > .forecast-help.is-open .overall-detail-help-tooltip {
   opacity: 1;
   transform: translate(0, 0);
 }
@@ -1138,6 +1176,7 @@ tbody tr:last-child td {
 
 .forecast-threshold {
   display: flex;
+  min-width: 0;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
@@ -1167,6 +1206,38 @@ tbody tr:last-child td {
 
 .forecast-backtest-button {
   min-height: 32px;
+}
+
+@media (max-width: 480px) {
+  .forecast-dialog {
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+  }
+
+  .forecast-dialog .overall-config-card {
+    padding: 16px;
+  }
+
+  .forecast-condition {
+    padding: 12px;
+  }
+
+  .forecast-condition-heading {
+    gap: 10px;
+  }
+
+  .forecast-threshold > label {
+    flex-basis: 100%;
+  }
+
+  .forecast-edit-button,
+  .forecast-backtest-button {
+    flex: 1 1 80px;
+  }
+
+  .forecast-edit-button {
+    margin-left: 0;
+  }
 }
 
 .forecast-backtest-dialog {
