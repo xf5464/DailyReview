@@ -3053,19 +3053,6 @@ body {
   margin: 0;
 }
 
-.site-badge {
-  display: inline-flex;
-  min-height: 30px;
-  align-items: center;
-  padding: 0 11px;
-  border: 1px solid #dfe6f1;
-  border-radius: 999px;
-  color: #526178;
-  background: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 .overall-chart-card[draggable="true"] {
   cursor: grab;
 }
@@ -3187,10 +3174,6 @@ body {
 
   .app-header {
     flex-direction: column;
-  }
-
-  .site-badge {
-    align-self: flex-start;
   }
 
   .overall-chart-grid {

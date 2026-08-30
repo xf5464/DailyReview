@@ -1643,9 +1643,9 @@
   function showDetail(id) {
     activeDetailId = id;
     activeShareholderTableQuarterDate = null;
-    shareholderSortKey = null;
-    shareholderSortDirection = null;
     var chart = chartById(id);
+    shareholderSortKey = chart && chart.chartType === 'stockTable' ? 'count' : null;
+    shareholderSortDirection = shareholderSortKey ? 'descending' : null;
     refs.detailTitle.textContent = chart && chart.title || TITLES[id];
     refs.detailHelp.textContent = DESCRIPTIONS[id] || '暂无说明。';
     refs.detailSource.href = chart && chart.sourceUrl || '#';
