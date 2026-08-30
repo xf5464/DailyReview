@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_CACHE = 'daily-review-app-v1';
+const APP_CACHE = 'daily-review-app-v2';
 const DATA_CACHE = 'daily-review-data-v1';
 const APP_SHELL = [
   './',
@@ -59,11 +59,5 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(networkFirst(request, DATA_CACHE, null, true));
     return;
   }
-  event.respondWith(caches.open(APP_CACHE).then(async (cache) => {
-    const cached = await cache.match(request, { ignoreSearch: true });
-    if (cached) return cached;
-    const response = await fetch(request);
-    if (response.ok) await cache.put(request, response.clone());
-    return response;
-  }));
+  event.respondWith(networkFirst(request, APP_CACHE));
 });

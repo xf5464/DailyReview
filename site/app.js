@@ -647,6 +647,36 @@
     refs.offlineDataDownloadButton.disabled = false;
   }
 
+  function offlineManifestNeedsUpdate(state, manifest) {
+    if (!state || state.schemaVersion !== manifest.schemaVersion) return true;
+    var localCharts = Array.isArray(state.charts) ? state.charts : [];
+    if (localCharts.length !== manifest.charts.length) return true;
+    var localSignatures = new Map(localCharts.map(function (chart) {
+      return [chart.id, chart.signature];
+    }));
+    return manifest.charts.some(function (chart) {
+      return localSignatures.get(chart.id) !== chart.signature;
+    });
+  }
+
+  async function checkOfflineDataUpdateOnLaunch() {
+    if (!offlineDataSupported() || !navigator.onLine) return;
+    try {
+      var manifestResponse = await fetch('data/offline-manifest.json?v=' + Date.now(), { cache: 'no-store' });
+      if (!manifestResponse.ok) return;
+      var manifest = await manifestResponse.json();
+      if (!manifest || manifest.schemaVersion !== 1 || !Array.isArray(manifest.charts)) return;
+      var cache = await caches.open(OFFLINE_DATA_CACHE);
+      var state = await readOfflineState(cache);
+      if (!offlineManifestNeedsUpdate(state, manifest)) return;
+      await showOfflineData(state
+        ? '检测到离线数据有更新，可点击“检查并增量更新”下载变化部分。'
+        : '尚未下载离线数据，可点击“下载全部离线数据”保存到本机。');
+    } catch (error) {
+      // 启动检测失败时保持安静，避免弱网或离线状态打断正常使用。
+    }
+  }
+
   async function responseMatchesHash(response, expectedHash) {
     if (!response || !response.ok || !window.crypto || !window.crypto.subtle) return Boolean(response && response.ok);
     var bytes = await response.clone().arrayBuffer();
@@ -773,15 +803,18 @@
     }
   }
 
-  async function showOfflineData() {
-    refs.offlineDataDialog.showModal();
+  async function showOfflineData(message) {
+    if (!refs.offlineDataDialog.open) refs.offlineDataDialog.showModal();
     refs.offlineDataClose.focus({ preventScroll: true });
     await refreshOfflineDataStatus();
+    if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
   }
 
   function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
-    navigator.serviceWorker.register('service-worker.js').catch(function () {
+    navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+      return registration.update();
+    }).catch(function () {
       // 不支持或注册失败时仍保留普通在线网页功能。
     });
   }
@@ -2511,15 +2544,40 @@
       point.append(title);
       refs.forecastBacktestChart.append(point);
     });
-    var startLabel = createSvg('text', {
-      x: box.left, y: height - 28, class: 'chart-label', 'text-anchor': 'start'
-    });
-    startLabel.textContent = formatDate(items[0].date, '日度');
-    var endLabel = createSvg('text', {
-      x: box.left + box.width, y: height - 28, class: 'chart-label', 'text-anchor': 'end'
-    });
-    endLabel.textContent = formatDate(items.at(-1).date, '日度');
-    refs.forecastBacktestChart.append(startLabel, endLabel);
+    var longerThanThreeYears = domainX[1] - domainX[0] > 3 * 365.25 * 86400000;
+    if (longerThanThreeYears) {
+      var firstYear = new Date(domainX[0]).getUTCFullYear();
+      var lastYear = new Date(domainX[1]).getUTCFullYear();
+      for (var year = firstYear; year <= lastYear; year += 1) {
+        if (year % 2 !== 0) continue;
+        var yearTimestamp = Date.UTC(year, 0, 1);
+        if (yearTimestamp < domainX[0] || yearTimestamp > domainX[1]) continue;
+        var yearX = box.left + (yearTimestamp - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
+        refs.forecastBacktestChart.append(createSvg('line', {
+          x1: yearX, y1: box.top + box.height, x2: yearX, y2: box.top + box.height + 5,
+          class: 'overall-chart-year-tick'
+        }));
+        var yearLabel = createSvg('text', {
+          x: yearX + 3,
+          y: height - 7,
+          class: 'chart-label overall-chart-year-label',
+          'text-anchor': 'start',
+          transform: 'rotate(-90 ' + (yearX + 3) + ' ' + (height - 7) + ')'
+        });
+        yearLabel.textContent = year + '年';
+        refs.forecastBacktestChart.append(yearLabel);
+      }
+    } else {
+      var startLabel = createSvg('text', {
+        x: box.left, y: height - 28, class: 'chart-label', 'text-anchor': 'start'
+      });
+      startLabel.textContent = formatDate(items[0].date, '日度');
+      var endLabel = createSvg('text', {
+        x: box.left + box.width, y: height - 28, class: 'chart-label', 'text-anchor': 'end'
+      });
+      endLabel.textContent = formatDate(items.at(-1).date, '日度');
+      refs.forecastBacktestChart.append(startLabel, endLabel);
+    }
   }
 
   async function showForecastBacktest(kind) {
@@ -2810,6 +2868,7 @@
     syncView();
     loadData(false);
     syncSharedLocalConfig();
+    checkOfflineDataUpdateOnLaunch();
   }
 
   initialize();
