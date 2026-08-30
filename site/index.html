@@ -213,8 +213,44 @@
         </div>
         <div class="overall-config-actions">
           <p class="overall-config-message forecast-message" id="forecastMessage" role="status"></p>
+          <button class="secondary-button" type="button" id="forecastDataButton">条件数据</button>
           <button class="primary-button" type="button" id="forecastSaveButton">保存设置</button>
         </div>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog forecast-data-dialog" id="forecastDataDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">CONDITION DATA</p><h2>条件数据列表</h2></div>
+          <button class="dialog-close-button" type="button" id="forecastDataCloseButton" data-close="forecastDataDialog" aria-label="关闭">×</button>
+        </div>
+        <p class="overall-config-description">选择要查询的条件，并可编辑本次查询阈值。这里的修改仅在当前界面生效，不会改变预测条件设置。</p>
+        <fieldset class="forecast-data-options">
+          <legend>预测条件</legend>
+          <div class="forecast-data-option">
+            <label class="forecast-data-option-check" for="forecastDataNdxEnabled">NDX 距历史最高点回撤<input id="forecastDataNdxEnabled" type="checkbox" name="forecastDataCondition" value="ndx" checked /></label>
+            <label class="forecast-data-threshold" for="forecastDataNdxThreshold"><span>达到或超过</span><input class="level-select" id="forecastDataNdxThreshold" type="number" name="forecastDataThreshold" data-kind="ndx" min="1" max="100" step="1" inputmode="decimal" required /><span>%</span></label>
+          </div>
+          <div class="forecast-data-option">
+            <label class="forecast-data-option-check" for="forecastDataVixEnabled">VIX 恐慌指数<input id="forecastDataVixEnabled" type="checkbox" name="forecastDataCondition" value="vix" checked /></label>
+            <label class="forecast-data-threshold" for="forecastDataVixThreshold"><span>达到或超过</span><input class="level-select" id="forecastDataVixThreshold" type="number" name="forecastDataThreshold" data-kind="vix" min="1" max="200" step="1" inputmode="decimal" required /><span>点</span></label>
+          </div>
+          <div class="forecast-data-option">
+            <label class="forecast-data-option-check" for="forecastDataUnemploymentEnabled">美国失业率<input id="forecastDataUnemploymentEnabled" type="checkbox" name="forecastDataCondition" value="unemployment" checked /></label>
+            <label class="forecast-data-threshold" for="forecastDataUnemploymentThreshold"><span>达到或超过</span><input class="level-select" id="forecastDataUnemploymentThreshold" type="number" name="forecastDataThreshold" data-kind="unemployment" min="1" max="30" step="0.1" inputmode="decimal" required /><span>%</span></label>
+          </div>
+          <div class="forecast-data-option">
+            <label class="forecast-data-option-check" for="forecastDataSahmEnabled">萨姆规则衰退指标<input id="forecastDataSahmEnabled" type="checkbox" name="forecastDataCondition" value="sahm" checked /></label>
+            <label class="forecast-data-threshold" for="forecastDataSahmThreshold"><span>达到或超过</span><input class="level-select" id="forecastDataSahmThreshold" type="number" name="forecastDataThreshold" data-kind="sahm" min="0.1" max="10" step="0.1" inputmode="decimal" required /><span>个百分点</span></label>
+          </div>
+        </fieldset>
+        <div class="forecast-data-actions">
+          <button class="primary-button" type="button" id="forecastDataRunButton">执行</button>
+        </div>
+        <p class="overall-config-message forecast-data-message" id="forecastDataMessage" role="status">请选择条件后执行。</p>
+        <ol class="forecast-data-results" id="forecastDataResults" aria-label="条件数据结果"></ol>
+        <div class="forecast-data-more"><button class="secondary-button" type="button" id="forecastDataMoreButton" hidden>加载更多</button></div>
       </div>
     </dialog>
 

@@ -8,6 +8,12 @@ on:
     - cron: "15 22 * * 0-5"
     - cron: "0 10 * * 1-6"
   workflow_dispatch:
+    inputs:
+      test_email:
+        description: Send one Gmail test message after the build
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -38,6 +44,51 @@ jobs:
 
       - name: Build static site and refresh data
         run: npm run build
+
+      - name: Check forecast alert conditions
+        if: github.event_name == 'schedule'
+        id: forecast
+        env:
+          NDX_DRAWDOWN_THRESHOLD: ${{ vars.NDX_DRAWDOWN_THRESHOLD }}
+          VIX_THRESHOLD: ${{ vars.VIX_THRESHOLD }}
+          UNEMPLOYMENT_THRESHOLD: ${{ vars.UNEMPLOYMENT_THRESHOLD }}
+          SAHM_THRESHOLD: ${{ vars.SAHM_THRESHOLD }}
+        run: node scripts/check-forecast-alert.js --output .forecast-alert.json
+
+      - name: Restore forecast alert notification state
+        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true'
+        id: alert-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .forecast-alert-state
+          key: forecast-alert-${{ steps.forecast.outputs.fingerprint }}
+
+      - name: Send forecast alert email
+        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: node scripts/send-forecast-email.js
+
+      - name: Record forecast alert notification state
+        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        run: mkdir -p .forecast-alert-state && cp .forecast-alert.json .forecast-alert-state/alert.json
+
+      - name: Save forecast alert notification state
+        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .forecast-alert-state
+          key: forecast-alert-${{ steps.forecast.outputs.fingerprint }}
+
+      - name: Send Gmail test email
+        if: github.event_name == 'workflow_dispatch' && inputs.test_email
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: node scripts/send-forecast-email.js --test
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

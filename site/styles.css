@@ -21,11 +21,14 @@ body {
 }
 
 html:has(#forecastDialog[open]),
-body:has(#forecastDialog[open]) {
+html:has(#forecastDataDialog[open]),
+body:has(#forecastDialog[open]),
+body:has(#forecastDataDialog[open]) {
   overflow-x: hidden;
 }
 
-body:has(#forecastDialog[open]) {
+body:has(#forecastDialog[open]),
+body:has(#forecastDataDialog[open]) {
   min-width: 0;
 }
 
@@ -1208,13 +1211,168 @@ tbody tr:last-child td {
   min-height: 32px;
 }
 
+.forecast-data-dialog {
+  width: min(760px, calc(100vw - 36px));
+  max-width: calc(100vw - 36px);
+  overflow-x: hidden;
+}
+
+.forecast-data-dialog .overall-config-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.forecast-data-options {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #dfe6f1;
+  border-radius: 10px;
+}
+
+.forecast-data-options legend {
+  padding: 0 5px;
+  color: #40506c;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.forecast-data-option {
+  display: grid;
+  min-width: 0;
+  gap: 9px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.forecast-data-option-check {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #263650;
+  font-size: 13px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.forecast-data-option-check input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  accent-color: #1f5fd2;
+}
+
+.forecast-data-threshold {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: #52617a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.forecast-data-threshold input {
+  width: 92px;
+  min-width: 0;
+}
+
+.forecast-data-option.is-disabled .forecast-data-threshold {
+  opacity: 0.48;
+}
+
+.forecast-data-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.forecast-data-message {
+  margin-bottom: 8px;
+}
+
+.forecast-data-results {
+  display: grid;
+  max-height: min(52vh, 560px);
+  gap: 10px;
+  margin: 0;
+  padding: 0 4px 0 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.forecast-data-result {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #dfe6f1;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.forecast-data-result time {
+  display: block;
+  margin-bottom: 9px;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.forecast-data-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.forecast-data-value {
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 7px;
+  background: #f8fbff;
+}
+
+.forecast-data-value dt,
+.forecast-data-value dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.forecast-data-value dt {
+  color: #657089;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.forecast-data-value dd {
+  margin-top: 4px;
+  color: #263650;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-data-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 @media (max-width: 480px) {
-  .forecast-dialog {
+  .forecast-dialog,
+  .forecast-data-dialog {
     width: calc(100vw - 20px);
     max-width: calc(100vw - 20px);
   }
 
-  .forecast-dialog .overall-config-card {
+  .forecast-dialog .overall-config-card,
+  .forecast-data-dialog .overall-config-card {
     padding: 16px;
   }
 
@@ -1237,6 +1395,14 @@ tbody tr:last-child td {
 
   .forecast-edit-button {
     margin-left: 0;
+  }
+
+  .forecast-data-options {
+    padding: 10px;
+  }
+
+  .forecast-data-values {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -195,6 +195,16 @@
     unemploymentRatePercent: 6,
     sahmRulePoints: 0.5
   };
+  var FORECAST_DATA_OPTIONS = [
+    { kind: 'ndx', chartId: 'ndx', label: 'NDX 距历史最高点回撤', decimals: 2, unit: '%' },
+    { kind: 'vix', chartId: 'vix', label: 'VIX 恐慌指数', decimals: 2, unit: ' 点' },
+    { kind: 'unemployment', chartId: 'unemploymentRate', label: '美国失业率', decimals: 1, unit: '%' },
+    { kind: 'sahm', chartId: 'sahmRule', label: '萨姆规则衰退指标', decimals: 2, unit: ' 个百分点' }
+  ];
+  var FORECAST_DATA_PAGE_SIZE = 200;
+  var forecastDataRows = [];
+  var forecastDataKinds = [];
+  var forecastDataRenderedCount = 0;
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
     groupOrderVersion: GROUP_ORDER_VERSION,
@@ -342,6 +352,15 @@
     forecastVixBacktestButton: document.querySelector('#forecastVixBacktestButton'),
     forecastUnemploymentBacktestButton: document.querySelector('#forecastUnemploymentBacktestButton'),
     forecastSahmBacktestButton: document.querySelector('#forecastSahmBacktestButton'),
+    forecastDataButton: document.querySelector('#forecastDataButton'),
+    forecastDataDialog: document.querySelector('#forecastDataDialog'),
+    forecastDataClose: document.querySelector('#forecastDataCloseButton'),
+    forecastDataOptions: document.querySelectorAll('input[name="forecastDataCondition"]'),
+    forecastDataThresholdInputs: document.querySelectorAll('input[name="forecastDataThreshold"]'),
+    forecastDataRun: document.querySelector('#forecastDataRunButton'),
+    forecastDataMore: document.querySelector('#forecastDataMoreButton'),
+    forecastDataMessage: document.querySelector('#forecastDataMessage'),
+    forecastDataResults: document.querySelector('#forecastDataResults'),
     forecastBacktestDialog: document.querySelector('#forecastBacktestDialog'),
     forecastBacktestClose: document.querySelector('#forecastBacktestCloseButton'),
     forecastBacktestTitle: document.querySelector('#forecastBacktestTitle'),
@@ -2560,10 +2579,195 @@
   function forecastBacktestSeries(kind, sourceItems) {
     if (kind !== 'ndx') return sourceItems;
     var runningHigh = 0;
+    var runningHighDate = '';
     return sourceItems.map(function (item) {
-      runningHigh = Math.max(runningHigh, item.value);
-      return { date: item.date, value: runningHigh > 0 ? (runningHigh - item.value) / runningHigh * 100 : 0 };
+      if (item.value > runningHigh) {
+        runningHigh = item.value;
+        runningHighDate = item.date;
+      }
+      return {
+        date: item.date,
+        value: runningHigh > 0 ? (runningHigh - item.value) / runningHigh * 100 : 0,
+        highDate: runningHighDate,
+        highValue: runningHigh
+      };
     });
+  }
+
+  function forecastDataOption(kind) {
+    return FORECAST_DATA_OPTIONS.find(function (option) { return option.kind === kind; });
+  }
+
+  function forecastDataThresholds() {
+    return Array.from(refs.forecastDataThresholdInputs).reduce(function (thresholds, input) {
+      thresholds[input.dataset.kind] = Number(input.value);
+      return thresholds;
+    }, {});
+  }
+
+  function forecastDataDefaults() {
+    var thresholds = forecastThresholdsFromInputs();
+    return {
+      ndx: thresholds.ndxDrawdownPercent,
+      vix: thresholds.vixLevel,
+      unemployment: thresholds.unemploymentRatePercent,
+      sahm: thresholds.sahmRulePoints
+    };
+  }
+
+  function syncForecastDataOptionState(input) {
+    var option = input.closest('.forecast-data-option');
+    var threshold = option.querySelector('input[name="forecastDataThreshold"]');
+    threshold.disabled = !input.checked;
+    option.classList.toggle('is-disabled', !input.checked);
+  }
+
+  function selectedForecastDataKinds() {
+    return Array.from(refs.forecastDataOptions)
+      .filter(function (input) { return input.checked; })
+      .map(function (input) { return input.value; });
+  }
+
+  function showForecastData() {
+    var defaults = forecastDataDefaults();
+    refs.forecastDataOptions.forEach(function (input) {
+      input.checked = true;
+      syncForecastDataOptionState(input);
+    });
+    refs.forecastDataThresholdInputs.forEach(function (input) {
+      input.value = String(defaults[input.dataset.kind]);
+    });
+    refs.forecastDataMessage.textContent = '请选择条件后执行。';
+    refs.forecastDataResults.replaceChildren();
+    refs.forecastDataMore.hidden = true;
+    forecastDataRows = [];
+    forecastDataKinds = [];
+    forecastDataRenderedCount = 0;
+    refs.forecastDataDialog.showModal();
+    refs.forecastDataClose.focus({ preventScroll: true });
+  }
+
+  function formatForecastDataValue(kind, value) {
+    var option = forecastDataOption(kind);
+    return option && Number.isFinite(value)
+      ? value.toLocaleString('zh-CN', {
+        minimumFractionDigits: option.decimals,
+        maximumFractionDigits: option.decimals
+      }) + option.unit
+      : '—';
+  }
+
+  function renderForecastDataResults(kinds) {
+    var seriesByKind = {};
+    var dates = new Set();
+    var thresholds = forecastDataThresholds();
+    kinds.forEach(function (kind) {
+      var series = forecastBacktestSeries(kind, forecastSourceSeries(kind));
+      seriesByKind[kind] = series;
+      series.forEach(function (item) { dates.add(item.date); });
+    });
+
+    var indexes = {};
+    var latest = {};
+    kinds.forEach(function (kind) { indexes[kind] = -1; });
+    var rows = Array.from(dates).sort().map(function (date) {
+      kinds.forEach(function (kind) {
+        var series = seriesByKind[kind];
+        while (indexes[kind] + 1 < series.length && series[indexes[kind] + 1].date <= date) {
+          indexes[kind] += 1;
+          latest[kind] = series[indexes[kind]];
+        }
+      });
+      return {
+        date: date,
+        values: kinds.reduce(function (values, kind) {
+          values[kind] = latest[kind] ? latest[kind].value : null;
+          return values;
+        }, {})
+      };
+    }).filter(function (row) {
+      return kinds.every(function (kind) {
+        return Number.isFinite(row.values[kind]) && row.values[kind] >= thresholds[kind];
+      });
+    }).reverse();
+
+    refs.forecastDataResults.replaceChildren();
+    if (!rows.length) {
+      refs.forecastDataMessage.textContent = '暂无所有已选条件同时达到阈值的日期。';
+      refs.forecastDataMore.hidden = true;
+      return;
+    }
+
+    forecastDataRows = rows;
+    forecastDataKinds = kinds.slice();
+    forecastDataRenderedCount = 0;
+    appendForecastDataResults();
+  }
+
+  function appendForecastDataResults() {
+    var end = Math.min(forecastDataRenderedCount + FORECAST_DATA_PAGE_SIZE, forecastDataRows.length);
+    var fragment = document.createDocumentFragment();
+    forecastDataRows.slice(forecastDataRenderedCount, end).forEach(function (row) {
+      var item = document.createElement('li');
+      item.className = 'forecast-data-result';
+      var time = document.createElement('time');
+      time.dateTime = row.date;
+      time.textContent = formatDate(row.date, '日度');
+      var values = document.createElement('dl');
+      values.className = 'forecast-data-values';
+      forecastDataKinds.forEach(function (kind) {
+        var option = forecastDataOption(kind);
+        var value = document.createElement('div');
+        value.className = 'forecast-data-value';
+        var name = document.createElement('dt');
+        name.textContent = option.label;
+        var number = document.createElement('dd');
+        number.textContent = formatForecastDataValue(kind, row.values[kind]);
+        value.append(name, number);
+        values.append(value);
+      });
+      item.append(time, values);
+      fragment.append(item);
+    });
+    refs.forecastDataResults.append(fragment);
+    forecastDataRenderedCount = end;
+    refs.forecastDataMore.hidden = forecastDataRenderedCount >= forecastDataRows.length;
+    refs.forecastDataMessage.textContent = '共 ' + forecastDataRows.length.toLocaleString('zh-CN') +
+      ' 个日期同时满足所选条件，按时间倒序排列；已显示 ' +
+      forecastDataRenderedCount.toLocaleString('zh-CN') + ' 条。';
+  }
+
+  async function runForecastData() {
+    var kinds = selectedForecastDataKinds();
+    if (!kinds.length) {
+      refs.forecastDataMessage.textContent = '请至少勾选一个预测条件。';
+      refs.forecastDataResults.replaceChildren();
+      return;
+    }
+    var invalidThreshold = kinds.some(function (kind) {
+      var input = Array.from(refs.forecastDataThresholdInputs).find(function (item) {
+        return item.dataset.kind === kind;
+      });
+      return !input || !input.checkValidity() || !Number.isFinite(Number(input.value));
+    });
+    if (invalidThreshold) {
+      refs.forecastDataMessage.textContent = '请输入有效阈值：NDX 1–100%，VIX 1–200 点，失业率 1–30%，萨姆规则 0.1–10 个百分点。';
+      refs.forecastDataResults.replaceChildren();
+      refs.forecastDataMore.hidden = true;
+      return;
+    }
+    refs.forecastDataRun.disabled = true;
+    refs.forecastDataRun.textContent = '执行中...';
+    refs.forecastDataMessage.textContent = '正在加载所选条件的数据...';
+    refs.forecastDataResults.replaceChildren();
+    refs.forecastDataMore.hidden = true;
+    try {
+      await loadCharts(kinds.map(function (kind) { return forecastDataOption(kind).chartId; }));
+      if (refs.forecastDataDialog.open) renderForecastDataResults(kinds);
+    } finally {
+      refs.forecastDataRun.disabled = false;
+      refs.forecastDataRun.textContent = '执行';
+    }
   }
 
   function renderForecastBacktest() {
@@ -2690,6 +2894,11 @@
       });
       var title = createSvg('title');
       title.textContent = formatDate(item.date, frequency) + ' · ' + item.value.toFixed(2) + unit + ' · 已达到条件';
+      if (kind === 'ndx' && item.highDate && Number.isFinite(item.highValue)) {
+        title.textContent += ' · 历史最高点 ' +
+          Number(item.highValue).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) +
+          ' 点（' + formatDate(item.highDate, '日度') + '）';
+      }
       point.append(title);
       refs.forecastBacktestChart.append(point);
     });
@@ -2781,7 +2990,9 @@
       tip.style.whiteSpace = 'pre-line';
       tip.textContent = formatDate(conditionItem.date, frequency) +
         (kind === 'ndx'
-          ? '\n回撤：' + conditionItem.value.toFixed(2) + '%'
+          ? '\n回撤：' + conditionItem.value.toFixed(2) + '%' +
+            '\n历史最高点日期：' + formatDate(conditionItem.highDate, '日度') +
+            '\n历史最高点：' + Number(conditionItem.highValue).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点'
           : (kind === 'vix'
             ? '\nVIX：' + conditionItem.value.toFixed(2) + ' 点'
             : (kind === 'unemployment'
@@ -2995,6 +3206,12 @@
     refs.forecastVixBacktestButton.addEventListener('click', function () { showForecastBacktest('vix'); });
     refs.forecastUnemploymentBacktestButton.addEventListener('click', function () { showForecastBacktest('unemployment'); });
     refs.forecastSahmBacktestButton.addEventListener('click', function () { showForecastBacktest('sahm'); });
+    refs.forecastDataButton.addEventListener('click', showForecastData);
+    refs.forecastDataRun.addEventListener('click', runForecastData);
+    refs.forecastDataMore.addEventListener('click', appendForecastDataResults);
+    refs.forecastDataOptions.forEach(function (input) {
+      input.addEventListener('change', function () { syncForecastDataOptionState(input); });
+    });
     document.querySelectorAll('.forecast-help').forEach(function (help) {
       var button = help.querySelector('.overall-detail-help-button');
       button.addEventListener('click', function (event) {
@@ -3107,6 +3324,9 @@
     });
     refs.forecastBacktestDialog.addEventListener('click', function (event) {
       if (event.target === refs.forecastBacktestDialog) refs.forecastBacktestDialog.close();
+    });
+    refs.forecastDataDialog.addEventListener('click', function (event) {
+      if (event.target === refs.forecastDataDialog) refs.forecastDataDialog.close();
     });
   }
 

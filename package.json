@@ -38,5 +38,8 @@
       "target": "nsis",
       "artifactName": "Daily-Review-Setup-${version}.${ext}"
     }
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.6"
   }
 }
