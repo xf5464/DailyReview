@@ -124,7 +124,16 @@
         <div class="forecast-condition-list">
           <section class="forecast-condition" id="forecastNdxCondition">
             <div class="forecast-condition-heading">
-              <div><h3>NDX 距历史最高点回撤</h3><p id="forecastNdxDetail">正在读取纳斯达克 100 指数...</p></div>
+              <div>
+                <div class="forecast-condition-title-row">
+                  <h3>NDX 距历史最高点回撤</h3>
+                  <span class="overall-detail-help forecast-help">
+                    <button class="overall-detail-help-button" type="button" aria-label="查看 NDX 回撤指标说明" aria-expanded="false">?</button>
+                    <span class="overall-detail-help-tooltip" role="tooltip">表示 NDX 当前点位相对截至当前的历史最高点下跌了多少。数值越大，代表市场回撤越深；达到设置的百分比时命中条件。</span>
+                  </span>
+                </div>
+                <p id="forecastNdxDetail">正在读取纳斯达克 100 指数...</p>
+              </div>
               <span class="forecast-status" id="forecastNdxStatus">等待数据</span>
             </div>
             <div class="forecast-threshold">
@@ -137,7 +146,16 @@
           </section>
           <section class="forecast-condition" id="forecastVixCondition">
             <div class="forecast-condition-heading">
-              <div><h3>VIX 恐慌指数</h3><p id="forecastVixDetail">正在读取 VIX...</p></div>
+              <div>
+                <div class="forecast-condition-title-row">
+                  <h3>VIX 恐慌指数</h3>
+                  <span class="overall-detail-help forecast-help">
+                    <button class="overall-detail-help-button" type="button" aria-label="查看 VIX 指标说明" aria-expanded="false">?</button>
+                    <span class="overall-detail-help-tooltip" role="tooltip">由标普 500 期权价格推算未来约 30 天的预期波动率。数值越高，通常代表市场不确定性和避险情绪越强；达到设置点位时命中条件。</span>
+                  </span>
+                </div>
+                <p id="forecastVixDetail">正在读取 VIX...</p>
+              </div>
               <span class="forecast-status" id="forecastVixStatus">等待数据</span>
             </div>
             <div class="forecast-threshold">
@@ -150,7 +168,16 @@
           </section>
           <section class="forecast-condition" id="forecastUnemploymentCondition">
             <div class="forecast-condition-heading">
-              <div><h3>美国失业率</h3><p id="forecastUnemploymentDetail">正在读取美国失业率...</p></div>
+              <div>
+                <div class="forecast-condition-title-row">
+                  <h3>美国失业率</h3>
+                  <span class="overall-detail-help forecast-help">
+                    <button class="overall-detail-help-button" type="button" aria-label="查看美国失业率指标说明" aria-expanded="false">?</button>
+                    <span class="overall-detail-help-tooltip" role="tooltip">美国劳工统计局公布的季节调整 U3 失业率，即失业人口占劳动力人口的比例。这里判断失业率的绝对水平，数值越高通常代表劳动力市场越弱。</span>
+                  </span>
+                </div>
+                <p id="forecastUnemploymentDetail">正在读取美国失业率...</p>
+              </div>
               <span class="forecast-status" id="forecastUnemploymentStatus">等待数据</span>
             </div>
             <div class="forecast-threshold">
@@ -163,7 +190,16 @@
           </section>
           <section class="forecast-condition" id="forecastSahmCondition">
             <div class="forecast-condition-heading">
-              <div><h3>萨姆规则衰退指标</h3><p id="forecastSahmDetail">正在读取萨姆规则...</p></div>
+              <div>
+                <div class="forecast-condition-title-row">
+                  <h3>萨姆规则衰退指标</h3>
+                  <span class="overall-detail-help forecast-help">
+                    <button class="overall-detail-help-button" type="button" aria-label="查看萨姆规则指标说明" aria-expanded="false">?</button>
+                    <span class="overall-detail-help-tooltip" role="tooltip">最近 3 个月平均失业率，相比过去 12 个月内最低的 3 个月平均值上升的幅度。达到 0.5 个百分点通常视为衰退启动信号；它衡量失业率上升速度，不是失业率绝对值。</span>
+                  </span>
+                </div>
+                <p id="forecastSahmDetail">正在读取萨姆规则...</p>
+              </div>
               <span class="forecast-status" id="forecastSahmStatus">等待数据</span>
             </div>
             <div class="forecast-threshold">

@@ -1089,6 +1089,31 @@ tbody tr:last-child td {
   font-size: 15px;
 }
 
+.forecast-condition-title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.forecast-help .overall-detail-help-button {
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.forecast-help .overall-detail-help-tooltip {
+  left: 0;
+  width: min(360px, calc(100vw - 88px));
+  transform: translate(0, -4px);
+}
+
+.forecast-help.is-open .overall-detail-help-tooltip {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
 .forecast-condition p {
   margin: 6px 0 0;
   color: #657089;

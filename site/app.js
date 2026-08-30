@@ -2995,6 +2995,26 @@
     refs.forecastVixBacktestButton.addEventListener('click', function () { showForecastBacktest('vix'); });
     refs.forecastUnemploymentBacktestButton.addEventListener('click', function () { showForecastBacktest('unemployment'); });
     refs.forecastSahmBacktestButton.addEventListener('click', function () { showForecastBacktest('sahm'); });
+    document.querySelectorAll('.forecast-help').forEach(function (help) {
+      var button = help.querySelector('.overall-detail-help-button');
+      button.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var open = !help.classList.contains('is-open');
+        document.querySelectorAll('.forecast-help.is-open').forEach(function (item) {
+          item.classList.remove('is-open');
+          item.querySelector('.overall-detail-help-button').setAttribute('aria-expanded', 'false');
+        });
+        help.classList.toggle('is-open', open);
+        button.setAttribute('aria-expanded', String(open));
+        if (!open) button.blur();
+      });
+    });
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.forecast-help.is-open').forEach(function (help) {
+        help.classList.remove('is-open');
+        help.querySelector('.overall-detail-help-button').setAttribute('aria-expanded', 'false');
+      });
+    });
     refs.forecastBacktestRange.addEventListener('change', renderForecastBacktest);
     document.querySelector('#forecastSaveButton').addEventListener('click', saveForecastConditions);
     refs.displayButton.addEventListener('click', function () {
