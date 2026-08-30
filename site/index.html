@@ -148,6 +148,19 @@
               <button class="secondary-button forecast-backtest-button" type="button" id="forecastVixBacktestButton">回测</button>
             </div>
           </section>
+          <section class="forecast-condition" id="forecastUnemploymentCondition">
+            <div class="forecast-condition-heading">
+              <div><h3>美国失业率</h3><p id="forecastUnemploymentDetail">正在读取美国失业率...</p></div>
+              <span class="forecast-status" id="forecastUnemploymentStatus">等待数据</span>
+            </div>
+            <div class="forecast-threshold">
+              <label for="forecastUnemploymentThreshold">达到或超过</label>
+              <input class="level-select" id="forecastUnemploymentThreshold" type="number" min="1" max="30" step="0.1" inputmode="decimal" disabled />
+              <span>%</span>
+              <button class="secondary-button forecast-edit-button" type="button" id="forecastUnemploymentEditButton">编辑</button>
+              <button class="secondary-button forecast-backtest-button" type="button" id="forecastUnemploymentBacktestButton">回测</button>
+            </div>
+          </section>
         </div>
         <div class="overall-config-actions">
           <p class="overall-config-message forecast-message" id="forecastMessage" role="status"></p>

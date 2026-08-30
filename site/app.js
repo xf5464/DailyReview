@@ -189,7 +189,7 @@
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
   var OFFLINE_DATA_CACHE = 'daily-review-data-v1';
   var OFFLINE_STATE_PATH = 'data/offline-state.json';
-  var DEFAULT_FORECAST_CONDITIONS = { ndxDrawdownPercent: 30, vixLevel: 30 };
+  var DEFAULT_FORECAST_CONDITIONS = { ndxDrawdownPercent: 30, vixLevel: 30, unemploymentRatePercent: 6 };
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
     groupOrderVersion: GROUP_ORDER_VERSION,
@@ -322,9 +322,15 @@
     forecastVixStatus: document.querySelector('#forecastVixStatus'),
     forecastVixThreshold: document.querySelector('#forecastVixThreshold'),
     forecastVixEditButton: document.querySelector('#forecastVixEditButton'),
+    forecastUnemploymentCondition: document.querySelector('#forecastUnemploymentCondition'),
+    forecastUnemploymentDetail: document.querySelector('#forecastUnemploymentDetail'),
+    forecastUnemploymentStatus: document.querySelector('#forecastUnemploymentStatus'),
+    forecastUnemploymentThreshold: document.querySelector('#forecastUnemploymentThreshold'),
+    forecastUnemploymentEditButton: document.querySelector('#forecastUnemploymentEditButton'),
     forecastMessage: document.querySelector('#forecastMessage'),
     forecastNdxBacktestButton: document.querySelector('#forecastNdxBacktestButton'),
     forecastVixBacktestButton: document.querySelector('#forecastVixBacktestButton'),
+    forecastUnemploymentBacktestButton: document.querySelector('#forecastUnemploymentBacktestButton'),
     forecastBacktestDialog: document.querySelector('#forecastBacktestDialog'),
     forecastBacktestClose: document.querySelector('#forecastBacktestCloseButton'),
     forecastBacktestTitle: document.querySelector('#forecastBacktestTitle'),
@@ -565,6 +571,11 @@
           forecastSource.vixLevel,
           DEFAULT_FORECAST_CONDITIONS.vixLevel,
           200
+        ),
+        unemploymentRatePercent: normalizeForecastThreshold(
+          forecastSource.unemploymentRatePercent,
+          DEFAULT_FORECAST_CONDITIONS.unemploymentRatePercent,
+          30
         )
       }
     };
@@ -2367,6 +2378,11 @@
         refs.forecastVixThreshold.value,
         config.forecastConditions.vixLevel,
         200
+      ),
+      unemploymentRatePercent: normalizeForecastThreshold(
+        refs.forecastUnemploymentThreshold.value,
+        config.forecastConditions.unemploymentRatePercent,
+        30
       )
     };
   }
@@ -2411,8 +2427,22 @@
       : 'VIX 数据暂不可用。';
     setForecastCondition(refs.forecastVixCondition, refs.forecastVixStatus, vixReached, vixValue !== null);
 
-    var available = ndxDrawdown !== null || vixValue !== null;
-    var reached = ndxReached || vixReached;
+    var unemployment = chartById('unemploymentRate');
+    var unemploymentItems = (unemployment && Array.isArray(unemployment.items) ? unemployment.items : [])
+      .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
+      .sort(function (left, right) { return left.date.localeCompare(right.date); });
+    var unemploymentLatest = unemploymentItems.at(-1);
+    var unemploymentValue = unemploymentLatest ? Number(unemploymentLatest.value) : null;
+    var unemploymentReached = unemploymentValue !== null &&
+      unemploymentValue >= thresholds.unemploymentRatePercent;
+    refs.forecastUnemploymentDetail.textContent = unemploymentLatest
+      ? '当前 ' + unemploymentValue.toFixed(1) + '%（' + formatDate(unemploymentLatest.date, '月度') + '）。'
+      : '美国失业率数据暂不可用。';
+    setForecastCondition(refs.forecastUnemploymentCondition, refs.forecastUnemploymentStatus,
+      unemploymentReached, unemploymentValue !== null);
+
+    var available = ndxDrawdown !== null || vixValue !== null || unemploymentValue !== null;
+    var reached = ndxReached || vixReached || unemploymentReached;
     refs.forecastSummary.classList.toggle('is-reached', reached);
     refs.forecastSummary.querySelector('strong').textContent = available
       ? (reached ? '已有条件达到' : '尚无条件达到')
@@ -2422,15 +2452,18 @@
   async function showForecast() {
     refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
     refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
+    refs.forecastUnemploymentThreshold.value = String(config.forecastConditions.unemploymentRatePercent);
     refs.forecastNdxThreshold.disabled = true;
     refs.forecastVixThreshold.disabled = true;
+    refs.forecastUnemploymentThreshold.disabled = true;
     refs.forecastNdxEditButton.textContent = '编辑';
     refs.forecastVixEditButton.textContent = '编辑';
+    refs.forecastUnemploymentEditButton.textContent = '编辑';
     refs.forecastMessage.textContent = '';
     renderForecast();
     refs.forecastDialog.showModal();
     refs.forecastDialog.querySelector('.dialog-close-button').focus({ preventScroll: true });
-    await loadCharts(['ndx', 'vix']);
+    await loadCharts(['ndx', 'vix', 'unemploymentRate']);
     if (refs.forecastDialog.open) {
       renderForecast();
       renderMeta();
@@ -2447,25 +2480,31 @@
   function saveForecastConditions() {
     var ndxValue = Number(refs.forecastNdxThreshold.value);
     var vixValue = Number(refs.forecastVixThreshold.value);
+    var unemploymentValue = Number(refs.forecastUnemploymentThreshold.value);
     if (!Number.isFinite(ndxValue) || ndxValue < 1 || ndxValue > 100 ||
-        !Number.isFinite(vixValue) || vixValue < 1 || vixValue > 200) {
-      refs.forecastMessage.textContent = 'NDX 回撤阈值须为 1–100%，VIX 阈值须为 1–200 点。';
+        !Number.isFinite(vixValue) || vixValue < 1 || vixValue > 200 ||
+        !Number.isFinite(unemploymentValue) || unemploymentValue < 1 || unemploymentValue > 30) {
+      refs.forecastMessage.textContent = 'NDX 回撤阈值须为 1–100%，VIX 阈值须为 1–200 点，失业率阈值须为 1–30%。';
       return;
     }
     config.forecastConditions = forecastThresholdsFromInputs();
     refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
     refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
+    refs.forecastUnemploymentThreshold.value = String(config.forecastConditions.unemploymentRatePercent);
     persistConfig();
     refs.forecastNdxThreshold.disabled = true;
     refs.forecastVixThreshold.disabled = true;
+    refs.forecastUnemploymentThreshold.disabled = true;
     refs.forecastNdxEditButton.textContent = '编辑';
     refs.forecastVixEditButton.textContent = '编辑';
+    refs.forecastUnemploymentEditButton.textContent = '编辑';
     renderForecast();
     refs.forecastMessage.textContent = '预测条件已保存到配置。';
   }
 
   function forecastSourceSeries(kind) {
-    var source = chartById(kind === 'ndx' ? 'ndx' : 'vix');
+    var chartId = kind === 'ndx' ? 'ndx' : (kind === 'vix' ? 'vix' : 'unemploymentRate');
+    var source = chartById(chartId);
     return (source && Array.isArray(source.items) ? source.items : [])
       .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
       .map(function (item) { return { date: item.date, value: Number(item.value) }; })
@@ -2484,11 +2523,14 @@
   function renderForecastBacktest() {
     var kind = activeForecastBacktest;
     var thresholds = forecastThresholdsFromInputs();
-    var threshold = kind === 'ndx' ? thresholds.ndxDrawdownPercent : thresholds.vixLevel;
-    var unit = kind === 'ndx' ? '%' : '点';
+    var threshold = kind === 'ndx'
+      ? thresholds.ndxDrawdownPercent
+      : (kind === 'vix' ? thresholds.vixLevel : thresholds.unemploymentRatePercent);
+    var unit = kind === 'vix' ? '点' : '%';
+    var frequency = kind === 'unemployment' ? '月度' : '日度';
     var sourceSeries = forecastSourceSeries(kind);
     var series = forecastBacktestSeries(kind, sourceSeries);
-    var items = filterItems({ items: series, frequency: '日度' }, refs.forecastBacktestRange.value);
+    var items = filterItems({ items: series, frequency: frequency }, refs.forecastBacktestRange.value);
     var ndxSeries = kind === 'ndx' ? sourceSeries : forecastSourceSeries('ndx');
     var sourceItems = filterItems({ items: ndxSeries, frequency: '日度' }, refs.forecastBacktestRange.value);
     if (!items.length) {
@@ -2506,7 +2548,8 @@
       previousHit = hit;
     });
     refs.forecastBacktestMessage.textContent = RANGES[refs.forecastBacktestRange.value].label +
-      ' · 阈值 ' + threshold + unit + ' · 共 ' + hits.length + ' 个交易日达到条件，分布在 ' + episodes + ' 个区段。';
+      ' · 阈值 ' + threshold + unit + ' · 共 ' + hits.length +
+      (kind === 'unemployment' ? ' 个月份' : ' 个交易日') + '达到条件，分布在 ' + episodes + ' 个区段。';
 
     var width = 900;
     var height = 420;
@@ -2556,7 +2599,9 @@
       class: 'overall-chart-unit forecast-backtest-condition-axis-title',
       'text-anchor': 'start'
     });
-    conditionAxisTitle.textContent = kind === 'ndx' ? 'NDX 回撤（%）' : 'VIX（点）';
+    conditionAxisTitle.textContent = kind === 'ndx'
+      ? 'NDX 回撤（%）'
+      : (kind === 'vix' ? 'VIX（点）' : '美国失业率（%）');
     refs.forecastBacktestChart.append(conditionAxisTitle);
     if (sourceDomainY) {
       var sourceAxisTitle = createSvg('text', {
@@ -2593,7 +2638,7 @@
         cx: xFor(item), cy: yFor(item.value), r: 4.5, class: 'forecast-backtest-hit'
       });
       var title = createSvg('title');
-      title.textContent = formatDate(item.date, '日度') + ' · ' + item.value.toFixed(2) + unit + ' · 已达到条件';
+      title.textContent = formatDate(item.date, frequency) + ' · ' + item.value.toFixed(2) + unit + ' · 已达到条件';
       point.append(title);
       refs.forecastBacktestChart.append(point);
     });
@@ -2683,10 +2728,12 @@
 
       var tip = ensureTooltip(refs.forecastBacktestChart);
       tip.style.whiteSpace = 'pre-line';
-      tip.textContent = formatDate(conditionItem.date, '日度') +
+      tip.textContent = formatDate(conditionItem.date, frequency) +
         (kind === 'ndx'
           ? '\n回撤：' + conditionItem.value.toFixed(2) + '%'
-          : '\nVIX：' + conditionItem.value.toFixed(2) + ' 点') +
+          : (kind === 'vix'
+            ? '\nVIX：' + conditionItem.value.toFixed(2) + ' 点'
+            : '\n失业率：' + conditionItem.value.toFixed(2) + '%')) +
         (sourceItem ? '\nNDX：' + Number(sourceItem.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点' : '');
       if (conditionItem.value >= threshold) tip.textContent += '\n已达到条件';
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
@@ -2706,16 +2753,18 @@
 
   async function showForecastBacktest(kind) {
     activeForecastBacktest = kind;
-    refs.forecastBacktestLineLabel.textContent = kind === 'ndx' ? '回撤比例' : 'VIX 点位';
+    refs.forecastBacktestLineLabel.textContent = kind === 'ndx'
+      ? '回撤比例'
+      : (kind === 'vix' ? 'VIX 点位' : '美国失业率');
     refs.forecastBacktestSourceKey.hidden = false;
     refs.forecastBacktestSourceLabel.hidden = false;
     refs.forecastBacktestTitle.textContent = kind === 'ndx'
       ? 'NDX 历史回撤条件回测'
-      : 'VIX 点位条件回测';
+      : (kind === 'vix' ? 'VIX 点位条件回测' : '美国失业率条件回测');
     refs.forecastBacktestMessage.textContent = '正在加载回测数据...';
     refs.forecastBacktestDialog.showModal();
     refs.forecastBacktestClose.focus({ preventScroll: true });
-    await loadCharts(kind === 'ndx' ? ['ndx'] : ['vix', 'ndx']);
+    await loadCharts(kind === 'ndx' ? ['ndx'] : [kind === 'vix' ? 'vix' : 'unemploymentRate', 'ndx']);
     if (refs.forecastBacktestDialog.open) {
       renderForecastBacktest();
       renderMeta();
@@ -2738,9 +2787,11 @@
         ? Object.assign({}, payload, { chartCatalog: payload.charts, charts: [] })
         : payload;
       await loadCharts(activeChartIds());
-      if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix']);
+      if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix', 'unemploymentRate']);
       if (refs.forecastBacktestDialog.open && activeForecastBacktest) {
-        await loadCharts(activeForecastBacktest === 'ndx' ? ['ndx'] : ['vix', 'ndx']);
+        await loadCharts(activeForecastBacktest === 'ndx'
+          ? ['ndx']
+          : [activeForecastBacktest === 'vix' ? 'vix' : 'unemploymentRate', 'ndx']);
       }
       renderAll();
       if (refs.forecastDialog.open) renderForecast();
@@ -2866,14 +2917,19 @@
     refs.forecastButton.addEventListener('click', showForecast);
     refs.forecastNdxThreshold.addEventListener('input', renderForecast);
     refs.forecastVixThreshold.addEventListener('input', renderForecast);
+    refs.forecastUnemploymentThreshold.addEventListener('input', renderForecast);
     refs.forecastNdxEditButton.addEventListener('click', function () {
       editForecastThreshold(refs.forecastNdxThreshold, refs.forecastNdxEditButton);
     });
     refs.forecastVixEditButton.addEventListener('click', function () {
       editForecastThreshold(refs.forecastVixThreshold, refs.forecastVixEditButton);
     });
+    refs.forecastUnemploymentEditButton.addEventListener('click', function () {
+      editForecastThreshold(refs.forecastUnemploymentThreshold, refs.forecastUnemploymentEditButton);
+    });
     refs.forecastNdxBacktestButton.addEventListener('click', function () { showForecastBacktest('ndx'); });
     refs.forecastVixBacktestButton.addEventListener('click', function () { showForecastBacktest('vix'); });
+    refs.forecastUnemploymentBacktestButton.addEventListener('click', function () { showForecastBacktest('unemployment'); });
     refs.forecastBacktestRange.addEventListener('change', renderForecastBacktest);
     document.querySelector('#forecastSaveButton').addEventListener('click', saveForecastConditions);
     refs.displayButton.addEventListener('click', function () {
