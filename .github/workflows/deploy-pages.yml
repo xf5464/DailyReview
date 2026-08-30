@@ -5,8 +5,8 @@ on:
     branches:
       - main
   schedule:
-    - cron: "15 22 * * 0-5"
-    - cron: "0 10 * * 1-6"
+    - cron: "17 22 * * 0-5"
+    - cron: "17 10 * * 1-6"
   workflow_dispatch:
     inputs:
       test_email:
