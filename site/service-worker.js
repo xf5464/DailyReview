@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_CACHE = 'daily-review-app-v2';
+const APP_CACHE = 'daily-review-app-v3';
 const DATA_CACHE = 'daily-review-data-v1';
 const APP_SHELL = [
   './',
@@ -18,12 +18,16 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(Promise.all([
-    caches.keys().then((names) => Promise.all(names
-      .filter((name) => name.startsWith('daily-review-app-') && name !== APP_CACHE)
-      .map((name) => caches.delete(name)))),
-    self.clients.claim(),
-  ]));
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    const previousAppCaches = names.filter((name) => name.startsWith('daily-review-app-') && name !== APP_CACHE);
+    await Promise.all(previousAppCaches.map((name) => caches.delete(name)));
+    await self.clients.claim();
+    if (previousAppCaches.length) {
+      const windows = await self.clients.matchAll({ type: 'window' });
+      await Promise.all(windows.map((client) => client.navigate(client.url)));
+    }
+  })());
 });
 
 async function networkFirst(request, cacheName, fallbackPath, normalizeSearch) {

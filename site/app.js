@@ -2501,7 +2501,7 @@
 
     var width = 900;
     var height = 420;
-    var box = { left: 72, top: 42, width: 790, height: 310 };
+    var box = { left: 42, top: 42, width: 770, height: 310 };
     var times = items.map(function (item) { return Date.parse(item.date + 'T00:00:00Z'); });
     var domainX = [Math.min.apply(null, times), Math.max.apply(null, times)];
     if (domainX[0] === domainX[1]) domainX[1] += 86400000;
@@ -2523,15 +2523,32 @@
         x1: box.left, y1: y, x2: box.left + box.width, y2: y, class: 'chart-grid'
       }));
       var yLabel = createSvg('text', {
-        x: box.left - 10, y: y + 4, class: 'chart-label', 'text-anchor': 'end'
+        x: box.left + box.width + 10, y: y + 4,
+        class: 'chart-label forecast-backtest-axis-label', 'text-anchor': 'start'
       });
-      yLabel.textContent = axisValue(domainY[1] - ratio * (domainY[1] - domainY[0]), 2);
+      yLabel.textContent = axisValue(domainY[1] - ratio * (domainY[1] - domainY[0]), 2) + unit;
       refs.forecastBacktestChart.append(yLabel);
     }
+    var axisTitle = createSvg('text', {
+      x: box.left + box.width,
+      y: 24,
+      class: 'overall-chart-unit forecast-backtest-axis-title',
+      'text-anchor': 'end'
+    });
+    axisTitle.textContent = kind === 'ndx' ? 'NDX 回撤（%）' : 'VIX（点）';
+    refs.forecastBacktestChart.append(axisTitle);
     refs.forecastBacktestChart.append(createSvg('line', {
       x1: box.left, y1: yFor(threshold), x2: box.left + box.width, y2: yFor(threshold),
       class: 'forecast-backtest-threshold-line'
     }));
+    var thresholdLabel = createSvg('text', {
+      x: box.left + box.width + 10,
+      y: yFor(threshold) - 7,
+      class: 'chart-label forecast-backtest-threshold-label',
+      'text-anchor': 'start'
+    });
+    thresholdLabel.textContent = '阈值 ' + threshold + unit;
+    refs.forecastBacktestChart.append(thresholdLabel);
     refs.forecastBacktestChart.append(createSvg('path', {
       d: linePath(items, box, domainX, domainY), class: 'forecast-backtest-line'
     }));
@@ -2544,14 +2561,20 @@
       point.append(title);
       refs.forecastBacktestChart.append(point);
     });
-    var longerThanThreeYears = domainX[1] - domainX[0] > 3 * 365.25 * 86400000;
+    var selectedBacktestRange = RANGES[refs.forecastBacktestRange.value] || {};
+    var longerThanThreeYears = Number(selectedBacktestRange.months) > 36 ||
+      domainX[1] - domainX[0] > 3 * 365.25 * 86400000;
     if (longerThanThreeYears) {
       var firstYear = new Date(domainX[0]).getUTCFullYear();
       var lastYear = new Date(domainX[1]).getUTCFullYear();
+      var visibleYears = [];
       for (var year = firstYear; year <= lastYear; year += 1) {
-        if (year % 2 !== 0) continue;
         var yearTimestamp = Date.UTC(year, 0, 1);
         if (yearTimestamp < domainX[0] || yearTimestamp > domainX[1]) continue;
+        visibleYears.push({ year: year, timestamp: yearTimestamp });
+      }
+      visibleYears.filter(function (_, index) { return index % 2 === 0; }).forEach(function (entry) {
+        var yearTimestamp = entry.timestamp;
         var yearX = box.left + (yearTimestamp - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
         refs.forecastBacktestChart.append(createSvg('line', {
           x1: yearX, y1: box.top + box.height, x2: yearX, y2: box.top + box.height + 5,
@@ -2564,9 +2587,9 @@
           'text-anchor': 'start',
           transform: 'rotate(-90 ' + (yearX + 3) + ' ' + (height - 7) + ')'
         });
-        yearLabel.textContent = year + '年';
+        yearLabel.textContent = entry.year + '年';
         refs.forecastBacktestChart.append(yearLabel);
-      }
+      });
     } else {
       var startLabel = createSvg('text', {
         x: box.left, y: height - 28, class: 'chart-label', 'text-anchor': 'start'
