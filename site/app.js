@@ -1704,7 +1704,9 @@
       renderShareholderTable(refs.detailStockTableBody, displayedRows, true);
       var availableCount = displayedRows.filter(function (row) { return hasNumericValue(row.latestValue); }).length;
       refs.detailMessage.textContent = (activeShareholderTableQuarterDate ? formatDate(activeShareholderTableQuarterDate, '季度') + ' · ' : '') +
-        availableCount + '/' + rows.length + ' 只成分股已有数据；可选择或左右翻季度，点击股票查看单股历史。';
+        availableCount + '/' + rows.length + ' 只成分股已有数据；成分范围：' +
+        (sourceChart.constituentSource || '同花顺影视院线（881274）实时成分股') +
+        '；可选择或左右翻季度，点击股票查看单股历史。';
       return;
     }
     var chart = filteredChart(sourceChart, refs.detailRange.value);

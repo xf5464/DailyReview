@@ -5,6 +5,7 @@ const {
   BEA_NEWS_RSS_URL,
   CBOE_VIX_HISTORY_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
+  TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT,
   RANGE_CONFIG,
   calculateDxy,
   calculateYearOverYear,
@@ -236,6 +237,33 @@ test('film and cinema constituent and shareholder parsers normalize public sourc
     '11.55', '0', '0', '0', '0', '0', '0', '0.28亿', '3.98亿', '45.94亿', '16.96',
   ].map((value) => '<td>' + value + '</td>').join('') + '</tr>';
   assert.equal(parseTonghuashunIndustryConstituents(industryRow)[0].marketCap, 45.94);
+});
+
+test('film and cinema shareholders use the verified constituent snapshot when the industry page fails', async () => {
+  const fetchImpl = async (url) => {
+    if (url.includes('/thshy/detail/code/881274')) {
+      return { ok: false, status: 503, text: async () => '' };
+    }
+    const text = url.includes('/11/last.js') ? TONGHUASHUN_WEEKLY_PRICE
+      : url.includes('RPT_HOLDERNUM_DET') ? EASTMONEY_HOLDER_JSON
+      : url.includes('basic.10jqka.com.cn/mobile/') ? TONGHUASHUN_HOLDER_HTML
+      : '';
+    return { ok: true, status: 200, text: async () => text };
+  };
+
+  const result = await queryMacroOutlook({
+    chartIds: ['filmCinemaShareholders'],
+    fetchImpl,
+    now: new Date('2026-08-30T00:00:00Z'),
+  });
+  const chart = result.charts[0];
+  assert.equal(chart.error, null);
+  assert.equal(chart.rows.length, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.length);
+  assert.equal(chart.rows[0].code, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT[0].code);
+  assert.equal(chart.rows[0].marketCap, undefined);
+  assert.equal(chart.constituentSnapshotDate, '2026-08-30');
+  assert.equal(chart.constituentSource, '内置成分股快照（2026-08-30）');
+  assert.equal(chart.items[0].value, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.length);
 });
 
 test('official ISM snapshot covers the four manufacturing indexes through July 2026', () => {

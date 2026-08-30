@@ -18,6 +18,31 @@ const TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS = Object.freeze([
 ]);
 const TONGHUASHUN_TODAY_LIST_URL = 'https://news.10jqka.com.cn/today_list/';
 const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/881274/';
+const TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE = '2026-08-30';
+// 同花顺行业页会在部分云端网络中拒绝访问。此列表由 2026-08-30 成功抓取的
+// 881274 行业页核验，仅作为成分股入口回退；股东人数仍在每次构建时逐股更新。
+const TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT = Object.freeze([
+  { code: '000892', name: '欢瑞世纪' },
+  { code: '002905', name: '金逸影视' },
+  { code: '603103', name: '横店影视' },
+  { code: '600715', name: '文投控股' },
+  { code: '300027', name: 'ST华谊' },
+  { code: '000802', name: '北京文化' },
+  { code: '600977', name: '中国电影' },
+  { code: '300291', name: '百纳千成' },
+  { code: '601595', name: '上海电影' },
+  { code: '002343', name: '慈文传媒' },
+  { code: '002739', name: '儒意电影' },
+  { code: '600088', name: '中视传媒' },
+  { code: '300426', name: '华智数媒' },
+  { code: '300251', name: '光线传媒' },
+  { code: '001330', name: '博纳影业' },
+  { code: '300182', name: '捷成股份' },
+  { code: '300133', name: '华策影视' },
+  { code: '300528', name: '幸福蓝海' },
+  { code: '002292', name: '奥飞娱乐' },
+  { code: '603721', name: '中广天择' },
+]);
 const ENGLISH_MONTH_NUMBERS = Object.freeze({
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
   july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
@@ -1638,11 +1663,20 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(items, range, 'monthly');
     }),
     filmCinemaShareholders: () => loadChart(CHART_METADATA.filmCinemaShareholders, async () => {
-      const industryText = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
-        Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
-      }, 'gb18030');
-      const constituents = parseTonghuashunIndustryConstituents(industryText);
-      if (!constituents.length) throw new Error('同花顺影视院线页面未返回成分股');
+      let constituents = [];
+      let constituentSource = '同花顺影视院线（881274）实时成分股';
+      let constituentSnapshotDate = null;
+      try {
+        const industryText = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
+          Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
+        }, 'gb18030');
+        constituents = parseTonghuashunIndustryConstituents(industryText);
+        if (!constituents.length) throw new Error('同花顺影视院线页面未返回成分股');
+      } catch {
+        constituents = TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.map((stock) => ({ ...stock }));
+        constituentSource = `内置成分股快照（${TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE}）`;
+        constituentSnapshotDate = TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE;
+      }
       const rows = await mapWithConcurrency(constituents, 5, async (stock) => {
         let history = [];
         let historySource = '同花顺 F10';
@@ -1688,7 +1722,12 @@ async function queryMacroOutlook(options = {}) {
       const availableRows = rows.filter((row) => Number.isFinite(row.latestValue));
       if (!availableRows.length) throw new Error('影视院线成分股股东人数暂不可用');
       const latestDate = availableRows.map((row) => row.latestDate).sort().at(-1);
-      return { items: [{ date: latestDate, value: availableRows.length }], rows };
+      return {
+        items: [{ date: latestDate, value: availableRows.length }],
+        rows,
+        constituentSource,
+        constituentSnapshotDate,
+      };
     }),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
       filterRecentItems(parseNasdaq100PeSnapshot(), range, 'monthly')
@@ -1792,6 +1831,7 @@ module.exports = {
   CBOE_VIX_HISTORY_URL,
   BEA_NEWS_RSS_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
+  TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT,
   calculateYearOverYear,
   filterRecentItems,
   mergeSpotWithFuturesSupplement,
