@@ -189,7 +189,12 @@
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
   var OFFLINE_DATA_CACHE = 'daily-review-data-v1';
   var OFFLINE_STATE_PATH = 'data/offline-state.json';
-  var DEFAULT_FORECAST_CONDITIONS = { ndxDrawdownPercent: 30, vixLevel: 30, unemploymentRatePercent: 6 };
+  var DEFAULT_FORECAST_CONDITIONS = {
+    ndxDrawdownPercent: 30,
+    vixLevel: 30,
+    unemploymentRatePercent: 6,
+    sahmRulePoints: 0.5
+  };
   var quarterlyPointSize = DEFAULT_QUARTER_POINT_SIZE;
   var DEFAULT_CONFIG = {
     groupOrderVersion: GROUP_ORDER_VERSION,
@@ -327,10 +332,16 @@
     forecastUnemploymentStatus: document.querySelector('#forecastUnemploymentStatus'),
     forecastUnemploymentThreshold: document.querySelector('#forecastUnemploymentThreshold'),
     forecastUnemploymentEditButton: document.querySelector('#forecastUnemploymentEditButton'),
+    forecastSahmCondition: document.querySelector('#forecastSahmCondition'),
+    forecastSahmDetail: document.querySelector('#forecastSahmDetail'),
+    forecastSahmStatus: document.querySelector('#forecastSahmStatus'),
+    forecastSahmThreshold: document.querySelector('#forecastSahmThreshold'),
+    forecastSahmEditButton: document.querySelector('#forecastSahmEditButton'),
     forecastMessage: document.querySelector('#forecastMessage'),
     forecastNdxBacktestButton: document.querySelector('#forecastNdxBacktestButton'),
     forecastVixBacktestButton: document.querySelector('#forecastVixBacktestButton'),
     forecastUnemploymentBacktestButton: document.querySelector('#forecastUnemploymentBacktestButton'),
+    forecastSahmBacktestButton: document.querySelector('#forecastSahmBacktestButton'),
     forecastBacktestDialog: document.querySelector('#forecastBacktestDialog'),
     forecastBacktestClose: document.querySelector('#forecastBacktestCloseButton'),
     forecastBacktestTitle: document.querySelector('#forecastBacktestTitle'),
@@ -460,10 +471,10 @@
     });
   }
 
-  function normalizeForecastThreshold(value, fallback, maximum) {
+  function normalizeForecastThreshold(value, fallback, maximum, minimum) {
     var parsed = Number(value);
     if (!Number.isFinite(parsed)) return fallback;
-    return Math.min(maximum, Math.max(1, Math.round(parsed * 10) / 10));
+    return Math.min(maximum, Math.max(minimum === undefined ? 1 : minimum, Math.round(parsed * 10) / 10));
   }
 
   function sanitizeConfig(value) {
@@ -576,6 +587,12 @@
           forecastSource.unemploymentRatePercent,
           DEFAULT_FORECAST_CONDITIONS.unemploymentRatePercent,
           30
+        ),
+        sahmRulePoints: normalizeForecastThreshold(
+          forecastSource.sahmRulePoints,
+          DEFAULT_FORECAST_CONDITIONS.sahmRulePoints,
+          10,
+          0.1
         )
       }
     };
@@ -2383,6 +2400,12 @@
         refs.forecastUnemploymentThreshold.value,
         config.forecastConditions.unemploymentRatePercent,
         30
+      ),
+      sahmRulePoints: normalizeForecastThreshold(
+        refs.forecastSahmThreshold.value,
+        config.forecastConditions.sahmRulePoints,
+        10,
+        0.1
       )
     };
   }
@@ -2441,8 +2464,21 @@
     setForecastCondition(refs.forecastUnemploymentCondition, refs.forecastUnemploymentStatus,
       unemploymentReached, unemploymentValue !== null);
 
-    var available = ndxDrawdown !== null || vixValue !== null || unemploymentValue !== null;
-    var reached = ndxReached || vixReached || unemploymentReached;
+    var sahm = chartById('sahmRule');
+    var sahmItems = (sahm && Array.isArray(sahm.items) ? sahm.items : [])
+      .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
+      .sort(function (left, right) { return left.date.localeCompare(right.date); });
+    var sahmLatest = sahmItems.at(-1);
+    var sahmValue = sahmLatest ? Number(sahmLatest.value) : null;
+    var sahmReached = sahmValue !== null && sahmValue >= thresholds.sahmRulePoints;
+    refs.forecastSahmDetail.textContent = sahmLatest
+      ? '当前 ' + sahmValue.toFixed(2) + ' 个百分点（' + formatDate(sahmLatest.date, '月度') + '）。'
+      : '萨姆规则数据暂不可用。';
+    setForecastCondition(refs.forecastSahmCondition, refs.forecastSahmStatus,
+      sahmReached, sahmValue !== null);
+
+    var available = ndxDrawdown !== null || vixValue !== null || unemploymentValue !== null || sahmValue !== null;
+    var reached = ndxReached || vixReached || unemploymentReached || sahmReached;
     refs.forecastSummary.classList.toggle('is-reached', reached);
     refs.forecastSummary.querySelector('strong').textContent = available
       ? (reached ? '已有条件达到' : '尚无条件达到')
@@ -2453,17 +2489,20 @@
     refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
     refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
     refs.forecastUnemploymentThreshold.value = String(config.forecastConditions.unemploymentRatePercent);
+    refs.forecastSahmThreshold.value = String(config.forecastConditions.sahmRulePoints);
     refs.forecastNdxThreshold.disabled = true;
     refs.forecastVixThreshold.disabled = true;
     refs.forecastUnemploymentThreshold.disabled = true;
+    refs.forecastSahmThreshold.disabled = true;
     refs.forecastNdxEditButton.textContent = '编辑';
     refs.forecastVixEditButton.textContent = '编辑';
     refs.forecastUnemploymentEditButton.textContent = '编辑';
+    refs.forecastSahmEditButton.textContent = '编辑';
     refs.forecastMessage.textContent = '';
     renderForecast();
     refs.forecastDialog.showModal();
     refs.forecastDialog.querySelector('.dialog-close-button').focus({ preventScroll: true });
-    await loadCharts(['ndx', 'vix', 'unemploymentRate']);
+    await loadCharts(['ndx', 'vix', 'unemploymentRate', 'sahmRule']);
     if (refs.forecastDialog.open) {
       renderForecast();
       renderMeta();
@@ -2481,29 +2520,36 @@
     var ndxValue = Number(refs.forecastNdxThreshold.value);
     var vixValue = Number(refs.forecastVixThreshold.value);
     var unemploymentValue = Number(refs.forecastUnemploymentThreshold.value);
+    var sahmValue = Number(refs.forecastSahmThreshold.value);
     if (!Number.isFinite(ndxValue) || ndxValue < 1 || ndxValue > 100 ||
         !Number.isFinite(vixValue) || vixValue < 1 || vixValue > 200 ||
-        !Number.isFinite(unemploymentValue) || unemploymentValue < 1 || unemploymentValue > 30) {
-      refs.forecastMessage.textContent = 'NDX 回撤阈值须为 1–100%，VIX 阈值须为 1–200 点，失业率阈值须为 1–30%。';
+        !Number.isFinite(unemploymentValue) || unemploymentValue < 1 || unemploymentValue > 30 ||
+        !Number.isFinite(sahmValue) || sahmValue < 0.1 || sahmValue > 10) {
+      refs.forecastMessage.textContent = 'NDX 回撤阈值须为 1–100%，VIX 阈值须为 1–200 点，失业率阈值须为 1–30%，萨姆规则阈值须为 0.1–10 个百分点。';
       return;
     }
     config.forecastConditions = forecastThresholdsFromInputs();
     refs.forecastNdxThreshold.value = String(config.forecastConditions.ndxDrawdownPercent);
     refs.forecastVixThreshold.value = String(config.forecastConditions.vixLevel);
     refs.forecastUnemploymentThreshold.value = String(config.forecastConditions.unemploymentRatePercent);
+    refs.forecastSahmThreshold.value = String(config.forecastConditions.sahmRulePoints);
     persistConfig();
     refs.forecastNdxThreshold.disabled = true;
     refs.forecastVixThreshold.disabled = true;
     refs.forecastUnemploymentThreshold.disabled = true;
+    refs.forecastSahmThreshold.disabled = true;
     refs.forecastNdxEditButton.textContent = '编辑';
     refs.forecastVixEditButton.textContent = '编辑';
     refs.forecastUnemploymentEditButton.textContent = '编辑';
+    refs.forecastSahmEditButton.textContent = '编辑';
     renderForecast();
     refs.forecastMessage.textContent = '预测条件已保存到配置。';
   }
 
   function forecastSourceSeries(kind) {
-    var chartId = kind === 'ndx' ? 'ndx' : (kind === 'vix' ? 'vix' : 'unemploymentRate');
+    var chartId = kind === 'ndx'
+      ? 'ndx'
+      : (kind === 'vix' ? 'vix' : (kind === 'unemployment' ? 'unemploymentRate' : 'sahmRule'));
     var source = chartById(chartId);
     return (source && Array.isArray(source.items) ? source.items : [])
       .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
@@ -2525,9 +2571,11 @@
     var thresholds = forecastThresholdsFromInputs();
     var threshold = kind === 'ndx'
       ? thresholds.ndxDrawdownPercent
-      : (kind === 'vix' ? thresholds.vixLevel : thresholds.unemploymentRatePercent);
-    var unit = kind === 'vix' ? '点' : '%';
-    var frequency = kind === 'unemployment' ? '月度' : '日度';
+      : (kind === 'vix'
+        ? thresholds.vixLevel
+        : (kind === 'unemployment' ? thresholds.unemploymentRatePercent : thresholds.sahmRulePoints));
+    var unit = kind === 'vix' ? '点' : (kind === 'sahm' ? '个百分点' : '%');
+    var frequency = kind === 'unemployment' || kind === 'sahm' ? '月度' : '日度';
     var sourceSeries = forecastSourceSeries(kind);
     var series = forecastBacktestSeries(kind, sourceSeries);
     var items = filterItems({ items: series, frequency: frequency }, refs.forecastBacktestRange.value);
@@ -2549,7 +2597,8 @@
     });
     refs.forecastBacktestMessage.textContent = RANGES[refs.forecastBacktestRange.value].label +
       ' · 阈值 ' + threshold + unit + ' · 共 ' + hits.length +
-      (kind === 'unemployment' ? ' 个月份' : ' 个交易日') + '达到条件，分布在 ' + episodes + ' 个区段。';
+      (kind === 'unemployment' || kind === 'sahm' ? ' 个月份' : ' 个交易日') +
+      '达到条件，分布在 ' + episodes + ' 个区段。';
 
     var width = 900;
     var height = 420;
@@ -2601,7 +2650,9 @@
     });
     conditionAxisTitle.textContent = kind === 'ndx'
       ? 'NDX 回撤（%）'
-      : (kind === 'vix' ? 'VIX（点）' : '美国失业率（%）');
+      : (kind === 'vix'
+        ? 'VIX（点）'
+        : (kind === 'unemployment' ? '美国失业率（%）' : '萨姆规则（百分点）'));
     refs.forecastBacktestChart.append(conditionAxisTitle);
     if (sourceDomainY) {
       var sourceAxisTitle = createSvg('text', {
@@ -2733,7 +2784,9 @@
           ? '\n回撤：' + conditionItem.value.toFixed(2) + '%'
           : (kind === 'vix'
             ? '\nVIX：' + conditionItem.value.toFixed(2) + ' 点'
-            : '\n失业率：' + conditionItem.value.toFixed(2) + '%')) +
+            : (kind === 'unemployment'
+              ? '\n失业率：' + conditionItem.value.toFixed(2) + '%'
+              : '\n萨姆规则：' + conditionItem.value.toFixed(2) + ' 个百分点'))) +
         (sourceItem ? '\nNDX：' + Number(sourceItem.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 点' : '');
       if (conditionItem.value >= threshold) tip.textContent += '\n已达到条件';
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
@@ -2755,16 +2808,21 @@
     activeForecastBacktest = kind;
     refs.forecastBacktestLineLabel.textContent = kind === 'ndx'
       ? '回撤比例'
-      : (kind === 'vix' ? 'VIX 点位' : '美国失业率');
+      : (kind === 'vix' ? 'VIX 点位' : (kind === 'unemployment' ? '美国失业率' : '萨姆规则'));
     refs.forecastBacktestSourceKey.hidden = false;
     refs.forecastBacktestSourceLabel.hidden = false;
     refs.forecastBacktestTitle.textContent = kind === 'ndx'
       ? 'NDX 历史回撤条件回测'
-      : (kind === 'vix' ? 'VIX 点位条件回测' : '美国失业率条件回测');
+      : (kind === 'vix'
+        ? 'VIX 点位条件回测'
+        : (kind === 'unemployment' ? '美国失业率条件回测' : '萨姆规则条件回测'));
     refs.forecastBacktestMessage.textContent = '正在加载回测数据...';
     refs.forecastBacktestDialog.showModal();
     refs.forecastBacktestClose.focus({ preventScroll: true });
-    await loadCharts(kind === 'ndx' ? ['ndx'] : [kind === 'vix' ? 'vix' : 'unemploymentRate', 'ndx']);
+    await loadCharts(kind === 'ndx' ? ['ndx'] : [
+      kind === 'vix' ? 'vix' : (kind === 'unemployment' ? 'unemploymentRate' : 'sahmRule'),
+      'ndx'
+    ]);
     if (refs.forecastBacktestDialog.open) {
       renderForecastBacktest();
       renderMeta();
@@ -2787,11 +2845,13 @@
         ? Object.assign({}, payload, { chartCatalog: payload.charts, charts: [] })
         : payload;
       await loadCharts(activeChartIds());
-      if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix', 'unemploymentRate']);
+      if (refs.forecastDialog.open) await loadCharts(['ndx', 'vix', 'unemploymentRate', 'sahmRule']);
       if (refs.forecastBacktestDialog.open && activeForecastBacktest) {
         await loadCharts(activeForecastBacktest === 'ndx'
           ? ['ndx']
-          : [activeForecastBacktest === 'vix' ? 'vix' : 'unemploymentRate', 'ndx']);
+          : [activeForecastBacktest === 'vix'
+            ? 'vix'
+            : (activeForecastBacktest === 'unemployment' ? 'unemploymentRate' : 'sahmRule'), 'ndx']);
       }
       renderAll();
       if (refs.forecastDialog.open) renderForecast();
@@ -2918,6 +2978,7 @@
     refs.forecastNdxThreshold.addEventListener('input', renderForecast);
     refs.forecastVixThreshold.addEventListener('input', renderForecast);
     refs.forecastUnemploymentThreshold.addEventListener('input', renderForecast);
+    refs.forecastSahmThreshold.addEventListener('input', renderForecast);
     refs.forecastNdxEditButton.addEventListener('click', function () {
       editForecastThreshold(refs.forecastNdxThreshold, refs.forecastNdxEditButton);
     });
@@ -2927,9 +2988,13 @@
     refs.forecastUnemploymentEditButton.addEventListener('click', function () {
       editForecastThreshold(refs.forecastUnemploymentThreshold, refs.forecastUnemploymentEditButton);
     });
+    refs.forecastSahmEditButton.addEventListener('click', function () {
+      editForecastThreshold(refs.forecastSahmThreshold, refs.forecastSahmEditButton);
+    });
     refs.forecastNdxBacktestButton.addEventListener('click', function () { showForecastBacktest('ndx'); });
     refs.forecastVixBacktestButton.addEventListener('click', function () { showForecastBacktest('vix'); });
     refs.forecastUnemploymentBacktestButton.addEventListener('click', function () { showForecastBacktest('unemployment'); });
+    refs.forecastSahmBacktestButton.addEventListener('click', function () { showForecastBacktest('sahm'); });
     refs.forecastBacktestRange.addEventListener('change', renderForecastBacktest);
     document.querySelector('#forecastSaveButton').addEventListener('click', saveForecastConditions);
     refs.displayButton.addEventListener('click', function () {

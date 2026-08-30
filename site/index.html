@@ -161,6 +161,19 @@
               <button class="secondary-button forecast-backtest-button" type="button" id="forecastUnemploymentBacktestButton">回测</button>
             </div>
           </section>
+          <section class="forecast-condition" id="forecastSahmCondition">
+            <div class="forecast-condition-heading">
+              <div><h3>萨姆规则衰退指标</h3><p id="forecastSahmDetail">正在读取萨姆规则...</p></div>
+              <span class="forecast-status" id="forecastSahmStatus">等待数据</span>
+            </div>
+            <div class="forecast-threshold">
+              <label for="forecastSahmThreshold">达到或超过</label>
+              <input class="level-select" id="forecastSahmThreshold" type="number" min="0.1" max="10" step="0.1" inputmode="decimal" disabled />
+              <span>个百分点</span>
+              <button class="secondary-button forecast-edit-button" type="button" id="forecastSahmEditButton">编辑</button>
+              <button class="secondary-button forecast-backtest-button" type="button" id="forecastSahmBacktestButton">回测</button>
+            </div>
+          </section>
         </div>
         <div class="overall-config-actions">
           <p class="overall-config-message forecast-message" id="forecastMessage" role="status"></p>

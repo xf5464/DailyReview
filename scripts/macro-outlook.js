@@ -481,6 +481,10 @@ const CHART_METADATA = {
     id: 'unemploymentRate', title: '美国失业率', unit: '%', decimals: 1, frequency: '月度',
     sourceName: 'FRED / 美国劳工统计局', sourceUrl: 'https://fred.stlouisfed.org/series/UNRATE',
   },
+  sahmRule: {
+    id: 'sahmRule', title: '萨姆规则衰退指标', unit: '个百分点', decimals: 2, frequency: '月度',
+    sourceName: 'FRED / Claudia Sahm', sourceUrl: 'https://fred.stlouisfed.org/series/SAHMCURRENT',
+  },
   financialConditions: {
     id: 'financialConditions', title: '美国金融状况指数', unit: '指数', decimals: 2, frequency: '周度',
     sourceName: 'FRED / 芝加哥联储', sourceUrl: 'https://fred.stlouisfed.org/series/NFCI',
@@ -1789,6 +1793,10 @@ async function queryMacroOutlook(options = {}) {
     unemploymentRate: () => loadChart(CHART_METADATA.unemploymentRate, async () => {
       const text = await fetchCsv(buildFredUrl('UNRATE', inflationStartDate, endDate), fetchImpl);
       return filterRecentItems(parseFredCsv(text, 'UNRATE'), range, 'monthly');
+    }),
+    sahmRule: () => loadChart(CHART_METADATA.sahmRule, async () => {
+      const text = await fetchCsv(buildFredUrl('SAHMCURRENT', inflationStartDate, endDate), fetchImpl);
+      return filterRecentItems(parseFredCsv(text, 'SAHMCURRENT'), range, 'monthly');
     }),
     financialConditions: () => loadChart(CHART_METADATA.financialConditions, async () => {
       const text = await fetchCsv(buildFredUrl('NFCI', dailyStartDate, endDate), fetchImpl);

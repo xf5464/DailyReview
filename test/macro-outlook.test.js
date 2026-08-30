@@ -488,7 +488,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns thirty-five independent chart payloads', async () => {
+test('macro outlook query returns thirty-six independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -513,6 +513,7 @@ test('macro outlook query returns thirty-five independent chart payloads', async
     BAMLH0A0HYM2: 'observation_date,BAMLH0A0HYM2\n2026-08-20,2.90\n2026-08-21,2.88\n',
     ICSA: 'observation_date,ICSA\n2026-08-15,245000\n',
     UNRATE: 'observation_date,UNRATE\n2026-06-01,4.1\n2026-07-01,4.2\n',
+    SAHMCURRENT: 'observation_date,SAHMCURRENT\n2026-06-01,0.23\n2026-07-01,0.27\n',
     NFCI: 'observation_date,NFCI\n2026-08-14,-0.50\n2026-08-21,-0.48\n',
   };
   const imfData = [
@@ -587,9 +588,9 @@ test('macro outlook query returns thirty-five independent chart payloads', async
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
     'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-    'initialClaims', 'unemploymentRate', 'financialConditions',
+    'initialClaims', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(35).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(36).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -623,6 +624,7 @@ test('macro outlook query returns thirty-five independent chart payloads', async
   assert.equal(result.charts.find((chart) => chart.id === 'ismBacklogOrders').items.at(-1).value, 55);
   assert.equal(result.charts.find((chart) => chart.id === 'initialClaims').items.at(-1).value, 24.5);
   assert.equal(result.charts.find((chart) => chart.id === 'unemploymentRate').items.at(-1).value, 4.2);
+  assert.equal(result.charts.find((chart) => chart.id === 'sahmRule').items.at(-1).value, 0.27);
   assert.equal(result.charts.find((chart) => chart.id === 'financialConditions').items.at(-1).value, -0.48);
 });
 
@@ -699,7 +701,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
         text: async () => makeDbnomicsPayload(ismSeries[1], ismSeries[2], ismSeries[3]),
       };
     }
-    const id = ['DGS10', 'DGS30', 'DFF', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DEXUSEU', 'DEXUSUK', 'DEXCAUS', 'DEXSDUS', 'DEXSZUS', 'DCOILBRENTEU', 'DCOILWTICO', 'PCOPPUSDM', 'DHHNGSP', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'ICSA', 'UNRATE', 'NFCI']
+    const id = ['DGS10', 'DGS30', 'DFF', 'CPIAUCSL', 'CBBTCUSD', 'DEXJPUS', 'DEXUSEU', 'DEXUSUK', 'DEXCAUS', 'DEXSDUS', 'DEXSZUS', 'DCOILBRENTEU', 'DCOILWTICO', 'PCOPPUSDM', 'DHHNGSP', 'NASDAQ100', 'SP500', 'VIXCLS', 'T10Y2Y', 'BAMLH0A0HYM2', 'ICSA', 'UNRATE', 'SAHMCURRENT', 'NFCI']
       .find((seriesId) => url.includes(`id=${seriesId}`));
     const rowsById = {
       DGS10: '2025-08-22,4.2\n2026-08-20,4.7',
@@ -724,6 +726,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
       BAMLH0A0HYM2: '2026-08-20,2.90\n2026-08-21,2.88',
       ICSA: '2026-08-15,245000',
       UNRATE: '2026-06-01,4.1\n2026-07-01,4.2',
+      SAHMCURRENT: '2026-06-01,0.23\n2026-07-01,0.27',
       NFCI: '2026-08-14,-0.50\n2026-08-21,-0.48',
     };
     const rows = rowsById[id];
@@ -763,6 +766,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'ismBacklogOrders').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'initialClaims').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'unemploymentRate').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'sahmRule').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'financialConditions').error, null);
 });
 
