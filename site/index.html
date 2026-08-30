@@ -164,7 +164,11 @@
         </div>
         <div class="overall-compare-controls forecast-backtest-controls">
           <label>时间范围<select class="level-select" id="forecastBacktestRangeSelect"></select></label>
-          <div class="forecast-backtest-legend"><span class="forecast-backtest-line-key"></span>指标曲线 <span class="forecast-backtest-hit-key"></span>达到条件</div>
+          <div class="forecast-backtest-legend">
+            <span class="forecast-backtest-line-key"></span><span id="forecastBacktestLineLabel">指标曲线</span>
+            <span class="forecast-backtest-source-line-key" id="forecastBacktestSourceKey" hidden></span><span id="forecastBacktestSourceLabel" hidden>NDX 指数</span>
+            <span class="forecast-backtest-hit-key"></span>达到条件
+          </div>
         </div>
         <p class="overall-config-message forecast-backtest-message" id="forecastBacktestMessage" role="status"></p>
         <svg class="overall-detail-chart overall-chart forecast-backtest-chart" id="forecastBacktestChart" role="img" aria-label="预测条件历史回测图"></svg>

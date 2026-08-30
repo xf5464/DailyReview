@@ -1166,6 +1166,11 @@ tbody tr:last-child td {
   border-top: 3px solid #2f6fed;
 }
 
+.forecast-backtest-source-line-key {
+  width: 24px;
+  border-top: 3px solid #7c3aed;
+}
+
 .forecast-backtest-hit-key {
   width: 10px;
   height: 10px;
@@ -1188,6 +1193,15 @@ tbody tr:last-child td {
   stroke-width: var(--chart-line-width);
 }
 
+.forecast-backtest-source-line {
+  fill: none;
+  stroke: #7c3aed;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--chart-line-width);
+  opacity: 0.82;
+}
+
 .forecast-backtest-hit {
   fill: #e53e3e;
   stroke: #ffffff;
@@ -1202,14 +1216,24 @@ tbody tr:last-child td {
   opacity: 0.8;
 }
 
-.forecast-backtest-axis-label,
-.forecast-backtest-axis-title {
+.forecast-backtest-condition-axis-label,
+.forecast-backtest-condition-axis-title {
   fill: #2f6fed;
+  font-weight: 700;
+}
+
+.forecast-backtest-source-axis-label,
+.forecast-backtest-source-axis-title {
+  fill: #7c3aed;
   font-weight: 700;
 }
 
 .forecast-backtest-threshold-label {
   fill: #c53030;
+  stroke: #ffffff;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  paint-order: stroke;
   font-size: 10px;
   font-weight: 800;
 }

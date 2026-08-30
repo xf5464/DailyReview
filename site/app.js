@@ -331,6 +331,9 @@
     forecastBacktestRange: document.querySelector('#forecastBacktestRangeSelect'),
     forecastBacktestMessage: document.querySelector('#forecastBacktestMessage'),
     forecastBacktestChart: document.querySelector('#forecastBacktestChart'),
+    forecastBacktestLineLabel: document.querySelector('#forecastBacktestLineLabel'),
+    forecastBacktestSourceKey: document.querySelector('#forecastBacktestSourceKey'),
+    forecastBacktestSourceLabel: document.querySelector('#forecastBacktestSourceLabel'),
     displayButton: document.querySelector('#displayControlsButton'),
     groupsButton: document.querySelector('#overallManageGroupsButton'),
     manageButton: document.querySelector('#overallManageButton'),
@@ -2461,12 +2464,15 @@
     refs.forecastMessage.textContent = '预测条件已保存到配置。';
   }
 
-  function forecastBacktestSeries(kind) {
+  function forecastSourceSeries(kind) {
     var source = chartById(kind === 'ndx' ? 'ndx' : 'vix');
-    var sourceItems = (source && Array.isArray(source.items) ? source.items : [])
+    return (source && Array.isArray(source.items) ? source.items : [])
       .filter(function (item) { return item && item.date && Number.isFinite(Number(item.value)); })
       .map(function (item) { return { date: item.date, value: Number(item.value) }; })
       .sort(function (left, right) { return left.date.localeCompare(right.date); });
+  }
+
+  function forecastBacktestSeries(kind, sourceItems) {
     if (kind !== 'ndx') return sourceItems;
     var runningHigh = 0;
     return sourceItems.map(function (item) {
@@ -2480,8 +2486,12 @@
     var thresholds = forecastThresholdsFromInputs();
     var threshold = kind === 'ndx' ? thresholds.ndxDrawdownPercent : thresholds.vixLevel;
     var unit = kind === 'ndx' ? '%' : '点';
-    var series = forecastBacktestSeries(kind);
+    var sourceSeries = forecastSourceSeries(kind);
+    var series = forecastBacktestSeries(kind, sourceSeries);
     var items = filterItems({ items: series, frequency: '日度' }, refs.forecastBacktestRange.value);
+    var sourceItems = kind === 'ndx'
+      ? filterItems({ items: sourceSeries, frequency: '日度' }, refs.forecastBacktestRange.value)
+      : [];
     if (!items.length) {
       refs.forecastBacktestMessage.textContent = '当前时间范围暂无可用数据。';
       renderEmpty(refs.forecastBacktestChart, '暂无可回测的数据');
@@ -2501,18 +2511,18 @@
 
     var width = 900;
     var height = 420;
-    var box = { left: 42, top: 42, width: 770, height: 310 };
+    var box = { left: kind === 'ndx' ? 72 : 42, top: 42, width: kind === 'ndx' ? 728 : 770, height: 310 };
     var times = items.map(function (item) { return Date.parse(item.date + 'T00:00:00Z'); });
     var domainX = [Math.min.apply(null, times), Math.max.apply(null, times)];
     if (domainX[0] === domainX[1]) domainX[1] += 86400000;
     var domainY = extent(items.map(function (item) { return item.value; }).concat(threshold));
+    var sourceDomainY = sourceItems.length ? extent(sourceItems.map(function (item) { return item.value; })) : null;
     var xFor = function (item) {
       return box.left + (Date.parse(item.date + 'T00:00:00Z') - domainX[0]) / (domainX[1] - domainX[0]) * box.width;
     };
     var yFor = function (value) {
       return box.top + (1 - (value - domainY[0]) / (domainY[1] - domainY[0])) * box.height;
     };
-
     refs.forecastBacktestChart.replaceChildren();
     refs.forecastBacktestChart.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
     refs.forecastBacktestChart.setAttribute('aria-label', refs.forecastBacktestTitle.textContent);
@@ -2523,32 +2533,59 @@
         x1: box.left, y1: y, x2: box.left + box.width, y2: y, class: 'chart-grid'
       }));
       var yLabel = createSvg('text', {
-        x: box.left + box.width + 10, y: y + 4,
-        class: 'chart-label forecast-backtest-axis-label', 'text-anchor': 'start'
+        x: kind === 'ndx' ? box.left - 10 : box.left + box.width + 10,
+        y: y + 4,
+        class: 'chart-label forecast-backtest-condition-axis-label',
+        'text-anchor': kind === 'ndx' ? 'end' : 'start'
       });
       yLabel.textContent = axisValue(domainY[1] - ratio * (domainY[1] - domainY[0]), 2) + unit;
       refs.forecastBacktestChart.append(yLabel);
+      if (sourceDomainY) {
+        var sourceLabel = createSvg('text', {
+          x: box.left + box.width + 10,
+          y: y + 4,
+          class: 'chart-label forecast-backtest-source-axis-label',
+          'text-anchor': 'start'
+        });
+        sourceLabel.textContent = axisValue(sourceDomainY[1] - ratio * (sourceDomainY[1] - sourceDomainY[0]), 0);
+        refs.forecastBacktestChart.append(sourceLabel);
+      }
     }
-    var axisTitle = createSvg('text', {
-      x: box.left + box.width,
+    var conditionAxisTitle = createSvg('text', {
+      x: kind === 'ndx' ? box.left : box.left + box.width,
       y: 24,
-      class: 'overall-chart-unit forecast-backtest-axis-title',
-      'text-anchor': 'end'
+      class: 'overall-chart-unit forecast-backtest-condition-axis-title',
+      'text-anchor': kind === 'ndx' ? 'start' : 'end'
     });
-    axisTitle.textContent = kind === 'ndx' ? 'NDX 回撤（%）' : 'VIX（点）';
-    refs.forecastBacktestChart.append(axisTitle);
+    conditionAxisTitle.textContent = kind === 'ndx' ? 'NDX 回撤（%）' : 'VIX（点）';
+    refs.forecastBacktestChart.append(conditionAxisTitle);
+    if (sourceDomainY) {
+      var sourceAxisTitle = createSvg('text', {
+        x: box.left + box.width,
+        y: 24,
+        class: 'overall-chart-unit forecast-backtest-source-axis-title',
+        'text-anchor': 'end'
+      });
+      sourceAxisTitle.textContent = 'NDX 指数（点）';
+      refs.forecastBacktestChart.append(sourceAxisTitle);
+    }
     refs.forecastBacktestChart.append(createSvg('line', {
       x1: box.left, y1: yFor(threshold), x2: box.left + box.width, y2: yFor(threshold),
       class: 'forecast-backtest-threshold-line'
     }));
     var thresholdLabel = createSvg('text', {
-      x: box.left + box.width + 10,
+      x: box.left + 8,
       y: yFor(threshold) - 7,
       class: 'chart-label forecast-backtest-threshold-label',
       'text-anchor': 'start'
     });
     thresholdLabel.textContent = '阈值 ' + threshold + unit;
     refs.forecastBacktestChart.append(thresholdLabel);
+    if (sourceItems.length) {
+      refs.forecastBacktestChart.append(createSvg('path', {
+        d: linePath(sourceItems, box, domainX, sourceDomainY), class: 'forecast-backtest-source-line'
+      }));
+    }
     refs.forecastBacktestChart.append(createSvg('path', {
       d: linePath(items, box, domainX, domainY), class: 'forecast-backtest-line'
     }));
@@ -2605,6 +2642,9 @@
 
   async function showForecastBacktest(kind) {
     activeForecastBacktest = kind;
+    refs.forecastBacktestLineLabel.textContent = kind === 'ndx' ? '回撤比例' : 'VIX 点位';
+    refs.forecastBacktestSourceKey.hidden = kind !== 'ndx';
+    refs.forecastBacktestSourceLabel.hidden = kind !== 'ndx';
     refs.forecastBacktestTitle.textContent = kind === 'ndx'
       ? 'NDX 历史回撤条件回测'
       : 'VIX 点位条件回测';
