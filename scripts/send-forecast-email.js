@@ -41,11 +41,11 @@ function messageFromAlert(alert) {
     text: [
       "DailyReview 自动构建检测到以下预测条件已达到要求：",
       "",
-      ...lines.map((line) => `- ${line}`),
+      ...(lines.length ? lines.map((line) => `- ${line}`) : ["- 当前没有预测条件达到要求"]),
       "",
+      `需要发送：${alert.shouldNotify ? "是" : "否"}`,
       `触发方式：${triggerType()}`,
       `数据构建时间：${alert.fetchedAt}`,
-      "同一轮持续满足的条件不会重复发送；条件解除后再次达到时会重新提醒。",
     ].join("\n"),
   };
 }
