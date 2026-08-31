@@ -71,33 +71,14 @@ jobs:
           SAHM_THRESHOLD: ${{ vars.SAHM_THRESHOLD }}
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
-      - name: Restore forecast alert notification state
-        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true'
-        id: alert-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .forecast-alert-state
-          key: forecast-alert-${{ steps.forecast.outputs.fingerprint }}
-
       - name: Send forecast alert email
-        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ github.event_name == 'workflow_dispatch' && inputs.trigger_source || '' }}
         run: node scripts/send-forecast-email.js
-
-      - name: Record forecast alert notification state
-        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
-        run: mkdir -p .forecast-alert-state && cp .forecast-alert.json .forecast-alert-state/alert.json
-
-      - name: Save forecast alert notification state
-        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .forecast-alert-state
-          key: forecast-alert-${{ steps.forecast.outputs.fingerprint }}
 
       - name: Send Gmail test email
         if: (github.event_name == 'workflow_dispatch' && inputs.test_email) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[test-email]'))
