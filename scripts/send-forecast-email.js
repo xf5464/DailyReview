@@ -24,7 +24,14 @@ function conditionLine(condition) {
 }
 
 function triggerType() {
-  return String(process.env.GITHUB_EVENT_NAME || "unknown").trim() || "unknown";
+  const eventName = String(process.env.GITHUB_EVENT_NAME || "unknown").trim() || "unknown";
+  const source = String(process.env.TRIGGER_SOURCE || "").trim().toLowerCase();
+
+  if (eventName === "schedule") return "GitHub 定时";
+  if (eventName === "workflow_dispatch" && source === "cloudflare") return "Cloudflare 外部定时";
+  if (eventName === "workflow_dispatch") return "手动触发";
+  if (eventName === "push") return "代码提交";
+  return source || eventName;
 }
 
 function messageFromAlert(alert) {
