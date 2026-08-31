@@ -23,6 +23,10 @@ function conditionLine(condition) {
   return `${base}；最高点 ${formatNumber(condition.highValue)}（${condition.highDate}），当前 NDX ${formatNumber(condition.indexValue)}`;
 }
 
+function triggerType() {
+  return String(process.env.GITHUB_EVENT_NAME || "unknown").trim() || "unknown";
+}
+
 function messageFromAlert(alert) {
   const lines = alert.conditions.map(conditionLine);
   return {
@@ -32,6 +36,7 @@ function messageFromAlert(alert) {
       "",
       ...lines.map((line) => `- ${line}`),
       "",
+      `触发方式：${triggerType()}`,
       `数据构建时间：${alert.fetchedAt}`,
       "同一轮持续满足的条件不会重复发送；条件解除后再次达到时会重新提醒。",
     ].join("\n"),
@@ -45,7 +50,8 @@ function testMessage() {
       "这是一封由 DailyReview GitHub Actions 主动发送的测试邮件。",
       "",
       "Gmail SMTP、应用专用密码以及逗号分隔的收件人配置均已成功工作。",
-      "之后每日两次自动构建会检查预测条件，并在达到要求时发送提醒。",
+      `触发方式：${triggerType()}`,
+      "之后自动构建会检查预测条件，并在达到要求时发送提醒。",
     ].join("\n"),
   };
 }
@@ -76,4 +82,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { conditionLine, messageFromAlert, recipients, testMessage };
+module.exports = { conditionLine, messageFromAlert, recipients, testMessage, triggerType };
