@@ -11,6 +11,11 @@ on:
     - cron: "17 10 * * *"
   workflow_dispatch:
     inputs:
+      run_alert_check:
+        description: Run forecast alert checks and send notifications if needed
+        required: false
+        default: false
+        type: boolean
       test_email:
         description: Send one Gmail test message after the build
         required: false
@@ -52,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Check forecast alert conditions
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)
         id: forecast
         env:
           NDX_DRAWDOWN_THRESHOLD: ${{ vars.NDX_DRAWDOWN_THRESHOLD }}
@@ -62,7 +67,7 @@ jobs:
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Restore forecast alert notification state
-        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true'
+        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true'
         id: alert-cache
         uses: actions/cache/restore@v4
         with:
@@ -70,7 +75,7 @@ jobs:
           key: forecast-alert-${{ steps.forecast.outputs.fingerprint }}
 
       - name: Send forecast alert email
-        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
@@ -78,11 +83,11 @@ jobs:
         run: node scripts/send-forecast-email.js
 
       - name: Record forecast alert notification state
-        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
         run: mkdir -p .forecast-alert-state && cp .forecast-alert.json .forecast-alert-state/alert.json
 
       - name: Save forecast alert notification state
-        if: github.event_name == 'schedule' && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
+        if: (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run_alert_check)) && steps.forecast.outputs.should_notify == 'true' && steps.alert-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .forecast-alert-state
