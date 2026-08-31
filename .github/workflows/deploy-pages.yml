@@ -16,6 +16,11 @@ on:
         required: false
         default: false
         type: boolean
+      trigger_source:
+        description: Trigger source label for alert emails
+        required: false
+        default: manual
+        type: string
       test_email:
         description: Send one Gmail test message after the build
         required: false
@@ -80,6 +85,7 @@ jobs:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          TRIGGER_SOURCE: ${{ github.event_name == 'workflow_dispatch' && inputs.trigger_source || '' }}
         run: node scripts/send-forecast-email.js
 
       - name: Record forecast alert notification state
@@ -99,6 +105,7 @@ jobs:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          TRIGGER_SOURCE: ${{ github.event_name == 'workflow_dispatch' && inputs.trigger_source || '' }}
         run: node scripts/send-forecast-email.js --test
 
       - name: Configure GitHub Pages
