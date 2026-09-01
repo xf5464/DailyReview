@@ -67,7 +67,7 @@ jobs:
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Send forecast alert email
-        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check
+        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true'
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
