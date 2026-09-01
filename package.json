@@ -7,6 +7,7 @@
   "main": "desktop/main.js",
   "scripts": {
     "build": "node scripts/build.js",
+    "update:national-team-etf": "node scripts/update-national-team-etf-holdings.js",
     "dev": "npm run build && electron .",
     "preview": "node scripts/serve.js",
     "desktop": "npm run build && electron .",

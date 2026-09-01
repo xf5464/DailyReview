@@ -1,4 +1,5 @@
 const DEFAULT_MONTH_COUNT = 12;
+const { queryNationalTeamWideEtf } = require('./national-team-wide-etf');
 const REQUEST_TIMEOUT_MS = 20_000;
 const MAX_OIL_SUPPLEMENT_DAYS = 14;
 const WORLD_GOLD_COUNCIL_ORIGIN = 'https://www.gold.org';
@@ -409,6 +410,18 @@ const CHART_METADATA = {
     chartType: 'stockTable',
     sourceName: '同花顺影视院线（881274）/ 同花顺 F10',
     sourceUrl: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
+  },
+  nationalTeamWideEtf: {
+    id: 'nationalTeamWideEtf',
+    title: '国家队宽基 ETF 持仓市值',
+    unit: '亿元',
+    decimals: 2,
+    frequency: '季度',
+    chartType: 'wideEtfTable',
+    sourceName: '新浪基金持有人披露 / 腾讯 ETF 行情',
+    sourceUrl: 'https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/CaihuiFundInfoService.getFundHolder',
+    supplementSourceName: '东方财富备用行情',
+    supplementSourceUrl: 'https://quote.eastmoney.com/center/gridlist.html#fund_etf',
   },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
@@ -1733,6 +1746,9 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate,
       };
     }),
+    nationalTeamWideEtf: () => loadChart(CHART_METADATA.nationalTeamWideEtf, () => (
+      queryNationalTeamWideEtf({ fetchImpl })
+    )),
     nasdaq100Pe: () => loadChart(CHART_METADATA.nasdaq100Pe, async () => (
       filterRecentItems(parseNasdaq100PeSnapshot(), range, 'monthly')
     )),

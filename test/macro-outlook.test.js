@@ -488,7 +488,7 @@ test('oil supplement anchors futures returns to the latest spot price and marks 
   assert.equal(result.at(-1).anchorDate, '2026-08-18');
 });
 
-test('macro outlook query returns thirty-six independent chart payloads', async () => {
+test('macro outlook query returns all independent chart payloads', async () => {
   const fredData = {
     DGS10: 'observation_date,DGS10\n2025-08-22,4.2\n2026-08-20,4.7\n',
     DGS30: 'observation_date,DGS30\n2025-08-22,4.8\n2026-08-20,5.1\n',
@@ -579,6 +579,9 @@ test('macro outlook query returns thirty-six independent chart payloads', async 
         : /10jqka\.com\.cn\/20\d{6}\/c\d+\.shtml/.test(url) ? TONGHUASHUN_NEW_ACCOUNT_HTML
         : url.includes('csindex.com.cn/csindex-home/perf') ? aShareTurnoverData
         : ismPath ? ismData[ismPath]
+        : url.includes('push2his.eastmoney.com') ? JSON.stringify({ rc: 0, data: { klines: [
+          '2016-06-30,1,1.00', '2025-12-31,1,2.00',
+        ] } })
         : url.includes('stock2.finance.sina.com.cn') ? sinaGoldData : seriesId ? fredData[seriesId] : imfData,
     };
   };
@@ -586,11 +589,11 @@ test('macro outlook query returns thirty-six independent chart payloads', async 
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(36).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(37).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
@@ -609,6 +612,7 @@ test('macro outlook query returns thirty-six independent chart payloads', async 
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').items.at(-1).value, 265.54);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').rows.length, 2);
+  assert.equal(result.charts.find((chart) => chart.id === 'nationalTeamWideEtf').chartType, 'wideEtfTable');
   assert.equal(result.charts.find((chart) => chart.id === 'nasdaq100Pe').items.at(-1).value, 33.82);
   assert.equal(result.charts.find((chart) => chart.id === 'ndx').items.at(-1).value, 29308.86);
   assert.equal(result.charts.find((chart) => chart.id === 'sp500').items.at(-1).value, 7780.45);
@@ -642,6 +646,11 @@ test('one failed source does not prevent the remaining charts from loading', asy
     }
     if (url.includes('api.imf.org')) {
       return { ok: true, status: 200, text: async () => 'COUNTRY,INDICATOR,TIME_PERIOD,OBS_VALUE\nG001,PSILVER,2026-M06,55.2\n' };
+    }
+    if (url.includes('push2his.eastmoney.com')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ rc: 0, data: { klines: [
+        '2016-06-30,1,1.00', '2025-12-31,1,2.00',
+      ] } }) };
     }
     if (url.includes('stock2.finance.sina.com.cn')) {
       return { ok: true, status: 200, text: async () => 'var _XAU=([{"date":"2026-08-20","close":"4500"}]);' };

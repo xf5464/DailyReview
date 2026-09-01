@@ -1618,6 +1618,57 @@ tbody tr:last-child td {
   background: #ffffff;
 }
 
+.wide-etf-card-wrap {
+  max-height: 220px;
+}
+
+.wide-etf-card-table,
+.wide-etf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wide-etf-card-table th,
+.wide-etf-card-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #edf1f6;
+  font-size: 12px;
+}
+
+.wide-etf-card-table th {
+  color: #40506c;
+  text-align: left;
+}
+
+.wide-etf-total-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 14px 0;
+  padding: 14px 16px;
+  border: 1px solid #dfe6f1;
+  border-radius: 10px;
+  color: #52617a;
+  background: #f8fbff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wide-etf-total-value strong {
+  color: #b45309;
+  font-size: 20px;
+}
+
+.wide-etf-detail-wrap {
+  max-height: none;
+}
+
+.wide-etf-table th:first-child,
+.wide-etf-table td:first-child {
+  text-align: left;
+}
+
 .shareholder-card-table-wrap {
   max-height: 300px;
 }

@@ -3,7 +3,7 @@
 
   var CHART_IDS = [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions'
@@ -31,6 +31,7 @@
     aShareSentimentThs: '同花顺情绪指数',
     aShareNewAccountsThs: 'A股每月新增开户数',
     filmCinemaShareholders: '影视院线成分股股东人数',
+    nationalTeamWideEtf: '国家队宽基 ETF 持仓市值',
     nasdaq100Pe: '纳斯达克100市盈率（NDX）',
     ndx: 'NDX（纳斯达克100指数）',
     sp500: '标普500指数（SPX）',
@@ -69,6 +70,7 @@
     aShareSentimentThs: 'A股市场情绪',
     aShareNewAccountsThs: 'A股投资者参与',
     filmCinemaShareholders: '影视院线',
+    nationalTeamWideEtf: 'A股机构持仓',
     nasdaq100Pe: '美股估值',
     ndx: '美股指数',
     sp500: '美股指数',
@@ -107,6 +109,7 @@
     aShareSentimentThs: '同花顺官方情绪指数（883404）的日度收盘点位，用于观察 A 股市场情绪变化。该指数历史自 2022 年 8 月开始，点位高低应结合自身历史区间比较。',
     aShareNewAccountsThs: '同花顺财经转述上交所披露的月度 A 股新开户数，包含个人和机构新开账户，单位为万户。该指标统计账户数量，不等同于去重后的新增自然人人数。',
     filmCinemaShareholders: '同花顺影视院线（881274）全部成分股的季度股东人数和当前流通市值。总表支持季度翻页与排序；点击股票可查看股东人数及连续周线收盘价双轴历史。',
+    nationalTeamWideEtf: '合并中央汇金与中央证金公开披露的宽基 ETF 持仓，按报告期最近可用 ETF 价格估算总持仓市值。详情可逐报告季度翻页，并按总额或宽基指数查看可选时间段曲线。',
     nasdaq100Pe: '纳斯达克 100 指数的滚动市盈率（TTM），即指数市值相对过去 12 个月盈利的倍数，用于观察估值高低。',
     ndx: '纳斯达克 100 指数点位，覆盖纳斯达克上市的主要非金融公司，科技和成长型公司的权重较高。',
     sp500: '标普 500 指数点位，覆盖美国约 500 家大型上市公司，是衡量美国大盘股表现的核心基准之一。',
@@ -145,6 +148,7 @@
     aShareSentimentThs: '#d9465f',
     aShareNewAccountsThs: '#2563eb',
     filmCinemaShareholders: '#7c3aed',
+    nationalTeamWideEtf: '#b45309',
     nasdaq100Pe: '#6a42c2',
     ndx: '#335cc7',
     sp500: '#16806a',
@@ -182,7 +186,7 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
-  var GROUP_ORDER_VERSION = 1;
+  var GROUP_ORDER_VERSION = 2;
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
@@ -211,7 +215,7 @@
     chartsPerRow: 4,
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     chartOrder: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'federalDebt',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -219,7 +223,7 @@
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'federalDebt',
+        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
         'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
         'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
         'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -232,12 +236,12 @@
         'initialClaims', 'unemploymentRate', 'broadDollar', 'financialConditions', 'treasuryYield'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
-      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders'],
+      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
       group_primary: ['treasuryYield30', 'cpi', 'unemploymentRate', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'federalDebt',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -273,6 +277,7 @@
       aShareSentimentThs: ['default', 'group_a_share'],
       aShareNewAccountsThs: ['default', 'group_a_share'],
       filmCinemaShareholders: ['default', 'group_a_share'],
+      nationalTeamWideEtf: ['default', 'group_a_share'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
       sp500: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
@@ -298,6 +303,7 @@
   var activeDetailId = null;
   var activeShareholderCode = null;
   var activeShareholderTableQuarterDate = null;
+  var activeWideEtfQuarterDate = null;
   var activeForecastBacktest = null;
   var shareholderSortKey = null;
   var shareholderSortDirection = null;
@@ -400,6 +406,20 @@
     detailExtremes: document.querySelector('#overallDetailExtremes'),
     detailStockTableWrap: document.querySelector('#overallDetailStockTableWrap'),
     detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
+    detailWideEtfTableWrap: document.querySelector('#overallDetailWideEtfTableWrap'),
+    wideEtfQuarter: document.querySelector('#wideEtfQuarterSelect'),
+    wideEtfPreviousQuarter: document.querySelector('#wideEtfPreviousQuarterButton'),
+    wideEtfNextQuarter: document.querySelector('#wideEtfNextQuarterButton'),
+    wideEtfCurveButton: document.querySelector('#wideEtfCurveButton'),
+    wideEtfTotalValue: document.querySelector('#wideEtfTotalValue'),
+    wideEtfTableBody: document.querySelector('#wideEtfTableBody'),
+    wideEtfCurveDialog: document.querySelector('#wideEtfCurveDialog'),
+    wideEtfCurveClose: document.querySelector('#wideEtfCurveCloseButton'),
+    wideEtfCurveTitle: document.querySelector('#wideEtfCurveTitle'),
+    wideEtfCurveSeries: document.querySelector('#wideEtfCurveSeriesSelect'),
+    wideEtfCurveRange: document.querySelector('#wideEtfCurveRangeSelect'),
+    wideEtfCurveMessage: document.querySelector('#wideEtfCurveMessage'),
+    wideEtfCurveChart: document.querySelector('#wideEtfCurveChart'),
     shareholderTableQuarter: document.querySelector('#shareholderTableQuarterSelect'),
     shareholderTablePreviousQuarter: document.querySelector('#shareholderTablePreviousQuarterButton'),
     shareholderTableNextQuarter: document.querySelector('#shareholderTableNextQuarterButton'),
@@ -1238,7 +1258,7 @@
       svg.append(rightUnit);
     }
 
-    var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart;
+    var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart || svg === refs.wideEtfCurveChart;
     var longDetailRange = isDetailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
     if (longDetailRange) {
       var firstYear = new Date(domainX[0]).getUTCFullYear();
@@ -1248,7 +1268,7 @@
         var yearTimestamp = Date.UTC(year, 0, 1);
         if (yearTimestamp >= domainX[0] && yearTimestamp <= domainX[1]) availableYears.push(year);
       }
-      var rawYearStep = Math.max(1, Math.ceil(availableYears.length / 8));
+      var rawYearStep = Math.max(2, Math.ceil(availableYears.length / 8));
       var yearStep = [1, 2, 5, 10, 20, 50].find(function (step) { return step >= rawYearStep; }) || rawYearStep;
       availableYears.filter(function (year) { return year % yearStep === 0; }).forEach(function (year) {
         var yearTimestamp = Date.UTC(year, 0, 1);
@@ -1432,6 +1452,40 @@
     svg.append(overlay);
   }
 
+  function wideEtfItemAt(row, date) {
+    return (row && row.quarterlyItems || []).find(function (item) { return item.date === date; }) || null;
+  }
+
+  function renderWideEtfRows(target, chart, date, compact) {
+    var rows = (chart && chart.rows || []).map(function (row) {
+      return { row: row, item: wideEtfItemAt(row, date) };
+    }).filter(function (entry) { return entry.item && hasNumericValue(entry.item.value); })
+      .sort(function (left, right) { return Number(right.item.value) - Number(left.item.value); });
+    if (compact) rows = rows.slice(0, 6);
+    var body = target.tagName === 'TBODY' ? target : document.createElement('tbody');
+    body.replaceChildren();
+    rows.forEach(function (entry) {
+      var tr = document.createElement('tr');
+      tr.append(createElement('th', '', entry.row.broadIndex));
+      if (!compact) tr.append(createElement('td', 'number-cell', String(entry.item.etfCount || 0)));
+      tr.append(createElement('td', 'number-cell', formatMarketCap(entry.item.value)));
+      if (!compact) tr.append(createElement('td', 'number-cell', entry.item.priceDate || '--'));
+      body.append(tr);
+    });
+    if (!rows.length) {
+      var emptyRow = document.createElement('tr');
+      var emptyCell = createElement('td', 'empty-cell', '该报告期暂无宽基 ETF 持仓');
+      emptyCell.colSpan = compact ? 2 : 4;
+      emptyRow.append(emptyCell);
+      body.append(emptyRow);
+    }
+    if (target.tagName !== 'TBODY') {
+      var table = createElement('table', 'wide-etf-card-table');
+      table.append(body);
+      target.replaceChildren(table);
+    }
+  }
+
   function createCard(chartId) {
     var source = chartById(chartId);
     var chart = filteredChart(source, refs.range.value);
@@ -1484,11 +1538,13 @@
     header.append(heading, actions);
 
     var stockTableChart = chart && chart.chartType === 'stockTable';
+    var wideEtfTableChart = chart && chart.chartType === 'wideEtfTable';
     var availableStockRows = stockTableChart ? (chart.rows || []).filter(function (row) {
       return hasNumericValue(row.latestValue);
     }) : [];
     var summary = createElement('p', 'overall-chart-summary', stockTableChart
       ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
+      : wideEtfTableChart && latest ? formatDate(latest.date, '季度') + ' · 宽基合计 ' + formatMarketCap(latest.value)
       : rangeSummary(chart));
     var svg = createSvg('svg', {
       class: 'overall-chart', role: 'img', 'aria-label': TITLES[chartId] + '曲线'
@@ -1497,6 +1553,9 @@
     if (stockTableChart) {
       cardStockTable = createElement('div', 'shareholder-table-wrap shareholder-card-table-wrap');
       renderShareholderTable(cardStockTable, chart.rows || [], false);
+    } else if (wideEtfTableChart) {
+      cardStockTable = createElement('div', 'shareholder-table-wrap wide-etf-card-wrap');
+      renderWideEtfRows(cardStockTable, chart, latest && latest.date, true);
     } else {
       renderLineChart(svg, chart);
     }
@@ -1519,7 +1578,7 @@
       supplementLink.rel = 'noopener noreferrer';
       sourceLine.append(supplementLink);
     }
-    card.append(header, summary, stockTableChart ? cardStockTable : svg, sourceLine);
+    card.append(header, summary, stockTableChart || wideEtfTableChart ? cardStockTable : svg, sourceLine);
 
     card.addEventListener('dragstart', function (event) {
       draggedChartId = chartId;
@@ -1726,6 +1785,7 @@
   function showDetail(id) {
     activeDetailId = id;
     activeShareholderTableQuarterDate = null;
+    activeWideEtfQuarterDate = null;
     var chart = chartById(id);
     shareholderSortKey = chart && chart.chartType === 'stockTable' ? 'count' : null;
     shareholderSortDirection = shareholderSortKey ? 'descending' : null;
@@ -1742,10 +1802,13 @@
   function renderDetail() {
     var sourceChart = chartById(activeDetailId);
     var stockTableChart = sourceChart && sourceChart.chartType === 'stockTable';
-    refs.detailRangeControl.hidden = Boolean(stockTableChart);
-    refs.detailExtremes.hidden = Boolean(stockTableChart);
-    refs.detailChart.toggleAttribute('hidden', Boolean(stockTableChart));
+    var wideEtfTableChart = sourceChart && sourceChart.chartType === 'wideEtfTable';
+    var customTableChart = stockTableChart || wideEtfTableChart;
+    refs.detailRangeControl.hidden = Boolean(customTableChart);
+    refs.detailExtremes.hidden = Boolean(customTableChart);
+    refs.detailChart.toggleAttribute('hidden', Boolean(customTableChart));
     refs.detailStockTableWrap.hidden = !stockTableChart;
+    refs.detailWideEtfTableWrap.hidden = !wideEtfTableChart;
     if (stockTableChart) {
       var rows = sourceChart.rows || [];
       var quarterDates = Array.from(new Set(rows.flatMap(function (row) {
@@ -1792,6 +1855,26 @@
         '；可选择或左右翻季度，点击股票查看单股历史。';
       return;
     }
+    if (wideEtfTableChart) {
+      var periodDates = (sourceChart.periods || []).map(function (period) { return period.reportDate; });
+      if (!periodDates.includes(activeWideEtfQuarterDate)) activeWideEtfQuarterDate = periodDates.at(-1) || null;
+      refs.wideEtfQuarter.replaceChildren();
+      (sourceChart.periods || []).forEach(function (period) {
+        refs.wideEtfQuarter.append(new Option(period.label, period.reportDate));
+      });
+      refs.wideEtfQuarter.value = activeWideEtfQuarterDate || '';
+      var selectedIndex = periodDates.indexOf(activeWideEtfQuarterDate);
+      refs.wideEtfPreviousQuarter.disabled = selectedIndex <= 0;
+      refs.wideEtfNextQuarter.disabled = selectedIndex < 0 || selectedIndex >= periodDates.length - 1;
+      var totalItem = (sourceChart.items || []).find(function (item) { return item.date === activeWideEtfQuarterDate; });
+      refs.wideEtfTotalValue.textContent = totalItem ? formatMarketCap(totalItem.value) : '--';
+      renderWideEtfRows(refs.wideEtfTableBody, sourceChart, activeWideEtfQuarterDate, false);
+      refs.detailMessage.textContent = (totalItem ? formatDate(totalItem.date, '季度') : '所选报告期') +
+        ' · 合并中央汇金与中央证金 · 已匹配 ' + (sourceChart.pricedEtfs || 0) + '/' +
+        (sourceChart.totalEtfs || 0) + ' 只宽基 ETF 报告期行情；正式披露仅有 Q2、Q4。' +
+        (sourceChart.dataFallback ? ' 本次构建行情源限流，当前显示最近一次成功估算快照。' : '');
+      return;
+    }
     var chart = filteredChart(sourceChart, refs.detailRange.value);
     if (!chart || !chart.items.length) {
       refs.detailMessage.textContent = chart && chart.error || '当前时间范围暂无数据。';
@@ -1810,6 +1893,67 @@
     refs.detailLowValue.textContent = formatValue(chart, lowest.value);
     refs.detailLowDate.textContent = formatDate(lowest.date, chart.frequency);
     renderLineChart(refs.detailChart, chart);
+  }
+
+  function moveWideEtfQuarter(offset) {
+    var chart = chartById('nationalTeamWideEtf');
+    var dates = (chart && chart.periods || []).map(function (period) { return period.reportDate; });
+    var index = dates.indexOf(activeWideEtfQuarterDate);
+    var target = index + offset;
+    if (target < 0 || target >= dates.length) return;
+    activeWideEtfQuarterDate = dates[target];
+    renderDetail();
+  }
+
+  function selectedWideEtfCurveChart() {
+    var source = chartById('nationalTeamWideEtf');
+    if (!source) return null;
+    var key = refs.wideEtfCurveSeries.value;
+    var row = (source.rows || []).find(function (item) { return item.broadIndex === key; });
+    return Object.assign({}, source, {
+      chartType: 'line',
+      title: row ? row.broadIndex + '持仓总市值' : '国家队宽基 ETF 持仓总市值',
+      items: row ? row.quarterlyItems : source.items,
+    });
+  }
+
+  function renderWideEtfCurve() {
+    var source = selectedWideEtfCurveChart();
+    var chart = source ? Object.assign({}, source) : null;
+    if (chart && chart.items.length) {
+      var rangeConfig = RANGES[refs.wideEtfCurveRange.value];
+      var latestDate = new Date(chart.items.at(-1).date + 'T00:00:00Z');
+      var startDate = new Date(latestDate);
+      if (rangeConfig.days) startDate.setUTCDate(startDate.getUTCDate() - rangeConfig.days);
+      if (rangeConfig.months) startDate.setUTCMonth(startDate.getUTCMonth() - rangeConfig.months);
+      var startText = startDate.toISOString().slice(0, 10);
+      chart.items = chart.items.filter(function (item) { return item.date >= startText; });
+      if (!chart.items.length && source.items.length) chart.items = [source.items.at(-1)];
+    }
+    refs.wideEtfCurveTitle.textContent = source ? source.title + '曲线' : '持仓市值曲线';
+    if (!chart || !chart.items.length) {
+      refs.wideEtfCurveMessage.textContent = '所选时间段暂无数据，请选择更长时间跨度。';
+      renderEmpty(refs.wideEtfCurveChart, '暂无可绘制的数据');
+      return;
+    }
+    refs.wideEtfCurveMessage.textContent = RANGES[refs.wideEtfCurveRange.value].label + ' · ' +
+      formatDate(chart.items[0].date, '季度') + ' 至 ' + formatDate(chart.items.at(-1).date, '季度') +
+      ' · 共 ' + chart.items.length + ' 个正式报告期 · 单位：亿元';
+    renderLineChart(refs.wideEtfCurveChart, chart);
+  }
+
+  function showWideEtfCurve() {
+    var chart = chartById('nationalTeamWideEtf');
+    if (!chart) return;
+    refs.wideEtfCurveSeries.replaceChildren(new Option('全部宽基合计', 'total'));
+    (chart.rows || []).forEach(function (row) {
+      refs.wideEtfCurveSeries.append(new Option(row.broadIndex, row.broadIndex));
+    });
+    refs.wideEtfCurveSeries.value = 'total';
+    refs.wideEtfCurveRange.value = 'year5';
+    renderWideEtfCurve();
+    refs.wideEtfCurveDialog.showModal();
+    refs.wideEtfCurveClose.focus({ preventScroll: true });
   }
 
   function hasNumericValue(value) {
@@ -3277,6 +3421,15 @@
     });
     refs.shareholderTablePreviousQuarter.addEventListener('click', function () { moveShareholderTableQuarter(-1); });
     refs.shareholderTableNextQuarter.addEventListener('click', function () { moveShareholderTableQuarter(1); });
+    refs.wideEtfQuarter.addEventListener('change', function () {
+      activeWideEtfQuarterDate = refs.wideEtfQuarter.value;
+      renderDetail();
+    });
+    refs.wideEtfPreviousQuarter.addEventListener('click', function () { moveWideEtfQuarter(-1); });
+    refs.wideEtfNextQuarter.addEventListener('click', function () { moveWideEtfQuarter(1); });
+    refs.wideEtfCurveButton.addEventListener('click', showWideEtfCurve);
+    refs.wideEtfCurveSeries.addEventListener('change', renderWideEtfCurve);
+    refs.wideEtfCurveRange.addEventListener('change', renderWideEtfCurve);
     refs.shareholderBarChartsButton.addEventListener('click', showShareholderBarCharts);
     refs.shareholderBarsSort.addEventListener('change', renderShareholderBarCharts);
     refs.shareholderBarsColumns.addEventListener('change', renderShareholderBarCharts);
@@ -3316,6 +3469,9 @@
     refs.shareholderBarsDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderBarsDialog) refs.shareholderBarsDialog.close();
     });
+    refs.wideEtfCurveDialog.addEventListener('click', function (event) {
+      if (event.target === refs.wideEtfCurveDialog) refs.wideEtfCurveDialog.close();
+    });
     refs.forecastDialog.addEventListener('click', function (event) {
       if (event.target === refs.forecastDialog) refs.forecastDialog.close();
     });
@@ -3346,6 +3502,7 @@
     refs.columns.value = String(config.chartsPerRow);
     populateRangeSelect(refs.compareRange, refs.range.value);
     populateRangeSelect(refs.detailRange, refs.range.value);
+    populateRangeSelect(refs.wideEtfCurveRange, 'year5');
     populateRangeSelect(refs.forecastBacktestRange, 'year5');
     refs.shareholderRange.replaceChildren();
     Object.keys(RANGES).filter(function (key) { return key.indexOf('year') === 0; }).forEach(function (key) {

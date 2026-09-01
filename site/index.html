@@ -345,7 +345,35 @@
             <tbody id="overallDetailStockTableBody"></tbody>
           </table>
         </div>
+        <div class="shareholder-table-wrap wide-etf-detail-wrap" id="overallDetailWideEtfTableWrap" hidden>
+          <div class="shareholder-table-quarter-browser">
+            <button class="secondary-button" type="button" id="wideEtfPreviousQuarterButton">← 上一季度</button>
+            <label>选择季度<select class="level-select" id="wideEtfQuarterSelect"></select></label>
+            <button class="secondary-button" type="button" id="wideEtfNextQuarterButton">下一季度 →</button>
+            <button class="primary-button" type="button" id="wideEtfCurveButton">曲线</button>
+          </div>
+          <div class="wide-etf-total-value"><span>宽基 ETF 持仓总市值</span><strong id="wideEtfTotalValue">--</strong></div>
+          <table class="shareholder-table wide-etf-table">
+            <thead><tr><th>宽基指数</th><th>ETF 数量</th><th>持仓总市值</th><th>行情日期</th></tr></thead>
+            <tbody id="wideEtfTableBody"></tbody>
+          </table>
+        </div>
         <svg class="overall-detail-chart overall-chart" id="overallDetailChart" role="img" aria-label="单指标详情图"></svg>
+      </div>
+    </dialog>
+
+    <dialog class="overall-config-dialog overall-detail-dialog" id="wideEtfCurveDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">国家队宽基 ETF</p><h2 id="wideEtfCurveTitle">持仓市值曲线</h2></div>
+          <button class="dialog-close-button" type="button" id="wideEtfCurveCloseButton" data-close="wideEtfCurveDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>曲线<select class="level-select" id="wideEtfCurveSeriesSelect"></select></label>
+          <label>时间跨度<select class="level-select" id="wideEtfCurveRangeSelect"></select></label>
+        </div>
+        <p class="overall-config-message" id="wideEtfCurveMessage" role="status"></p>
+        <svg class="overall-detail-chart overall-chart" id="wideEtfCurveChart" role="img" aria-label="国家队宽基 ETF 持仓市值曲线"></svg>
       </div>
     </dialog>
 
