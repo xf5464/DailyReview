@@ -16,17 +16,27 @@ async function main() {
 
   const alertPath = path.resolve(process.cwd(), ".forecast-alert.json");
   const alert = JSON.parse(fs.readFileSync(alertPath, "utf8"));
+  const forceTest = String(process.env.FORCE_NOTIFICATION_TEST || "").toLowerCase() === "true";
+  const hasConditions = alert.shouldNotify && Array.isArray(alert.conditions) && alert.conditions.length > 0;
 
-  if (!alert.shouldNotify || !Array.isArray(alert.conditions) || alert.conditions.length === 0) {
+  if (!hasConditions && !forceTest) {
     console.log("No active forecast conditions; Bark notification skipped.");
     return;
   }
 
-  const title = `[DailyReview] ${alert.conditions.length} 项预测条件已达到要求`;
-  const body = [
-    ...alert.conditions.map((condition) => `${condition.label}：${formatValue(condition)}`),
-    `数据构建时间：${alert.fetchedAt || "未知"}`,
-  ].join("\n");
+  const title = hasConditions
+    ? `[DailyReview] ${alert.conditions.length} 项预测条件已达到要求`
+    : "[DailyReview] Bark 推送测试成功";
+  const body = hasConditions
+    ? [
+        ...alert.conditions.map((condition) => `${condition.label}：${formatValue(condition)}`),
+        `数据构建时间：${alert.fetchedAt || "未知"}`,
+      ].join("\n")
+    : [
+        "这是一条由 GitHub Actions 强制发送的测试通知。",
+        "当前没有预测条件达到要求，但测试选项已开启，因此仍执行推送。",
+        `数据构建时间：${alert.fetchedAt || "未知"}`,
+      ].join("\n");
 
   const response = await fetch("https://api.day.app/push", {
     method: "POST",
@@ -53,7 +63,9 @@ async function main() {
     throw new Error(`Bark ${result.code}: ${result.message || result.msg || "unknown error"}`);
   }
 
-  console.log(`Bark notification sent for ${alert.conditions.length} condition(s).`);
+  console.log(hasConditions
+    ? `Bark notification sent for ${alert.conditions.length} condition(s).`
+    : "Bark test notification sent with no active conditions.");
 }
 
 main().catch((error) => {
