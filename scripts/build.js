@@ -28,10 +28,21 @@ function addAssetVersions() {
     .slice(0, 12);
   const appVersion = versionFor('app.js');
   const stylesVersion = versionFor('styles.css');
+  const shellVersion = contentHash([
+    'index.html', 'styles.css', 'app.js', 'service-worker.js', 'manifest.webmanifest', 'icon.svg',
+  ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
   const html = fs.readFileSync(indexPath, 'utf8')
     .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
-    .replace('src="app.js"', `src="app.js?v=${appVersion}"`);
+    .replace('src="app.js"', `src="app.js?v=${appVersion}"`)
+    .replace('__APP_VERSION__', shellVersion);
   fs.writeFileSync(indexPath, html, 'utf8');
+  const workerPath = path.join(outputDirectory, 'service-worker.js');
+  const worker = fs.readFileSync(workerPath, 'utf8').replace('__APP_VERSION__', shellVersion);
+  fs.writeFileSync(workerPath, worker, 'utf8');
+  writeJson(path.join(outputDirectory, 'app-version.json'), {
+    version: shellVersion,
+    publishedAt: new Date().toISOString(),
+  });
 }
 
 async function build() {

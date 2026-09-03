@@ -312,6 +312,7 @@
   var tooltip = null;
   var sharedConfigAvailable = false;
   var sharedConfigSaveQueue = Promise.resolve();
+  var appUpdateReloading = false;
 
   var refs = {
     meta: document.querySelector('#overallPageMeta'),
@@ -331,6 +332,8 @@
     offlineDataProgress: document.querySelector('#offlineDataProgress'),
     offlineDataMessage: document.querySelector('#offlineDataMessage'),
     offlineDataDownloadButton: document.querySelector('#offlineDataDownloadButton'),
+    appUpdateDialog: document.querySelector('#appUpdateDialog'),
+    appUpdateMessage: document.querySelector('#appUpdateMessage'),
     forecastDialog: document.querySelector('#forecastDialog'),
     forecastSummary: document.querySelector('#forecastSummary'),
     forecastNdxCondition: document.querySelector('#forecastNdxCondition'),
@@ -730,7 +733,7 @@
   }
 
   async function checkOfflineDataUpdateOnLaunch() {
-    if (!offlineDataSupported() || !navigator.onLine) return;
+    if (!offlineDataSupported() || !isMobileDevice() || !navigator.onLine) return;
     try {
       var manifestResponse = await fetch('data/offline-manifest.json?v=' + Date.now(), { cache: 'no-store' });
       if (!manifestResponse.ok) return;
@@ -740,8 +743,9 @@
       var state = await readOfflineState(cache);
       if (!offlineManifestNeedsUpdate(state, manifest)) return;
       await showOfflineData(state
-        ? '检测到离线数据有更新，可点击“检查并增量更新”下载变化部分。'
-        : '尚未下载离线数据，可点击“下载全部离线数据”保存到本机。');
+        ? '检测到离线数据有更新，正在自动下载变化部分...'
+        : '首次使用，正在自动下载全部离线数据...');
+      await downloadAllOfflineData();
     } catch (error) {
       // 启动检测失败时保持安静，避免弱网或离线状态打断正常使用。
     }
@@ -880,13 +884,86 @@
     if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
   }
 
-  function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) return;
-    navigator.serviceWorker.register('service-worker.js').then(function (registration) {
-      return registration.update();
-    }).catch(function () {
-      // 不支持或注册失败时仍保留普通在线网页功能。
+  function isMobileDevice() {
+    if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+      if (navigator.userAgentData.mobile) return true;
+    }
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '')) return true;
+    // iPadOS 的 Safari 可能使用 macOS UA；“请求桌面网站”的手机也可能去掉 Mobile 标记。
+    if (navigator.maxTouchPoints > 1 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return true;
+    return Boolean(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches && navigator.maxTouchPoints > 0);
+  }
+
+  function waitForUpdatedServiceWorker(registration) {
+    return new Promise(function (resolve) {
+      var settled = false;
+      var timeout = window.setTimeout(finish, 15000);
+      function finish() {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        resolve();
+      }
+      navigator.serviceWorker.addEventListener('controllerchange', finish, { once: true });
+      var worker = registration.installing || registration.waiting;
+      if (!worker) {
+        finish();
+        return;
+      }
+      if (worker.state === 'activated') {
+        finish();
+        return;
+      }
+      worker.addEventListener('statechange', function () {
+        if (worker.state === 'activated') finish();
+      });
     });
+  }
+
+  async function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return null;
+    try {
+      var registration = await navigator.serviceWorker.register('service-worker.js');
+      await registration.update();
+      return registration;
+    } catch (error) {
+      // 不支持或注册失败时仍保留普通在线网页功能。
+      return null;
+    }
+  }
+
+  async function checkMobileAppUpdateOnLaunch() {
+    if (!('serviceWorker' in navigator) || !isMobileDevice() || !navigator.onLine) {
+      await registerServiceWorker();
+      return false;
+    }
+    var currentVersion = document.querySelector('meta[name="daily-review-version"]');
+    currentVersion = currentVersion && currentVersion.content;
+    try {
+      var response = await fetch('app-version.json?v=' + Date.now(), { cache: 'no-store' });
+      if (!response.ok) throw new Error('无法读取应用版本');
+      var latest = await response.json();
+      if (!latest || !latest.version || !currentVersion || currentVersion === '__APP_VERSION__' || latest.version === currentVersion) {
+        await registerServiceWorker();
+        return false;
+      }
+      refs.appUpdateDialog.showModal();
+      refs.appUpdateMessage.textContent = '发现新版本，正在下载应用文件...';
+      var registration = await registerServiceWorker();
+      if (!registration) throw new Error('浏览器无法启动自动更新');
+      await waitForUpdatedServiceWorker(registration);
+      refs.appUpdateMessage.textContent = '更新完成，正在重新打开...';
+      appUpdateReloading = true;
+      window.location.reload();
+      return true;
+    } catch (error) {
+      if (refs.appUpdateDialog.open && !appUpdateReloading) {
+        refs.appUpdateMessage.textContent = '自动更新暂时失败，将继续使用当前版本；下次打开时会重试。';
+        window.setTimeout(function () { refs.appUpdateDialog.close(); }, 2200);
+      }
+      await registerServiceWorker();
+      return false;
+    }
   }
 
   async function syncSharedLocalConfig() {
@@ -3494,7 +3571,6 @@
   }
 
   function initialize() {
-    registerServiceWorker();
     applyRuntimeCapabilities();
     applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
     applyQuarterPointSize(localStorage.getItem(QUARTER_POINT_SIZE_STORAGE_KEY), false);
@@ -3513,7 +3589,9 @@
     syncView();
     loadData(false);
     syncSharedLocalConfig();
-    checkOfflineDataUpdateOnLaunch();
+    checkMobileAppUpdateOnLaunch().then(function (updating) {
+      if (!updating) checkOfflineDataUpdateOnLaunch();
+    });
   }
 
   initialize();

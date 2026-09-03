@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f5f7fb" />
+    <meta name="daily-review-version" content="__APP_VERSION__" />
     <meta name="description" content="汇总全球利率、通胀、资产、汇率与风险指标的宏观温度计。" />
     <meta property="og:title" content="Daily Review · 全球宏观温度计" />
     <meta property="og:description" content="一页查看全球利率、通胀、资产、汇率与风险指标。" />
@@ -91,6 +92,18 @@
         </div>
       </section>
     </main>
+
+    <dialog class="overall-config-dialog app-update-dialog" id="appUpdateDialog" aria-labelledby="appUpdateTitle">
+      <div class="overall-config-card">
+        <div class="app-update-heading">
+          <span class="app-update-icon" aria-hidden="true">↻</span>
+          <div><p class="industry-detail-kicker">APP UPDATE</p><h2 id="appUpdateTitle">正在更新应用</h2></div>
+        </div>
+        <p class="overall-config-description">检测到新版本，正在自动下载并安装。完成后页面会自动刷新。</p>
+        <progress class="offline-data-progress app-update-progress" id="appUpdateProgress" aria-label="应用更新进度"></progress>
+        <p class="overall-config-message app-update-message" id="appUpdateMessage" role="status" aria-live="polite">正在准备更新...</p>
+      </div>
+    </dialog>
 
     <dialog class="overall-config-dialog offline-data-dialog" id="offlineDataDialog">
       <div class="overall-config-card">

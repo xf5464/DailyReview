@@ -994,6 +994,52 @@ tbody tr:last-child td {
   min-height: 38px;
 }
 
+.app-update-dialog {
+  width: min(460px, calc(100vw - 36px));
+}
+
+.app-update-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.app-update-heading h2 {
+  margin: 0;
+}
+
+.app-update-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: #1f5fd2;
+  background: #eaf1ff;
+  font-size: 27px;
+  font-weight: 800;
+  animation: app-update-spin 1.1s linear infinite;
+}
+
+.app-update-progress {
+  margin-top: 4px;
+}
+
+.app-update-message {
+  min-height: 20px;
+  line-height: 1.5;
+}
+
+@keyframes app-update-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-update-icon { animation: none; }
+}
+
 .offline-data-dialog {
   width: min(620px, calc(100vw - 36px));
 }

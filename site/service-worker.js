@@ -1,6 +1,8 @@
 'use strict';
 
-const APP_CACHE = 'daily-review-app-v3';
+// scripts/build.js replaces this placeholder so every published shell revision
+// produces a different worker and cache name.
+const APP_CACHE = 'daily-review-app-__APP_VERSION__';
 const DATA_CACHE = 'daily-review-data-v1';
 const APP_SHELL = [
   './',
