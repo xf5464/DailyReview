@@ -11,6 +11,11 @@ on:
         required: false
         default: false
         type: boolean
+      test_notifications:
+        description: Force-send notification messages even when no alert condition is met
+        required: false
+        default: false
+        type: boolean
       trigger_source:
         description: Trigger source label for alert emails
         required: false
@@ -57,7 +62,7 @@ jobs:
         run: npm run build
 
       - name: Check forecast alert conditions
-        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check
+        if: github.event_name == 'workflow_dispatch' && (inputs.run_alert_check || inputs.test_notifications)
         id: forecast
         env:
           NDX_DRAWDOWN_THRESHOLD: ${{ vars.NDX_DRAWDOWN_THRESHOLD }}
@@ -67,7 +72,7 @@ jobs:
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Send forecast alert email
-        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true'
+        if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
@@ -76,15 +81,17 @@ jobs:
         run: node scripts/send-forecast-email.js
 
       - name: Send WeCom forecast alert
-        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true'
+        if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
         env:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
+          FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
         run: node scripts/send-wechat-alert.js
 
       - name: Send Bark forecast alert
-        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true'
+        if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
         env:
           BARK_KEY: ${{ secrets.BARK_KEY }}
+          FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
         run: node scripts/send-bark-alert.js
 
       - name: Send Gmail test email
