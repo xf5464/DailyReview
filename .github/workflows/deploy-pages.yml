@@ -81,6 +81,12 @@ jobs:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
         run: node scripts/send-wechat-alert.js
 
+      - name: Send Bark forecast alert
+        if: github.event_name == 'workflow_dispatch' && inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true'
+        env:
+          BARK_KEY: ${{ secrets.BARK_KEY }}
+        run: node scripts/send-bark-alert.js
+
       - name: Send Gmail test email
         if: (github.event_name == 'workflow_dispatch' && inputs.test_email) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[test-email]'))
         env:
