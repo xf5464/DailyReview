@@ -16,21 +16,33 @@ async function main() {
 
   const alertPath = path.resolve(process.cwd(), ".forecast-alert.json");
   const alert = JSON.parse(fs.readFileSync(alertPath, "utf8"));
+  const forceTest = String(process.env.FORCE_NOTIFICATION_TEST || "").toLowerCase() === "true";
+  const hasConditions = alert.shouldNotify && Array.isArray(alert.conditions) && alert.conditions.length > 0;
 
-  if (!alert.shouldNotify || !Array.isArray(alert.conditions) || alert.conditions.length === 0) {
+  if (!hasConditions && !forceTest) {
     console.log("No active forecast conditions; WeCom notification skipped.");
     return;
   }
 
-  const lines = [
-    `**[DailyReview] ${alert.conditions.length} 项预测条件已达到要求**`,
-    "",
-    ...alert.conditions.flatMap((condition) => [
-      `> ${condition.label}：${formatValue(condition)}`,
-      "",
-    ]),
-    `数据构建时间：${alert.fetchedAt || "未知"}`,
-  ];
+  const lines = hasConditions
+    ? [
+        `**[DailyReview] ${alert.conditions.length} 项预测条件已达到要求**`,
+        "",
+        ...alert.conditions.flatMap((condition) => [
+          `> ${condition.label}：${formatValue(condition)}`,
+          "",
+        ]),
+        `数据构建时间：${alert.fetchedAt || "未知"}`,
+      ]
+    : [
+        "**[DailyReview] 企业微信通知测试成功**",
+        "",
+        "> 这是一条由 GitHub Actions 强制发送的测试通知。",
+        "",
+        "> 当前没有预测条件达到要求，但测试选项已开启，因此仍执行推送。",
+        "",
+        `数据构建时间：${alert.fetchedAt || "未知"}`,
+      ];
 
   const response = await fetch(webhook, {
     method: "POST",
@@ -55,7 +67,9 @@ async function main() {
     throw new Error(`WeCom ${result.errcode}: ${result.errmsg || "unknown error"}`);
   }
 
-  console.log(`WeCom notification sent for ${alert.conditions.length} condition(s).`);
+  console.log(hasConditions
+    ? `WeCom notification sent for ${alert.conditions.length} condition(s).`
+    : "WeCom test notification sent with no active conditions.");
 }
 
 main().catch((error) => {
