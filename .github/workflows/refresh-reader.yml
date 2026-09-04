@@ -1,0 +1,59 @@
+name: Refresh Reader News
+
+on:
+  push:
+    paths:
+      - .github/hot-news-refresh-trigger
+  workflow_dispatch:
+    inputs:
+      window_hours:
+        description: News lookback window (12-72 hours)
+        required: false
+        default: "30"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: send-hot-news
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Fetch hot news and update reader only
+        env:
+          HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
+          HOT_NEWS_REFRESH_ONLY: "true"
+          HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
+        run: node scripts/send-hot-news-email.js
+
+      - name: Save the reader news archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/reader/data/recent.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: refresh reader news archive"
+          git pull --rebase origin main
+          git push
