@@ -10,7 +10,8 @@ const dataDirectory = path.join(outputDirectory, 'data');
 const chartDataDirectory = path.join(dataDirectory, 'charts');
 const offlineDataDirectory = path.join(dataDirectory, 'offline');
 
-// 总览页小图的统一观察期配置。新增月度/季度折线图时自动沿用，不允许单图写死。
+// 总览页小图的统一观察期配置。季度图按季度数，其余普通时间序列小图按月数。
+// 新增图表时自动沿用，不允许单图按 ID 写死观察期。
 const overviewMiniChartPeriods = {
   monthly: 12,
   quarterly: 12,
@@ -48,10 +49,19 @@ function applyChartPresentationOverrides() {
     '    var chart = source ? Object.assign({}, source) : null;',
     "    var cardFrequency = chart && chart.frequency || '';",
     "    var fixedPeriodCard = chart && chart.chartType !== 'stockTable' && chart.chartType !== 'wideEtfTable';",
-    "    if (fixedPeriodCard && cardFrequency.includes('月')) {",
-    '      chart.items = (source.items || []).slice(-OVERVIEW_MINI_CHART_PERIODS.monthly);',
-    "    } else if (fixedPeriodCard && cardFrequency.includes('季')) {",
+    "    if (fixedPeriodCard && cardFrequency.includes('季')) {",
     '      chart.items = (source.items || []).slice(-OVERVIEW_MINI_CHART_PERIODS.quarterly);',
+    '    } else if (fixedPeriodCard) {',
+    '      var cardItems = (source.items || []).filter(function (item) { return item && item.date; })',
+    '        .slice().sort(function (left, right) { return left.date.localeCompare(right.date); });',
+    '      if (cardItems.length) {',
+    "        var cardLatest = new Date(cardItems[cardItems.length - 1].date + 'T00:00:00Z');",
+    '        var cardStart = shiftMonths(cardLatest, -OVERVIEW_MINI_CHART_PERIODS.monthly);',
+    '        var cardStartText = cardStart.toISOString().slice(0, 10);',
+    '        chart.items = cardItems.filter(function (item) { return item.date >= cardStartText; });',
+    '      } else {',
+    '        chart.items = [];',
+    '      }',
     '    } else {',
     '      chart = filteredChart(source, refs.range.value);',
     '    }',
@@ -63,8 +73,8 @@ function applyChartPresentationOverrides() {
 
   const axisLabelSource = "        label.textContent = formatDate(item.date, chart.frequency);";
   const axisLabelReplacement = [
-    "        var compactMonthlyAxis = !isDetailChart && chart.frequency && chart.frequency.includes('月');",
     "        var compactQuarterlyAxis = !isDetailChart && chart.frequency && chart.frequency.includes('季');",
+    '        var compactMonthlyAxis = !isDetailChart && !compactQuarterlyAxis;',
     '        if (compactMonthlyAxis || compactQuarterlyAxis) {',
     "          var itemDate = new Date(item.date + 'T00:00:00Z');",
     "          var firstLabelDate = new Date(items[xIndexes[0]].date + 'T00:00:00Z');",
@@ -75,16 +85,16 @@ function applyChartPresentationOverrides() {
     '          var spansYears = firstLabelDate.getUTCFullYear() !== lastLabelDate.getUTCFullYear();',
     '          var showYear = spansYears && (labelIndex === 0 ||',
     '            !previousLabelDate || itemDate.getUTCFullYear() !== previousLabelDate.getUTCFullYear());',
-    "          var compactPeriod = compactMonthlyAxis",
-    "            ? (itemDate.getUTCMonth() + 1) + '月'",
-    "            : 'Q' + (Math.floor(itemDate.getUTCMonth() / 3) + 1);",
+    '          var compactPeriod = compactQuarterlyAxis',
+    "            ? 'Q' + (Math.floor(itemDate.getUTCMonth() / 3) + 1)",
+    "            : (itemDate.getUTCMonth() + 1) + '月';",
     "          label.textContent = (showYear ? itemDate.getUTCFullYear() + '年' : '') + compactPeriod;",
     '        } else {',
     '          label.textContent = formatDate(item.date, chart.frequency);',
     '        }',
   ].join('\n');
   if (!source.includes(axisLabelSource)) {
-    throw new Error('Unable to apply compact monthly/quarterly axis labels: renderLineChart pattern changed.');
+    throw new Error('Unable to apply compact overview axis labels: renderLineChart pattern changed.');
   }
   source = source.replace(axisLabelSource, axisLabelReplacement);
 
@@ -105,7 +115,7 @@ function addAssetVersions() {
   ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
   const html = fs.readFileSync(indexPath, 'utf8')
     .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
-    .replace('src="app.js"', `src="app.js?v=${appVersion}"`)
+    .replace('src="app.js"', `src="app.js?v=${appVersion}`)
     .replace('__APP_VERSION__', shellVersion);
   fs.writeFileSync(indexPath, html, 'utf8');
   const workerPath = path.join(outputDirectory, 'service-worker.js');
