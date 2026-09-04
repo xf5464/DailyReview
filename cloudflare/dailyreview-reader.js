@@ -251,14 +251,29 @@ async function decodeGoogleNewsUrl(target) {
   const articleId = target.pathname.split("/").filter(Boolean).at(-1);
   if (!articleId) throw new Error("Google News 文章编号缺失");
 
+  const pageResponse = await fetch("https://news.google.com/articles/" + encodeURIComponent(articleId), {
+    redirect: "follow",
+    headers: {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36",
+      accept: "text/html",
+      "accept-language": "en-US,en;q=0.9",
+    },
+    signal: AbortSignal.timeout(10_000),
+  });
+  if (!pageResponse.ok) throw new Error("Google News 解码页返回 HTTP " + pageResponse.status);
+  const html = await pageResponse.text();
+  const signature = html.match(/data-n-a-sg=["']([^"']+)["']/)?.[1];
+  const timestamp = html.match(/data-n-a-ts=["']([^"']+)["']/)?.[1];
+  if (!signature || !timestamp) throw new Error("Google News 解码参数缺失");
+
   const requestValue = JSON.stringify([
     "garturlreq",
-    [["en-US", "US", ["FINANCE_TOP_INDICES", "WEB_TEST_1_0_0"], null, null, 1, 1, "US:en",
-      null, 180, null, null, null, null, null, 0, null, null, [1608992183, 723341000]],
-      "en-US", "US", 1, [2, 3, 4, 8], 1, 0, "655000234", 0, 0, null, 0],
+    [["X", "X", ["X", "X"], null, null, 1, 1, "US:en", null, 1, null, null, null, null, null, 0, 1],
+      "X", "X", 1, [1, 1, 1], 1, 1, null, 0, 0, null, 0],
     articleId,
+    Number(timestamp),
+    signature,
   ]);
-  const envelope = ["Fbv4je", requestValue, null, "1"];
   const response = await fetch("https://news.google.com/_/DotsSplashUi/data/batchexecute?rpcids=Fbv4je", {
     method: "POST",
     headers: {
@@ -266,7 +281,7 @@ async function decodeGoogleNewsUrl(target) {
       referer: "https://news.google.com/",
       "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36",
     },
-    body: "f.req=" + encodeURIComponent(JSON.stringify([[envelope]])),
+    body: "f.req=" + encodeURIComponent(JSON.stringify([[["Fbv4je", requestValue]]])),
     signal: AbortSignal.timeout(10_000),
   });
   if (!response.ok) throw new Error("Google News 解码接口返回 HTTP " + response.status);
@@ -398,7 +413,7 @@ export default {
       status: "ok",
       browserFallback: Boolean(env.BROWSER),
       googleNewsResolver: true,
-      workerVersion: "2026.09.04.10",
+      workerVersion: "2026.09.04.11",
     });
   },
 };
