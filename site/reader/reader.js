@@ -94,10 +94,6 @@ function categoryLabel(category) {
   return category === 'market' ? '美股' : '科技';
 }
 
-function safariShortcutUrl() {
-  return `shortcuts://run-shortcut?name=${encodeURIComponent('DailyReview Safari')}&input=clipboard`;
-}
-
 function itemButton(item, rank) {
   const row = document.createElement('div');
   row.className = 'news-row';
@@ -125,14 +121,15 @@ function itemButton(item, rank) {
   category.textContent = categoryLabel(item.category);
   button.append(number, copy, category);
 
-  const safari = document.createElement('a');
-  safari.className = 'safari-link';
-  safari.href = safariShortcutUrl();
-  safari.dataset.url = item.url;
-  safari.textContent = 'Safari';
-  safari.setAttribute('aria-label', `使用 Safari 打开：${translated.textContent}`);
+  const browser = document.createElement('a');
+  browser.className = 'safari-link';
+  browser.href = item.url;
+  browser.target = '_blank';
+  browser.rel = 'noopener noreferrer';
+  browser.textContent = '浏览器';
+  browser.setAttribute('aria-label', `使用默认浏览器打开：${translated.textContent}`);
 
-  row.append(button, safari);
+  row.append(button, browser);
   return row;
 }
 
@@ -302,19 +299,7 @@ async function enablePush() {
   }
 }
 
-refs.days.addEventListener('click', async (event) => {
-  const safari = event.target.closest('.safari-link');
-  if (safari) {
-    event.preventDefault();
-    try {
-      await navigator.clipboard.writeText(safari.dataset.url);
-      location.href = safari.href;
-    } catch {
-      alert('无法复制新闻地址，请允许读取剪贴板后重试。');
-    }
-    return;
-  }
-
+refs.days.addEventListener('click', (event) => {
   const toggle = event.target.closest('.day-toggle');
   if (!toggle) return;
   const list = document.getElementById(toggle.getAttribute('aria-controls'));
