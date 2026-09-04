@@ -1,7 +1,7 @@
 'use strict';
 
 const API_ROOT = 'https://dailyreview-reader.xf5464.workers.dev';
-const ARCHIVE_URL = 'data/recent.json';
+const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
 const VAPID_PUBLIC_KEY = 'BEHmGzDXFg7hlOBk3NGv5KIaMroGXDIr5YfeetHNRFgQu0J1kl6eX1-5JqsxmHRApQbC_4Y-Zm_YHYTZ8XVIMCs';
 const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v1';
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';

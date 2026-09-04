@@ -90,3 +90,17 @@ jobs:
           fi
           git commit -m "chore: archive hot news for reader"
           git push
+
+      - name: Notify subscribed readers
+        if: steps.gate.outputs.should_send == 'true'
+        env:
+          READER_PUSH_TOKEN: ${{ secrets.READER_PUSH_TOKEN }}
+        run: |
+          if [[ -z "$READER_PUSH_TOKEN" ]]; then
+            echo "READER_PUSH_TOKEN is not configured; skipping."
+            exit 0
+          fi
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $READER_PUSH_TOKEN" \
+            https://dailyreview-reader.xf5464.workers.dev/push/send

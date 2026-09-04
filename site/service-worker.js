@@ -4,6 +4,7 @@
 // produces a different worker and cache name.
 const APP_CACHE = 'daily-review-app-__APP_VERSION__';
 const DATA_CACHE = 'daily-review-data-v2';
+const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
 const APP_SHELL = [
   './',
   'index.html',
@@ -76,7 +77,7 @@ self.addEventListener('fetch', (event) => {
 
 async function latestNews() {
   try {
-    const response = await fetch(new URL('reader/data/recent.json', self.registration.scope), { cache: 'no-store' });
+    const response = await fetch(ARCHIVE_URL + '?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) throw new Error(String(response.status));
     const archive = await response.json();
     return (archive.days || []).flatMap((day) => day.items || [])[0] || null;
