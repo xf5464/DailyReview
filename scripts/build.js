@@ -114,14 +114,75 @@ function applyChartPresentationOverrides() {
     "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 亿元'",
     "      : '--';",
     '  }',
+    '',
+    '  function formatCinemaMarketCap(value) {',
+    '    return hasNumericValue(value)',
+    "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 亿元'",
+    "      : '--';",
+    '  }',
   ].join('\n');
   if (!source.includes(marketCapFormatterSource)) {
-    throw new Error('Unable to add integer national-team holdings formatter: formatMarketCap pattern changed.');
+    throw new Error('Unable to add integer holdings formatters: formatMarketCap pattern changed.');
   }
   source = source.replace(marketCapFormatterSource, marketCapFormatterReplacement);
   source = source.replace("formatMarketCap(entry.item.value)", "formatWideEtfMarketCap(entry.item.value)");
   source = source.replace("' · 宽基合计 ' + formatMarketCap(latest.value)", "' · 宽基合计 ' + formatWideEtfMarketCap(latest.value)");
   source = source.replace("totalItem ? formatMarketCap(totalItem.value) : '--'", "totalItem ? formatWideEtfMarketCap(totalItem.value) : '--'");
+
+  const holderCountSource = [
+    '  function formatHolderCount(value) {',
+    '    return hasNumericValue(value)',
+    "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 户'",
+    "      : '--';",
+    '  }',
+  ].join('\n');
+  const holderCountReplacement = [
+    holderCountSource,
+    '',
+    '  function formatHolderCountNumber(value) {',
+    '    return hasNumericValue(value)',
+    "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value))",
+    "      : '--';",
+    '  }',
+  ].join('\n');
+  if (!source.includes(holderCountSource)) {
+    throw new Error('Unable to add unitless cinema holder formatter: formatHolderCount pattern changed.');
+  }
+  source = source.replace(holderCountSource, holderCountReplacement);
+
+  const holderChangeSource = [
+    '  function formatHolderChange(value) {',
+    "    if (!Number.isFinite(Number(value))) return '--';",
+    '    var numericValue = Number(value);',
+    "    return (numericValue > 0 ? '+' : '') + new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numericValue) + ' 户';",
+    '  }',
+  ].join('\n');
+  const holderChangeReplacement = [
+    holderChangeSource,
+    '',
+    '  function formatHolderChangeNumber(value) {',
+    "    if (!Number.isFinite(Number(value))) return '--';",
+    '    var numericValue = Number(value);',
+    "    return (numericValue > 0 ? '+' : '') + new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numericValue);",
+    '  }',
+  ].join('\n');
+  if (!source.includes(holderChangeSource)) {
+    throw new Error('Unable to add unitless cinema change formatter: formatHolderChange pattern changed.');
+  }
+  source = source.replace(holderChangeSource, holderChangeReplacement);
+
+  source = source.replace(
+    "row.append(createElement('td', stock.error || !hasNumericValue(stock.latestValue) ? 'shareholder-value-missing' : '', formatHolderCount(stock.latestValue)));",
+    "row.append(createElement('td', stock.error || !hasNumericValue(stock.latestValue) ? 'shareholder-value-missing' : '', interactive ? formatHolderCountNumber(stock.latestValue) : formatHolderCount(stock.latestValue)));"
+  );
+  source = source.replace(
+    "var changeCell = createElement('td', changeClass, formatHolderChange(change.value));",
+    "var changeCell = createElement('td', changeClass, formatHolderChangeNumber(change.value));"
+  );
+  source = source.replace(
+    "row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatMarketCap(stock.marketCap)));",
+    "row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatCinemaMarketCap(stock.marketCap)));"
+  );
 
   fs.writeFileSync(appPath, source, 'utf8');
 
@@ -148,6 +209,22 @@ function applyChartPresentationOverrides() {
     '  padding-right: 6px;',
     '  white-space: normal;',
     '  overflow-wrap: anywhere;',
+    '}',
+    '',
+    '/* 影视院线详情：顶部季度控件与操作按钮统一底线和高度。 */',
+    '.shareholder-table-quarter-browser {',
+    '  align-items: flex-end;',
+    '}',
+    '',
+    '.shareholder-table-quarter-browser > .secondary-button,',
+    '.shareholder-table-quarter-browser > label .level-select {',
+    '  height: 34px;',
+    '  min-height: 34px;',
+    '}',
+    '',
+    '.shareholder-table-quarter-browser > .secondary-button {',
+    '  align-self: flex-end;',
+    '  white-space: nowrap;',
     '}',
     '',
   ].join('\n');
