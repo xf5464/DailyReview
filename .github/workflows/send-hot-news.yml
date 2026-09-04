@@ -1,6 +1,14 @@
 name: Send Hot News
 
 on:
+  push:
+    paths:
+      - .github/hot-news-trigger
+  workflow_run:
+    workflows:
+      - Deploy Daily Review
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       trigger_source:
@@ -26,26 +34,44 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Decide whether this run should send
+        id: gate
+        env:
+          COMPLETED_WORKFLOW_RESULT: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$GITHUB_EVENT_NAME" == "push" ]]; then
+            echo "should_send=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$COMPLETED_WORKFLOW_RESULT" == "success" && "$(date -u +%H)" == "22" ]]; then
+            echo "should_send=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_send=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.gate.outputs.should_send == 'true'
         uses: actions/checkout@v4
 
       - name: Setup Node.js
+        if: steps.gate.outputs.should_send == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: npm
 
       - name: Install dependencies
+        if: steps.gate.outputs.should_send == 'true'
         run: npm ci
 
       - name: Test
+        if: steps.gate.outputs.should_send == 'true'
         run: npm test
 
       - name: Fetch hot news and send Gmail
+        if: steps.gate.outputs.should_send == 'true'
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
-          TRIGGER_SOURCE: ${{ inputs.trigger_source }}
-          HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours }}
+          TRIGGER_SOURCE: ${{ github.event_name == 'workflow_run' && 'cloudflare' || github.event_name == 'workflow_dispatch' && inputs.trigger_source || 'github-trigger-file' }}
+          HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
         run: node scripts/send-hot-news-email.js
