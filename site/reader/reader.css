@@ -87,13 +87,9 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
 .category { align-self: start; border-radius: 999px; padding: 4px 7px; background: #edf3ff; color: var(--blue); font-size: 11px; white-space: nowrap; }
 
-.panel, .install-hint, .manual-reader { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.panel, .install-hint { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
 .panel h2 { font-size: 24px; }
 .install-hint { display: grid; gap: 5px; }
-.manual-reader summary { color: var(--blue); font-weight: 700; cursor: pointer; }
-form { display: grid; gap: 11px; margin-top: 18px; }
-label { color: var(--muted); font-size: 14px; }
-input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; background: white; color: var(--ink); font-size: 16px; }
 .primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: white; font-weight: 700; }
 
 dialog { width: min(760px, 100%); height: min(92vh, 920px); margin: auto auto 0; padding: 0; border: 0; border-radius: 24px 24px 0 0; background: var(--paper); color: var(--ink); }

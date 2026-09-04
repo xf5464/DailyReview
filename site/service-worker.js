@@ -17,6 +17,8 @@ const APP_SHELL = [
   'reader/reader.css',
   'reader/reader.js',
   'reader/manifest.webmanifest',
+  'reader/icon-192.png',
+  'reader/icon-512.png',
   'reader/data/recent.json',
 ];
 
@@ -93,8 +95,8 @@ self.addEventListener('push', (event) => {
     if (item?.id) target.searchParams.set('open', item.id);
     await self.registration.showNotification('DailyReview 新热点', {
       body: item?.titleZh || item?.title || '新一批科技与美股热点已经更新',
-      icon: new URL('icon.svg', self.registration.scope).href,
-      badge: new URL('icon.svg', self.registration.scope).href,
+      icon: new URL('reader/icon-192.png', self.registration.scope).href,
+      badge: new URL('reader/icon-192.png', self.registration.scope).href,
       tag: `dailyreview-${item?.id || Date.now()}`,
       data: { url: target.href },
     });

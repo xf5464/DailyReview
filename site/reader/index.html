@@ -7,18 +7,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>DailyReview 中文阅读器</title>
-    <link rel="icon" href="../icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="../og.png" />
-    <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="reader.css?v=2026.09.04.2" />
-    <script src="reader.js?v=2026.09.04.2" defer></script>
+    <link rel="icon" href="icon-192.png?v=2026.09.04.3" type="image/png" />
+    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.04.3" />
+    <link rel="manifest" href="manifest.webmanifest?v=2026.09.04.3" />
+    <link rel="stylesheet" href="reader.css?v=2026.09.04.3" />
+    <script src="reader.js?v=2026.09.04.3" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.2</span></div>
+      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.3</span></div>
       <div class="actions">
         <button id="pushButton" type="button">开启提醒</button>
-        <button id="fontButton" type="button" aria-label="调整字号">字号</button>
       </div>
     </header>
     <main>
@@ -45,14 +44,6 @@
         <span>先用 Safari“添加到主屏幕”，从桌面打开后再点“开启提醒”。</span>
       </section>
 
-      <details class="manual-reader">
-        <summary>阅读其他英文链接</summary>
-        <form id="readerForm">
-          <label for="urlInput">文章地址</label>
-          <input id="urlInput" name="url" type="url" inputmode="url" placeholder="https://…" required />
-          <button class="primary" type="submit">翻译并阅读</button>
-        </form>
-      </details>
     </main>
 
     <dialog id="readerDialog">

@@ -14,8 +14,6 @@ const refs = {
   tabs: [...document.querySelectorAll('.category-tab')],
   installHint: document.querySelector('#installHint'),
   push: document.querySelector('#pushButton'),
-  form: document.querySelector('#readerForm'),
-  input: document.querySelector('#urlInput'),
   dialog: document.querySelector('#readerDialog'),
   close: document.querySelector('#closeDialog'),
   loading: document.querySelector('#loadingState'),
@@ -29,7 +27,6 @@ const refs = {
   errorSource: document.querySelector('#errorSourceLink'),
   errorMessage: document.querySelector('#errorMessage'),
   retry: document.querySelector('#retryButton'),
-  font: document.querySelector('#fontButton'),
   dialogFont: document.querySelector('#dialogFontButton'),
 };
 
@@ -343,15 +340,9 @@ refs.days.addEventListener('click', (event) => {
   list.hidden = expanded;
 });
 refs.tabs.forEach((tab) => tab.addEventListener('click', () => selectCategory(tab.dataset.category)));
-refs.form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const url = refs.input.value.trim();
-  if (url) loadArticle(url);
-});
 refs.retry.addEventListener('click', () => { if (currentUrl) loadArticle(currentUrl, true); });
 refs.close.addEventListener('click', () => refs.dialog.close());
 refs.dialog.addEventListener('click', (event) => { if (event.target === refs.dialog) refs.dialog.close(); });
-refs.font.addEventListener('click', changeFont);
 refs.dialogFont.addEventListener('click', changeFont);
 refs.push.addEventListener('click', enablePush);
 document.documentElement.style.setProperty('--reader-size', `${fontSizes[fontStep] || 19}px`);
