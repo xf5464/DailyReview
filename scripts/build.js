@@ -184,6 +184,15 @@ function applyChartPresentationOverrides() {
     "row.append(createElement('td', hasNumericValue(stock.marketCap) ? '' : 'shareholder-value-missing', formatCinemaMarketCap(stock.marketCap)));"
   );
 
+  source = source.replace(
+    "      if (!compact) tr.append(createElement('td', 'number-cell', entry.item.priceDate || '--'));",
+    ''
+  );
+  source = source.replace(
+    '      emptyCell.colSpan = compact ? 2 : 4;',
+    '      emptyCell.colSpan = compact ? 2 : 3;'
+  );
+
   fs.writeFileSync(appPath, source, 'utf8');
 
   const stylesPath = path.join(outputDirectory, 'styles.css');
@@ -209,6 +218,28 @@ function applyChartPresentationOverrides() {
     '  padding-right: 6px;',
     '  white-space: normal;',
     '  overflow-wrap: anywhere;',
+    '}',
+    '',
+    '/* 国家队持仓详情：三列等宽，禁止横向滚动。 */',
+    '.wide-etf-detail-wrap {',
+    '  overflow-x: hidden;',
+    '  overflow-y: auto;',
+    '}',
+    '',
+    '.wide-etf-detail-wrap .wide-etf-table {',
+    '  width: 100%;',
+    '  min-width: 0;',
+    '  table-layout: fixed;',
+    '}',
+    '',
+    '.wide-etf-detail-wrap .wide-etf-table th,',
+    '.wide-etf-detail-wrap .wide-etf-table td {',
+    '  width: 33.333333%;',
+    '  padding-left: 8px;',
+    '  padding-right: 8px;',
+    '  white-space: normal;',
+    '  overflow-wrap: anywhere;',
+    '  text-align: center;',
     '}',
     '',
     '/* 详情页同类操作区：优先等宽、左右边界对齐；窄控件放在等宽网格中居中。 */',
@@ -275,6 +306,16 @@ function applyChartPresentationOverrides() {
     '',
   ].join('\n');
   fs.writeFileSync(stylesPath, styles + responsiveCinemaTableRules, 'utf8');
+
+  const indexPath = path.join(outputDirectory, 'index.html');
+  let indexSource = fs.readFileSync(indexPath, 'utf8');
+  const wideEtfHeaderSource = '<thead><tr><th>宽基指数</th><th>ETF 数量</th><th>持仓总市值</th><th>行情日期</th></tr></thead>';
+  const wideEtfHeaderReplacement = '<thead><tr><th>宽基指数</th><th>ETF 数量</th><th>持仓总市值</th></tr></thead>';
+  if (!indexSource.includes(wideEtfHeaderSource)) {
+    throw new Error('Unable to simplify national-team detail header: index pattern changed.');
+  }
+  indexSource = indexSource.replace(wideEtfHeaderSource, wideEtfHeaderReplacement);
+  fs.writeFileSync(indexPath, indexSource, 'utf8');
 }
 
 function addAssetVersions() {
