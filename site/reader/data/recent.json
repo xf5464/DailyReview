@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T08:29:58.717Z",
+  "updatedAt": "2026-09-04T09:15:20.097Z",
   "days": [
     {
       "date": "2026-09-04",
       "pushes": [
+        "2026-09-04T09:15:20.097Z",
         "2026-09-04T08:29:58.717Z",
         "2026-09-04T08:18:49.346Z",
         "2026-09-04T07:33:26.498Z"
@@ -18,9 +19,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 159.9,
-          "engagement": "1729 points · 1523 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 159.6,
+          "engagement": "1774 points · 1552 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -30,9 +31,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 147.3,
-          "engagement": "1753 points · 437 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 146.9,
+          "engagement": "1784 points · 447 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "b9197b873957814a",
@@ -42,9 +43,9 @@
           "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 133.1,
-          "engagement": "1099 points · 246 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 132.4,
+          "engagement": "1101 points · 248 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "debf643f0294e072",
@@ -54,9 +55,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 129.2,
-          "engagement": "570 points · 270 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 128.8,
+          "engagement": "578 points · 276 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "45a86641ba677818",
@@ -66,9 +67,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 128.9,
-          "engagement": "540 points · 172 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 128.8,
+          "engagement": "553 points · 179 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "f519b6f605b220ae",
@@ -78,9 +79,9 @@
           "url": "https://twitter.com/GergelyOrosz/status/2095453567955968398",
           "source": "twitter.com",
           "publishedAt": "2026-09-03T11:01:04.000Z",
-          "score": 115.7,
-          "engagement": "312 points · 210 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 115.1,
+          "engagement": "315 points · 210 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "519991c639b3b5bf",
@@ -90,9 +91,9 @@
           "url": "https://ifm.ai/blog/k2/",
           "source": "ifm.ai",
           "publishedAt": "2026-09-03T15:36:43.000Z",
-          "score": 114,
-          "engagement": "293 points · 97 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 113.4,
+          "engagement": "296 points · 97 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "6379e22bcefbb3cd",
@@ -102,9 +103,9 @@
           "url": "https://armature.tech/blog/which-tools-coding-agents-install",
           "source": "armature.tech",
           "publishedAt": "2026-09-03T21:20:34.000Z",
-          "score": 114.6,
-          "engagement": "202 points · 93 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 115,
+          "engagement": "214 points · 98 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "5725b766800de7c4",
@@ -114,9 +115,9 @@
           "url": "https://pola.rs/posts/announcing-polars-2/",
           "source": "pola.rs",
           "publishedAt": "2026-09-03T06:59:08.000Z",
-          "score": 112.9,
-          "engagement": "393 points · 132 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 113,
+          "engagement": "394 points · 133 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "ce01ffa2ae76baf8",
@@ -126,9 +127,9 @@
           "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/",
           "source": "nolanlawson.com",
           "publishedAt": "2026-09-03T19:17:24.000Z",
-          "score": 113.1,
-          "engagement": "150 points · 171 comments",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "score": 112.6,
+          "engagement": "151 points · 176 comments",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "64d8f3a213bb739c",
@@ -136,11 +137,11 @@
           "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
           "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
           "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "cnbc.com",
+          "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 58.8,
+          "score": 70.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "d22dfbfde94f5b18",
@@ -150,9 +151,9 @@
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
           "source": "Reuters",
           "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
-          "score": 69.3,
+          "score": 66.2,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "37a9c9f598bb6853",
@@ -160,11 +161,11 @@
           "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
           "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
-          "source": "benzinga.com",
+          "source": "Benzinga",
           "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
-          "score": 67,
+          "score": 65.6,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "1714b76912633a1d",
@@ -174,9 +175,81 @@
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNYkFXYjBmVDlURFczY1gtRkhYSTl2b1lVVnVaYkJaMjAwS0VQUnlobTRvMDFrSDZ3M0ZwcXhvMjU0LVVNUnJYcjYwZ2NENktCcFdsbzgyaFF3MnlBM29WM25KbUMzbUVDZHpQVEhoWTlnNXNUSnFfTEU5YlBJdnNxeTFXUEcxTm9qa3Jtc09CZ2dsbDRKdmNJN1AwZWx0LVdGZk5TMzc0Vzl6cVhOV05KMHVkR3M3NTQ?oc=5",
           "source": "USA Today",
           "publishedAt": "Fri, 04 Sep 2026 07:02:00 GMT",
-          "score": 61.6,
+          "score": 60.3,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "26c0ceab511fd221",
+          "category": "market",
+          "title": "Tech stocks lead rally on Wall Street",
+          "titleZh": "科技股引领华尔街反弹",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbzV4SHR0bVJmWWZlOWJWZDdNcEpVLU5WcVNtTmJyZTVpWHgzamRBb1FEWkNMVUk2TXlrMDM4cHRNZHVfXy1zdVRycGthdXhubVlUSHRoVzk4TGhnTmhsc013LTF3YlRlR2ZzTUt4Y0ZXd1d6bFd5dm1GZVdMQnZDeUM5cFdkWjFNcTVNb3c2VGowYV96?oc=5",
+          "source": "Northwest Arkansas Democrat-Gazette",
+          "publishedAt": "Fri, 04 Sep 2026 06:56:00 GMT",
+          "score": 61.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "327871d4a29576d0",
+          "category": "market",
+          "title": "Nasdaq, S&P 500 futures climb ahead of key jobs report",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Fri, 04 Sep 2026 09:05:43 GMT",
+          "score": 81.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "026e2457ae426fe4",
+          "category": "market",
+          "title": "US Stock Market Today: S&P 500 Futures Edge Higher As Yields Ease Before Jobs",
+          "titleZh": "今日美国股市：随着收益率在就业前放松，标准普尔500指数期货边缘走高",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZ2JKa2dZUFlKOHhTU0t3akw3RV80VFZLYzNZd0dqMTFZbmtIX1hFQTJPckV3RzZoMXV0M0ZDWmRscjBHcjJKYUI1cW9TRnJwUzEwcVBBUTlHNWNPMWZGYmgxSzctTVllMEI5eVZoR2F0VzJCN2Q1dlBrRDNrb3NUcDBEajRocU0zaHYzMWE2YVY5Zw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 08:19:15 GMT",
+          "score": 71,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "6823efb8e0a69435",
+          "category": "market",
+          "title": "Planet Labs Earnings Top Wall Street Estimates as Military Space Business Grows",
+          "titleZh": "随着军用太空业务的增长， Planet Labs的顶级华尔街收入估计数",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFAwbXYwSDJpLVhjQWdGeV9OLTZDdlcydW1fdC1HaE9vTE04WkVzX01TLTdMejVZRVpsWm81OGlwMkhoQjRTWTMzLThENEoteTdsZTVJVWFmNktlNXNEcTNxVGxVQ20yNzJBbXVvS3VyZlNXNXJ0UWRoMk1CVXNPMms?oc=5",
+          "source": "Barron's",
+          "publishedAt": "Fri, 04 Sep 2026 08:20:00 GMT",
+          "score": 67.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "b96dbea80da7de6e",
+          "category": "market",
+          "title": "Sturdy stock market mints a record number of 401(k) millionaires",
+          "titleZh": "稳健的股市创造了创纪录的401 (k)百万富翁人数",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOWnZudzRUdVVaVEprdWdiWVBETXJ2Q2NDckFya21UYVBLdUNGUlhEbDZULWR2bmZMbkpPdTlseG54S0xtTW1jNmd6SFhTZ2NRYUc2UUoyWEVmWDZfc1RWWDB4aVhzZmhheUdmaDc2Ym9ZdWpvSHJ5d0Jqa2s4Q2xHYkd5OGVOZnRETEE?oc=5",
+          "source": "cbsnews.com",
+          "publishedAt": "Fri, 04 Sep 2026 09:00:12 GMT",
+          "score": 62.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
+        },
+        {
+          "id": "2e7e9bed85a13b22",
+          "category": "market",
+          "title": "This Unstoppable Stock Is Obliterating the S&P 500 and the Nasdaq-100 in 2026, but Is There Still Time to Buy?",
+          "titleZh": "这只势不可挡的股票将在2026年抹杀标准普尔500指数和纳斯达克100指数，但还有时间买入吗？",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNbHhoQURHR29KUy1sOGdIZVVLbDdUeGdBVmRqTXJKVktrejJvN1VtMzlDeHd5ZnVVa2Rjb3FqSDQ0c3VfQmg3TVFSS3dySFFYOS14YWZXV1I5RU5NZUMxcmRLR2w3c3ZWWlNwalNPX1M0djM1VndVWFZOMVhIQ1Q4UkUzalV2enBuOUphZGZrNzFwMEJKOVE?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Fri, 04 Sep 2026 09:07:29 GMT",
+          "score": 59.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
           "id": "5008f6cdd374df64",
@@ -271,18 +344,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Thu, 03 Sep 2026 22:15:01 GMT",
           "score": 55.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
-          "id": "26c0ceab511fd221",
-          "category": "market",
-          "title": "Tech stocks lead rally on Wall Street",
-          "titleZh": "科技股引领华尔街反弹",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbzV4SHR0bVJmWWZlOWJWZDdNcEpVLU5WcVNtTmJyZTVpWHgzamRBb1FEWkNMVUk2TXlrMDM4cHRNZHVfXy1zdVRycGthdXhubVlUSHRoVzk4TGhnTmhsc013LTF3YlRlR2ZzTUt4Y0ZXd1d6bFd5dm1GZVdMQnZDeUM5cFdkWjFNcTVNb3c2VGowYV96?oc=5",
-          "source": "Northwest Arkansas Democrat-Gazette",
-          "publishedAt": "Fri, 04 Sep 2026 06:56:00 GMT",
-          "score": 62.6,
           "engagement": "",
           "pushedAt": "2026-09-04T08:18:49.346Z"
         },
