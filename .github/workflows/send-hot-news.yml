@@ -75,4 +75,5 @@ jobs:
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ github.event_name == 'workflow_run' && 'cloudflare' || github.event_name == 'workflow_dispatch' && inputs.trigger_source || 'github-trigger-file' }}
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
+          READER_BASE_URL: ${{ vars.READER_BASE_URL }}
         run: node scripts/send-hot-news-email.js

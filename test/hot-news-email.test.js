@@ -23,6 +23,7 @@ test("deduplicates substantially similar headlines", () => {
 });
 
 test("places a Chinese translation directly below each English headline", () => {
+  process.env.READER_BASE_URL = "https://xf5464.github.io/DailyReview/reader/";
   const item = { title: "Test & news", titleZh: "测试新闻", url: "https://example.com?a=1&b=2", source: "Reuters", publishedAt: "2026-09-04T01:00:00Z", score: 88 };
   const message = newsMessage({ tech: [item], market: [item], failureCount: 0, fetchedAt: "2026-09-04T02:00:00Z" });
   assert.match(message.subject, /海外科技与美股热点/);
@@ -35,13 +36,24 @@ test("places a Chinese translation directly below each English headline", () => 
   assert.match(message.html, /中文阅读全文/);
   assert.match(message.html, /DailyReview\/reader\/\?url=/);
   assert.match(message.text, /中文阅读：https:\/\/xf5464\.github\.io\/DailyReview\/reader\//);
+  delete process.env.READER_BASE_URL;
 });
 
 test("builds a reader URL without losing characters in the source URL", () => {
+  process.env.READER_BASE_URL = "https://xf5464.github.io/DailyReview/reader/";
   const original = "https://example.com/story?a=1&b=two words";
   const translated = new URL(readerUrl(original));
   assert.equal(translated.pathname, "/DailyReview/reader/");
   assert.equal(translated.searchParams.get("url"), original);
+  delete process.env.READER_BASE_URL;
+});
+
+test("keeps original links until the reader backend is enabled", () => {
+  delete process.env.READER_BASE_URL;
+  const item = { title: "News", titleZh: "新闻", url: "https://example.com/story", source: "Reuters", publishedAt: "2026-09-04T01:00:00Z", score: 88 };
+  const message = newsMessage({ tech: [item], market: [item], failureCount: 0, fetchedAt: "2026-09-04T02:00:00Z" });
+  assert.doesNotMatch(message.html, /中文阅读全文/);
+  assert.match(message.html, /href="https:\/\/example\.com\/story"/);
 });
 
 test("supports comma-separated Gmail recipients", () => {
