@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
+      - uses: actions/checkout@v4
+
       - name: Wait for the test article to be published
         run: |
           article="https://xf5464.github.io/DailyReview/reader/test-article.html"
@@ -33,6 +35,11 @@ jobs:
           curl --fail --silent --show-error --max-time 20 \
             "https://dailyreview-reader.xf5464.workers.dev/" \
             | grep -q '"workerVersion":"2026.09.04.10"'
+
+      - name: Inspect Google News decoder response
+        env:
+          GOOGLE_NEWS_SOURCE: https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5
+        run: node scripts/diagnose-google-news.js
 
       - name: Resolve Google News directly to its publisher
         env:
