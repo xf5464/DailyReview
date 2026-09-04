@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T19:30:43.662Z",
+  "updatedAt": "2026-09-04T20:00:42.897Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T20:00:42.897Z",
         "2026-09-04T19:30:43.662Z",
         "2026-09-04T19:00:46.705Z",
         "2026-09-04T18:30:44.011Z",
@@ -26,9 +27,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 153.9,
-          "engagement": "2111 points · 1919 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "score": 154,
+          "engagement": "2118 points · 1922 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -38,9 +39,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 157.4,
-          "engagement": "1157 points · 940 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "score": 157.9,
+          "engagement": "1213 points · 990 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -50,9 +51,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 144.6,
-          "engagement": "2123 points · 520 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "score": 144.7,
+          "engagement": "2127 points · 526 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -62,9 +63,9 @@
           "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 130.9,
-          "engagement": "507 points · 213 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "score": 130.8,
+          "engagement": "512 points · 220 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "45a86641ba677818",
@@ -74,9 +75,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 123.4,
-          "engagement": "669 points · 220 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "score": 123.5,
+          "engagement": "672 points · 221 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "debf643f0294e072",
@@ -88,7 +89,185 @@
           "publishedAt": "2026-09-03T14:51:10.000Z",
           "score": 125,
           "engagement": "629 points · 306 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "d26be4db00d9b182",
+          "category": "tech",
+          "title": "Google AI Mode shows same products 21.6% more expensive than traditional search",
+          "titleZh": "谷歌AI模式显示相同的产品比传统搜索贵21.6%",
+          "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
+          "source": "productrise.app",
+          "publishedAt": "2026-09-04T11:59:15.000Z",
+          "score": 122.3,
+          "engagement": "335 points · 70 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "f97132099316cf1a",
+          "category": "market",
+          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
+          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
+          "url": "https://www.marketwatch.com/story/six-reasons-that-the-risk-of-a-stock-market-selloff-is-rising-heres-what-investors-should-be-doing-4c3d84ec",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
+          "score": 66.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "fb4815673485f329",
+          "category": "market",
+          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
+          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/hardware-infrastructure-stocks-q2-teardown-151810939.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
+          "score": 60.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "ffe246597ac60595",
+          "category": "market",
+          "title": "Wall Street dips after strong jobs data fuels hawkish Fed bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "reuters.com",
+          "publishedAt": "Fri, 04 Sep 2026 18:29:49 GMT",
+          "score": 62.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "357919a940137f1c",
+          "category": "market",
+          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
+          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
+          "score": 65.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "e6d513961aa3a32c",
+          "category": "market",
+          "title": "Health-tracking smart ring maker Oura to list on US stock market",
+          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
+          "url": "https://www.theguardian.com/business/2026/sep/04/health-tracking-smart-ring-maker-oura-to-list-on-us-stock-market",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
+          "source": "The Guardian",
+          "publishedAt": "Fri, 04 Sep 2026 17:30:00 GMT",
+          "score": 60.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "4ac59570d769a269",
+          "category": "tech",
+          "title": "IBM Bob",
+          "titleZh": "IBM Bob",
+          "url": "https://bob.ibm.com/",
+          "source": "bob.ibm.com",
+          "publishedAt": "2026-09-04T12:50:29.000Z",
+          "score": 122.1,
+          "engagement": "173 points · 200 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "ddfe5c961485cf81",
+          "category": "market",
+          "title": "Commvault (CVLT) Triples Its Cloud Safety Net While Wall Street Cools",
+          "titleZh": "Commvault (CVLT)将其云安全网增加三倍，而华尔街则降温",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/commvault-cvlt-triples-cloud-safety-173309595.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNUm5YcXF3Qng4RXEtVGRUNnBTYWVocTNfRDBUUWsxdEVKZDFvckpUZWtkbVZVWU1NeFlPaDIwcEdTcmxZa0duM2oya2RhanktV0FTTERWbl9Kd2JVd01ISUNiN1V5NFRCMXpCTGl6YVJnMVEwTGo0d3RIY2JENUNsZVlRQzhiTzNmVFNaTjRXSTU5NFdFYV9SaTVwNDJLYTZtQWc?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 17:33:09 GMT",
+          "score": 59.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "e6d8a113556dfe7b",
+          "category": "market",
+          "title": "AmperCap Acquisition Company Rings the Nasdaq Stock Market Opening Bell",
+          "titleZh": "AmperCap收购公司敲响纳斯达克股市开盘钟声",
+          "url": "https://www.nasdaq.com/videos/ampercap-acquisition-company-rings-nasdaq-stock-market-opening-bell",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQSkQxX2hoYXBqazBoSGswR3haNnhJRDNZangxR0l1U0JTZEl2eTRjU0UtT1k1ay1od3dQSzRSOVpFZ3NUOThVY3VPOUF0OGR4M2owbFJfcEN4Q0cybDh2bVJ2ZTY1THEwcnZUMTEzX0Nob2FUYXlrekN4b0xJdTRtLTgtNTZ3bHlRVHdNUlRQRDJyb1B6cFp3eU15Mm9pQQ?oc=5",
+          "source": "Nasdaq",
+          "publishedAt": "Fri, 04 Sep 2026 14:36:07 GMT",
+          "score": 60.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "791690be39c8f194",
+          "category": "market",
+          "title": "The Nasdaq, S&P 500, and Dow All Fell Slightly Friday. The Jobs Report Wasn't Really Why.",
+          "titleZh": "纳斯达克、标准普尔500指数和道琼斯指数周五小幅下跌。就业报告并不是真正的原因。",
+          "url": "https://www.fool.com/investing/2026/09/04/the-nasdaq-sp-500-and-dow-all-fell-slightly-friday/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQckJ6LVAxbHpUZ0lBOUZyRTd6ZGNZaXhXcGNHcFVwbUszc3RJTmkyMWh1eEhvVW0tYVZRUjVjbV9TNjhsRkl2ZURKLTkxQ2RiRF9DX3ZXRm5IY1FQYVdZa1B6N2xVdGZFdWM4N0tZVU5pblV1UVNva1FTME9XRDl5TzZDSWd5X004cURxWUVLUU1MMEh5Z284OA?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Fri, 04 Sep 2026 18:48:42 GMT",
+          "score": 59.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "b24297b71d7302b5",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 67,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "ef42487a6b629ef2",
+          "category": "market",
+          "title": "Tesla's stock drops as Cybercab update 'underwhelms' Wall Street",
+          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
+          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
+          "score": 69.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "2b69b213c5cac724",
+          "category": "tech",
+          "title": "Nobody Is Saying Why OpenAI and Anthropic Had Outages",
+          "titleZh": "没有人会说为什么OpenAI和Anthropic会发生停电",
+          "url": "https://www.wired.com/story/nobody-is-saying-why-openai-and-anthropic-had-outages-today/",
+          "source": "wired.com",
+          "publishedAt": "2026-09-04T17:29:22.000Z",
+          "score": 122,
+          "engagement": "167 points · 110 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
+        },
+        {
+          "id": "e94fc2f0f03f5691",
+          "category": "tech",
+          "title": "Formalizing Fermat's Last Theorem",
+          "titleZh": "形式化费马最后定理",
+          "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
+          "source": "anthropic.com",
+          "publishedAt": "2026-09-04T18:42:56.000Z",
+          "score": 121.8,
+          "engagement": "164 points · 93 comments",
+          "pushedAt": "2026-09-04T20:00:42.897Z"
         },
         {
           "id": "656e675460d44f88",
@@ -103,57 +282,6 @@
           "pushedAt": "2026-09-04T19:30:43.662Z"
         },
         {
-          "id": "d26be4db00d9b182",
-          "category": "tech",
-          "title": "Google AI Mode shows same products 21.6% more expensive than traditional search",
-          "titleZh": "谷歌AI模式显示相同的产品比传统搜索贵21.6%",
-          "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
-          "source": "productrise.app",
-          "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 122,
-          "engagement": "330 points · 65 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "f97132099316cf1a",
-          "category": "market",
-          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
-          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
-          "url": "https://www.marketwatch.com/story/six-reasons-that-the-risk-of-a-stock-market-selloff-is-rising-heres-what-investors-should-be-doing-4c3d84ec",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 67.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "fb4815673485f329",
-          "category": "market",
-          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
-          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/hardware-infrastructure-stocks-q2-teardown-151810939.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "ffe246597ac60595",
-          "category": "market",
-          "title": "Wall Street dips after strong jobs data fuels hawkish Fed bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 18:29:49 GMT",
-          "score": 80.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
           "id": "85054bb548fd17e8",
           "category": "tech",
           "title": "Gmail to end support for \"Send as\" for third-party addresses, such as @yahoo.com",
@@ -163,57 +291,6 @@
           "publishedAt": "2026-09-04T15:03:03.000Z",
           "score": 120.2,
           "engagement": "163 points · 118 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "357919a940137f1c",
-          "category": "market",
-          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
-          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
-          "score": 66.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "e6d513961aa3a32c",
-          "category": "market",
-          "title": "Health-tracking smart ring maker Oura to list on US stock market",
-          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
-          "url": "https://www.theguardian.com/business/2026/sep/04/health-tracking-smart-ring-maker-oura-to-list-on-us-stock-market",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
-          "source": "theguardian.com",
-          "publishedAt": "Fri, 04 Sep 2026 17:30:00 GMT",
-          "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "4ac59570d769a269",
-          "category": "tech",
-          "title": "IBM Bob",
-          "titleZh": "IBM Bob",
-          "url": "https://bob.ibm.com/",
-          "source": "bob.ibm.com",
-          "publishedAt": "2026-09-04T12:50:29.000Z",
-          "score": 121.4,
-          "engagement": "161 points · 193 comments",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "ddfe5c961485cf81",
-          "category": "market",
-          "title": "Commvault (CVLT) Triples Its Cloud Safety Net While Wall Street Cools",
-          "titleZh": "Commvault (CVLT)将其云安全网增加三倍，而华尔街则降温",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/commvault-cvlt-triples-cloud-safety-173309595.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNUm5YcXF3Qng4RXEtVGRUNnBTYWVocTNfRDBUUWsxdEVKZDFvckpUZWtkbVZVWU1NeFlPaDIwcEdTcmxZa0duM2oya2RhanktV0FTTERWbl9Kd2JVd01ISUNiN1V5NFRCMXpCTGl6YVJnMVEwTGo0d3RIY2JENUNsZVlRQzhiTzNmVFNaTjRXSTU5NFdFYV9SaTVwNDJLYTZtQWc?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 17:33:09 GMT",
-          "score": 60.3,
-          "engagement": "",
           "pushedAt": "2026-09-04T19:30:43.662Z"
         },
         {
@@ -230,19 +307,6 @@
           "pushedAt": "2026-09-04T19:30:43.662Z"
         },
         {
-          "id": "e6d8a113556dfe7b",
-          "category": "market",
-          "title": "AmperCap Acquisition Company Rings the Nasdaq Stock Market Opening Bell",
-          "titleZh": "AmperCap收购公司敲响纳斯达克股市开盘钟声",
-          "url": "https://www.nasdaq.com/videos/ampercap-acquisition-company-rings-nasdaq-stock-market-opening-bell",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQSkQxX2hoYXBqazBoSGswR3haNnhJRDNZangxR0l1U0JTZEl2eTRjU0UtT1k1ay1od3dQSzRSOVpFZ3NUOThVY3VPOUF0OGR4M2owbFJfcEN4Q0cybDh2bVJ2ZTY1THEwcnZUMTEzX0Nob2FUYXlrekN4b0xJdTRtLTgtNTZ3bHlRVHdNUlRQRDJyb1B6cFp3eU15Mm9pQQ?oc=5",
-          "source": "Nasdaq",
-          "publishedAt": "Fri, 04 Sep 2026 14:36:07 GMT",
-          "score": 61.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
           "id": "438f58c44a2f2399",
           "category": "market",
           "title": "S&P 500 changes are coming soon. These stocks could be named to the index today.",
@@ -254,45 +318,6 @@
           "score": 58.9,
           "engagement": "",
           "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "791690be39c8f194",
-          "category": "market",
-          "title": "The Nasdaq, S&P 500, and Dow All Fell Slightly Friday. The Jobs Report Wasn't Really Why.",
-          "titleZh": "纳斯达克、标准普尔500指数和道琼斯指数周五小幅下跌。就业报告并不是真正的原因。",
-          "url": "https://www.fool.com/investing/2026/09/04/the-nasdaq-sp-500-and-dow-all-fell-slightly-friday/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQckJ6LVAxbHpUZ0lBOUZyRTd6ZGNZaXhXcGNHcFVwbUszc3RJTmkyMWh1eEhvVW0tYVZRUjVjbV9TNjhsRkl2ZURKLTkxQ2RiRF9DX3ZXRm5IY1FQYVdZa1B6N2xVdGZFdWM4N0tZVU5pblV1UVNva1FTME9XRDl5TzZDSWd5X004cURxWUVLUU1MMEh5Z284OA?oc=5",
-          "source": "The Motley Fool",
-          "publishedAt": "Fri, 04 Sep 2026 18:48:42 GMT",
-          "score": 59.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:30:43.662Z"
-        },
-        {
-          "id": "b24297b71d7302b5",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 68,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:00:46.705Z"
-        },
-        {
-          "id": "ef42487a6b629ef2",
-          "category": "market",
-          "title": "Tesla's stock drops as Cybercab update 'underwhelms' Wall Street",
-          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
-          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
-          "score": 71.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T19:00:46.705Z"
         },
         {
           "id": "f0e41de37211bf37",
