@@ -397,7 +397,8 @@ export default {
       service: "DailyReview Reader",
       status: "ok",
       browserFallback: Boolean(env.BROWSER),
-      googleNewsResolver: true,\n      workerVersion: "2026.09.04.10",
+      googleNewsResolver: true,
+      workerVersion: "2026.09.04.10",
     });
   },
 };
