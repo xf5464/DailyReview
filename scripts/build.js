@@ -115,7 +115,7 @@ function addAssetVersions() {
   ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
   const html = fs.readFileSync(indexPath, 'utf8')
     .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
-    .replace('src="app.js"', `src="app.js?v=${appVersion}`)
+    .replace('src="app.js"', `src="app.js?v=${appVersion}"`)
     .replace('__APP_VERSION__', shellVersion);
   fs.writeFileSync(indexPath, html, 'utf8');
   const workerPath = path.join(outputDirectory, 'service-worker.js');
