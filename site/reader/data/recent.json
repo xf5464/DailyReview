@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T23:30:44.644Z",
+  "updatedAt": "2026-09-04T23:56:08.908Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T23:56:08.908Z",
         "2026-09-04T23:30:44.644Z",
         "2026-09-04T23:00:40.872Z",
         "2026-09-04T22:30:44.466Z",
@@ -35,8 +36,8 @@
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
           "score": 154.3,
-          "engagement": "2144 points · 1961 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "engagement": "2147 points · 1963 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -46,9 +47,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 157.4,
-          "engagement": "1414 points · 1137 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 157.1,
+          "engagement": "1428 points · 1150 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "45a86641ba677818",
@@ -58,9 +59,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 123.6,
-          "engagement": "675 points · 223 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 123.7,
+          "engagement": "676 points · 223 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -70,9 +71,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 119.8,
-          "engagement": "361 points · 71 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 119.5,
+          "engagement": "362 points · 72 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -83,8 +84,8 @@
           "source": "bob.ibm.com",
           "publishedAt": "2026-09-04T12:50:29.000Z",
           "score": 122.5,
-          "engagement": "208 points · 249 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "engagement": "213 points · 251 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "e94fc2f0f03f5691",
@@ -94,9 +95,9 @@
           "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
           "source": "anthropic.com",
           "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 138,
-          "engagement": "418 points · 269 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 138.5,
+          "engagement": "435 points · 285 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "efb32cf2a2d830f1",
@@ -106,9 +107,9 @@
           "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
           "source": "torrentfreak.com",
           "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 129.2,
-          "engagement": "301 points · 187 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 129.4,
+          "engagement": "312 points · 191 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "656e675460d44f88",
@@ -118,9 +119,163 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 120,
-          "engagement": "381 points · 84 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
+          "score": 119.9,
+          "engagement": "387 points · 85 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "ffe246597ac60595",
+          "category": "market",
+          "title": "Wall Street ends lower as solid jobs data fuels hawkish Fed bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "reuters.com",
+          "publishedAt": "Fri, 04 Sep 2026 20:24:45 GMT",
+          "score": 60.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "dd56d4642799f114",
+          "category": "market",
+          "title": "Update: Wall Street Wraps Mixed Week in Red Following Strong Jobs Report",
+          "titleZh": "更新：在强劲的就业报告之后，华尔街以红色包装混合周",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-wraps-mixed-week-204238792.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVEFvaUlfTlhMREpTT2xmcUpLU2R2Q0VhajBESWxnYWItWU5ZSHdXTHBzeldRdmY1ZnYzRE5BeVVQT2wzcjJ2TjBLY3lGVGtaeFVyWkdpNklwZTZmZ3hKRTZMUGI2MER3c3pQYm1OUnpuWFA5dU1oVlBfUnJyalJ1aDFIN2JuRGVOQmRnb1l2ZVdEQ05UUm92Zw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 20:42:38 GMT",
+          "score": 62.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "438f58c44a2f2399",
+          "category": "market",
+          "title": "Bloom Energy was just named to the S&P 500. These other stocks are joining the index as well.",
+          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
+          "url": "https://www.marketwatch.com/story/s-p-500-changes-are-coming-soon-these-stocks-could-be-named-to-the-index-today-2d0d7c14",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 21:46:00 GMT",
+          "score": 65.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "fd4e0b99ad940433",
+          "category": "tech",
+          "title": "Shutting down our public encrypted DNS",
+          "titleZh": "关闭我们的公共加密DNS",
+          "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
+          "source": "mullvad.net",
+          "publishedAt": "2026-09-04T18:50:28.000Z",
+          "score": 120.6,
+          "engagement": "222 points · 78 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "2f8e9d6abc142fa8",
+          "category": "market",
+          "title": "2 of Wall Street’s Favorite Stocks with Exciting Potential and 1 We Find Risky",
+          "titleZh": "华尔街最受欢迎的2只具有令人兴奋的潜力的股票和1只我们发现有风险的股票",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/2-wall-street-favorite-stocks-223810421.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPdjI3bEZXVVlXb2JVWk5MT1o1TnpxaVdCcjZmYmxMTEVBbnVIai1hWVlSQ1Vld1luNnRPbUlTbE4zWHQzUGg1R3IxZVdPalhRME9zX2NyYmd2NE5iVFAtc183UkY4Y3MwR0prd0VkTWFINWYzUDREQlZ3Z0h3bzRHTnc2RGd1RHhQTUdKdTZHMGNYZktkdlBIYk1R?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:38:10 GMT",
+          "score": 64,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "66ef69aa4128f8f3",
+          "category": "market",
+          "title": "Jim Cramer Says “Someone Must Know Something” About Broadcom Inc. (NASDAQ:AVGO)’s Post-Earnings Share Dip",
+          "titleZh": "Jim Cramer表示，关于Broadcom Inc. （纳斯达克股票代码： AVGO ）的收益后股价下跌， “必须有人知道一些事情”",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-someone-must-225141015.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNVVdxTnNldmFMY1F0NUdFbVFCcTBPTnhUcC0zcDBYS2c1dVhoUEFab2g2WUdjRkJoRUdWUlRSZGpLdjc5Wjl3M3hBTWI4Z0tGM3J0MGZ3OUN3X3ZqN2s0VTlOdGxhWXV6X2NJazh4cE1oVlRmZm5KX3JwTUU2SDFRUjJESURtMGIxckVNdWVGSVBDQnU1RDZKRA?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:51:41 GMT",
+          "score": 67.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "9ec0ebe21759072b",
+          "category": "market",
+          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
+          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
+          "score": 64.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "05f3c93495260c84",
+          "category": "market",
+          "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
+          "titleZh": "Jim Cramer标记Adobe Inc. （纳斯达克股票代码： ADBE ）的另一个风险",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-flagged-another-risk-225229766.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpqSEZuQUNwc2xnSjRaT0ZlWFNZWC1QeUlTcEhkVzcyR1J6RVdOQnF4cUtqOHg2WGpMYUM5TXJCNWZfa1RpZmM4QWVnRmVGa25UeF91ZF9aejM4TnlQWU4zNTRyckJBNjVSMWdqNUFmUEJlc0g3MmNsLW9hdDdzZTdOdVptWmNkWDkzQktXaWc0a1VxRGMzRldWai0?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
+          "score": 63.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "d701939668904225",
+          "category": "market",
+          "title": "There Are A Lot Of Zscaler Inc. (NASDAQ:ZS) Shorts, Says Jim Cramer",
+          "titleZh": "Jim Cramer表示，有很多Zscaler Inc. (NASDAQ: ZS)短裤",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/lot-zscaler-inc-nasdaq-zs-225009241.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERpalZlSXphbGU3dmVzUE5Xd3h4bmdvZk1fLWcyNDlEeFl3MkliUWFYMHZXc081N3JjcjR1UmJXRjJPUndTSXJjS1ctSEdJRVdvREJ4dUR1Uk1lRWZuckJqQXhsTXR0aGE2MURMcDhoLXktSGpPR2Q0d1RVTlRka0hJZS16alpZNnJYQy13SThTaDUt?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:50:09 GMT",
+          "score": 62.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "ef42487a6b629ef2",
+          "category": "market",
+          "title": "Tesla's stock drops 6% as Cybercab update 'underwhelms' Wall Street",
+          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
+          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
+          "score": 61.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "b24297b71d7302b5",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 63.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
+        },
+        {
+          "id": "79a921d6eacb0325",
+          "category": "tech",
+          "title": "Show HN: Open-Source eInk Bike Computer",
+          "titleZh": "Show HN ：开源eInk自行车电脑",
+          "url": "https://opentrailpaper.com",
+          "source": "opentrailpaper.com",
+          "publishedAt": "2026-09-04T17:18:08.000Z",
+          "score": 118.2,
+          "engagement": "215 points · 73 comments",
+          "pushedAt": "2026-09-04T23:56:08.908Z"
         },
         {
           "id": "f0e41de37211bf37",
@@ -132,19 +287,6 @@
           "publishedAt": "2026-09-04T12:43:49.000Z",
           "score": 118.2,
           "engagement": "184 points · 172 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "ffe246597ac60595",
-          "category": "market",
-          "title": "Wall Street ends lower as solid jobs data fuels hawkish Fed bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 20:24:45 GMT",
-          "score": 78.9,
-          "engagement": "",
           "pushedAt": "2026-09-04T23:30:44.644Z"
         },
         {
@@ -161,109 +303,6 @@
           "pushedAt": "2026-09-04T23:30:44.644Z"
         },
         {
-          "id": "dd56d4642799f114",
-          "category": "market",
-          "title": "Update: Wall Street Wraps Mixed Week in Red Following Strong Jobs Report",
-          "titleZh": "更新：在强劲的就业报告之后，华尔街以红色包装混合周",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-wraps-mixed-week-204238792.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVEFvaUlfTlhMREpTT2xmcUpLU2R2Q0VhajBESWxnYWItWU5ZSHdXTHBzeldRdmY1ZnYzRE5BeVVQT2wzcjJ2TjBLY3lGVGtaeFVyWkdpNklwZTZmZ3hKRTZMUGI2MER3c3pQYm1OUnpuWFA5dU1oVlBfUnJyalJ1aDFIN2JuRGVOQmRnb1l2ZVdEQ05UUm92Zw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 20:42:38 GMT",
-          "score": 61.9,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "438f58c44a2f2399",
-          "category": "market",
-          "title": "Bloom Energy was just named to the S&P 500. These other stocks are joining the index as well.",
-          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
-          "url": "https://www.marketwatch.com/story/s-p-500-changes-are-coming-soon-these-stocks-could-be-named-to-the-index-today-2d0d7c14",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 21:46:00 GMT",
-          "score": 66.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "fd4e0b99ad940433",
-          "category": "tech",
-          "title": "Shutting down our public encrypted DNS",
-          "titleZh": "关闭我们的公共加密DNS",
-          "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
-          "source": "mullvad.net",
-          "publishedAt": "2026-09-04T18:50:28.000Z",
-          "score": 119.9,
-          "engagement": "208 points · 75 comments",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "2f8e9d6abc142fa8",
-          "category": "market",
-          "title": "2 of Wall Street’s Favorite Stocks with Exciting Potential and 1 We Find Risky",
-          "titleZh": "华尔街最受欢迎的2只具有令人兴奋的潜力的股票和1只我们发现有风险的股票",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/2-wall-street-favorite-stocks-223810421.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPdjI3bEZXVVlXb2JVWk5MT1o1TnpxaVdCcjZmYmxMTEVBbnVIai1hWVlSQ1Vld1luNnRPbUlTbE4zWHQzUGg1R3IxZVdPalhRME9zX2NyYmd2NE5iVFAtc183UkY4Y3MwR0prd0VkTWFINWYzUDREQlZ3Z0h3bzRHTnc2RGd1RHhQTUdKdTZHMGNYZktkdlBIYk1R?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:38:10 GMT",
-          "score": 64.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "66ef69aa4128f8f3",
-          "category": "market",
-          "title": "Jim Cramer Says “Someone Must Know Something” About Broadcom Inc. (NASDAQ:AVGO)’s Post-Earnings Share Dip",
-          "titleZh": "Jim Cramer表示，关于Broadcom Inc. （纳斯达克股票代码： AVGO ）的收益后股价下跌， “必须有人知道一些事情”",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-someone-must-225141015.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNVVdxTnNldmFMY1F0NUdFbVFCcTBPTnhUcC0zcDBYS2c1dVhoUEFab2g2WUdjRkJoRUdWUlRSZGpLdjc5Wjl3M3hBTWI4Z0tGM3J0MGZ3OUN3X3ZqN2s0VTlOdGxhWXV6X2NJazh4cE1oVlRmZm5KX3JwTUU2SDFRUjJESURtMGIxckVNdWVGSVBDQnU1RDZKRA?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:51:41 GMT",
-          "score": 68.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "9ec0ebe21759072b",
-          "category": "market",
-          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
-          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
-          "score": 65.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "05f3c93495260c84",
-          "category": "market",
-          "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
-          "titleZh": "Jim Cramer标记Adobe Inc. （纳斯达克股票代码： ADBE ）的另一个风险",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-flagged-another-risk-225229766.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpqSEZuQUNwc2xnSjRaT0ZlWFNZWC1QeUlTcEhkVzcyR1J6RVdOQnF4cUtqOHg2WGpMYUM5TXJCNWZfa1RpZmM4QWVnRmVGa25UeF91ZF9aejM4TnlQWU4zNTRyckJBNjVSMWdqNUFmUEJlc0g3MmNsLW9hdDdzZTdOdVptWmNkWDkzQktXaWc0a1VxRGMzRldWai0?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
-          "score": 63.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "d701939668904225",
-          "category": "market",
-          "title": "There Are A Lot Of Zscaler Inc. (NASDAQ:ZS) Shorts, Says Jim Cramer",
-          "titleZh": "Jim Cramer表示，有很多Zscaler Inc. (NASDAQ: ZS)短裤",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/lot-zscaler-inc-nasdaq-zs-225009241.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERpalZlSXphbGU3dmVzUE5Xd3h4bmdvZk1fLWcyNDlEeFl3MkliUWFYMHZXc081N3JjcjR1UmJXRjJPUndTSXJjS1ctSEdJRVdvREJ4dUR1Uk1lRWZuckJqQXhsTXR0aGE2MURMcDhoLXktSGpPR2Q0d1RVTlRka0hJZS16alpZNnJYQy13SThTaDUt?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:50:09 GMT",
-          "score": 62.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
           "id": "3fd8ebcf47ac803c",
           "category": "market",
           "title": "Jim Cramer Said Meta Platforms, Inc. (NASDAQ: META)’s Big Court Win Was A Close Call",
@@ -275,32 +314,6 @@
           "score": 60.1,
           "engagement": "",
           "pushedAt": "2026-09-04T23:30:44.644Z"
-        },
-        {
-          "id": "ef42487a6b629ef2",
-          "category": "market",
-          "title": "Tesla's stock drops 6% as Cybercab update 'underwhelms' Wall Street",
-          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
-          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
-          "score": 65.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:00:40.872Z"
-        },
-        {
-          "id": "b24297b71d7302b5",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 64,
-          "engagement": "",
-          "pushedAt": "2026-09-04T23:00:40.872Z"
         },
         {
           "id": "2fac46b3f7b1c068",
