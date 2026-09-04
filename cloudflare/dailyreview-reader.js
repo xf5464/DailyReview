@@ -242,6 +242,73 @@ async function translateArticle(env, text) {
   return translated.join("\n\n");
 }
 
+function isGoogleNewsUrl(target) {
+  const host = target.hostname.toLowerCase();
+  return host === "news.google.com" || host.endsWith(".news.google.com");
+}
+
+async function resolveGoogleNewsUrl(env, target) {
+  const direct = await fetch(target, {
+    redirect: "follow",
+    headers: {
+      "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1",
+      accept: "text/html,application/xhtml+xml",
+    },
+    signal: AbortSignal.timeout(12_000),
+  });
+  const directUrl = new URL(direct.url || target.toString());
+  if (!isGoogleNewsUrl(directUrl)) return assertPublicHttpUrl(directUrl.toString());
+
+  if (env.BROWSER) {
+    const response = await env.BROWSER.quickAction("markdown", {
+      url: target.toString(),
+      gotoOptions: { waitUntil: "domcontentloaded", timeout: 20_000 },
+    });
+    if (response.ok) {
+      const result = await response.json();
+      const browserUrl = new URL(String(result.url || target));
+      if (!isGoogleNewsUrl(browserUrl)) return assertPublicHttpUrl(browserUrl.toString());
+    }
+  }
+
+  const jina = await fetch("https://r.jina.ai/" + target.toString(), {
+    headers: { accept: "text/plain", "x-return-format": "markdown" },
+    signal: AbortSignal.timeout(20_000),
+  });
+  if (jina.ok) {
+    const sourceUrl = (await jina.text()).match(/^URL Source:\s*(.+)$/mi)?.[1]?.trim();
+    if (sourceUrl) {
+      const jinaUrl = new URL(sourceUrl);
+      if (!isGoogleNewsUrl(jinaUrl)) return assertPublicHttpUrl(jinaUrl.toString());
+    }
+  }
+  throw new Error("暂时无法解析 Google News 的原媒体地址。");
+}
+
+async function openApi(request, env) {
+  const requestUrl = new URL(request.url);
+  let target;
+  try { target = assertPublicHttpUrl(requestUrl.searchParams.get("url") || ""); }
+  catch (error) { return json({ error: error.message }, 400); }
+
+  if (!isGoogleNewsUrl(target)) {
+    return Response.redirect(target.toString(), 302);
+  }
+
+  try {
+    const resolved = await resolveGoogleNewsUrl(env, target);
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: resolved.toString(),
+        "cache-control": "public, max-age=86400",
+      },
+    });
+  } catch {
+    return Response.redirect(target.toString(), 302);
+  }
+}
+
 async function readerApi(request, env, ctx) {
   const requestUrl = new URL(request.url);
   let target;
@@ -286,6 +353,7 @@ export default {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
     if (request.method === "GET" && url.pathname === "/reader-api") return readerApi(request, env, ctx);
+    if (request.method === "GET" && url.pathname === "/open") return openApi(request, env);
     return json({
       service: "DailyReview Reader",
       status: "ok",
