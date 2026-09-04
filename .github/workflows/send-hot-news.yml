@@ -72,7 +72,7 @@ jobs:
         if: steps.gate.outputs.should_send == 'true'
         run: npm test
 
-      - name: Fetch hot news and update reader
+      - name: Fetch hot news and send email
         if: steps.gate.outputs.should_send == 'true'
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
@@ -86,7 +86,7 @@ jobs:
         run: node scripts/send-hot-news-email.js
 
       - name: Save the reader news archive
-        if: steps.gate.outputs.should_send == 'true'
+        if: steps.gate.outputs.should_send == 'true' && github.event_name == 'workflow_dispatch' && inputs.refresh_only == true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
