@@ -1,16 +1,9 @@
-// Add these workflow dispatch helpers to the existing dailyreview-cron Worker.
+// Add this reader-refresh helper to the existing dailyreview-cron Worker.
 // Cloudflare Cron uses UTC:
-// - `17 4,10,16,22 * * *` sends email at 12:17, 18:17, 00:17 and 06:17 China time.
 // - `*/30 * * * *` refreshes the reader every 30 minutes without sending email.
+// - The existing `17 4,10,16,22 * * *` DailyReview jobs are intentionally ignored here.
 
 const GITHUB_API = "https://api.github.com/repos/xf5464/DailyReview/actions/workflows";
-const EMAIL_CRONS = new Set([
-  "17 4,10,16,22 * * *",
-  "17 4 * * *",
-  "17 10 * * *",
-  "17 16 * * *",
-  "17 22 * * *",
-]);
 const READER_REFRESH_CRON = "*/30 * * * *";
 
 async function dispatchWorkflow(env, workflow, inputs) {
@@ -29,27 +22,11 @@ async function dispatchWorkflow(env, workflow, inputs) {
 }
 
 export async function sendDailyHotNews(event, env) {
-  if (event.cron === READER_REFRESH_CRON) {
-    await dispatchWorkflow(env, "refresh-reader.yml", {
-      window_hours: "30",
-    });
-    return true;
-  }
-  if (!EMAIL_CRONS.has(event.cron)) return false;
-  await dispatchWorkflow(env, "send-hot-news.yml", {
-    trigger_source: "cloudflare",
+  if (event.cron !== READER_REFRESH_CRON) return false;
+  await dispatchWorkflow(env, "refresh-reader.yml", {
     window_hours: "30",
-    refresh_only: "false",
   });
   return true;
-}
-
-export async function sendHotNewsNow(env) {
-  await dispatchWorkflow(env, "send-hot-news.yml", {
-    trigger_source: "cloudflare-manual",
-    window_hours: "30",
-    refresh_only: "false",
-  });
 }
 
 export async function refreshReaderNow(env) {
@@ -67,9 +44,9 @@ export default {
     return Response.json({
       service: "DailyReview Cron Hot News",
       status: "ok",
-      emailCron: "17 4,10,16,22 * * *",
       readerRefreshCron: "*/30 * * * *",
-      cronVersion: "2026.09.04.13",
+      ignoresDailyReviewCron: "17 4,10,16,22 * * *",
+      cronVersion: "2026.09.05.14",
     });
   },
 };
