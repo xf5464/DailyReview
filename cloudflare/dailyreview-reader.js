@@ -2,6 +2,21 @@ const ALLOWED_ORIGIN = "https://xf5464.github.io";
 const MAX_HTML_BYTES = 2_500_000;
 const MAX_ARTICLE_CHARS = 32_000;
 const TRANSLATION_CHUNK_CHARS = 2_400;
+const PAYWALL_HOSTS = [
+  "wsj.com", "bloomberg.com", "ft.com", "barrons.com", "nytimes.com",
+  "economist.com", "theinformation.com", "businessinsider.com",
+  "fortune.com", "seekingalpha.com", "investors.com",
+];
+const PAYWALL_PATTERNS = [
+  /subscribe to (?:continue|keep) reading/i,
+  /sign in to (?:continue|keep) reading/i,
+  /already (?:a )?subscriber/i,
+  /this article is for subscribers/i,
+  /unlock (?:this|the) article/i,
+  /subscription required/i,
+  /register or sign in to continue/i,
+  /become a (?:member|subscriber) to continue/i,
+];
 
 const CORS_HEADERS = {
   "access-control-allow-origin": ALLOWED_ORIGIN,
@@ -28,6 +43,9 @@ function assertPublicHttpUrl(rawUrl) {
     /^169\.254\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
     host === "::1" || host.startsWith("fc") || host.startsWith("fd") || host.startsWith("fe80:");
   if (blocked) throw new Error("不支持本地或内网地址。");
+  if (PAYWALL_HOSTS.some((blockedHost) => host === blockedHost || host.endsWith("." + blockedHost))) {
+    throw new Error("该来源需要付费订阅，已停止读取。");
+  }
   target.hash = "";
   return target;
 }
@@ -153,6 +171,12 @@ async function extractWithJina(target) {
   };
 }
 
+function isLikelyPaywall(text) {
+  const content = String(text || "").replace(/\s+/g, " ").trim();
+  const matches = PAYWALL_PATTERNS.filter((pattern) => pattern.test(content)).length;
+  return matches >= 2 || (matches >= 1 && content.length < 4_000);
+}
+
 async function extractReadableArticle(env, target) {
   const failures = [];
   for (const attempt of [
@@ -160,7 +184,18 @@ async function extractReadableArticle(env, target) {
     () => extractWithBrowser(env, target),
     () => extractWithJina(target),
   ]) {
-    try { return await attempt(); } catch (error) { failures.push(error.message); }
+    try {
+      const article = await attempt();
+      if (isLikelyPaywall(article.body)) {
+        const error = new Error("检测到付费订阅墙，已停止读取。");
+        error.paywall = true;
+        throw error;
+      }
+      return article;
+    } catch (error) {
+      if (error.paywall) throw error;
+      failures.push(error.message);
+    }
   }
   throw new Error("三种读取方式均失败：" + failures.join("；") + "。");
 }

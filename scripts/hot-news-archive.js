@@ -33,7 +33,7 @@ function pruneArchive(archive, now = Date.now()) {
   };
 }
 
-function mergeNews(archive, news, now = Date.now()) {
+function mergeNews(archive, news, now = Date.now(), shouldKeepItem = () => true) {
   const pushedAt = new Date(now).toISOString();
   const date = chinaDate(now);
   const next = pruneArchive(archive || emptyArchive(), now);
@@ -52,6 +52,9 @@ function mergeNews(archive, news, now = Date.now()) {
   incoming.forEach((item) => byId.set(item.id, item));
   day.items = [...byId.values()].sort((left, right) =>
     Date.parse(right.pushedAt || right.publishedAt) - Date.parse(left.pushedAt || left.publishedAt));
+  next.days.forEach((entry) => {
+    entry.items = (entry.items || []).filter(shouldKeepItem);
+  });
   next.updatedAt = pushedAt;
   return pruneArchive(next, now);
 }
@@ -60,8 +63,8 @@ function readArchive(filePath) {
   try { return JSON.parse(fs.readFileSync(filePath, 'utf8')); } catch { return emptyArchive(); }
 }
 
-function saveNewsArchive(news, filePath, now = Date.now()) {
-  const next = mergeNews(readArchive(filePath), news, now);
+function saveNewsArchive(news, filePath, now = Date.now(), shouldKeepItem = () => true) {
+  const next = mergeNews(readArchive(filePath), news, now, shouldKeepItem);
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
   return next;

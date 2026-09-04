@@ -39,3 +39,10 @@ test('prunes the repository archive when a build starts', () => {
   assert.deepEqual(JSON.parse(fs.readFileSync(filePath, 'utf8')).days.map((day) => day.date), ['2026-09-04']);
   fs.rmSync(directory, { recursive: true, force: true });
 });
+
+test('removes previously archived items rejected by the current filter', () => {
+  let archive = mergeNews(null, news('Paid', 'https://example.com/paid'), Date.parse('2026-09-04T01:00:00Z'));
+  archive = mergeNews(archive, news('Free', 'https://example.com/free'), Date.parse('2026-09-04T03:00:00Z'),
+    (item) => !item.url.endsWith('/paid'));
+  assert.deepEqual(archive.days[0].items.map((item) => item.url), ['https://example.com/free']);
+});

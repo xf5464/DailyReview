@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { environmentFlag, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
+const { environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
 
 test("parses Google News RSS and removes source suffix", () => {
   const xml = `<rss><channel><item><title><![CDATA[Nvidia launches a new chip - Reuters]]></title><link>https://example.com/a?x=1&amp;y=2</link><pubDate>Fri, 04 Sep 2026 01:00:00 GMT</pubDate><source url="https://reuters.com">Reuters</source></item></channel></rss>`;
@@ -72,4 +72,10 @@ test("recognizes refresh-only environment values", () => {
 test("reuses an existing Chinese title without calling the translation service", async () => {
   const items = [{ title: "Existing English headline", titleZh: "已有中文标题" }];
   assert.deepEqual(await require("../scripts/send-hot-news-email").addChineseTranslations(items), items);
+});
+
+test("filters strict paid-subscription sources by publisher or domain", () => {
+  assert.equal(isPaywalledItem({ source: "The Wall Street Journal", url: "https://news.google.com/story" }), true);
+  assert.equal(isPaywalledItem({ source: "Unknown", url: "https://www.bloomberg.com/news/a" }), true);
+  assert.equal(isPaywalledItem({ source: "Reuters", url: "https://reuters.com/world/a" }), false);
 });

@@ -5,11 +5,32 @@ const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
 
 const SOURCE_WEIGHTS = new Map([
-  ["Reuters", 30], ["Bloomberg", 28], ["The Wall Street Journal", 27],
-  ["CNBC", 25], ["Financial Times", 25], ["The Verge", 23],
+  ["Reuters", 30], ["CNBC", 25], ["The Verge", 23],
   ["Ars Technica", 23], ["TechCrunch", 22], ["MarketWatch", 21],
-  ["Barron's", 21], ["Yahoo Finance", 19], ["Forbes", 17],
+  ["Yahoo Finance", 19], ["Forbes", 17],
 ]);
+
+const PAYWALL_SOURCE_NAMES = [
+  "the wall street journal", "bloomberg", "financial times", "barron's",
+  "the new york times", "the economist", "the information",
+  "business insider", "fortune", "seeking alpha", "investor's business daily",
+];
+const PAYWALL_HOSTS = [
+  "wsj.com", "bloomberg.com", "ft.com", "barrons.com", "nytimes.com",
+  "economist.com", "theinformation.com", "businessinsider.com",
+  "fortune.com", "seekingalpha.com", "investors.com",
+];
+
+function isPaywalledItem(item) {
+  const source = String(item?.source || "").trim().toLowerCase();
+  if (PAYWALL_SOURCE_NAMES.some((name) => source.includes(name))) return true;
+  try {
+    const host = new URL(item?.url || "").hostname.toLowerCase().replace(/^www\./, "");
+    return PAYWALL_HOSTS.some((blocked) => host === blocked || host.endsWith("." + blocked));
+  } catch {
+    return false;
+  }
+}
 
 function requiredEnvironment(name) {
   const value = String(process.env[name] || "").trim();
@@ -233,7 +254,8 @@ async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now
   const failures = settled.filter((result) => result.status === "rejected");
   const groups = settled.filter((result) => result.status === "fulfilled").map((result) => result.value);
   if (!groups.length) throw new Error("All hot-news sources failed.");
-  const all = groups.flat().filter((item) => hoursOld(item.publishedAt, now) <= windowHours);
+  const all = groups.flat().filter((item) =>
+    hoursOld(item.publishedAt, now) <= windowHours && !isPaywalledItem(item));
   const rankedTech = rankAndDedupe(all.filter((item) => item.category === "tech"), MAX_ITEMS, now);
   const rankedMarket = rankAndDedupe(all.filter((item) => item.category === "market"), MAX_ITEMS, now);
   const reuseTranslations = (items) => items.map((item) => ({
@@ -314,7 +336,7 @@ async function main() {
   const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || "").trim();
   const news = await collectHotNews(windowHours, Date.now(), archivedTitleTranslations(archivePath));
   if (archivePath) {
-    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt));
+    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
     console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
   } else if (refreshOnly) {
     throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
@@ -337,4 +359,4 @@ async function main() {
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { addChineseTranslations, archivedTitleTranslations, collectHotNews, decodeXml, environmentFlag, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
+module.exports = { addChineseTranslations, archivedTitleTranslations, collectHotNews, decodeXml, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
