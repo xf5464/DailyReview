@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T22:17:40.250Z",
+  "updatedAt": "2026-09-04T22:30:44.466Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T22:30:44.466Z",
         "2026-09-04T22:17:40.250Z",
         "2026-09-04T22:00:58.460Z",
         "2026-09-04T21:00:45.557Z",
@@ -32,8 +33,8 @@
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
           "score": 154.2,
-          "engagement": "2141 points · 1949 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "engagement": "2142 points · 1951 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -43,9 +44,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 158,
-          "engagement": "1367 points · 1109 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "score": 157.9,
+          "engagement": "1379 points · 1113 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "45a86641ba677818",
@@ -57,7 +58,7 @@
           "publishedAt": "2026-09-03T18:32:13.000Z",
           "score": 123.6,
           "engagement": "675 points · 223 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -67,9 +68,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 120.9,
-          "engagement": "356 points · 71 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "score": 120.8,
+          "engagement": "359 points · 71 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -80,8 +81,8 @@
           "source": "bob.ibm.com",
           "publishedAt": "2026-09-04T12:50:29.000Z",
           "score": 123.1,
-          "engagement": "203 points · 237 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "engagement": "206 points · 240 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "ef42487a6b629ef2",
@@ -92,9 +93,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
-          "score": 66.9,
+          "score": 67.5,
           "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "e94fc2f0f03f5691",
@@ -104,9 +105,9 @@
           "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
           "source": "anthropic.com",
           "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 136.2,
-          "engagement": "360 points · 231 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "score": 136.7,
+          "engagement": "369 points · 244 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "efb32cf2a2d830f1",
@@ -116,9 +117,9 @@
           "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
           "source": "torrentfreak.com",
           "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 128.3,
-          "engagement": "277 points · 162 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "score": 128.7,
+          "engagement": "280 points · 173 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "656e675460d44f88",
@@ -128,9 +129,150 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 120.5,
-          "engagement": "364 points · 82 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
+          "score": 120.4,
+          "engagement": "368 points · 82 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "f0e41de37211bf37",
+          "category": "tech",
+          "title": "How Fairphone built the Fairphone Gen 6+",
+          "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
+          "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
+          "source": "arstechnica.com",
+          "publishedAt": "2026-09-04T12:43:49.000Z",
+          "score": 118.5,
+          "engagement": "183 points · 159 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "65a884b0542855a9",
+          "category": "market",
+          "title": "Stock Market Today, Sept. 4: Tesla Falls After Cybercab Launch Disappoints Investors",
+          "titleZh": "今日股市， 9月 4 ：特斯拉在Cybercab推出后下跌令投资者失望",
+          "url": "https://www.fool.com/coverage/stock-market-today/2026/09/04/stock-market-today-sept-4-tesla-falls-after-cybercab-launch-disappoints-investors/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxORlR0TTRpT2s3dXNZX2NzS2hsdlFlRFE1R3BtSm9MSVUtSm1wd0RIMUZwbUpvUVllMS1sTi13M3lyVVB2UzN5bDlqbENMN1FrWHRUX3o0YU5YMXY5cE1wMnE2VTNYeHFra19BNmRzOGR3am5mSF9MTjQxTEhHUk1HUi1vaFZSVmRjTjVJOFRUQmQwSmpSSHgwUTlrWUFtOXZEbnV0SmM1TkotZnRJYUdRRThJeWQyOEcwR0h6QmxQdHM0YmdvOFhhZDIyTUdzclp4X3VRUU1IS0o3UQ?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Fri, 04 Sep 2026 21:48:26 GMT",
+          "score": 60,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "ffe246597ac60595",
+          "category": "market",
+          "title": "Wall Street ends lower as solid jobs data fuels hawkish Fed bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Fri, 04 Sep 2026 20:24:45 GMT",
+          "score": 79.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "357919a940137f1c",
+          "category": "market",
+          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
+          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
+          "score": 63.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "b24297b71d7302b5",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 64.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "dd56d4642799f114",
+          "category": "market",
+          "title": "Update: Wall Street Wraps Mixed Week in Red Following Strong Jobs Report",
+          "titleZh": "更新：在强劲的就业报告之后，华尔街以红色包装混合周",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-wraps-mixed-week-204238792.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVEFvaUlfTlhMREpTT2xmcUpLU2R2Q0VhajBESWxnYWItWU5ZSHdXTHBzeldRdmY1ZnYzRE5BeVVQT2wzcjJ2TjBLY3lGVGtaeFVyWkdpNklwZTZmZ3hKRTZMUGI2MER3c3pQYm1OUnpuWFA5dU1oVlBfUnJyalJ1aDFIN2JuRGVOQmRnb1l2ZVdEQ05UUm92Zw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 20:42:38 GMT",
+          "score": 63.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "2fac46b3f7b1c068",
+          "category": "market",
+          "title": "Dow Drops 272, Nasdaq Loses 77, S&P 500 Falls 29",
+          "titleZh": "道琼斯指数下跌272点，纳斯达克下跌77点，标准普尔500指数下跌29点",
+          "url": "https://tvnewscheck.com/business/article/dow-drops-272-nasdaq-loses-77-sp-500-falls-29/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObFRqSkphbTEzZmtDZldvUm9jRXZIYVNCR2RXVTloakRibU5vRk1IVFJiTFlvWWdLVVFpd09Zd2RkVVk3azgtRFd6bG41eFVLVjBKTFZpR1lDNFljSVRUMzVsSGNvN3J4cW9laE1uUEhGSUFBNzFSNFIzZnFVbm4wZjhXUUlPWDB3TU1nR2gzdGE?oc=5",
+          "source": "TV News Check",
+          "publishedAt": "Fri, 04 Sep 2026 20:52:02 GMT",
+          "score": 60.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "438f58c44a2f2399",
+          "category": "market",
+          "title": "Bloom Energy was just named to the S&P 500. These other stocks are joining the index as well.",
+          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
+          "url": "https://www.marketwatch.com/story/s-p-500-changes-are-coming-soon-these-stocks-could-be-named-to-the-index-today-2d0d7c14",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 21:46:00 GMT",
+          "score": 69.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "0a19b0b255d03433",
+          "category": "market",
+          "title": "Stock Market Today, Sept. 4: Planet Labs Dips 1% Despite Earnings Beat, Full-Year Guidance Raise",
+          "titleZh": "今日股市， 9月 4 ：尽管盈利增长强劲，但Planet Labs下跌1% ，全年指引提升",
+          "url": "https://www.fool.com/coverage/stock-market-today/2026/09/04/stock-market-today-sept-4-planet-labs-dips-1-despite-earnings-beat-full-year-guidance-raise/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOZ25yejVhRXlvM2VOWjVlV2xqcDlLM2t0d3lDSG1OemcxWUY5WHIyYTM2MVZXeGFRZUtyX29Oajk2UEdVSXdibE44YXZsXzF1dTh0ekw4VmZ1MHZyOVJEUWRTV1ljY1M4TEhObkdveGRTSjNfX2FDQnA3VEkwTnR5WFVrZWdXZnJrYkRPQmYyN2QtdU05NGZEVDczREhXMkZNODJONUlXZFNlSzhoZF9VVldOT01vMVZXTDRza0k5ei15OHZRZndJTkNRU1B0RjhJZFQ0SEFwRkFyNTZXcWdsS3l2enFvMjg?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Fri, 04 Sep 2026 21:48:26 GMT",
+          "score": 60.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "d5146ce255a7eb88",
+          "category": "market",
+          "title": "How major US stock indexes fared Friday 9/4/2026",
+          "titleZh": "美国主要股指2026年9月4日（周五）表现如何",
+          "url": "https://www.washingtonpost.com/business/2026/09/04/stock-market-dow-nasdaq-jobs/b9e994e6-a89f-11f1-9e38-f705d048bd5a_story.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQbFkySkMtMXR6R0VsaDRPLWd3U01ZVWpOSEY3ZzllOThDdDZoM0lldjhEQmZoQkhXRDB4cmFkME00c2NIUVd4eG9HVEhhdERyWWlEakdPOFR1Q2hycmdZdnA4NG8xSmhxek13MWhxOFk0amJOQ1h5QUFzZFNKTjB6ZUtIaWgzZE1JQ1JGMVVkU1dJMVIzQW9jaEQ4M2p6M2xsM2JFQTBZUEc5VGgxR2tuanJ4WlcxVDRVcGh6aWt6WkRzMF91Y3c?oc=5",
+          "source": "The Washington Post",
+          "publishedAt": "Fri, 04 Sep 2026 21:29:26 GMT",
+          "score": 59.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
+        },
+        {
+          "id": "fd4e0b99ad940433",
+          "category": "tech",
+          "title": "Shutting down our public encrypted DNS",
+          "titleZh": "关闭我们的公共加密DNS",
+          "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
+          "source": "mullvad.net",
+          "publishedAt": "2026-09-04T18:50:28.000Z",
+          "score": 118.9,
+          "engagement": "186 points · 69 comments",
+          "pushedAt": "2026-09-04T22:30:44.466Z"
         },
         {
           "id": "85054bb548fd17e8",
@@ -142,135 +284,6 @@
           "publishedAt": "2026-09-04T15:03:03.000Z",
           "score": 118.9,
           "engagement": "177 points · 125 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "f0e41de37211bf37",
-          "category": "tech",
-          "title": "How Fairphone built the Fairphone Gen 6+",
-          "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
-          "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
-          "source": "arstechnica.com",
-          "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 118.7,
-          "engagement": "183 points · 157 comments",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "65a884b0542855a9",
-          "category": "market",
-          "title": "Stock Market Today, Sept. 4: Tesla Falls After Cybercab Launch Disappoints Investors",
-          "titleZh": "今日股市， 9月 4 ：特斯拉在Cybercab推出后下跌令投资者失望",
-          "url": "https://www.fool.com/coverage/stock-market-today/2026/09/04/stock-market-today-sept-4-tesla-falls-after-cybercab-launch-disappoints-investors/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxORlR0TTRpT2s3dXNZX2NzS2hsdlFlRFE1R3BtSm9MSVUtSm1wd0RIMUZwbUpvUVllMS1sTi13M3lyVVB2UzN5bDlqbENMN1FrWHRUX3o0YU5YMXY5cE1wMnE2VTNYeHFra19BNmRzOGR3am5mSF9MTjQxTEhHUk1HUi1vaFZSVmRjTjVJOFRUQmQwSmpSSHgwUTlrWUFtOXZEbnV0SmM1TkotZnRJYUdRRThJeWQyOEcwR0h6QmxQdHM0YmdvOFhhZDIyTUdzclp4X3VRUU1IS0o3UQ?oc=5",
-          "source": "The Motley Fool",
-          "publishedAt": "Fri, 04 Sep 2026 21:48:26 GMT",
-          "score": 60.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "ffe246597ac60595",
-          "category": "market",
-          "title": "Wall Street ends lower as solid jobs data fuels hawkish Fed bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "reuters.com",
-          "publishedAt": "Fri, 04 Sep 2026 20:24:45 GMT",
-          "score": 62.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "357919a940137f1c",
-          "category": "market",
-          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
-          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
-          "score": 63.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "b24297b71d7302b5",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 65.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "dd56d4642799f114",
-          "category": "market",
-          "title": "Update: Wall Street Wraps Mixed Week in Red Following Strong Jobs Report",
-          "titleZh": "更新：在强劲的就业报告之后，华尔街以红色包装混合周",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-wraps-mixed-week-204238792.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPVEFvaUlfTlhMREpTT2xmcUpLU2R2Q0VhajBESWxnYWItWU5ZSHdXTHBzeldRdmY1ZnYzRE5BeVVQT2wzcjJ2TjBLY3lGVGtaeFVyWkdpNklwZTZmZ3hKRTZMUGI2MER3c3pQYm1OUnpuWFA5dU1oVlBfUnJyalJ1aDFIN2JuRGVOQmRnb1l2ZVdEQ05UUm92Zw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 20:42:38 GMT",
-          "score": 63.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "2fac46b3f7b1c068",
-          "category": "market",
-          "title": "Dow Drops 272, Nasdaq Loses 77, S&P 500 Falls 29",
-          "titleZh": "道琼斯指数下跌272点，纳斯达克下跌77点，标准普尔500指数下跌29点",
-          "url": "https://tvnewscheck.com/business/article/dow-drops-272-nasdaq-loses-77-sp-500-falls-29/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObFRqSkphbTEzZmtDZldvUm9jRXZIYVNCR2RXVTloakRibU5vRk1IVFJiTFlvWWdLVVFpd09Zd2RkVVk3azgtRFd6bG41eFVLVjBKTFZpR1lDNFljSVRUMzVsSGNvN3J4cW9laE1uUEhGSUFBNzFSNFIzZnFVbm4wZjhXUUlPWDB3TU1nR2gzdGE?oc=5",
-          "source": "TV News Check",
-          "publishedAt": "Fri, 04 Sep 2026 20:52:02 GMT",
-          "score": 60.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "438f58c44a2f2399",
-          "category": "market",
-          "title": "Bloom Energy was just named to the S&P 500. These other stocks are joining the index as well.",
-          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
-          "url": "https://www.marketwatch.com/story/s-p-500-changes-are-coming-soon-these-stocks-could-be-named-to-the-index-today-2d0d7c14",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 21:46:00 GMT",
-          "score": 68.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "0a19b0b255d03433",
-          "category": "market",
-          "title": "Stock Market Today, Sept. 4: Planet Labs Dips 1% Despite Earnings Beat, Full-Year Guidance Raise",
-          "titleZh": "今日股市， 9月 4 ：尽管盈利增长强劲，但Planet Labs下跌1% ，全年指引提升",
-          "url": "https://www.fool.com/coverage/stock-market-today/2026/09/04/stock-market-today-sept-4-planet-labs-dips-1-despite-earnings-beat-full-year-guidance-raise/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOZ25yejVhRXlvM2VOWjVlV2xqcDlLM2t0d3lDSG1OemcxWUY5WHIyYTM2MVZXeGFRZUtyX29Oajk2UEdVSXdibE44YXZsXzF1dTh0ekw4VmZ1MHZyOVJEUWRTV1ljY1M4TEhObkdveGRTSjNfX2FDQnA3VEkwTnR5WFVrZWdXZnJrYkRPQmYyN2QtdU05NGZEVDczREhXMkZNODJONUlXZFNlSzhoZF9VVldOT01vMVZXTDRza0k5ei15OHZRZndJTkNRU1B0RjhJZFQ0SEFwRkFyNTZXcWdsS3l2enFvMjg?oc=5",
-          "source": "The Motley Fool",
-          "publishedAt": "Fri, 04 Sep 2026 21:48:26 GMT",
-          "score": 60.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T22:17:40.250Z"
-        },
-        {
-          "id": "d5146ce255a7eb88",
-          "category": "market",
-          "title": "How major US stock indexes fared Friday 9/4/2026",
-          "titleZh": "美国主要股指2026年9月4日（周五）表现如何",
-          "url": "https://www.washingtonpost.com/business/2026/09/04/stock-market-dow-nasdaq-jobs/b9e994e6-a89f-11f1-9e38-f705d048bd5a_story.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQbFkySkMtMXR6R0VsaDRPLWd3U01ZVWpOSEY3ZzllOThDdDZoM0lldjhEQmZoQkhXRDB4cmFkME00c2NIUVd4eG9HVEhhdERyWWlEakdPOFR1Q2hycmdZdnA4NG8xSmhxek13MWhxOFk0amJOQ1h5QUFzZFNKTjB6ZUtIaWgzZE1JQ1JGMVVkU1dJMVIzQW9jaEQ4M2p6M2xsM2JFQTBZUEc5VGgxR2tuanJ4WlcxVDRVcGh6aWt6WkRzMF91Y3c?oc=5",
-          "source": "The Washington Post",
-          "publishedAt": "Fri, 04 Sep 2026 21:29:26 GMT",
-          "score": 59.3,
-          "engagement": "",
           "pushedAt": "2026-09-04T22:17:40.250Z"
         },
         {
