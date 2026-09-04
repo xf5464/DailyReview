@@ -46,3 +46,17 @@ test('removes previously archived items rejected by the current filter', () => {
     (item) => !item.url.endsWith('/paid'));
   assert.deepEqual(archive.days[0].items.map((item) => item.url), ['https://example.com/free']);
 });
+
+
+test('replaces old Google News relay records with the resolved publisher URL', () => {
+  const googleUrl = 'https://news.google.com/rss/articles/CBMiExample?oc=5';
+  let archive = mergeNews(null, news('Old relay', googleUrl), Date.parse('2026-09-04T01:00:00Z'));
+  const directItem = {
+    category: 'tech', title: 'Resolved story', titleZh: '已解析新闻',
+    url: 'https://www.cnbc.com/2026/09/04/story.html', googleNewsUrl: googleUrl,
+    source: 'CNBC', publishedAt: '2026-09-04T01:00:00Z', score: 90,
+  };
+  archive = mergeNews(archive, { tech: [directItem], market: [] }, Date.parse('2026-09-04T03:00:00Z'));
+  assert.deepEqual(archive.days[0].items.map((item) => item.url), [directItem.url]);
+  assert.equal(archive.days[0].items[0].googleNewsUrl, googleUrl);
+});
