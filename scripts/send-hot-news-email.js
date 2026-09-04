@@ -1,6 +1,7 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const DEFAULT_WINDOW_HOURS = 30;
 const MAX_ITEMS = 10;
+const DEFAULT_READER_BASE_URL = "https://xf5464.github.io/DailyReview/reader/";
 
 const SOURCE_WEIGHTS = new Map([
   ["Reuters", 30], ["Bloomberg", 28], ["The Wall Street Journal", 27],
@@ -240,16 +241,24 @@ function triggerType() {
   return source === "cloudflare" ? "Cloudflare 定时" : "GitHub 手动触发";
 }
 
+function readerUrl(url) {
+  const base = String(process.env.READER_BASE_URL || DEFAULT_READER_BASE_URL).trim();
+  const target = new URL(base);
+  target.searchParams.set("url", url);
+  return target.toString();
+}
+
 function itemText(item, index) {
   const extra = item.engagement ? `；${item.engagement}` : `；热度分 ${item.score}`;
   const translation = item.titleZh ? `\n   中文：${item.titleZh}` : "";
-  return `${index + 1}. ${item.title}${translation}\n   ${item.source} · ${formatChinaTime(item.publishedAt)}${extra}\n   ${item.url}`;
+  return `${index + 1}. ${item.title}${translation}\n   ${item.source} · ${formatChinaTime(item.publishedAt)}${extra}\n   中文阅读：${readerUrl(item.url)}\n   原文：${item.url}`;
 }
 
 function itemHtml(item, index) {
   const extra = item.engagement ? item.engagement : `综合热度 ${item.score}`;
   const translation = item.titleZh ? `<div style="margin-top:4px;color:#344054;font-size:15px">${escapeHtml(item.titleZh)}</div>` : "";
-  return `<li style="margin:0 0 18px"><a href="${escapeHtml(item.url)}" style="color:#1558d6;font-size:16px;font-weight:600;text-decoration:none">${escapeHtml(item.title)}</a>${translation}<div style="margin-top:5px;color:#667085;font-size:13px">${escapeHtml(item.source)} · ${escapeHtml(formatChinaTime(item.publishedAt))} · ${escapeHtml(extra)}</div></li>`;
+  const translatedUrl = readerUrl(item.url);
+  return `<li style="margin:0 0 20px"><a href="${escapeHtml(translatedUrl)}" style="color:#1558d6;font-size:16px;font-weight:600;text-decoration:none">${escapeHtml(item.title)}</a>${translation}<div style="margin-top:5px;color:#667085;font-size:13px">${escapeHtml(item.source)} · ${escapeHtml(formatChinaTime(item.publishedAt))} · ${escapeHtml(extra)}</div><div style="margin-top:8px"><a href="${escapeHtml(translatedUrl)}" style="display:inline-block;margin-right:12px;padding:5px 10px;border-radius:7px;background:#1558d6;color:#fff;font-size:13px;text-decoration:none">中文阅读全文</a><a href="${escapeHtml(item.url)}" style="color:#667085;font-size:13px;text-decoration:none">打开原文</a></div></li>`;
 }
 
 function newsMessage(news) {
@@ -283,4 +292,4 @@ async function main() {
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { addChineseTranslations, collectHotNews, decodeXml, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, recipients, translateBatch, translateTitle };
+module.exports = { addChineseTranslations, collectHotNews, decodeXml, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };

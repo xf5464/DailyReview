@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, recipients } = require("../scripts/send-hot-news-email");
+const { isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
 
 test("parses Google News RSS and removes source suffix", () => {
   const xml = `<rss><channel><item><title><![CDATA[Nvidia launches a new chip - Reuters]]></title><link>https://example.com/a?x=1&amp;y=2</link><pubDate>Fri, 04 Sep 2026 01:00:00 GMT</pubDate><source url="https://reuters.com">Reuters</source></item></channel></rss>`;
@@ -32,6 +32,16 @@ test("places a Chinese translation directly below each English headline", () => 
   assert.match(message.text, /中文：测试新闻/);
   assert.match(message.html, /Test &amp; news/);
   assert.match(message.html, /测试新闻/);
+  assert.match(message.html, /中文阅读全文/);
+  assert.match(message.html, /DailyReview\/reader\/\?url=/);
+  assert.match(message.text, /中文阅读：https:\/\/xf5464\.github\.io\/DailyReview\/reader\//);
+});
+
+test("builds a reader URL without losing characters in the source URL", () => {
+  const original = "https://example.com/story?a=1&b=two words";
+  const translated = new URL(readerUrl(original));
+  assert.equal(translated.pathname, "/DailyReview/reader/");
+  assert.equal(translated.searchParams.get("url"), original);
 });
 
 test("supports comma-separated Gmail recipients", () => {

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f4ed" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>DailyReview 中文阅读</title>
+    <link rel="icon" href="../icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../og.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="reader.css" />
+    <script src="reader.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../">DailyReview</a>
+      <div class="actions">
+        <button id="fontButton" type="button" aria-label="调整字号">字号</button>
+        <a id="sourceLink" class="source-link" href="../" target="_blank" rel="noopener noreferrer">原文</a>
+      </div>
+    </header>
+    <main>
+      <section id="emptyState" class="panel input-panel">
+        <p class="eyebrow">中文阅读器</p>
+        <h1>粘贴英文新闻链接</h1>
+        <form id="readerForm">
+          <label for="urlInput">文章地址</label>
+          <input id="urlInput" name="url" type="url" inputmode="url" placeholder="https://…" required />
+          <button class="primary" type="submit">翻译并阅读</button>
+        </form>
+      </section>
+
+      <section id="loadingState" class="panel status-panel" hidden aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <h1>正在提取并翻译</h1>
+        <p>通常需要几秒，较长文章可能需要更久。</p>
+      </section>
+
+      <article id="article" hidden>
+        <p id="siteName" class="eyebrow"></p>
+        <h1 id="articleTitle"></h1>
+        <p id="articleMeta" class="meta"></p>
+        <div id="articleBody" class="article-body"></div>
+        <div class="article-footer">
+          <a id="footerSourceLink" target="_blank" rel="noopener noreferrer">查看英文原文</a>
+        </div>
+      </article>
+
+      <section id="errorState" class="panel error-panel" hidden role="alert">
+        <p class="eyebrow">暂时无法翻译</p>
+        <h1 id="errorTitle">文章读取失败</h1>
+        <p id="errorMessage"></p>
+        <div class="error-actions">
+          <button id="retryButton" class="primary" type="button">重试</button>
+          <a id="errorSourceLink" target="_blank" rel="noopener noreferrer">打开英文原文</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

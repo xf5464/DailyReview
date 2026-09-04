@@ -1,0 +1,18 @@
+{
+  "name": "DailyReview 中文阅读器",
+  "short_name": "中文阅读",
+  "description": "打开海外科技与美股新闻并自动翻译成中文",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f4ed",
+  "theme_color": "#f7f4ed",
+  "icons": [
+    {
+      "src": "../icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
