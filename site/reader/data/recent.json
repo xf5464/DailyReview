@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T21:00:45.557Z",
+  "updatedAt": "2026-09-04T22:00:58.460Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T22:00:58.460Z",
         "2026-09-04T21:00:45.557Z",
         "2026-09-04T20:30:43.501Z",
         "2026-09-04T20:00:42.897Z",
@@ -29,9 +30,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 154.1,
-          "engagement": "2128 points · 1935 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
+          "score": 154.2,
+          "engagement": "2138 points · 1944 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -41,9 +42,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 158,
-          "engagement": "1289 points · 1038 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
+          "score": 158.1,
+          "engagement": "1357 points · 1100 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
         },
         {
           "id": "45a86641ba677818",
@@ -55,7 +56,7 @@
           "publishedAt": "2026-09-03T18:32:13.000Z",
           "score": 123.6,
           "engagement": "675 points · 222 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
+          "pushedAt": "2026-09-04T22:00:58.460Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -65,9 +66,211 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 121.8,
-          "engagement": "350 points · 70 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
+          "score": 121.1,
+          "engagement": "354 points · 71 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "4ac59570d769a269",
+          "category": "tech",
+          "title": "IBM Bob",
+          "titleZh": "IBM Bob",
+          "url": "https://bob.ibm.com/",
+          "source": "bob.ibm.com",
+          "publishedAt": "2026-09-04T12:50:29.000Z",
+          "score": 122.9,
+          "engagement": "197 points · 234 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "ef42487a6b629ef2",
+          "category": "market",
+          "title": "Tesla's stock drops 6% as Cybercab update 'underwhelms' Wall Street",
+          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
+          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
+          "score": 60.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "e94fc2f0f03f5691",
+          "category": "tech",
+          "title": "Formalizing Fermat's Last Theorem",
+          "titleZh": "形式化费马最后定理",
+          "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
+          "source": "anthropic.com",
+          "publishedAt": "2026-09-04T18:42:56.000Z",
+          "score": 135.1,
+          "engagement": "338 points · 215 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "efb32cf2a2d830f1",
+          "category": "tech",
+          "title": "Adult Film Producer Unmasks Prolific 'John DOE' Torrent Pirate as Meta Executive",
+          "titleZh": "成人电影制片人揭开多产的“无名氏”洪流海盗作为Meta执行官的面纱",
+          "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
+          "source": "torrentfreak.com",
+          "publishedAt": "2026-09-04T16:46:59.000Z",
+          "score": 127.8,
+          "engagement": "268 points · 154 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "656e675460d44f88",
+          "category": "tech",
+          "title": "Solving the Jane Street reverse engineering challenge",
+          "titleZh": "解决Jane Street逆向工程挑战",
+          "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
+          "source": "jestoph.com",
+          "publishedAt": "2026-09-04T10:17:01.000Z",
+          "score": 120.7,
+          "engagement": "363 points · 82 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "85054bb548fd17e8",
+          "category": "tech",
+          "title": "Gmail to end support for \"Send as\" for third-party addresses, such as @yahoo.com",
+          "titleZh": "Gmail将终止对第三方地址（如@ yahoo.com ）的“发送方式”支持",
+          "url": "https://support.google.com/mail/answer/22370?hl=en",
+          "source": "support.google.com",
+          "publishedAt": "2026-09-04T15:03:03.000Z",
+          "score": 119.1,
+          "engagement": "175 points · 125 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "f0e41de37211bf37",
+          "category": "tech",
+          "title": "How Fairphone built the Fairphone Gen 6+",
+          "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
+          "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
+          "source": "arstechnica.com",
+          "publishedAt": "2026-09-04T12:43:49.000Z",
+          "score": 118.9,
+          "engagement": "183 points · 157 comments",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "be1a6ea66646b7ac",
+          "category": "market",
+          "title": "Tesla shares are falling after Cybercab event. What analysts are saying",
+          "titleZh": "特斯拉股价在Cybercab活动后下跌。 分析师的看法",
+          "url": "https://www.cnbc.com/2026/09/04/tesla-shares-are-falling-after-cybercab-event-what-analysts-are-saying.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLWVDTG0yRURDS3hkZGJJNnBYREltUmhvV2FQdWVpbExHaXF6aFBMcFB1TlRPdU1GU3RSVWIzYXh3blM2SC1VQVYwc2NxQm0xMmNDN2dpVEhYY0huUkVfM01uaExaNnNwUnhxUXhrZWRQVEkwckVjQTJNeXRtUEZvV2phOGF6eUtJNThMQkJKM3RVQ2VySW9ZT1JSVDZPZ1UxckpwT3Jqb004cGc?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 17:30:01 GMT",
+          "score": 54.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "f1e0668911d46f30",
+          "category": "market",
+          "title": "Tesla’s stock falls as Cybercab launch lands with a thud",
+          "titleZh": "特斯拉股价下跌， Cybercab砰的一声落地",
+          "url": "https://www.marketwatch.com/story/teslas-stock-falls-as-cybercab-launch-lands-with-a-thud-1108376b",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNcjVfZ0pSV3ZXbENpLTByRW5DY1VhTXFBOE9pRzZ5czJSYjVWd1JpOGRwb0EySzBSTGRwcnl2eTRGM2h1R29Cdk5WV0MxMmdZSnRRWG51d21XYU9Va0l0M0l6a29lTGx1WGhURk9DTDFxVlJmOVRZUlN6X04wVWc4ZTE4VnFtYVVBTmFmelB2YmFTaFA1TVFhNG1hc28xMWM?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 20:18:00 GMT",
+          "score": 56,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "65a884b0542855a9",
+          "category": "market",
+          "title": "Stock Market Today, Sept. 4: Tesla Falls After Cybercab Launch Disappoints Investors",
+          "titleZh": "今日股市， 9月 4 ：特斯拉在Cybercab推出后下跌令投资者失望",
+          "url": "https://www.fool.com/coverage/stock-market-today/2026/09/04/stock-market-today-sept-4-tesla-falls-after-cybercab-launch-disappoints-investors/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxORlR0TTRpT2s3dXNZX2NzS2hsdlFlRFE1R3BtSm9MSVUtSm1wd0RIMUZwbUpvUVllMS1sTi13M3lyVVB2UzN5bDlqbENMN1FrWHRUX3o0YU5YMXY5cE1wMnE2VTNYeHFra19BNmRzOGR3am5mSF9MTjQxTEhHUk1HUi1vaFZSVmRjTjVJOFRUQmQwSmpSSHgwUTlrWUFtOXZEbnV0SmM1TkotZnRJYUdRRThJeWQyOEcwR0h6QmxQdHM0YmdvOFhhZDIyTUdzclp4X3VRUU1IS0o3UQ?oc=5",
+          "source": "fool.com",
+          "publishedAt": "Fri, 04 Sep 2026 21:48:26 GMT",
+          "score": 53.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "4c66dc13f8810840",
+          "category": "market",
+          "title": "Why Did Tesla Stock Fall Today?",
+          "titleZh": "为什么特斯拉股价今天下跌？",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/why-did-tesla-stock-fall-212335068.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQd0piRUhDUk1mMG1fZG91TERneVN6V2YtMTJDcG5aWHg3NjBKMmJyazdkREJVcFJzWnBTZ19OVXRvWkpVSWdsX05leHVfVGVBM19vczQtYUtSSXJHeVhwdHlTcVlxV3c4YlRhWDU1eHVwU1ZTd3BISG90WmFmckV5NHdKQkp5bDZxWjJ3UmJ2NEpyM3c?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 21:23:35 GMT",
+          "score": 52.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "3d161e7e1ed1d3b0",
+          "category": "market",
+          "title": "Tesla Stock Falls 6% as NHTSA Probes Its Cybercabs",
+          "titleZh": "特斯拉股价下跌6% ，美国国家公路交通安全管理局(NHTSA)调查其网络驾驶室",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-stock-falls-6-nhtsa-195335580.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNUWtOTnBtWjVHVWxZem0zSWVfX2I3MVpkRVFNdjZKYldBSEhiV2l1dXlDamwyNm5Jdk9FdkJRUHZ2aVdCNnJSTXpKdm1PTU83aC1LZ0dMd0xxSmtQcktXSThWSngyRG5lRXRVREJVUURZNTBPT3hrd21lVFh1M2I2TEhnQjBNN0EyM3dteVNDQlJKOFFx?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 19:53:35 GMT",
+          "score": 50.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "17d70d415892f9bf",
+          "category": "market",
+          "title": "Tesla (TSLA) Stock Trades Down, Here Is Why",
+          "titleZh": "特斯拉（ TSLA ）股票交易下跌，原因如下",
+          "url": "https://stockstory.org/us/stocks/nasdaq/tsla/news/why-up-down/tesla-tsla-stock-trades-down-here-is-why-5",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPX2FEX01VMnFVNTdDNE9XU3FwOG1xVDl0YUdrTFdQMkhUVUVfZHFyM0x0NEtKNGhYVFFrbnUtMEduMUN3VmJXRVVwQXFKejFEVlJlaUZ2Qm1yY0szcXZSTm83Z25yeUZpYkUwc0Eybjl4bTlvTDNvOUR4Q25zUklxRTVOQjRJQUF2STdOTFRZcUJQaWFXNDhldzVnZUFMQ0tibzlBaXBWbw?oc=5",
+          "source": "StockStory",
+          "publishedAt": "Fri, 04 Sep 2026 19:02:29 GMT",
+          "score": 46.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "1e74b6a724dc0db0",
+          "category": "market",
+          "title": "Nvidia stock moves closer to all-time high",
+          "titleZh": "英伟达股价接近历史高位",
+          "url": "https://ca.finance.yahoo.com/news/nvidia-stock-extends-gains-to-hover-close-to-new-all-time-high-193309793.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORWxmR3B2VXgxZWxtejREMGdaVE5xbUQ1Q3Nsb1pNMV9pR2VMcmxNeXRRSl9HSE5lQXB4MW9qX3dBWkQ4eE1DX2k4OHc3VE5pUjNuU2w3LUxvNnF1QmpEOXdDbVJSQVJyMHIxTTlRMUVtd3pvSDE2V1owQ2pjbXdQLURsVjJqLW1DS2hndTRNMGg2TUFtSFVXSnZnTGg2UEgwRmxxTW5QUWxvVGpwOEJrbQ?oc=5",
+          "source": "Yahoo! Finance Canada",
+          "publishedAt": "Fri, 04 Sep 2026 20:13:44 GMT",
+          "score": 46.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "cbd6feb837b504ee",
+          "category": "market",
+          "title": "NHTSA Says It’s Looking Into Tesla’s Cybercab Safety Standards. The Stock Is Sliding",
+          "titleZh": "NHTSA表示正在调查特斯拉的网络驾驶室安全标准。 库存正在下滑",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nhtsa-says-looking-tesla-cybercab-163756080.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOUWZRLVpGb1ZRUll6UDVTMHU3c2I0T05mbUpsQWVhX0Vvb3ByWjVYZlN2Y1FXSVQ2V3BjdzVWWmJRTGtGRG5SaFBYUURXcXNLQ0xzMklUVFQ3SWlXZlZqVkFrNGh3ZUVCY0wxVWUtaXpMVU10R3pKbHFFNkJpNUdqU0V1Z1RWeXdYdGtlV0tJVWJKa0VhTFdycDRZb3ZzeTg?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:37:56 GMT",
+          "score": 45.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
+        },
+        {
+          "id": "b1156940c7c1112e",
+          "category": "market",
+          "title": "NVIDIA (NASDAQ: NVDA) director gifts 500,000 shares",
+          "titleZh": "英伟达(NASDAQ: NVDA)董事赠送50万股",
+          "url": "https://www.stocktitan.net/sec-filings/NVDA/form-4-nvidia-corp-insider-trading-activity-4ef78dc0a35f.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPajYzc2pvZXNqNlpzTW1hMV81cWVGQlBqc3U5TkxiN2tsYUw1eXJqVjNFRDVPMTZ4WGJDcUFlUnA3ZF9nWHNnSndZSHdybFlRZ3VMcDFKU3JpVkRWMWhYSlNoOGFIVVFaam1xUTRobDNiemNUN3ltaDd0ZGxEbFo5WHU0MC11bnNMSmI2OHRWVU1nc0Z6T3RNV1duaE5NMU5ua1NKc1FxSG0?oc=5",
+          "source": "Stock Titan",
+          "publishedAt": "Fri, 04 Sep 2026 21:01:30 GMT",
+          "score": 45.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T22:00:58.460Z"
         },
         {
           "id": "f97132099316cf1a",
@@ -122,18 +325,6 @@
           "pushedAt": "2026-09-04T21:00:45.557Z"
         },
         {
-          "id": "4ac59570d769a269",
-          "category": "tech",
-          "title": "IBM Bob",
-          "titleZh": "IBM Bob",
-          "url": "https://bob.ibm.com/",
-          "source": "bob.ibm.com",
-          "publishedAt": "2026-09-04T12:50:29.000Z",
-          "score": 122.9,
-          "engagement": "187 points · 223 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
           "id": "e6d8a113556dfe7b",
           "category": "market",
           "title": "AmperCap Acquisition Company Rings the Nasdaq Stock Market Opening Bell",
@@ -160,43 +351,6 @@
           "pushedAt": "2026-09-04T21:00:45.557Z"
         },
         {
-          "id": "ef42487a6b629ef2",
-          "category": "market",
-          "title": "Tesla's stock drops 6% as Cybercab update 'underwhelms' Wall Street",
-          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
-          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
-          "score": 68.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
-          "id": "e94fc2f0f03f5691",
-          "category": "tech",
-          "title": "Formalizing Fermat's Last Theorem",
-          "titleZh": "形式化费马最后定理",
-          "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
-          "source": "anthropic.com",
-          "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 130.7,
-          "engagement": "269 points · 153 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
-          "id": "efb32cf2a2d830f1",
-          "category": "tech",
-          "title": "Adult Film Producer Unmasks Prolific 'John DOE' Torrent Pirate as Meta Executive",
-          "titleZh": "成人电影制片人揭开多产的“无名氏”洪流海盗作为Meta执行官的面纱",
-          "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
-          "source": "torrentfreak.com",
-          "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 124.9,
-          "engagement": "223 points · 125 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
           "id": "4309d197ae47c08f",
           "category": "market",
           "title": "The Nasdaq, S&P 500, and Dow All Fell Slightly Friday. The Jobs Report Wasn't Really Why.",
@@ -207,42 +361,6 @@
           "publishedAt": "Fri, 04 Sep 2026 18:37:30 GMT",
           "score": 68,
           "engagement": "",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
-          "id": "656e675460d44f88",
-          "category": "tech",
-          "title": "Solving the Jane Street reverse engineering challenge",
-          "titleZh": "解决Jane Street逆向工程挑战",
-          "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
-          "source": "jestoph.com",
-          "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 121.3,
-          "engagement": "354 points · 81 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
-          "id": "85054bb548fd17e8",
-          "category": "tech",
-          "title": "Gmail to end support for \"Send as\" for third-party addresses, such as @yahoo.com",
-          "titleZh": "Gmail将终止对第三方地址（如@ yahoo.com ）的“发送方式”支持",
-          "url": "https://support.google.com/mail/answer/22370?hl=en",
-          "source": "support.google.com",
-          "publishedAt": "2026-09-04T15:03:03.000Z",
-          "score": 119.6,
-          "engagement": "171 points · 123 comments",
-          "pushedAt": "2026-09-04T21:00:45.557Z"
-        },
-        {
-          "id": "f0e41de37211bf37",
-          "category": "tech",
-          "title": "How Fairphone built the Fairphone Gen 6+",
-          "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
-          "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
-          "source": "arstechnica.com",
-          "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 119.5,
-          "engagement": "182 points · 149 comments",
           "pushedAt": "2026-09-04T21:00:45.557Z"
         },
         {
@@ -317,19 +435,6 @@
           "source": "Funds Society",
           "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
           "score": 55.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T20:30:43.501Z"
-        },
-        {
-          "id": "be1a6ea66646b7ac",
-          "category": "market",
-          "title": "Tesla shares are falling after Cybercab event. What analysts are saying",
-          "titleZh": "特斯拉股价在Cybercab活动后下跌。 分析师的看法",
-          "url": "https://www.cnbc.com/2026/09/04/tesla-shares-are-falling-after-cybercab-event-what-analysts-are-saying.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLWVDTG0yRURDS3hkZGJJNnBYREltUmhvV2FQdWVpbExHaXF6aFBMcFB1TlRPdU1GU3RSVWIzYXh3blM2SC1VQVYwc2NxQm0xMmNDN2dpVEhYY0huUkVfM01uaExaNnNwUnhxUXhrZWRQVEkwckVjQTJNeXRtUEZvV2phOGF6eUtJNThMQkJKM3RVQ2VySW9ZT1JSVDZPZ1UxckpwT3Jqb004cGc?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 17:30:01 GMT",
-          "score": 56,
           "engagement": "",
           "pushedAt": "2026-09-04T20:30:43.501Z"
         },
