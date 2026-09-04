@@ -26,6 +26,7 @@ test("places a Chinese translation directly below each English headline", () => 
   const item = { title: "Test & news", titleZh: "测试新闻", url: "https://example.com?a=1&b=2", source: "Reuters", publishedAt: "2026-09-04T01:00:00Z", score: 88 };
   const message = newsMessage({ tech: [item], market: [item], failureCount: 0, fetchedAt: "2026-09-04T02:00:00Z" });
   assert.match(message.subject, /海外科技与美股热点/);
+  assert.match(message.subject, /2026\/09\/04 10:00/);
   assert.match(message.text, /全球科技热点 Top 10/);
   assert.match(message.text, /美股热点 Top 10/);
   assert.match(message.text, /中文：测试新闻/);

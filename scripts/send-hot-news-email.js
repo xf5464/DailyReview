@@ -257,7 +257,7 @@ function newsMessage(news) {
   const textSection = (title, items) => [title, "", ...items.map(itemText), ""].join("\n");
   const htmlSection = (title, items) => `<h2 style="margin:28px 0 14px;color:#101828">${title}</h2><ol style="padding-left:24px">${items.map(itemHtml).join("")}</ol>`;
   return {
-    subject: `[DailyReview] 海外科技与美股热点 Top 10｜${time.slice(0, 10)}`,
+    subject: `[DailyReview] 海外科技与美股热点 Top 10｜${time}`,
     text: [
       `采集时间：${time}（北京时间）`, `触发方式：${triggerType()}`,
       "排序综合考虑发布时间、来源权威度、聚合位置；科技新闻同时参考 Hacker News 讨论热度。", "",
