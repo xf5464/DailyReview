@@ -61,3 +61,18 @@ export async function refreshReaderNow(env) {
     refresh_only: "true",
   });
 }
+
+export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(sendDailyHotNews(event, env));
+  },
+
+  async fetch() {
+    return Response.json({
+      service: "DailyReview Cron Hot News",
+      status: "ok",
+      emailCron: "17 4,10,16,22 * * *",
+      readerRefreshCron: "*/30 * * * *",
+    });
+  },
+};
