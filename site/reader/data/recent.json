@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T16:30:50.302Z",
+  "updatedAt": "2026-09-04T16:37:03.292Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T16:37:03.292Z",
         "2026-09-04T16:30:50.302Z",
         "2026-09-04T16:17:43.844Z",
         "2026-09-04T16:00:43.675Z"
@@ -19,8 +20,8 @@
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
           "score": 155.3,
-          "engagement": "2028 points · 1854 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "engagement": "2032 points · 1858 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -30,9 +31,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 150.4,
-          "engagement": "743 points · 523 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 150.7,
+          "engagement": "757 points · 530 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -43,8 +44,8 @@
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
           "score": 144.1,
-          "engagement": "2068 points · 507 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "engagement": "2070 points · 508 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "b9197b873957814a",
@@ -56,7 +57,7 @@
           "publishedAt": "2026-09-03T10:53:08.000Z",
           "score": 131.4,
           "engagement": "1124 points · 261 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -66,9 +67,9 @@
           "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 131.6,
-          "engagement": "455 points · 188 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 131.8,
+          "engagement": "462 points · 190 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "45a86641ba677818",
@@ -78,9 +79,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 124.8,
-          "engagement": "649 points · 211 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 124.7,
+          "engagement": "651 points · 212 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "debf643f0294e072",
@@ -92,7 +93,7 @@
           "publishedAt": "2026-09-03T14:51:10.000Z",
           "score": 124.9,
           "engagement": "626 points · 303 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "656e675460d44f88",
@@ -102,9 +103,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 120.4,
-          "engagement": "261 points · 66 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 120.6,
+          "engagement": "264 points · 67 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -114,117 +115,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 120.4,
-          "engagement": "266 points · 50 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "327871d4a29576d0",
-          "category": "market",
-          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "reuters.com",
-          "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
-          "score": 61.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "2df93ea7c97d6d38",
-          "category": "market",
-          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
-          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 72.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "8cecb3d9bc5d5fe7",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 70.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "a6f507fd27a6a586",
-          "category": "market",
-          "title": "S&P 500 changes are coming soon. These stocks could be named to the index today.",
-          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 15:39:00 GMT",
-          "score": 68.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "59d602dc0f1f49e8",
-          "category": "market",
-          "title": "Health-tracking smart ring maker Oura to list on US stock market",
-          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
-          "source": "The Guardian",
-          "publishedAt": "Fri, 04 Sep 2026 14:24:00 GMT",
-          "score": 61.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "98090b0a5a391971",
-          "category": "market",
-          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
-          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 68,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "af21ac2edf73e636",
-          "category": "market",
-          "title": "Wall Street September October Historical Market Risks",
-          "titleZh": "华尔街9月10月历史市场风险",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
-          "source": "Funds Society",
-          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
-          "score": 60.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "1395508a6b3d4792",
-          "category": "market",
-          "title": "Intuitive Surgical Vs. Stryker: Wall Street Loves Both But One Has a Quiet Advantage That Will Make Investors Money",
-          "titleZh": "直觉手术vs.史赛克：华尔街两者都喜欢，但一个人有一个安静的优势，可以让投资者赚钱",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYkZBaDg0WjFpSWt6T19PcEl1Uk0tZktYRDdqRGdPbERMVGUyMW1hQW5Ud2xwWWdrdjlUY1p3NHd4QjRLOTgxMnVGOU13a0Nnd05jY2oyRmhrRjg4Q3FobG8tUFFSTXJMZ0djRnVBZFQyaXJFT3ZwWUZ3R051S2t2aTc0OHF3ejBSQ1U1OWJBWU9aX21VQmVKNWRtRVVYN3E4?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 14:45:42 GMT",
-          "score": 64.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
-        },
-        {
-          "id": "3774e1e2f32f32f0",
-          "category": "market",
-          "title": "UiPath downgraded, Shell upgraded: Wall Street's top analyst calls",
-          "titleZh": "UiPath降级，壳牌升级：华尔街顶级分析师致电",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
-          "score": 64.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 120.9,
+          "engagement": "277 points · 51 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "f0e41de37211bf37",
@@ -234,33 +127,139 @@
           "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
           "source": "arstechnica.com",
           "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 115.6,
-          "engagement": "118 points · 101 comments",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "score": 115.7,
+          "engagement": "120 points · 101 comments",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
-          "id": "031531bde2ad3281",
+          "id": "f97132099316cf1a",
+          "category": "market",
+          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
+          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
+          "url": "https://www.marketwatch.com/story/six-reasons-that-the-risk-of-a-stock-market-selloff-is-rising-heres-what-investors-should-be-doing-4c3d84ec",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
+          "score": 72.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "438f58c44a2f2399",
+          "category": "market",
+          "title": "S&P 500 changes are coming soon. These stocks could be named to the index today.",
+          "titleZh": "标准普尔500指数的变化即将到来。 这些股票今天可以被命名为指数。",
+          "url": "https://www.marketwatch.com/story/s-p-500-changes-are-coming-soon-these-stocks-could-be-named-to-the-index-today-2d0d7c14",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 15:39:00 GMT",
+          "score": 69,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "fb4815673485f329",
+          "category": "market",
+          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
+          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/hardware-infrastructure-stocks-q2-teardown-151810939.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
+          "score": 67.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "87487ca0e0846db5",
+          "category": "market",
+          "title": "UiPath downgraded, Shell upgraded: Wall Street's top analyst calls",
+          "titleZh": "UiPath降级，壳牌升级：华尔街顶级分析师致电",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/uipath-downgraded-shell-upgraded-wall-134820981.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
+          "score": 64,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "3c9b32035b337714",
+          "category": "market",
+          "title": "Intuitive Surgical Vs. Stryker: Wall Street Loves Both But One Has a Quiet Advantage That Will Make Investors Money",
+          "titleZh": "直觉手术vs.史赛克：华尔街两者都喜欢，但一个人有一个安静的优势，可以让投资者赚钱",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/intuitive-surgical-vs-stryker-wall-144542715.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYkZBaDg0WjFpSWt6T19PcEl1Uk0tZktYRDdqRGdPbERMVGUyMW1hQW5Ud2xwWWdrdjlUY1p3NHd4QjRLOTgxMnVGOU13a0Nnd05jY2oyRmhrRjg4Q3FobG8tUFFSTXJMZ0djRnVBZFQyaXJFT3ZwWUZ3R051S2t2aTc0OHF3ejBSQ1U1OWJBWU9aX21VQmVKNWRtRVVYN3E4?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 14:45:42 GMT",
+          "score": 63.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "ffe246597ac60595",
+          "category": "market",
+          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "reuters.com",
+          "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
+          "score": 61.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "e6d513961aa3a32c",
+          "category": "market",
+          "title": "Health-tracking smart ring maker Oura to list on US stock market",
+          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
+          "url": "https://www.theguardian.com/business/2026/sep/04/health-tracking-smart-ring-maker-oura-to-list-on-us-stock-market",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
+          "source": "The Guardian",
+          "publishedAt": "Fri, 04 Sep 2026 14:24:00 GMT",
+          "score": 61.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "1b46a118e4239607",
           "category": "market",
           "title": "The Nasdaq’s Biggest Winner Was a Bitcoin Stock That Is Still Down 56% in a Year",
           "titleZh": "纳斯达克最大的赢家是比特币股票，该股票在一年内仍下跌56%",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/nasdaq-biggest-winner-bitcoin-stock-121858296.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 12:18:58 GMT",
-          "score": 61.4,
+          "score": 61,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:30:50.302Z"
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
-          "id": "6d096478faab7d5d",
+          "id": "c4103a5565630a62",
           "category": "market",
-          "title": "How the Nasdaq Foundation is Supporting Rural Founders to Build with AI",
-          "titleZh": "纳斯达克基金会如何支持农村创始人使用人工智能进行建设",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWklJZ1YyY2ZldFN1ZUlRaDVuWjJ0X3ZGTXB5NzlzOER4YTRmWVRYeG9PVktyUjA2Tk14WGljcTB0YkIwLVBJZ0pnUjhhWG03MWFqX2RZWXlNY2FEX1FLa1VZUHZfRHJWdWtFR1Z0Xy1ZQnFGSDNkMG8wLUx3MHM5RXBPdFAzSThLOEhERkhJYkZWZC1EZXo5bA?oc=5",
-          "source": "Nasdaq",
-          "publishedAt": "Fri, 04 Sep 2026 13:00:00 GMT",
-          "score": 56.5,
+          "title": "Wall Street September October Historical Market Risks",
+          "titleZh": "华尔街9月10月历史市场风险",
+          "url": "https://www.fundssociety.com/en/news/markets/two-months-five-crashes-and-a-warning-wall-street-looks-to-the-past-and-enters-risk-territory/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
+          "source": "Funds Society",
+          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
+          "score": 60,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:37:03.292Z"
+        },
+        {
+          "id": "f210a4a14a0e2331",
+          "category": "market",
+          "title": "Wall Street Slides After Strong Jobs Report Bolsters Hawkish Fed Bets",
+          "titleZh": "强劲就业报告后华尔街下滑支持鹰派美联储押注",
+          "url": "https://gvwire.com/2026/09/04/wall-street-slides-after-strong-jobs-report-bolsters-hawkish-fed-bets/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOZkUtMzBRaDRtamV5NERVZy14X1gxenE3a1k4YkNBMG5zMFpuSDBubElBVGdsZUhONmQ1OHZpTHd0Si0zNE5LNWtSZEpqT3ZnMW5LUlEtS195QjlGejVpWWJ3SjJqUVh6NEg3XzZqQ3BBZEN0Y3pxT2ZvSElxZnBBRkZLYnVtc1ZmNTZQdGR0SW02UnJyMGVmdTczS1I4UGZwaEE?oc=5",
+          "source": "GV Wire",
+          "publishedAt": "Fri, 04 Sep 2026 16:35:08 GMT",
+          "score": 59.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:37:03.292Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -272,18 +271,6 @@
           "publishedAt": "2026-09-04T12:50:29.000Z",
           "score": 114,
           "engagement": "101 points · 98 comments",
-          "pushedAt": "2026-09-04T16:00:43.675Z"
-        },
-        {
-          "id": "64d8f3a213bb739c",
-          "category": "market",
-          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
-          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 59.8,
-          "engagement": "",
           "pushedAt": "2026-09-04T16:00:43.675Z"
         }
       ]
@@ -385,18 +372,6 @@
           "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
-          "id": "64d8f3a213bb739c",
-          "category": "market",
-          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
-          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 61.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
           "id": "e98d37e7a1b8d4a1",
           "category": "tech",
           "title": "Hackers Had a Live Feed of Every ID Verification Company Scanned for over a Year",
@@ -433,138 +408,6 @@
           "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
-          "id": "2df93ea7c97d6d38",
-          "category": "market",
-          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
-          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
-          "source": "MarketWatch",
-          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 73.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "8cecb3d9bc5d5fe7",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 71.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "3774e1e2f32f32f0",
-          "category": "market",
-          "title": "UiPath downgraded, Shell upgraded: Wall Street's top analyst calls",
-          "titleZh": "UiPath降级，壳牌升级：华尔街顶级分析师致电",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
-          "score": 66.9,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "031531bde2ad3281",
-          "category": "market",
-          "title": "The Nasdaq’s Biggest Winner Was a Bitcoin Stock That Is Still Down 56% in a Year",
-          "titleZh": "纳斯达克最大的赢家是比特币股票，该股票在一年内仍下跌56%",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 12:18:58 GMT",
-          "score": 64.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "b78b53136335d7a7",
-          "category": "market",
-          "title": "Wall Street Analysts See a 25.77% Upside in Five Below (FIVE): Can the Stock Really Move This High?",
-          "titleZh": "华尔街分析师看到5以下（ 5 ）上涨25.77% ：股市真的能走高吗？",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNZnpydHpiMlNuYTUzd1k1OGhpWTNRNVh0dXp2WWN2Zm5aQ1p0dFhFQmU3cmZIbE9LRFZMV3ZBUk1FR0IxY19FdHNmSU5vMWdjX1FzUlRTZ19qbXhTOEk0N3loWHhRaDEyV3hpU3pmMlVTUmh3R3hXY3AyUmhnMU9vYllzMGJlTWhjazNTWlJWYm1JZ183RkQw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 13:55:02 GMT",
-          "score": 62.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "f1fc4fcb91990214",
-          "category": "market",
-          "title": "3 of Wall Street’s Favorite Stocks We Find Risky",
-          "titleZh": "我们发现有风险的华尔街最受欢迎的3只股票",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNMHdCd1U4OEZxNXhpSldBbFplX1RoNXh1b2xvRlJzbXhYNURzcnh1c0tzRndYMEFMeExhVWctUGhkc0taYlRERGhOcWowZHowZjZHV1FyN00xdjkwdm0xdlYybGNDb0FSTlc3M1YzcWx5RzVzYzFjdHM1RmQyVXRxZk8yWmpCUVpvdllyVEVBVm9qWENrZkcwMUhR?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 11:58:10 GMT",
-          "score": 61.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "af21ac2edf73e636",
-          "category": "market",
-          "title": "Wall Street September October Historical Market Risks",
-          "titleZh": "华尔街9月10月历史市场风险",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
-          "source": "Funds Society",
-          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
-          "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "327871d4a29576d0",
-          "category": "market",
-          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
-          "score": 80.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "98090b0a5a391971",
-          "category": "market",
-          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
-          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 69.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:30:46.038Z"
-        },
-        {
-          "id": "9f5e2561080c0328",
-          "category": "market",
-          "title": "3 of Wall Street’s Favorite Stocks to Research Further",
-          "titleZh": "华尔街最喜欢进一步研究的3只股票",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNLXBYY0UzTDl0VnBfMHV0ZGxWalVITE5QT0RZYlVuZ3VZWUI2YzF6QTByMjFaamZCTllmeWQzcHJvTUNhb00xNGd2LTRRLVZKYXpqZDFjZVFUSnpJU2FEZHY2SmpNV013MTNNZTZKUTI5d0R3TE4xdU95aGM3bE42RnYzRWVQS0dnWGFWb0lsVHRkVVV6TUZ1UmFn?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 11:26:10 GMT",
-          "score": 63.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
-        },
-        {
-          "id": "e71bc8183150f8cf",
-          "category": "market",
-          "title": "Is Kroger (KR) a Buy as Wall Street Analysts Look Optimistic?",
-          "titleZh": "Kroger (KR)是否买入，因为华尔街分析师看起来很乐观？",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQUzd0THBZWnE5SEVQLUJxQ1RtMTZscDR4anAxbWdDdHlfYTdYQThYamRpb2ZaTTVOX1VmUTRDal9zc3Nqb1EtOEJUbEhVUDU4dklOd0RGMlFKRE14TmFFM1dKMUlNVTZRejV1cFNRQWdSZDFoS2hsVmVhUlI2SzR6Y0hZQnQ5YUlsYk9JMVBUNXI1bXJI?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 13:30:03 GMT",
-          "score": 60.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
-        },
-        {
           "id": "519991c639b3b5bf",
           "category": "tech",
           "title": "K2 Horizon: A connected fleet of six open models",
@@ -589,90 +432,6 @@
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
-          "id": "d22dfbfde94f5b18",
-          "category": "market",
-          "title": "Wall Street ends sharply higher as Waller remarks ease rate hike fears",
-          "titleZh": "华尔街收盘大幅走高，因为华勒表示对宽松加息的担忧",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
-          "score": 64.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "37a9c9f598bb6853",
-          "category": "market",
-          "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
-          "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
-          "source": "Benzinga",
-          "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
-          "score": 61.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "026e2457ae426fe4",
-          "category": "market",
-          "title": "US Stock Market Today: S&P 500 Futures Edge Higher As Yields Ease Before Jobs",
-          "titleZh": "今日美国股市：随着收益率在就业前放松，标准普尔500指数期货边缘走高",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZ2JKa2dZUFlKOHhTU0t3akw3RV80VFZLYzNZd0dqMTFZbmtIX1hFQTJPckV3RzZoMXV0M0ZDWmRscjBHcjJKYUI1cW9TRnJwUzEwcVBBUTlHNWNPMWZGYmgxSzctTVllMEI5eVZoR2F0VzJCN2Q1dlBrRDNrb3NUcDBEajRocU0zaHYzMWE2YVY5Zw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 08:19:15 GMT",
-          "score": 69.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "d0814e9587cb2f30",
-          "category": "market",
-          "title": "U.S. Futures Steady as Investors Await Jobs Report; Lululemon and Adobe in Focus: Dow Jones, S&P, Nasdaq, Wall Street",
-          "titleZh": "随着投资者等待就业报告，美国期货走势稳定； Lululemon和Adobe成为焦点：道琼斯、标准普尔、纳斯达克、华尔街",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQck9vaW1LQUZkbzlBajE3Zzl0SjA0MjBLWllweUI1NDlseDhka20wemttbk5zSVpDVXYwcDZKSWVSbVpOM2lWR21CSktHQW1BSDNHT0E0cXhSeDZ5el9MWXlxNFFPRXM3dHZqOS1JckFpalhXM1hfWWpodi1vNktFbjJVcVd4c3VQd000R3NYd0dTNG1INVRBVkhWMFgxUQ?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 08:48:52 GMT",
-          "score": 69.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "0bf92a30269d59da",
-          "category": "market",
-          "title": "If I Were in My 20s, I'd Buy This Spectacular Nasdaq-100 Index Fund and Hold It Forever",
-          "titleZh": "如果我20多岁，我会购买这只壮观的纳斯达克-100指数基金并永远持有",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPLXFnSlNoSEtkMFQzclZwdjM2Q1JOcjVubWtsd2V3a19JRzBxWjJIRHFsV0VoX3B1NmNPcjQ1QkVuWGpqeE9KSWlKMi1aS0pWWDRHZmxVTXFJWC0xVmo5UUhJblF1YXNsZThpTGhUUzNtYWYwU1dSNTF2dUxLclJrYkxucng3VWh3UTJhYWpZTUJQS3RxeWlv?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 10:02:00 GMT",
-          "score": 62.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "9b21a6d440eac00d",
-          "category": "market",
-          "title": "1 S&P 500 Stock on Our Watchlist and 2 We Question",
-          "titleZh": "我们的观察名单上有1只标准普尔500指数股票， 2只我们质疑",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcWFuWFdRMlFrQ1pxdy1TVXg5M3JLelRfOTdnMDdTVjlkUk5vcVlaN05kdHRfWjFENmdRMzZDYW41T2IyU19YR2FXRDlxOTk4a3d2dmI5bzYyd1pBaFRNTlpMcERmXzVRdGR1c0hXOVYxLWZPUk5JdVl5OU9XTjIzQnM1OXFNYmN4NGo1QVNJaU43dGVIVm5TNG9JWWxxaWVtYUpPc0JFaVNrUzRxbnNDQTlBaw?oc=5",
-          "source": "StockStory",
-          "publishedAt": "Fri, 04 Sep 2026 09:51:01 GMT",
-          "score": 62.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "59d602dc0f1f49e8",
-          "category": "market",
-          "title": "Health-tracking smart ring maker Oura to list on US stock market",
-          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
-          "source": "The Guardian",
-          "publishedAt": "Fri, 04 Sep 2026 09:46:00 GMT",
-          "score": 61.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
           "id": "ce01ffa2ae76baf8",
           "category": "tech",
           "title": "The asteroid currently hitting front end web development",
@@ -683,186 +442,6 @@
           "score": 112.6,
           "engagement": "151 points · 176 comments",
           "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "1714b76912633a1d",
-          "category": "market",
-          "title": "Is the stock market open or closed on Labor Day? See holiday schedule",
-          "titleZh": "股票市场在劳动节是开放还是关闭？查看节假日时间表",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNYkFXYjBmVDlURFczY1gtRkhYSTl2b1lVVnVaYkJaMjAwS0VQUnlobTRvMDFrSDZ3M0ZwcXhvMjU0LVVNUnJYcjYwZ2NENktCcFdsbzgyaFF3MnlBM29WM25KbUMzbUVDZHpQVEhoWTlnNXNUSnFfTEU5YlBJdnNxeTFXUEcxTm9qa3Jtc09CZ2dsbDRKdmNJN1AwZWx0LVdGZk5TMzc0Vzl6cVhOV05KMHVkR3M3NTQ?oc=5",
-          "source": "USA Today",
-          "publishedAt": "Fri, 04 Sep 2026 07:02:00 GMT",
-          "score": 60.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "26c0ceab511fd221",
-          "category": "market",
-          "title": "Tech stocks lead rally on Wall Street",
-          "titleZh": "科技股引领华尔街反弹",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbzV4SHR0bVJmWWZlOWJWZDdNcEpVLU5WcVNtTmJyZTVpWHgzamRBb1FEWkNMVUk2TXlrMDM4cHRNZHVfXy1zdVRycGthdXhubVlUSHRoVzk4TGhnTmhsc013LTF3YlRlR2ZzTUt4Y0ZXd1d6bFd5dm1GZVdMQnZDeUM5cFdkWjFNcTVNb3c2VGowYV96?oc=5",
-          "source": "Northwest Arkansas Democrat-Gazette",
-          "publishedAt": "Fri, 04 Sep 2026 06:56:00 GMT",
-          "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "b96dbea80da7de6e",
-          "category": "market",
-          "title": "Sturdy stock market mints a record number of 401(k) millionaires",
-          "titleZh": "稳健的股市创造了创纪录的401 (k)百万富翁人数",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOWnZudzRUdVVaVEprdWdiWVBETXJ2Q2NDckFya21UYVBLdUNGUlhEbDZULWR2bmZMbkpPdTlseG54S0xtTW1jNmd6SFhTZ2NRYUc2UUoyWEVmWDZfc1RWWDB4aVhzZmhheUdmaDc2Ym9ZdWpvSHJ5d0Jqa2s4Q2xHYkd5OGVOZnRETEE?oc=5",
-          "source": "cbsnews.com",
-          "publishedAt": "Fri, 04 Sep 2026 09:00:12 GMT",
-          "score": 62.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "2e7e9bed85a13b22",
-          "category": "market",
-          "title": "This Unstoppable Stock Is Obliterating the S&P 500 and the Nasdaq-100 in 2026, but Is There Still Time to Buy?",
-          "titleZh": "这只势不可挡的股票将在2026年抹杀标准普尔500指数和纳斯达克100指数，但还有时间买入吗？",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNbHhoQURHR29KUy1sOGdIZVVLbDdUeGdBVmRqTXJKVktrejJvN1VtMzlDeHd5ZnVVa2Rjb3FqSDQ0c3VfQmg3TVFSS3dySFFYOS14YWZXV1I5RU5NZUMxcmRLR2w3c3ZWWlNwalNPX1M0djM1VndVWFZOMVhIQ1Q4UkUzalV2enBuOUphZGZrNzFwMEJKOVE?oc=5",
-          "source": "The Motley Fool",
-          "publishedAt": "Fri, 04 Sep 2026 09:07:29 GMT",
-          "score": 59.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "5008f6cdd374df64",
-          "category": "market",
-          "title": "Asian benchmarks trade mixed following rally on Wall Street led by technology issues | National News | 2news.com",
-          "titleZh": "以科技问题为首的华尔街反弹后，亚洲基准交易好坏参半|国家新闻| 2news.com",
-          "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxONEtzWTVoSHpvZG96bjlyRlJ5cTZEekM0SGp3c1dKaDZHdjVqaTFzcVhPUWp3UmVqTXRWU1FSd1AtWWZaWFU3cUlKOTV1MnhsbVJyVTQ1VEZYLTdwaURLY0pNU1JEQzlLMUxCVXVZaFZoR3BnbkF6eGU4T1NhN21PaW5jX2VkU3NLT1VHaE9iQXdHSlJ3NDl3djM0bFpHOW9iZWVLMXVTbXhDa0dlOXh2Y2djU1NLR3VGc2lSeURmbTJuRmNZNXMzZWhveHpBd3hicGMybGlaWFozR2ZKRWd1TlVkSTdLd2dKM0NoYTBPN1VWUFJMdmkzdHVHdVQ?oc=5",
-          "source": "KTVN",
-          "publishedAt": "Fri, 04 Sep 2026 07:01:57 GMT",
-          "score": 58.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "0cd3eedc015c0b93",
-          "category": "market",
-          "title": "Boeing’s $8.4 Billion Deal Is Bleeding Red Ink",
-          "titleZh": "波音84亿$的交易正在流红墨水",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPRVhLZmljTlVQSlhsUXp4OFB6NTNuTDRtS2NQT01oVzlIVFdlbGxPUVRsM2hjNWg5WU5EeTBKT2NVRGxJYVVpQWVnN09oSGRGX2dXU1FmQmpJcG1IdURVMk42UTZPZ094TlVDQnJza3hVV3FXNG9rZUViNXZrWHN3S0RoMldJU1I1YkE?oc=5",
-          "source": "WSJ",
-          "publishedAt": "Fri, 04 Sep 2026 08:01:15 GMT",
-          "score": 55.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "3c90a31ba9e6621e",
-          "category": "market",
-          "title": "Microsoft to Change Reporting Structure to Reflect Effects of AI",
-          "titleZh": "微软将改变报告结构以反映人工智能的影响",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQU3hZTS1LdVBJWUFVdjZ2ZUpUQ1hSMkJJYkRzVmJ5aWZ1UHdscUtrLW1WNzR3eEZBYW9DZFhYWERCaEtYVTZ5VDExelNWZTRzTHRjaTRqX3B3VTNMWjRIRlNVSjdDSEFPU21lRzZmZWh3cXhlVUlmNXZmTnpZc3p0ajZPUjFoNlRNVlAtVmkwdkJiQUgtczJ2MkpSR3FuLXdQZ29v?oc=5",
-          "source": "WSJ",
-          "publishedAt": "Fri, 04 Sep 2026 07:53:05 GMT",
-          "score": 54.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "b2ee8f9659fe46ca",
-          "category": "market",
-          "title": "Kazakhstan Eases Stock Market Access, But Liquidity Remains Key Challenge, Expert Says",
-          "titleZh": "专家表示，哈萨克斯坦放宽股市准入，但流动性仍是关键挑战",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPX3BTaXRSTW41NVV2RU1BUVliMzhXSUVqTHBXTGpRYWRWRzQzUUVIYk4wS0NvdEJBdG5LVThNS1ZuZ1RQeWtyLTNVdl9oNzh6N2trSGQzZkZvdVZ6eDFJZGdHNXhFY1podFQya0xXM3RudUlhUk9yMjZBclUxQ2RHQUc0UkluZDM3VmxUcEpSRFB0ZUFfa1R3ZEdsMTJNaTFyTmZibFRvZS03Mm40clh5eUYycG5ReUh6?oc=5",
-          "source": "The Astana Times",
-          "publishedAt": "Fri, 04 Sep 2026 05:03:45 GMT",
-          "score": 54.9,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "5e1704dd8321edbe",
-          "category": "market",
-          "title": "Nasdaq buys Dasseti to expand eVestment analytics",
-          "titleZh": "纳斯达克收购Dasseti以扩展eVestment分析",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOM2djaXQyMEs1Snozdm95bWVzaWQtbHJVV2F5dHNhRnpPZDFmbElxc3piYlJPSVpjVnp6QmRIbHFzQzEzOWt2cG00YnRBZDVUWmZFWjBFdVRSSHFzMktGeERmQXgxLTE1VmhoWjRubUFHblh5dF9wdmlpQTh0YWhWWFNRZEV2SGJmQXozanpraDNWWkE?oc=5",
-          "source": "FinTech Futures",
-          "publishedAt": "Fri, 04 Sep 2026 08:07:04 GMT",
-          "score": 54,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "46e584e4f964f7bf",
-          "category": "market",
-          "title": "Asian benchmarks mostly rise after tech stocks lead rally on Wall Street",
-          "titleZh": "在科技股引领华尔街反弹后，亚洲基准指数大部分上涨",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUUVkR3FCUUJLVDZkWHBnM2tRVEtzNVJ4M0FLckU0QmQ2T2NZMW5vV0JES3dmOUhDazV2RXFOcjVSVkppYmoybGZubldTQ09CNFNOZnN4ajZKcG9BMjVsSnhKa0xEbUFEWHBXTTE0YmR3dUtsMTZhcS11WWpndjVmRmpLd2VWamNxaUp1LVlJd2d1dk5JRzJ6Q1pTeW1WRGNqT2VJLVVaV0UtUlFiSlA3bkNuNW4?oc=5",
-          "source": "WSLS",
-          "publishedAt": "Fri, 04 Sep 2026 03:24:16 GMT",
-          "score": 53.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:29:58.717Z"
-        },
-        {
-          "id": "fb16f816208ff2d8",
-          "category": "market",
-          "title": "GE Vernova (GEV) Laps the Stock Market: Here's Why",
-          "titleZh": "GE Vernova (GEV)超越股市：原因如下",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOWmpjNExaZDVHNndLcnhnNUpLODMtVElMWjNucG9hS2lldEV1NHZnXzFuM0tkNFlXY2hkMjJrRTZyc0pha0pVMzRuRHRPX1dSUWZBN1BaaW8wbGhKUXlRT2JDM25DVVVBOXlNc2ktQkN5R05TRnQ4UFdJQllfS1RnSGlWNXpVdWlrZV9zcFhSMDFKV2Jm?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Thu, 03 Sep 2026 21:50:02 GMT",
-          "score": 55.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
-          "id": "09834b333c288dfd",
-          "category": "market",
-          "title": "Why D.R. Horton (DHI) Outpaced the Stock Market Today",
-          "titleZh": "为什么D.R. Horton （ DHI ）今天超过了股市",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQNHdTTG1TZzktWTZhY2FMMzB5Zkp5eW82M1d3OEhPazg0Wnpic0RPdHRMS1ZnRnhBTUdzQXAzaUN2UnJ0SUVWQlQyLXp4U0ZtYTBKTndGbHVSUGxpclVjeUVqTlBKeEhGdTNGSTRxQXJ0SHZSWFNGRW8xZGNHbDMwNmozN0N4ZXZTVHVR?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Thu, 03 Sep 2026 22:15:01 GMT",
-          "score": 55.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
-          "id": "7543f6d0a3bb2cfc",
-          "category": "market",
-          "title": "Asian benchmarks mostly rise after tech stocks lead rally on Wall Street",
-          "titleZh": "在科技股引领华尔街反弹后，亚洲基准指数大部分上涨",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORXpMNDlIcXcxbUdSQTZlc056OVl6SDhRdzV5N05FdGMtalpueWxPVGo4RkowTWtoWExRanZyc3o1aVFxTlpDeTFlalZ1S1RmREZMRFRoTU5xOTlTVlZtUVlSLVRtNGV3S0xXNmN0SWNFcGN3d1N0QmxBZWoydDFvNGozbWpDSlNNQTNSRmpBYlp2VHNzaWhOaDN2SGM0MVRIcVBzdVRvS20?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 03:20:00 GMT",
-          "score": 66.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T07:33:26.498Z"
-        },
-        {
-          "id": "5655911bad2dc01f",
-          "category": "market",
-          "title": "Q2 Earnings Outperformers: CarGurus (NASDAQ:CARG) And The Rest Of The Online Marketplace Stocks",
-          "titleZh": "第二季度收益跑赢大盘： CarGurus （纳斯达克股票代码： CARG ）和其他在线市场股票",
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSldjTFowNUlkUnlhWmtFSGVvT2ZObEpQT1dfWV8waVFqTGNIUUJGUXdFU3pyTGVWWVRSNnF2dUVyQkRibjQxQVJJd2tfMzZvcWh0TWlkY2IyMnpYdVowZ2dzMFdmVTVSV1A1Z05IdG5KVUxSc3RILXdZMlFQU1RDN1ZHRDFnaFExaHdIb29FVmN3OGIwSV93Nmw5Y2dnNmdka3pqbGZkSF9fUQ?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 00:23:00 GMT",
-          "score": 59.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T07:33:26.498Z"
-        },
-        {
-          "id": "413b2c9c3f1e2a06",
-          "category": "market",
-          "title": "Q2 Earnings Highs And Lows: Leonardo DRS (NASDAQ:DRS) Vs The Rest Of The Defense Contractors Stocks",
-          "titleZh": "第二季度盈利高点和低点： Leonardo DRS （纳斯达克股票代码： DRS ）与其他国防承包商股票对比",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTUtNX19RYjNWOEp0ZHdqSzZKdjhwaXRuTTBnMFF2NlJydHcxeUtNelRjQjhFOTJsdU9naEI4Uk1FVmh5U21uUTY4Y1RLUVd4ck1TVGpUQnlMc0xaNlMtSEVEa2s2UGFWS3hXZXQ3YmRnV3NxRzR6VEJxMFFDOXhiajQ2VGtTLWlwOXhMS3gwZGRCcmQ2U2NTdTB2cEE?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Thu, 03 Sep 2026 23:59:18 GMT",
-          "score": 56.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T07:33:26.498Z"
         }
       ]
     }
