@@ -95,10 +95,11 @@ function categoryLabel(category) {
 }
 
 function itemButton(item, rank) {
-  const button = document.createElement('button');
-  button.type = 'button';
+  const button = document.createElement('a');
   button.className = 'news-item';
-  button.dataset.url = item.url;
+  button.href = item.url;
+  button.target = '_blank';
+  button.rel = 'noopener noreferrer';
   button.dataset.id = item.id || '';
 
   const number = document.createElement('span');
@@ -134,14 +135,25 @@ function renderArchive(value, fromCache = false) {
     section.className = 'day';
     const header = document.createElement('header');
     header.className = 'day-header';
-    const heading = document.createElement('h2');
-    heading.textContent = dayLabel(day.date);
+    const heading = document.createElement('button');
+    heading.type = 'button';
+    heading.className = 'day-toggle';
+    heading.setAttribute('aria-expanded', 'true');
+    const headingText = document.createElement('span');
+    headingText.textContent = dayLabel(day.date);
+    const caret = document.createElement('span');
+    caret.className = 'day-caret';
+    caret.setAttribute('aria-hidden', 'true');
+    caret.textContent = '⌄';
+    heading.append(headingText, caret);
     const count = document.createElement('span');
     count.className = 'day-count';
     count.textContent = `${day.items?.length || 0} 条 · ${day.pushes?.length || 1} 次推送`;
     header.append(heading, count);
     const list = document.createElement('ol');
     list.className = 'news-list';
+    list.id = `news-${day.date}`;
+    heading.setAttribute('aria-controls', list.id);
     (day.items || []).forEach((item, index) => {
       const row = document.createElement('li');
       row.append(itemButton(item, index + 1));
@@ -275,8 +287,13 @@ async function enablePush() {
 }
 
 refs.days.addEventListener('click', (event) => {
-  const button = event.target.closest('.news-item');
-  if (button?.dataset.url) loadArticle(button.dataset.url);
+  const toggle = event.target.closest('.day-toggle');
+  if (!toggle) return;
+  const list = document.getElementById(toggle.getAttribute('aria-controls'));
+  if (!list) return;
+  const expanded = toggle.getAttribute('aria-expanded') === 'true';
+  toggle.setAttribute('aria-expanded', String(!expanded));
+  list.hidden = expanded;
 });
 refs.form.addEventListener('submit', (event) => {
   event.preventDefault();
