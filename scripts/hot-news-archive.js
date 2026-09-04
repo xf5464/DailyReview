@@ -14,6 +14,15 @@ function itemId(url) {
   return crypto.createHash('sha256').update(String(url)).digest('hex').slice(0, 16);
 }
 
+function isGoogleNewsUrl(rawUrl) {
+  try {
+    const host = new URL(rawUrl).hostname.toLowerCase();
+    return host === 'news.google.com' || host.endsWith('.news.google.com');
+  } catch {
+    return false;
+  }
+}
+
 function emptyArchive() {
   return { schemaVersion: 1, updatedAt: null, days: [] };
 }
@@ -45,9 +54,15 @@ function mergeNews(archive, news, now = Date.now(), shouldKeepItem = () => true)
   day.pushes = [...new Set([pushedAt, ...(day.pushes || [])])].sort().reverse();
   const incoming = [...(news.tech || []), ...(news.market || [])].map((item) => ({
     id: itemId(item.url), category: item.category, title: item.title, titleZh: item.titleZh || '',
-    url: item.url, source: item.source, publishedAt: item.publishedAt, score: item.score,
+    url: item.url, ...(item.googleNewsUrl ? { googleNewsUrl: item.googleNewsUrl } : {}),
+    source: item.source, publishedAt: item.publishedAt, score: item.score,
     engagement: item.engagement || '', pushedAt,
   }));
+  if (incoming.some((item) => item.googleNewsUrl)) {
+    next.days.forEach((entry) => {
+      entry.items = (entry.items || []).filter((item) => !isGoogleNewsUrl(item.url));
+    });
+  }
   const byId = new Map((day.items || []).map((item) => [item.id, item]));
   incoming.forEach((item) => byId.set(item.id, item));
   day.items = [...byId.values()].sort((left, right) =>
@@ -78,5 +93,5 @@ function pruneArchiveFile(filePath, now = Date.now()) {
 }
 
 module.exports = {
-  RETENTION_DAYS, chinaDate, emptyArchive, itemId, mergeNews, pruneArchive, pruneArchiveFile, saveNewsArchive,
+  RETENTION_DAYS, chinaDate, emptyArchive, isGoogleNewsUrl, itemId, mergeNews, pruneArchive, pruneArchiveFile, saveNewsArchive,
 };
