@@ -17,10 +17,7 @@ async function main() {
   const pageHtml = await pageResponse.text();
   const signature = pageHtml.match(/data-n-a-sg=["']([^"']+)["']/)?.[1] || '';
   const timestamp = pageHtml.match(/data-n-a-ts=["']([^"']+)["']/)?.[1] || '';
-  const externalUrls = [...new Set((pageHtml.match(/https?:\\?\\?\\/\\?\\/[^"'<> ]+/g) || [])
-    .map((value) => value.replaceAll('\\\\/', '/'))
-    .filter((value) => !value.includes('google.com'))
-    .slice(0, 20))];
+  const externalUrls = [];
   console.log(JSON.stringify({
     pageStatus: pageResponse.status,
     pageUrl: pageResponse.url,
