@@ -7,22 +7,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>DailyReview 中文阅读器</title>
-    <link rel="icon" href="icon-192.png?v=2026.09.04.4" type="image/png" />
-    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.04.4" />
-    <link rel="manifest" href="manifest.webmanifest?v=2026.09.04.4" />
-    <link rel="stylesheet" href="reader.css?v=2026.09.04.4" />
-    <script src="reader.js?v=2026.09.04.4" defer></script>
+    <link rel="icon" href="icon-192.png?v=2026.09.04.5" type="image/png" />
+    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.04.5" />
+    <link rel="manifest" href="manifest.webmanifest?v=2026.09.04.5" />
+    <link rel="stylesheet" href="reader.css?v=2026.09.04.5" />
+    <script src="reader.js?v=2026.09.04.5" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.4</span></div>
+      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.5</span></div>
     </header>
     <main>
       <section class="hero">
         <p class="eyebrow">每日科技与美股</p>
-        <h1>最近三天热点</h1>
+        <h1>热点 Top 10</h1>
         <p id="archiveMeta" class="subtle" aria-live="polite">正在载入…</p>
       </section>
+
+      <nav class="time-tabs" role="group" aria-label="新闻时间范围">
+        <button class="time-tab" type="button" data-hours="6" aria-pressed="false">6小时</button>
+        <button class="time-tab" type="button" data-hours="12" aria-pressed="false">12小时</button>
+        <button class="time-tab" type="button" data-hours="18" aria-pressed="false">18小时</button>
+        <button class="time-tab" type="button" data-hours="24" aria-pressed="true">24小时</button>
+      </nav>
 
       <nav class="category-tabs" role="tablist" aria-label="热点分类">
         <button class="category-tab" type="button" role="tab" data-category="tech" aria-controls="daysContainer">科技</button>

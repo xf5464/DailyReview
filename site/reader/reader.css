@@ -40,6 +40,19 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .subtle, .panel p { color: var(--muted); line-height: 1.6; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
+.time-tabs {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 0 0 12px; padding: 4px;
+  border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .5);
+}
+.time-tab {
+  border: 0; border-radius: 10px; padding: 9px 5px; color: var(--muted);
+  background: transparent; font-size: 13px; font-weight: 720; cursor: pointer;
+}
+.time-tab[aria-pressed="true"] {
+  color: white; background: var(--blue); box-shadow: 0 2px 10px rgba(23, 92, 211, .18);
+}
+.time-tab:active { transform: scale(.98); }
+
 .category-tabs {
   display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 0 0 24px; padding: 4px;
   border: 1px solid var(--line); border-radius: 14px; background: rgba(222, 216, 202, .45);

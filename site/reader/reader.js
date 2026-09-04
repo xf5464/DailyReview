@@ -11,6 +11,7 @@ const refs = {
   empty: document.querySelector('#emptyArchive'),
   archiveMeta: document.querySelector('#archiveMeta'),
   tabs: [...document.querySelectorAll('.category-tab')],
+  timeTabs: [...document.querySelectorAll('.time-tab')],
   dialog: document.querySelector('#readerDialog'),
   close: document.querySelector('#closeDialog'),
   loading: document.querySelector('#loadingState'),
@@ -29,6 +30,8 @@ const refs = {
 
 let archive = { days: [] };
 let activeCategory = localStorage.getItem('dailyreview-reader-category') === 'market' ? 'market' : 'tech';
+const savedHours = Number(localStorage.getItem('dailyreview-reader-hours'));
+let activeHours = [6, 12, 18, 24].includes(savedHours) ? savedHours : 24;
 let currentUrl = '';
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
 const fontSizes = [17, 19, 21, 23];
@@ -73,17 +76,6 @@ function pruneArticleCache() {
     Number(entry?.cachedAt || 0) >= cutoff && entry?.payload?.translatedText));
   localStorage.setItem(ARTICLE_CACHE_KEY, JSON.stringify(next));
   return next;
-}
-
-function dayLabel(date) {
-  const today = chinaDate();
-  const yesterday = new Date(`${today}T12:00:00+08:00`);
-  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
-  const prefix = date === today ? '今天' : date === chinaDate(yesterday) ? '昨天' : '';
-  const formatted = new Intl.DateTimeFormat('zh-CN', {
-    timeZone: 'Asia/Shanghai', month: 'long', day: 'numeric', weekday: 'short',
-  }).format(new Date(`${date}T12:00:00+08:00`));
-  return prefix ? `${prefix} · ${formatted}` : formatted;
 }
 
 function categoryLabel(category) {
@@ -139,62 +131,77 @@ function updateCategoryTabs() {
   });
 }
 
+function itemTimestamp(item) {
+  const publishedAt = Date.parse(item?.publishedAt);
+  if (Number.isFinite(publishedAt)) return publishedAt;
+  const pushedAt = Date.parse(item?.pushedAt);
+  return Number.isFinite(pushedAt) ? pushedAt : 0;
+}
+
+function selectedItems(value) {
+  const now = Date.now();
+  const cutoff = now - activeHours * 60 * 60 * 1000;
+  const byId = new Map();
+  (value.days || []).flatMap((day) => day.items || []).forEach((item) => {
+    const timestamp = itemTimestamp(item);
+    if (item.category !== activeCategory || timestamp < cutoff || timestamp > now + 5 * 60 * 1000) return;
+    const key = item.id || item.url;
+    const previous = byId.get(key);
+    if (!previous || Date.parse(item.pushedAt || 0) > Date.parse(previous.pushedAt || 0)) byId.set(key, item);
+  });
+  return [...byId.values()]
+    .sort((left, right) =>
+      (Number(right.score) || 0) - (Number(left.score) || 0)
+      || itemTimestamp(right) - itemTimestamp(left))
+    .slice(0, 10);
+}
+
+function updateTimeTabs() {
+  refs.timeTabs.forEach((tab) => {
+    const selected = Number(tab.dataset.hours) === activeHours;
+    tab.setAttribute('aria-pressed', String(selected));
+  });
+}
+
 function renderArchive(value, fromCache = false) {
   archive = pruneArchive(value);
   localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive));
   refs.days.replaceChildren();
   updateCategoryTabs();
+  updateTimeTabs();
 
-  const visibleDays = archive.days
-    .map((day) => ({
-      ...day,
-      items: (day.items || []).filter((item) => item.category === activeCategory),
-    }))
-    .filter((day) => day.items.length > 0);
-  const total = visibleDays.reduce((sum, day) => sum + day.items.length, 0);
-  refs.empty.hidden = visibleDays.length > 0;
-  refs.archiveMeta.textContent = visibleDays.length
-    ? `${categoryLabel(activeCategory)} · ${visibleDays.length} 天 · ${total} 条${fromCache ? ' · 本地缓存' : ''}`
-    : `最近三天暂无${categoryLabel(activeCategory)}热点`;
+  const items = selectedItems(archive);
+  refs.empty.hidden = items.length > 0;
+  refs.archiveMeta.textContent = items.length
+    ? `${categoryLabel(activeCategory)} · 最近${activeHours}小时 · ${items.length} 条${fromCache ? ' · 本地缓存' : ''}`
+    : `最近${activeHours}小时暂无${categoryLabel(activeCategory)}热点`;
 
-  visibleDays.forEach((day) => {
-    const section = document.createElement('section');
-    section.className = 'day';
-    const header = document.createElement('header');
-    header.className = 'day-header';
-    const heading = document.createElement('button');
-    heading.type = 'button';
-    heading.className = 'day-toggle';
-    heading.setAttribute('aria-expanded', 'true');
-    const headingText = document.createElement('span');
-    headingText.textContent = dayLabel(day.date);
-    const caret = document.createElement('span');
-    caret.className = 'day-caret';
-    caret.setAttribute('aria-hidden', 'true');
-    caret.textContent = '⌄';
-    heading.append(headingText, caret);
-    const count = document.createElement('span');
-    count.className = 'day-count';
-    count.textContent = `${day.items.length} 条 · ${day.pushes?.length || 1} 次更新`;
-    header.append(heading, count);
-    const list = document.createElement('ol');
-    list.className = 'news-list';
-    list.id = `news-${activeCategory}-${day.date}`;
-    heading.setAttribute('aria-controls', list.id);
-    day.items.forEach((item, index) => {
-      const row = document.createElement('li');
-      row.append(itemButton(item, index + 1));
-      list.append(row);
-    });
-    section.append(header, list);
-    refs.days.append(section);
+  if (!items.length) return;
+  const section = document.createElement('section');
+  section.className = 'day';
+  const list = document.createElement('ol');
+  list.className = 'news-list';
+  items.forEach((item, index) => {
+    const row = document.createElement('li');
+    row.append(itemButton(item, index + 1));
+    list.append(row);
   });
+  section.append(list);
+  refs.days.append(section);
 }
 
 function selectCategory(category) {
   if (!['tech', 'market'].includes(category) || category === activeCategory) return;
   activeCategory = category;
   localStorage.setItem('dailyreview-reader-category', category);
+  renderArchive(archive);
+}
+
+function selectHours(hours) {
+  const next = Number(hours);
+  if (![6, 12, 18, 24].includes(next) || next === activeHours) return;
+  activeHours = next;
+  localStorage.setItem('dailyreview-reader-hours', String(next));
   renderArchive(archive);
 }
 
@@ -273,21 +280,12 @@ function changeFont() {
 
 refs.days.addEventListener('click', (event) => {
   const externalLink = event.target.closest('.news-item, .safari-link');
-  if (externalLink) {
-    event.preventDefault();
-    location.href = externalLink.getAttribute('href');
-    return;
-  }
-
-  const toggle = event.target.closest('.day-toggle');
-  if (!toggle) return;
-  const list = document.getElementById(toggle.getAttribute('aria-controls'));
-  if (!list) return;
-  const expanded = toggle.getAttribute('aria-expanded') === 'true';
-  toggle.setAttribute('aria-expanded', String(!expanded));
-  list.hidden = expanded;
+  if (!externalLink) return;
+  event.preventDefault();
+  location.href = externalLink.getAttribute('href');
 });
 refs.tabs.forEach((tab) => tab.addEventListener('click', () => selectCategory(tab.dataset.category)));
+refs.timeTabs.forEach((tab) => tab.addEventListener('click', () => selectHours(tab.dataset.hours)));
 refs.retry.addEventListener('click', () => { if (currentUrl) loadArticle(currentUrl, true); });
 refs.close.addEventListener('click', () => refs.dialog.close());
 refs.dialog.addEventListener('click', (event) => { if (event.target === refs.dialog) refs.dialog.close(); });
