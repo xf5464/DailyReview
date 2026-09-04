@@ -1,5 +1,254 @@
 {
   "schemaVersion": 1,
-  "updatedAt": null,
-  "days": []
+  "updatedAt": "2026-09-04T07:33:26.498Z",
+  "days": [
+    {
+      "date": "2026-09-04",
+      "pushes": [
+        "2026-09-04T07:33:26.498Z"
+      ],
+      "items": [
+        {
+          "id": "ea74e2fffbc50210",
+          "category": "tech",
+          "title": "GPT-6 Astra",
+          "titleZh": "GPT-6 Astra",
+          "url": "https://openai.com/index/gpt-6-astra/",
+          "source": "openai.com",
+          "publishedAt": "2026-09-03T18:41:05.000Z",
+          "score": 160.1,
+          "engagement": "1674 points · 1460 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "b837590e8bc38616",
+          "category": "tech",
+          "title": ".name Termination",
+          "titleZh": ".name终止",
+          "url": "https://neil.fraser.name/news/2026/09/03/",
+          "source": "neil.fraser.name",
+          "publishedAt": "2026-09-03T14:54:39.000Z",
+          "score": 147.4,
+          "engagement": "1688 points · 418 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "b9197b873957814a",
+          "category": "tech",
+          "title": "Audacity 4.0",
+          "titleZh": "Audacity 4.0",
+          "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
+          "source": "github.com",
+          "publishedAt": "2026-09-03T10:53:08.000Z",
+          "score": 133.9,
+          "engagement": "1093 points · 245 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "debf643f0294e072",
+          "category": "tech",
+          "title": "Any Human Ever – One life, drawn at random from all who have ever lived",
+          "titleZh": "任何曾经的人类–一个生命，从所有曾经生活过的人中随机抽取",
+          "url": "https://anyhumanever.com/",
+          "source": "anyhumanever.com",
+          "publishedAt": "2026-09-03T14:51:10.000Z",
+          "score": 129.7,
+          "engagement": "557 points · 265 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "45a86641ba677818",
+          "category": "tech",
+          "title": "Qwen 3.8 27B available on Cerebras at 1500 tokens/s",
+          "titleZh": "QWEN 3.8 27B在大脑上以1500令牌/秒的价格提供",
+          "url": "https://inference-docs.cerebras.ai/models/overview",
+          "source": "inference-docs.cerebras.ai",
+          "publishedAt": "2026-09-03T18:32:13.000Z",
+          "score": 129.3,
+          "engagement": "526 points · 167 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "f519b6f605b220ae",
+          "category": "tech",
+          "title": "Google Antigravity TOS: 3rd party usage can get Google account suspended",
+          "titleZh": "Google Antigravity TOS ：第三方使用可能会导致Google帐户被暂停",
+          "url": "https://twitter.com/GergelyOrosz/status/2095453567955968398",
+          "source": "twitter.com",
+          "publishedAt": "2026-09-03T11:01:04.000Z",
+          "score": 116.5,
+          "engagement": "309 points · 209 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "519991c639b3b5bf",
+          "category": "tech",
+          "title": "K2 Horizon: A connected fleet of six open models",
+          "titleZh": "K2 Horizon ：由六个开放式车型组成的互联车队",
+          "url": "https://ifm.ai/blog/k2/",
+          "source": "ifm.ai",
+          "publishedAt": "2026-09-03T15:36:43.000Z",
+          "score": 114.6,
+          "engagement": "290 points · 94 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "6379e22bcefbb3cd",
+          "category": "tech",
+          "title": "Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out",
+          "titleZh": "Claude、Codex和Cursor选择了哪些工具？ 我们测量了17000次跑步来找出",
+          "url": "https://armature.tech/blog/which-tools-coding-agents-install",
+          "source": "armature.tech",
+          "publishedAt": "2026-09-03T21:20:34.000Z",
+          "score": 113.2,
+          "engagement": "190 points · 75 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "5725b766800de7c4",
+          "category": "tech",
+          "title": "Pre-Release of Polars 2.0",
+          "titleZh": "Polars 2.0预发布",
+          "url": "https://pola.rs/posts/announcing-polars-2/",
+          "source": "pola.rs",
+          "publishedAt": "2026-09-03T06:59:08.000Z",
+          "score": 112.8,
+          "engagement": "393 points · 131 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "ce01ffa2ae76baf8",
+          "category": "tech",
+          "title": "The asteroid currently hitting front end web development",
+          "titleZh": "小行星目前正在撞击前端网络开发",
+          "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/",
+          "source": "nolanlawson.com",
+          "publishedAt": "2026-09-03T19:17:24.000Z",
+          "score": 112.2,
+          "engagement": "138 points · 155 comments",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "64d8f3a213bb739c",
+          "category": "market",
+          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
+          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
+          "score": 72.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "d22dfbfde94f5b18",
+          "category": "market",
+          "title": "Wall Street ends sharply higher as Waller remarks ease rate hike fears",
+          "titleZh": "华尔街收盘大幅走高，因为华勒表示对宽松加息的担忧",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
+          "score": 70.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "37a9c9f598bb6853",
+          "category": "market",
+          "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
+          "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
+          "source": "Benzinga",
+          "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
+          "score": 67.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "7543f6d0a3bb2cfc",
+          "category": "market",
+          "title": "Asian benchmarks mostly rise after tech stocks lead rally on Wall Street",
+          "titleZh": "在科技股引领华尔街反弹后，亚洲基准指数大部分上涨",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORXpMNDlIcXcxbUdSQTZlc056OVl6SDhRdzV5N05FdGMtalpueWxPVGo4RkowTWtoWExRanZyc3o1aVFxTlpDeTFlalZ1S1RmREZMRFRoTU5xOTlTVlZtUVlSLVRtNGV3S0xXNmN0SWNFcGN3d1N0QmxBZWoydDFvNGozbWpDSlNNQTNSRmpBYlp2VHNzaWhOaDN2SGM0MVRIcVBzdVRvS20?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 03:20:00 GMT",
+          "score": 66.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "1714b76912633a1d",
+          "category": "market",
+          "title": "Is the stock market open or closed on Labor Day? See holiday schedule",
+          "titleZh": "股票市场在劳动节是开放还是关闭？查看节假日时间表",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNYkFXYjBmVDlURFczY1gtRkhYSTl2b1lVVnVaYkJaMjAwS0VQUnlobTRvMDFrSDZ3M0ZwcXhvMjU0LVVNUnJYcjYwZ2NENktCcFdsbzgyaFF3MnlBM29WM25KbUMzbUVDZHpQVEhoWTlnNXNUSnFfTEU5YlBJdnNxeTFXUEcxTm9qa3Jtc09CZ2dsbDRKdmNJN1AwZWx0LVdGZk5TMzc0Vzl6cVhOV05KMHVkR3M3NTQ?oc=5",
+          "source": "USA Today",
+          "publishedAt": "Fri, 04 Sep 2026 07:02:00 GMT",
+          "score": 62.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "5655911bad2dc01f",
+          "category": "market",
+          "title": "Q2 Earnings Outperformers: CarGurus (NASDAQ:CARG) And The Rest Of The Online Marketplace Stocks",
+          "titleZh": "第二季度收益跑赢大盘： CarGurus （纳斯达克股票代码： CARG ）和其他在线市场股票",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSldjTFowNUlkUnlhWmtFSGVvT2ZObEpQT1dfWV8waVFqTGNIUUJGUXdFU3pyTGVWWVRSNnF2dUVyQkRibjQxQVJJd2tfMzZvcWh0TWlkY2IyMnpYdVowZ2dzMFdmVTVSV1A1Z05IdG5KVUxSc3RILXdZMlFQU1RDN1ZHRDFnaFExaHdIb29FVmN3OGIwSV93Nmw5Y2dnNmdka3pqbGZkSF9fUQ?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 00:23:00 GMT",
+          "score": 59.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "fb16f816208ff2d8",
+          "category": "market",
+          "title": "GE Vernova (GEV) Laps the Stock Market: Here's Why",
+          "titleZh": "GE Vernova (GEV)超越股市：原因如下",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOWmpjNExaZDVHNndLcnhnNUpLODMtVElMWjNucG9hS2lldEV1NHZnXzFuM0tkNFlXY2hkMjJrRTZyc0pha0pVMzRuRHRPX1dSUWZBN1BaaW8wbGhKUXlRT2JDM25DVVVBOXlNc2ktQkN5R05TRnQ4UFdJQllfS1RnSGlWNXpVdWlrZV9zcFhSMDFKV2Jm?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Thu, 03 Sep 2026 21:50:02 GMT",
+          "score": 57.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "b2ee8f9659fe46ca",
+          "category": "market",
+          "title": "Kazakhstan Eases Stock Market Access, But Liquidity Remains Key Challenge, Expert Says",
+          "titleZh": "专家表示，哈萨克斯坦放宽股市准入，但流动性仍是关键挑战",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPX3BTaXRSTW41NVV2RU1BUVliMzhXSUVqTHBXTGpRYWRWRzQzUUVIYk4wS0NvdEJBdG5LVThNS1ZuZ1RQeWtyLTNVdl9oNzh6N2trSGQzZkZvdVZ6eDFJZGdHNXhFY1podFQya0xXM3RudUlhUk9yMjZBclUxQ2RHQUc0UkluZDM3VmxUcEpSRFB0ZUFfa1R3ZEdsMTJNaTFyTmZibFRvZS03Mm40clh5eUYycG5ReUh6?oc=5",
+          "source": "The Astana Times",
+          "publishedAt": "Fri, 04 Sep 2026 05:03:45 GMT",
+          "score": 56.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "09834b333c288dfd",
+          "category": "market",
+          "title": "Why D.R. Horton (DHI) Outpaced the Stock Market Today",
+          "titleZh": "为什么D.R. Horton （ DHI ）今天超过了股市",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQNHdTTG1TZzktWTZhY2FMMzB5Zkp5eW82M1d3OEhPazg0Wnpic0RPdHRMS1ZnRnhBTUdzQXAzaUN2UnJ0SUVWQlQyLXp4U0ZtYTBKTndGbHVSUGxpclVjeUVqTlBKeEhGdTNGSTRxQXJ0SHZSWFNGRW8xZGNHbDMwNmozN0N4ZXZTVHVR?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Thu, 03 Sep 2026 22:15:01 GMT",
+          "score": 56.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        },
+        {
+          "id": "413b2c9c3f1e2a06",
+          "category": "market",
+          "title": "Q2 Earnings Highs And Lows: Leonardo DRS (NASDAQ:DRS) Vs The Rest Of The Defense Contractors Stocks",
+          "titleZh": "第二季度盈利高点和低点： Leonardo DRS （纳斯达克股票代码： DRS ）与其他国防承包商股票对比",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTUtNX19RYjNWOEp0ZHdqSzZKdjhwaXRuTTBnMFF2NlJydHcxeUtNelRjQjhFOTJsdU9naEI4Uk1FVmh5U21uUTY4Y1RLUVd4ck1TVGpUQnlMc0xaNlMtSEVEa2s2UGFWS3hXZXQ3YmRnV3NxRzR6VEJxMFFDOXhiajQ2VGtTLWlwOXhMS3gwZGRCcmQ2U2NTdTB2cEE?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Thu, 03 Sep 2026 23:59:18 GMT",
+          "score": 56.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T07:33:26.498Z"
+        }
+      ]
+    }
+  ]
 }
