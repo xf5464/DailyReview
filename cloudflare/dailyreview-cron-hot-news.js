@@ -30,10 +30,8 @@ async function dispatchWorkflow(env, workflow, inputs) {
 
 export async function sendDailyHotNews(event, env) {
   if (event.cron === READER_REFRESH_CRON) {
-    await dispatchWorkflow(env, "send-hot-news.yml", {
-      trigger_source: "cloudflare-refresh",
+    await dispatchWorkflow(env, "refresh-reader.yml", {
       window_hours: "30",
-      refresh_only: "true",
     });
     return true;
   }
@@ -55,10 +53,8 @@ export async function sendHotNewsNow(env) {
 }
 
 export async function refreshReaderNow(env) {
-  await dispatchWorkflow(env, "send-hot-news.yml", {
-    trigger_source: "cloudflare-refresh-manual",
+  await dispatchWorkflow(env, "refresh-reader.yml", {
     window_hours: "30",
-    refresh_only: "true",
   });
 }
 
@@ -73,6 +69,7 @@ export default {
       status: "ok",
       emailCron: "17 4,10,16,22 * * *",
       readerRefreshCron: "*/30 * * * *",
+      cronVersion: "2026.09.04.13",
     });
   },
 };
