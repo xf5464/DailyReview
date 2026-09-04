@@ -312,3 +312,4 @@ if ('serviceWorker' in navigator) {
 
 const params = new URL(location.href).searchParams;
 const initialUrl = params.get('url');
+if (initialUrl) loadArticle(initialUrl);
