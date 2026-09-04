@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T15:00:45.706Z",
+  "updatedAt": "2026-09-04T15:30:46.038Z",
   "days": [
     {
       "date": "2026-09-04",
       "pushes": [
+        "2026-09-04T15:30:46.038Z",
         "2026-09-04T15:00:45.706Z",
         "2026-09-04T10:29:44.587Z",
         "2026-09-04T09:15:20.097Z",
@@ -21,9 +22,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 156.3,
-          "engagement": "1979 points · 1807 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 156,
+          "engagement": "1996 points · 1826 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -33,9 +34,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 143.7,
-          "engagement": "2034 points · 496 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 143.8,
+          "engagement": "2047 points · 500 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "b9197b873957814a",
@@ -46,8 +47,8 @@
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
           "score": 131.3,
-          "engagement": "1120 points · 258 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "engagement": "1121 points · 259 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "debf643f0294e072",
@@ -57,9 +58,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 124.7,
-          "engagement": "623 points · 299 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 124.8,
+          "engagement": "625 points · 299 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "45a86641ba677818",
@@ -69,9 +70,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 125.6,
-          "engagement": "623 points · 207 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 125.3,
+          "engagement": "630 points · 208 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "f519b6f605b220ae",
@@ -83,7 +84,7 @@
           "publishedAt": "2026-09-03T11:01:04.000Z",
           "score": 113.8,
           "engagement": "325 points · 212 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "6379e22bcefbb3cd",
@@ -93,9 +94,9 @@
           "url": "https://armature.tech/blog/which-tools-coding-agents-install",
           "source": "armature.tech",
           "publishedAt": "2026-09-03T21:20:34.000Z",
-          "score": 113.7,
-          "engagement": "265 points · 124 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 113.3,
+          "engagement": "267 points · 125 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "64d8f3a213bb739c",
@@ -105,9 +106,9 @@
           "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 63.2,
+          "score": 61.5,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -117,9 +118,9 @@
           "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 129.4,
-          "engagement": "377 points · 157 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 130.2,
+          "engagement": "400 points · 169 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -129,9 +130,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 144.4,
-          "engagement": "518 points · 350 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 147,
+          "engagement": "602 points · 415 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "656e675460d44f88",
@@ -141,9 +142,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 116.6,
-          "engagement": "200 points · 51 comments",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "score": 118.3,
+          "engagement": "220 points · 58 comments",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "2df93ea7c97d6d38",
@@ -153,9 +154,9 @@
           "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 73.6,
+          "score": 73.7,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "8cecb3d9bc5d5fe7",
@@ -165,9 +166,9 @@
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 72,
+          "score": 71.2,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "3774e1e2f32f32f0",
@@ -177,9 +178,9 @@
           "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
-          "score": 67.7,
+          "score": 66.9,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "031531bde2ad3281",
@@ -189,9 +190,9 @@
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 12:18:58 GMT",
-          "score": 67.1,
+          "score": 64.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "b78b53136335d7a7",
@@ -201,9 +202,57 @@
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNZnpydHpiMlNuYTUzd1k1OGhpWTNRNVh0dXp2WWN2Zm5aQ1p0dFhFQmU3cmZIbE9LRFZMV3ZBUk1FR0IxY19FdHNmSU5vMWdjX1FzUlRTZ19qbXhTOEk0N3loWHhRaDEyV3hpU3pmMlVTUmh3R3hXY3AyUmhnMU9vYllzMGJlTWhjazNTWlJWYm1JZ183RkQw?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 13:55:02 GMT",
-          "score": 64.8,
+          "score": 62.5,
           "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
+          "pushedAt": "2026-09-04T15:30:46.038Z"
+        },
+        {
+          "id": "f1fc4fcb91990214",
+          "category": "market",
+          "title": "3 of Wall Street’s Favorite Stocks We Find Risky",
+          "titleZh": "我们发现有风险的华尔街最受欢迎的3只股票",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNMHdCd1U4OEZxNXhpSldBbFplX1RoNXh1b2xvRlJzbXhYNURzcnh1c0tzRndYMEFMeExhVWctUGhkc0taYlRERGhOcWowZHowZjZHV1FyN00xdjkwdm0xdlYybGNDb0FSTlc3M1YzcWx5RzVzYzFjdHM1RmQyVXRxZk8yWmpCUVpvdllyVEVBVm9qWENrZkcwMUhR?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 11:58:10 GMT",
+          "score": 61.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
+        },
+        {
+          "id": "af21ac2edf73e636",
+          "category": "market",
+          "title": "Wall Street September October Historical Market Risks",
+          "titleZh": "华尔街9月10月历史市场风险",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
+          "source": "Funds Society",
+          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
+          "score": 61.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
+        },
+        {
+          "id": "327871d4a29576d0",
+          "category": "market",
+          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
+          "score": 80.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
+        },
+        {
+          "id": "98090b0a5a391971",
+          "category": "market",
+          "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
+          "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
+          "score": 69.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:30:46.038Z"
         },
         {
           "id": "9f5e2561080c0328",
@@ -214,30 +263,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 11:26:10 GMT",
           "score": 63.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
-        },
-        {
-          "id": "f1fc4fcb91990214",
-          "category": "market",
-          "title": "3 of Wall Street’s Favorite Stocks We Find Risky",
-          "titleZh": "我们发现有风险的华尔街最受欢迎的3只股票",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNMHdCd1U4OEZxNXhpSldBbFplX1RoNXh1b2xvRlJzbXhYNURzcnh1c0tzRndYMEFMeExhVWctUGhkc0taYlRERGhOcWowZHowZjZHV1FyN00xdjkwdm0xdlYybGNDb0FSTlc3M1YzcWx5RzVzYzFjdHM1RmQyVXRxZk8yWmpCUVpvdllyVEVBVm9qWENrZkcwMUhR?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 11:58:10 GMT",
-          "score": 63.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T15:00:45.706Z"
-        },
-        {
-          "id": "af21ac2edf73e636",
-          "category": "market",
-          "title": "Wall Street September October Historical Market Risks",
-          "titleZh": "华尔街9月10月历史市场风险",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
-          "source": "fundssociety.com",
-          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
-          "score": 62.2,
           "engagement": "",
           "pushedAt": "2026-09-04T15:00:45.706Z"
         },
@@ -302,18 +327,6 @@
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
-          "id": "327871d4a29576d0",
-          "category": "market",
-          "title": "Nasdaq, S&P 500 futures climb ahead of key jobs report",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 09:05:43 GMT",
-          "score": 80.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
           "id": "026e2457ae426fe4",
           "category": "market",
           "title": "US Stock Market Today: S&P 500 Futures Edge Higher As Yields Ease Before Jobs",
@@ -322,18 +335,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 08:19:15 GMT",
           "score": 69.1,
-          "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "6823efb8e0a69435",
-          "category": "market",
-          "title": "Planet Labs Earnings Top Wall Street Estimates as Military Space Business Grows",
-          "titleZh": "随着军用太空业务的增长， Planet Labs的顶级华尔街收入估计数",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFAwbXYwSDJpLVhjQWdGeV9OLTZDdlcydW1fdC1HaE9vTE04WkVzX01TLTdMejVZRVpsWm81OGlwMkhoQjRTWTMzLThENEoteTdsZTVJVWFmNktlNXNEcTNxVGxVQ20yNzJBbXVvS3VyZlNXNXJ0UWRoMk1CVXNPMms?oc=5",
-          "source": "Barron's",
-          "publishedAt": "Fri, 04 Sep 2026 08:20:00 GMT",
-          "score": 63,
           "engagement": "",
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
