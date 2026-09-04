@@ -1,7 +1,10 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
+const {
+  environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
+  readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
+} = require("../scripts/send-hot-news-email");
 
 test("parses Google News RSS and removes source suffix", () => {
   const xml = `<rss><channel><item><title><![CDATA[Nvidia launches a new chip - Reuters]]></title><link>https://example.com/a?x=1&amp;y=2</link><pubDate>Fri, 04 Sep 2026 01:00:00 GMT</pubDate><source url="https://reuters.com">Reuters</source></item></channel></rss>`;
@@ -78,4 +81,35 @@ test("filters strict paid-subscription sources by publisher or domain", () => {
   assert.equal(isPaywalledItem({ source: "The Wall Street Journal", url: "https://news.google.com/story" }), true);
   assert.equal(isPaywalledItem({ source: "Unknown", url: "https://www.bloomberg.com/news/a" }), true);
   assert.equal(isPaywalledItem({ source: "Reuters", url: "https://reuters.com/world/a" }), false);
+});
+
+
+test("resolves a signed Google News URL to its publisher during collection", async () => {
+  const googleUrl = "https://news.google.com/rss/articles/CBMiTest?oc=5";
+  const calls = [];
+  const fetcher = async (url, options = {}) => {
+    calls.push({ url, options });
+    if (calls.length === 1) {
+      return { ok: true, text: async () => '<div data-n-a-sg="signature" data-n-a-ts="1788480000"></div>' };
+    }
+    return { ok: true, text: async () => '[\\\"garturlres\\\",\\\"https://www.cnbc.com/2026/09/04/story.html\\\",' };
+  };
+  const resolved = await resolveGoogleNewsUrl(googleUrl, fetcher);
+  assert.equal(resolved, "https://www.cnbc.com/2026/09/04/story.html");
+  assert.equal(calls.length, 2);
+  assert.equal(calls[1].options.method, "POST");
+  assert.match(calls[1].options.body, /Fbv4je/);
+});
+
+test("reuses an archived Google News mapping without another network request", async () => {
+  const googleUrl = "https://news.google.com/rss/articles/CBMiCached?oc=5";
+  const directUrl = "https://www.reuters.com/technology/example/";
+  const result = await resolveGoogleNewsItems(
+    [{ title: "Cached story", url: googleUrl, source: "Reuters" }],
+    new Map([[googleUrl, directUrl]]),
+    async () => { throw new Error("fetch should not run"); },
+  );
+  assert.equal(result.resolvedCount, 1);
+  assert.equal(result.items[0].url, directUrl);
+  assert.equal(result.items[0].googleNewsUrl, googleUrl);
 });
