@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T08:18:49.346Z",
+  "updatedAt": "2026-09-04T08:29:58.717Z",
   "days": [
     {
       "date": "2026-09-04",
       "pushes": [
+        "2026-09-04T08:29:58.717Z",
         "2026-09-04T08:18:49.346Z",
         "2026-09-04T07:33:26.498Z"
       ],
@@ -18,8 +19,8 @@
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
           "score": 159.9,
-          "engagement": "1716 points · 1517 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "engagement": "1729 points · 1523 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -30,8 +31,8 @@
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
           "score": 147.3,
-          "engagement": "1740 points · 432 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "engagement": "1753 points · 437 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "b9197b873957814a",
@@ -41,9 +42,9 @@
           "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 133.2,
-          "engagement": "1098 points · 246 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 133.1,
+          "engagement": "1099 points · 246 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "debf643f0294e072",
@@ -53,9 +54,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 129.3,
-          "engagement": "568 points · 270 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 129.2,
+          "engagement": "570 points · 270 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "45a86641ba677818",
@@ -65,9 +66,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 129,
-          "engagement": "536 points · 172 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 128.9,
+          "engagement": "540 points · 172 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "f519b6f605b220ae",
@@ -77,9 +78,9 @@
           "url": "https://twitter.com/GergelyOrosz/status/2095453567955968398",
           "source": "twitter.com",
           "publishedAt": "2026-09-03T11:01:04.000Z",
-          "score": 115.9,
-          "engagement": "311 points · 210 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 115.7,
+          "engagement": "312 points · 210 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "519991c639b3b5bf",
@@ -89,9 +90,9 @@
           "url": "https://ifm.ai/blog/k2/",
           "source": "ifm.ai",
           "publishedAt": "2026-09-03T15:36:43.000Z",
-          "score": 114.1,
-          "engagement": "292 points · 96 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 114,
+          "engagement": "293 points · 97 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "6379e22bcefbb3cd",
@@ -102,8 +103,8 @@
           "source": "armature.tech",
           "publishedAt": "2026-09-03T21:20:34.000Z",
           "score": 114.6,
-          "engagement": "202 points · 90 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "engagement": "202 points · 93 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "5725b766800de7c4",
@@ -113,9 +114,9 @@
           "url": "https://pola.rs/posts/announcing-polars-2/",
           "source": "pola.rs",
           "publishedAt": "2026-09-03T06:59:08.000Z",
-          "score": 112.8,
-          "engagement": "393 points · 131 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 112.9,
+          "engagement": "393 points · 132 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "ce01ffa2ae76baf8",
@@ -125,9 +126,9 @@
           "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/",
           "source": "nolanlawson.com",
           "publishedAt": "2026-09-03T19:17:24.000Z",
-          "score": 112.6,
-          "engagement": "145 points · 167 comments",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "score": 113.1,
+          "engagement": "150 points · 171 comments",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "64d8f3a213bb739c",
@@ -135,11 +136,11 @@
           "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
           "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
           "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "CNBC",
+          "source": "cnbc.com",
           "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 71.7,
+          "score": 58.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "d22dfbfde94f5b18",
@@ -149,9 +150,9 @@
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
           "source": "Reuters",
           "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
-          "score": 69.2,
+          "score": 69.3,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "37a9c9f598bb6853",
@@ -159,11 +160,11 @@
           "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
           "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
-          "source": "Benzinga",
+          "source": "benzinga.com",
           "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
-          "score": 66.9,
+          "score": 67,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "1714b76912633a1d",
@@ -173,9 +174,81 @@
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNYkFXYjBmVDlURFczY1gtRkhYSTl2b1lVVnVaYkJaMjAwS0VQUnlobTRvMDFrSDZ3M0ZwcXhvMjU0LVVNUnJYcjYwZ2NENktCcFdsbzgyaFF3MnlBM29WM25KbUMzbUVDZHpQVEhoWTlnNXNUSnFfTEU5YlBJdnNxeTFXUEcxTm9qa3Jtc09CZ2dsbDRKdmNJN1AwZWx0LVdGZk5TMzc0Vzl6cVhOV05KMHVkR3M3NTQ?oc=5",
           "source": "USA Today",
           "publishedAt": "Fri, 04 Sep 2026 07:02:00 GMT",
-          "score": 61.5,
+          "score": 61.6,
           "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "5008f6cdd374df64",
+          "category": "market",
+          "title": "Asian benchmarks trade mixed following rally on Wall Street led by technology issues | National News | 2news.com",
+          "titleZh": "以科技问题为首的华尔街反弹后，亚洲基准交易好坏参半|国家新闻| 2news.com",
+          "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxONEtzWTVoSHpvZG96bjlyRlJ5cTZEekM0SGp3c1dKaDZHdjVqaTFzcVhPUWp3UmVqTXRWU1FSd1AtWWZaWFU3cUlKOTV1MnhsbVJyVTQ1VEZYLTdwaURLY0pNU1JEQzlLMUxCVXVZaFZoR3BnbkF6eGU4T1NhN21PaW5jX2VkU3NLT1VHaE9iQXdHSlJ3NDl3djM0bFpHOW9iZWVLMXVTbXhDa0dlOXh2Y2djU1NLR3VGc2lSeURmbTJuRmNZNXMzZWhveHpBd3hicGMybGlaWFozR2ZKRWd1TlVkSTdLd2dKM0NoYTBPN1VWUFJMdmkzdHVHdVQ?oc=5",
+          "source": "KTVN",
+          "publishedAt": "Fri, 04 Sep 2026 07:01:57 GMT",
+          "score": 58.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "0cd3eedc015c0b93",
+          "category": "market",
+          "title": "Boeing’s $8.4 Billion Deal Is Bleeding Red Ink",
+          "titleZh": "波音84亿$的交易正在流红墨水",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPRVhLZmljTlVQSlhsUXp4OFB6NTNuTDRtS2NQT01oVzlIVFdlbGxPUVRsM2hjNWg5WU5EeTBKT2NVRGxJYVVpQWVnN09oSGRGX2dXU1FmQmpJcG1IdURVMk42UTZPZ094TlVDQnJza3hVV3FXNG9rZUViNXZrWHN3S0RoMldJU1I1YkE?oc=5",
+          "source": "WSJ",
+          "publishedAt": "Fri, 04 Sep 2026 08:01:15 GMT",
+          "score": 55.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "3c90a31ba9e6621e",
+          "category": "market",
+          "title": "Microsoft to Change Reporting Structure to Reflect Effects of AI",
+          "titleZh": "微软将改变报告结构以反映人工智能的影响",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQU3hZTS1LdVBJWUFVdjZ2ZUpUQ1hSMkJJYkRzVmJ5aWZ1UHdscUtrLW1WNzR3eEZBYW9DZFhYWERCaEtYVTZ5VDExelNWZTRzTHRjaTRqX3B3VTNMWjRIRlNVSjdDSEFPU21lRzZmZWh3cXhlVUlmNXZmTnpZc3p0ajZPUjFoNlRNVlAtVmkwdkJiQUgtczJ2MkpSR3FuLXdQZ29v?oc=5",
+          "source": "WSJ",
+          "publishedAt": "Fri, 04 Sep 2026 07:53:05 GMT",
+          "score": 54.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "b2ee8f9659fe46ca",
+          "category": "market",
+          "title": "Kazakhstan Eases Stock Market Access, But Liquidity Remains Key Challenge, Expert Says",
+          "titleZh": "专家表示，哈萨克斯坦放宽股市准入，但流动性仍是关键挑战",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPX3BTaXRSTW41NVV2RU1BUVliMzhXSUVqTHBXTGpRYWRWRzQzUUVIYk4wS0NvdEJBdG5LVThNS1ZuZ1RQeWtyLTNVdl9oNzh6N2trSGQzZkZvdVZ6eDFJZGdHNXhFY1podFQya0xXM3RudUlhUk9yMjZBclUxQ2RHQUc0UkluZDM3VmxUcEpSRFB0ZUFfa1R3ZEdsMTJNaTFyTmZibFRvZS03Mm40clh5eUYycG5ReUh6?oc=5",
+          "source": "The Astana Times",
+          "publishedAt": "Fri, 04 Sep 2026 05:03:45 GMT",
+          "score": 54.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "5e1704dd8321edbe",
+          "category": "market",
+          "title": "Nasdaq buys Dasseti to expand eVestment analytics",
+          "titleZh": "纳斯达克收购Dasseti以扩展eVestment分析",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOM2djaXQyMEs1Snozdm95bWVzaWQtbHJVV2F5dHNhRnpPZDFmbElxc3piYlJPSVpjVnp6QmRIbHFzQzEzOWt2cG00YnRBZDVUWmZFWjBFdVRSSHFzMktGeERmQXgxLTE1VmhoWjRubUFHblh5dF9wdmlpQTh0YWhWWFNRZEV2SGJmQXozanpraDNWWkE?oc=5",
+          "source": "FinTech Futures",
+          "publishedAt": "Fri, 04 Sep 2026 08:07:04 GMT",
+          "score": 54,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
+        },
+        {
+          "id": "46e584e4f964f7bf",
+          "category": "market",
+          "title": "Asian benchmarks mostly rise after tech stocks lead rally on Wall Street",
+          "titleZh": "在科技股引领华尔街反弹后，亚洲基准指数大部分上涨",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUUVkR3FCUUJLVDZkWHBnM2tRVEtzNVJ4M0FLckU0QmQ2T2NZMW5vV0JES3dmOUhDazV2RXFOcjVSVkppYmoybGZubldTQ09CNFNOZnN4ajZKcG9BMjVsSnhKa0xEbUFEWHBXTTE0YmR3dUtsMTZhcS11WWpndjVmRmpLd2VWamNxaUp1LVlJd2d1dk5JRzJ6Q1pTeW1WRGNqT2VJLVVaV0UtUlFiSlA3bkNuNW4?oc=5",
+          "source": "WSLS",
+          "publishedAt": "Fri, 04 Sep 2026 03:24:16 GMT",
+          "score": 53.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T08:29:58.717Z"
         },
         {
           "id": "fb16f816208ff2d8",
@@ -214,42 +287,6 @@
           "pushedAt": "2026-09-04T08:18:49.346Z"
         },
         {
-          "id": "5008f6cdd374df64",
-          "category": "market",
-          "title": "Asian benchmarks trade mixed following rally on Wall Street led by technology issues | National News | 2news.com",
-          "titleZh": "以科技问题为首的华尔街反弹后，亚洲基准交易好坏参半|国家新闻| 2news.com",
-          "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxONEtzWTVoSHpvZG96bjlyRlJ5cTZEekM0SGp3c1dKaDZHdjVqaTFzcVhPUWp3UmVqTXRWU1FSd1AtWWZaWFU3cUlKOTV1MnhsbVJyVTQ1VEZYLTdwaURLY0pNU1JEQzlLMUxCVXVZaFZoR3BnbkF6eGU4T1NhN21PaW5jX2VkU3NLT1VHaE9iQXdHSlJ3NDl3djM0bFpHOW9iZWVLMXVTbXhDa0dlOXh2Y2djU1NLR3VGc2lSeURmbTJuRmNZNXMzZWhveHpBd3hicGMybGlaWFozR2ZKRWd1TlVkSTdLd2dKM0NoYTBPN1VWUFJMdmkzdHVHdVQ?oc=5",
-          "source": "KTVN",
-          "publishedAt": "Fri, 04 Sep 2026 07:01:57 GMT",
-          "score": 58.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
-          "id": "0cd3eedc015c0b93",
-          "category": "market",
-          "title": "Boeing’s $8.4 Billion Deal Is Bleeding Red Ink",
-          "titleZh": "波音84亿$的交易正在流红墨水",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPRVhLZmljTlVQSlhsUXp4OFB6NTNuTDRtS2NQT01oVzlIVFdlbGxPUVRsM2hjNWg5WU5EeTBKT2NVRGxJYVVpQWVnN09oSGRGX2dXU1FmQmpJcG1IdURVMk42UTZPZ094TlVDQnJza3hVV3FXNG9rZUViNXZrWHN3S0RoMldJU1I1YkE?oc=5",
-          "source": "WSJ",
-          "publishedAt": "Fri, 04 Sep 2026 08:01:15 GMT",
-          "score": 55.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
-          "id": "3c90a31ba9e6621e",
-          "category": "market",
-          "title": "Microsoft to Change Reporting Structure to Reflect Effects of AI",
-          "titleZh": "微软将改变报告结构以反映人工智能的影响",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQU3hZTS1LdVBJWUFVdjZ2ZUpUQ1hSMkJJYkRzVmJ5aWZ1UHdscUtrLW1WNzR3eEZBYW9DZFhYWERCaEtYVTZ5VDExelNWZTRzTHRjaTRqX3B3VTNMWjRIRlNVSjdDSEFPU21lRzZmZWh3cXhlVUlmNXZmTnpZc3p0ajZPUjFoNlRNVlAtVmkwdkJiQUgtczJ2MkpSR3FuLXdQZ29v?oc=5",
-          "source": "WSJ",
-          "publishedAt": "Fri, 04 Sep 2026 07:53:05 GMT",
-          "score": 54.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T08:18:49.346Z"
-        },
-        {
           "id": "7543f6d0a3bb2cfc",
           "category": "market",
           "title": "Asian benchmarks mostly rise after tech stocks lead rally on Wall Street",
@@ -270,18 +307,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 00:23:00 GMT",
           "score": 59.6,
-          "engagement": "",
-          "pushedAt": "2026-09-04T07:33:26.498Z"
-        },
-        {
-          "id": "b2ee8f9659fe46ca",
-          "category": "market",
-          "title": "Kazakhstan Eases Stock Market Access, But Liquidity Remains Key Challenge, Expert Says",
-          "titleZh": "专家表示，哈萨克斯坦放宽股市准入，但流动性仍是关键挑战",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPX3BTaXRSTW41NVV2RU1BUVliMzhXSUVqTHBXTGpRYWRWRzQzUUVIYk4wS0NvdEJBdG5LVThNS1ZuZ1RQeWtyLTNVdl9oNzh6N2trSGQzZkZvdVZ6eDFJZGdHNXhFY1podFQya0xXM3RudUlhUk9yMjZBclUxQ2RHQUc0UkluZDM3VmxUcEpSRFB0ZUFfa1R3ZEdsMTJNaTFyTmZibFRvZS03Mm40clh5eUYycG5ReUh6?oc=5",
-          "source": "The Astana Times",
-          "publishedAt": "Fri, 04 Sep 2026 05:03:45 GMT",
-          "score": 56.7,
           "engagement": "",
           "pushedAt": "2026-09-04T07:33:26.498Z"
         },
