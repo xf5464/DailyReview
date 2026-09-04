@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T17:30:44.513Z",
+  "updatedAt": "2026-09-04T18:00:50.843Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T18:00:50.843Z",
         "2026-09-04T17:30:44.513Z",
         "2026-09-04T17:00:52.047Z",
         "2026-09-04T16:40:05.816Z",
@@ -22,9 +23,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 154.7,
-          "engagement": "2067 points · 1885 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 154.3,
+          "engagement": "2081 points · 1894 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -34,9 +35,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 154.2,
-          "engagement": "908 points · 709 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 155.5,
+          "engagement": "985 points · 780 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -46,9 +47,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 144.4,
-          "engagement": "2093 points · 516 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 144.5,
+          "engagement": "2105 points · 520 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -59,8 +60,8 @@
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
           "score": 132,
-          "engagement": "489 points · 201 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "engagement": "496 points · 209 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "45a86641ba677818",
@@ -70,9 +71,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 124.2,
-          "engagement": "657 points · 218 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 123.7,
+          "engagement": "660 points · 218 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "debf643f0294e072",
@@ -84,7 +85,7 @@
           "publishedAt": "2026-09-03T14:51:10.000Z",
           "score": 124.9,
           "engagement": "627 points · 304 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "656e675460d44f88",
@@ -94,9 +95,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 121.5,
-          "engagement": "290 points · 73 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 121.8,
+          "engagement": "308 points · 73 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -106,9 +107,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 121.4,
-          "engagement": "299 points · 54 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 121.9,
+          "engagement": "310 points · 58 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "f0e41de37211bf37",
@@ -118,9 +119,9 @@
           "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
           "source": "arstechnica.com",
           "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 117.9,
-          "engagement": "138 points · 121 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 118.4,
+          "engagement": "146 points · 125 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "f97132099316cf1a",
@@ -131,9 +132,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 71.4,
+          "score": 70.6,
           "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "438f58c44a2f2399",
@@ -144,9 +145,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 15:39:00 GMT",
-          "score": 64.8,
+          "score": 63.7,
           "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "fb4815673485f329",
@@ -157,9 +158,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 67.3,
+          "score": 66.2,
           "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "ffe246597ac60595",
@@ -170,9 +171,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
           "source": "Reuters",
           "publishedAt": "Fri, 04 Sep 2026 16:25:46 GMT",
-          "score": 77.9,
+          "score": 77.4,
           "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "b24297b71d7302b5",
@@ -183,9 +184,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 69.2,
+          "score": 69,
           "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "85054bb548fd17e8",
@@ -195,9 +196,74 @@
           "url": "https://support.google.com/mail/answer/22370?hl=en",
           "source": "support.google.com",
           "publishedAt": "2026-09-04T15:03:03.000Z",
-          "score": 118.4,
-          "engagement": "134 points · 99 comments",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
+          "score": 119.8,
+          "engagement": "146 points · 110 comments",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
+        },
+        {
+          "id": "3c9b32035b337714",
+          "category": "market",
+          "title": "Intuitive Surgical Vs. Stryker: Wall Street Loves Both But One Has a Quiet Advantage That Will Make Investors Money",
+          "titleZh": "直觉手术vs.史赛克：华尔街两者都喜欢，但一个人有一个安静的优势，可以让投资者赚钱",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/intuitive-surgical-vs-stryker-wall-144542715.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYkZBaDg0WjFpSWt6T19PcEl1Uk0tZktYRDdqRGdPbERMVGUyMW1hQW5Ud2xwWWdrdjlUY1p3NHd4QjRLOTgxMnVGOU13a0Nnd05jY2oyRmhrRjg4Q3FobG8tUFFSTXJMZ0djRnVBZFQyaXJFT3ZwWUZ3R051S2t2aTc0OHF3ejBSQ1U1OWJBWU9aX21VQmVKNWRtRVVYN3E4?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 14:45:42 GMT",
+          "score": 62,
+          "engagement": "",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
+        },
+        {
+          "id": "357919a940137f1c",
+          "category": "market",
+          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
+          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
+          "score": 67.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
+        },
+        {
+          "id": "3ca4134a5daf537e",
+          "category": "market",
+          "title": "HVAC and Water Systems Stocks Q2 Earnings: AAON (NASDAQ:AAON) Best of the Bunch",
+          "titleZh": "暖通空调和水系统股票第二季度收益： AAON （纳斯达克股票代码： AAON ）同类最佳",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/hvac-water-systems-stocks-q2-165410011.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWE1xc1FPbGp5NVdVc093RF9YZjNjNzhBekZ4M21fQkprVjBHM2w2enRrcURmcDZ1c2VMWlgtdVFWRGFnYm1ueFpSUEtvSnc3Ym9ObTlsUTM1TWRBU1FVWVBjTGdSMV92Q0dMZ2dSNXF4aTVGNDNiU3Y5Z1kyZ2dYUUZfdWItOUZpQ0FueVRiTWhqZTFLMTJFTg?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:54:10 GMT",
+          "score": 64.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
+        },
+        {
+          "id": "3a207dc7bb12f105",
+          "category": "market",
+          "title": "Q2 Rundown: FirstSun Capital Bancorp (NASDAQ:FSUN) Vs Other Regional Banks Stocks",
+          "titleZh": "第二季度概况： FirstSun Capital Bancorp （纳斯达克股票代码： FSUN ）与其他区域性银行股票",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/q2-rundown-firstsun-capital-bancorp-163010669.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZzhWSFdDRkpjS19oOTk5RGZzOE96SHJWZHF0MDhqdmR2TXRkVUlHU2V0VTNYdU40RWUzOUFaSlVSYjdCUHZLNmVsbTA2N2hRbWlRMU5kVGxkNnEzSnl1c0hGa0hRMkhCS091c1UtMGhoZG9rQWdBUWl3RXZPaXJhU1k4anBacnpOWkxVTGZFTWtNaTg1T3pqcUJrTFdTTlV0bFE?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 16:30:10 GMT",
+          "score": 62.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
+        },
+        {
+          "id": "ef42487a6b629ef2",
+          "category": "market",
+          "title": "Tesla's stock drops as Cybercab update 'underwhelms' Wall Street",
+          "titleZh": "随着Cybercab的更新“压倒”华尔街，特斯拉的股票下跌",
+          "url": "https://www.cnbc.com/2026/09/04/teslas-stock-drops-as-cybercab-update-underwhelms-nhtsa-probe.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR0t5RzhPYWdIZ3hPSzBuN2dVTGdnRFhrUzRBd2RLM1NHUXNvUFlTWjYzdXE2UzlGc3lETkM5Tm9FMDFhOGJNSnVudnZqYXNmdG9NaWl3T1NwcjhkVWcxZ3pROGxmbXZSMFBGODVURzJNV0h6Nm1hRFdhNENmUTlZelFQZnRSTm9iZDhGc190WlBYdmRvTTVVUGNKOEhLVVXSAaQBQVVfeXFMT1FHblZwckdBTVFmY1BSSklTdW9ZdGw4RmNheHRRTFphZkVZZWRjdGd2LVpXU1NzZ0N6Yi1HVFdYWW1rWk11Z0htRDBIcGdqbk5fVXVncC0wTGZqcXdsUW04cVNvUnBwRmhhODFTTEtkUjlScW5Vc0p3SmpHNnBZQ2RuUVBNek1hc3lKVVFTMFkyOUdEdHZBOWJrVVFTS0JETlR5Ni0?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 17:33:08 GMT",
+          "score": 64.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T18:00:50.843Z"
         },
         {
           "id": "87487ca0e0846db5",
@@ -209,58 +275,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
           "score": 62.5,
-          "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
-        },
-        {
-          "id": "3c9b32035b337714",
-          "category": "market",
-          "title": "Intuitive Surgical Vs. Stryker: Wall Street Loves Both But One Has a Quiet Advantage That Will Make Investors Money",
-          "titleZh": "直觉手术vs.史赛克：华尔街两者都喜欢，但一个人有一个安静的优势，可以让投资者赚钱",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/intuitive-surgical-vs-stryker-wall-144542715.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYkZBaDg0WjFpSWt6T19PcEl1Uk0tZktYRDdqRGdPbERMVGUyMW1hQW5Ud2xwWWdrdjlUY1p3NHd4QjRLOTgxMnVGOU13a0Nnd05jY2oyRmhrRjg4Q3FobG8tUFFSTXJMZ0djRnVBZFQyaXJFT3ZwWUZ3R051S2t2aTc0OHF3ejBSQ1U1OWJBWU9aX21VQmVKNWRtRVVYN3E4?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 14:45:42 GMT",
-          "score": 62.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
-        },
-        {
-          "id": "357919a940137f1c",
-          "category": "market",
-          "title": "Stock Market Midday, Sept. 4: Stocks Edge Lower on Strong Jobs Report as Lululemon Plummets",
-          "titleZh": "9月中午股市 4 ： Lululemon暴跌导致强劲工作报告的股票边缘下跌",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-midday-sept-4-163537251.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOa0NxNTFQQVFKRmQtRmp0dV9JYk1QRDc3eWh0Ri11WTBRemRrWnkxcnR5MFp1N3dGUERJam15XzFLZkpjSUJqVFZwR1dfZTBiRUp0QnUyVmpkOVlTWEg5TGJSTS1lcTMydm9acThmTVNzemtYRjBrVWx0bWVJUVVucmtPekt5T3V0V0RPYjJ6Qml1QnhDY3c?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 16:35:37 GMT",
-          "score": 68,
-          "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
-        },
-        {
-          "id": "3ca4134a5daf537e",
-          "category": "market",
-          "title": "HVAC and Water Systems Stocks Q2 Earnings: AAON (NASDAQ:AAON) Best of the Bunch",
-          "titleZh": "暖通空调和水系统股票第二季度收益： AAON （纳斯达克股票代码： AAON ）同类最佳",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/hvac-water-systems-stocks-q2-165410011.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWE1xc1FPbGp5NVdVc093RF9YZjNjNzhBekZ4M21fQkprVjBHM2w2enRrcURmcDZ1c2VMWlgtdVFWRGFnYm1ueFpSUEtvSnc3Ym9ObTlsUTM1TWRBU1FVWVBjTGdSMV92Q0dMZ2dSNXF4aTVGNDNiU3Y5Z1kyZ2dYUUZfdWItOUZpQ0FueVRiTWhqZTFLMTJFTg?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 16:54:10 GMT",
-          "score": 65.3,
-          "engagement": "",
-          "pushedAt": "2026-09-04T17:30:44.513Z"
-        },
-        {
-          "id": "3a207dc7bb12f105",
-          "category": "market",
-          "title": "Q2 Rundown: FirstSun Capital Bancorp (NASDAQ:FSUN) Vs Other Regional Banks Stocks",
-          "titleZh": "第二季度概况： FirstSun Capital Bancorp （纳斯达克股票代码： FSUN ）与其他区域性银行股票",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/q2-rundown-firstsun-capital-bancorp-163010669.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZzhWSFdDRkpjS19oOTk5RGZzOE96SHJWZHF0MDhqdmR2TXRkVUlHU2V0VTNYdU40RWUzOUFaSlVSYjdCUHZLNmVsbTA2N2hRbWlRMU5kVGxkNnEzSnl1c0hGa0hRMkhCS091c1UtMGhoZG9rQWdBUWl3RXZPaXJhU1k4anBacnpOWkxVTGZFTWtNaTg1T3pqcUJrTFdTTlV0bFE?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 16:30:10 GMT",
-          "score": 64,
           "engagement": "",
           "pushedAt": "2026-09-04T17:30:44.513Z"
         },
