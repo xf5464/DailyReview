@@ -94,7 +94,14 @@ function categoryLabel(category) {
   return category === 'market' ? '美股' : '科技';
 }
 
+function safariShortcutUrl(url) {
+  return `shortcuts://run-shortcut?name=${encodeURIComponent('DailyReview Safari')}&input=text&text=${encodeURIComponent(url)}`;
+}
+
 function itemButton(item, rank) {
+  const row = document.createElement('div');
+  row.className = 'news-row';
+
   const button = document.createElement('a');
   button.className = 'news-item';
   button.href = item.url;
@@ -117,7 +124,15 @@ function itemButton(item, rank) {
   category.className = 'category';
   category.textContent = categoryLabel(item.category);
   button.append(number, copy, category);
-  return button;
+
+  const safari = document.createElement('a');
+  safari.className = 'safari-link';
+  safari.href = safariShortcutUrl(item.url);
+  safari.textContent = 'Safari';
+  safari.setAttribute('aria-label', `使用 Safari 打开：${translated.textContent}`);
+
+  row.append(button, safari);
+  return row;
 }
 
 function renderArchive(value, fromCache = false) {

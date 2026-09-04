@@ -51,13 +51,22 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .day-toggle[aria-expanded="false"] .day-caret { transform: rotate(-90deg); }
 .day-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .news-list { list-style: none; margin: 0; padding: 0; }
+.news-row {
+  display: flex; align-items: stretch; border-bottom: 1px solid rgba(128, 119, 101, .13);
+}
 .news-item {
-  display: grid; grid-template-columns: 26px 1fr auto; gap: 11px; width: 100%;
-  padding: 17px 19px; border: 0; border-bottom: 1px solid rgba(128, 119, 101, .13);
+  display: grid; flex: 1; grid-template-columns: 26px 1fr auto; gap: 11px; min-width: 0;
+  padding: 17px 12px 17px 19px; border: 0;
   color: var(--ink); background: transparent; text-align: left; text-decoration: none; cursor: pointer;
 }
-.news-list li:last-child .news-item { border-bottom: 0; }
+.news-list li:last-child .news-row { border-bottom: 0; }
 .news-item:active { background: rgba(23, 92, 211, .06); }
+.safari-link {
+  display: flex; align-items: center; justify-content: center; width: 66px; padding: 10px 8px;
+  border-left: 1px solid rgba(128, 119, 101, .13); color: var(--blue); background: rgba(237, 243, 255, .45);
+  font-size: 12px; font-weight: 760; text-decoration: none;
+}
+.safari-link:active { background: rgba(23, 92, 211, .12); }
 .rank { padding-top: 2px; color: var(--blue); font-size: 13px; font-weight: 760; }
 .news-title { display: block; font-family: ui-serif, "Songti SC", STSong, serif; font-size: 18px; font-weight: 700; line-height: 1.45; }
 .news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
