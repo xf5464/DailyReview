@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T16:40:05.816Z",
+  "updatedAt": "2026-09-04T17:00:52.047Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T17:00:52.047Z",
         "2026-09-04T16:40:05.816Z",
         "2026-09-04T16:37:03.292Z",
         "2026-09-04T16:30:50.302Z",
@@ -20,9 +21,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 155.2,
-          "engagement": "2034 points · 1858 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 155,
+          "engagement": "2044 points · 1871 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -32,9 +33,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 150.9,
-          "engagement": "768 points · 537 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 151.8,
+          "engagement": "820 points · 570 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -44,21 +45,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 144.1,
-          "engagement": "2070 points · 508 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
-        },
-        {
-          "id": "b9197b873957814a",
-          "category": "tech",
-          "title": "Audacity 4.0",
-          "titleZh": "Audacity 4.0",
-          "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
-          "source": "github.com",
-          "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 131.4,
-          "engagement": "1124 points · 261 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 144.2,
+          "engagement": "2081 points · 512 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -68,9 +57,9 @@
           "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 131.7,
-          "engagement": "462 points · 191 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 132,
+          "engagement": "476 points · 197 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "45a86641ba677818",
@@ -80,9 +69,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 124.7,
-          "engagement": "652 points · 212 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 124.5,
+          "engagement": "653 points · 215 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "debf643f0294e072",
@@ -94,7 +83,7 @@
           "publishedAt": "2026-09-03T14:51:10.000Z",
           "score": 124.9,
           "engagement": "626 points · 303 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "656e675460d44f88",
@@ -104,9 +93,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 120.7,
-          "engagement": "266 points · 68 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 121.3,
+          "engagement": "280 points · 71 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -116,9 +105,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 120.9,
-          "engagement": "277 points · 51 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 121.3,
+          "engagement": "287 points · 53 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "f0e41de37211bf37",
@@ -128,9 +117,9 @@
           "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
           "source": "arstechnica.com",
           "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 115.8,
-          "engagement": "121 points · 101 comments",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "score": 116.2,
+          "engagement": "124 points · 107 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "f97132099316cf1a",
@@ -141,9 +130,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 72.2,
+          "score": 71.9,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "438f58c44a2f2399",
@@ -154,9 +143,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 15:39:00 GMT",
-          "score": 69,
+          "score": 66.2,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
+          "pushedAt": "2026-09-04T17:00:52.047Z"
         },
         {
           "id": "fb4815673485f329",
@@ -167,8 +156,123 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
           "source": "finance.yahoo.com",
           "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 62.3,
+          "score": 61.4,
           "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "ffe246597ac60595",
+          "category": "market",
+          "title": "Wall St slides after strong jobs report bolsters hawkish Fed bets",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Fri, 04 Sep 2026 16:25:46 GMT",
+          "score": 78.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "e6d513961aa3a32c",
+          "category": "market",
+          "title": "Health-tracking smart ring maker Oura to list on US stock market",
+          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
+          "url": "https://www.theguardian.com/business/2026/sep/04/health-tracking-smart-ring-maker-oura-to-list-on-us-stock-market",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
+          "source": "The Guardian",
+          "publishedAt": "Fri, 04 Sep 2026 14:24:00 GMT",
+          "score": 61.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "c4103a5565630a62",
+          "category": "market",
+          "title": "Wall Street September October Historical Market Risks",
+          "titleZh": "华尔街9月10月历史市场风险",
+          "url": "https://www.fundssociety.com/en/news/markets/two-months-five-crashes-and-a-warning-wall-street-looks-to-the-past-and-enters-risk-territory/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
+          "source": "Funds Society",
+          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
+          "score": 59.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "b24297b71d7302b5",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 70,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "85054bb548fd17e8",
+          "category": "tech",
+          "title": "Gmail to end support for \"Send as\" for third-party addresses, such as @yahoo.com",
+          "titleZh": "Gmail将终止对第三方地址（如@ yahoo.com ）的“发送方式”支持",
+          "url": "https://support.google.com/mail/answer/22370?hl=en",
+          "source": "support.google.com",
+          "publishedAt": "2026-09-04T15:03:03.000Z",
+          "score": 116.8,
+          "engagement": "117 points · 93 comments",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "3c2829698ba30b52",
+          "category": "market",
+          "title": "Stocks making the biggest moves midday: Sandisk, Tesla, Lululemon, Quanex, AMC & more",
+          "titleZh": "中午股市走势最大： Sandisk、Tesla、Lululemon、Quanex、AMC等",
+          "url": "https://www.cnbc.com/2026/09/04/stocks-making-the-biggest-moves-midday-sndk-tsla-nx-amc.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOWFFSRTlNWEpJZGFYVC1McjEwRnFuYk9DaUNDWXJIel9LU2Ffallrd0RsaHNkMDVfXzJidDNtX3V4OFI0dkFqaG5wMjhZUTRDcGp2TjVONlNYci1Kdkg3OU5EQnFON3JMMmp0d0JNWHVxemlHMDZBcnJFU2JEYjFhWVVsd2lYMnN6U2t2bUd3R1k0UFlsVlBR?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 15:57:27 GMT",
+          "score": 60.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "0aaff6f60a8af69b",
+          "category": "market",
+          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
+          "titleZh": "标准普尔500指数，就业报告推动加息押注后道琼斯指数下滑",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-p-500-futures-climb-090500873.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQYS1VeGVVNGlUSEVHX2luNjFkSHVnam9BRmwxYUhHakhuZ0ljbDAxeklCeG1BSVZuNERDbDJKMjlDcWpxRGYwX3ZsNHdnVjFpdkxWNHd0YWF6TjRHNjk1dmNmdDcwNDBRZlpDMl9RR2JzV2VnS2xhbXhCMThpZXVjczlGcHJ6M295MkpXaXBkdGR3X1A2WkE?oc=5",
+          "source": "finance.yahoo.com",
+          "publishedAt": "Fri, 04 Sep 2026 14:19:59 GMT",
+          "score": 57.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "7cc71cc5efb6107a",
+          "category": "market",
+          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
+          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
+          "url": "https://www.cnbc.com/2026/09/04/shein-ipo-fast-fashion-temu-competition.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
+          "score": 57.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T17:00:52.047Z"
+        },
+        {
+          "id": "b9197b873957814a",
+          "category": "tech",
+          "title": "Audacity 4.0",
+          "titleZh": "Audacity 4.0",
+          "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
+          "source": "github.com",
+          "publishedAt": "2026-09-03T10:53:08.000Z",
+          "score": 131.4,
+          "engagement": "1124 points · 261 comments",
           "pushedAt": "2026-09-04T16:40:05.816Z"
         },
         {
@@ -198,45 +302,6 @@
           "pushedAt": "2026-09-04T16:40:05.816Z"
         },
         {
-          "id": "ffe246597ac60595",
-          "category": "market",
-          "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
-          "score": 79.7,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
-        },
-        {
-          "id": "e6d513961aa3a32c",
-          "category": "market",
-          "title": "Health-tracking smart ring maker Oura to list on US stock market",
-          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
-          "url": "https://www.theguardian.com/business/2026/sep/04/health-tracking-smart-ring-maker-oura-to-list-on-us-stock-market",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
-          "source": "The Guardian",
-          "publishedAt": "Fri, 04 Sep 2026 14:24:00 GMT",
-          "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
-        },
-        {
-          "id": "c4103a5565630a62",
-          "category": "market",
-          "title": "Wall Street September October Historical Market Risks",
-          "titleZh": "华尔街9月10月历史市场风险",
-          "url": "https://www.fundssociety.com/en/news/markets/two-months-five-crashes-and-a-warning-wall-street-looks-to-the-past-and-enters-risk-territory/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
-          "source": "Funds Society",
-          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
-          "score": 59.9,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
-        },
-        {
           "id": "f210a4a14a0e2331",
           "category": "market",
           "title": "Wall Street Slides After Strong Jobs Report Bolsters Hawkish Fed Bets",
@@ -246,19 +311,6 @@
           "source": "GV Wire",
           "publishedAt": "Fri, 04 Sep 2026 16:35:08 GMT",
           "score": 59.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T16:40:05.816Z"
-        },
-        {
-          "id": "b24297b71d7302b5",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "cnbc.com",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 56.8,
           "engagement": "",
           "pushedAt": "2026-09-04T16:40:05.816Z"
         },
