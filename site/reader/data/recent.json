@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T16:17:43.844Z",
+  "updatedAt": "2026-09-04T16:30:50.302Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-04T16:30:50.302Z",
         "2026-09-04T16:17:43.844Z",
         "2026-09-04T16:00:43.675Z"
       ],
@@ -17,9 +18,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 155.5,
-          "engagement": "2024 points · 1846 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 155.3,
+          "engagement": "2028 points · 1854 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "6d216f06400d8d58",
@@ -29,9 +30,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 149.7,
-          "engagement": "713 points · 495 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 150.4,
+          "engagement": "743 points · 523 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -42,8 +43,8 @@
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
           "score": 144.1,
-          "engagement": "2067 points · 507 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "engagement": "2068 points · 507 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "b9197b873957814a",
@@ -53,9 +54,9 @@
           "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 131.3,
-          "engagement": "1124 points · 259 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 131.4,
+          "engagement": "1124 points · 261 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "e98d37e7a1b8d4a1",
@@ -65,9 +66,9 @@
           "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
           "source": "techdirt.com",
           "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 131.5,
-          "engagement": "447 points · 185 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 131.6,
+          "engagement": "455 points · 188 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "45a86641ba677818",
@@ -77,9 +78,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 124.9,
-          "engagement": "645 points · 211 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 124.8,
+          "engagement": "649 points · 211 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "debf643f0294e072",
@@ -89,9 +90,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 124.8,
-          "engagement": "626 points · 301 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 124.9,
+          "engagement": "626 points · 303 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "656e675460d44f88",
@@ -101,9 +102,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 120,
-          "engagement": "253 points · 64 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 120.4,
+          "engagement": "261 points · 66 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "d26be4db00d9b182",
@@ -113,9 +114,9 @@
           "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products",
           "source": "productrise.app",
           "publishedAt": "2026-09-04T11:59:15.000Z",
-          "score": 118.9,
-          "engagement": "253 points · 43 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 120.4,
+          "engagement": "266 points · 50 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "327871d4a29576d0",
@@ -123,11 +124,11 @@
           "title": "S&P 500, Dow slide after jobs report fuels rate-hike bets",
           "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
+          "source": "reuters.com",
           "publishedAt": "Fri, 04 Sep 2026 14:20:29 GMT",
-          "score": 80,
+          "score": 61.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "2df93ea7c97d6d38",
@@ -137,9 +138,9 @@
           "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
-          "score": 72.6,
+          "score": 72.4,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "8cecb3d9bc5d5fe7",
@@ -147,11 +148,11 @@
           "title": "Here are our top 10 things to watch in the stock market Friday",
           "titleZh": "以下是我们周五股市值得关注的10件事",
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "cnbc.com",
+          "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 58.1,
+          "score": 70.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "a6f507fd27a6a586",
@@ -161,9 +162,9 @@
           "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 15:39:00 GMT",
-          "score": 68.2,
+          "score": 68.8,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "59d602dc0f1f49e8",
@@ -173,9 +174,9 @@
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
           "source": "The Guardian",
           "publishedAt": "Fri, 04 Sep 2026 14:24:00 GMT",
-          "score": 61.8,
+          "score": 61.6,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "98090b0a5a391971",
@@ -183,11 +184,11 @@
           "title": "Hardware & Infrastructure Stocks Q2 Teardown: Super Micro (NASDAQ:SMCI) Vs The Rest",
           "titleZh": "硬件及基础设施股票第二季度拆解分析：超微（NASDAQ:SMCI）与其他公司的对比",
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNQTFEalQydnpJdDdLUHE5X2M0WkdVZUNCNHA1X1NZSUdGMGNTWWZYZGRkLUNjYWxmZVlKdUFnNWREdFpuTU14NFZLUEdDVi1qWldUNHExZlhvSG9Fd2FBNTVpenpiMGx0bTg2T3R6N0daMmFhN0V0QUZFVWFnRlZWd25EeloxOU5jcTBVYTFwQkh5eGNDU2dlX09UX21sQWFrRHdPaHFUdFNIeEE?oc=5",
-          "source": "finance.yahoo.com",
+          "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 15:18:10 GMT",
-          "score": 59.4,
+          "score": 68,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "af21ac2edf73e636",
@@ -197,9 +198,9 @@
           "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
           "source": "Funds Society",
           "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
-          "score": 60.3,
+          "score": 60.1,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "1395508a6b3d4792",
@@ -207,11 +208,11 @@
           "title": "Intuitive Surgical Vs. Stryker: Wall Street Loves Both But One Has a Quiet Advantage That Will Make Investors Money",
           "titleZh": "直觉手术vs.史赛克：华尔街两者都喜欢，但一个人有一个安静的优势，可以让投资者赚钱",
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYkZBaDg0WjFpSWt6T19PcEl1Uk0tZktYRDdqRGdPbERMVGUyMW1hQW5Ud2xwWWdrdjlUY1p3NHd4QjRLOTgxMnVGOU13a0Nnd05jY2oyRmhrRjg4Q3FobG8tUFFSTXJMZ0djRnVBZFQyaXJFT3ZwWUZ3R051S2t2aTc0OHF3ejBSQ1U1OWJBWU9aX21VQmVKNWRtRVVYN3E4?oc=5",
-          "source": "finance.yahoo.com",
+          "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 14:45:42 GMT",
-          "score": 57.4,
+          "score": 64.1,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "3774e1e2f32f32f0",
@@ -219,11 +220,11 @@
           "title": "UiPath downgraded, Shell upgraded: Wall Street's top analyst calls",
           "titleZh": "UiPath降级，壳牌升级：华尔街顶级分析师致电",
           "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
-          "source": "finance.yahoo.com",
+          "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
-          "score": 57,
+          "score": 64.1,
           "engagement": "",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "f0e41de37211bf37",
@@ -233,9 +234,21 @@
           "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
           "source": "arstechnica.com",
           "publishedAt": "2026-09-04T12:43:49.000Z",
-          "score": 115,
-          "engagement": "114 points · 96 comments",
-          "pushedAt": "2026-09-04T16:17:43.844Z"
+          "score": 115.6,
+          "engagement": "118 points · 101 comments",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
+        },
+        {
+          "id": "031531bde2ad3281",
+          "category": "market",
+          "title": "The Nasdaq’s Biggest Winner Was a Bitcoin Stock That Is Still Down 56% in a Year",
+          "titleZh": "纳斯达克最大的赢家是比特币股票，该股票在一年内仍下跌56%",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 12:18:58 GMT",
+          "score": 61.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T16:30:50.302Z"
         },
         {
           "id": "6d096478faab7d5d",
