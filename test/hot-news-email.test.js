@@ -1,5 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
 
 const {
   environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
@@ -112,4 +113,20 @@ test("reuses an archived Google News mapping without another network request", a
   assert.equal(result.resolvedCount, 1);
   assert.equal(result.items[0].url, directUrl);
   assert.equal(result.items[0].googleNewsUrl, googleUrl);
+});
+
+
+test("keeps the four DailyReview runs disconnected from hot-news collection", () => {
+  const workflow = fs.readFileSync(".github/workflows/send-hot-news.yml", "utf8");
+  assert.doesNotMatch(workflow, /workflow_run:/);
+  const cron = fs.readFileSync("cloudflare/dailyreview-cron-hot-news.js", "utf8");
+  assert.match(cron, /"refresh-reader\.yml"/);
+  assert.doesNotMatch(cron, /"send-hot-news\.yml"/);
+  assert.match(cron, /event\.cron !== READER_REFRESH_CRON/);
+});
+
+test("keeps reader publication free of Gmail configuration", () => {
+  const workflow = fs.readFileSync(".github/workflows/refresh-reader.yml", "utf8");
+  assert.match(workflow, /HOT_NEWS_REFRESH_ONLY: "true"/);
+  assert.doesNotMatch(workflow, /GMAIL_USERNAME|GMAIL_APP_PASSWORD|ALERT_EMAIL_TO/);
 });
