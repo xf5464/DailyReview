@@ -82,6 +82,21 @@ function categoryLabel(category) {
   return category === 'market' ? '美股' : '科技';
 }
 
+function publishedTimeLabel(value) {
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return '时间未知';
+  const time = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).format(date);
+  const dateKey = chinaDate(date);
+  if (dateKey === chinaDate()) return `今天 ${time}`;
+  if (dateKey === chinaDate(Date.now() - 24 * 60 * 60 * 1000)) return `昨天 ${time}`;
+  const day = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai', month: 'numeric', day: 'numeric',
+  }).format(date);
+  return `${day} ${time}`;
+}
+
 function chromeUrl(url) {
   if (url.startsWith('https://')) return `googlechromes://${url.slice(8)}`;
   if (url.startsWith('http://')) return `googlechrome://${url.slice(7)}`;
@@ -108,10 +123,16 @@ function itemButton(item, rank) {
   original.className = 'news-original';
   original.textContent = item.title || '';
   copy.append(translated, original);
+  const details = document.createElement('span');
+  details.className = 'news-details';
   const source = document.createElement('span');
   source.className = 'news-source';
   source.textContent = item.source || '来源未知';
-  button.append(number, copy, source);
+  const published = document.createElement('span');
+  published.className = 'news-time';
+  published.textContent = publishedTimeLabel(item.publishedAt);
+  details.append(source, published);
+  button.append(number, copy, details);
 
   const browser = document.createElement('a');
   browser.className = 'safari-link';
