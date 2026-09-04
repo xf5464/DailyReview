@@ -4,11 +4,6 @@ on:
   push:
     paths:
       - .github/hot-news-trigger
-  workflow_run:
-    workflows:
-      - Deploy Daily Review
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       trigger_source:
