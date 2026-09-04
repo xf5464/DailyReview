@@ -32,7 +32,30 @@ jobs:
         run: |
           curl --fail --silent --show-error --max-time 20 \
             "https://dailyreview-reader.xf5464.workers.dev/" \
-            | grep -q '"status":"ok"'
+            | grep -q '"googleNewsResolver":true'
+
+      - name: Resolve Google News directly to its publisher
+        env:
+          GOOGLE_NEWS_SOURCE: https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWddVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5
+        run: |
+          curl --silent --show-error --max-time 90 --get \
+            --data-urlencode "url=$GOOGLE_NEWS_SOURCE" \
+            --dump-header resolver-headers.txt --output /dev/null \
+            "https://dailyreview-reader.xf5464.workers.dev/open"
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const headers = fs.readFileSync('resolver-headers.txt', 'utf8');
+          const status = headers.match(/^HTTP\/\S+\s+(\d+)/mi)?.[1];
+          const location = headers.match(/^location:\s*(.+)$/mi)?.[1]?.trim();
+          if (status !== '302' || !location) {
+            throw new Error(`Resolver did not return a redirect: ${headers}`);
+          }
+          const host = new URL(location).hostname;
+          if (host === 'news.google.com' || host.endsWith('.news.google.com')) {
+            throw new Error(`Resolver still points to Google News: ${location}`);
+          }
+          console.log(`Google News resolved directly to ${host}: ${location}`);
+          NODE
 
       - name: Translate the test article
         env:
