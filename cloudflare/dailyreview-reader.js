@@ -358,6 +358,7 @@ export default {
       service: "DailyReview Reader",
       status: "ok",
       browserFallback: Boolean(env.BROWSER),
+      googleNewsResolver: true,
     });
   },
 };
