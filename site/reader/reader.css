@@ -23,7 +23,9 @@ button, summary, .news-item { -webkit-tap-highlight-color: transparent; }
   border-bottom: 1px solid rgba(128, 119, 101, .18);
   background: rgba(247, 244, 237, .92); backdrop-filter: blur(16px);
 }
+.brand-group { display: flex; align-items: baseline; gap: 7px; min-width: 0; }
 .brand { color: var(--ink); font-size: 17px; font-weight: 760; text-decoration: none; }
+.version-badge { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .actions { display: flex; gap: 8px; }
 .actions button, .icon-button {
   border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px;

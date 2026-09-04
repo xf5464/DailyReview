@@ -95,7 +95,6 @@ function categoryLabel(category) {
 }
 
 function chromeUrl(url) {
-  if (!/iP(hone|ad|od)/.test(navigator.userAgent)) return url;
   if (url.startsWith('https://')) return `googlechromes://${url.slice(8)}`;
   if (url.startsWith('http://')) return `googlechrome://${url.slice(7)}`;
   return url;
@@ -303,6 +302,13 @@ async function enablePush() {
 }
 
 refs.days.addEventListener('click', (event) => {
+  const externalLink = event.target.closest('.news-item, .safari-link');
+  if (externalLink) {
+    event.preventDefault();
+    location.href = externalLink.getAttribute('href');
+    return;
+  }
+
   const toggle = event.target.closest('.day-toggle');
   if (!toggle) return;
   const list = document.getElementById(toggle.getAttribute('aria-controls'));
