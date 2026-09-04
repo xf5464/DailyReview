@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - .github/hot-news-trigger
-      - .github/hot-news-refresh-trigger
   workflow_run:
     workflows:
       - Deploy Daily Review
@@ -58,21 +57,6 @@ jobs:
         if: steps.gate.outputs.should_send == 'true'
         uses: actions/checkout@v4
 
-      - name: Determine update mode
-        if: steps.gate.outputs.should_send == 'true'
-        id: mode
-        env:
-          DISPATCH_REFRESH_ONLY: ${{ inputs.refresh_only || 'false' }}
-        run: |
-          refresh_only="$DISPATCH_REFRESH_ONLY"
-          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            changed_files="$(jq -r '.commits[]? | (.added[]?, .modified[]?, .removed[]?)' "$GITHUB_EVENT_PATH")"
-            if grep -Fxq ".github/hot-news-refresh-trigger" <<< "$changed_files"; then
-              refresh_only=true
-            fi
-          fi
-          echo "refresh_only=$refresh_only" >> "$GITHUB_OUTPUT"
-
       - name: Setup Node.js
         if: steps.gate.outputs.should_send == 'true'
         uses: actions/setup-node@v4
@@ -96,7 +80,7 @@ jobs:
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ github.event_name == 'workflow_run' && 'cloudflare' || github.event_name == 'workflow_dispatch' && inputs.trigger_source || 'github-trigger-file' }}
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
-          HOT_NEWS_REFRESH_ONLY: ${{ steps.mode.outputs.refresh_only }}
+          HOT_NEWS_REFRESH_ONLY: ${{ inputs.refresh_only || 'false' }}
           READER_BASE_URL: ${{ vars.READER_BASE_URL }}
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
         run: node scripts/send-hot-news-email.js
