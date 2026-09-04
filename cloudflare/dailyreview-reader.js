@@ -346,17 +346,35 @@ async function sendPush(request, env) {
           return;
         }
         const response = await sendOnePush(subscription, env);
-        if (response.ok || response.status === 201) sent += 1;
-        else if (response.status === 404 || response.status === 410) {
-          await env.PUSH_SUBSCRIPTIONS.delete(name);
-          removed += 1;
-        } else failures.push(response.status);
+        if (response.ok || response.status === 201) {
+          sent += 1;
+        } else {
+          const responseBody = (await response.text().catch(() => "")).trim().slice(0, 300);
+          const diagnostic = {
+            status: response.status,
+            statusText: response.statusText || "",
+            body: responseBody,
+          };
+          if (response.status === 404 || response.status === 410) {
+            await env.PUSH_SUBSCRIPTIONS.delete(name);
+            removed += 1;
+            diagnostic.removed = true;
+          } else {
+            failures.push(diagnostic);
+          }
+        }
       } catch (error) {
-        failures.push(error.message);
+        failures.push({ error: String(error?.message || error).slice(0, 300) });
       }
     }));
   }
-  return json({ subscriptions: listed.keys.length, sent, removed, failed: failures.length });
+  return json({
+    subscriptions: listed.keys.length,
+    sent,
+    removed,
+    failed: failures.length,
+    errors: failures.slice(0, 10),
+  });
 }
 
 export default {
