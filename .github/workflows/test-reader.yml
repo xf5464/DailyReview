@@ -35,7 +35,7 @@ jobs:
         run: |
           curl --fail --silent --show-error --max-time 20 \
             "https://dailyreview-reader.xf5464.workers.dev/" \
-            | grep -q '"workerVersion":"2026.09.04.10"'
+            | grep -q '"workerVersion":"2026.09.04.11"'
 
       - name: Inspect Google News decoder response
         env:
