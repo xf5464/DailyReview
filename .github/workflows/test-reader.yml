@@ -1,0 +1,49 @@
+name: Test Chinese Reader
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-reader.yml
+      - cloudflare/dailyreview-reader.js
+      - site/reader/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Wait for the test article to be published
+        run: |
+          article="https://xf5464.github.io/DailyReview/reader/test-article.html"
+          for attempt in {1..30}; do
+            if curl --fail --silent --show-error --max-time 15 "$article" | grep -q "DailyReview Reader Translation Test"; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "GitHub Pages did not publish the reader test article in time." >&2
+          exit 1
+
+      - name: Check Worker health
+        run: |
+          curl --fail --silent --show-error --max-time 20 \
+            "https://dailyreview-reader.xf5464.workers.dev/" \
+            | grep -q '"status":"ok"'
+
+      - name: Translate the test article
+        env:
+          READER_TEST_URL: https://dailyreview-reader.xf5464.workers.dev/reader-api?url=https%3A%2F%2Fxf5464.github.io%2FDailyReview%2Freader%2Ftest-article.html
+        run: |
+          curl --fail --silent --show-error --max-time 180 "$READER_TEST_URL" > reader-result.json
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const result = JSON.parse(fs.readFileSync('reader-result.json', 'utf8'));
+          if (!result.translatedText || !/[\u3400-\u9fff]/.test(result.translatedText)) {
+            throw new Error(`Reader returned no Chinese translation: ${JSON.stringify(result)}`);
+          }
+          console.log(`Reader OK: ${result.siteName}; ${result.translatedText.length} translated characters; cached=${result.cached}.`);
+          NODE
