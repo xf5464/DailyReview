@@ -1,7 +1,17 @@
-// Add this workflow dispatch to the existing dailyreview-cron Worker.
-// The Cron Trigger `17 22 * * *` is 06:17 in China Standard Time (UTC+8).
+// Add these workflow dispatch helpers to the existing dailyreview-cron Worker.
+// Cloudflare Cron uses UTC:
+// - `17 4,10,16,22 * * *` sends email at 12:17, 18:17, 00:17 and 06:17 China time.
+// - `*/30 * * * *` refreshes the reader every 30 minutes without sending email.
 
 const GITHUB_API = "https://api.github.com/repos/xf5464/DailyReview/actions/workflows";
+const EMAIL_CRONS = new Set([
+  "17 4,10,16,22 * * *",
+  "17 4 * * *",
+  "17 10 * * *",
+  "17 16 * * *",
+  "17 22 * * *",
+]);
+const READER_REFRESH_CRON = "*/30 * * * *";
 
 async function dispatchWorkflow(env, workflow, inputs) {
   const response = await fetch(`${GITHUB_API}/${workflow}/dispatches`, {
@@ -19,11 +29,35 @@ async function dispatchWorkflow(env, workflow, inputs) {
 }
 
 export async function sendDailyHotNews(event, env) {
-  if (event.cron !== "17 22 * * *") return false;
-  await dispatchWorkflow(env, "send-hot-news.yml", { trigger_source: "cloudflare", window_hours: "30" });
+  if (event.cron === READER_REFRESH_CRON) {
+    await dispatchWorkflow(env, "send-hot-news.yml", {
+      trigger_source: "cloudflare-refresh",
+      window_hours: "30",
+      refresh_only: "true",
+    });
+    return true;
+  }
+  if (!EMAIL_CRONS.has(event.cron)) return false;
+  await dispatchWorkflow(env, "send-hot-news.yml", {
+    trigger_source: "cloudflare",
+    window_hours: "30",
+    refresh_only: "false",
+  });
   return true;
 }
 
 export async function sendHotNewsNow(env) {
-  await dispatchWorkflow(env, "send-hot-news.yml", { trigger_source: "cloudflare-manual", window_hours: "30" });
+  await dispatchWorkflow(env, "send-hot-news.yml", {
+    trigger_source: "cloudflare-manual",
+    window_hours: "30",
+    refresh_only: "false",
+  });
+}
+
+export async function refreshReaderNow(env) {
+  await dispatchWorkflow(env, "send-hot-news.yml", {
+    trigger_source: "cloudflare-refresh-manual",
+    window_hours: "30",
+    refresh_only: "true",
+  });
 }

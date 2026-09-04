@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
+const { environmentFlag, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, readerUrl, recipients } = require("../scripts/send-hot-news-email");
 
 test("parses Google News RSS and removes source suffix", () => {
   const xml = `<rss><channel><item><title><![CDATA[Nvidia launches a new chip - Reuters]]></title><link>https://example.com/a?x=1&amp;y=2</link><pubDate>Fri, 04 Sep 2026 01:00:00 GMT</pubDate><source url="https://reuters.com">Reuters</source></item></channel></rss>`;
@@ -59,4 +59,12 @@ test("keeps original links until the reader backend is enabled", () => {
 test("supports comma-separated Gmail recipients", () => {
   assert.deepEqual(recipients("a@example.com, b@example.com"), ["a@example.com", "b@example.com"]);
   assert.throws(() => recipients("  "), /at least one/);
+});
+
+test("recognizes refresh-only environment values", () => {
+  assert.equal(environmentFlag("true"), true);
+  assert.equal(environmentFlag("1"), true);
+  assert.equal(environmentFlag("on"), true);
+  assert.equal(environmentFlag("false"), false);
+  assert.equal(environmentFlag(""), false);
 });

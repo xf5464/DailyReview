@@ -281,24 +281,37 @@ function newsMessage(news) {
   };
 }
 
+function environmentFlag(value) {
+  return ["1", "true", "yes", "on"].includes(String(value || "").trim().toLowerCase());
+}
+
 async function main() {
+  const refreshOnly = environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY);
+  const windowHours = Math.min(72, Math.max(12, Number(process.env.HOT_NEWS_WINDOW_HOURS) || DEFAULT_WINDOW_HOURS));
+  const news = await collectHotNews(windowHours);
+  const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || "").trim();
+  if (archivePath) {
+    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt));
+    console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
+  } else if (refreshOnly) {
+    throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
+  }
+
+  if (refreshOnly) {
+    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}.`);
+    return;
+  }
+
   const nodemailer = require("nodemailer");
   const username = requiredEnvironment("GMAIL_USERNAME");
   const password = requiredEnvironment("GMAIL_APP_PASSWORD").replace(/\s+/g, "");
   const to = recipients(requiredEnvironment("ALERT_EMAIL_TO"));
-  const windowHours = Math.min(72, Math.max(12, Number(process.env.HOT_NEWS_WINDOW_HOURS) || DEFAULT_WINDOW_HOURS));
-  const news = await collectHotNews(windowHours);
   const transport = nodemailer.createTransport({ host: "smtp.gmail.com", port: 465, secure: true, auth: { user: username, pass: password } });
   const result = await transport.sendMail({ from: username, to, ...newsMessage(news) });
   console.log(`Hot-news email accepted for ${result.accepted.length} recipient(s): tech=${news.tech.length}, market=${news.market.length}.`);
   if (result.rejected.length) throw new Error(`Email rejected for ${result.rejected.length} recipient(s).`);
-  const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || '').trim();
-  if (archivePath) {
-    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt));
-    console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
-  }
 }
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { addChineseTranslations, collectHotNews, decodeXml, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
+module.exports = { addChineseTranslations, collectHotNews, decodeXml, environmentFlag, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
