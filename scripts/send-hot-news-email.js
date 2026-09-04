@@ -466,17 +466,15 @@ async function main() {
     archivedTitleTranslations(archivePath),
     archivedGoogleNewsUrls(archivePath),
   );
-  if (archivePath) {
+  if (refreshOnly) {
+    if (!archivePath) throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
     console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
-  } else if (refreshOnly) {
-    throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
-  }
-
-  if (refreshOnly) {
     console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}.`);
     return;
   }
+
+  console.log("Email-only mode: reader archive was not modified.");
 
   const nodemailer = require("nodemailer");
   const username = requiredEnvironment("GMAIL_USERNAME");
