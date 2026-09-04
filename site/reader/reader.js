@@ -94,15 +94,20 @@ function categoryLabel(category) {
   return category === 'market' ? '美股' : '科技';
 }
 
+function chromeUrl(url) {
+  if (!/iP(hone|ad|od)/.test(navigator.userAgent)) return url;
+  if (url.startsWith('https://')) return `googlechromes://${url.slice(8)}`;
+  if (url.startsWith('http://')) return `googlechrome://${url.slice(7)}`;
+  return url;
+}
+
 function itemButton(item, rank) {
   const row = document.createElement('div');
   row.className = 'news-row';
 
   const button = document.createElement('a');
   button.className = 'news-item';
-  button.href = item.url;
-  button.target = '_blank';
-  button.rel = 'noopener noreferrer';
+  button.href = chromeUrl(item.url);
   button.dataset.id = item.id || '';
 
   const number = document.createElement('span');
@@ -123,11 +128,9 @@ function itemButton(item, rank) {
 
   const browser = document.createElement('a');
   browser.className = 'safari-link';
-  browser.href = item.url;
-  browser.target = '_blank';
-  browser.rel = 'noopener noreferrer';
-  browser.textContent = '浏览器';
-  browser.setAttribute('aria-label', `使用默认浏览器打开：${translated.textContent}`);
+  browser.href = chromeUrl(item.url);
+  browser.textContent = 'Chrome';
+  browser.setAttribute('aria-label', `使用 Chrome 打开：${translated.textContent}`);
 
   row.append(button, browser);
   return row;
