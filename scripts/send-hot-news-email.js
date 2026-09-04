@@ -127,6 +127,62 @@ async function fetchGoogleFeed(query, category, feedRank) {
   return parseRssItems(xml, category, feedRank);
 }
 
+function containsChinese(value) {
+  return /[\u3400-\u9fff]/.test(String(value));
+}
+
+async function translateTitle(title) {
+  if (!title || containsChinese(title)) return title;
+  const [translated] = await translateBatch([title]);
+  return translated;
+}
+
+async function translateBatch(titles) {
+  const separator = "\n|||\n";
+  const source = titles.join(separator);
+  const params = new URLSearchParams({ q: source, langpair: "en|zh-CN", mt: "1" });
+  const payload = JSON.parse(await fetchText(`https://api.mymemory.translated.net/get?${params}`, 15_000));
+  const translated = String(payload?.responseData?.translatedText || "").trim();
+  if (!translated || Number(payload.responseStatus) !== 200) {
+    throw new Error("Translation API returned no Chinese translation.");
+  }
+  const parts = translated.split(/\s*\|\|\|\s*/).map((item) => item.trim());
+  if (parts.length !== titles.length) throw new Error("Translation API changed the batch separator.");
+  return parts;
+}
+
+async function addChineseTranslations(items, maxBatchBytes = 450) {
+  const output = items.map((item) => ({ ...item, titleZh: containsChinese(item.title) ? item.title : "" }));
+  const batches = [];
+  let batch = [];
+  for (let index = 0; index < items.length; index += 1) {
+    if (output[index].titleZh) continue;
+    const candidate = [...batch, index];
+    const bytes = Buffer.byteLength(candidate.map((itemIndex) => items[itemIndex].title).join("\n|||\n"), "utf8");
+    if (batch.length && bytes > maxBatchBytes) {
+      batches.push(batch);
+      batch = [index];
+    } else {
+      batch = candidate;
+    }
+  }
+  if (batch.length) batches.push(batch);
+  async function translateIndexes(indexes) {
+    try {
+      const translations = await translateBatch(indexes.map((index) => items[index].title));
+      indexes.forEach((index, offset) => { output[index].titleZh = translations[offset]; });
+    } catch {
+      if (indexes.length > 1) {
+        const middle = Math.ceil(indexes.length / 2);
+        await translateIndexes(indexes.slice(0, middle));
+        await translateIndexes(indexes.slice(middle));
+      }
+    }
+  }
+  for (const indexes of batches) await translateIndexes(indexes);
+  return output;
+}
+
 async function fetchHackerNews(windowHours, now = Date.now()) {
   const ids = JSON.parse(await fetchText("https://hacker-news.firebaseio.com/v0/topstories.json"));
   const stories = await Promise.all(ids.slice(0, 80).map(async (id) => {
@@ -161,8 +217,9 @@ async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now
   const groups = settled.filter((result) => result.status === "fulfilled").map((result) => result.value);
   if (!groups.length) throw new Error("All hot-news sources failed.");
   const all = groups.flat().filter((item) => hoursOld(item.publishedAt, now) <= windowHours);
-  const tech = rankAndDedupe(all.filter((item) => item.category === "tech"), MAX_ITEMS, now);
-  const market = rankAndDedupe(all.filter((item) => item.category === "market"), MAX_ITEMS, now);
+  const rankedTech = rankAndDedupe(all.filter((item) => item.category === "tech"), MAX_ITEMS, now);
+  const rankedMarket = rankAndDedupe(all.filter((item) => item.category === "market"), MAX_ITEMS, now);
+  const [tech, market] = await Promise.all([addChineseTranslations(rankedTech), addChineseTranslations(rankedMarket)]);
   if (!tech.length || !market.length) throw new Error(`Not enough news: tech=${tech.length}, market=${market.length}`);
   return { tech, market, failureCount: failures.length, fetchedAt: new Date(now).toISOString() };
 }
@@ -185,12 +242,14 @@ function triggerType() {
 
 function itemText(item, index) {
   const extra = item.engagement ? `；${item.engagement}` : `；热度分 ${item.score}`;
-  return `${index + 1}. ${item.title}\n   ${item.source} · ${formatChinaTime(item.publishedAt)}${extra}\n   ${item.url}`;
+  const translation = item.titleZh ? `\n   中文：${item.titleZh}` : "";
+  return `${index + 1}. ${item.title}${translation}\n   ${item.source} · ${formatChinaTime(item.publishedAt)}${extra}\n   ${item.url}`;
 }
 
 function itemHtml(item, index) {
   const extra = item.engagement ? item.engagement : `综合热度 ${item.score}`;
-  return `<li style="margin:0 0 18px"><a href="${escapeHtml(item.url)}" style="color:#1558d6;font-size:16px;font-weight:600;text-decoration:none">${escapeHtml(item.title)}</a><div style="margin-top:5px;color:#667085;font-size:13px">${escapeHtml(item.source)} · ${escapeHtml(formatChinaTime(item.publishedAt))} · ${escapeHtml(extra)}</div></li>`;
+  const translation = item.titleZh ? `<div style="margin-top:4px;color:#344054;font-size:15px">${escapeHtml(item.titleZh)}</div>` : "";
+  return `<li style="margin:0 0 18px"><a href="${escapeHtml(item.url)}" style="color:#1558d6;font-size:16px;font-weight:600;text-decoration:none">${escapeHtml(item.title)}</a>${translation}<div style="margin-top:5px;color:#667085;font-size:13px">${escapeHtml(item.source)} · ${escapeHtml(formatChinaTime(item.publishedAt))} · ${escapeHtml(extra)}</div></li>`;
 }
 
 function newsMessage(news) {
@@ -224,4 +283,4 @@ async function main() {
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { collectHotNews, decodeXml, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, recipients };
+module.exports = { addChineseTranslations, collectHotNews, decodeXml, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, recipients, translateBatch, translateTitle };
