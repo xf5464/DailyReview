@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T09:15:20.097Z",
+  "updatedAt": "2026-09-04T10:29:44.587Z",
   "days": [
     {
       "date": "2026-09-04",
       "pushes": [
+        "2026-09-04T10:29:44.587Z",
         "2026-09-04T09:15:20.097Z",
         "2026-09-04T08:29:58.717Z",
         "2026-09-04T08:18:49.346Z",
@@ -19,9 +20,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 159.6,
-          "engagement": "1774 points · 1552 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 159.1,
+          "engagement": "1830 points · 1623 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -31,9 +32,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 146.9,
-          "engagement": "1784 points · 447 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 146.2,
+          "engagement": "1843 points · 451 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "b9197b873957814a",
@@ -43,9 +44,9 @@
           "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 132.4,
-          "engagement": "1101 points · 248 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 131.2,
+          "engagement": "1105 points · 250 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "debf643f0294e072",
@@ -55,9 +56,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 128.8,
-          "engagement": "578 points · 276 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 128,
+          "engagement": "593 points · 280 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "45a86641ba677818",
@@ -67,9 +68,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 128.8,
-          "engagement": "553 points · 179 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 128.2,
+          "engagement": "567 points · 188 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "f519b6f605b220ae",
@@ -79,9 +80,9 @@
           "url": "https://twitter.com/GergelyOrosz/status/2095453567955968398",
           "source": "twitter.com",
           "publishedAt": "2026-09-03T11:01:04.000Z",
-          "score": 115.1,
-          "engagement": "315 points · 210 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 113.9,
+          "engagement": "317 points · 210 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "519991c639b3b5bf",
@@ -91,9 +92,9 @@
           "url": "https://ifm.ai/blog/k2/",
           "source": "ifm.ai",
           "publishedAt": "2026-09-03T15:36:43.000Z",
-          "score": 113.4,
-          "engagement": "296 points · 97 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 112.7,
+          "engagement": "303 points · 101 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "6379e22bcefbb3cd",
@@ -103,9 +104,9 @@
           "url": "https://armature.tech/blog/which-tools-coding-agents-install",
           "source": "armature.tech",
           "publishedAt": "2026-09-03T21:20:34.000Z",
-          "score": 115,
-          "engagement": "214 points · 98 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "score": 114.9,
+          "engagement": "226 points · 104 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "5725b766800de7c4",
@@ -117,7 +118,139 @@
           "publishedAt": "2026-09-03T06:59:08.000Z",
           "score": 113,
           "engagement": "394 points · 133 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "64d8f3a213bb739c",
+          "category": "market",
+          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
+          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
+          "score": 68.9,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "d22dfbfde94f5b18",
+          "category": "market",
+          "title": "Wall Street ends sharply higher as Waller remarks ease rate hike fears",
+          "titleZh": "华尔街收盘大幅走高，因为华勒表示对宽松加息的担忧",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
+          "score": 64.3,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "37a9c9f598bb6853",
+          "category": "market",
+          "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
+          "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
+          "source": "Benzinga",
+          "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
+          "score": 61.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "327871d4a29576d0",
+          "category": "market",
+          "title": "Nasdaq, S&P 500 futures climb ahead of key jobs report",
+          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+          "source": "Reuters",
+          "publishedAt": "Fri, 04 Sep 2026 09:05:43 GMT",
+          "score": 80.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "026e2457ae426fe4",
+          "category": "market",
+          "title": "US Stock Market Today: S&P 500 Futures Edge Higher As Yields Ease Before Jobs",
+          "titleZh": "今日美国股市：随着收益率在就业前放松，标准普尔500指数期货边缘走高",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZ2JKa2dZUFlKOHhTU0t3akw3RV80VFZLYzNZd0dqMTFZbmtIX1hFQTJPckV3RzZoMXV0M0ZDWmRscjBHcjJKYUI1cW9TRnJwUzEwcVBBUTlHNWNPMWZGYmgxSzctTVllMEI5eVZoR2F0VzJCN2Q1dlBrRDNrb3NUcDBEajRocU0zaHYzMWE2YVY5Zw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 08:19:15 GMT",
+          "score": 69.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "6823efb8e0a69435",
+          "category": "market",
+          "title": "Planet Labs Earnings Top Wall Street Estimates as Military Space Business Grows",
+          "titleZh": "随着军用太空业务的增长， Planet Labs的顶级华尔街收入估计数",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFAwbXYwSDJpLVhjQWdGeV9OLTZDdlcydW1fdC1HaE9vTE04WkVzX01TLTdMejVZRVpsWm81OGlwMkhoQjRTWTMzLThENEoteTdsZTVJVWFmNktlNXNEcTNxVGxVQ20yNzJBbXVvS3VyZlNXNXJ0UWRoMk1CVXNPMms?oc=5",
+          "source": "Barron's",
+          "publishedAt": "Fri, 04 Sep 2026 08:20:00 GMT",
+          "score": 63,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "e98d37e7a1b8d4a1",
+          "category": "tech",
+          "title": "Hackers Had a Live Feed of Every ID Verification Company Scanned for over a Year",
+          "titleZh": "黑客对每家身份验证公司进行了一年多的实时扫描",
+          "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
+          "source": "techdirt.com",
+          "publishedAt": "2026-09-04T06:47:51.000Z",
+          "score": 114.4,
+          "engagement": "159 points · 49 comments",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "d0814e9587cb2f30",
+          "category": "market",
+          "title": "U.S. Futures Steady as Investors Await Jobs Report; Lululemon and Adobe in Focus: Dow Jones, S&P, Nasdaq, Wall Street",
+          "titleZh": "随着投资者等待就业报告，美国期货走势稳定； Lululemon和Adobe成为焦点：道琼斯、标准普尔、纳斯达克、华尔街",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQck9vaW1LQUZkbzlBajE3Zzl0SjA0MjBLWllweUI1NDlseDhka20wemttbk5zSVpDVXYwcDZKSWVSbVpOM2lWR21CSktHQW1BSDNHT0E0cXhSeDZ5el9MWXlxNFFPRXM3dHZqOS1JckFpalhXM1hfWWpodi1vNktFbjJVcVd4c3VQd000R3NYd0dTNG1INVRBVkhWMFgxUQ?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 08:48:52 GMT",
+          "score": 69.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "0bf92a30269d59da",
+          "category": "market",
+          "title": "If I Were in My 20s, I'd Buy This Spectacular Nasdaq-100 Index Fund and Hold It Forever",
+          "titleZh": "如果我20多岁，我会购买这只壮观的纳斯达克-100指数基金并永远持有",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPLXFnSlNoSEtkMFQzclZwdjM2Q1JOcjVubWtsd2V3a19JRzBxWjJIRHFsV0VoX3B1NmNPcjQ1QkVuWGpqeE9KSWlKMi1aS0pWWDRHZmxVTXFJWC0xVmo5UUhJblF1YXNsZThpTGhUUzNtYWYwU1dSNTF2dUxLclJrYkxucng3VWh3UTJhYWpZTUJQS3RxeWlv?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 10:02:00 GMT",
+          "score": 62.4,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "9b21a6d440eac00d",
+          "category": "market",
+          "title": "1 S&P 500 Stock on Our Watchlist and 2 We Question",
+          "titleZh": "我们的观察名单上有1只标准普尔500指数股票， 2只我们质疑",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcWFuWFdRMlFrQ1pxdy1TVXg5M3JLelRfOTdnMDdTVjlkUk5vcVlaN05kdHRfWjFENmdRMzZDYW41T2IyU19YR2FXRDlxOTk4a3d2dmI5bzYyd1pBaFRNTlpMcERmXzVRdGR1c0hXOVYxLWZPUk5JdVl5OU9XTjIzQnM1OXFNYmN4NGo1QVNJaU43dGVIVm5TNG9JWWxxaWVtYUpPc0JFaVNrUzRxbnNDQTlBaw?oc=5",
+          "source": "StockStory",
+          "publishedAt": "Fri, 04 Sep 2026 09:51:01 GMT",
+          "score": 62.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
+        },
+        {
+          "id": "59d602dc0f1f49e8",
+          "category": "market",
+          "title": "Health-tracking smart ring maker Oura to list on US stock market",
+          "titleZh": "健康追踪智能戒指制造商Oura将在美国股市上市",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjZQNkdWN3p0OWdHVHpjLUV3aXM3UENqTFRKeWV1UFk5SF9mdjdmRUxPd2p4MFlSZ2RMemJtUjZzQTZJek5yS29Ta1Q3QWZ1Z1o2djhYR0dWelJFcmZja0NRNTRBR1lxeTdzdC1FVkQ0QXRMc0V3WFdMX2Y3V2JFdERrQXk3dWZRTFI3ZVVRZVdhdEdoblBSanhrZkZjWEppajdtWi1XYUJtWkpMamFuc0pmdw?oc=5",
+          "source": "The Guardian",
+          "publishedAt": "Fri, 04 Sep 2026 09:46:00 GMT",
+          "score": 61.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
           "id": "ce01ffa2ae76baf8",
@@ -129,42 +262,6 @@
           "publishedAt": "2026-09-03T19:17:24.000Z",
           "score": 112.6,
           "engagement": "151 points · 176 comments",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "64d8f3a213bb739c",
-          "category": "market",
-          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
-          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 70.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "d22dfbfde94f5b18",
-          "category": "market",
-          "title": "Wall Street ends sharply higher as Waller remarks ease rate hike fears",
-          "titleZh": "华尔街收盘大幅走高，因为华勒表示对宽松加息的担忧",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUzRxMTJxTk80aFlHOHU2WkVVbjhCeDhJVGNiVXFqSUg0cGhIUjY3d2hBTWQtUGVvMTJXMUVjaVJwc1lnTW9OMUp1ZjhiUjFfVlVTbk44Z1c2WTdqOVYwUUMzbVhVbHk5Tnk4V3ZoVWtvdHdBMDJDV1V2dEVRanc1UGc1ZlExN3VFTUpTTzBDcUVRZWN6Qlh0STQzb0ZqUmVlbWk4YWwzOA?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Thu, 03 Sep 2026 22:48:22 GMT",
-          "score": 66.2,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "37a9c9f598bb6853",
-          "category": "market",
-          "title": "Stock Market: Will S&P 500 Open Up or Down Today?",
-          "titleZh": "股市：标准普尔500指数今天会开盘还是下跌？",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFJTZ2VPWDBHVUhxRi1pNzRnVkV5YjdKMzdfczZkZ09oaWVTR2NaT3d5SjFIeDRXeUx4d1Z3ZFpQSG1nVXR4Qi1jLUFRZEtBQy1DdFFDN2FaaHg3YUZjRGlKeGtaa3Q3NUxDZHUtM2FndHpzZE9Fd3NJam9iODFoRkdPcHF1UnJvSkxvLW5GaTFUS0dNeDN2OXoya0pvZzBINEszYlhUYWoyLS1kTHRhYTV6RWE2aDg?oc=5",
-          "source": "Benzinga",
-          "publishedAt": "Fri, 04 Sep 2026 06:04:40 GMT",
-          "score": 65.6,
-          "engagement": "",
           "pushedAt": "2026-09-04T09:15:20.097Z"
         },
         {
@@ -188,42 +285,6 @@
           "source": "Northwest Arkansas Democrat-Gazette",
           "publishedAt": "Fri, 04 Sep 2026 06:56:00 GMT",
           "score": 61.4,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "327871d4a29576d0",
-          "category": "market",
-          "title": "Nasdaq, S&P 500 futures climb ahead of key jobs report",
-          "titleZh": "纳斯达克，标准普尔500指数期货在关键就业报告之前攀升",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
-          "source": "Reuters",
-          "publishedAt": "Fri, 04 Sep 2026 09:05:43 GMT",
-          "score": 81.8,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "026e2457ae426fe4",
-          "category": "market",
-          "title": "US Stock Market Today: S&P 500 Futures Edge Higher As Yields Ease Before Jobs",
-          "titleZh": "今日美国股市：随着收益率在就业前放松，标准普尔500指数期货边缘走高",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZ2JKa2dZUFlKOHhTU0t3akw3RV80VFZLYzNZd0dqMTFZbmtIX1hFQTJPckV3RzZoMXV0M0ZDWmRscjBHcjJKYUI1cW9TRnJwUzEwcVBBUTlHNWNPMWZGYmgxSzctTVllMEI5eVZoR2F0VzJCN2Q1dlBrRDNrb3NUcDBEajRocU0zaHYzMWE2YVY5Zw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 08:19:15 GMT",
-          "score": 71,
-          "engagement": "",
-          "pushedAt": "2026-09-04T09:15:20.097Z"
-        },
-        {
-          "id": "6823efb8e0a69435",
-          "category": "market",
-          "title": "Planet Labs Earnings Top Wall Street Estimates as Military Space Business Grows",
-          "titleZh": "随着军用太空业务的增长， Planet Labs的顶级华尔街收入估计数",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFAwbXYwSDJpLVhjQWdGeV9OLTZDdlcydW1fdC1HaE9vTE04WkVzX01TLTdMejVZRVpsWm81OGlwMkhoQjRTWTMzLThENEoteTdsZTVJVWFmNktlNXNEcTNxVGxVQ20yNzJBbXVvS3VyZlNXNXJ0UWRoMk1CVXNPMms?oc=5",
-          "source": "Barron's",
-          "publishedAt": "Fri, 04 Sep 2026 08:20:00 GMT",
-          "score": 67.3,
           "engagement": "",
           "pushedAt": "2026-09-04T09:15:20.097Z"
         },
