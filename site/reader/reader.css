@@ -41,6 +41,19 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .subtle, .panel p, .install-hint span { color: var(--muted); line-height: 1.6; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
+.category-tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 0 0 24px; padding: 4px;
+  border: 1px solid var(--line); border-radius: 14px; background: rgba(222, 216, 202, .45);
+}
+.category-tab {
+  border: 0; border-radius: 10px; padding: 11px 16px; color: var(--muted);
+  background: transparent; font-weight: 760; cursor: pointer;
+}
+.category-tab[aria-selected="true"] {
+  color: var(--blue); background: white; box-shadow: 0 2px 10px rgba(53, 48, 38, .09);
+}
+.category-tab:active { transform: scale(.99); }
+
 .days { display: grid; gap: 24px; }
 .day { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 14px 45px rgba(53, 48, 38, .06); }
 .day-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 20px 14px; border-bottom: 1px solid rgba(128, 119, 101, .14); }

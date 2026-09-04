@@ -10,12 +10,12 @@
     <link rel="icon" href="../icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="../og.png" />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="reader.css?v=2026.09.04.1" />
-    <script src="reader.js?v=2026.09.04.1" defer></script>
+    <link rel="stylesheet" href="reader.css?v=2026.09.04.2" />
+    <script src="reader.js?v=2026.09.04.2" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.1</span></div>
+      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.04.2</span></div>
       <div class="actions">
         <button id="pushButton" type="button">开启提醒</button>
         <button id="fontButton" type="button" aria-label="调整字号">字号</button>
@@ -27,6 +27,11 @@
         <h1>最近三天热点</h1>
         <p id="archiveMeta" class="subtle" aria-live="polite">正在载入…</p>
       </section>
+
+      <nav class="category-tabs" role="tablist" aria-label="热点分类">
+        <button class="category-tab" type="button" role="tab" data-category="tech" aria-controls="daysContainer">科技</button>
+        <button class="category-tab" type="button" role="tab" data-category="market" aria-controls="daysContainer">美股</button>
+      </nav>
 
       <section id="daysContainer" class="days" aria-live="polite"></section>
 

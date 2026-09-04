@@ -11,6 +11,7 @@ const refs = {
   days: document.querySelector('#daysContainer'),
   empty: document.querySelector('#emptyArchive'),
   archiveMeta: document.querySelector('#archiveMeta'),
+  tabs: [...document.querySelectorAll('.category-tab')],
   installHint: document.querySelector('#installHint'),
   push: document.querySelector('#pushButton'),
   form: document.querySelector('#readerForm'),
@@ -33,6 +34,7 @@ const refs = {
 };
 
 let archive = { days: [] };
+let activeCategory = localStorage.getItem('dailyreview-reader-category') === 'market' ? 'market' : 'tech';
 let currentUrl = '';
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
 const fontSizes = [17, 19, 21, 23];
@@ -135,17 +137,33 @@ function itemButton(item, rank) {
   return row;
 }
 
+function updateCategoryTabs() {
+  refs.tabs.forEach((tab) => {
+    const selected = tab.dataset.category === activeCategory;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+}
+
 function renderArchive(value, fromCache = false) {
   archive = pruneArchive(value);
   localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive));
   refs.days.replaceChildren();
-  refs.empty.hidden = archive.days.length > 0;
-  const total = archive.days.reduce((sum, day) => sum + (day.items?.length || 0), 0);
-  refs.archiveMeta.textContent = archive.days.length
-    ? `${archive.days.length} 天 · ${total} 条${fromCache ? ' · 本地缓存' : ''}`
-    : '等待下一次热点推送';
+  updateCategoryTabs();
 
-  archive.days.forEach((day) => {
+  const visibleDays = archive.days
+    .map((day) => ({
+      ...day,
+      items: (day.items || []).filter((item) => item.category === activeCategory),
+    }))
+    .filter((day) => day.items.length > 0);
+  const total = visibleDays.reduce((sum, day) => sum + day.items.length, 0);
+  refs.empty.hidden = visibleDays.length > 0;
+  refs.archiveMeta.textContent = visibleDays.length
+    ? `${categoryLabel(activeCategory)} · ${visibleDays.length} 天 · ${total} 条${fromCache ? ' · 本地缓存' : ''}`
+    : `最近三天暂无${categoryLabel(activeCategory)}热点`;
+
+  visibleDays.forEach((day) => {
     const section = document.createElement('section');
     section.className = 'day';
     const header = document.createElement('header');
@@ -163,13 +181,13 @@ function renderArchive(value, fromCache = false) {
     heading.append(headingText, caret);
     const count = document.createElement('span');
     count.className = 'day-count';
-    count.textContent = `${day.items?.length || 0} 条 · ${day.pushes?.length || 1} 次推送`;
+    count.textContent = `${day.items.length} 条 · ${day.pushes?.length || 1} 次推送`;
     header.append(heading, count);
     const list = document.createElement('ol');
     list.className = 'news-list';
-    list.id = `news-${day.date}`;
+    list.id = `news-${activeCategory}-${day.date}`;
     heading.setAttribute('aria-controls', list.id);
-    (day.items || []).forEach((item, index) => {
+    day.items.forEach((item, index) => {
       const row = document.createElement('li');
       row.append(itemButton(item, index + 1));
       list.append(row);
@@ -177,6 +195,13 @@ function renderArchive(value, fromCache = false) {
     section.append(header, list);
     refs.days.append(section);
   });
+}
+
+function selectCategory(category) {
+  if (!['tech', 'market'].includes(category) || category === activeCategory) return;
+  activeCategory = category;
+  localStorage.setItem('dailyreview-reader-category', category);
+  renderArchive(archive);
 }
 
 async function loadArchive() {
@@ -317,6 +342,7 @@ refs.days.addEventListener('click', (event) => {
   toggle.setAttribute('aria-expanded', String(!expanded));
   list.hidden = expanded;
 });
+refs.tabs.forEach((tab) => tab.addEventListener('click', () => selectCategory(tab.dataset.category)));
 refs.form.addEventListener('submit', (event) => {
   event.preventDefault();
   const url = refs.input.value.trim();
