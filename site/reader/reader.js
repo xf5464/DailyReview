@@ -2,7 +2,6 @@
 
 const API_ROOT = 'https://dailyreview-reader.xf5464.workers.dev';
 const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
-const VAPID_PUBLIC_KEY = 'BEHmGzDXFg7hlOBk3NGv5KIaMroGXDIr5YfeetHNRFgQu0J1kl6eX1-5JqsxmHRApQbC_4Y-Zm_YHYTZ8XVIMCs';
 const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v1';
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
 const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
@@ -12,8 +11,6 @@ const refs = {
   empty: document.querySelector('#emptyArchive'),
   archiveMeta: document.querySelector('#archiveMeta'),
   tabs: [...document.querySelectorAll('.category-tab')],
-  installHint: document.querySelector('#installHint'),
-  push: document.querySelector('#pushButton'),
   dialog: document.querySelector('#readerDialog'),
   close: document.querySelector('#closeDialog'),
   loading: document.querySelector('#loadingState'),
@@ -117,12 +114,12 @@ function itemButton(item, rank) {
   translated.textContent = item.titleZh || item.title || '未命名新闻';
   const original = document.createElement('span');
   original.className = 'news-original';
-  original.textContent = [item.source, item.title].filter(Boolean).join(' · ');
+  original.textContent = item.title || '';
   copy.append(translated, original);
-  const category = document.createElement('span');
-  category.className = 'category';
-  category.textContent = categoryLabel(item.category);
-  button.append(number, copy, category);
+  const source = document.createElement('span');
+  source.className = 'news-source';
+  source.textContent = item.source || '来源未知';
+  button.append(number, copy, source);
 
   const browser = document.createElement('a');
   browser.className = 'safari-link';
@@ -178,7 +175,7 @@ function renderArchive(value, fromCache = false) {
     heading.append(headingText, caret);
     const count = document.createElement('span');
     count.className = 'day-count';
-    count.textContent = `${day.items.length} 条 · ${day.pushes?.length || 1} 次推送`;
+    count.textContent = `${day.items.length} 条 · ${day.pushes?.length || 1} 次更新`;
     header.append(heading, count);
     const list = document.createElement('ol');
     list.className = 'news-list';
@@ -274,55 +271,6 @@ function changeFont() {
   document.documentElement.style.setProperty('--reader-size', `${fontSizes[fontStep]}px`);
 }
 
-function base64UrlToBytes(value) {
-  const padding = '='.repeat((4 - (value.length % 4)) % 4);
-  const binary = atob((value + padding).replace(/-/g, '+').replace(/_/g, '/'));
-  return Uint8Array.from(binary, (char) => char.charCodeAt(0));
-}
-
-function isStandalone() {
-  return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-}
-
-async function refreshPushButton(registration) {
-  const subscription = await registration.pushManager.getSubscription();
-  refs.push.textContent = subscription ? '提醒已开启' : '开启提醒';
-  refs.push.disabled = Boolean(subscription);
-}
-
-async function enablePush() {
-  if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-    alert('当前浏览器不支持网页推送。');
-    return;
-  }
-  if (/iP(hone|ad|od)/.test(navigator.userAgent) && !isStandalone()) {
-    refs.installHint.hidden = false;
-    refs.installHint.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-  try {
-    const permission = await Notification.requestPermission();
-    if (permission !== 'granted') throw new Error('没有获得通知权限。');
-    const registration = await navigator.serviceWorker.ready;
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: base64UrlToBytes(VAPID_PUBLIC_KEY),
-    });
-    const response = await fetch(`${API_ROOT}/push/subscribe`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(subscription),
-    });
-    if (!response.ok) {
-      const payload = await response.json().catch(() => ({}));
-      throw new Error(payload.error || '订阅保存失败。');
-    }
-    await refreshPushButton(registration);
-  } catch (error) {
-    alert(error.message || '开启提醒失败。');
-  }
-}
-
 refs.days.addEventListener('click', (event) => {
   const externalLink = event.target.closest('.news-item, .safari-link');
   if (externalLink) {
@@ -344,7 +292,6 @@ refs.retry.addEventListener('click', () => { if (currentUrl) loadArticle(current
 refs.close.addEventListener('click', () => refs.dialog.close());
 refs.dialog.addEventListener('click', (event) => { if (event.target === refs.dialog) refs.dialog.close(); });
 refs.dialogFont.addEventListener('click', changeFont);
-refs.push.addEventListener('click', enablePush);
 document.documentElement.style.setProperty('--reader-size', `${fontSizes[fontStep] || 19}px`);
 
 pruneArticleCache();
@@ -352,21 +299,16 @@ loadArchive();
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').then(async (registration) => {
-    await refreshPushButton(registration);
+    const subscription = await registration.pushManager?.getSubscription();
+    if (!subscription) return;
+    await fetch(`${API_ROOT}/push/unsubscribe`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(subscription),
+    }).catch(() => null);
+    await subscription.unsubscribe();
   }).catch(() => {});
 }
 
 const params = new URL(location.href).searchParams;
 const initialUrl = params.get('url');
-const openItemId = params.get('open');
-if (initialUrl) loadArticle(initialUrl);
-if (openItemId) {
-  const waitForArchive = setInterval(() => {
-    const item = archive.days.flatMap((day) => day.items || []).find((entry) => entry.id === openItemId);
-    if (item) {
-      clearInterval(waitForArchive);
-      loadArticle(item.url);
-    }
-  }, 250);
-  setTimeout(() => clearInterval(waitForArchive), 5000);
-}

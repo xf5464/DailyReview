@@ -26,8 +26,7 @@ button, summary, .news-item { -webkit-tap-highlight-color: transparent; }
 .brand-group { display: flex; align-items: baseline; gap: 7px; min-width: 0; }
 .brand { color: var(--ink); font-size: 17px; font-weight: 760; text-decoration: none; }
 .version-badge { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.actions { display: flex; gap: 8px; }
-.actions button, .icon-button {
+.icon-button {
   border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px;
   background: rgba(255, 255, 255, .72); color: var(--ink);
 }
@@ -38,7 +37,7 @@ main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 34px 0 cal
 h1, h2 { font-family: ui-serif, "Songti SC", STSong, serif; letter-spacing: -.02em; }
 h1 { margin: 0; font-size: clamp(38px, 9vw, 56px); line-height: 1.08; }
 h2 { margin: 0; font-size: 28px; line-height: 1.25; }
-.subtle, .panel p, .install-hint span { color: var(--muted); line-height: 1.6; }
+.subtle, .panel p { color: var(--muted); line-height: 1.6; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
 .category-tabs {
@@ -85,11 +84,13 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .rank { padding-top: 2px; color: var(--blue); font-size: 13px; font-weight: 760; }
 .news-title { display: block; font-family: ui-serif, "Songti SC", STSong, serif; font-size: 18px; font-weight: 700; line-height: 1.45; }
 .news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
-.category { align-self: start; border-radius: 999px; padding: 4px 7px; background: #edf3ff; color: var(--blue); font-size: 11px; white-space: nowrap; }
+.news-source {
+  align-self: start; max-width: 94px; padding-top: 3px; color: var(--muted);
+  font-size: 11px; line-height: 1.35; text-align: right; overflow-wrap: anywhere;
+}
 
-.panel, .install-hint { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.panel { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
 .panel h2 { font-size: 24px; }
-.install-hint { display: grid; gap: 5px; }
 .primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: white; font-weight: 700; }
 
 dialog { width: min(760px, 100%); height: min(92vh, 920px); margin: auto auto 0; padding: 0; border: 0; border-radius: 24px 24px 0 0; background: var(--paper); color: var(--ink); }
@@ -117,6 +118,7 @@ article h2 { font-size: clamp(30px, 7vw, 45px); }
   main { padding-top: 20px; }
   .news-title { font-size: 17px; }
   .news-original { display: none; }
+  .news-source { max-width: 72px; }
   .day-header { padding-inline: 17px; }
   .news-item { padding-inline: 16px; }
 }

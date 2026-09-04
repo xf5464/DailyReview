@@ -2,12 +2,11 @@ const ALLOWED_ORIGIN = "https://xf5464.github.io";
 const MAX_HTML_BYTES = 2_500_000;
 const MAX_ARTICLE_CHARS = 32_000;
 const TRANSLATION_CHUNK_CHARS = 2_400;
-const PUSH_ENDPOINT_SUFFIXES = ["push.apple.com", "googleapis.com", "push.services.mozilla.com", "notify.windows.com"];
 
 const CORS_HEADERS = {
   "access-control-allow-origin": ALLOWED_ORIGIN,
-  "access-control-allow-methods": "GET, POST, OPTIONS",
-  "access-control-allow-headers": "accept, authorization, content-type",
+  "access-control-allow-methods": "GET, OPTIONS",
+  "access-control-allow-headers": "accept, content-type",
   "access-control-max-age": "86400",
   vary: "Origin",
 };
@@ -247,149 +246,15 @@ async function readerApi(request, env, ctx) {
   }
 }
 
-function base64Url(bytes) {
-  const array = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-  let binary = "";
-  for (const byte of array) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
-}
-
-function base64UrlBytes(value) {
-  const normalized = String(value).replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
-  const binary = atob(padded);
-  return Uint8Array.from(binary, (char) => char.charCodeAt(0));
-}
-
-async function subscriptionKey(endpoint) {
-  return base64Url(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(endpoint)));
-}
-
-function validPushEndpoint(endpoint) {
-  try {
-    const url = new URL(endpoint);
-    return url.protocol === "https:" && PUSH_ENDPOINT_SUFFIXES.some((suffix) =>
-      url.hostname === suffix || url.hostname.endsWith("." + suffix));
-  } catch {
-    return false;
-  }
-}
-
-async function subscribe(request, env) {
-  if (!env.PUSH_SUBSCRIPTIONS) return json({ error: "尚未绑定 PUSH_SUBSCRIPTIONS KV。" }, 503);
-  const subscription = await request.json().catch(() => null);
-  if (!subscription?.endpoint || !validPushEndpoint(subscription.endpoint)) return json({ error: "推送订阅地址无效。" }, 400);
-  const key = await subscriptionKey(subscription.endpoint);
-  await env.PUSH_SUBSCRIPTIONS.put(key, JSON.stringify(subscription), { expirationTtl: 60 * 60 * 24 * 90 });
-  return json({ subscribed: true });
-}
-
-async function unsubscribe(request, env) {
-  if (!env.PUSH_SUBSCRIPTIONS) return json({ error: "尚未绑定 PUSH_SUBSCRIPTIONS KV。" }, 503);
-  const subscription = await request.json().catch(() => null);
-  if (!subscription?.endpoint) return json({ error: "缺少推送订阅地址。" }, 400);
-  await env.PUSH_SUBSCRIPTIONS.delete(await subscriptionKey(subscription.endpoint));
-  return json({ subscribed: false });
-}
-
-async function vapidAuthorization(endpoint, env) {
-  if (!env.VAPID_PUBLIC_KEY || !env.VAPID_PRIVATE_KEY || !env.VAPID_SUBJECT) throw new Error("VAPID 配置不完整。");
-  const publicBytes = base64UrlBytes(env.VAPID_PUBLIC_KEY);
-  if (publicBytes.length !== 65 || publicBytes[0] !== 4) throw new Error("VAPID 公钥格式错误。");
-  const jwtHeader = base64Url(new TextEncoder().encode(JSON.stringify({ typ: "JWT", alg: "ES256" })));
-  const jwtPayload = base64Url(new TextEncoder().encode(JSON.stringify({
-    aud: new URL(endpoint).origin,
-    exp: Math.floor(Date.now() / 1000) + 12 * 60 * 60,
-    sub: env.VAPID_SUBJECT,
-  })));
-  const unsigned = jwtHeader + "." + jwtPayload;
-  const key = await crypto.subtle.importKey("jwk", {
-    kty: "EC",
-    crv: "P-256",
-    x: base64Url(publicBytes.slice(1, 33)),
-    y: base64Url(publicBytes.slice(33, 65)),
-    d: env.VAPID_PRIVATE_KEY,
-    ext: true,
-  }, { name: "ECDSA", namedCurve: "P-256" }, false, ["sign"]);
-  const signature = await crypto.subtle.sign(
-    { name: "ECDSA", hash: "SHA-256" },
-    key,
-    new TextEncoder().encode(unsigned),
-  );
-  return "vapid t=" + unsigned + "." + base64Url(signature) + ", k=" + env.VAPID_PUBLIC_KEY;
-}
-
-async function sendOnePush(subscription, env) {
-  const authorization = await vapidAuthorization(subscription.endpoint, env);
-  return fetch(subscription.endpoint, {
-    method: "POST",
-    headers: { authorization, ttl: "300", urgency: "normal" },
-    body: null,
-  });
-}
-
-async function sendPush(request, env) {
-  const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") || "";
-  if (!env.PUSH_SEND_TOKEN || token !== env.PUSH_SEND_TOKEN) return json({ error: "未授权。" }, 401);
-  if (!env.PUSH_SUBSCRIPTIONS) return json({ error: "尚未绑定 PUSH_SUBSCRIPTIONS KV。" }, 503);
-  const listed = await env.PUSH_SUBSCRIPTIONS.list({ limit: 1000 });
-  let sent = 0;
-  let removed = 0;
-  const failures = [];
-  for (let offset = 0; offset < listed.keys.length; offset += 20) {
-    await Promise.all(listed.keys.slice(offset, offset + 20).map(async ({ name }) => {
-      try {
-        const subscription = await env.PUSH_SUBSCRIPTIONS.get(name, "json");
-        if (!subscription?.endpoint) {
-          await env.PUSH_SUBSCRIPTIONS.delete(name);
-          removed += 1;
-          return;
-        }
-        const response = await sendOnePush(subscription, env);
-        if (response.ok || response.status === 201) {
-          sent += 1;
-        } else {
-          const responseBody = (await response.text().catch(() => "")).trim().slice(0, 300);
-          const diagnostic = {
-            status: response.status,
-            statusText: response.statusText || "",
-            body: responseBody,
-          };
-          if (response.status === 404 || response.status === 410) {
-            await env.PUSH_SUBSCRIPTIONS.delete(name);
-            removed += 1;
-            diagnostic.removed = true;
-          } else {
-            failures.push(diagnostic);
-          }
-        }
-      } catch (error) {
-        failures.push({ error: String(error?.message || error).slice(0, 300) });
-      }
-    }));
-  }
-  return json({
-    subscriptions: listed.keys.length,
-    sent,
-    removed,
-    failed: failures.length,
-    errors: failures.slice(0, 10),
-  });
-}
-
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
     if (request.method === "GET" && url.pathname === "/reader-api") return readerApi(request, env, ctx);
-    if (request.method === "POST" && url.pathname === "/push/subscribe") return subscribe(request, env);
-    if (request.method === "POST" && url.pathname === "/push/unsubscribe") return unsubscribe(request, env);
-    if (request.method === "POST" && url.pathname === "/push/send") return sendPush(request, env);
     return json({
       service: "DailyReview Reader",
       status: "ok",
       browserFallback: Boolean(env.BROWSER),
-      pushReady: Boolean(env.PUSH_SUBSCRIPTIONS && env.VAPID_PUBLIC_KEY && env.VAPID_PRIVATE_KEY),
     });
   },
 };

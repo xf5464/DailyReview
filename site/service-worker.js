@@ -4,7 +4,6 @@
 // produces a different worker and cache name.
 const APP_CACHE = 'daily-review-app-__APP_VERSION__';
 const DATA_CACHE = 'daily-review-data-v2';
-const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
 const APP_SHELL = [
   './',
   'index.html',
@@ -75,44 +74,4 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   event.respondWith(networkFirst(request, APP_CACHE));
-});
-
-async function latestNews() {
-  try {
-    const response = await fetch(ARCHIVE_URL + '?v=' + Date.now(), { cache: 'no-store' });
-    if (!response.ok) throw new Error(String(response.status));
-    const archive = await response.json();
-    return (archive.days || []).flatMap((day) => day.items || [])[0] || null;
-  } catch {
-    return null;
-  }
-}
-
-self.addEventListener('push', (event) => {
-  event.waitUntil((async () => {
-    const item = await latestNews();
-    const target = new URL('reader/', self.registration.scope);
-    if (item?.id) target.searchParams.set('open', item.id);
-    await self.registration.showNotification('DailyReview 新热点', {
-      body: item?.titleZh || item?.title || '新一批科技与美股热点已经更新',
-      icon: new URL('reader/icon-192.png', self.registration.scope).href,
-      badge: new URL('reader/icon-192.png', self.registration.scope).href,
-      tag: `dailyreview-${item?.id || Date.now()}`,
-      data: { url: target.href },
-    });
-  })());
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil((async () => {
-    const target = event.notification.data?.url || new URL('reader/', self.registration.scope).href;
-    const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-    const existing = windows.find((client) => client.url.startsWith(self.registration.scope));
-    if (existing) {
-      await existing.navigate(target);
-      return existing.focus();
-    }
-    return self.clients.openWindow(target);
-  })());
 });
