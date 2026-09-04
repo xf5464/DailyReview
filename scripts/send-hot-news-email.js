@@ -1,6 +1,7 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const DEFAULT_WINDOW_HOURS = 30;
 const MAX_ITEMS = 10;
+const { saveNewsArchive } = require('./hot-news-archive');
 
 const SOURCE_WEIGHTS = new Map([
   ["Reuters", 30], ["Bloomberg", 28], ["The Wall Street Journal", 27],
@@ -291,6 +292,11 @@ async function main() {
   const result = await transport.sendMail({ from: username, to, ...newsMessage(news) });
   console.log(`Hot-news email accepted for ${result.accepted.length} recipient(s): tech=${news.tech.length}, market=${news.market.length}.`);
   if (result.rejected.length) throw new Error(`Email rejected for ${result.rejected.length} recipient(s).`);
+  const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || '').trim();
+  if (archivePath) {
+    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt));
+    console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
+  }
 }
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });

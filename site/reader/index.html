@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f7f4ed" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>DailyReview 中文阅读</title>
+    <title>DailyReview 中文阅读器</title>
     <link rel="icon" href="../icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="../og.png" />
     <link rel="manifest" href="manifest.webmanifest" />
@@ -17,46 +17,72 @@
     <header class="topbar">
       <a class="brand" href="../">DailyReview</a>
       <div class="actions">
+        <button id="pushButton" type="button">开启提醒</button>
         <button id="fontButton" type="button" aria-label="调整字号">字号</button>
-        <a id="sourceLink" class="source-link" href="../" target="_blank" rel="noopener noreferrer">原文</a>
       </div>
     </header>
     <main>
-      <section id="emptyState" class="panel input-panel">
-        <p class="eyebrow">中文阅读器</p>
-        <h1>粘贴英文新闻链接</h1>
+      <section class="hero">
+        <p class="eyebrow">每日科技与美股</p>
+        <h1>最近三天热点</h1>
+        <p id="archiveMeta" class="subtle" aria-live="polite">正在载入…</p>
+      </section>
+
+      <section id="daysContainer" class="days" aria-live="polite"></section>
+
+      <section id="emptyArchive" class="panel" hidden>
+        <h2>还没有热点记录</h2>
+        <p>下一次邮件推送完成后，列表会自动保存在这里。</p>
+      </section>
+
+      <section id="installHint" class="install-hint" hidden>
+        <strong>在 iPhone 接收提醒</strong>
+        <span>先用 Safari“添加到主屏幕”，从桌面打开后再点“开启提醒”。</span>
+      </section>
+
+      <details class="manual-reader">
+        <summary>阅读其他英文链接</summary>
         <form id="readerForm">
           <label for="urlInput">文章地址</label>
           <input id="urlInput" name="url" type="url" inputmode="url" placeholder="https://…" required />
           <button class="primary" type="submit">翻译并阅读</button>
         </form>
-      </section>
-
-      <section id="loadingState" class="panel status-panel" hidden aria-live="polite">
-        <div class="spinner" aria-hidden="true"></div>
-        <h1>正在提取并翻译</h1>
-        <p>通常需要几秒，较长文章可能需要更久。</p>
-      </section>
-
-      <article id="article" hidden>
-        <p id="siteName" class="eyebrow"></p>
-        <h1 id="articleTitle"></h1>
-        <p id="articleMeta" class="meta"></p>
-        <div id="articleBody" class="article-body"></div>
-        <div class="article-footer">
-          <a id="footerSourceLink" target="_blank" rel="noopener noreferrer">查看英文原文</a>
-        </div>
-      </article>
-
-      <section id="errorState" class="panel error-panel" hidden role="alert">
-        <p class="eyebrow">暂时无法翻译</p>
-        <h1 id="errorTitle">文章读取失败</h1>
-        <p id="errorMessage"></p>
-        <div class="error-actions">
-          <button id="retryButton" class="primary" type="button">重试</button>
-          <a id="errorSourceLink" target="_blank" rel="noopener noreferrer">打开英文原文</a>
-        </div>
-      </section>
+      </details>
     </main>
+
+    <dialog id="readerDialog">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <button id="closeDialog" class="icon-button" type="button" aria-label="关闭">关闭</button>
+          <button id="dialogFontButton" class="icon-button" type="button">字号</button>
+        </header>
+
+        <section id="loadingState" class="dialog-state" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <h2>正在提取并翻译</h2>
+          <p>通常需要几秒，较长文章可能需要更久。</p>
+        </section>
+
+        <article id="article" hidden>
+          <p id="siteName" class="eyebrow"></p>
+          <h2 id="articleTitle"></h2>
+          <p id="articleMeta" class="meta"></p>
+          <div id="articleBody" class="article-body"></div>
+          <div class="article-footer">
+            <a id="footerSourceLink" target="_blank" rel="noopener noreferrer">查看英文原文</a>
+          </div>
+        </article>
+
+        <section id="errorState" class="dialog-state error-state" hidden role="alert">
+          <p class="eyebrow">暂时无法翻译</p>
+          <h2>文章读取失败</h2>
+          <p id="errorMessage"></p>
+          <div class="error-actions">
+            <button id="retryButton" class="primary" type="button">重试</button>
+            <a id="errorSourceLink" target="_blank" rel="noopener noreferrer">打开英文原文</a>
+          </div>
+        </section>
+      </div>
+    </dialog>
   </body>
 </html>

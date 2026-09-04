@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const crypto = require('node:crypto');
 const path = require('node:path');
 const { queryMacroOutlook } = require('./macro-outlook');
+const { pruneArchiveFile } = require('./hot-news-archive');
 
 const projectRoot = path.resolve(__dirname, '..');
 const siteDirectory = path.join(projectRoot, 'site');
@@ -128,6 +129,7 @@ function addAssetVersions() {
 }
 
 async function build() {
+  pruneArchiveFile(path.join(siteDirectory, 'reader', 'data', 'recent.json'));
   fs.rmSync(outputDirectory, { recursive: true, force: true });
   fs.cpSync(siteDirectory, outputDirectory, { recursive: true });
   applyChartPresentationOverrides();

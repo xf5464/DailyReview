@@ -1,46 +1,96 @@
 :root {
   color-scheme: light;
   --paper: #f7f4ed;
-  --ink: #1d2433;
-  --muted: #687080;
-  --line: #ddd7ca;
+  --ink: #172033;
+  --muted: #6b7280;
+  --line: #ded8ca;
   --blue: #175cd3;
-  --card: rgba(255, 255, 255, 0.82);
+  --card: rgba(255, 255, 255, .86);
   --reader-size: 19px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
 }
 
 * { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); }
-.topbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: max(12px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 12px max(18px, env(safe-area-inset-left)); border-bottom: 1px solid rgba(128, 119, 101, .18); background: rgba(247, 244, 237, .92); backdrop-filter: blur(16px); }
-.brand { color: var(--ink); font-size: 17px; font-weight: 750; text-decoration: none; }
-.actions { display: flex; align-items: center; gap: 8px; }
-.actions button, .source-link { border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; background: rgba(255,255,255,.66); color: var(--ink); font: inherit; font-size: 14px; text-decoration: none; }
-main { width: min(760px, calc(100% - 36px)); margin: 0 auto; padding: 38px 0 calc(72px + env(safe-area-inset-bottom)); }
-.panel { margin-top: 7vh; padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: 0 18px 60px rgba(53, 48, 38, .08); }
-.eyebrow { margin: 0 0 10px; color: var(--blue); font-size: 13px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
-h1 { margin: 0; font-family: ui-serif, "Songti SC", "STSong", serif; font-size: clamp(31px, 7vw, 48px); line-height: 1.16; letter-spacing: -.02em; }
-form { display: grid; gap: 12px; margin-top: 28px; }
+button, input { font: inherit; }
+button, summary, .news-item { -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 5; display: flex; align-items: center;
+  justify-content: space-between; padding: max(12px, env(safe-area-inset-top))
+  max(18px, env(safe-area-inset-right)) 12px max(18px, env(safe-area-inset-left));
+  border-bottom: 1px solid rgba(128, 119, 101, .18);
+  background: rgba(247, 244, 237, .92); backdrop-filter: blur(16px);
+}
+.brand { color: var(--ink); font-size: 17px; font-weight: 760; text-decoration: none; }
+.actions { display: flex; gap: 8px; }
+.actions button, .icon-button {
+  border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px;
+  background: rgba(255, 255, 255, .72); color: var(--ink);
+}
+
+main { width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 34px 0 calc(72px + env(safe-area-inset-bottom)); }
+.hero { padding: 10px 2px 26px; }
+.eyebrow { margin: 0 0 9px; color: var(--blue); font-size: 13px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; }
+h1, h2 { font-family: ui-serif, "Songti SC", STSong, serif; letter-spacing: -.02em; }
+h1 { margin: 0; font-size: clamp(38px, 9vw, 56px); line-height: 1.08; }
+h2 { margin: 0; font-size: 28px; line-height: 1.25; }
+.subtle, .panel p, .install-hint span { color: var(--muted); line-height: 1.6; }
+.subtle { margin: 12px 0 0; font-size: 14px; }
+
+.days { display: grid; gap: 24px; }
+.day { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 14px 45px rgba(53, 48, 38, .06); }
+.day-header { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 20px 20px 14px; border-bottom: 1px solid rgba(128, 119, 101, .14); }
+.day-header h2 { font-size: 24px; }
+.day-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.news-list { list-style: none; margin: 0; padding: 0; }
+.news-item {
+  display: grid; grid-template-columns: 26px 1fr auto; gap: 11px; width: 100%;
+  padding: 17px 19px; border: 0; border-bottom: 1px solid rgba(128, 119, 101, .13);
+  color: var(--ink); background: transparent; text-align: left; cursor: pointer;
+}
+.news-list li:last-child .news-item { border-bottom: 0; }
+.news-item:active { background: rgba(23, 92, 211, .06); }
+.rank { padding-top: 2px; color: var(--blue); font-size: 13px; font-weight: 760; }
+.news-title { display: block; font-family: ui-serif, "Songti SC", STSong, serif; font-size: 18px; font-weight: 700; line-height: 1.45; }
+.news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.category { align-self: start; border-radius: 999px; padding: 4px 7px; background: #edf3ff; color: var(--blue); font-size: 11px; white-space: nowrap; }
+
+.panel, .install-hint, .manual-reader { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.panel h2 { font-size: 24px; }
+.install-hint { display: grid; gap: 5px; }
+.manual-reader summary { color: var(--blue); font-weight: 700; cursor: pointer; }
+form { display: grid; gap: 11px; margin-top: 18px; }
 label { color: var(--muted); font-size: 14px; }
-input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
-.primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: #fff; font: inherit; font-weight: 700; }
-.status-panel { text-align: center; }
-.status-panel h1, .error-panel h1 { font-size: 30px; }
-.status-panel p, .error-panel p { color: var(--muted); line-height: 1.65; }
+input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; background: white; color: var(--ink); font-size: 16px; }
+.primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: white; font-weight: 700; }
+
+dialog { width: min(760px, 100%); height: min(92vh, 920px); margin: auto auto 0; padding: 0; border: 0; border-radius: 24px 24px 0 0; background: var(--paper); color: var(--ink); }
+dialog::backdrop { background: rgba(22, 27, 38, .48); backdrop-filter: blur(3px); }
+.dialog-shell { min-height: 100%; padding: 0 24px calc(42px + env(safe-area-inset-bottom)); overflow: auto; }
+.dialog-header { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; margin: 0 -24px 24px; padding: 14px 20px; border-bottom: 1px solid rgba(128, 119, 101, .16); background: rgba(247, 244, 237, .94); backdrop-filter: blur(14px); }
+.dialog-state { padding: 11vh 10px; text-align: center; }
+.dialog-state p { color: var(--muted); line-height: 1.65; }
 .spinner { width: 38px; height: 38px; margin: 0 auto 22px; border: 3px solid #d7dfed; border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-article { padding-top: 16px; }
-article .eyebrow { margin-top: 18px; }
-.meta { margin: 17px 0 30px; color: var(--muted); font-size: 14px; }
-.article-body { font-family: ui-serif, "Songti SC", "STSong", serif; font-size: var(--reader-size); line-height: 1.9; letter-spacing: .01em; }
+article { padding: 4px 0 20px; }
+article h2 { font-size: clamp(30px, 7vw, 45px); }
+.meta { margin: 15px 0 28px; color: var(--muted); font-size: 13px; }
+.article-body { font-family: ui-serif, "Songti SC", STSong, serif; font-size: var(--reader-size); line-height: 1.9; }
 .article-body p { margin: 0 0 1.35em; }
 .article-footer { margin-top: 38px; padding-top: 22px; border-top: 1px solid var(--line); }
 .article-footer a, .error-actions a { color: var(--blue); text-decoration: none; }
-.error-actions { display: flex; align-items: center; gap: 18px; margin-top: 24px; }
-[hidden] { display: none !important; }
+.error-actions { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 24px; }
+
+@media (min-width: 720px) {
+  dialog { margin-bottom: 4vh; border-radius: 24px; }
+}
 
 @media (max-width: 520px) {
-  main { width: min(100% - 30px, 760px); padding-top: 24px; }
-  .panel { margin-top: 3vh; padding: 22px; border-radius: 18px; }
-  h1 { font-size: 34px; }
+  main { padding-top: 20px; }
+  .news-title { font-size: 17px; }
+  .news-original { display: none; }
+  .day-header { padding-inline: 17px; }
+  .news-item { padding-inline: 16px; }
 }

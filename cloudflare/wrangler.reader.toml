@@ -5,3 +5,14 @@ workers_dev = true
 
 [ai]
 binding = "AI"
+
+[browser]
+binding = "BROWSER"
+
+# Create a KV namespace in the Cloudflare dashboard, then bind it as:
+# [[kv_namespaces]]
+# binding = "PUSH_SUBSCRIPTIONS"
+# id = "<your namespace id>"
+#
+# Add VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT and
+# PUSH_SEND_TOKEN as encrypted Worker secrets.
