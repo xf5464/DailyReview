@@ -97,6 +97,20 @@ function publishedTimeLabel(value) {
   return `${day} ${time}`;
 }
 
+function directArticleUrl(url) {
+  try {
+    const target = new URL(url);
+    if (target.hostname === 'news.google.com' || target.hostname.endsWith('.news.google.com')) {
+      const resolver = new URL('/open', API_ROOT);
+      resolver.searchParams.set('url', target.toString());
+      return resolver.toString();
+    }
+  } catch {
+    return url;
+  }
+  return url;
+}
+
 function chromeUrl(url) {
   if (url.startsWith('https://')) return `googlechromes://${url.slice(8)}`;
   if (url.startsWith('http://')) return `googlechrome://${url.slice(7)}`;
@@ -109,7 +123,7 @@ function itemButton(item, rank) {
 
   const button = document.createElement('a');
   button.className = 'news-item';
-  button.href = chromeUrl(item.url);
+  button.href = chromeUrl(directArticleUrl(item.url));
   button.dataset.id = item.id || '';
 
   const number = document.createElement('span');
@@ -136,7 +150,7 @@ function itemButton(item, rank) {
 
   const browser = document.createElement('a');
   browser.className = 'safari-link';
-  browser.href = chromeUrl(item.url);
+  browser.href = chromeUrl(directArticleUrl(item.url));
   browser.textContent = 'Chrome';
   browser.setAttribute('aria-label', `使用 Chrome 打开：${translated.textContent}`);
 
