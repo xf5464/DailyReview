@@ -99,7 +99,59 @@ function applyChartPresentationOverrides() {
   }
   source = source.replace(axisLabelSource, axisLabelReplacement);
 
+  const marketCapFormatterSource = [
+    '  function formatMarketCap(value) {',
+    '    return hasNumericValue(value)',
+    "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 2 }).format(Number(value)) + ' 亿元'",
+    "      : '--';",
+    '  }',
+  ].join('\n');
+  const marketCapFormatterReplacement = [
+    marketCapFormatterSource,
+    '',
+    '  function formatWideEtfMarketCap(value) {',
+    '    return hasNumericValue(value)',
+    "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 亿元'",
+    "      : '--';",
+    '  }',
+  ].join('\n');
+  if (!source.includes(marketCapFormatterSource)) {
+    throw new Error('Unable to add integer national-team holdings formatter: formatMarketCap pattern changed.');
+  }
+  source = source.replace(marketCapFormatterSource, marketCapFormatterReplacement);
+  source = source.replace("formatMarketCap(entry.item.value)", "formatWideEtfMarketCap(entry.item.value)");
+  source = source.replace("' · 宽基合计 ' + formatMarketCap(latest.value)", "' · 宽基合计 ' + formatWideEtfMarketCap(latest.value)");
+  source = source.replace("totalItem ? formatMarketCap(totalItem.value) : '--'", "totalItem ? formatWideEtfMarketCap(totalItem.value) : '--'");
+
   fs.writeFileSync(appPath, source, 'utf8');
+
+  const stylesPath = path.join(outputDirectory, 'styles.css');
+  const styles = fs.readFileSync(stylesPath, 'utf8');
+  const responsiveCinemaTableRules = [
+    '',
+    '/* 影视院线总览卡：三列等分，不允许产生横向滚动。 */',
+    '.shareholder-card-table-wrap {',
+    '  overflow-x: hidden;',
+    '  overflow-y: auto;',
+    '}',
+    '',
+    '.shareholder-card-table-wrap .shareholder-table {',
+    '  width: 100%;',
+    '  min-width: 0;',
+    '  table-layout: fixed;',
+    '}',
+    '',
+    '.shareholder-card-table-wrap .shareholder-table th,',
+    '.shareholder-card-table-wrap .shareholder-table td {',
+    '  width: 33.333333%;',
+    '  padding-left: 6px;',
+    '  padding-right: 6px;',
+    '  white-space: normal;',
+    '  overflow-wrap: anywhere;',
+    '}',
+    '',
+  ].join('\n');
+  fs.writeFileSync(stylesPath, styles + responsiveCinemaTableRules, 'utf8');
 }
 
 function addAssetVersions() {
@@ -141,6 +193,9 @@ async function build() {
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');
   const outlook = await queryMacroOutlook({ range: 'year30' });
+  outlook.charts.forEach((chart) => {
+    if (chart.id === 'nationalTeamWideEtf') chart.decimals = 0;
+  });
   const usableCharts = outlook.charts.filter((chart) => chart.items.length > 0);
   if (usableCharts.length === 0) {
     throw new Error('No macro chart returned usable data; refusing to publish an empty site.');
