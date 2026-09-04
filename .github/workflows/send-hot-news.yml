@@ -1,0 +1,51 @@
+name: Send Hot News
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: Trigger source shown in the email
+        required: false
+        default: manual
+        type: string
+      window_hours:
+        description: News lookback window (12-72 hours)
+        required: false
+        default: "30"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: send-hot-news
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Fetch hot news and send Gmail
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          TRIGGER_SOURCE: ${{ inputs.trigger_source }}
+          HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours }}
+        run: node scripts/send-hot-news-email.js
