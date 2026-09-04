@@ -140,6 +140,104 @@ async function fetchText(url, timeoutMs = 15_000) {
   return response.text();
 }
 
+function isGoogleNewsUrl(rawUrl) {
+  try {
+    const host = new URL(rawUrl).hostname.toLowerCase();
+    return host === "news.google.com" || host.endsWith(".news.google.com");
+  } catch {
+    return false;
+  }
+}
+
+async function resolveGoogleNewsUrl(rawUrl, fetcher = fetch) {
+  if (!isGoogleNewsUrl(rawUrl)) return rawUrl;
+  const target = new URL(rawUrl);
+  const articleId = target.pathname.split("/").filter(Boolean).at(-1);
+  if (!articleId) throw new Error("Google News article ID is missing.");
+
+  const requestOptions = {
+    redirect: "follow",
+    headers: {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36",
+      accept: "text/html",
+      "accept-language": "en-US,en;q=0.9",
+    },
+    signal: AbortSignal.timeout(10_000),
+  };
+  const pageResponse = await fetcher("https://news.google.com/articles/" + encodeURIComponent(articleId), requestOptions);
+  if (!pageResponse.ok) throw new Error(`Google News decode page returned HTTP ${pageResponse.status}`);
+  const html = await pageResponse.text();
+  const signature = html.match(/data-n-a-sg=["']([^"']+)["']/)?.[1];
+  const timestamp = html.match(/data-n-a-ts=["']([^"']+)["']/)?.[1];
+  if (!signature || !timestamp) throw new Error("Google News decode parameters are missing.");
+
+  const requestValue = JSON.stringify([
+    "garturlreq",
+    [["X", "X", ["X", "X"], null, null, 1, 1, "US:en", null, 1, null, null, null, null, null, 0, 1],
+      "X", "X", 1, [1, 1, 1], 1, 1, null, 0, 0, null, 0],
+    articleId,
+    Number(timestamp),
+    signature,
+  ]);
+  const response = await fetcher("https://news.google.com/_/DotsSplashUi/data/batchexecute?rpcids=Fbv4je", {
+    method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded;charset=UTF-8",
+      referer: "https://news.google.com/",
+      "user-agent": requestOptions.headers["user-agent"],
+    },
+    body: "f.req=" + encodeURIComponent(JSON.stringify([[["Fbv4je", requestValue]]])),
+    signal: AbortSignal.timeout(10_000),
+  });
+  if (!response.ok) throw new Error(`Google News decode API returned HTTP ${response.status}`);
+  const text = await response.text();
+  const marker = '[\\\"garturlres\\\",\\\"';
+  const offset = text.indexOf(marker);
+  if (offset < 0) throw new Error("Google News did not return the publisher URL.");
+  const escaped = text.slice(offset + marker.length).split('\\\",', 1)[0];
+  let resolved;
+  try { resolved = JSON.parse('"' + escaped + '"'); }
+  catch { resolved = escaped.replaceAll("\\\\/", "/"); }
+  if (!/^https?:\/\//i.test(resolved) || isGoogleNewsUrl(resolved)) {
+    throw new Error("Google News returned an invalid publisher URL.");
+  }
+  return resolved;
+}
+
+async function resolveGoogleNewsItems(items, knownUrls = new Map(), fetcher = fetch, concurrency = 4) {
+  const output = new Array(items.length);
+  let cursor = 0;
+  let resolvedCount = 0;
+  async function worker() {
+    while (cursor < items.length) {
+      const index = cursor++;
+      const item = items[index];
+      if (!isGoogleNewsUrl(item.url)) {
+        output[index] = { ...item };
+        continue;
+      }
+      const googleNewsUrl = item.url;
+      const cached = knownUrls.get(googleNewsUrl);
+      if (cached && !isGoogleNewsUrl(cached)) {
+        output[index] = { ...item, url: cached, googleNewsUrl };
+        resolvedCount += 1;
+        continue;
+      }
+      try {
+        const resolved = await resolveGoogleNewsUrl(googleNewsUrl, fetcher);
+        output[index] = { ...item, url: resolved, googleNewsUrl };
+        resolvedCount += 1;
+      } catch (error) {
+        console.warn(`Could not resolve Google News URL for "${item.title}": ${error.message}`);
+        output[index] = { ...item, googleNewsUrl };
+      }
+    }
+  }
+  const workers = Array.from({ length: Math.max(1, Math.min(concurrency, items.length || 1)) }, () => worker());
+  await Promise.all(workers);
+  return { items: output, resolvedCount };
+}
+
 function googleNewsUrl(query) {
   const params = new URLSearchParams({ q: query, hl: "en-US", gl: "US", ceid: "US:en" });
   return `https://news.google.com/rss/search?${params}`;
@@ -237,13 +335,33 @@ function archivedTitleTranslations(filePath) {
     const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
     return new Map((archive.days || []).flatMap((day) => day.items || [])
       .filter((item) => item.url && item.titleZh)
-      .map((item) => [item.url, item.titleZh]));
+      .flatMap((item) => [
+        [item.url, item.titleZh],
+        ...(item.googleNewsUrl ? [[item.googleNewsUrl, item.titleZh]] : []),
+      ]));
   } catch {
     return new Map();
   }
 }
 
-async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now(), knownTranslations = new Map()) {
+function archivedGoogleNewsUrls(filePath) {
+  if (!filePath) return new Map();
+  try {
+    const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return new Map((archive.days || []).flatMap((day) => day.items || [])
+      .filter((item) => item.googleNewsUrl && item.url && !isGoogleNewsUrl(item.url))
+      .map((item) => [item.googleNewsUrl, item.url]));
+  } catch {
+    return new Map();
+  }
+}
+
+async function collectHotNews(
+  windowHours = DEFAULT_WINDOW_HOURS,
+  now = Date.now(),
+  knownTranslations = new Map(),
+  knownGoogleNewsUrls = new Map(),
+) {
   const requests = [
     fetchHackerNews(windowHours, now),
     fetchGoogleFeed("technology OR AI OR chips OR software when:1d", "tech", 0),
@@ -256,17 +374,25 @@ async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now
   if (!groups.length) throw new Error("All hot-news sources failed.");
   const all = groups.flat().filter((item) =>
     hoursOld(item.publishedAt, now) <= windowHours && !isPaywalledItem(item));
-  const rankedTech = rankAndDedupe(all.filter((item) => item.category === "tech"), MAX_ITEMS, now);
-  const rankedMarket = rankAndDedupe(all.filter((item) => item.category === "market"), MAX_ITEMS, now);
+  const candidateLimit = MAX_ITEMS + 8;
+  const rankedTechCandidates = rankAndDedupe(all.filter((item) => item.category === "tech"), candidateLimit, now);
+  const rankedMarketCandidates = rankAndDedupe(all.filter((item) => item.category === "market"), candidateLimit, now);
+  const [resolvedTech, resolvedMarket] = await Promise.all([
+    resolveGoogleNewsItems(rankedTechCandidates, knownGoogleNewsUrls),
+    resolveGoogleNewsItems(rankedMarketCandidates, knownGoogleNewsUrls),
+  ]);
+  const rankedTech = resolvedTech.items.filter((item) => !isPaywalledItem(item)).slice(0, MAX_ITEMS);
+  const rankedMarket = resolvedMarket.items.filter((item) => !isPaywalledItem(item)).slice(0, MAX_ITEMS);
   const reuseTranslations = (items) => items.map((item) => ({
     ...item,
-    titleZh: knownTranslations.get(item.url) || "",
+    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || "",
   }));
   const [tech, market] = await Promise.all([
     addChineseTranslations(reuseTranslations(rankedTech)),
     addChineseTranslations(reuseTranslations(rankedMarket)),
   ]);
   if (!tech.length || !market.length) throw new Error(`Not enough news: tech=${tech.length}, market=${market.length}`);
+  console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount} Google News URL(s) before archiving.`);
   return { tech, market, failureCount: failures.length, fetchedAt: new Date(now).toISOString() };
 }
 
@@ -334,7 +460,12 @@ async function main() {
   const refreshOnly = environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY);
   const windowHours = Math.min(72, Math.max(12, Number(process.env.HOT_NEWS_WINDOW_HOURS) || DEFAULT_WINDOW_HOURS));
   const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || "").trim();
-  const news = await collectHotNews(windowHours, Date.now(), archivedTitleTranslations(archivePath));
+  const news = await collectHotNews(
+    windowHours,
+    Date.now(),
+    archivedTitleTranslations(archivePath),
+    archivedGoogleNewsUrls(archivePath),
+  );
   if (archivePath) {
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
     console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
@@ -359,4 +490,9 @@ async function main() {
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { addChineseTranslations, archivedTitleTranslations, collectHotNews, decodeXml, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
+module.exports = {
+  addChineseTranslations, archivedGoogleNewsUrls, archivedTitleTranslations, collectHotNews, decodeXml,
+  environmentFlag, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
+  parseRssItems, rankAndDedupe, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
+  translateBatch, translateTitle,
+};
