@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T10:29:44.587Z",
+  "updatedAt": "2026-09-04T15:00:45.706Z",
   "days": [
     {
       "date": "2026-09-04",
       "pushes": [
+        "2026-09-04T15:00:45.706Z",
         "2026-09-04T10:29:44.587Z",
         "2026-09-04T09:15:20.097Z",
         "2026-09-04T08:29:58.717Z",
@@ -20,9 +21,9 @@
           "url": "https://openai.com/index/gpt-6-astra/",
           "source": "openai.com",
           "publishedAt": "2026-09-03T18:41:05.000Z",
-          "score": 159.1,
-          "engagement": "1830 points · 1623 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 156.3,
+          "engagement": "1979 points · 1807 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "b837590e8bc38616",
@@ -32,9 +33,9 @@
           "url": "https://neil.fraser.name/news/2026/09/03/",
           "source": "neil.fraser.name",
           "publishedAt": "2026-09-03T14:54:39.000Z",
-          "score": 146.2,
-          "engagement": "1843 points · 451 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 143.7,
+          "engagement": "2034 points · 496 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "b9197b873957814a",
@@ -44,9 +45,9 @@
           "url": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
           "source": "github.com",
           "publishedAt": "2026-09-03T10:53:08.000Z",
-          "score": 131.2,
-          "engagement": "1105 points · 250 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 131.3,
+          "engagement": "1120 points · 258 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "debf643f0294e072",
@@ -56,9 +57,9 @@
           "url": "https://anyhumanever.com/",
           "source": "anyhumanever.com",
           "publishedAt": "2026-09-03T14:51:10.000Z",
-          "score": 128,
-          "engagement": "593 points · 280 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 124.7,
+          "engagement": "623 points · 299 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "45a86641ba677818",
@@ -68,9 +69,9 @@
           "url": "https://inference-docs.cerebras.ai/models/overview",
           "source": "inference-docs.cerebras.ai",
           "publishedAt": "2026-09-03T18:32:13.000Z",
-          "score": 128.2,
-          "engagement": "567 points · 188 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 125.6,
+          "engagement": "623 points · 207 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "f519b6f605b220ae",
@@ -80,9 +81,177 @@
           "url": "https://twitter.com/GergelyOrosz/status/2095453567955968398",
           "source": "twitter.com",
           "publishedAt": "2026-09-03T11:01:04.000Z",
-          "score": 113.9,
-          "engagement": "317 points · 210 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
+          "score": 113.8,
+          "engagement": "325 points · 212 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "6379e22bcefbb3cd",
+          "category": "tech",
+          "title": "Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out",
+          "titleZh": "Claude、Codex和Cursor选择了哪些工具？ 我们测量了17000次跑步来找出",
+          "url": "https://armature.tech/blog/which-tools-coding-agents-install",
+          "source": "armature.tech",
+          "publishedAt": "2026-09-03T21:20:34.000Z",
+          "score": 113.7,
+          "engagement": "265 points · 124 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "64d8f3a213bb739c",
+          "category": "market",
+          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
+          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
+          "score": 63.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "e98d37e7a1b8d4a1",
+          "category": "tech",
+          "title": "Hackers Had a Live Feed of Every ID Verification Company Scanned for over a Year",
+          "titleZh": "黑客对每家身份验证公司进行了一年多的实时扫描",
+          "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
+          "source": "techdirt.com",
+          "publishedAt": "2026-09-04T06:47:51.000Z",
+          "score": 129.4,
+          "engagement": "377 points · 157 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "6d216f06400d8d58",
+          "category": "tech",
+          "title": "Discovery of a new OpenAI agent message board",
+          "titleZh": "发现新的OpenAI代理留言板",
+          "url": "https://collusion.wiki/",
+          "source": "collusion.wiki",
+          "publishedAt": "2026-09-04T11:54:53.000Z",
+          "score": 144.4,
+          "engagement": "518 points · 350 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "656e675460d44f88",
+          "category": "tech",
+          "title": "Solving the Jane Street Reverse Engineering Challenge",
+          "titleZh": "解决Jane Street逆向工程挑战",
+          "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
+          "source": "jestoph.com",
+          "publishedAt": "2026-09-04T10:17:01.000Z",
+          "score": 116.6,
+          "engagement": "200 points · 51 comments",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "2df93ea7c97d6d38",
+          "category": "market",
+          "title": "Six reasons that the risk of a stock-market selloff is rising. Here’s what investors should be doing.",
+          "titleZh": "股市抛售风险上升的六个原因。 以下是投资者应该做的事情。",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNcGtpYnFoQWcwSkE2T2ExODJNRkRTajg4VWNtQTFodmw4Rk1ETDFtXy1BOTl6NUllWUtFWldhNUg3dURub0dwS2NhcHpLbGVLU1BzWnFGLWlpMUtCbFBIWFNwdktLVzRGNkpVRnNST25vU0J2Q25fNU01Q0lmeTZ3U3BudmctRmplcmlVbUdVZ3VpcUFUSFF5NVhTdm5zV05nMjBtcXBXTS1RdmYyYXVGYnFFZW9XY1pnUXdWVEpxNEFoNG5UcVhyOFJfV3NnVnEySmRFMjlNZDM?oc=5",
+          "source": "MarketWatch",
+          "publishedAt": "Fri, 04 Sep 2026 13:30:00 GMT",
+          "score": 73.6,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "8cecb3d9bc5d5fe7",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 72,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "3774e1e2f32f32f0",
+          "category": "market",
+          "title": "UiPath downgraded, Shell upgraded: Wall Street's top analyst calls",
+          "titleZh": "UiPath降级，壳牌升级：华尔街顶级分析师致电",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONDlIMlZWRExrMDJ1NUJlbFMwU3l2VWVfMUNVSWdCY3dEejhPeUhMUXE1MlJqYzNWVDZGVWNqNXl5eWlUa2NTRnN0WGk5UThTbWZEQUhwRjEzWGNqZHFxdGRBX0pmUDRoZk9OZTZvcXdSNjliZUdtcVBIcnVOMTJ0ZUFwdzcwaE8taTFia3FjQUpobWpVMWNCdFMwVnJ1Zm9aV1lhVw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 13:48:20 GMT",
+          "score": 67.7,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "031531bde2ad3281",
+          "category": "market",
+          "title": "The Nasdaq’s Biggest Winner Was a Bitcoin Stock That Is Still Down 56% in a Year",
+          "titleZh": "纳斯达克最大的赢家是比特币股票，该股票在一年内仍下跌56%",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNY1g3THZ3b2xxM0JOaGRDOVdiR1ctQUMwRHRGR0w0cTREdGJBUUtXZ3RTbENvMFl3Zkc2QWhreEFyLVRJZmFzN2xwZGhOUXI1VGdrYVN2bl9HbGZaN2hJbHhsTkw3ME1vQ1Y5TFBPeTBQb2lUdDNGSUtSeGhCeFZqUHM0NF9kellWV3g4dGNfNGU0VV9hY0V6VzRpWFlPQnJkZ0E?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 12:18:58 GMT",
+          "score": 67.1,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "b78b53136335d7a7",
+          "category": "market",
+          "title": "Wall Street Analysts See a 25.77% Upside in Five Below (FIVE): Can the Stock Really Move This High?",
+          "titleZh": "华尔街分析师看到5以下（ 5 ）上涨25.77% ：股市真的能走高吗？",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNZnpydHpiMlNuYTUzd1k1OGhpWTNRNVh0dXp2WWN2Zm5aQ1p0dFhFQmU3cmZIbE9LRFZMV3ZBUk1FR0IxY19FdHNmSU5vMWdjX1FzUlRTZ19qbXhTOEk0N3loWHhRaDEyV3hpU3pmMlVTUmh3R3hXY3AyUmhnMU9vYllzMGJlTWhjazNTWlJWYm1JZ183RkQw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 13:55:02 GMT",
+          "score": 64.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "9f5e2561080c0328",
+          "category": "market",
+          "title": "3 of Wall Street’s Favorite Stocks to Research Further",
+          "titleZh": "华尔街最喜欢进一步研究的3只股票",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNLXBYY0UzTDl0VnBfMHV0ZGxWalVITE5QT0RZYlVuZ3VZWUI2YzF6QTByMjFaamZCTllmeWQzcHJvTUNhb00xNGd2LTRRLVZKYXpqZDFjZVFUSnpJU2FEZHY2SmpNV013MTNNZTZKUTI5d0R3TE4xdU95aGM3bE42RnYzRWVQS0dnWGFWb0lsVHRkVVV6TUZ1UmFn?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 11:26:10 GMT",
+          "score": 63.5,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "f1fc4fcb91990214",
+          "category": "market",
+          "title": "3 of Wall Street’s Favorite Stocks We Find Risky",
+          "titleZh": "我们发现有风险的华尔街最受欢迎的3只股票",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNMHdCd1U4OEZxNXhpSldBbFplX1RoNXh1b2xvRlJzbXhYNURzcnh1c0tzRndYMEFMeExhVWctUGhkc0taYlRERGhOcWowZHowZjZHV1FyN00xdjkwdm0xdlYybGNDb0FSTlc3M1YzcWx5RzVzYzFjdHM1RmQyVXRxZk8yWmpCUVpvdllyVEVBVm9qWENrZkcwMUhR?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 11:58:10 GMT",
+          "score": 63.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "af21ac2edf73e636",
+          "category": "market",
+          "title": "Wall Street September October Historical Market Risks",
+          "titleZh": "华尔街9月10月历史市场风险",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNeE9jOWdlR09TeE5kcWpfOVVxYzhsYmNjRXU4cEYxMEJtd2pyTjZUOFJ3QmNkQ01fay1sVHZ2dW1sWkZEa1NaRUNVVENERU5ZdElianJuT3MtZ1NHQjE2MUpmdmt2N0twSGNfUXBYMmZfb0ZUQy1sYzU4Y2RnempBVkliLWlBdXNYYzZWRGpfak1ZVmJZVXlCaGNJUkxJWXI3NjRRcGNHcUVadThRNS1DYmFRMUlpUEdpQzJ1V256VW1OWFQzTXVyekpoU3BJc0U0ZUJGTVlB?oc=5",
+          "source": "fundssociety.com",
+          "publishedAt": "Fri, 04 Sep 2026 13:29:02 GMT",
+          "score": 62.2,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
+        },
+        {
+          "id": "e71bc8183150f8cf",
+          "category": "market",
+          "title": "Is Kroger (KR) a Buy as Wall Street Analysts Look Optimistic?",
+          "titleZh": "Kroger (KR)是否买入，因为华尔街分析师看起来很乐观？",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQUzd0THBZWnE5SEVQLUJxQ1RtMTZscDR4anAxbWdDdHlfYTdYQThYamRpb2ZaTTVOX1VmUTRDal9zc3Nqb1EtOEJUbEhVUDU4dklOd0RGMlFKRE14TmFFM1dKMUlNVTZRejV1cFNRQWdSZDFoS2hsVmVhUlI2SzR6Y0hZQnQ5YUlsYk9JMVBUNXI1bXJI?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 13:30:03 GMT",
+          "score": 60.8,
+          "engagement": "",
+          "pushedAt": "2026-09-04T15:00:45.706Z"
         },
         {
           "id": "519991c639b3b5bf",
@@ -97,18 +266,6 @@
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
-          "id": "6379e22bcefbb3cd",
-          "category": "tech",
-          "title": "Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out",
-          "titleZh": "Claude、Codex和Cursor选择了哪些工具？ 我们测量了17000次跑步来找出",
-          "url": "https://armature.tech/blog/which-tools-coding-agents-install",
-          "source": "armature.tech",
-          "publishedAt": "2026-09-03T21:20:34.000Z",
-          "score": 114.9,
-          "engagement": "226 points · 104 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
           "id": "5725b766800de7c4",
           "category": "tech",
           "title": "Pre-Release of Polars 2.0",
@@ -118,18 +275,6 @@
           "publishedAt": "2026-09-03T06:59:08.000Z",
           "score": 113,
           "engagement": "394 points · 133 comments",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "64d8f3a213bb739c",
-          "category": "market",
-          "title": "Shein has made a shaky stock market entry. Can it get its mojo back?",
-          "titleZh": "Shein不稳定地进入了股市。 它能找回魔力吗？",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTTVOZ3VEallhYjg3YU95ZkYzYzY3VTMya2dmNFFiRDExZENhbFl2LU52YUF2TjVodUdEWVVjTm5jWnVXLWtMZlFnLUp3U3VQTVBZeHVlLTJqajNUcC0zZ18xcHJQSDJQbEJWWWdVaXBIM0xHYXNlaVVhQzI0YkFmUVdB0gGHAUFVX3lxTE5nMGI2QkI0VFpwQ3NGODcwRkpoSjEyczN4RnprYmlXSXhocmJ6dnlDUXYtYWdiTkowM2lZY3hJNXRDSXAySFVlSjlNbDZiNkFweWthR09KbHN6VkVyR1VfNF94MWhnM2FYdnFjMThzWWNCNXFENTgyRzZKdXZRb0VkZ0Npd2NlSQ?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 04:49:36 GMT",
-          "score": 68.9,
-          "engagement": "",
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
@@ -190,18 +335,6 @@
           "publishedAt": "Fri, 04 Sep 2026 08:20:00 GMT",
           "score": 63,
           "engagement": "",
-          "pushedAt": "2026-09-04T10:29:44.587Z"
-        },
-        {
-          "id": "e98d37e7a1b8d4a1",
-          "category": "tech",
-          "title": "Hackers Had a Live Feed of Every ID Verification Company Scanned for over a Year",
-          "titleZh": "黑客对每家身份验证公司进行了一年多的实时扫描",
-          "url": "http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/",
-          "source": "techdirt.com",
-          "publishedAt": "2026-09-04T06:47:51.000Z",
-          "score": 114.4,
-          "engagement": "159 points · 49 comments",
           "pushedAt": "2026-09-04T10:29:44.587Z"
         },
         {
