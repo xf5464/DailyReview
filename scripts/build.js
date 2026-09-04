@@ -10,6 +10,12 @@ const dataDirectory = path.join(outputDirectory, 'data');
 const chartDataDirectory = path.join(dataDirectory, 'charts');
 const offlineDataDirectory = path.join(dataDirectory, 'offline');
 
+// 总览页小图的统一观察期配置。新增月度/季度折线图时自动沿用，不允许单图写死。
+const overviewMiniChartPeriods = {
+  monthly: 12,
+  quarterly: 12,
+};
+
 function contentHash(content) {
   return crypto.createHash('sha256').update(content).digest('hex').slice(0, 16);
 }
@@ -23,36 +29,62 @@ function applyChartPresentationOverrides() {
   const appPath = path.join(outputDirectory, 'app.js');
   let source = fs.readFileSync(appPath, 'utf8');
 
+  const rangesAnchor = '  var RANGES = {';
+  const rangesReplacement = [
+    '  var OVERVIEW_MINI_CHART_PERIODS = {',
+    `    monthly: ${overviewMiniChartPeriods.monthly},`,
+    `    quarterly: ${overviewMiniChartPeriods.quarterly}`,
+    '  };',
+    '',
+    rangesAnchor,
+  ].join('\n');
+  if (!source.includes(rangesAnchor)) {
+    throw new Error('Unable to inject overview mini chart period config: RANGES pattern changed.');
+  }
+  source = source.replace(rangesAnchor, rangesReplacement);
+
   const cardRangeSource = "    var chart = filteredChart(source, refs.range.value);";
   const cardRangeReplacement = [
-    "    var cardRangeKey = chartId === 'silver' && refs.range.value === 'month3' ? 'year1' : refs.range.value;",
-    '    var chart = filteredChart(source, cardRangeKey);',
+    '    var chart = source ? Object.assign({}, source) : null;',
+    "    var cardFrequency = chart && chart.frequency || '';",
+    "    var fixedPeriodCard = chart && chart.chartType !== 'stockTable' && chart.chartType !== 'wideEtfTable';",
+    "    if (fixedPeriodCard && cardFrequency.includes('月')) {",
+    '      chart.items = (source.items || []).slice(-OVERVIEW_MINI_CHART_PERIODS.monthly);',
+    "    } else if (fixedPeriodCard && cardFrequency.includes('季')) {",
+    '      chart.items = (source.items || []).slice(-OVERVIEW_MINI_CHART_PERIODS.quarterly);',
+    '    } else {',
+    '      chart = filteredChart(source, refs.range.value);',
+    '    }',
   ].join('\n');
   if (!source.includes(cardRangeSource)) {
-    throw new Error('Unable to apply silver card range override: createCard pattern changed.');
+    throw new Error('Unable to apply overview mini chart period rules: createCard pattern changed.');
   }
   source = source.replace(cardRangeSource, cardRangeReplacement);
 
   const axisLabelSource = "        label.textContent = formatDate(item.date, chart.frequency);";
   const axisLabelReplacement = [
-    "        if (!isDetailChart && chart.id === 'silver' && chart.frequency && chart.frequency.includes('月')) {",
+    "        var compactMonthlyAxis = !isDetailChart && chart.frequency && chart.frequency.includes('月');",
+    "        var compactQuarterlyAxis = !isDetailChart && chart.frequency && chart.frequency.includes('季');",
+    '        if (compactMonthlyAxis || compactQuarterlyAxis) {',
     "          var itemDate = new Date(item.date + 'T00:00:00Z');",
-    '          var firstLabelDate = new Date(items[xIndexes[0]].date + \'T00:00:00Z\');',
-    '          var lastLabelDate = new Date(items[xIndexes[xIndexes.length - 1]].date + \'T00:00:00Z\');',
+    "          var firstLabelDate = new Date(items[xIndexes[0]].date + 'T00:00:00Z');",
+    "          var lastLabelDate = new Date(items[xIndexes[xIndexes.length - 1]].date + 'T00:00:00Z');",
     '          var previousLabelDate = labelIndex > 0',
     "            ? new Date(items[xIndexes[labelIndex - 1]].date + 'T00:00:00Z')",
     '            : null;',
     '          var spansYears = firstLabelDate.getUTCFullYear() !== lastLabelDate.getUTCFullYear();',
     '          var showYear = spansYears && (labelIndex === 0 ||',
     '            !previousLabelDate || itemDate.getUTCFullYear() !== previousLabelDate.getUTCFullYear());',
-    "          label.textContent = (showYear ? itemDate.getUTCFullYear() + '年' : '') +",
-    "            (itemDate.getUTCMonth() + 1) + '月';",
+    "          var compactPeriod = compactMonthlyAxis",
+    "            ? (itemDate.getUTCMonth() + 1) + '月'",
+    "            : 'Q' + (Math.floor(itemDate.getUTCMonth() / 3) + 1);",
+    "          label.textContent = (showYear ? itemDate.getUTCFullYear() + '年' : '') + compactPeriod;",
     '        } else {',
     '          label.textContent = formatDate(item.date, chart.frequency);',
     '        }',
   ].join('\n');
   if (!source.includes(axisLabelSource)) {
-    throw new Error('Unable to apply compact silver axis labels: renderLineChart pattern changed.');
+    throw new Error('Unable to apply compact monthly/quarterly axis labels: renderLineChart pattern changed.');
   }
   source = source.replace(axisLabelSource, axisLabelReplacement);
 
