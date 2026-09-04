@@ -68,3 +68,8 @@ test("recognizes refresh-only environment values", () => {
   assert.equal(environmentFlag("false"), false);
   assert.equal(environmentFlag(""), false);
 });
+
+test("reuses an existing Chinese title without calling the translation service", async () => {
+  const items = [{ title: "Existing English headline", titleZh: "已有中文标题" }];
+  assert.deepEqual(await require("../scripts/send-hot-news-email").addChineseTranslations(items), items);
+});

@@ -1,6 +1,7 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const DEFAULT_WINDOW_HOURS = 30;
 const MAX_ITEMS = 10;
+const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
 
 const SOURCE_WEIGHTS = new Map([
@@ -153,7 +154,10 @@ async function translateBatch(titles) {
 }
 
 async function addChineseTranslations(items, maxBatchBytes = 450) {
-  const output = items.map((item) => ({ ...item, titleZh: containsChinese(item.title) ? item.title : "" }));
+  const output = items.map((item) => ({
+    ...item,
+    titleZh: String(item.titleZh || "").trim() || (containsChinese(item.title) ? item.title : ""),
+  }));
   const batches = [];
   let batch = [];
   for (let index = 0; index < items.length; index += 1) {
@@ -206,7 +210,19 @@ async function fetchHackerNews(windowHours, now = Date.now()) {
     }));
 }
 
-async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now()) {
+function archivedTitleTranslations(filePath) {
+  if (!filePath) return new Map();
+  try {
+    const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return new Map((archive.days || []).flatMap((day) => day.items || [])
+      .filter((item) => item.url && item.titleZh)
+      .map((item) => [item.url, item.titleZh]));
+  } catch {
+    return new Map();
+  }
+}
+
+async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now(), knownTranslations = new Map()) {
   const requests = [
     fetchHackerNews(windowHours, now),
     fetchGoogleFeed("technology OR AI OR chips OR software when:1d", "tech", 0),
@@ -220,7 +236,14 @@ async function collectHotNews(windowHours = DEFAULT_WINDOW_HOURS, now = Date.now
   const all = groups.flat().filter((item) => hoursOld(item.publishedAt, now) <= windowHours);
   const rankedTech = rankAndDedupe(all.filter((item) => item.category === "tech"), MAX_ITEMS, now);
   const rankedMarket = rankAndDedupe(all.filter((item) => item.category === "market"), MAX_ITEMS, now);
-  const [tech, market] = await Promise.all([addChineseTranslations(rankedTech), addChineseTranslations(rankedMarket)]);
+  const reuseTranslations = (items) => items.map((item) => ({
+    ...item,
+    titleZh: knownTranslations.get(item.url) || "",
+  }));
+  const [tech, market] = await Promise.all([
+    addChineseTranslations(reuseTranslations(rankedTech)),
+    addChineseTranslations(reuseTranslations(rankedMarket)),
+  ]);
   if (!tech.length || !market.length) throw new Error(`Not enough news: tech=${tech.length}, market=${market.length}`);
   return { tech, market, failureCount: failures.length, fetchedAt: new Date(now).toISOString() };
 }
@@ -288,8 +311,8 @@ function environmentFlag(value) {
 async function main() {
   const refreshOnly = environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY);
   const windowHours = Math.min(72, Math.max(12, Number(process.env.HOT_NEWS_WINDOW_HOURS) || DEFAULT_WINDOW_HOURS));
-  const news = await collectHotNews(windowHours);
   const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || "").trim();
+  const news = await collectHotNews(windowHours, Date.now(), archivedTitleTranslations(archivePath));
   if (archivePath) {
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt));
     console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
@@ -314,4 +337,4 @@ async function main() {
 
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
-module.exports = { addChineseTranslations, collectHotNews, decodeXml, environmentFlag, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
+module.exports = { addChineseTranslations, archivedTitleTranslations, collectHotNews, decodeXml, environmentFlag, isSimilarTitle, newsMessage, normalizeTitle, parseRssItems, rankAndDedupe, readerUrl, recipients, translateBatch, translateTitle };
