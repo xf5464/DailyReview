@@ -19,6 +19,46 @@ function writeJson(filePath, value) {
   fs.writeFileSync(filePath, JSON.stringify(value) + '\n', 'utf8');
 }
 
+function applyChartPresentationOverrides() {
+  const appPath = path.join(outputDirectory, 'app.js');
+  let source = fs.readFileSync(appPath, 'utf8');
+
+  const cardRangeSource = "    var chart = filteredChart(source, refs.range.value);";
+  const cardRangeReplacement = [
+    "    var cardRangeKey = chartId === 'silver' && refs.range.value === 'month3' ? 'year1' : refs.range.value;",
+    '    var chart = filteredChart(source, cardRangeKey);',
+  ].join('\n');
+  if (!source.includes(cardRangeSource)) {
+    throw new Error('Unable to apply silver card range override: createCard pattern changed.');
+  }
+  source = source.replace(cardRangeSource, cardRangeReplacement);
+
+  const axisLabelSource = "        label.textContent = formatDate(item.date, chart.frequency);";
+  const axisLabelReplacement = [
+    "        if (!isDetailChart && chart.id === 'silver' && chart.frequency && chart.frequency.includes('月')) {",
+    "          var itemDate = new Date(item.date + 'T00:00:00Z');",
+    '          var firstLabelDate = new Date(items[xIndexes[0]].date + \'T00:00:00Z\');',
+    '          var lastLabelDate = new Date(items[xIndexes[xIndexes.length - 1]].date + \'T00:00:00Z\');',
+    '          var previousLabelDate = labelIndex > 0',
+    "            ? new Date(items[xIndexes[labelIndex - 1]].date + 'T00:00:00Z')",
+    '            : null;',
+    '          var spansYears = firstLabelDate.getUTCFullYear() !== lastLabelDate.getUTCFullYear();',
+    '          var showYear = spansYears && (labelIndex === 0 ||',
+    '            !previousLabelDate || itemDate.getUTCFullYear() !== previousLabelDate.getUTCFullYear());',
+    "          label.textContent = (showYear ? itemDate.getUTCFullYear() + '年' : '') +",
+    "            (itemDate.getUTCMonth() + 1) + '月';",
+    '        } else {',
+    '          label.textContent = formatDate(item.date, chart.frequency);',
+    '        }',
+  ].join('\n');
+  if (!source.includes(axisLabelSource)) {
+    throw new Error('Unable to apply compact silver axis labels: renderLineChart pattern changed.');
+  }
+  source = source.replace(axisLabelSource, axisLabelReplacement);
+
+  fs.writeFileSync(appPath, source, 'utf8');
+}
+
 function addAssetVersions() {
   const indexPath = path.join(outputDirectory, 'index.html');
   const versionFor = (fileName) => crypto
@@ -48,6 +88,7 @@ function addAssetVersions() {
 async function build() {
   fs.rmSync(outputDirectory, { recursive: true, force: true });
   fs.cpSync(siteDirectory, outputDirectory, { recursive: true });
+  applyChartPresentationOverrides();
   addAssetVersions();
   fs.mkdirSync(dataDirectory, { recursive: true });
   fs.mkdirSync(chartDataDirectory, { recursive: true });
