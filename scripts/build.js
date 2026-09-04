@@ -193,6 +193,53 @@ function applyChartPresentationOverrides() {
     '      emptyCell.colSpan = compact ? 2 : 3;'
   );
 
+  const bindEventsAnchor = '  function bindEvents() {';
+  const scrollLockHelpers = [
+    '  var dialogBackgroundScrollY = 0;',
+    '  var dialogBackgroundScrollLocked = false;',
+    '',
+    '  function syncDialogBackgroundScrollLock() {',
+    "    var hasOpenDialog = Boolean(document.querySelector('dialog[open]'));",
+    '    if (hasOpenDialog && !dialogBackgroundScrollLocked) {',
+    '      dialogBackgroundScrollY = window.scrollY || window.pageYOffset || 0;',
+    "      document.documentElement.classList.add('dialog-background-locked');",
+    "      document.body.classList.add('dialog-background-locked');",
+    "      document.body.style.top = '-' + dialogBackgroundScrollY + 'px';",
+    '      dialogBackgroundScrollLocked = true;',
+    '      return;',
+    '    }',
+    '    if (!hasOpenDialog && dialogBackgroundScrollLocked) {',
+    "      document.documentElement.classList.remove('dialog-background-locked');",
+    "      document.body.classList.remove('dialog-background-locked');",
+    "      document.body.style.removeProperty('top');",
+    '      dialogBackgroundScrollLocked = false;',
+    '      window.scrollTo(0, dialogBackgroundScrollY);',
+    '    }',
+    '  }',
+    '',
+    '  function observeDialogBackgroundScrollLock() {',
+    '    var observer = new MutationObserver(syncDialogBackgroundScrollLock);',
+    "    observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });",
+    '    document.querySelectorAll(\'dialog\').forEach(function (dialog) {',
+    "      dialog.addEventListener('close', syncDialogBackgroundScrollLock);",
+    "      dialog.addEventListener('cancel', function () { window.setTimeout(syncDialogBackgroundScrollLock, 0); });",
+    '    });',
+    '    syncDialogBackgroundScrollLock();',
+    '  }',
+    '',
+    bindEventsAnchor,
+  ].join('\n');
+  if (!source.includes(bindEventsAnchor)) {
+    throw new Error('Unable to add dialog background scroll lock: bindEvents pattern changed.');
+  }
+  source = source.replace(bindEventsAnchor, scrollLockHelpers);
+
+  const initializeAnchor = '    bindEvents();';
+  if (!source.includes(initializeAnchor)) {
+    throw new Error('Unable to initialize dialog background scroll lock: initialize pattern changed.');
+  }
+  source = source.replace(initializeAnchor, initializeAnchor + '\n    observeDialogBackgroundScrollLock();');
+
   fs.writeFileSync(appPath, source, 'utf8');
 
   const stylesPath = path.join(outputDirectory, 'styles.css');
@@ -240,6 +287,33 @@ function applyChartPresentationOverrides() {
     '  white-space: normal;',
     '  overflow-wrap: anywhere;',
     '  text-align: center;',
+    '}',
+    '',
+    '/* 任意弹窗打开时锁住背景页面，防止 iOS/Safari 上下滑穿透。 */',
+    'html.dialog-background-locked,',
+    'body.dialog-background-locked {',
+    '  width: 100%;',
+    '  overflow: hidden !important;',
+    '  overscroll-behavior: none;',
+    '}',
+    '',
+    'body.dialog-background-locked {',
+    '  position: fixed;',
+    '  left: 0;',
+    '  right: 0;',
+    '}',
+    '',
+    'dialog[open] {',
+    '  max-height: calc(100dvh - 24px);',
+    '  overflow-x: hidden;',
+    '  overflow-y: auto;',
+    '  overscroll-behavior: contain;',
+    '  -webkit-overflow-scrolling: touch;',
+    '}',
+    '',
+    'dialog[open] > .overall-config-card {',
+    '  min-width: 0;',
+    '  max-width: 100%;',
     '}',
     '',
     '/* 详情页同类操作区：优先等宽、左右边界对齐；窄控件放在等宽网格中居中。 */',
