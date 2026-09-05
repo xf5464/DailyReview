@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T19:00:41.466Z",
+  "updatedAt": "2026-09-05T19:30:48.138Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 20.9,
+      "score": 20.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 65.2,
+      "score": 64.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "89e0adf0c9c1b067",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 18:10:58 GMT",
-      "score": 45.2,
+      "score": 44.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,37 +60,37 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
-      "id": "7d32cd79e9ec75d3",
+      "id": "24dda51b24e4f869",
       "category": "market",
-      "title": "Foxconn expects Q3 to beat market expectations as AI demand stays strong",
-      "titleZh": "随着人工智能需求保持强劲，富士康预计第三季度将超越市场预期",
-      "url": "https://www.investing.com/news/stock-market-news/foxconn-expects-q3-to-beat-market-expectations-as-ai-demand-stays-strong-4890202",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQbnM3eEVVTUt4Q3B1dGZSMEo3N1JkNExKSlpDeWZmdGpQVFhqVllDV3FwOTBwNzYxR3lIVXBxVHU1bFdDQnh0dWhxdEFPVHFaMkV2MVhzUldXd3ZGb0t4WjltTzB6dXNDVzhIbzJFMnZPQTNNQ0pfZ05jS2JnOHBEOTdSXzVTemd3TnlaaVpyemx6NG1NLWZ1MW9tbzlxTjUxVWkwSVBGUlI2R215OUxNYWFrNm5WWG5MOWZWTVJ6V255SlMzLWZCTA?oc=5",
+      "title": "UBS: Commodities can add diversification as inflation, geopolitical risks rise By Investing.com",
+      "titleZh": "瑞银：随着通货膨胀和地缘政治风险的上升，大宗商品可能会增加多元化",
+      "url": "https://za.investing.com/news/stock-market-news/ubs-commodities-can-add-diversification-as-inflation-geopolitical-risks-rise-4455213",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNa1E3dzlWeWVfSmp5d054alVQc1Vfa3ZXR3U4cW1oUllYRVVNUVNjbVNHWEtlMVM3YU9LUXVZc2dFQWhYT1I0d3Q2d0NpU2l2THFXWTlBbEtVb3kxckpqQnEybXBvbGN4SzhLUEtOeWNORndrNC1YNTBUZ1owa0YtVXpqbE9PUXc0NVFfWGUzOUNRcWRwa1BtMVlXQzQxbERlYWx5ZXNVY3ZRMlhYRktaWkhZQzJ1bkVvQTgxVnpWLVl6MmJFVnFJZ01YbFQ?oc=5",
       "source": "Investing.com",
       "sourceKey": "investing",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 12:29:43 GMT",
-      "score": 51.3,
+      "publishedAt": "Sat, 05 Sep 2026 19:25:49 GMT",
+      "score": 45.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
-      "id": "000026ca39267979",
+      "id": "eb91ce01e3372d1f",
       "category": "market",
-      "title": "Jobs and Iran add to Trump’s midterm headaches. Why that’s good for bonds and bad for energy stocks.",
-      "titleZh": "乔布斯和伊朗加剧了特朗普的中期头痛。 为什么这对债券有利，对能源股不利。",
-      "url": "https://www.marketwatch.com/story/jobs-and-iran-add-to-trumps-midterm-headaches-why-thats-good-for-bonds-and-bad-for-energy-stocks-551cb765",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOTWtTaW9PYmhWYlAwMmtvNl8wYldIcV9ueVBuTFlSWUg0blBmb1l3dU5SdnhzNFBuOWhjalRPZEd6ck9vSldPYWtqeHdVdUtROXpsZTFhakFGLWVVRjMyUm01bjl3SklUdDREa2lmSUo5UzZZUE41Ty05UmUwbkp4UmY3UE9uTVZGTkFqTnJWQ0FhVlQ2RUtmTzctM3NNM0dRT0xsRGtOMmRhVEs2dl9GN3Y1TVB0alV6MTVNdjNHUWlnZ1prQ0hvUXlHYU1oT1RZVmZzVm5n?oc=5",
+      "title": "Opinion: Think you maxed out your 401(k)? The real limit is actually almost $50,000 higher.",
+      "titleZh": "意见：您认为您的401 (k)已用完？ 实际限额实际上高出近50,000 $。",
+      "url": "https://www.marketwatch.com/story/think-you-maxed-out-your-401-k-the-real-limit-is-actually-almost-50-000-higher-217a89ee",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhYOEtjNWRDbmNxZHEzWWJIQWRfUjE3UFZoemViMEN5MzA0dHlQdjhubFhXWV81RWJYQ2M3bGZXNXhHWmVLNzVtWE1kZlV6Qzg0NFpINVZ2LUZvWlRyYzYzSTNfRW00RWItNXNUOHFrMXpfS3ZfLTA5bi14dk5HelVtX09WaDRfa2tiRklGOWVMdjdhc1BCcF9oR2YzTlNpSW82eTN1ZlJfVkJHN2FuWjUzb3hHaW05SkJoLW9n?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 16:34:00 GMT",
-      "score": 40.6,
+      "publishedAt": "Sat, 05 Sep 2026 18:59:00 GMT",
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "d932b32e68b90e46",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 13:25:58 GMT",
-      "score": 60.4,
+      "score": 59.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "fc13dce42e6b5e98",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:08:50 GMT",
-      "score": 38.9,
+      "score": 38.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "954c0e42ee45f4cc",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 14:44:00 GMT",
-      "score": 54.3,
+      "score": 53.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "c460312cd3b974cb",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 49.9,
+      "score": 49.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -162,10 +162,10 @@
       "source": "Reuters Technology",
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 18:27:54 GMT",
+      "publishedAt": "Sat, 05 Sep 2026 18:59:31 GMT",
       "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "b86b5015c5da7a40",
@@ -178,24 +178,24 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 18:05:27 GMT",
-      "score": 77.1,
+      "score": 76.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
-      "id": "3c803508656819f2",
+      "id": "5b13087810689101",
       "category": "tech",
-      "title": "CD sales are booming as physical media continues its resurgence",
-      "titleZh": "随着实体媒体的持续复苏， CD销量正在蓬勃发展",
-      "url": "https://www.theverge.com/entertainment/990794/cd-sales-are-booming-as-physical-media-continues-its-resurgence",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQd0NDWWFoVDZYZXJ5cDA4MFQ1RmtXU3kyOUJYMG5WOE81MXdBVGF3Qi1XVzV5Ul82Z1R2b2ZhSXhmTDB0MUlUemFMNlp0VnJHcW9UdkRyY1RhTlFnRGFmNlowWUFBWEkwS3ZsQ3JFa0toRXdqREYzNGY3S0xyNklVTkYtNkFTZjVMUF9LRzZabkhjNU1yZzBuZWsybzhRbnB2Q0JrQjNXei0xcHlqQnc?oc=5",
+      "title": "OpenAI admits to German wiki ‘incident’",
+      "titleZh": "OpenAI承认德国维基“事件”",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/990773/openai-german-wiki-incident",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQbXNMTnVsWjBSNmhxZWlUanFZYlk3a2QyRG5CVjhKVllWYmdDeEh5UmVfS0MyLVhZMlRKbmU5RjRzVWdVNE96b0VvVkx1UlV0Z0IxM3F6UnZqMXZDUENvRVkzQWlkUU56bF9FUG8yRHF2WVRXUkh6Ni1zSjNNWGlHWWhqMVBoMmlqcVQwVFVaNA?oc=5",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 16:49:33 GMT",
-      "score": 53.8,
+      "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
+      "score": 50.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "cee0480452514b7d",
@@ -208,24 +208,24 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 51.7,
+      "score": 51.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
-      "id": "9ab528f7dfe3ba97",
+      "id": "1b162106c901be17",
       "category": "tech",
-      "title": "Why It's Important To Regularly Restart Your Router",
-      "titleZh": "为什么定期重新启动路由器很重要",
-      "url": "https://www.engadget.com/2247914/why-important-regularly-restart-router/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9yQTdVeVdhMlR2MzFEYlhLVVd5ZjJ0SkdBNTdKbUZXbXIwMXNCQmZXcl9XaThMT2pxTHdnQ1BmMXBYTVdCNVZacDBidFIxTEVkVU91Vl95N29fYzZNOXowZ1UtdkdXVGU0ZEUxQ0E1WHY3TlY5OG9jYWRHeGs?oc=5",
+      "title": "You're Probably Wasting These Keys On Your Keyboard — Here's How To Remap Them",
+      "titleZh": "您可能会将这些键浪费在键盘上—以下是重新映射它们的方法",
+      "url": "https://www.engadget.com/2247939/how-to-remap-keys-windows/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMia0FVX3lxTE93MGZQMmVBUlRsU2Z6SDNRTzBKQUJtOFAtbVp4S3F3X2haeFdkVGpSOEdMMTktdFM4X045RTFwOWZLeWZZN3NKSnV3NTJPU0ktbFRpclBaYzRxRDh2djdCcjl3OS1UMlczRlFR?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 16:30:00 GMT",
-      "score": 58.7,
+      "publishedAt": "Sat, 05 Sep 2026 18:00:00 GMT",
+      "score": 52.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "8a4890e0650899fa",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 13:43:57 GMT",
-      "score": 47.7,
+      "score": 47.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 39.2,
+      "score": 38.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 49.3,
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,23 +283,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 51.3,
+      "score": 50.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
-      "id": "388819ff9e6f9d10",
+      "id": "415884a72ea16d83",
       "category": "tech",
-      "title": "The \"$60 Gaming PC\" – AMD BC-250 (2025)",
-      "titleZh": "“$ 60游戏PC” – AMD BC-250 (2025)",
-      "url": "https://devquasar.com/hardware/the-60-gaming-pc-amd-bc-250/",
+      "title": "The Luxuries in Life",
+      "titleZh": "生活中的奢侈品",
+      "url": "https://feld.com/archives/2026/09/the-real-luxuries-in-life/",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-05T13:36:38.000Z",
-      "score": 115.6,
-      "engagement": "180 points · 59 comments",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "publishedAt": "2026-09-05T17:46:16.000Z",
+      "score": 106.1,
+      "engagement": "92 points · 31 comments",
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T19:00:41.466Z"
+      "fetchedAt": "2026-09-05T19:30:48.138Z"
     }
   ]
 }
