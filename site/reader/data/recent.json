@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T15:00:42.774Z",
+  "updatedAt": "2026-09-05T15:30:42.168Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 24.9,
+      "score": 24.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 38.1,
+      "score": 37.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "f0dc04164b041e3d",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 12:20:42 GMT",
-      "score": 37.3,
+      "score": 36.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -60,7 +60,7 @@
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
       "score": 29.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "7d32cd79e9ec75d3",
@@ -73,24 +73,24 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 12:29:43 GMT",
-      "score": 55.3,
+      "score": 54.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
-      "id": "61a403bbcc1af309",
+      "id": "81267dda083a8b1f",
       "category": "market",
-      "title": "Stocks to Watch: Ionis Pharmaceuticals, Novartis, Corvex",
-      "titleZh": "值得关注的股票： Ionis Pharmaceuticals、Novartis、Corvex",
-      "url": "https://www.marketwatch.com/story/stocks-to-watch-ionis-pharmaceuticals-novartis-corvex-784b323c?mod\\u003dmarkets",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPcVoyNzFFLTV2SnZEVUpnU0hJTXRzSGR1XzFKeFBNbUowcGQ5bmdNUWl1Q2NSVzNlR3VhSWhUTUhxeUc4NjE1SjFuVzFGNWFKX0hLQmpWWjc2dFNsUDZuaHByUVBPOFRwOUtKamZFNm5jeVc1dHdSM2xxeTdac3NzaHA2UGRGVmh2aVpXSXFaa2VpcDRFdHM2bFBzNjdLT1Q5OU1Id25oTWpyVW42?oc=5",
+      "title": "My wife and I are in our 70s. Should we move to California and take on a bigger mortgage to be near our kids?",
+      "titleZh": "我和妻子都70多岁了。 我们是否应该搬到加利福尼亚州，并承担更大的抵押贷款，以靠近我们的孩子？",
+      "url": "https://www.marketwatch.com/story/my-wife-and-i-are-in-our-70s-should-we-move-to-california-and-take-on-a-bigger-mortgage-to-be-near-our-kids-1d619084",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPZzJjaWVaSG1nQ2ZiUzY0cHZFbC1WcWpoalhMMktkTGtMeW5WSkxQaldqN0d1TEYzVFlMRWVaeThBYW9Mci1pNHJfRFVfTWNrVnpLbWxEMGpPMHp0allNNDF1NFVPUjM0Z1dNR2hoTmY0WGFUdjhwYkhUOF9UMGZ3UTdpSHpPM3BuSjlMUXlNWWRlN2EyVm5uS2tmektzaUxJaThYZmRBQUp3aDI2UWdUcWxwR0g0NzRnd29yMG1oQXhrb1phOERiMTJFS2xIdDFIT2ZPaktzSkg2Y1lCczVnM3p3Vm0?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Fri, 04 Sep 2026 22:58:00 GMT",
-      "score": 30,
+      "publishedAt": "Sat, 05 Sep 2026 14:00:00 GMT",
+      "score": 50.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,24 +103,24 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 45.7,
+      "score": 45.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
-      "id": "0dc71337fa397861",
+      "id": "8108d90c6c101e16",
       "category": "market",
-      "title": "Roads to Retirement: The Journey Begins",
-      "titleZh": "退休之路：旅程开始",
-      "url": "https://www.thestreet.com/retirement/roads-to-retirement-the-journey-begins",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOMU9PbHhBNmtSOHVXQUVoc0k2dlhTellNa3poQnVnamliMUN0Z210OEd6dkZWSk95ZVpRdFFlamdmSVlIVE5XUldyRjRlMDdiMXhEcVIwTVFJdEFIQnlJNXU3V2MxSDMxZDNUN3ExUnNlRHVjazA1RFE5N25XaFJjRQ?oc=5",
+      "title": "Kroger, Publix, and regional grocery chains face pricing problem",
+      "titleZh": "Kroger、Publix和区域生鲜杂货连锁店面临定价问题",
+      "url": "https://www.thestreet.com/retail/kroger-publix-and-regional-grocery-chains-face-pricing-problem",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 11:30:00 GMT",
-      "score": 36.5,
+      "publishedAt": "Sat, 05 Sep 2026 13:21:54 GMT",
+      "score": 40,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "7851080814ece1f2",
@@ -133,24 +133,24 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 11:05:00 GMT",
-      "score": 42.1,
+      "score": 41.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
-      "id": "05ccb16c4ad4e751",
+      "id": "c460312cd3b974cb",
       "category": "market",
-      "title": "NVS, IONS, AMGN Stocks Drop After-Hours — What’s Driving The Selloff?",
-      "titleZh": "NVS、IONS、AMGN股票盘后下跌—是什么推动了抛售？",
-      "url": "https://es.tradingview.com/news/stocktwits:4632bebd6094b:0-nvs-ions-amgn-stocks-drop-after-hours-what-s-driving-the-selloff/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOSTh4Tk15WHpXdFhueUFDbVlXMTlxbUtZMEIydTFJQVB6V2RpNWZlUnd0NURvaTJiRk5zMDh1OVJHRWZqZV9SZXZ4bGh5TWFlTTZGN05qRmRlNzN6cEpieTRWWURDYmo2Um45S21GcTh0a1dlOGhxZzNoV2VWS2Z0SFN6Z0Y2blZCNXFCeExaYkRiUVl6Nm9GMUtkWFIyU0IySEpCQ242QVF5U2M5T0NoekI5ZXlJd0F5OXhEdFRvM2gwZw?oc=5",
+      "title": "Bitcoin Drops Below $80K After Strong Jobs Data, ETF Inflows Collapse 76% In A Day",
+      "titleZh": "比特币在强劲的就业数据后跌破$ 80K ， ETF流入在一天内暴跌76%",
+      "url": "https://www.tradingview.com/news/stocktwits:704e17338094b:0-bitcoin-drops-below-80k-after-strong-jobs-data-etf-inflows-collapse-76-in-a-day/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQV3lkQzNrakNCdXo3Wkl0S0VITmdNdFpPZU9LbUpWVVFSLUZ5SjBUT2NXQUIzNHM0WW1ObmU2aWVodnFjSy02S2RVUjF4SkVDUF9wRVoyal9MRFBKajg5dHh6VW1IckE5a2wwTjJoUmcwdU5za2FaVWNWd1VDT0xUTFlWZmdOMUlKQUtISXlOM1gzVXRwNlQ2MnFJS1A5Q3hBTzdoajJOQlJ0dlk0Y1dqUi1SVk1Td3pKcWRyMURlVlpjczB5M0Voa2tDdjJPWFI2Ym53T0FIRQ?oc=5",
       "source": "TradingView News",
       "sourceKey": "tradingview",
       "sourceOrder": 9,
-      "publishedAt": "Fri, 04 Sep 2026 22:52:25 GMT",
-      "score": 26.9,
+      "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
+      "score": 53.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 54.2,
+      "score": 53.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 59.6,
+      "score": 59.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "b9982393b7628a00",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
-      "score": 54,
+      "score": 53.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,24 +208,24 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 42.1,
+      "score": 41.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
-      "id": "3711ce1673c64999",
+      "id": "077ebd64bf95f3a5",
       "category": "tech",
-      "title": "Does Your Android Auto Keep Lowering The Volume? This Might Be Why",
-      "titleZh": "您的Android Auto会不断降低音量吗？ 这可能就是原因",
-      "url": "https://www.engadget.com/2244675/android-auto-lowering-volume-reason-why/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1YX25lQWhseXpmYjByY09icDVtVEZkSUN4NzZjdVdZNWFIMGs5OFZNby16QUNXMy03TjJtWVd4ZERnU3BKcDR3ZVdNNmZPY1BkR3N2UjRBRGRrM25Lc0tsSGROSjFSOF96ZGdKMko1dWp4NUpVRFhRRFpxVlp1QQ?oc=5",
+      "title": "Acer Project DualPlay Mini concept hands-on: Flipping from powerful handheld to powerful tiny laptop",
+      "titleZh": "宏碁Project DualPlay Mini概念动手操作：从功能强大的手持笔记本电脑到功能强大的微型笔记本电脑",
+      "url": "https://www.engadget.com/2251692/acer-project-dualplay-mini-concept-hands-on-ifa-2026/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQaHdTRmkwTnhWRkZiT0hnbEh6bFZ5M0tEaGtKWXhCSDFxVUNPYkZLdThHc0lIc2cyYkxIZXdwdEtibjB5UWJSOC15TGtWSHF4NTJZN2x0ZkVLeWpndXFINDBxY190VGdnSFN6WWpEbVNNSjdkczVGZmlwdkExdFk5TjJ6d1B6ZTVVMnpneHZZVQ?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 14:00:00 GMT",
-      "score": 39,
+      "publishedAt": "Sat, 05 Sep 2026 14:10:05 GMT",
+      "score": 52.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "44900c7618fb8f37",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 05:48:52 GMT",
-      "score": 30.8,
+      "score": 43.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 43.2,
+      "score": 42.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "1305dd241c305356",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 14:29:13 GMT",
-      "score": 53.5,
+      "score": 53.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "67a5b180e8cd67f1",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 13:09:23 GMT",
-      "score": 51.1,
+      "score": 50.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "388819ff9e6f9d10",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:36:38.000Z",
-      "score": 97.7,
-      "engagement": "59 points · 20 comments",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "score": 100.8,
+      "engagement": "71 points · 24 comments",
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T15:00:42.774Z"
+      "fetchedAt": "2026-09-05T15:30:42.168Z"
     }
   ]
 }
