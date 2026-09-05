@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const {
   buildAlert,
   centralBankGoldTrendCondition,
+  ismNewOrdersDeteriorationCondition,
   ndxDrawdownSeries,
 } = require("../scripts/check-forecast-alert");
 const { recipients } = require("../scripts/send-forecast-email");
@@ -81,6 +82,31 @@ test("central bank gold trend stays inactive without consecutive increases", () 
     CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: "2",
   });
   assert.equal(condition, null);
+});
+
+test("ISM new orders deterioration fires below 50 with at least a 10 percent monthly drop", () => {
+  const condition = ismNewOrdersDeteriorationCondition([
+    { date: "2020-02-01", value: 49.8 },
+    { date: "2020-03-01", value: 42.2 },
+  ], { ISM_NEW_ORDERS_DROP_THRESHOLD: "10" });
+
+  assert.ok(condition);
+  assert.equal(condition.id, "ismNewOrdersDeterioration");
+  assert.equal(condition.latestLevel, 42.2);
+  assert.equal(condition.previousLevel, 49.8);
+  assert.ok(condition.value >= 10);
+});
+
+test("ISM new orders deterioration stays inactive if either requirement is missing", () => {
+  assert.equal(ismNewOrdersDeteriorationCondition([
+    { date: "2026-01-01", value: 55 },
+    { date: "2026-02-01", value: 49.9 },
+  ], { ISM_NEW_ORDERS_DROP_THRESHOLD: "10" }), null);
+
+  assert.equal(ismNewOrdersDeteriorationCondition([
+    { date: "2026-01-01", value: 52 },
+    { date: "2026-02-01", value: 50.1 },
+  ], { ISM_NEW_ORDERS_DROP_THRESHOLD: "1" }), null);
 });
 
 test("comma-separated recipients are trimmed and empty entries ignored", () => {
