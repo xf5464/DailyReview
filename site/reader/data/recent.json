@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T18:30:41.325Z",
+  "updatedAt": "2026-09-05T19:00:41.466Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 21.9,
+      "score": 20.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,24 +28,24 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 66.2,
+      "score": 65.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
-      "id": "8d2f38a2483962a8",
+      "id": "89e0adf0c9c1b067",
       "category": "market",
-      "title": "Why Walmart is moving in on DoorDash, Uber Eats delivery action, starting with donuts, coffee and sandwiches",
-      "titleZh": "沃尔玛推出DoorDash和Uber Eats优食派送服务的原因，首先是甜甜圈、咖啡和三明治",
-      "url": "https://www.cnbc.com/2026/09/05/walmart-dunkin-subway-delivery-uber-eats-doordash.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNenNvT2xaSjVjWG1QMzk2UFI2X2xfX0pQU0NyOVQ2Nk5Ccm1BRXVuWDVYQ3pERVk0eTZkdW5TMEV0aXcxRFF2dW0xY2d6X2ltWmxwVDh3ODNLbUZpWmk0Nk9XRWVCaUIySFpOMVczWlJaU3liUmJmcW9lUTZnNGlUSkQ1alN1TUNTdFRfTUgtZ9IBlAFBVV95cUxPR21DOTRJRHFUUjk3SnA3S3VqZllLZDBVLXFMcWM0Q2I3STZCOHp1Qm0ySGRUR3lQSzh4RmVlSXhwSU5YOTc5U2F5MlVsQUsxNDZwZGRHZjY5dHdLcGxDdGtGdlUyVnNZX1R3VmJJZGhPS3IybWxvZFd2OWtySms5QXlTM0FEdUkyVjNUYV9ZX0lPclZu?oc=5",
+      "title": "Trump turns up the heat on Warsh as Fed rate hike looms",
+      "titleZh": "随着美联储加息迫在眉睫，特朗普加大了对沃什的热情",
+      "url": "https://www.cnbc.com/2026/09/05/trump-warsh-fed-september-rate-hike.html",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5DYTJSa3ZaZFdjOVppNUhHcUgwZUkzNzNkQ2dQbkxfZTV2czZOREZKemRxUDhtSlgyLVQ1eEQyRlVxRWFZNXVQSVdFUTVfc0FqMzFBSXE4Qkl1VWtzdmdQWllkSkl5QjJqZXpSOEVYWUpEU3d1TFNQeVNqX07SAYIBQVVfeXFMTi1HQkxWWlgzN1hYVGt2elQwUUVzcWJIai1VclJVUkNwVDI0ME9ZRjBlSzBtT0xoMTFVMWJfUkdWT0VPZmdrc0RRLXVDd0hkeFBpMEhMNzZhSTZ2SUx1QkQ2RW5UTVk2a3VPVjgwWWdoX1Q3b0I5THlCMHdJWHJGMWFidw?oc=5",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 14:46:14 GMT",
-      "score": 42.5,
+      "publishedAt": "Sat, 05 Sep 2026 18:10:58 GMT",
+      "score": 45.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "7d32cd79e9ec75d3",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 12:29:43 GMT",
-      "score": 52.3,
+      "score": 51.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "000026ca39267979",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 16:34:00 GMT",
-      "score": 44.6,
+      "score": 40.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "d932b32e68b90e46",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 13:25:58 GMT",
-      "score": 61.4,
+      "score": 60.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "fc13dce42e6b5e98",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:08:50 GMT",
-      "score": 39.9,
+      "score": 38.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "954c0e42ee45f4cc",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 14:44:00 GMT",
-      "score": 57.1,
+      "score": 54.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "c460312cd3b974cb",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 50.6,
+      "score": 49.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -162,25 +162,25 @@
       "source": "Reuters Technology",
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 15:28:31 GMT",
-      "score": 58.5,
+      "publishedAt": "Sat, 05 Sep 2026 18:27:54 GMT",
+      "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
-      "id": "b4f1a92def54cb86",
+      "id": "b86b5015c5da7a40",
       "category": "tech",
-      "title": "Oura is going public, but these smart ring companies are coming for its crown",
-      "titleZh": "Oura即将上市，但这些智能戒指公司正在争夺王冠",
-      "url": "https://techcrunch.com/2026/09/05/oura-is-going-public-but-these-smart-ring-companies-are-coming-for-its-crown/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNZVo3bnRyTnczcWJGNDJzNzRkQmFXd002NEtfWUpVaHkwOS1fUTZyUmR1elhDeUgzSmFBa1hEUnQ5SDJwX3czNDdrVUlqSXB6ajl4TVJkUU9nUmJZZ2hBQmRpRVZqRTBZa3cyemxTdWZFS2IyWmdwV3hJeldLbmFDbVMydk5GVEVBX0NjM2hUM0tmdkNOOW83Y2VySWstd091YXdpZ1l4R2pJS0Y3eTJIYw?oc=5",
+      "title": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
+      "titleZh": "OpenAI确认“维基事件” ，称其正在“开发一个框架”以进行更多披露",
+      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaXFFeGc1SDlwN0VKcFZmZFRYdUFCdTZuOFVEVVA2dzdHWjVIOGN4ZlFrZ0toYVR2V1ZtNHJlRFFpaW1aNEJMSl9hS0NEWXZIQm1vcFB3NXdyQTI0NE9uRDNfVFBKNElfM193Ym1hX2dPMUNXZmMyZFRpaF85el9QU25OSFVkZDBvQjJ3dFVpZVpwTFU5VFJpVW14QzE0NUhEX0Z2SnNjLVJ1d3RydDduQkI3NzZOMWs?oc=5",
       "source": "TechCrunch",
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 15:00:00 GMT",
-      "score": 69,
+      "publishedAt": "Sat, 05 Sep 2026 18:05:27 GMT",
+      "score": 77.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "3c803508656819f2",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 16:49:33 GMT",
-      "score": 54.8,
+      "score": 53.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "cee0480452514b7d",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 52.7,
+      "score": 51.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "9ab528f7dfe3ba97",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 16:30:00 GMT",
-      "score": 49.9,
+      "score": 58.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
-      "id": "1ee7e3885c31e2cc",
+      "id": "8a4890e0650899fa",
       "category": "tech",
-      "title": "/ latest smartphones - page 66",
-      "titleZh": "/latest smartphones -第66页",
-      "url": "https://www.zdnet.com/topic/smartphones/66/?edition\\u003dus",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jdVptUUl6YmhFYkJDRU1iZ0dqSDZXRi1TQ0QxQjMxX1NCcWg4QXdFNndDamc0dUxybXVyOEZyTUhpcGFDeV92NUxQVnZWOS0wNk1TdWo4UDJQUXBRNmsxbTJnZHU?oc=5",
+      "title": "Adrian Kingsley-Hughes",
+      "titleZh": "阿德里安·金斯利-休斯",
+      "url": "https://www.zdnet.com/meet-the-team/adrian-kingsley-hughes/page/20/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBQWDF4bnREdDFpOGVnQ2ZRSV9ta0ZSZ1Zab3BSZ085clhFb2ZFdmFIc3dYcExEX3RKbXJhVmlCU3BzUUNFSWhWY090NmFHbXBZTW8zSHNtVDl4RVloaFljWHo3Z2NDcExKbjE2TXRvX0pYXzd5ZGc?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 12:34:16 GMT",
-      "score": 47.6,
+      "publishedAt": "Sat, 05 Sep 2026 13:43:57 GMT",
+      "score": 47.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 40.2,
+      "score": 39.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,24 +268,24 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 50.3,
+      "score": 49.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
-      "id": "a88be8fcf16633fb",
+      "id": "ce85c40651f4070e",
       "category": "tech",
-      "title": "Nvidia returns to selling Founder's Edition RTX 50-series GPUs at MSRP in person at PAX West — Verified Priority Access has RTX 5090, RTX 5080, and RTX 5070 at list price",
-      "titleZh": "英伟达在PAX West以MSRP亲自销售创始人版腾讯通50系列GPU —已验证优先接入以标价提供腾讯通5090、腾讯通5080和腾讯通5070",
-      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-returns-to-selling-founders-edition-rtx-50-series-gpus-at-msrp-in-person-at-pax-west-verified-priority-access-has-rtx-5090-rtx-5080-and-rtx-5070-at-list-price",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiuAJBVV95cUxOckp3UlROa3BicU9sV09MVnpSZDBhWlhVWEJDeUtWMTZ0MHBmMjlHN01YUmIzNHFWTXV5V1ZkVjhrTF9HSlg4R3o3UmR4Tm1iWGZvSzQ1MjhqVFZUTE9xOE9PVDFnbDVSTDRUR2I1dElhLW9WVXpnTnk4WXVLWU9OQ04zMW9kMnUzOXRnYjR1azZSM3R2MkpLWjk1WUhrYU8wMThrZDJNdTRlcnpKWU5wODh3NDliYmlzbktSaGd4bHYteUlmcVRDY3lVMG83QTRLdzFta3BfTFVuMVRlS2hTYThJMWZnUzVacVR6Ulg5NzdQazNVWkVNdGlnZjJIMU1BVXJjZkVTcFlHa3ZvNkxPRzl2eE13YWdkT3JJZEJNMkRER1pTU3VlQzFhaDNpdmppc1c5aTM4ZlY?oc=5",
+      "title": "Stripped-down Windows 11 for AI developers demands 64GB RAM and insane 250 GB/s bandwidth — Project Zenith will debut on AMD's flagship Ryzen AI Halo platform",
+      "titleZh": "适用于人工智能开发人员的精简版Windows 11要求64GB RAM和疯狂的250 GB/s带宽— Project Zenith将在AMD的旗舰Ryzen AI Halo平台上首次亮相",
+      "url": "https://www.tomshardware.com/software/windows/stripped-down-windows-11-for-ai-developers-demands-64gb-ram-and-insane-250-gb-s-bandwidth-project-zenith-will-debut-on-amds-flagship-ryzen-ai-halo-platform",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxPcWhMVnBRa0ZYYXd2b3FjRHpfckpPVTlWR1M2SWVjNnI1ZkhpcDVrRGpzNDh1SzhQWExrZ0tzdUpXSXBNUm9pYnB5UVhjdFA2VDlDUTVYcGFzakNHUFpSUDBzdHp5akRpYkV3c29OYmMweWhvQzVxTnBKeWtHRk5LckRuc3ZHR2lTZlE2Wl9FMHdJZWc4VEFlMG5ITUFtb21VcTNFYmc3NUc2NHpPQmpGRl9xRW1zNVF1M21qV2N0MDdKSHltbnZiejd3QWw2djFDSlV6RTdmaE5EWE9faVJYTEw0SDZZM1pBVnF2VlB2V2xzd293T2FSR2FGT0FHZjNSUGhja2pzMm5HS1VYdmJDQWltVGs0RDBXVG1PeWxNUDd2SzlnYm0tOA?oc=5",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 15:04:13 GMT",
-      "score": 47.1,
+      "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
+      "score": 51.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "388819ff9e6f9d10",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:36:38.000Z",
-      "score": 114.3,
-      "engagement": "164 points · 54 comments",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "score": 115.6,
+      "engagement": "180 points · 59 comments",
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T18:30:41.325Z"
+      "fetchedAt": "2026-09-05T19:00:41.466Z"
     }
   ]
 }
