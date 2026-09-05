@@ -9,7 +9,7 @@
     "build": "node scripts/build.js && node scripts/supplement-ism-new-orders-history.js && node scripts/supplement-ism-other-history.js && node scripts/patch-detail-overflow.js && node scripts/patch-ism-detail-default-range.js && node scripts/prepare-forecast-gold-ui.js && node scripts/prepare-forecast-ism-ui.js && node scripts/patch-forecast-condition-data.js",
     "update:national-team-etf": "node scripts/update-national-team-etf-holdings.js",
     "dev": "npm run build && electron .",
-    "preview": "npm run build && node scripts/serve.js",
+    "preview": "node scripts/serve.js",
     "desktop": "npm run build && electron .",
     "desktop:open": "electron .",
     "desktop:pack": "npm run build && electron-builder --dir",
