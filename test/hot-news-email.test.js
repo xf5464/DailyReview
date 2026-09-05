@@ -130,5 +130,12 @@ test("keeps the four DailyReview runs disconnected from hot-news collection", ()
 test("keeps reader publication free of Gmail configuration", () => {
   const workflow = fs.readFileSync(".github/workflows/refresh-reader.yml", "utf8");
   assert.match(workflow, /HOT_NEWS_REFRESH_ONLY: "true"/);
+  assert.match(workflow, /for attempt in 1 2 3/);
   assert.doesNotMatch(workflow, /GMAIL_USERNAME|GMAIL_APP_PASSWORD|ALERT_EMAIL_TO/);
+});
+
+test("runs the flaky online reader diagnostic only when requested manually", () => {
+  const workflow = fs.readFileSync(".github/workflows/test-reader.yml", "utf8");
+  assert.match(workflow, /on:\n  workflow_dispatch:/);
+  assert.doesNotMatch(workflow, /\n  push:/);
 });
