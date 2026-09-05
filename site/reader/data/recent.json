@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T22:00:40.536Z",
+  "updatedAt": "2026-09-05T22:30:41.028Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 34.8,
+      "score": 34.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 61.9,
+      "score": 61.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 50.7,
+      "score": 50.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "471ea4a5746f88c6",
@@ -73,54 +73,54 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:21:27 GMT",
-      "score": 57.8,
+      "score": 57.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
-      "id": "b898a990b78b2f34",
+      "id": "f0a0f9f139c08466",
       "category": "market",
-      "title": "MU Stock Price | Micron Technology Inc. Stock Quote (U.S.: Nasdaq)",
-      "titleZh": "MU股价| Micron Technology Inc.股票报价（美国：纳斯达克）",
-      "url": "https://www.marketwatch.com/investing/stock/mu",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9vX2xEV29lbDh4MU1TSWxlek1qTWFRb3FSZHh4X1ZVbDhQYkVacXllcTRUR3gzV2thQXdQTGtpSWxjVU1WZHJMaHh0MVVGUmgwU0U5RldmdkVpQQ?oc=5",
+      "title": "AVGO Stock Price | Broadcom Inc. Stock Quote (U.S.: Nasdaq)",
+      "titleZh": "AVGO股价| Broadcom Inc.股票报价（美国：纳斯达克）",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5YY3dkVlZjNDNhQ3l5S1k5NFVGYzhsZUc4aW5maUF3MU1oUzNFY0VJWDRqRGZOS0VGYlRnYnRYZHBQVVZ1OGE3SVEtazB3Wl9PdkV2Y0tqWDZVYk5z?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5YY3dkVlZjNDNhQ3l5S1k5NFVGYzhsZUc4aW5maUF3MU1oUzNFY0VJWDRqRGZOS0VGYlRnYnRYZHBQVVZ1OGE3SVEtazB3Wl9PdkV2Y0tqWDZVYk5z?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 19:15:40 GMT",
-      "score": 46.2,
+      "publishedAt": "Sat, 05 Sep 2026 19:30:40 GMT",
+      "score": 46,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
-      "id": "61ad7676e01b7894",
+      "id": "a631cc7dc083bcb0",
       "category": "market",
-      "title": "Congressman Who Has Bought Over $1 Million in Apple Stock Isn’t Selling with Tim Cook’s Exit",
-      "titleZh": "买入超过100万美元苹果股票的国会议员不在蒂姆·库克退出的情况下出售",
-      "url": "https://www.benzinga.com/news/politics/26/09/61640254/congressman-who-has-bought-over-1-million-in-apple-stock-isnt-selling-with-tim-cooks-exit",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPTTl0WGZQeHc4R1pWcjktbHNzcDNxWTQ0ZWpjWGdWWUNUcTMycl9WQThwQU1JNk1GM0h5TGE4T3B4UE5CVVVvdkNzSjk5SHJrYi04QnpNUnVZOHowZG44dWpqR01jTW5IS1BfMzVxcHpUSmx3d0tDUThaQWZGUUMxUklacklwdFUwQmFxeG1YRHBoY3I5VW96SF9NVk5XemlMRHEzQXpaRXg1WVNjaC1ZLWM2R28tQWdMOWY3SnJ5aDFpeUxnRzJScE51TllzUE1pellzczF1VERUazQ?oc=5",
+      "title": "Norges Bank Proposes $80B Shift From U.S. Treasuries to Mortgage-Backed Bonds",
+      "titleZh": "挪威央行建议将800亿美元从美国国债转向抵押贷款支持债券",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTEd6VGJMSFdYcGJSMGhXdGFpYzhBdlBDLVRnVF9JUW1sb0VvVEktZUU2dEFCTktDTlJhU3o1S2d3bF9SaUc2eDJxN2l4MWE4bzU2UFNqcDNJXzliNERhM1dIVGRkaVVwbHdNclJ3LTdUazk5M3NLNEFZNXQ4QzBTa3VkcHd2T3B4ak5kR0NsMHNuSzY2ck1xb1RSSWdiQVVpXzVkMTVraTNpNUpSQ0p3X1R0cEd1aVV0aXc?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTEd6VGJMSFdYcGJSMGhXdGFpYzhBdlBDLVRnVF9JUW1sb0VvVEktZUU2dEFCTktDTlJhU3o1S2d3bF9SaUc2eDJxN2l4MWE4bzU2UFNqcDNJXzliNERhM1dIVGRkaVVwbHdNclJ3LTdUazk5M3NLNEFZNXQ4QzBTa3VkcHd2T3B4ak5kR0NsMHNuSzY2ck1xb1RSSWdiQVVpXzVkMTVraTNpNUpSQ0p3X1R0cEd1aVV0aXc?oc=5",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 32,
+      "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
+      "score": 45.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
-      "id": "2fa5c8d34a04327f",
+      "id": "37d997ef24899f39",
       "category": "market",
-      "title": "Cathie Wood buys surging crypto stock despite latest controversy",
-      "titleZh": "尽管存在最新争议，但Cathie Wood仍购买了飙升的加密货币股票",
-      "url": "https://www.thestreet.com/crypto/markets/cathie-wood-buys-surging-crypto-stock-despite-latest-controversy",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQZGo0UFcwaE4xbjdRV25oaGlZaVcxaENzYmZScjBMZzVJdGxUcmtaTDZycDdPd0dtcFFRU3VVMV9UR3VmUEs0YjlfXzZOa1hLYlQxUmdSUS1sN1lYX0NqaHZzaWpZZlRaN2lDUU95d0tqek8zazgzdHFSYlVjNGxMb2hTYmFJcHFxLVdqUWNiLTNFa0I1MzE0cGk5MHR5REtjeTI0ZFlCWmY?oc=5",
+      "title": "Kroger, Publix, and regional grocery chains face pricing problem",
+      "titleZh": "Kroger、Publix和区域生鲜杂货连锁店面临定价问题",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 18:43:28 GMT",
-      "score": 57.7,
+      "publishedAt": "Sat, 05 Sep 2026 19:28:31 GMT",
+      "score": 37,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "c686985f2d1ee36a",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 19:01:42 GMT",
-      "score": 57.4,
+      "score": 56.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 53.5,
+      "score": 53.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 60.4,
+      "score": 59.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "6ef2aef9012f0dd0",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 19:35:24 GMT",
-      "score": 55.6,
+      "score": 55.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 48.3,
+      "score": 47.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "c9c8a76de54c12a5",
@@ -208,24 +208,24 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 20:31:03 GMT",
-      "score": 53.5,
+      "score": 53,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
-      "id": "02adb880bf455770",
+      "id": "703059ef7076ee92",
       "category": "tech",
-      "title": "The Reasons Rugged Laptops Are Rarely Bought By Consumers",
-      "titleZh": "加固型笔记本电脑很少被消费者购买的原因",
-      "url": "https://www.engadget.com/2247940/reason-why-rugged-laptops-rarely-bought-by-consumers/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNRnUzZksyRXRDcklFYVpSbXVGUlNNX1YxYnV4Y0lfcndNUmowVTVLT2k3cjIzdTkxd3BhQWEyb3V2ZEpOYTRDcWNOTlRlYXVTdDV4U0xIZU13UDR1Yk1wdFQ3R0dTa3RXWXUxNDhFMi1KZFJkbmpaTFktTVZIVXZjR3hhRkpNbG43a0FIeEMtQQ?oc=5",
+      "title": "OpenAI Responds After Report Exposed Another Incident In Which Its AI Agents Went Rogue",
+      "titleZh": "OpenAI在报告揭露其人工智能代理流氓的另一起事件后作出回应",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPQVhDSHNsRGlmbUlISE5OZDl2dV9vOV9uQ2ZkSFRBZ3ZoYmlTUDRmUlB3LXVyZzQzVlR6VGgtTkNfeW1ONHlrLTBDN3QzdUJMTDlhbGEydVZvY0pxUXg0VWZVZEwtVUREQ1A3NzhSd05LRUt4c1VNMnoyaVN6U0hYSnhaR3BhRmJUX2lTVTN5LTRpUE1jbk0zM0xiMkJwcG9tWGo3ZkgwcmQxZ1VJMlRUWi04cEVway05MzIwM0Z3?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPQVhDSHNsRGlmbUlISE5OZDl2dV9vOV9uQ2ZkSFRBZ3ZoYmlTUDRmUlB3LXVyZzQzVlR6VGgtTkNfeW1ONHlrLTBDN3QzdUJMTDlhbGEydVZvY0pxUXg0VWZVZEwtVUREQ1A3NzhSd05LRUt4c1VNMnoyaVN6U0hYSnhaR3BhRmJUX2lTVTN5LTRpUE1jbk0zM0xiMkJwcG9tWGo3ZkgwcmQxZ1VJMlRUWi04cEVway05MzIwM0Z3?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 20:00:00 GMT",
-      "score": 52,
+      "publishedAt": "Sat, 05 Sep 2026 21:17:18 GMT",
+      "score": 59.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "858781058482c3d1",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
-      "score": 53.8,
+      "score": 53.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "b05084f15c3908f8",
@@ -252,10 +252,10 @@
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 20:30:28 GMT",
-      "score": 50.5,
+      "publishedAt": "Sat, 05 Sep 2026 22:22:48 GMT",
+      "score": 51.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 46.3,
+      "score": 45.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 38.6,
+      "score": 38.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "415884a72ea16d83",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T17:46:16.000Z",
-      "score": 131.7,
-      "engagement": "343 points · 148 comments",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "score": 133.1,
+      "engagement": "378 points · 163 comments",
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T22:00:40.536Z"
+      "fetchedAt": "2026-09-05T22:30:41.028Z"
     }
   ]
 }
