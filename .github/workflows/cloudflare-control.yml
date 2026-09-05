@@ -1,0 +1,74 @@
+name: Cloudflare Worker Control
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/cloudflare-control.yml
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Cloudflare operation
+        required: true
+        default: check
+        type: choice
+        options:
+          - check
+          - deploy-reader
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-worker-control
+  cancel-in-progress: false
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate configured credentials
+        shell: bash
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo "Required Cloudflare repository secrets are missing." >&2
+            exit 1
+          fi
+          verification="$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            https://api.cloudflare.com/client/v4/user/tokens/verify)"
+          VERIFY_RESPONSE="$verification" node - <<'NODE'
+          const response = JSON.parse(process.env.VERIFY_RESPONSE || '{}');
+          if (!response.success || response.result?.status !== 'active') {
+            throw new Error('Cloudflare API token is not active.');
+          }
+          console.log('Cloudflare API token is active.');
+          NODE
+
+      - name: Check deployed reader versions
+        run: npx --yes wrangler@4 versions list --config cloudflare/wrangler.reader.toml
+
+      - name: Deploy dailyreview-reader
+        if: github.event_name == 'workflow_dispatch' && inputs.action == 'deploy-reader'
+        run: npx --yes wrangler@4 deploy --config cloudflare/wrangler.reader.toml
+
+      - name: Check reader health
+        shell: bash
+        run: |
+          response="$(curl --fail --silent --show-error --retry 3 --retry-delay 5 \
+            https://dailyreview-reader.xf5464.workers.dev/)"
+          HEALTH_RESPONSE="$response" node - <<'NODE'
+          const health = JSON.parse(process.env.HEALTH_RESPONSE || '{}');
+          if (health.service !== 'DailyReview Reader' || health.status !== 'ok') {
+            throw new Error(`Unexpected reader health response: ${JSON.stringify(health)}`);
+          }
+          console.log(`Reader health OK; workerVersion=${health.workerVersion || 'unknown'}; browserFallback=${health.browserFallback}.`);
+          NODE
