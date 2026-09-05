@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T06:30:53.066Z",
+  "updatedAt": "2026-09-05T07:00:40.867Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-05T07:00:40.867Z",
         "2026-09-05T06:30:53.066Z",
         "2026-09-05T06:00:42.255Z",
         "2026-09-05T05:30:41.019Z",
@@ -48,9 +49,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 152.9,
-          "engagement": "1612 points · 1273 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 152.5,
+          "engagement": "1628 points · 1279 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -60,9 +61,9 @@
           "url": "https://bob.ibm.com/",
           "source": "bob.ibm.com",
           "publishedAt": "2026-09-04T12:50:29.000Z",
-          "score": 118.8,
-          "engagement": "252 points · 280 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 118.6,
+          "engagement": "255 points · 283 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "e94fc2f0f03f5691",
@@ -72,9 +73,9 @@
           "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
           "source": "anthropic.com",
           "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 137.1,
-          "engagement": "574 points · 355 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 136.7,
+          "engagement": "578 points · 357 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "efb32cf2a2d830f1",
@@ -84,9 +85,9 @@
           "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
           "source": "torrentfreak.com",
           "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 126.3,
-          "engagement": "376 points · 222 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 126,
+          "engagement": "380 points · 224 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "ffe246597ac60595",
@@ -97,9 +98,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
           "source": "Reuters",
           "publishedAt": "Fri, 04 Sep 2026 22:57:36 GMT",
-          "score": 74.4,
+          "score": 73.9,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "fd4e0b99ad940433",
@@ -109,9 +110,9 @@
           "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
           "source": "mullvad.net",
           "publishedAt": "2026-09-04T18:50:28.000Z",
-          "score": 122.6,
-          "engagement": "313 points · 139 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 122.4,
+          "engagement": "316 points · 141 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "6a5cb4a438703700",
@@ -121,9 +122,9 @@
           "url": "https://nvd.nist.gov/vuln/detail/cve-2026-85046",
           "source": "nvd.nist.gov",
           "publishedAt": "2026-09-04T21:52:01.000Z",
-          "score": 132.7,
-          "engagement": "410 points · 229 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 132.9,
+          "engagement": "426 points · 235 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "969cb59a59bd8182",
@@ -133,9 +134,9 @@
           "url": "https://news.gallup.com/poll/713933/record-high-say-government-corruption-widespread.aspx",
           "source": "news.gallup.com",
           "publishedAt": "2026-09-04T22:03:16.000Z",
-          "score": 131.3,
-          "engagement": "340 points · 255 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 131.7,
+          "engagement": "358 points · 266 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "fc8b777bd4955741",
@@ -145,9 +146,9 @@
           "url": "https://eebench.org/blog/can-ai-design-circuit-boards-yet/",
           "source": "eebench.org",
           "publishedAt": "2026-09-04T19:48:29.000Z",
-          "score": 119.3,
-          "engagement": "226 points · 138 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 119.4,
+          "engagement": "232 points · 142 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "d24d114a279304c1",
@@ -158,9 +159,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTHZQS3hESmlXdVFIVXFCTE9PQ1lyZm5Edi05T09hU3JTREFHTUxTNVZNWUhZVGdUMEFUVFZpYTdTX2p5UHR5dkt0R1RxSHZHV0FtMEZGVVpDT0NoU1ItblluU01UcHlwYVk2UEhQWExwaTgwUVF6UnJhdkxYOFpibXdrUGdpMEVxTTZKSmRkLUhPUQ?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Sat, 05 Sep 2026 01:08:00 GMT",
-          "score": 62,
+          "score": 61.5,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "79a921d6eacb0325",
@@ -170,9 +171,9 @@
           "url": "https://opentrailpaper.com",
           "source": "opentrailpaper.com",
           "publishedAt": "2026-09-04T17:18:08.000Z",
-          "score": 116.4,
-          "engagement": "268 points · 96 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 116.2,
+          "engagement": "271 points · 97 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "b24297b71d7302b5",
@@ -183,9 +184,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 55.3,
+          "score": 54.8,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "9ec0ebe21759072b",
@@ -196,9 +197,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
-          "score": 57.3,
+          "score": 56.5,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "e7bf3bf26d9bc6fe",
@@ -209,9 +210,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOUo2cHEwRHVzQ1N6dkhsaTBwOVdwVVB3b0w4UFlKZ2N0SlNpclY3WVQyV21jLVIwYk9RNlZJLWJnMW5IM3RPLTlXUElpb0o3Q2lXVDNicjVldi1ad3kwazNwNjYzUkNzZ0xaeklTWFk0RnhWeXRIdG9SUUdnbXF6MWdPQkwtZUpsMGNsSjUyN2xiVmdPYW9z?oc=5",
           "source": "The Motley Fool",
           "publishedAt": "Sat, 05 Sep 2026 05:31:14 GMT",
-          "score": 61.8,
+          "score": 61.3,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "edf096e6792c207b",
@@ -222,9 +223,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMiowJBVV95cUxQX0E2dXEwWjNSZlJPY0tnMWl6NHNlRW9vMktYd2dpNGc4amYyYnQ5aE9MS3RwZXhIdGZaNkRmbXk5N09EcWwxR1dnLWh6MG42VEhZQzZtdTBwdXg1M1lBdkxFbktVQXI1ZlJGdXk2SUg5NmFMZ3FEeWxtdUw0cHVBbVp1WTU4OE1NSG1mRVZlWXF6MXlyeHJMM3NoREI2ZXNsbmRfX2tuUlhGbXVMLUZVRUw0cWlyTXRlb3FqQXg3WFZpS1hyTTE3dzY5dVpmZUpnSWxBa3BpMy1hRnh0cHBQODhhdXJqRHJUQlZpVGNhVFVjOWZZQmVPQ2pkVmNQNU1TalNyaEo0eTh4OU1BYmJGbmhwajI1djc0dVNVSEhGS2ktS0U?oc=5",
           "source": "Stocktwits",
           "publishedAt": "Sat, 05 Sep 2026 04:04:51 GMT",
-          "score": 55.9,
+          "score": 55.4,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "1f2abd83e90d07d3",
@@ -235,9 +236,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVM0bDBfTVUyb2Job2pTdHVobW1qSm9RVHMxWldNR3luV3ZZNXJ4dXhuQzRCbXZNeUlTZ0VuOGdMMUpOeUVPb3c3Q1NMTElTSDBzakFEZFdnSkItQWlMMjFUUUM2OTBSMjljQkdQMVRmSmcxTDkzaGJoSWR4bl9STVVMb2ZTaTRZV1FKX0NodURJSFg5dk5iNkdaNjZoaXVy?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 23:15:00 GMT",
-          "score": 57.7,
+          "score": 57.2,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "d701939668904225",
@@ -248,9 +249,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERpalZlSXphbGU3dmVzUE5Xd3h4bmdvZk1fLWcyNDlEeFl3MkliUWFYMHZXc081N3JjcjR1UmJXRjJPUndTSXJjS1ctSEdJRVdvREJ4dUR1Uk1lRWZuckJqQXhsTXR0aGE2MURMcDhoLXktSGpPR2Q0d1RVTlRka0hJZS16alpZNnJYQy13SThTaDUt?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:50:09 GMT",
-          "score": 55.8,
+          "score": 55,
           "engagement": "",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "0c6009cf40693d37",
@@ -260,9 +261,35 @@
           "url": "https://openrouter.ai/openai/gpt-6-astra",
           "source": "openrouter.ai",
           "publishedAt": "2026-09-04T21:39:19.000Z",
-          "score": 116.1,
-          "engagement": "185 points · 98 comments",
-          "pushedAt": "2026-09-05T06:30:53.066Z"
+          "score": 116.6,
+          "engagement": "191 points · 106 comments",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
+        },
+        {
+          "id": "05f3c93495260c84",
+          "category": "market",
+          "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
+          "titleZh": "Jim Cramer标记Adobe Inc. （纳斯达克股票代码： ADBE ）的另一个风险",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-flagged-another-risk-225229766.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpqSEZuQUNwc2xnSjRaT0ZlWFNZWC1QeUlTcEhkVzcyR1J6RVdOQnF4cUtqOHg2WGpMYUM5TXJCNWZfa1RpZmM4QWVnRmVGa25UeF91ZF9aejM4TnlQWU4zNTRyckJBNjVSMWdqNUFmUEJlc0g3MmNsLW9hdDdzZTdOdVptWmNkWDkzQktXaWc0a1VxRGMzRldWai0?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
+          "score": 56.3,
+          "engagement": "",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
+        },
+        {
+          "id": "c7bcca28abc8e3ff",
+          "category": "market",
+          "title": "Stock Market This Week Ends Flat Before Labor Day",
+          "titleZh": "本周股市在劳动节前结束",
+          "url": "https://www.stl.news/stock-market-this-week-ends-flat-before-labor-day/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1LcHIyeDRyOXotcFFGekg3c0lHMXRDSjFDMzl0R1BXR2pFdVZoOXBQaU5HSWhPTmt6ZjJKajdRcDI1ZzhYZFBqcThQMzJyYVIzUmNZbWJRS2xselNUeXhvWDJ4VTlMeG1USk51clVWcmZjbW5saTJaX0FnUQ?oc=5",
+          "source": "stl.news",
+          "publishedAt": "Sat, 05 Sep 2026 06:31:51 GMT",
+          "score": 56.3,
+          "engagement": "",
+          "pushedAt": "2026-09-05T07:00:40.867Z"
         },
         {
           "id": "3fd8ebcf47ac803c",
@@ -289,19 +316,6 @@
           "score": 54.5,
           "engagement": "",
           "pushedAt": "2026-09-05T06:30:53.066Z"
-        },
-        {
-          "id": "05f3c93495260c84",
-          "category": "market",
-          "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
-          "titleZh": "Jim Cramer标记Adobe Inc. （纳斯达克股票代码： ADBE ）的另一个风险",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-flagged-another-risk-225229766.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpqSEZuQUNwc2xnSjRaT0ZlWFNZWC1QeUlTcEhkVzcyR1J6RVdOQnF4cUtqOHg2WGpMYUM5TXJCNWZfa1RpZmM4QWVnRmVGa25UeF91ZF9aejM4TnlQWU4zNTRyckJBNjVSMWdqNUFmUEJlc0g3MmNsLW9hdDdzZTdOdVptWmNkWDkzQktXaWc0a1VxRGMzRldWai0?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
-          "score": 57.6,
-          "engagement": "",
-          "pushedAt": "2026-09-05T06:00:42.255Z"
         },
         {
           "id": "66ef69aa4128f8f3",
