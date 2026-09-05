@@ -11,6 +11,17 @@
 
   config = { dropThreshold: number(config.dropThreshold, 10) };
 
+  function areConsecutiveMonths(previousDate, currentDate) {
+    var previousText = String(previousDate || '');
+    var currentText = String(currentDate || '');
+    if (!/^\d{4}-\d{2}/.test(previousText) || !/^\d{4}-\d{2}/.test(currentText)) return false;
+    var previous = new Date(previousText.slice(0, 7) + '-01T00:00:00Z');
+    var current = new Date(currentText.slice(0, 7) + '-01T00:00:00Z');
+    if (Number.isNaN(previous.getTime()) || Number.isNaN(current.getTime())) return false;
+    var expected = new Date(Date.UTC(previous.getUTCFullYear(), previous.getUTCMonth() + 1, 1));
+    return current.getUTCFullYear() === expected.getUTCFullYear() && current.getUTCMonth() === expected.getUTCMonth();
+  }
+
   function compute(items) {
     var series = (Array.isArray(items) ? items : [])
       .map(function (item) { return { date: String(item.date || ''), value: Number(item.value) }; })
@@ -20,7 +31,7 @@
 
     var previous = series[series.length - 2];
     var latest = series[series.length - 1];
-    if (!(previous.value > 0)) return { available: false };
+    if (!(previous.value > 0) || !areConsecutiveMonths(previous.date, latest.date)) return { available: false };
     var dropPercent = (previous.value - latest.value) / previous.value * 100;
     return {
       available: true,
@@ -103,7 +114,7 @@
     if (!state.available) {
       status.textContent = '暂无数据';
       status.classList.remove('is-reached');
-      detail.textContent = '当前数据不足，暂时无法判断。';
+      detail.textContent = '当前连续月份数据不足，暂时无法判断。';
       previous.textContent = '--';
       latest.textContent = '--';
       drop.textContent = '--';
