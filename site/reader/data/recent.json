@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T19:30:48.138Z",
+  "updatedAt": "2026-09-05T20:00:46.821Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 20.4,
+      "score": 19.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,24 +28,24 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 64.7,
+      "score": 64.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
-      "id": "89e0adf0c9c1b067",
+      "id": "7bef401b23d6c68f",
       "category": "market",
-      "title": "Trump turns up the heat on Warsh as Fed rate hike looms",
-      "titleZh": "随着美联储加息迫在眉睫，特朗普加大了对沃什的热情",
-      "url": "https://www.cnbc.com/2026/09/05/trump-warsh-fed-september-rate-hike.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5DYTJSa3ZaZFdjOVppNUhHcUgwZUkzNzNkQ2dQbkxfZTV2czZOREZKemRxUDhtSlgyLVQ1eEQyRlVxRWFZNXVQSVdFUTVfc0FqMzFBSXE4Qkl1VWtzdmdQWllkSkl5QjJqZXpSOEVYWUpEU3d1TFNQeVNqX07SAYIBQVVfeXFMTi1HQkxWWlgzN1hYVGt2elQwUUVzcWJIai1VclJVUkNwVDI0ME9ZRjBlSzBtT0xoMTFVMWJfUkdWT0VPZmdrc0RRLXVDd0hkeFBpMEhMNzZhSTZ2SUx1QkQ2RW5UTVk2a3VPVjgwWWdoX1Q3b0I5THlCMHdJWHJGMWFidw?oc=5",
+      "title": "LeBron James teases partnership with Polymarket",
+      "titleZh": "勒布朗·詹姆斯嘲笑与Polymarket的合作关系",
+      "url": "https://www.cnbc.com/2026/09/05/lebron-james-polymarket-partnership.html",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9xY2swbHotbGt3SXRiVy13MnEtZWY2bXhOQXQwalNzOXNmcXhPQ3dZVnRnMVZnZldEeGs4bldCLWpxMEYyZjRBSVpjVHJNM1ZEc3FkaE5FOFQ0akRIREF3bG9PVmZVZkFuRS13UHVtOGgyOUNja0hXaUdBbGjSAYIBQVVfeXFMT0ZQenNCTzUxVHFUUVhLRkxfVUZ4TmN6TVpYQlBDckVFUThOQ0RGUTRmTndVcVJNd3ctX01aZU5NeV84ME96RHg4QWRQZlk1U3cwZXZCU09NQkZydkZzTjh3bGhjSWNLVlJmSndpOUU1UzVndE83ZVVDWm5Tcm9iU0xvQQ?oc=5",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 18:10:58 GMT",
-      "score": 44.7,
+      "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
+      "score": 42.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "24dda51b24e4f869",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:25:49 GMT",
-      "score": 45.3,
+      "score": 44.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "eb91ce01e3372d1f",
@@ -88,39 +88,39 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:59:00 GMT",
-      "score": 48.8,
+      "score": 51.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
-      "id": "d932b32e68b90e46",
+      "id": "9e27686738dd7f81",
       "category": "market",
-      "title": "LULU, AVGO, DELL, SNOW, GOOGL: 5 Stocks Investors Couldn't Stop Buzzing About This Week",
-      "titleZh": "LULU、AVGO、DELL、SNOW、GOOGL ：本周5只股票的投资者无法停止嗡嗡声",
-      "url": "https://www.benzinga.com/markets/equities/26/09/61643470/lulu-avgo-dell-snow-googl-5-stocks-investors-couldnt-stop-buzzing-about-this-week",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNNVRQcE1GYkJuNFVsRU9oVE9YelB2UHRHTXRIaWlvZjRUSW5hZlNQRUJfMlFhcGFFanBqX0lYa0lZbjd5MnlJemNYUFRwblNrZkRFcVBfQWtBRFdQZlBSek9PTFREWV9Vel9BZDMyZDlxTXB3eWtvZkNHYzd2TFJfemk0aFBqOXl2aU80MU5KaVpLTHlPWjRIcEpZYVFJVmdWZWRCQloxbmM3ZVRpM3VGUW95TGJZUHprMjRSMndHVll1UGVZd0dSSTZGZzJNS3RPNmx2Mg?oc=5",
+      "title": "Norges Bank Proposes $80B Shift From U.S. Treasuries to Mortgage-Backed Bonds",
+      "titleZh": "挪威央行建议将800亿美元从美国国债转向抵押贷款支持债券",
+      "url": "https://www.benzinga.com/markets/macro-economic-events/26/09/61643251/norges-bank-treasury-mortgage-backed-bonds-shift",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTEd6VGJMSFdYcGJSMGhXdGFpYzhBdlBDLVRnVF9JUW1sb0VvVEktZUU2dEFCTktDTlJhU3o1S2d3bF9SaUc2eDJxN2l4MWE4bzU2UFNqcDNJXzliNERhM1dIVGRkaVVwbHdNclJ3LTdUazk5M3NLNEFZNXQ4QzBTa3VkcHd2T3B4ak5kR0NsMHNuSzY2ck1xb1RSSWdiQVVpXzVkMTVraTNpNUpSQ0p3X1R0cEd1aVV0aXc?oc=5",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 13:25:58 GMT",
-      "score": 59.9,
+      "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
+      "score": 42.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
-      "id": "fc13dce42e6b5e98",
+      "id": "8108d90c6c101e16",
       "category": "market",
-      "title": "Walmart, Target, and Kroger face new retail crime issue",
-      "titleZh": "沃尔玛、塔吉特和克罗格面临新的零售犯罪问题",
-      "url": "https://www.thestreet.com/retail/tech-brand-used-by-walmart-target-shares-new-retail-crime-issue",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTG5LbXhyTDVFRy1WSGU4VkRwYTJKS255Wkk0OGpPdE1Ob0hxXzk5SktNZzVoYV9jQWFCWmVfVGVhRTROMi12aUQ5bVFwNlFhYmtlVEl2NzFuSlFFRHl3cFlyeV9xend6SEhzNXR4X3VGRHBqN0wyQ2RlTjRVRXNIc19qUkg1NTN2NGt2UXY5WWxxR0poOFJoWVVuS3g?oc=5",
+      "title": "Kroger, Publix, and regional grocery chains face pricing problem",
+      "titleZh": "Kroger、Publix和区域生鲜杂货连锁店面临定价问题",
+      "url": "https://www.thestreet.com/retail/kroger-publix-and-regional-grocery-chains-face-pricing-problem",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 16:08:50 GMT",
-      "score": 38.4,
+      "publishedAt": "Sat, 05 Sep 2026 16:08:08 GMT",
+      "score": 36.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "954c0e42ee45f4cc",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 14:44:00 GMT",
-      "score": 53.8,
+      "score": 55.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "c460312cd3b974cb",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 49.4,
+      "score": 48.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 18:59:31 GMT",
-      "score": 60.5,
+      "score": 60,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "b86b5015c5da7a40",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 18:05:27 GMT",
-      "score": 76.6,
+      "score": 76.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 50.8,
+      "score": 50.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "cee0480452514b7d",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 51.2,
+      "score": 50.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "1b162106c901be17",
@@ -223,9 +223,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:00:00 GMT",
-      "score": 52.5,
+      "score": 58.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "8a4890e0650899fa",
@@ -238,24 +238,24 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 13:43:57 GMT",
-      "score": 47.2,
+      "score": 46.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
-      "id": "9a5a1c020d5e8efc",
+      "id": "b05084f15c3908f8",
       "category": "tech",
-      "title": "Today’s NYT Connections Hints and Answers for Sept. 5, #1182",
-      "titleZh": "今天的纽约时报连接提示和答案9月5日， # 1182",
-      "url": "https://www.cnet.com/tech/gaming/todays-nyt-connections-hints-and-answers-for-sept-5-1182/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQYVNsamFmRlozWjNpdjVQVERqVVdOcDltYmdPc25kcXd1LVBqVHpHNmltY3pFajVTcEJPUFhLQzBmUlJhQ3lpOEZwZDhzeWlSX3FlVUJXV1VWTDhPc0ZrY1BpdWxybmNWWXZ4Y3VaNS0xM0I1QXdNRll0emVRWW00SEplYlY4RWxyMVgtVTdTZnFXaG9u?oc=5",
+      "title": "Best TVs of 2026: Expert Tested, Compared and Reviewed",
+      "titleZh": "2026年最佳电视：经过专家测试、比较和评论",
+      "url": "https://www.cnet.com/tech/home-entertainment/best-tvs-of-2026-expert-tested-compared-and-reviewed/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPbmtVUjFCM3gyRUc1ZlctSWNmZWJxeXNsREREN0VjbUlMSGYwNDIzUUpjNWVKNlJJRzE2ajJ2X2U1VnJqYXVwdXlRZ0FkU3dORXJyaWtoRVBBZ2w0X2pEbGxlaFIwTnYwRlZJdnpISC1fc2NJOXpMTEgzSkdrLVA3OVQ4alUydXlmUkFVYlNDWmQzYXhnb1ItNnRLMEZOcmc?oc=5",
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 38.7,
+      "publishedAt": "Sat, 05 Sep 2026 19:22:13 GMT",
+      "score": 51.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 48.8,
+      "score": 48.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 50.8,
+      "score": 50.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "415884a72ea16d83",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T17:46:16.000Z",
-      "score": 106.1,
-      "engagement": "92 points · 31 comments",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "score": 114.8,
+      "engagement": "148 points · 48 comments",
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T19:30:48.138Z"
+      "fetchedAt": "2026-09-05T20:00:46.821Z"
     }
   ]
 }
