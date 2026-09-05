@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T11:30:45.284Z",
+  "updatedAt": "2026-09-05T12:00:48.618Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 28.4,
+      "score": 27.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 41.6,
+      "score": 41.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "aac3a04d43a07c83",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 05:41:23 GMT",
-      "score": 34.2,
+      "score": 33.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -58,9 +58,9 @@
       "sourceKey": "nasdaq-news",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
-      "score": 30.1,
+      "score": 29.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "9bdc1ee2fe25b809",
@@ -73,24 +73,24 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 42.3,
+      "score": 42.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
-      "id": "b898a990b78b2f34",
+      "id": "25046c1dbf437b57",
       "category": "market",
-      "title": "MU Stock Price | Micron Technology Inc. Stock Quote (U.S.: Nasdaq)",
-      "titleZh": "MU股价| Micron Technology Inc.股票报价（美国：纳斯达克）",
-      "url": "https://www.marketwatch.com/investing/stock/mu",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9vX2xEV29lbDh4MU1TSWxlek1qTWFRb3FSZHh4X1ZVbDhQYkVacXllcTRUR3gzV2thQXdQTGtpSWxjVU1WZHJMaHh0MVVGUmgwU0U5RldmdkVpQQ?oc=5",
+      "title": "NVDA Stock Price | NVIDIA Corp. Stock Quote (U.S.: Nasdaq)",
+      "titleZh": "NVDA股价| NVIDIA Corp.股票报价（美国：纳斯达克）",
+      "url": "https://www.marketwatch.com/investing/stock/nvda",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9rTUx0am9SNU4zUG1rZG02REFwVHRBSmgyanJKb1ZFRHZNbG91b2RIN1NTUUxsTS1JX0xFWmVkTmxsQWxleG1nN1VXZnVJby13cEdlX1B2dUs4aEhr?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 03:54:05 GMT",
-      "score": 41.4,
+      "publishedAt": "Sat, 05 Sep 2026 03:50:02 GMT",
+      "score": 40.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 38.7,
+      "score": 40.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "4b8a03cd47875345",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 08:03:00 GMT",
-      "score": 58.1,
+      "score": 57.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "8d614b4e5dffde06",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 05:15:00 GMT",
-      "score": 51.4,
+      "score": 51.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 28.5,
+      "score": 28,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 57.7,
+      "score": 57.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 63.1,
+      "score": 62.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "84cc6f131818be7c",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:42:54 GMT",
-      "score": 49.5,
+      "score": 49,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 45.6,
+      "score": 45.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "11cb31cdc9cbd100",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Fri, 04 Sep 2026 23:00:00 GMT",
-      "score": 54.4,
+      "score": 53.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
-      "id": "858781058482c3d1",
+      "id": "8a6ef4568b0e9930",
       "category": "tech",
-      "title": "I tried the bezelless concept phone at IFA, and it’s more futuristic than I thought",
-      "titleZh": "我在IFA尝试了无边框概念手机，它比我想象的更具未来感",
-      "url": "https://www.zdnet.com/uncategorized/tecno-bezelless-phone-concept-ifa-berlin-2026/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNuZHRwaE03bG43MUhBZ1FUWENlcjRLMGpNdktUcDdGcUdYYW1aeWQ1VzVVcktoR0tGenNjRi12bzNHMGIxVE1WdFlZUlJHRVhJU3pNUEllelF6N3RfMDh5eEk5YV83blZSNUs3cjNNeDl2dVFOdi11aEFfMHgwRXB0YzRMZ1R4V0E?oc=5",
+      "title": "CSIRO’s Data61 develops ‘vaccine’ against attacks on machine learning",
+      "titleZh": "CSIRO的Data61开发了针对机器学习攻击的“疫苗”",
+      "url": "https://www.zdnet.com/article/csiros-data61-develops-vaccine-against-attacks-on-machine-learning-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN0pnMzNCUUlScDNSX1VKem9XTWVZZWhQS0ZrdF9xR0VTd0NxTHZENnB5QlZXVXRzOS1DSG5Dd1BiOWNUUlhPYlNTbU1tY0tUcjhwNVhHLTlpY0xfX1REa0V3b0U0dndzbGJhVmRXWkRHWkNISXk4ZUNzQ2REVzBLNFgxQzVKYVo0cHB4Wm1ONUE2ZEk3alN1dVVtUzdSS0hu?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
-      "score": 52.6,
+      "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
+      "score": 49.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 46.7,
+      "score": 46.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "1503c662885bcd2a",
@@ -263,14 +263,14 @@
       "title": "OpenAI admits it didn't disclose rogue AI wiki hijacking incident",
       "titleZh": "OpenAI承认没有披露流氓AI Wiki劫持事件",
       "url": "https://www.bleepingcomputer.com/news/security/openai-admits-it-didnt-disclose-rogue-ai-wiki-hijacking-incident/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZlpqaVRmQ29qQUtNWUtSZ3g3TTJLUlpKY0VZZGJRTmNuLVVJNjV3VjFIc3ZLUEE5SlNxNV80SjdMNEg2SlFSV2RLeDhPcUlZakwzRlotN3BudzdhSGhqZTRlbGlTRWhnam05U0tmbElkVEREcnlndHBoai1fQlZoUndTaC1UT2ZkSXZJWUYwdUFHNXgxdWxaQndBV2xXVVBobnVSNFF4Qnl5enFiNDBaRjZn?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZlpqaVRmQ29qQUtNWUtSZ3g3TTJLUlpKY0VZZGJRTmNuLVVJNjV3VjFIc3ZLUEE5SlNxNV80SjdMNEg2SlFSV2RLeDhPcUlZakwzRlotN3BudzdhSGhqZTRlbGlTRWhnam05U0tmbElkVEREcnlndHBoai1fQlZoUndTaC1UT2ZkSXZJWUYwdUFHNXgxdWxaQndBV2xXVVBobnVSNFF4Qnl5enFiNDBaRjZn0gG3AUFVX3lxTE9rdGZwVlloWl9HMy00NE9ZY1hvUE02Y3pob2lmb1FONE9UZVRuR0lONDdtS0JwZ0daMmpYV21uTkd3XzdqT3hqcHlGMlVWVTkzSTQzUXpaZmdiN3hqZV9Wckg0cHlHZGJQS250a1FrZTdSRXoyMHc3RXNOcFIxeTh6dTdGZVMwN29SWHlvT3NkUFp3QVBTdUFXbzJIRWFYT3l4VWp1d241WndDajFpSmtfODZHMEh3VQ?oc=5",
       "source": "BleepingComputer",
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 11:11:50 GMT",
-      "score": 53.7,
+      "score": 55,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "229881e0cd3cca0b",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Fri, 04 Sep 2026 23:09:31 GMT",
-      "score": 40.9,
+      "score": 40.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "6a5cb4a438703700",
@@ -298,8 +298,8 @@
       "sourceOrder": 9,
       "publishedAt": "2026-09-04T21:52:01.000Z",
       "score": 132.6,
-      "engagement": "530 points · 284 comments",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "engagement": "545 points · 288 comments",
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T11:30:45.284Z"
+      "fetchedAt": "2026-09-05T12:00:48.618Z"
     }
   ]
 }
