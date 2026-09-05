@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T09:00:39.023Z",
+  "updatedAt": "2026-09-05T09:27:12.870Z",
   "items": [
     {
       "id": "ffe246597ac60595",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 22:57:36 GMT",
-      "score": 53.9,
+      "score": 53.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 44.1,
+      "score": 43.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "aac3a04d43a07c83",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 05:41:23 GMT",
-      "score": 36.7,
+      "score": 36.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -58,24 +58,24 @@
       "sourceKey": "nasdaq-news",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
-      "score": 32.6,
+      "score": 32.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
-      "id": "02b8b4cf7a3083f4",
+      "id": "9bdc1ee2fe25b809",
       "category": "market",
-      "title": "Norwood Financial EVP O’Bell sells $103.5k in shares By Investing.com",
-      "titleZh": "Norwood Financial执行副总裁O’Bell通过Investing.com出售$ 103,500股股票",
-      "url": "https://ng.investing.com/news/stock-market-news/norwood-financial-evp-obell-sells-1035k-in-shares-93CH-2686475",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQMjFBelV1SzJ3U1F5Q2ZkcFJ2QWhZY3JuR1N3VE1qSWUzYVhkWi0zVGFyVWxUMkd3RHZsVzd6cVplajZLa2VDTW5DaG5wS2VvVkdzb3JCdnJpdnNDSWQxbmU2ZUktc1Bfa3pmOEE2RmRDT2NOTzU3cmFfTDB4VlF4NExsMFFKZFpqSm9iWE9vTXJnRV9RNkRGZUViLTAwdTluQlk1LUxfS0Y2dGJwWm9z?oc=5",
+      "title": "Dream Finders Homes director Len Sturm purchases $20,205 in stock By Investing.com",
+      "titleZh": "Dream Finders Homes总监Len Sturm通过Investing.com购买了$ 20,205的股票",
+      "url": "https://au.investing.com/news/stock-market-news/dream-finders-homes-director-len-sturm-purchases-20205-in-stock-93CH-4630709",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZjFyVGRrQ2c2cjYzWmFhSzF5MXE5ZnpMd1RndmZyTnd2aENqcmdZTFBOUjV2UVlhdEl2YWNhSEMteXlVLWM1ODU0R0VRNEQ1ZnJKcWlUVHVtaFRTSXE0TkNCVEkzb0JEQkpodWpGdkltb3dJRzFsTDhrbDBvR19kRHA1RWhjWjMtTUM5Z2J1ZC1Ud2pRYXFTNDN6OWVjSEs0c1NuMXcyN3NVR0RzUGttUkxHNkpvWlVVb3FfT2tiMHJzZw?oc=5",
       "source": "Investing.com",
       "sourceKey": "investing",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 06:55:56 GMT",
-      "score": 40.9,
+      "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
+      "score": 43.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "25046c1dbf437b57",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 04:03:09 GMT",
-      "score": 44,
+      "score": 43.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 42.9,
+      "score": 43,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "fc13dce42e6b5e98",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 00:45:00 GMT",
-      "score": 37.7,
+      "score": 37.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "8d614b4e5dffde06",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 04:40:59 GMT",
-      "score": 51,
+      "score": 51.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 31.9,
+      "score": 30.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "9b209e7e37fc8455",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 03:00:00 GMT",
-      "score": 52,
+      "score": 51.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,39 +178,39 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 65.6,
+      "score": 65.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
-      "id": "84cc6f131818be7c",
+      "id": "5e6e436440229fb7",
       "category": "tech",
-      "title": "The White House is making arcade games racist",
-      "titleZh": "白宫正在制造街机游戏的种族主义者",
-      "url": "https://www.theverge.com/policy/990520/trump-arcade-games-maga-copyright",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE54cTJnWWZFSDdFdlA1cTJTMmVLZENYd3VXNVZvY3VjWkdGTktWZjMwSHpuRF9YckptY1N0N2RhTGwwRHdqSHpRemtjVmk0SWFwbjZGR2Z2R2xPczJjN2JtVi15N3dRX2tVRUhGMnc2TXhmelc1bWlmUnI3bVU?oc=5",
+      "title": "AGI is whatever you want it to be",
+      "titleZh": "AGI是您想要的任何东西",
+      "url": "https://www.theverge.com/podcast/990323/agi-is-whatever-you-want-it-to-be",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5LRkNCTllWOHl6MFd2RWg3QmFYUWZDTkpHSUR2cTlaYXBBaFF3d21waEY1OGVhQTc2N0hXNVBXeG53QWMwb2twV0p0VW16aG85ZzlWNDVRVGxodlZuVTZYZ3RRTFQydkRBSXRuelZPbWs5WVo1UEZXZ1JzUXFGQQ?oc=5",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Fri, 04 Sep 2026 19:42:54 GMT",
-      "score": 54.4,
+      "publishedAt": "Fri, 04 Sep 2026 17:16:49 GMT",
+      "score": 39.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
-      "id": "df0ce962f556124f",
+      "id": "d0ecd112f134a941",
       "category": "tech",
       "title": "OpenAI agents discussed ways to escape their sandbox on public wiki",
       "titleZh": "OpenAI代理讨论了在公共wiki上逃离沙箱的方法",
-      "url": "https://arstechnica.com/civis/threads/openai-agents-discussed-ways-to-escape-their-sandbox-on-public-wiki.1514673/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPbHFXSHlkWW5Fb0VOR05MSHRuQm1xcW8zdk16NHhsVENwYmltdHFxSDFXYzZWS0ROZGJjU19QWlk4S1Y3UHU5YjRLR05XdVJoWnRYX2g0b1lveHhwd3dqdTdhZ2QtZkowYUJaWW41ZXJNZmNYdGFVQV8xeFpSTU5SeGxidGdrc3NTSy14UXdyS0c0YUJJRjU4RTdVVENSYXBtb0tHWF9DOXVJeTUwME9LV1N3Rl8?oc=5",
+      "url": "https://arstechnica.com/civis/threads/openai-agents-discussed-ways-to-escape-their-sandbox-on-public-wiki.1514673/page-2",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQdms3MjZLektOdXl4S1d0ak5aNjB5NklqbFRxTG50RUd0Y1N3Ykw4YWdvM2g2bER0XzJpMm5RNldneVN4T2VHMTNVT05BUjNBNmJxNDBmWHJHLUw0NVlndm5XdlNVT3cxTmRaT1ZjSWNtblFNbDI3cEd6VHJra3hPVzhlc2tINDdIV1c0NkJaSnpvMXNJT1N1MHpxQy1yaGl2b2RUTkJzeXZEUmZOUFJlMDA5XzJiX3FQb2FadQ?oc=5",
       "source": "Ars Technica",
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
-      "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 48.1,
+      "publishedAt": "Sat, 05 Sep 2026 01:04:12 GMT",
+      "score": 49.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "11cb31cdc9cbd100",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Fri, 04 Sep 2026 23:00:00 GMT",
-      "score": 56,
+      "score": 42.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
-      "id": "78e6773e811e2d42",
+      "id": "8a6ef4568b0e9930",
       "category": "tech",
-      "title": "Taylor Clemons",
-      "titleZh": "Taylor Clemons",
-      "url": "https://www.zdnet.com/meet-the-team/tclemons1/page/2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9pNElET0g4aFMwX18za29qeVdOaFpyZXc1dGJvdDJjVEllQTIzTmNZZVRNTE5qZl9LWVdRSWh2VWg1ZnplbXh2Rm0yWjF5dy10MVExUXNLalhvaUhIV2JRSGllMA?oc=5",
+      "title": "CSIRO’s Data61 develops ‘vaccine’ against attacks on machine learning",
+      "titleZh": "CSIRO的Data61开发了针对机器学习攻击的“疫苗”",
+      "url": "https://www.zdnet.com/article/csiros-data61-develops-vaccine-against-attacks-on-machine-learning-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN0pnMzNCUUlScDNSX1VKem9XTWVZZWhQS0ZrdF9xR0VTd0NxTHZENnB5QlZXVXRzOS1DSG5Dd1BiOWNUUlhPYlNTbU1tY0tUcjhwNVhHLTlpY0xfX1REa0V3b0U0dndzbGJhVmRXWkRHWkNISXk4ZUNzQ2REVzBLNFgxQzVKYVo0cHB4Wm1ONUE2ZEk3alN1dVVtUzdSS0hu?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 06:12:16 GMT",
-      "score": 50.2,
+      "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,24 +253,24 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 49.2,
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
-      "id": "5c7b6ad938baf62c",
+      "id": "5810310f9f13808b",
       "category": "tech",
-      "title": "IDScan sued over alleged data breach affecting 153 million drivers",
-      "titleZh": "IDScan起诉涉嫌数据泄露影响1.53亿司机",
-      "url": "https://www.bleepingcomputer.com/news/security/idscan-sued-over-alleged-data-breach-affecting-153-million-drivers/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQVUdJbkw0d1BTXy1WWkRqWGlIWWVvYWthLTBjQnVPTk9sYXBIU3dEU0V0dlBjNWk1ZFVyaW01ZmwwS3lwQjhqem5EQUhtSWdieXQyekdBb283UHNnNzJ6R1o3ek5GZVhZcmVPd2pxMVNFdUJLR3h5NnU5bG9Fa0VYaFk5RDdpaG1vSlQzYVpCejJ4Q1lDa0hnVDRWYzlKdzRzNDRaYjJxQ0x1YmVaVGcxdWlTX2TSAboBQVVfeXFMTkhpZUJ1bWNiQ2N3aGlHc01hbDA0Z0g0M09UY05tOF84TGNvTzNSNGpXeV9GVkQtbF9RUTZnNFpCcExocGQyTTdlZi1VSkhsbVVIT3A1VVh0LW9yTWJyYVFXbEtBVy1udHdoT2pUQXVERWY5WG04TjFiamV6VVV4Y21iXzRpWmlLaWVSU21lLTBNVUVheTVNRnRjNTY2ZkxWdDFWMGR5SDhoLVk1V1ZoTG9mVVROLUdJb19B?oc=5",
+      "title": "Unusual USB Dongle / FAT32 Behavior — Seeking Identification - External Hardware",
+      "titleZh": "不寻常的USB加密狗/FAT32行为—寻求识别-外部硬件",
+      "url": "https://www.bleepingcomputer.com/forums/t/818452/unusual-usb-dongle-fat32-behavior-seeking-identification/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOd1NRcnU2QXNDeTNSR3hzcmlNM3EtbGpxVFlqOGxjdGFOTThLaWs3VlpBLTkxdU1KOURFaDdjMHpjZ3JsREhIVHNyV1E5VWI2TUduQTRCYjlYSGJrMUI3bWFRTHMyWHdfOVlNSWNZaDIxRkNWS09VN3lYaHR0ay1iTGhrdXo1OTFacFlqMTdIWXFVbExma2x0Q21QdUpSYkdBNEVFTHpwX2UtQQ?oc=5",
       "source": "BleepingComputer",
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
-      "publishedAt": "Fri, 04 Sep 2026 16:56:45 GMT",
-      "score": 47.8,
+      "publishedAt": "Sat, 05 Sep 2026 09:10:33 GMT",
+      "score": 50.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "229881e0cd3cca0b",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Fri, 04 Sep 2026 23:09:31 GMT",
-      "score": 43.1,
+      "score": 42.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     },
     {
       "id": "3d056644792d44a8",
@@ -297,9 +297,135 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T07:52:50.000Z",
-      "score": 90.6,
-      "engagement": "35 points · 18 comments",
-      "fetchedAt": "2026-09-05T09:00:39.023Z"
+      "score": 102.1,
+      "engagement": "61 points · 36 comments",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "af7655f6c3f3367e",
+      "category": "youtube",
+      "title": "The AI Boom Is Finally Breaking Apart",
+      "titleZh": "人工智能热潮终于分崩离析",
+      "url": "https://www.youtube.com/watch?v=sOv1odPw_pc",
+      "source": "House of El: AI",
+      "sourceKey": "youtube-sOv1odPw_pc",
+      "sourceOrder": 0,
+      "publishedAt": "2026-09-04T17:02:17Z",
+      "score": 150310,
+      "engagement": "150,310 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "ee2dd4ee3e47a311",
+      "category": "youtube",
+      "title": "Tesla's Cybercab launch did not live up to the hype, says WSJ's Tim Higgins",
+      "titleZh": "《华尔街日报》的蒂姆·希金斯（ Tim Higgins ）表示，特斯拉推出Cybercab并没有辜负炒作",
+      "url": "https://www.youtube.com/watch?v=usSv3KD3fTo",
+      "source": "CNBC Television",
+      "sourceKey": "youtube-usSv3KD3fTo",
+      "sourceOrder": 1,
+      "publishedAt": "2026-09-04T12:23:56Z",
+      "score": 45970,
+      "engagement": "45,970 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "d7fa1905dcd7ac17",
+      "category": "youtube",
+      "title": "It's Happening Again: Wall Street Is All In on One Sector (5 Stocks to Buy Now)",
+      "titleZh": "它再次发生：华尔街完全集中在一个行业（现在购买5只股票）",
+      "url": "https://www.youtube.com/watch?v=1hv2UrdCvko",
+      "source": "MarketBeat",
+      "sourceKey": "youtube-1hv2UrdCvko",
+      "sourceOrder": 2,
+      "publishedAt": "2026-09-04T22:30:18Z",
+      "score": 42755,
+      "engagement": "42,755 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "d5fba6210f3f75a0",
+      "category": "youtube",
+      "title": "Wall Street Rejected Crypto: BitGo Down 60% Despite Record Growth, Kraken Pauses IPO Again",
+      "titleZh": "华尔街拒绝加密货币：尽管创纪录的增长，但BitGo下跌了60 ％ ， Kraken再次暂停IPO",
+      "url": "https://www.youtube.com/watch?v=aXV1KMrglmQ",
+      "source": "Dana Love, PhD",
+      "sourceKey": "youtube-aXV1KMrglmQ",
+      "sourceOrder": 3,
+      "publishedAt": "2026-09-04T14:00:12Z",
+      "score": 28069,
+      "engagement": "28,069 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "addde378bcf84d91",
+      "category": "youtube",
+      "title": "CIERRE DE WALL STREET: EEUU SORPRENDE CON EL EMPLEO, TRUMP APRIETA A LA FED Y LOS BONOS TIEMBLAN",
+      "titleZh": "CIERRE DE WALL STREET: EEUU SORPRENDE CON EL EMPLEO, TRUMP APRIETA A LA FED Y LOS BONOS TIEMBLAN",
+      "url": "https://www.youtube.com/watch?v=GGwfY-ZXIdc",
+      "source": "Negocios TV",
+      "sourceKey": "youtube-GGwfY-ZXIdc",
+      "sourceOrder": 4,
+      "publishedAt": "2026-09-04T20:56:47Z",
+      "score": 17175,
+      "engagement": "17,175 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "f5ffdc231d0fe645",
+      "category": "youtube",
+      "title": "The Wolf of Wall Street - Jordan Belfort - Cel mai bun vânzător din istorie? | Feed your Mind Ep. 11",
+      "titleZh": "华尔街之狼- Jordan Belfort - Cel mai bun vânzător din istorie? |喂饱你的心灵第11集",
+      "url": "https://www.youtube.com/watch?v=jwb_Cl7Iz_w",
+      "source": "📈📉 Feed your Greed",
+      "sourceKey": "youtube-jwb_Cl7Iz_w",
+      "sourceOrder": 5,
+      "publishedAt": "2026-09-04T15:00:38Z",
+      "score": 16757,
+      "engagement": "16,757 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "b9c3ea62b1cbc12c",
+      "category": "youtube",
+      "title": "Opening Bell: Bitcoin, Lululemon, Zscaler, DocuSign, Adobe, Nvidia",
+      "titleZh": "开门红：比特币、Lululemon、Zscaler、DocuSign、Adobe、Nvidia",
+      "url": "https://www.youtube.com/watch?v=9tmpETvOQMo",
+      "source": "DER AKTIONÄR TV",
+      "sourceKey": "youtube-9tmpETvOQMo",
+      "sourceOrder": 6,
+      "publishedAt": "2026-09-04T13:00:44Z",
+      "score": 16742,
+      "engagement": "16,742 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "4e25425cb221510c",
+      "category": "youtube",
+      "title": "Wall Street Just Got A $20 Trillion Margin Call",
+      "titleZh": "华尔街刚刚收到$ 20万亿的保证金通知",
+      "url": "https://www.youtube.com/watch?v=nMbGxhmvzHs",
+      "source": "Joe Consorti",
+      "sourceKey": "youtube-nMbGxhmvzHs",
+      "sourceOrder": 8,
+      "publishedAt": "2026-09-04T23:30:15Z",
+      "score": 14019,
+      "engagement": "14,019 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
+    },
+    {
+      "id": "77b0052ba1d4b09d",
+      "category": "youtube",
+      "title": "Wall Street Found New Leaders — And They Aren’t Tech Stocks",
+      "titleZh": "华尔街找到了新的领导者—他们不是科技股",
+      "url": "https://www.youtube.com/watch?v=S7hkXCigCWs",
+      "source": "Wallstreet Trapper",
+      "sourceKey": "youtube-S7hkXCigCWs",
+      "sourceOrder": 9,
+      "publishedAt": "2026-09-05T00:00:38Z",
+      "score": 9857,
+      "engagement": "9,857 次观看",
+      "fetchedAt": "2026-09-05T09:27:12.870Z"
     }
   ]
 }
