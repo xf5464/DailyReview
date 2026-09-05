@@ -39,8 +39,11 @@ jobs:
         env:
           COMPLETED_WORKFLOW_RESULT: ${{ github.event.workflow_run.conclusion }}
           COMPLETED_WORKFLOW_EVENT: ${{ github.event.workflow_run.event }}
+          DISPATCH_TRIGGER_SOURCE: ${{ inputs.trigger_source }}
         run: |
-          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$GITHUB_EVENT_NAME" == "push" ]]; then
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" && "$DISPATCH_TRIGGER_SOURCE" == "cloudflare" ]]; then
+            echo "should_send=false" >> "$GITHUB_OUTPUT"
+          elif [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$GITHUB_EVENT_NAME" == "push" ]]; then
             echo "should_send=true" >> "$GITHUB_OUTPUT"
           elif [[ "$COMPLETED_WORKFLOW_RESULT" == "success" && "$COMPLETED_WORKFLOW_EVENT" == "workflow_dispatch" ]]; then
             echo "should_send=true" >> "$GITHUB_OUTPUT"
