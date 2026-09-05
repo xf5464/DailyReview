@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/cloudflare-control.yml
+      - cloudflare/dailyreview-reader.js
+      - cloudflare/wrangler.reader.toml
   workflow_dispatch:
     inputs:
       action:
@@ -57,7 +58,7 @@ jobs:
         run: npx --yes wrangler@4 versions list --config cloudflare/wrangler.reader.toml
 
       - name: Deploy dailyreview-reader
-        if: github.event_name == 'workflow_dispatch' && inputs.action == 'deploy-reader'
+        if: github.event_name == 'push' || inputs.action == 'deploy-reader'
         run: npx --yes wrangler@4 deploy --config cloudflare/wrangler.reader.toml
 
       - name: Check reader health
