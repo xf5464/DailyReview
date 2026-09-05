@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T14:00:42.027Z",
+  "updatedAt": "2026-09-05T14:30:42.688Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 25.9,
+      "score": 25.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 39.1,
+      "score": 38.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "f0dc04164b041e3d",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 12:20:42 GMT",
-      "score": 38.3,
+      "score": 37.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -60,22 +60,22 @@
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
       "score": 29.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
-      "id": "9bdc1ee2fe25b809",
+      "id": "1f9ca97c4670a1d8",
       "category": "market",
-      "title": "Dream Finders Homes director Len Sturm purchases $20,205 in stock By Investing.com",
-      "titleZh": "Dream Finders Homes总监Len Sturm通过Investing.com购买了$ 20,205的股票",
-      "url": "https://au.investing.com/news/stock-market-news/dream-finders-homes-director-len-sturm-purchases-20205-in-stock-93CH-4630709",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZjFyVGRrQ2c2cjYzWmFhSzF5MXE5ZnpMd1RndmZyTnd2aENqcmdZTFBOUjV2UVlhdEl2YWNhSEMteXlVLWM1ODU0R0VRNEQ1ZnJKcWlUVHVtaFRTSXE0TkNCVEkzb0JEQkpodWpGdkltb3dJRzFsTDhrbDBvR19kRHA1RWhjWjMtTUM5Z2J1ZC1Ud2pRYXFTNDN6OWVjSEs0c1NuMXcyN3NVR0RzUGttUkxHNkpvWlVVb3FfT2tiMHJzZw?oc=5",
+      "title": "Citi pushes Fed rate-cut forecast to June 2027 after resilient jobs market",
+      "titleZh": "在就业市场弹性后，花旗将美联储降息预测推迟至2027年6月",
+      "url": "https://www.investing.com/news/stock-market-news/citi-pushes-fed-ratecut-forecast-to-june-2027-after-resilient-jobs-market-4890197",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNeTVIbzdyb0YyeFpabDB2SV9MU1h6M21nalBSQmNZaGR0MzI0QjE0SHNlbDBQSndHZjBZSU5pTVNhVXp6aDBFZjFLMmdBdzdDNGM0YWM4cmc2b0JBQ25wc0RLZ1UzUmdkQXRsSUVHVlJnUFJBOWk3VlgxREM2Q1FUOS1VckdJcnlLVDNBOTdOTWRTb0lTOGJ3NjVibC1iMjBuR3pSc0Z1OC1UQnUxa09tZzBrQXFhWnN5TWUzQWI4ZDQ2N2dKWHU1SURR?oc=5",
       "source": "Investing.com",
       "sourceKey": "investing",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 39.2,
+      "publishedAt": "Sat, 05 Sep 2026 11:41:33 GMT",
+      "score": 58,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "61a403bbcc1af309",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Fri, 04 Sep 2026 22:58:00 GMT",
-      "score": 31,
+      "score": 30.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 38.5,
+      "score": 38.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "f0c0f379174692dc",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:03:00 GMT",
-      "score": 37.8,
+      "score": 36.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "7851080814ece1f2",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 11:05:00 GMT",
-      "score": 43.1,
+      "score": 42.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 26.6,
+      "score": 26.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 55.2,
+      "score": 54.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 60.6,
+      "score": 60.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "b9982393b7628a00",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
-      "score": 55,
+      "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,39 +208,39 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 43.1,
+      "score": 27.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
-      "id": "1f6531d3c8c7a31f",
+      "id": "dcb99b7f472a1ee4",
       "category": "tech",
-      "title": "How To Check Which Apps Are Draining Your iPhone Battery",
-      "titleZh": "如何检查哪些应用正在耗尽iPhone电池",
-      "url": "https://www.engadget.com/2247753/how-to-check-apps-draining-iphone-battery/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQWVVDOWxSYnh5WkVuXzdnUUM5cjV1a2x2bnMxN2tZVHZEQ2xZVllJSVdocDE2VG5QeDRzaFpacnJiNlJlMU1ma3FEbnhjazJLZkJySGFFUnh3S0dUTHdxaVp5bW9oaHJJaDRlRWxva2M4MVgtYXEtVUFhNmE1a3Bjbg?oc=5",
+      "title": "Is It Worth Paying Extra For iCloud Storage?",
+      "titleZh": "是否值得为iCloud存储支付额外费用？",
+      "url": "https://www.engadget.com/2247758/paying-extra-for-icloud-storage-worth-it/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5HWkF4cWJoVk5md25BbGh4N3BrZWx5cXFCRXNQUk1TTlNjaWFhYl95SkZiR3N3WkNWdm5vLUJsWXRncG90bWpQSzh5dkZ5MDJQX1d0VzJycUZBSGtfbkNNemdHcXoyRW5qN01WdXBPclVfckhhTVhNNnpvbFl3cFU?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 12:30:00 GMT",
-      "score": 64.8,
+      "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
+      "score": 64.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
-      "id": "858781058482c3d1",
+      "id": "8a6ef4568b0e9930",
       "category": "tech",
-      "title": "I tried the bezelless concept phone at IFA, and it’s more futuristic than I thought",
-      "titleZh": "我在IFA尝试了无边框概念手机，它比我想象的更具未来感",
-      "url": "https://www.zdnet.com/uncategorized/tecno-bezelless-phone-concept-ifa-berlin-2026/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNuZHRwaE03bG43MUhBZ1FUWENlcjRLMGpNdktUcDdGcUdYYW1aeWQ1VzVVcktoR0tGenNjRi12bzNHMGIxVE1WdFlZUlJHRVhJU3pNUEllelF6N3RfMDh5eEk5YV83blZSNUs3cjNNeDl2dVFOdi11aEFfMHgwRXB0YzRMZ1R4V0E?oc=5",
+      "title": "CSIRO’s Data61 develops ‘vaccine’ against attacks on machine learning",
+      "titleZh": "CSIRO的Data61开发了针对机器学习攻击的“疫苗”",
+      "url": "https://www.zdnet.com/article/csiros-data61-develops-vaccine-against-attacks-on-machine-learning-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN0pnMzNCUUlScDNSX1VKem9XTWVZZWhQS0ZrdF9xR0VTd0NxTHZENnB5QlZXVXRzOS1DSG5Dd1BiOWNUUlhPYlNTbU1tY0tUcjhwNVhHLTlpY0xfX1REa0V3b0U0dndzbGJhVmRXWkRHWkNISXk4ZUNzQ2REVzBLNFgxQzVKYVo0cHB4Wm1ONUE2ZEk3alN1dVVtUzdSS0hu?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
-      "score": 50.1,
+      "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
+      "score": 47.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 44.2,
+      "score": 31.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "139acf68d7514890",
@@ -268,24 +268,24 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 12:12:20 GMT",
-      "score": 49.2,
+      "score": 48.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
-      "id": "016858d51c1355cd",
+      "id": "67a5b180e8cd67f1",
       "category": "tech",
-      "title": "Modder gets Nvidia's DLSS 5 working on AMD's RDNA 4 GPUs — RX 9070 XT only manages 30 FPS at 1080p right now, but 5070 Ti-level performance is the eventual goal",
-      "titleZh": "Modder让Nvidia的DLSS 5在AMD的RDNA 4 GPU上工作— RX 9070 XT目前仅在1080p下管理30 FPS ，但5070 Ti级性能是最终目标",
-      "url": "https://www.tomshardware.com/pc-components/gpus/modder-gets-nvidias-dlss-5-working-on-amds-rdna-4-gpus-rx-9070-xt-only-manages-30-fps-at-1080p-right-now-but-5070-ti-level-performance-is-the-eventual-goal",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwJBVV95cUxNY2FuOU9ZYlQ1M0plTzJTckdwR0xkVWpxZlVFRXV1MzlaMGFfRUtRVlE3UWJXc1B6dkNKRjhneGtwamFreDJHdXQzUld4WVdYSXRXdHlPX3Z1UmpsZ3dFY3RCVnlQYkZXRE9oT1gwU3Bla3o1ZHRlcEFwZzdjUW5uck5zNUNLSXRzWVRxQTZMeF9yQmZCS1otQ0pRYmtNZkU2VERiLUNNYVdxZ3JpV21ZeVhCTzZZVnZwZ0w3T0k0U19GLVJHMzlzOF84alpFa1Q1NkZyNTdMT3BqN19lYXktX3JFTEtkN2FGU2hwTmdYRl91ZkcxLU9YWjRMbERvdEQ0Zm5tUUtEU3ZSMTlscWltTVgtWXB5TVhwaE9jUlR0R2N2V09nZDZOekVTMA?oc=5",
+      "title": "AMD reportedly prepping Ryzen 5 7500 (non-F) CPU with integrated graphics at double the price — Six-core Zen 4 chip rumored to share identical specs with its F-moniker cousin",
+      "titleZh": "据报道， AMD以两倍的价格为Ryzen 5 7500 （非F ） CPU提供集成显卡—传闻六核Zen 4芯片与其F-moniker表兄弟共享相同的规格",
+      "url": "https://www.tomshardware.com/pc-components/cpus/amd-reportedly-prepping-ryzen-5-7500-non-f-cpu-with-integrated-graphics-at-double-the-price-six-core-zen-4-chip-rumored-to-share-identical-specs-with-its-f-moniker-cousin",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwJBVV95cUxOM3IxWG8wTnQ0NzBYUEpWam9CbnNQalJBeVdnblpQUUpwVVU4SzdkX0x5UldOV2NJeWRwWVkzbm5LcVNINEMxNktGbTJtT3hsdzZxVTZfUGhXei1uc3NEWmdPcEFsbko5Ukl2aU5lVloyYldLUHRFeURyTW9DUzNqM0RpUzA1QmRodHZPUnFoRDJqRFg4TU9oYmFNMXlIbXhoY2lKalFEc3J1NkJxb2dtSUtIU0hzUlZUMWxhcl9ETnQtTC11SlRkbnN3V19MamVGOS1famJXRy1weG56VHZ6MTdyQzFVWERpd2dsUE5lUlJ2SEJLVFIwYXZxMjVGaHIzMmRqRkpoSkFXaHR4b18wbUN4djVMUWtDdnNrbTZpenAxLTdNYkpsanBqbVVtemhfUFpfd1pXNjA4TDBkdTNB?oc=5",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 12:00:00 GMT",
-      "score": 48,
+      "publishedAt": "Sat, 05 Sep 2026 13:09:23 GMT",
+      "score": 51.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "388819ff9e6f9d10",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:36:38.000Z",
-      "score": 70.8,
-      "engagement": "13 points · 5 comments",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "score": 88.3,
+      "engagement": "39 points · 10 comments",
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T14:00:42.027Z"
+      "fetchedAt": "2026-09-05T14:30:42.688Z"
     }
   ]
 }
