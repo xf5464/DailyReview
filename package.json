@@ -6,7 +6,7 @@
   "description": "Global macro dashboard for Electron and GitHub Pages.",
   "main": "desktop/main.js",
   "scripts": {
-    "build": "node scripts/build.js && node scripts/supplement-ism-fred-md-history.js && node scripts/patch-detail-overflow.js && node scripts/prepare-forecast-gold-ui.js && node scripts/prepare-forecast-ism-ui.js && node scripts/patch-forecast-condition-data.js",
+    "build": "node scripts/build.js && node scripts/run-ism-fred-md-history.js && node scripts/patch-detail-overflow.js && node scripts/prepare-forecast-gold-ui.js && node scripts/prepare-forecast-ism-ui.js && node scripts/patch-forecast-condition-data.js",
     "update:national-team-etf": "node scripts/update-national-team-etf-holdings.js",
     "dev": "npm run build && electron .",
     "preview": "node scripts/serve.js",
@@ -14,7 +14,7 @@
     "desktop:open": "electron .",
     "desktop:pack": "npm run build && electron-builder --dir",
     "desktop:dist": "npm run build && electron-builder",
-    "test": "node --test && node --check site/app.js && node --check site/service-worker.js && node --check site/forecast-gold-trend.js && node --check site/forecast-ism-new-orders.js && node --check scripts/build.js && node --check scripts/supplement-ism-fred-md-history.js && node --check scripts/patch-detail-overflow.js && node --check scripts/prepare-forecast-gold-ui.js && node --check scripts/prepare-forecast-ism-ui.js && node --check scripts/patch-forecast-condition-data.js && node --check desktop/main.js"
+    "test": "node --test && node --check site/app.js && node --check site/service-worker.js && node --check site/forecast-gold-trend.js && node --check site/forecast-ism-new-orders.js && node --check scripts/build.js && node --check scripts/supplement-ism-fred-md-history.js && node --check scripts/run-ism-fred-md-history.js && node --check scripts/patch-detail-overflow.js && node --check scripts/prepare-forecast-gold-ui.js && node --check scripts/prepare-forecast-ism-ui.js && node --check scripts/patch-forecast-condition-data.js && node --check desktop/main.js"
   },
   "engines": {
     "node": ">=20"
