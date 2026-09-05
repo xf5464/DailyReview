@@ -119,6 +119,8 @@ test("reuses an archived Google News mapping without another network request", a
 test("keeps the four DailyReview runs disconnected from hot-news collection", () => {
   const workflow = fs.readFileSync(".github/workflows/send-hot-news.yml", "utf8");
   assert.doesNotMatch(workflow, /workflow_run:/);
+  assert.match(workflow, /DISPATCH_TRIGGER_SOURCE/);
+  assert.match(workflow, /DISPATCH_TRIGGER_SOURCE" == "cloudflare"/);
   const cron = fs.readFileSync("cloudflare/dailyreview-cron-hot-news.js", "utf8");
   assert.match(cron, /"refresh-reader\.yml"/);
   assert.doesNotMatch(cron, /"send-hot-news\.yml"/);
