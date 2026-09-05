@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T09:30:42.086Z",
+  "updatedAt": "2026-09-05T09:41:05.538Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 30.4,
+      "score": 30.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 43.6,
+      "score": 43.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "aac3a04d43a07c83",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 05:41:23 GMT",
-      "score": 36.2,
+      "score": 36,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -58,9 +58,9 @@
       "sourceKey": "nasdaq-news",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
-      "score": 32.1,
+      "score": 31.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "9bdc1ee2fe25b809",
@@ -73,24 +73,24 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 43.7,
+      "score": 43.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
-      "id": "25046c1dbf437b57",
+      "id": "b898a990b78b2f34",
       "category": "market",
-      "title": "NVDA Stock Price | NVIDIA Corp. Stock Quote (U.S.: Nasdaq)",
-      "titleZh": "NVDA股价| NVIDIA Corp.股票报价（美国：纳斯达克）",
-      "url": "https://www.marketwatch.com/investing/stock/nvda",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9rTUx0am9SNU4zUG1rZG02REFwVHRBSmgyanJKb1ZFRHZNbG91b2RIN1NTUUxsTS1JX0xFWmVkTmxsQWxleG1nN1VXZnVJby13cEdlX1B2dUs4aEhr?oc=5",
+      "title": "MU Stock Price | Micron Technology Inc. Stock Quote (U.S.: Nasdaq)",
+      "titleZh": "MU股价| Micron Technology Inc.股票报价（美国：纳斯达克）",
+      "url": "https://www.marketwatch.com/investing/stock/mu",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9vX2xEV29lbDh4MU1TSWxlek1qTWFRb3FSZHh4X1ZVbDhQYkVacXllcTRUR3gzV2thQXdQTGtpSWxjVU1WZHJMaHh0MVVGUmgwU0U5RldmdkVpQQ?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 04:03:09 GMT",
-      "score": 43.5,
+      "publishedAt": "Sat, 05 Sep 2026 03:54:05 GMT",
+      "score": 40.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,24 +103,24 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 42.4,
+      "score": 42.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
-      "id": "fc13dce42e6b5e98",
+      "id": "4b8a03cd47875345",
       "category": "market",
-      "title": "Walmart, Target, and Kroger face growing retail crime issue",
-      "titleZh": "沃尔玛、塔吉特和克罗格面临日益严重的零售犯罪问题",
-      "url": "https://www.thestreet.com/retail/tech-brand-used-by-walmart-target-shares-new-retail-crime-issue",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTG5LbXhyTDVFRy1WSGU4VkRwYTJKS255Wkk0OGpPdE1Ob0hxXzk5SktNZzVoYV9jQWFCWmVfVGVhRTROMi12aUQ5bVFwNlFhYmtlVEl2NzFuSlFFRHl3cFlyeV9xend6SEhzNXR4X3VGRHBqN0wyQ2RlTjRVRXNIc19qUkg1NTN2NGt2UXY5WWxxR0poOFJoWVVuS3g?oc=5",
+      "title": "Jim Cramer has a blunt message for Amazon stock investors",
+      "titleZh": "吉姆·克莱默（ Jim Cramer ）向亚马逊股票投资者传达了一个直",
+      "url": "https://www.thestreet.com/investing/stocks/jim-cramer-has-a-blunt-message-for-amazon-stock-investors",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOMUY0a09mbkU3eU1TYzR3Q3lPUTl0dnJ5aWtnVUQ2eUxGd21OSFlVSGY0dnlIS0I3S0MzbDJNbDB3cHNWYk81VXktdXBuYks2UHlPTHMxUlZrNFpkdVowTm1ORGxZNm1oUHlUNmF6c1hQLUs0enkxMUFEVGUxel96LUU5UWZQeVZ3OTJlaTByY1NQazJEa1dLVjVVUVRwNHVQaGc?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 00:45:00 GMT",
-      "score": 37.2,
+      "publishedAt": "Sat, 05 Sep 2026 08:03:00 GMT",
+      "score": 59.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "8d614b4e5dffde06",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 04:40:59 GMT",
-      "score": 51.1,
+      "score": 51.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 30.8,
+      "score": 30.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "9b209e7e37fc8455",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 03:00:00 GMT",
-      "score": 51.5,
+      "score": 51.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 65.1,
+      "score": 64.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "5e6e436440229fb7",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 17:16:49 GMT",
-      "score": 39.8,
+      "score": 23.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 47.6,
+      "score": 47.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "11cb31cdc9cbd100",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Fri, 04 Sep 2026 23:00:00 GMT",
-      "score": 56.1,
+      "score": 55.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
-      "id": "8a6ef4568b0e9930",
+      "id": "78e6773e811e2d42",
       "category": "tech",
-      "title": "CSIRO’s Data61 develops ‘vaccine’ against attacks on machine learning",
-      "titleZh": "CSIRO的Data61开发了针对机器学习攻击的“疫苗”",
-      "url": "https://www.zdnet.com/article/csiros-data61-develops-vaccine-against-attacks-on-machine-learning-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN0pnMzNCUUlScDNSX1VKem9XTWVZZWhQS0ZrdF9xR0VTd0NxTHZENnB5QlZXVXRzOS1DSG5Dd1BiOWNUUlhPYlNTbU1tY0tUcjhwNVhHLTlpY0xfX1REa0V3b0U0dndzbGJhVmRXWkRHWkNISXk4ZUNzQ2REVzBLNFgxQzVKYVo0cHB4Wm1ONUE2ZEk3alN1dVVtUzdSS0hu?oc=5",
+      "title": "Taylor Clemons",
+      "titleZh": "泰勒·克莱蒙斯",
+      "url": "https://www.zdnet.com/meet-the-team/tclemons1/page/2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9pNElET0g4aFMwX18za29qeVdOaFpyZXc1dGJvdDJjVEllQTIzTmNZZVRNTE5qZl9LWVdRSWh2VWg1ZnplbXh2Rm0yWjF5dy10MVExUXNLalhvaUhIV2JRSGllMA?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
-      "score": 52.1,
+      "publishedAt": "Sat, 05 Sep 2026 06:12:16 GMT",
+      "score": 49.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 36.7,
+      "score": 36.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "5810310f9f13808b",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 09:10:33 GMT",
-      "score": 50.7,
+      "score": 50.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "229881e0cd3cca0b",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Fri, 04 Sep 2026 23:09:31 GMT",
-      "score": 42.6,
+      "score": 42.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "3d056644792d44a8",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T07:52:50.000Z",
-      "score": 103,
-      "engagement": "63 points · 39 comments",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 105.2,
+      "engagement": "73 points · 42 comments",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -311,9 +311,9 @@
       "sourceKey": "youtube-kLw0TWFKxT4",
       "sourceOrder": 0,
       "publishedAt": "2026-09-04T20:08:42Z",
-      "score": 245578,
-      "engagement": "245,578 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 245867,
+      "engagement": "245,867 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -325,9 +325,9 @@
       "sourceKey": "youtube-iBgKWE1WBKA",
       "sourceOrder": 1,
       "publishedAt": "2026-09-04T10:00:25Z",
-      "score": 231789,
-      "engagement": "231,789 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 232331,
+      "engagement": "232,331 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -339,23 +339,23 @@
       "sourceKey": "youtube-DwF2ouJm-FI",
       "sourceOrder": 2,
       "publishedAt": "2026-09-04T15:07:38Z",
-      "score": 213714,
-      "engagement": "213,714 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 214411,
+      "engagement": "214,411 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
       "category": "youtube",
       "title": "Tesla Taksiciliği Bitirebilir Mi?  #cüneytözdemir #gündem #haber  #canlıyayın  #fyp  #keşfet",
-      "titleZh": "Tesla Taksiciliği Bitirebilir Mi? # cüneytözdemir # gündem # haber # canlıyayın # fyp # keşfet",
+      "titleZh": "特斯拉可以完成出租车驾驶吗？ # cüneytözdemir # agenda # news # livestream # fyp # explore",
       "url": "https://www.youtube.com/watch?v=q2yH8cb-How",
       "source": "Cüneyt Özdemir",
       "sourceKey": "youtube-q2yH8cb-How",
       "sourceOrder": 3,
       "publishedAt": "2026-09-04T16:00:16Z",
-      "score": 212997,
-      "engagement": "212,997 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 213840,
+      "engagement": "213,840 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "39102722396f6ece",
@@ -367,37 +367,37 @@
       "sourceKey": "youtube-hj8rCr2lYCY",
       "sourceOrder": 4,
       "publishedAt": "2026-09-04T13:52:04Z",
-      "score": 208841,
-      "engagement": "208,841 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 209135,
+      "engagement": "209,135 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "60d4f30abce08daf",
       "category": "youtube",
       "title": "нвидиа поддерживает творческое виденье",
-      "titleZh": "нвидиа поддерживает творческое виденье",
+      "titleZh": "英伟达支持创意愿景",
       "url": "https://www.youtube.com/watch?v=0oLivAVOe4s",
       "source": "chopocompik_shorts",
       "sourceKey": "youtube-0oLivAVOe4s",
       "sourceOrder": 5,
       "publishedAt": "2026-09-04T12:09:55Z",
-      "score": 183288,
-      "engagement": "183,288 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 183499,
+      "engagement": "183,499 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "e4b10fe78a890372",
       "category": "youtube",
       "title": "\"POV You test PSUs💀\" #pcgaming #benchmark #rtx5050 #gtx1080ti",
-      "titleZh": "\"POV You test PSUs💀\" # pcgaming # benchmark # rtx5050 # gtx1080ti",
+      "titleZh": "“POV 你测试 PSU💀”#pcgaming #benchmark #rtx5050 #gtx1080ti",
       "url": "https://www.youtube.com/watch?v=_CWt4Lr9ito",
       "source": "LGA1155",
       "sourceKey": "youtube-_CWt4Lr9ito",
       "sourceOrder": 6,
       "publishedAt": "2026-09-04T18:32:18Z",
-      "score": 140673,
-      "engagement": "140,673 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 140972,
+      "engagement": "140,972 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "da36e08de20db544",
@@ -409,23 +409,23 @@
       "sourceKey": "youtube-pJc1JMpnIw0",
       "sourceOrder": 7,
       "publishedAt": "2026-09-04T15:46:50Z",
-      "score": 111534,
-      "engagement": "111,534 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 112189,
+      "engagement": "112,189 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "39a6c4ebcc789812",
       "category": "youtube",
       "title": "Tesla lanza el Cybercab: el coche sin volante que lo cambiará todo",
-      "titleZh": "特斯拉lanza el Cybercab ： el coche sin volante que lo cambiará todo",
+      "titleZh": "特斯拉推出Cybercab ：将改变一切的无人驾驶汽车",
       "url": "https://www.youtube.com/watch?v=cP_jFIKBIYI",
       "source": "Juan Ramón Rallo",
       "sourceKey": "youtube-cP_jFIKBIYI",
       "sourceOrder": 8,
       "publishedAt": "2026-09-04T18:30:10Z",
-      "score": 109673,
-      "engagement": "109,673 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 110227,
+      "engagement": "110,227 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -437,9 +437,9 @@
       "sourceKey": "youtube-Zy2VUeIMw2Y",
       "sourceOrder": 9,
       "publishedAt": "2026-09-04T10:46:25Z",
-      "score": 106979,
-      "engagement": "106,979 次观看",
-      "fetchedAt": "2026-09-05T09:30:42.086Z"
+      "score": 107027,
+      "engagement": "107,027 次观看",
+      "fetchedAt": "2026-09-05T09:41:05.538Z"
     }
   ]
 }
