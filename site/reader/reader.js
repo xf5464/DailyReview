@@ -146,9 +146,11 @@ function itemButton(item, rank) {
 
   const browser = document.createElement('a');
   browser.className = 'safari-link';
-  browser.href = chromeUrl(directArticleUrl(item.url));
-  browser.textContent = item.category === 'youtube' ? '播放' : 'Chrome';
-  browser.setAttribute('aria-label', `使用 Chrome 打开：${translated.textContent}`);
+  const youtube = item.category === 'youtube';
+  browser.href = youtube ? item.url : chromeUrl(directArticleUrl(item.url));
+  browser.textContent = youtube ? 'YouTube' : 'Chrome';
+  browser.setAttribute('aria-label', `${youtube ? '使用 YouTube 打开' : '使用 Chrome 打开'}：${translated.textContent}`);
+  if (youtube) browser.dataset.nativeApp = 'youtube';
 
   row.append(button, browser);
   return row;
@@ -302,6 +304,7 @@ function changeFont() {
 refs.days.addEventListener('click', (event) => {
   const externalLink = event.target.closest('.news-item, .safari-link');
   if (!externalLink) return;
+  if (externalLink.dataset.nativeApp === 'youtube') return;
   event.preventDefault();
   location.href = externalLink.getAttribute('href');
 });

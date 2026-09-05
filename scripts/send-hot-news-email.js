@@ -291,16 +291,35 @@ function containsChinese(value) {
   return /[\u3400-\u9fff]/.test(String(value));
 }
 
-async function translateTitle(title) {
+function detectTitleLanguage(title, hint = "") {
+  const text = String(title || "");
+  if (containsChinese(text)) return "zh-CN";
+  if (/[\u3040-\u30ff]/.test(text)) return "ja";
+  if (/[\uac00-\ud7af]/.test(text)) return "ko";
+  if (/[\u0400-\u04ff]/.test(text)) return "ru";
+  if (/[\u0600-\u06ff]/.test(text)) return "ar";
+  if (/[ğışçöüİ]/i.test(text)) return "tr";
+  if (/[ăâîșț]/i.test(text)) return "ro";
+  const lower = ` ${text.toLowerCase()} `;
+  if (/\b(el|los|las|una|para|pero|del|mercado|acciones)\b/.test(lower)) return "es";
+  if (/\b(le|les|des|avec|pour|marché|actions)\b/.test(lower)) return "fr";
+  if (/\b(der|die|das|und|aktien|markt)\b/.test(lower)) return "de";
+  if (/\b(não|uma|para|mercado|ações)\b/.test(lower)) return "pt";
+  const base = String(hint || "").trim().toLowerCase().split(/[-_]/)[0];
+  const aliases = { nb: "no", nn: "no", fil: "tl", iw: "he", id: "id" };
+  return aliases[base] || base || "en";
+}
+
+async function translateTitle(title, sourceLanguage = "en") {
   if (!title || containsChinese(title)) return title;
-  const [translated] = await translateBatch([title]);
+  const [translated] = await translateBatch([title], sourceLanguage);
   return translated;
 }
 
-async function translateBatch(titles) {
+async function translateBatch(titles, sourceLanguage = "en") {
   const separator = "\n|||\n";
   const source = titles.join(separator);
-  const params = new URLSearchParams({ q: source, langpair: "en|zh-CN", mt: "1" });
+  const params = new URLSearchParams({ q: source, langpair: `${sourceLanguage}|zh-CN`, mt: "1" });
   const payload = JSON.parse(await fetchText(`https://api.mymemory.translated.net/get?${params}`, 15_000));
   const translated = String(payload?.responseData?.translatedText || "").trim();
   if (!translated || Number(payload.responseStatus) !== 200) {
@@ -311,38 +330,54 @@ async function translateBatch(titles) {
   return parts;
 }
 
+async function translateTitleFallback(title) {
+  const params = new URLSearchParams({ client: "gtx", sl: "auto", tl: "zh-CN", dt: "t", q: title });
+  const payload = JSON.parse(await fetchText(`https://translate.googleapis.com/translate_a/single?${params}`, 15_000));
+  const translated = (payload?.[0] || []).map((part) => part?.[0] || "").join("").trim();
+  if (!translated || !containsChinese(translated)) throw new Error("Automatic translation returned no Chinese text.");
+  return translated;
+}
+
 async function addChineseTranslations(items, maxBatchBytes = 450) {
   const output = items.map((item) => ({
     ...item,
     titleZh: String(item.titleZh || "").trim() || (containsChinese(item.title) ? item.title : ""),
   }));
-  const batches = [];
-  let batch = [];
+  const groups = new Map();
   for (let index = 0; index < items.length; index += 1) {
     if (output[index].titleZh) continue;
-    const candidate = [...batch, index];
-    const bytes = Buffer.byteLength(candidate.map((itemIndex) => items[itemIndex].title).join("\n|||\n"), "utf8");
-    if (batch.length && bytes > maxBatchBytes) {
-      batches.push(batch);
-      batch = [index];
-    } else {
-      batch = candidate;
-    }
+    const language = detectTitleLanguage(items[index].title, items[index].language);
+    if (!groups.has(language)) groups.set(language, []);
+    groups.get(language).push(index);
   }
-  if (batch.length) batches.push(batch);
-  async function translateIndexes(indexes) {
+  async function translateIndexes(indexes, language) {
     try {
-      const translations = await translateBatch(indexes.map((index) => items[index].title));
+      const translations = await translateBatch(indexes.map((index) => items[index].title), language);
+      if (translations.some((translation) => !containsChinese(translation))) throw new Error("Translation was not Chinese.");
       indexes.forEach((index, offset) => { output[index].titleZh = translations[offset]; });
-    } catch {
+    } catch (error) {
       if (indexes.length > 1) {
         const middle = Math.ceil(indexes.length / 2);
-        await translateIndexes(indexes.slice(0, middle));
-        await translateIndexes(indexes.slice(middle));
+        await translateIndexes(indexes.slice(0, middle), language);
+        await translateIndexes(indexes.slice(middle), language);
+      } else {
+        try { output[indexes[0]].titleZh = await translateTitleFallback(items[indexes[0]].title); }
+        catch { console.warn(`Could not translate title from ${language}: ${error.message}`); }
       }
     }
   }
-  for (const indexes of batches) await translateIndexes(indexes);
+  for (const [language, indexes] of groups) {
+    let batch = [];
+    for (const index of indexes) {
+      const candidate = [...batch, index];
+      const bytes = Buffer.byteLength(candidate.map((itemIndex) => items[itemIndex].title).join("\n|||\n"), "utf8");
+      if (batch.length && bytes > maxBatchBytes) {
+        await translateIndexes(batch, language);
+        batch = [index];
+      } else batch = candidate;
+    }
+    if (batch.length) await translateIndexes(batch, language);
+  }
   return output;
 }
 
@@ -378,6 +413,7 @@ function youtubeItemsFromResponses(searchPayload, videosPayload) {
       title: String(video?.snippet?.title || "").trim(),
       url: `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`,
       source: String(video?.snippet?.channelTitle || "YouTube").trim(),
+      language: video?.snippet?.defaultAudioLanguage || video?.snippet?.defaultLanguage || "",
       sourceKey: `youtube-${video.id}`,
       sourceOrder: searchOrder.get(video.id) ?? 999,
       publishedAt: video?.snippet?.publishedAt || "",
@@ -635,7 +671,7 @@ if (require.main === module) main().catch((error) => { console.error(error.stack
 
 module.exports = {
   NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, collectHotNews, decodeXml,
-  environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
+  detectTitleLanguage, environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
   parseRssItems, rankAndDedupe, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   translateBatch, translateTitle, youtubeItemsFromResponses,
 };

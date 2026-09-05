@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 
 const {
-  NEWS_SOURCES, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
+  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
@@ -20,11 +20,25 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.05\.19/);
+  assert.match(html, /v2026\.09\.05\.20/);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'youtube'/);
   assert.match(script, /dailyreview-recent-v3/);
   assert.match(script, /ARCHIVE_URLS/);
+});
+
+test("detects non-English YouTube title languages", () => {
+  assert.equal(detectTitleLanguage("Tesla Taksiciliği Bitirebilir Mi?"), "tr");
+  assert.equal(detectTitleLanguage("нвидиа поддерживает творческое виденье"), "ru");
+  assert.equal(detectTitleLanguage("Tesla lanza el coche para el mercado"), "es");
+  assert.equal(detectTitleLanguage("The latest Nvidia GPU driver is bad"), "en");
+  assert.equal(detectTitleLanguage("特斯拉交付创新高"), "zh-CN");
+});
+
+test("uses YouTube universal links for the native-app button", () => {
+  const script = fs.readFileSync("site/reader/reader.js", "utf8");
+  assert.match(script, /browser\.href = youtube \? item\.url/);
+  assert.match(script, /dataset\.nativeApp === 'youtube'/);
 });
 
 test("orders YouTube results by views and creates direct video links", () => {
