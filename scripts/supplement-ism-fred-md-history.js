@@ -81,9 +81,9 @@ function parseFredMdSeries(text, seriesId) {
 
 function findCurrentFredMdCsvUrl(html) {
   const source = String(html ?? '');
-  const anchorPattern = /<a\b[^>]*href=["']([^"']+\.csv)["'][^>]*>\s*current\.csv\s*<\/a>/i;
-  const match = anchorPattern.exec(source);
-  if (!match) throw new Error('FRED-MD page does not expose current.csv');
+  const anchors = [...source.matchAll(/<a\b[^>]*href=["']([^"']+\.csv)["'][^>]*>\s*current\.csv\s*<\/a>/gi)];
+  const match = anchors.find((entry) => /\/fred-md\/monthly\/[^"']*-md\.csv(?:[?#]|$)/i.test(entry[1]));
+  if (!match) throw new Error('FRED-MD page does not expose the monthly current.csv');
   return new URL(match[1].replace(/&amp;/gi, '&'), FRED_MD_PAGE_URL).href;
 }
 
