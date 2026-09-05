@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T16:00:43.943Z",
+  "updatedAt": "2026-09-05T16:30:42.697Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 23.9,
+      "score": 23.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 37.1,
+      "score": 36.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "f0dc04164b041e3d",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 12:20:42 GMT",
-      "score": 36.3,
+      "score": 35.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -60,7 +60,7 @@
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
       "score": 29.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "7d32cd79e9ec75d3",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 12:29:43 GMT",
-      "score": 54.3,
+      "score": 53.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "81267dda083a8b1f",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 14:00:00 GMT",
-      "score": 50,
+      "score": 49.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 45,
+      "score": 44.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "8108d90c6c101e16",
@@ -118,24 +118,24 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 13:21:54 GMT",
-      "score": 39.8,
+      "score": 38.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
-      "id": "7851080814ece1f2",
+      "id": "610d89c88e07dfbc",
       "category": "market",
-      "title": "Palantir Billionaire Peter Thiel Just Bought Shares of This AI Stock That’s Climbed 200,000% Since Its IPO -- And It’s His Top Position.",
-      "titleZh": "Palantir亿万富翁彼得·蒂尔（ Peter Thiel ）刚刚购买了这只AI股票的股票，该股票自首次公开募股以来已攀升20万％ -这是他的头号位置。",
-      "url": "https://www.fool.com/investing/2026/09/05/palantir-billionaire-peter-thiel-just-bought-shares-of-this-ai-stock-that-s-climbed-200-000-since-its-ipo-and-it-s-his-top-position/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMihAJBVV95cUxPTG51T2l1YmRZOEx1VEdwWG8xZTlSTmRyVlhQQk5OcnhJSGNhdV93dXdMUWlFdllhbmhINzIwVlZPdDVrQjFpb1RQYUlfY1paS1RHb3J6ZVV0blVnYnpNUHFzR1ZsS3V4X1pmbDdaR1RITlpXUmdfQXhic3QxY2JhQzhuSTVrWGNxRURYa01LTEExWi1VNldRQW0zdVR3VWtINm85MGF1U04yRTA4eC1TcmRRbEZDUHZpeVRRbG9IMktmT2g1b0F5c2ZnV2pQYURudUNadzBPa2J2YVQ3Z1dHN2JYWkg4eWx5eXhYR21weFAyNnlrNHV4ekd2X25CWFYydWRqcA?oc=5",
+      "title": "If a Market Crash Is Coming, Here's the 1 Thing You Should Do, According to Warren Buffett",
+      "titleZh": "根据沃伦·巴菲特（ Warren Buffett ）的说法，如果市场崩溃即将来临，您应该做的一件事是：",
+      "url": "https://www.fool.com/investing/2026/09/05/if-a-market-crash-is-coming-heres-the-1-thing-you/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPWUtoU19WcVFQS3dma2dKNUNOdG9vREdXTmFTQ2k1OVVHaVFpcEc1OGFRanBPTzFONGNPNGZTWXRoSC16Sk5ybDJOcWZaNEx3ckMxT1RrNERzNHJYZ0RfQ1ZCNV95UnNOR2VrRnhZNk5kQkN2eU41Qzd1ckxEV1NhX0RaRXdzcHFWZnVZdXVKdEZFcHAxNlNF?oc=5",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 11:05:00 GMT",
-      "score": 41.1,
+      "publishedAt": "Sat, 05 Sep 2026 11:42:00 GMT",
+      "score": 53.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "c460312cd3b974cb",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 52.6,
+      "score": 52.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -162,10 +162,10 @@
       "source": "Reuters Technology",
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 14:55:55 GMT",
-      "score": 59,
+      "publishedAt": "Sat, 05 Sep 2026 15:28:31 GMT",
+      "score": 60,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "b4f1a92def54cb86",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 15:00:00 GMT",
-      "score": 68.9,
+      "score": 68.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "84cc6f131818be7c",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:42:54 GMT",
-      "score": 44.4,
+      "score": 43.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "cee0480452514b7d",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 54.7,
+      "score": 54.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "077ebd64bf95f3a5",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 14:10:05 GMT",
-      "score": 52.2,
+      "score": 51.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
-      "id": "1ee7e3885c31e2cc",
+      "id": "8a6ef4568b0e9930",
       "category": "tech",
-      "title": "/ latest smartphones - page 66",
-      "titleZh": "/latest smartphones -第66页",
-      "url": "https://www.zdnet.com/topic/smartphones/66/?edition\\u003dus",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jdVptUUl6YmhFYkJDRU1iZ0dqSDZXRi1TQ0QxQjMxX1NCcWg4QXdFNndDamc0dUxybXVyOEZyTUhpcGFDeV92NUxQVnZWOS0wNk1TdWo4UDJQUXBRNmsxbTJnZHU?oc=5",
+      "title": "CSIRO’s Data61 develops ‘vaccine’ against attacks on machine learning",
+      "titleZh": "CSIRO的Data61开发了针对机器学习攻击的“疫苗”",
+      "url": "https://www.zdnet.com/article/csiros-data61-develops-vaccine-against-attacks-on-machine-learning-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN0pnMzNCUUlScDNSX1VKem9XTWVZZWhQS0ZrdF9xR0VTd0NxTHZENnB5QlZXVXRzOS1DSG5Dd1BiOWNUUlhPYlNTbU1tY0tUcjhwNVhHLTlpY0xfX1REa0V3b0U0dndzbGJhVmRXWkRHWkNISXk4ZUNzQ2REVzBLNFgxQzVKYVo0cHB4Wm1ONUE2ZEk3alN1dVVtUzdSS0hu?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 12:34:16 GMT",
-      "score": 49.6,
+      "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
+      "score": 45.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 30.2,
+      "score": 41.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "1305dd241c305356",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 14:29:13 GMT",
-      "score": 53.4,
+      "score": 52.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "a88be8fcf16633fb",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 15:04:13 GMT",
-      "score": 49.1,
+      "score": 48.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "388819ff9e6f9d10",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:36:38.000Z",
-      "score": 106.3,
-      "engagement": "102 points · 29 comments",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "score": 108.9,
+      "engagement": "115 points · 36 comments",
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T16:00:43.943Z"
+      "fetchedAt": "2026-09-05T16:30:42.697Z"
     }
   ]
 }
