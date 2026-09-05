@@ -1,21 +1,21 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T10:30:39.071Z",
+  "updatedAt": "2026-09-05T11:00:37.512Z",
   "items": [
     {
-      "id": "ffe246597ac60595",
+      "id": "fbe2a4d07950ca5c",
       "category": "market",
-      "title": "Wall Street ends lower as solid jobs data fuels hawkish Fed bets",
-      "titleZh": "由于稳健的就业数据助长了美联储的鹰派押注，华尔街收盘走低",
-      "url": "https://www.reuters.com/business/nasdaq-sp-500-futures-climb-ahead-key-jobs-report-2026-09-04/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
+      "title": "Niger blames France for inciting soldiers' mutiny",
+      "titleZh": "尼日尔指责法国煽动士兵叛乱",
+      "url": "https://www.reuters.com/world/africa/niger-blames-france-inciting-soldiers-mutiny-2026-09-04/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQY3dqdDhwV1dDXzFpSU9LYzR0cE5XSlh6U1hKSUt2NkYwdVZtMmhXdzY0ajh4U1lwSFNEWl95MWZtQTU3bnpQaGRWTXJDX19iN0l2RmRYTEg3dkpFcVMzMEhIdmdXN1M4cTgwVy1KODJYQk1VTkhNQWVZM05ZeVVjcm4wUlhfV2VfQzRqSzljNmx3d2w2d3lBQQ?oc=5",
       "source": "Reuters Markets",
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
-      "publishedAt": "Fri, 04 Sep 2026 22:57:36 GMT",
-      "score": 52.4,
+      "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
+      "score": 28.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 42.6,
+      "score": 42.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "aac3a04d43a07c83",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 05:41:23 GMT",
-      "score": 35.2,
+      "score": 34.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -58,9 +58,9 @@
       "sourceKey": "nasdaq-news",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
-      "score": 31.1,
+      "score": 30.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "9bdc1ee2fe25b809",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 42.7,
+      "score": 42.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "25046c1dbf437b57",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 03:50:02 GMT",
-      "score": 42.3,
+      "score": 41.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 41.4,
+      "score": 40.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "4b8a03cd47875345",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 08:03:00 GMT",
-      "score": 59.1,
+      "score": 58.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "8d614b4e5dffde06",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 05:15:00 GMT",
-      "score": 52.4,
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 30.4,
+      "score": 29.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 58.7,
+      "score": 58.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,24 +178,24 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 64.1,
+      "score": 46.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
-      "id": "5e6e436440229fb7",
+      "id": "84cc6f131818be7c",
       "category": "tech",
-      "title": "AGI is whatever you want it to be",
-      "titleZh": "AGI是您想要的任何东西",
-      "url": "https://www.theverge.com/podcast/990323/agi-is-whatever-you-want-it-to-be",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5LRkNCTllWOHl6MFd2RWg3QmFYUWZDTkpHSUR2cTlaYXBBaFF3d21waEY1OGVhQTc2N0hXNVBXeG53QWMwb2twV0p0VW16aG85ZzlWNDVRVGxodlZuVTZYZ3RRTFQydkRBSXRuelZPbWs5WVo1UEZXZ1JzUXFGQQ?oc=5",
+      "title": "The White House is making arcade games racist",
+      "titleZh": "白宫正在制造街机游戏的种族主义者",
+      "url": "https://www.theverge.com/policy/990520/trump-arcade-games-maga-copyright",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE54cTJnWWZFSDdFdlA1cTJTMmVLZENYd3VXNVZvY3VjWkdGTktWZjMwSHpuRF9YckptY1N0N2RhTGwwRHdqSHpRemtjVmk0SWFwbjZGR2Z2R2xPczJjN2JtVi15N3dRX2tVRUhGMnc2TXhmelc1bWlmUnI3bVU?oc=5",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Fri, 04 Sep 2026 17:16:49 GMT",
-      "score": 38.8,
+      "publishedAt": "Fri, 04 Sep 2026 19:42:54 GMT",
+      "score": 49.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 46.6,
+      "score": 46.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "11cb31cdc9cbd100",
@@ -223,9 +223,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Fri, 04 Sep 2026 23:00:00 GMT",
-      "score": 55.1,
+      "score": 54.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "78e6773e811e2d42",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 06:12:16 GMT",
-      "score": 35.7,
+      "score": 35.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 47.7,
+      "score": 47.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "5810310f9f13808b",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 09:10:33 GMT",
-      "score": 49.7,
+      "score": 49.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "229881e0cd3cca0b",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Fri, 04 Sep 2026 23:09:31 GMT",
-      "score": 41.6,
+      "score": 41.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "3d056644792d44a8",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T07:52:50.000Z",
-      "score": 116.1,
-      "engagement": "122 points · 87 comments",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "score": 119.9,
+      "engagement": "145 points · 115 comments",
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T10:30:39.071Z"
+      "fetchedAt": "2026-09-05T11:00:37.512Z"
     }
   ]
 }
