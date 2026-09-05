@@ -1,7 +1,7 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const MAX_ITEMS = 10;
 const YOUTUBE_LOOKBACK_HOURS = 24;
-const YOUTUBE_QUERY = 'AI|technology|Nvidia|Apple|Tesla|stock market|Wall Street';
+const YOUTUBE_QUERY = '"artificial intelligence"|"technology news"|"stock market"|"Wall Street"|Nvidia|Tesla -movie -film -trailer -music';
 const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
 
@@ -398,7 +398,7 @@ async function fetchYouTubeTop(apiKey, now = Date.now(), fetcher = fetch) {
   if (!apiKey) throw new Error("Missing required environment variable: YOUTUBE_API_KEY");
   const publishedAfter = new Date(now - YOUTUBE_LOOKBACK_HOURS * 60 * 60 * 1000).toISOString();
   const searchParams = new URLSearchParams({
-    part: "snippet", type: "video", maxResults: "25", order: "viewCount",
+    part: "snippet", type: "video", maxResults: "50", order: "viewCount",
     q: YOUTUBE_QUERY, publishedAfter, regionCode: "US", relevanceLanguage: "en",
     safeSearch: "moderate", key: apiKey,
   });
@@ -406,7 +406,7 @@ async function fetchYouTubeTop(apiKey, now = Date.now(), fetcher = fetch) {
   const videoIds = (searchPayload.items || []).map((item) => item?.id?.videoId).filter(Boolean);
   if (!videoIds.length) throw new Error("YouTube returned no recent videos.");
   const videoParams = new URLSearchParams({
-    part: "snippet,statistics", id: videoIds.join(","), maxResults: "25", key: apiKey,
+    part: "snippet,statistics", id: videoIds.join(","), maxResults: "50", key: apiKey,
   });
   const videosPayload = await fetchJson(`https://www.googleapis.com/youtube/v3/videos?${videoParams}`, 15_000, fetcher);
   const items = youtubeItemsFromResponses(searchPayload, videosPayload);
@@ -612,7 +612,8 @@ async function main() {
   );
   if (refreshOnly) {
     if (!archivePath) throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
-    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
+    const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) =>
+      item.category === "youtube" || !isPaywalledItem(item));
     console.log(`Saved latest reader snapshot: ${archive.items.length} item(s), updated ${archive.updatedAt}.`);
     console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, youtube=${news.youtube.length}.`);
     return;
