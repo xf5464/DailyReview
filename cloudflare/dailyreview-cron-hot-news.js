@@ -46,7 +46,7 @@ export default {
       status: "ok",
       readerRefreshCron: "*/30 * * * *",
       ignoresDailyReviewCron: "17 4,10,16,22 * * *",
-      cronVersion: "2026.09.05.14",
+      cronVersion: "2026.09.05.15",
     });
   },
 };
