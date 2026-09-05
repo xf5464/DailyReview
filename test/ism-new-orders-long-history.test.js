@@ -3,7 +3,8 @@ const assert = require('node:assert/strict');
 
 const {
   FRED_MD_ISM_SERIES,
-  FRED_MD_URL,
+  FRED_MD_PAGE_URL,
+  findCurrentFredMdCsvUrl,
   normalizeFredMdDate,
   parseFredMdSeries,
 } = require('../scripts/supplement-ism-fred-md-history');
@@ -34,8 +35,8 @@ test('FRED-MD parser reads the ISM PMI, new-orders, and supplier-deliveries hist
   ]);
 });
 
-test('ISM FRED-MD mapping uses the official St. Louis Fed current dataset and excludes backlog orders', () => {
-  assert.equal(FRED_MD_URL, 'https://files.stlouisfed.org/files/htdocs/fred-md/monthly/current.csv');
+test('ISM FRED-MD mapping uses the official St. Louis Fed data page and excludes backlog orders', () => {
+  assert.equal(FRED_MD_PAGE_URL, 'https://www.stlouisfed.org/research/economists/mccracken/fred-databases');
   assert.deepEqual(FRED_MD_ISM_SERIES, {
     ismManufacturingPmi: 'NAPM',
     ismSupplierDeliveries: 'NAPMSDI',
@@ -43,4 +44,12 @@ test('ISM FRED-MD mapping uses the official St. Louis Fed current dataset and ex
   });
   assert.equal(Object.hasOwn(FRED_MD_ISM_SERIES, 'ismBacklogOrders'), false);
   assert.equal(normalizeFredMdDate('12/1/2008'), '2008-12-01');
+});
+
+test('current FRED-MD CSV URL is discovered from the official data page', () => {
+  const html = '<a href="/-/media/project/frbstl/stlouisfed/research/fred-md/monthly/2026-07-md.csv">current.csv</a>';
+  assert.equal(
+    findCurrentFredMdCsvUrl(html),
+    'https://www.stlouisfed.org/-/media/project/frbstl/stlouisfed/research/fred-md/monthly/2026-07-md.csv',
+  );
 });
