@@ -1,12 +1,6 @@
 name: Test Chinese Reader
 
 on:
-  push:
-    paths:
-      - .github/workflows/test-reader.yml
-      - cloudflare/dailyreview-reader.js
-      - scripts/diagnose-google-news.js
-      - site/reader/**
   workflow_dispatch:
 
 permissions:
