@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T12:00:48.618Z",
+  "updatedAt": "2026-09-05T12:30:40.303Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 27.9,
+      "score": 27.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,24 +28,24 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 41.1,
+      "score": 40.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
-      "id": "aac3a04d43a07c83",
+      "id": "d244a3feea55e161",
       "category": "market",
-      "title": "Italy's Meloni just hit a major political milestone. Former leaders say economic reform must follow",
-      "titleZh": "意大利的梅洛尼刚刚达到了一个重要的政治里程碑。 前领导人表示，经济改革必须紧随其后",
-      "url": "https://www.cnbc.com/2026/09/05/italy-meloni-bonds-debt.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE4wVzFGWk43R3ZrT3VOR215UV8zTVFIVF82ajhjUHgzRkdRRUN2RE80MkhqYllzc3hLVDRGeEwwOVlYcDE5dnlON3NvckFqUGJad1g1c0hETEtnejBUNFpwLWJlN3o2LWFQUDNaU9IBckFVX3lxTFBYUzBxYWtuU0FiTnZPaTZOampDT19RWmlPeGREMkZIMkFqMHpydFBTZzNfWGZRSUZzZmlQUGtEUEVTamd3Y2RnS2NINVhpaFZYYzJKMDE5VWh2b1A0QmpxVWg0QWR1WnRGSlhQNHZTWnlndw?oc=5",
+      "title": "Iranian tanker hit by U.S. attack near Iran's Kharg Island, Tasnim says",
+      "titleZh": "塔斯尼姆说，伊朗油轮在伊朗哈格岛附近遭到美国袭击",
+      "url": "https://www.cnbc.com/2026/09/05/iranian-tanker-reportedly-hit-by-us-attack-near-irans-kharg-island.html",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQbVllam50bVJ1bUZ2eUZUa1Q3LVozS3BNTlEzSC00UGZ5UXNoNHM2alhyc0JsZG9ob2xha1J0UmpBTHMtZnljYlZEb2pYX0gyd25QMWlqR01JTlp0MFdwVUw3Y1pxNW1LTUVpeHk4UjNDT3RzaGJCdUhkUzRvWERMTkdlVnNwZThNZEZPdFVPOEZCUzdKTUxvaVEyYWY1elAzLVU2OE5n0gGrAUFVX3lxTE80ajlSMUhPTkttN2RnWE5oQXJzYVNBWHgzLVhXTjlZMVNNaENENS1vbDFjUXZfZ0R6X2kyZVQwWXNDUzlRMERQN0EtZW5lS2MyWHJpVFlJWjhwbzZGUGswSUI4SmxpQmhVNjdPUG9JZW1ZZ29hckFYcmwxVzlLOHM2Ums2bDVXRHlQbEdlMTFYZFdQUkU2dUFoNzFvYjlSVk00V09HRktvYm81WQ?oc=5",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 05:41:23 GMT",
-      "score": 33.7,
+      "publishedAt": "Sat, 05 Sep 2026 10:36:58 GMT",
+      "score": 38.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -58,9 +58,9 @@
       "sourceKey": "nasdaq-news",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
-      "score": 29.6,
+      "score": 29.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "9bdc1ee2fe25b809",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 42.1,
+      "score": 41.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "25046c1dbf437b57",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 03:50:02 GMT",
-      "score": 40.8,
+      "score": 40.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 40.2,
+      "score": 39.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "4b8a03cd47875345",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 08:03:00 GMT",
-      "score": 57.6,
+      "score": 57.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "8d614b4e5dffde06",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 05:15:00 GMT",
-      "score": 51.2,
+      "score": 50.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 28,
+      "score": 28.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 57.2,
+      "score": 56.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,24 +178,24 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 62.6,
+      "score": 62.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
-      "id": "84cc6f131818be7c",
+      "id": "5e6e436440229fb7",
       "category": "tech",
-      "title": "The White House is making arcade games racist",
-      "titleZh": "白宫正在制造街机游戏的种族主义者",
-      "url": "https://www.theverge.com/policy/990520/trump-arcade-games-maga-copyright",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE54cTJnWWZFSDdFdlA1cTJTMmVLZENYd3VXNVZvY3VjWkdGTktWZjMwSHpuRF9YckptY1N0N2RhTGwwRHdqSHpRemtjVmk0SWFwbjZGR2Z2R2xPczJjN2JtVi15N3dRX2tVRUhGMnc2TXhmelc1bWlmUnI3bVU?oc=5",
+      "title": "AGI is whatever you want it to be",
+      "titleZh": "AGI是您想要的任何东西",
+      "url": "https://www.theverge.com/podcast/990323/agi-is-whatever-you-want-it-to-be",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5LRkNCTllWOHl6MFd2RWg3QmFYUWZDTkpHSUR2cTlaYXBBaFF3d21waEY1OGVhQTc2N0hXNVBXeG53QWMwb2twV0p0VW16aG85ZzlWNDVRVGxodlZuVTZYZ3RRTFQydkRBSXRuelZPbWs5WVo1UEZXZ1JzUXFGQQ?oc=5",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Fri, 04 Sep 2026 19:42:54 GMT",
-      "score": 49,
+      "publishedAt": "Fri, 04 Sep 2026 17:16:49 GMT",
+      "score": 36.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 45.1,
+      "score": 44.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "11cb31cdc9cbd100",
@@ -223,9 +223,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Fri, 04 Sep 2026 23:00:00 GMT",
-      "score": 53.9,
+      "score": 39.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "8a6ef4568b0e9930",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 05:38:39 GMT",
-      "score": 49.6,
+      "score": 49.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 46.2,
+      "score": 45.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "1503c662885bcd2a",
@@ -268,24 +268,24 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 11:11:50 GMT",
-      "score": 55,
+      "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
-      "id": "229881e0cd3cca0b",
+      "id": "819d1d2daeba36ae",
       "category": "tech",
-      "title": "DLSS 5 officially launches inside NBA 2K27, limited to RTX 50-series GPUs for now — Nvidia promises to bring neutral rendering tech to RTX 40-series soon",
-      "titleZh": "DLSS 5在NBA 2K27内正式推出，目前仅限于腾讯通50系列GPU —英伟达承诺很快将中性渲染技术引入腾讯通40系列",
-      "url": "https://www.tomshardware.com/pc-components/gpus/dlss-5-officially-launches-inside-nba-2k27-limited-to-rtx-50-series-gpus-for-now-nvidia-promises-to-bring-neutral-rendering-tech-to-rtx-40-series-soon",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipAJBVV95cUxOX0E2Rnl0aWdsX05wMWkyUWlocUlXcmpjSDVGNzRUa1Q0TmNnQnRXcmN6WmJXSnVjTlBnSjBCM3VsNzdESTR6WXFyVmo5VUQweTVleW9MejByV1FYOUZDcVFNWUU4MWl1TlNpRVFxMjF2VG1rMHFRT2JRQjNuWnhxTWkxOS15cnVuVmE0UFgwcklMVXlzejEtUHVDQXRKVkFSWkhxZWhVYTJQcnJfdlJSV1FGSW5lYmpwRHRDYkZkRjFHeUZCUVNybzBXblpNdVNVS1BGLTQtZDR6VGl1c0xaVTdNX1FaNkFlZlFmYXF2d3JJZ1ZHSUFoYWFrX2xpSXM1bTlWM3pPQzVQRmV0eEk1alVzVVdQYUZIQlVHSHBkMHY2M1I5?oc=5",
+      "title": "Japan to mass-procure 3D-printed rocket-powered drone interceptor — Terra B1 capable of countering one-way attack platforms",
+      "titleZh": "日本将大规模采购3D打印火箭动力无人机拦截器--TERRA B1 ，能够对抗单向攻击平台",
+      "url": "https://www.tomshardware.com/tech-industry/drones/japan-to-mass-procure-3d-printed-rocket-powered-drone-interceptor-terra-b1-capable-of-countering-one-way-attack-platforms",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPVFFvZ0RXTDNUQWVvWVpndk1JQXRPeU1XWDdGQUplNjdCeGJ6b01mOWpWNE0xQmxzQkZOcGxnUTRfSk9iVkU0enotel9lVDYtcndveW1WZk9ieS1XejlEbHVsUUIyTjNxQVlCRXRmUWU2VDdONDVlSllVYnY1TGpLMm5yV1ZSU0EzZFVpOEdsS3RYYmh2OHNkeE9pS1pkRDJlOW5BU0l4MW9Wb1JkUTR0d0JoYkdqSmlFVFFPbV9ZZGFJUXFYR3lTaG1BeDY4TWZQcjV1VWVJb04xWkpTRzBITlZrOWkwaHhRUk5GQlA5dG9nY19LZXZ0U0ttNElnVWtG?oc=5",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Fri, 04 Sep 2026 23:09:31 GMT",
-      "score": 40.4,
+      "publishedAt": "Sat, 05 Sep 2026 10:00:00 GMT",
+      "score": 47.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "6a5cb4a438703700",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-04T21:52:01.000Z",
-      "score": 132.6,
-      "engagement": "545 points · 288 comments",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "score": 132.8,
+      "engagement": "567 points · 298 comments",
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T12:00:48.618Z"
+      "fetchedAt": "2026-09-05T12:30:40.303Z"
     }
   ]
 }
