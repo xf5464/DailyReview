@@ -1,8 +1,11 @@
 'use strict';
 
 const API_ROOT = 'https://dailyreview-reader.xf5464.workers.dev';
-const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
-const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v2';
+const ARCHIVE_URLS = [
+  'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json',
+  new URL('data/recent.json', location.href).toString(),
+];
+const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v3';
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
 const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
@@ -210,18 +213,29 @@ function selectCategory(category) {
   activeCategory = category;
   localStorage.setItem('dailyreview-reader-category', category);
   renderArchive(archive);
+  if (!selectedItems(archive).length) loadArchive();
 }
 
 async function loadArchive() {
   const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] }));
   if (cached.items.length) renderArchive(cached, true);
-  try {
-    const response = await fetch(`${ARCHIVE_URL}?v=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(String(response.status));
-    renderArchive(await response.json());
-  } catch {
-    if (!cached.items.length) renderArchive(cached, true);
+  let lastError;
+  for (const archiveUrl of ARCHIVE_URLS) {
+    try {
+      const target = new URL(archiveUrl);
+      target.searchParams.set('v', String(Date.now()));
+      const response = await fetch(target, { cache: 'no-store' });
+      if (!response.ok) throw new Error(String(response.status));
+      const next = await response.json();
+      if (!Array.isArray(next?.items)) throw new Error('数据格式错误');
+      renderArchive(next);
+      return;
+    } catch (error) {
+      lastError = error;
+    }
   }
+  if (!cached.items.length) renderArchive(cached, true);
+  refs.archiveMeta.textContent += ` · 加载失败，点击页签重试（${lastError?.message || '网络错误'}）`;
 }
 
 function showDialogState(name) {
