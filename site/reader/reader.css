@@ -41,7 +41,7 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
 .category-tabs {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 0 0 24px; padding: 4px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 0 0 24px; padding: 4px;
   border: 1px solid var(--line); border-radius: 14px; background: rgba(222, 216, 202, .45);
 }
 .category-tab {

@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const {
   NEWS_SOURCES, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
+  youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
 
 test("uses ten fixed free sources for each reader tab", () => {
@@ -19,7 +20,25 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.05\.17/);
+  assert.match(html, /v2026\.09\.05\.18/);
+  assert.match(html, /data-category="youtube"[^>]*>YouTube</);
+  assert.match(script, /'tech', 'market', 'youtube'/);
+});
+
+test("orders YouTube results by views and creates direct video links", () => {
+  const search = { items: [
+    { id: { videoId: "low" } }, { id: { videoId: "high" } },
+  ] };
+  const videos = { items: [
+    { id: "low", snippet: { title: "Low", channelTitle: "A", publishedAt: "2026-09-05T01:00:00Z" }, statistics: { viewCount: "10" } },
+    { id: "high", snippet: { title: "High", channelTitle: "B", publishedAt: "2026-09-05T02:00:00Z" }, statistics: { viewCount: "100" } },
+  ] };
+  const items = youtubeItemsFromResponses(search, videos);
+  assert.deepEqual(items.map((item) => item.title), ["High", "Low"]);
+  assert.equal(items[0].category, "youtube");
+  assert.equal(items[0].url, "https://www.youtube.com/watch?v=high");
+  assert.equal(items[0].source, "B");
+  assert.match(items[0].engagement, /100 次观看/);
 });
 
 test("parses Google News RSS and removes source suffix", () => {
@@ -145,6 +164,7 @@ test("keeps the four DailyReview runs disconnected from hot-news collection", ()
 test("keeps reader publication free of Gmail configuration", () => {
   const workflow = fs.readFileSync(".github/workflows/refresh-reader.yml", "utf8");
   assert.match(workflow, /HOT_NEWS_REFRESH_ONLY: "true"/);
+  assert.match(workflow, /YOUTUBE_API_KEY: \$\{\{ secrets\.YOUTUBE_API_KEY \}\}/);
   assert.match(workflow, /for attempt in 1 2 3/);
   assert.doesNotMatch(workflow, /GMAIL_USERNAME|GMAIL_APP_PASSWORD|ALERT_EMAIL_TO/);
 });

@@ -48,7 +48,7 @@ function pruneArchive(archive) {
 
 function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true) {
   const fetchedAt = new Date(now).toISOString();
-  const items = [...(news.tech || []), ...(news.market || [])]
+  const items = [...(news.tech || []), ...(news.market || []), ...(news.youtube || [])]
     .map((item, index) => normalizeItem({ ...item, fetchedAt }, index % 10))
     .filter(shouldKeepItem);
   return pruneArchive({ schemaVersion: 2, updatedAt: fetchedAt, items });

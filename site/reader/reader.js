@@ -28,7 +28,8 @@ const refs = {
 };
 
 let archive = { schemaVersion: 2, updatedAt: null, items: [] };
-let activeCategory = localStorage.getItem('dailyreview-reader-category') === 'market' ? 'market' : 'tech';
+const savedCategory = localStorage.getItem('dailyreview-reader-category');
+let activeCategory = ['tech', 'market', 'youtube'].includes(savedCategory) ? savedCategory : 'tech';
 let currentUrl = '';
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
 const fontSizes = [17, 19, 21, 23];
@@ -71,7 +72,7 @@ function pruneArticleCache() {
 }
 
 function categoryLabel(category) {
-  return category === 'market' ? '美股' : '科技';
+  return category === 'market' ? '美股' : category === 'youtube' ? 'YouTube' : '科技';
 }
 
 function publishedTimeLabel(value) {
@@ -143,7 +144,7 @@ function itemButton(item, rank) {
   const browser = document.createElement('a');
   browser.className = 'safari-link';
   browser.href = chromeUrl(directArticleUrl(item.url));
-  browser.textContent = 'Chrome';
+  browser.textContent = item.category === 'youtube' ? '播放' : 'Chrome';
   browser.setAttribute('aria-label', `使用 Chrome 打开：${translated.textContent}`);
 
   row.append(button, browser);
@@ -187,7 +188,7 @@ function renderArchive(value, fromCache = false) {
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
   refs.archiveMeta.textContent = items.length
-    ? `${categoryLabel(activeCategory)} · 每个来源最新 1 条 · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
+    ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : '每个来源最新 1 条'} · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
     : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
 
   if (!items.length) return;
@@ -205,7 +206,7 @@ function renderArchive(value, fromCache = false) {
 }
 
 function selectCategory(category) {
-  if (!['tech', 'market'].includes(category) || category === activeCategory) return;
+  if (!['tech', 'market', 'youtube'].includes(category) || category === activeCategory) return;
   activeCategory = category;
   localStorage.setItem('dailyreview-reader-category', category);
   renderArchive(archive);

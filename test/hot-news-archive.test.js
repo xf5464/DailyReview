@@ -48,3 +48,9 @@ test('applies the current free-source filter to the new snapshot', () => {
   }, Date.parse('2026-09-04T03:00:00Z'), (entry) => entry.sourceKey !== 'paid');
   assert.deepEqual(archive.items.map((entry) => entry.sourceKey), ['free']);
 });
+
+test('stores the YouTube Top 10 with the news snapshot', () => {
+  const youtube = Array.from({ length: 10 }, (_, index) => item('youtube', `youtube-${index}`, `video-${index}`));
+  const archive = mergeNews(null, { tech: [], market: [], youtube }, Date.parse('2026-09-04T03:00:00Z'));
+  assert.equal(archive.items.filter((entry) => entry.category === 'youtube').length, 10);
+});

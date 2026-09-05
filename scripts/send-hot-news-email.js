@@ -1,5 +1,7 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const MAX_ITEMS = 10;
+const YOUTUBE_LOOKBACK_HOURS = 24;
+const YOUTUBE_QUERY = 'AI|technology|Nvidia|Apple|Tesla|stock market|Wall Street';
 const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
 
@@ -162,6 +164,19 @@ async function fetchText(url, timeoutMs = 15_000) {
   });
   if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
   return response.text();
+}
+
+async function fetchJson(url, timeoutMs = 15_000, fetcher = fetch) {
+  const response = await fetcher(url, {
+    headers: { "user-agent": USER_AGENT, accept: "application/json" },
+    signal: AbortSignal.timeout(timeoutMs),
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const detail = payload?.error?.message || `HTTP ${response.status}`;
+    throw new Error(`${url} returned ${detail}`);
+  }
+  return payload;
 }
 
 function isGoogleNewsUrl(rawUrl) {
@@ -351,6 +366,54 @@ async function fetchHackerNewsTop(now = Date.now()) {
   };
 }
 
+function youtubeItemsFromResponses(searchPayload, videosPayload) {
+  const searchOrder = new Map((searchPayload?.items || [])
+    .map((item, index) => [item?.id?.videoId, index]).filter(([id]) => id));
+  return (videosPayload?.items || []).map((video) => {
+    const views = Number(video?.statistics?.viewCount || 0);
+    const likes = Number(video?.statistics?.likeCount || 0);
+    const comments = Number(video?.statistics?.commentCount || 0);
+    return {
+      category: "youtube",
+      title: String(video?.snippet?.title || "").trim(),
+      url: `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`,
+      source: String(video?.snippet?.channelTitle || "YouTube").trim(),
+      sourceKey: `youtube-${video.id}`,
+      sourceOrder: searchOrder.get(video.id) ?? 999,
+      publishedAt: video?.snippet?.publishedAt || "",
+      feedRank: searchOrder.get(video.id) ?? 999,
+      score: views,
+      engagement: `${views.toLocaleString("en-US")} 次观看`,
+      views,
+      likes,
+      comments,
+    };
+  }).filter((item) => item.title && item.sourceKey !== "youtube-undefined")
+    .sort((left, right) => right.views - left.views || right.likes - left.likes || right.comments - left.comments)
+    .slice(0, MAX_ITEMS)
+    .map((item, index) => ({ ...item, sourceOrder: index }));
+}
+
+async function fetchYouTubeTop(apiKey, now = Date.now(), fetcher = fetch) {
+  if (!apiKey) throw new Error("Missing required environment variable: YOUTUBE_API_KEY");
+  const publishedAfter = new Date(now - YOUTUBE_LOOKBACK_HOURS * 60 * 60 * 1000).toISOString();
+  const searchParams = new URLSearchParams({
+    part: "snippet", type: "video", maxResults: "25", order: "viewCount",
+    q: YOUTUBE_QUERY, publishedAfter, regionCode: "US", relevanceLanguage: "en",
+    safeSearch: "moderate", key: apiKey,
+  });
+  const searchPayload = await fetchJson(`https://www.googleapis.com/youtube/v3/search?${searchParams}`, 15_000, fetcher);
+  const videoIds = (searchPayload.items || []).map((item) => item?.id?.videoId).filter(Boolean);
+  if (!videoIds.length) throw new Error("YouTube returned no recent videos.");
+  const videoParams = new URLSearchParams({
+    part: "snippet,statistics", id: videoIds.join(","), maxResults: "25", key: apiKey,
+  });
+  const videosPayload = await fetchJson(`https://www.googleapis.com/youtube/v3/videos?${videoParams}`, 15_000, fetcher);
+  const items = youtubeItemsFromResponses(searchPayload, videosPayload);
+  if (items.length < MAX_ITEMS) throw new Error(`YouTube returned only ${items.length}/${MAX_ITEMS} usable videos.`);
+  return addChineseTranslations(items);
+}
+
 function archivedItems(filePath) {
   if (!filePath) return [];
   try {
@@ -425,8 +488,21 @@ async function collectHotNews(
     addChineseTranslations(reuseTranslations(resolvedTech.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
     addChineseTranslations(reuseTranslations(resolvedMarket.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
   ]);
+  let youtube;
+  try {
+    youtube = await fetchYouTubeTop(String(process.env.YOUTUBE_API_KEY || "").trim(), now);
+  } catch (error) {
+    const previous = [...knownSourceItems.values()]
+      .filter((item) => item.category === "youtube")
+      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+      .slice(0, MAX_ITEMS);
+    if (previous.length !== MAX_ITEMS) throw error;
+    failureCount += 1;
+    youtube = previous;
+    console.warn(`YouTube failed; reused the previous Top 10: ${error.message}`);
+  }
   console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount} Google News URL(s) before archiving.`);
-  return { tech, market, failureCount, fetchedAt: new Date(now).toISOString() };
+  return { tech, market, youtube, failureCount, fetchedAt: new Date(now).toISOString() };
 
   /* Previous cross-source ranking implementation retained in history.
   const requests = [
@@ -538,7 +614,7 @@ async function main() {
     if (!archivePath) throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
     console.log(`Saved latest reader snapshot: ${archive.items.length} item(s), updated ${archive.updatedAt}.`);
-    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}.`);
+    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, youtube=${news.youtube.length}.`);
     return;
   }
 
@@ -558,7 +634,7 @@ if (require.main === module) main().catch((error) => { console.error(error.stack
 
 module.exports = {
   NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, collectHotNews, decodeXml,
-  environmentFlag, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
+  environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
   parseRssItems, rankAndDedupe, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
-  translateBatch, translateTitle,
+  translateBatch, translateTitle, youtubeItemsFromResponses,
 };

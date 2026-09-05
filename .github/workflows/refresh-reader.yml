@@ -41,6 +41,7 @@ jobs:
 
       - name: Fetch hot news and update reader only
         env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
           HOT_NEWS_REFRESH_ONLY: "true"
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
