@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T04:00:39.596Z",
+  "updatedAt": "2026-09-05T04:30:43.838Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-05T04:30:43.838Z",
         "2026-09-05T04:00:39.596Z",
         "2026-09-05T03:30:40.088Z",
         "2026-09-05T03:00:39.615Z",
@@ -43,9 +44,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 154.5,
-          "engagement": "1539 points · 1229 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 154.2,
+          "engagement": "1557 points · 1234 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -55,9 +56,9 @@
           "url": "https://bob.ibm.com/",
           "source": "bob.ibm.com",
           "publishedAt": "2026-09-04T12:50:29.000Z",
-          "score": 120.5,
-          "engagement": "239 points · 272 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 120.3,
+          "engagement": "242 points · 278 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "e94fc2f0f03f5691",
@@ -67,9 +68,9 @@
           "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
           "source": "anthropic.com",
           "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 138.1,
-          "engagement": "531 points · 332 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 138,
+          "engagement": "541 points · 338 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "efb32cf2a2d830f1",
@@ -79,9 +80,9 @@
           "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
           "source": "torrentfreak.com",
           "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 128.1,
-          "engagement": "365 points · 212 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 127.8,
+          "engagement": "368 points · 215 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "656e675460d44f88",
@@ -91,9 +92,9 @@
           "url": "https://jestoph.com/2026/09/04/jane-street-challenge.html",
           "source": "jestoph.com",
           "publishedAt": "2026-09-04T10:17:01.000Z",
-          "score": 116.5,
-          "engagement": "401 points · 88 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 116.2,
+          "engagement": "403 points · 89 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "ffe246597ac60595",
@@ -104,9 +105,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
           "source": "Reuters",
           "publishedAt": "Fri, 04 Sep 2026 22:57:36 GMT",
-          "score": 76.9,
+          "score": 76.4,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "438f58c44a2f2399",
@@ -117,9 +118,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNSUxnX0s3RXZTaWhGdHdaZG1MVmFZVVFLejFaMERORHVjMGVLVzVmVGhNUVVGTnR2VkdORXM4Q2k2eDRaUzNNcV9ERElYN19oczFGWEFsUmJJUExsbU0tZHBvczhVYXV3d0Zycmpuekx0MlZDNVY3dndFbGZxS3VUQ2VocmI2UWpKMDRnZ0gzdGRtQ2tLWVJ0bDdRTVV6cVVRTldZRjRMVjgwLU9FWWdqbTQxaGV1clUxVXJtZHFB?oc=5",
           "source": "MarketWatch",
           "publishedAt": "Fri, 04 Sep 2026 21:46:00 GMT",
-          "score": 58.4,
+          "score": 56.7,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "fd4e0b99ad940433",
@@ -129,9 +130,9 @@
           "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
           "source": "mullvad.net",
           "publishedAt": "2026-09-04T18:50:28.000Z",
-          "score": 122.5,
-          "engagement": "275 points · 122 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 122.9,
+          "engagement": "286 points · 128 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "66ef69aa4128f8f3",
@@ -142,9 +143,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNVVdxTnNldmFMY1F0NUdFbVFCcTBPTnhUcC0zcDBYS2c1dVhoUEFab2g2WUdjRkJoRUdWUlRSZGpLdjc5Wjl3M3hBTWI4Z0tGM3J0MGZ3OUN3X3ZqN2s0VTlOdGxhWXV6X2NJazh4cE1oVlRmZm5KX3JwTUU2SDFRUjJESURtMGIxckVNdWVGSVBDQnU1RDZKRA?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:51:41 GMT",
-          "score": 61.4,
+          "score": 60.2,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "05f3c93495260c84",
@@ -155,9 +156,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpqSEZuQUNwc2xnSjRaT0ZlWFNZWC1QeUlTcEhkVzcyR1J6RVdOQnF4cUtqOHg2WGpMYUM5TXJCNWZfa1RpZmM4QWVnRmVGa25UeF91ZF9aejM4TnlQWU4zNTRyckJBNjVSMWdqNUFmUEJlc0g3MmNsLW9hdDdzZTdOdVptWmNkWDkzQktXaWc0a1VxRGMzRldWai0?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
-          "score": 60.2,
+          "score": 59.4,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "6a5cb4a438703700",
@@ -167,9 +168,9 @@
           "url": "https://nvd.nist.gov/vuln/detail/cve-2026-85046",
           "source": "nvd.nist.gov",
           "publishedAt": "2026-09-04T21:52:01.000Z",
-          "score": 130.5,
-          "engagement": "323 points · 181 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 131.3,
+          "engagement": "345 points · 193 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "1f2abd83e90d07d3",
@@ -180,9 +181,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVM0bDBfTVUyb2Job2pTdHVobW1qSm9RVHMxWldNR3luV3ZZNXJ4dXhuQzRCbXZNeUlTZ0VuOGdMMUpOeUVPb3c3Q1NMTElTSDBzakFEZFdnSkItQWlMMjFUUUM2OTBSMjljQkdQMVRmSmcxTDkzaGJoSWR4bl9STVVMb2ZTaTRZV1FKX0NodURJSFg5dk5iNkdaNjZoaXVy?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 23:15:00 GMT",
-          "score": 59,
+          "score": 57.9,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "d701939668904225",
@@ -193,9 +194,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERpalZlSXphbGU3dmVzUE5Xd3h4bmdvZk1fLWcyNDlEeFl3MkliUWFYMHZXc081N3JjcjR1UmJXRjJPUndTSXJjS1ctSEdJRVdvREJ4dUR1Uk1lRWZuckJqQXhsTXR0aGE2MURMcDhoLXktSGpPR2Q0d1RVTlRka0hJZS16alpZNnJYQy13SThTaDUt?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:50:09 GMT",
-          "score": 59.2,
+          "score": 58.4,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "969cb59a59bd8182",
@@ -205,9 +206,9 @@
           "url": "https://news.gallup.com/poll/713933/record-high-say-government-corruption-widespread.aspx",
           "source": "news.gallup.com",
           "publishedAt": "2026-09-04T22:03:16.000Z",
-          "score": 128.2,
-          "engagement": "255 points · 197 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 129.2,
+          "engagement": "279 points · 207 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "fc8b777bd4955741",
@@ -217,9 +218,9 @@
           "url": "https://eebench.org/blog/can-ai-design-circuit-boards-yet/",
           "source": "eebench.org",
           "publishedAt": "2026-09-04T19:48:29.000Z",
-          "score": 118.4,
-          "engagement": "187 points · 121 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 119.1,
+          "engagement": "199 points · 127 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "d24d114a279304c1",
@@ -230,9 +231,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTHZQS3hESmlXdVFIVXFCTE9PQ1lyZm5Edi05T09hU3JTREFHTUxTNVZNWUhZVGdUMEFUVFZpYTdTX2p5UHR5dkt0R1RxSHZHV0FtMEZGVVpDT0NoU1ItblluU01UcHlwYVk2UEhQWExwaTgwUVF6UnJhdkxYOFpibXdrUGdpMEVxTTZKSmRkLUhPUQ?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Sat, 05 Sep 2026 01:08:00 GMT",
-          "score": 64.5,
+          "score": 64,
           "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "79a921d6eacb0325",
@@ -242,9 +243,48 @@
           "url": "https://opentrailpaper.com",
           "source": "opentrailpaper.com",
           "publishedAt": "2026-09-04T17:18:08.000Z",
-          "score": 117.4,
-          "engagement": "252 points · 87 comments",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
+          "score": 117.2,
+          "engagement": "254 points · 89 comments",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
+        },
+        {
+          "id": "3fd8ebcf47ac803c",
+          "category": "market",
+          "title": "Jim Cramer Said Meta Platforms, Inc. (NASDAQ: META)’s Big Court Win Was A Close Call",
+          "titleZh": "Jim Cramer表示， Meta Platforms, Inc. （纳斯达克股票代码： META ）在球场上取得的巨大胜利是接近尾声",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-said-meta-platforms-224820469.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUkdPcTRsWDctTzFqZWx0QTg0Q3BqOGNKbi13a1BOYmFWUmpScXRWdzBNd2d4b0wzelo4ZDNTSndRTWc5Y1JrcGF0ZF9HT3hLZkJqYnRHNEJPMFNvYUdYTG92S3JkLWlYMS0zVHhwM1J1Rm1BakpPV0RvUEtYZVlTcFFFWlNGTDIxZDc3Q1JwZ1dZeWxWbXFJcHFNdw?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:48:20 GMT",
+          "score": 56.6,
+          "engagement": "",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
+        },
+        {
+          "id": "b24297b71d7302b5",
+          "category": "market",
+          "title": "Here are our top 10 things to watch in the stock market Friday",
+          "titleZh": "以下是我们周五股市值得关注的10件事",
+          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
+          "source": "CNBC",
+          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
+          "score": 58.2,
+          "engagement": "",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
+        },
+        {
+          "id": "9ec0ebe21759072b",
+          "category": "market",
+          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
+          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
+          "score": 57.8,
+          "engagement": "",
+          "pushedAt": "2026-09-05T04:30:43.838Z"
         },
         {
           "id": "8c35cf54ba6d28bf",
@@ -256,32 +296,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Sat, 05 Sep 2026 01:58:00 GMT",
           "score": 57,
-          "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
-        },
-        {
-          "id": "3fd8ebcf47ac803c",
-          "category": "market",
-          "title": "Jim Cramer Said Meta Platforms, Inc. (NASDAQ: META)’s Big Court Win Was A Close Call",
-          "titleZh": "Jim Cramer表示， Meta Platforms, Inc. （纳斯达克股票代码： META ）在球场上取得的巨大胜利是接近尾声",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-said-meta-platforms-224820469.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUkdPcTRsWDctTzFqZWx0QTg0Q3BqOGNKbi13a1BOYmFWUmpScXRWdzBNd2d4b0wzelo4ZDNTSndRTWc5Y1JrcGF0ZF9HT3hLZkJqYnRHNEJPMFNvYUdYTG92S3JkLWlYMS0zVHhwM1J1Rm1BakpPV0RvUEtYZVlTcFFFWlNGTDIxZDc3Q1JwZ1dZeWxWbXFJcHFNdw?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:48:20 GMT",
-          "score": 57.7,
-          "engagement": "",
-          "pushedAt": "2026-09-05T04:00:39.596Z"
-        },
-        {
-          "id": "b24297b71d7302b5",
-          "category": "market",
-          "title": "Here are our top 10 things to watch in the stock market Friday",
-          "titleZh": "以下是我们周五股市值得关注的10件事",
-          "url": "https://www.cnbc.com/2026/09/04/here-are-our-top-10-things-to-watch-in-the-stock-market-friday.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakViSmFyaGVycHNBd1hFQUkxSFFXZTF4UEFYY2tSZ3lnMGRodVlCX3g2NmNLM0ZoSksyeUJxRW8wT1luem1LMmdZZFFfTFlhc2paU2Y1MXRtUXNVdk5VSmFRcFJEeFpxUXNnT0xZa1l5b0JjakZweGtiWUZKSnAtS2gzODJLR3UyS0pyZnlnamZ3VTFrZjM5eUdTTFQwaXFV?oc=5",
-          "source": "CNBC",
-          "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
-          "score": 58.7,
           "engagement": "",
           "pushedAt": "2026-09-05T04:00:39.596Z"
         },
@@ -321,19 +335,6 @@
           "publishedAt": "2026-09-04T11:59:15.000Z",
           "score": 117.7,
           "engagement": "369 points · 72 comments",
-          "pushedAt": "2026-09-05T02:00:39.874Z"
-        },
-        {
-          "id": "9ec0ebe21759072b",
-          "category": "market",
-          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
-          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
-          "score": 61.8,
-          "engagement": "",
           "pushedAt": "2026-09-05T02:00:39.874Z"
         },
         {
