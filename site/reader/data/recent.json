@@ -1,21 +1,21 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T20:30:40.209Z",
+  "updatedAt": "2026-09-05T21:00:44.576Z",
   "items": [
     {
-      "id": "fbe2a4d07950ca5c",
+      "id": "52f9dfbd15d2b656",
       "category": "market",
-      "title": "Niger blames France for inciting soldiers' mutiny",
-      "titleZh": "尼日尔指责法国煽动士兵叛乱",
-      "url": "https://www.reuters.com/world/africa/niger-blames-france-inciting-soldiers-mutiny-2026-09-04/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQY3dqdDhwV1dDXzFpSU9LYzR0cE5XSlh6U1hKSUt2NkYwdVZtMmhXdzY0ajh4U1lwSFNEWl95MWZtQTU3bnpQaGRWTXJDX19iN0l2RmRYTEg3dkpFcVMzMEhIdmdXN1M4cTgwVy1KODJYQk1VTkhNQWVZM05ZeVVjcm4wUlhfV2VfQzRqSzljNmx3d2w2d3lBQQ?oc=5",
+      "title": "Spire Healthcare agrees £1.03 billion takeover by Toscafund and others",
+      "titleZh": "Spire Healthcare同意Toscafund及其他公司以10.3亿英镑收购",
+      "url": "https://www.reuters.com/legal/litigation/spire-healthcare-agrees-103-billion-takeover-by-toscafund-others-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbEZ1aGtYY1FlV19VUDlHZHkxWUlmelVuenZQRDJqeF92YWM4c0YyYTZsNzNxQnVvcDE5SmFhaTgtdjBDZVZWRmxYLWY3QjFZdXBWYmhfbE5iRUxfY2FETWhkSldUNGVkR1JHTDh2d3FCQ0lUOGpLbGEtdll0Z1BwVGtCWXF1M3lUaVFqT0NfbUlPdFd4b3pma0FtcE0tTVRrc0M1YUJpcWZVOGQ5U0ZBMGI1ZTJPdng3?oc=5",
       "source": "Reuters Markets",
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
-      "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 19.4,
+      "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
+      "score": 35.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 63.7,
+      "score": 63.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 41.7,
+      "score": 44.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "24dda51b24e4f869",
@@ -73,84 +73,84 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:25:49 GMT",
-      "score": 44.3,
+      "score": 43.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "25046c1dbf437b57",
+      "id": "eb91ce01e3372d1f",
       "category": "market",
-      "title": "NVDA Stock Price | NVIDIA Corp. Stock Quote (U.S.: Nasdaq)",
-      "titleZh": "NVDA股价| NVIDIA Corp.股票报价（美国：纳斯达克）",
-      "url": "https://www.marketwatch.com/investing/stock/nvda",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9rTUx0am9SNU4zUG1rZG02REFwVHRBSmgyanJKb1ZFRHZNbG91b2RIN1NTUUxsTS1JX0xFWmVkTmxsQWxleG1nN1VXZnVJby13cEdlX1B2dUs4aEhr?oc=5",
+      "title": "Opinion: Think you maxed out your 401(k)? The real limit is actually almost $50,000 higher.",
+      "titleZh": "意见：您认为您的401 (k)已用完？ 实际限额实际上高出近50,000 $。",
+      "url": "https://www.marketwatch.com/story/think-you-maxed-out-your-401-k-the-real-limit-is-actually-almost-50-000-higher-217a89ee",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhYOEtjNWRDbmNxZHEzWWJIQWRfUjE3UFZoemViMEN5MzA0dHlQdjhubFhXWV81RWJYQ2M3bGZXNXhHWmVLNzVtWE1kZlV6Qzg0NFpINVZ2LUZvWlRyYzYzSTNfRW00RWItNXNUOHFrMXpfS3ZfLTA5bi14dk5HelVtX09WaDRfa2tiRklGOWVMdjdhc1BCcF9oR2YzTlNpSW82eTN1ZlJfVkJHN2FuWjUzb3hHaW05SkJoLW9n?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 19:11:42 GMT",
-      "score": 47.7,
+      "publishedAt": "Sat, 05 Sep 2026 18:59:00 GMT",
+      "score": 50.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "8c78f84832342d84",
+      "id": "9e27686738dd7f81",
       "category": "market",
-      "title": "This Week in Tesla: Elon Musk Touts 'Golden Era' With Cybercab Amid Fleet Expansion",
-      "titleZh": "本周在特斯拉： Elon Musk在车队扩张中吹嘘Cybercab的“黄金时代”",
-      "url": "https://www.benzinga.com/markets/tech/26/09/61643696/this-week-in-tesla-elon-musk-touts-golden-era-with-cybercab-amid-fleet-expansion",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNN1JlamV2cHZobG5NMExPQzg3YUxIcTJ1a0t4WFpFUE9JRE1meGx3emE2bDNzcFdUaktFckxHMnByX3JQN3c1RHpjcl9IVUI3RWRacmxCdFJSOGh0OVBmSC1sLTctNzl0d2l6bkhpUTBGMWdJNk0tQVVGNzMxRUg2S2FQeEFsNEktdmNWQnZqVWx1Ym11VnpnM0xtdmJDQld0elo4TnVZMWhaMnlLODZQVjA1Q25pTXZET0dramEzV2EzQ3FoX1FaOGJzNGJwdw?oc=5",
+      "title": "Norges Bank Proposes $80B Shift From U.S. Treasuries to Mortgage-Backed Bonds",
+      "titleZh": "挪威央行建议将800亿美元从美国国债转向抵押贷款支持债券",
+      "url": "https://www.benzinga.com/markets/macro-economic-events/26/09/61643251/norges-bank-treasury-mortgage-backed-bonds-shift",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTEd6VGJMSFdYcGJSMGhXdGFpYzhBdlBDLVRnVF9JUW1sb0VvVEktZUU2dEFCTktDTlJhU3o1S2d3bF9SaUc2eDJxN2l4MWE4bzU2UFNqcDNJXzliNERhM1dIVGRkaVVwbHdNclJ3LTdUazk5M3NLNEFZNXQ4QzBTa3VkcHd2T3B4ak5kR0NsMHNuSzY2ck1xb1RSSWdiQVVpXzVkMTVraTNpNUpSQ0p3X1R0cEd1aVV0aXc?oc=5",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 16:30:18 GMT",
-      "score": 54.5,
+      "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
+      "score": 41.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "8108d90c6c101e16",
+      "id": "639afa9d0d097b41",
       "category": "market",
-      "title": "Kroger, Publix, and regional grocery chains face pricing problem",
-      "titleZh": "Kroger、Publix和区域生鲜杂货连锁店面临定价问题",
-      "url": "https://www.thestreet.com/retail/kroger-publix-and-regional-grocery-chains-face-pricing-problem",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
+      "title": "Morgan Stanley resets Snowflake stock price target by $170",
+      "titleZh": "摩根士丹利将Snowflake股价目标重置170 $",
+      "url": "https://www.thestreet.com/investing/stocks/morgan-stanley-resets-snowflake-snow-stock-price-target",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNUkRmbVQ4bWtQektSUTdHeXIwdUVTeFlEbUF5eE1VVjJJQ3VSZ3pTVFNTY3NkTzY2TE5WU3hSeTFfQl9JcHJUNnZoUEVvRm56dXdiU0c4M0ZFTWhuUmI3Yk83Y2xwaHZsN0RwTGhCX01lUFA0MXNJWFgxYzcyV1lTNXVkVjZuVkhMdXdNdEN4YXNicU5ZLXVEcV9NcGIxT00?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 16:08:08 GMT",
-      "score": 36.2,
+      "publishedAt": "Sat, 05 Sep 2026 18:03:00 GMT",
+      "score": 51.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "954c0e42ee45f4cc",
+      "id": "c686985f2d1ee36a",
       "category": "market",
-      "title": "3 Incredible High-Growth Stocks to Buy With $10,000 Right Now",
-      "titleZh": "现在用$ 10,000购买3只令人难以置信的高增长股票",
-      "url": "https://www.fool.com/investing/2026/09/05/incredible-high-growth-stocks-buy-nvda-nbis-mu/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPamFoZEhYMl9xLUhTRk90bi1xYm5MVzNjNUxvY05OMGQ2MVhCc0JCU1BMcUlVWm14b3FPZjBweVZjanVKYXFuUEN5Z1ItM2liT292YThpaDA4b1dGTjBXNDB5QldzZ0NYbW4tVWo5aHVJRjhYd2h1cVZKTUxUdkRlZXM0TlZ0bUlJbUVsd1hKbVJ3dEU?oc=5",
+      "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
+      "titleZh": "苹果新任首席执行官约翰·特纳斯（ John Ternus ）领导下的首款iPhone于9月推出 9.现在是时候买入股票了。",
+      "url": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPTzlWVnBZRmZFVzBjOUoxMmV2XzRrSjVRTkhyeWh6QWU1cUpDckZqWkhVMW5CbExucEZJdkd3UmViM0VXakowNG9qeGY4S1pXeUxnT1VpQmxpcWtDRmpKYUxJRHhNc0ItXzdMS1VWNWJCWENWQXJ5ZjF3NUNVZkZVdFZJdDh5WlM3VGdndWZCS2JoV0d0bXc?oc=5",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 14:44:00 GMT",
-      "score": 51.9,
+      "publishedAt": "Sat, 05 Sep 2026 19:01:42 GMT",
+      "score": 55.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "c460312cd3b974cb",
+      "id": "22a3ebb29c1e0518",
       "category": "market",
-      "title": "Bitcoin Drops Below $80K After Strong Jobs Data, ETF Inflows Collapse 76% In A Day",
-      "titleZh": "比特币在强劲的就业数据后跌破$ 80K ， ETF流入在一天内暴跌76%",
-      "url": "https://www.tradingview.com/news/stocktwits:704e17338094b:0-bitcoin-drops-below-80k-after-strong-jobs-data-etf-inflows-collapse-76-in-a-day/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQV3lkQzNrakNCdXo3Wkl0S0VITmdNdFpPZU9LbUpWVVFSLUZ5SjBUT2NXQUIzNHM0WW1ObmU2aWVodnFjSy02S2RVUjF4SkVDUF9wRVoyal9MRFBKajg5dHh6VW1IckE5a2wwTjJoUmcwdU5za2FaVWNWd1VDT0xUTFlWZmdOMUlKQUtISXlOM1gzVXRwNlQ2MnFJS1A5Q3hBTzdoajJOQlJ0dlk0Y1dqUi1SVk1Td3pKcWRyMURlVlpjczB5M0Voa2tDdjJPWFI2Ym53T0FIRQ?oc=5",
+      "title": "Wall Street Veteran Jordi Visser Says Crypto Isn't A Binary Bet - It Doesn't Have To Be 'Worth A Million' To Be 'Worth Something'",
+      "titleZh": "华尔街资深人士乔迪·维瑟（ Jordi Visser ）表示，加密货币不是二元赌注-它不一定要“价值一百万”才能“有价值”",
+      "url": "https://www.tradingview.com/news/stocktwits:3c3433b52094b:0-wall-street-veteran-jordi-visser-says-crypto-isn-t-a-binary-bet-it-doesn-t-have-to-be-worth-a-million-to-be-worth-something/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOZ0NXaTN3Zk9NQ3lLR081TnI3bDNBVEVPdHRWLS1pUVlvY2tjdllyVWRiLTlaLVRLY3FqX0J2dVJsVXlwRUJYSkt3NXFwLS02ekxHb3lCX0dINnVPSW0ySURTMTZfaDNvakRLVWNvZTlzX2JBWlNiYXhzdGFNQkNDZDlhLUVjS2dUdXBHVC02OUF2Z0JEYUQtUHRWckpjTFhqVERYLTJrdEhNbVo4aTBTdWJwVWhDYjBPdkRZMDJ3MFRTQkZLRDVwOWk3NmxpZURsMEp0Sm5VN2tMZTFmX1VsWGYwelF2ZFd6aVVhZVA5ajMzWlZHNldNaHNxWThpb3VSZVJMRkpxUUZkQ05fTWJfQnZR?oc=5",
       "source": "TradingView News",
       "sourceKey": "tradingview",
       "sourceOrder": 9,
-      "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 48.4,
+      "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
+      "score": 54.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 18:59:31 GMT",
-      "score": 59.5,
+      "score": 59,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "6ef2aef9012f0dd0",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 19:35:24 GMT",
-      "score": 74.1,
+      "score": 73.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,39 +193,39 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 49.8,
+      "score": 49.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "cee0480452514b7d",
+      "id": "c9c8a76de54c12a5",
       "category": "tech",
-      "title": "Tesla’s Cybercab has been deployed, and it’s already under investigation",
-      "titleZh": "特斯拉的Cybercab已经部署，并且已经在调查中",
-      "url": "https://arstechnica.com/civis/threads/tesla%E2%80%99s-cybercab-has-been-deployed-and-it%E2%80%99s-already-under-investigation.1514677/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOSWxNcE4yMHRjYU5CZXVaUWJlWXJnRHJTczJMMWoyNFVUMWxVdUh4YUpYZ2lkeVk1dGNSR2NQT0hBUkg2NmVuZGcxX1Yyb2ZwRHVwaXVadHY1MnB6dVpZQUxZT3I3MjZvLUVXS3JaczN1eEV6dDFVLXlGWklTdWtEeUxQUDVnSXN6VERWeURsOVlJLVhKcW12WHNXOU1HQlFTY3pIdjhNVmhCR29nZTh3NmtFUXpMN2xqYjdtem9QY1k4MmtxaVphT0NLLVQ3YWM?oc=5",
+      "title": "Rocket Report: China debuts yet another new rocket; NASA considers bulk buys",
+      "titleZh": "火箭报告：中国推出另一款新火箭；美国宇航局考虑批量购买",
+      "url": "https://arstechnica.com/civis/threads/rocket-report-china-debuts-yet-another-new-rocket-nasa-considers-bulk-buys.1514658/page-2",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNWklLb0FQU19ZUVdBZHJqZWp0ZlBSODJYNlFNV2pkTVpTcGw0X0JlNHdRdlJ1ME0xdXZpaTQ0WTdxdUxWWVpEQkI5WGdJWFNIRGtoSVg4SkR2MWxQal9HNGIyX3ZaWERKdUJGem9lTGRDQ1ZzRGJMNzVDRnVKVHpIOGRJaXJ0YllpMlBOMWEwWldLdUtobE9FT2tBVmdvWm9CV19hdUV5eWpsQ1E1MG83S1pnaTZpdlBBS0dpSjNuVWZjZkUzeUE?oc=5",
       "source": "Ars Technica",
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
-      "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 50.2,
+      "publishedAt": "Sat, 05 Sep 2026 20:31:03 GMT",
+      "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "1b162106c901be17",
+      "id": "02adb880bf455770",
       "category": "tech",
-      "title": "You're Probably Wasting These Keys On Your Keyboard — Here's How To Remap Them",
-      "titleZh": "您可能会将这些键浪费在键盘上—以下是重新映射它们的方法",
-      "url": "https://www.engadget.com/2247939/how-to-remap-keys-windows/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMia0FVX3lxTE93MGZQMmVBUlRsU2Z6SDNRTzBKQUJtOFAtbVp4S3F3X2haeFdkVGpSOEdMMTktdFM4X045RTFwOWZLeWZZN3NKSnV3NTJPU0ktbFRpclBaYzRxRDh2djdCcjl3OS1UMlczRlFR?oc=5",
+      "title": "The Reasons Rugged Laptops Are Rarely Bought By Consumers",
+      "titleZh": "加固型笔记本电脑很少被消费者购买的原因",
+      "url": "https://www.engadget.com/2247940/reason-why-rugged-laptops-rarely-bought-by-consumers/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNRnUzZksyRXRDcklFYVpSbXVGUlNNX1YxYnV4Y0lfcndNUmowVTVLT2k3cjIzdTkxd3BhQWEyb3V2ZEpOYTRDcWNOTlRlYXVTdDV4U0xIZU13UDR1Yk1wdFQ3R0dTa3RXWXUxNDhFMi1KZFJkbmpaTFktTVZIVXZjR3hhRkpNbG43a0FIeEMtQQ?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 18:00:00 GMT",
-      "score": 59,
+      "publishedAt": "Sat, 05 Sep 2026 20:00:00 GMT",
+      "score": 53,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "858781058482c3d1",
@@ -238,24 +238,24 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
-      "score": 42.9,
+      "score": 55.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
-      "id": "9a5a1c020d5e8efc",
+      "id": "357f424d60cb5760",
       "category": "tech",
-      "title": "Today’s NYT Connections Hints and Answers for Sept. 5, #1182",
-      "titleZh": "今天的纽约时报连接提示和答案9月5日， # 1182",
-      "url": "https://www.cnet.com/tech/gaming/todays-nyt-connections-hints-and-answers-for-sept-5-1182/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQYVNsamFmRlozWjNpdjVQVERqVVdOcDltYmdPc25kcXd1LVBqVHpHNmltY3pFajVTcEJPUFhLQzBmUlJhQ3lpOEZwZDhzeWlSX3FlVUJXV1VWTDhPc0ZrY1BpdWxybmNWWXZ4Y3VaNS0xM0I1QXdNRll0emVRWW00SEplYlY4RWxyMVgtVTdTZnFXaG9u?oc=5",
+      "title": "I Can’t Put the Galaxy Z Fold 8 Down. Can Apple’s Foldable Change That?",
+      "titleZh": "我无法将Galaxy Z Fold 8放下。 苹果的可折叠产品能改变这种状况吗？",
+      "url": "https://www.cnet.com/tech/mobile/i-cant-put-the-galaxy-z-fold-8-down-can-apples-foldable-change-that/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPblhLMGNueW9wQmpQRmFLN0J3Y1V1WjV1RXNMZjNFSVN6LUNHLTJfMVpHOEQyMDJfUkRyay10SDdZdEhkTzVxZGRlUUFVcUFOY3hOb2dJVHotM2o0bWxHRWZONWI5dlJnSkFwUWdHSk8yMlNkSzdXSk01dWdnQ0lmNjNFSkJaNVR0dWNyaW1HWmFnNlcwYm1QT0tOM3RSWWZseFR3?oc=5",
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 37.7,
+      "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
+      "score": 47.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 47.8,
+      "score": 47.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,23 +283,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 49.8,
+      "score": 39.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "415884a72ea16d83",
       "category": "tech",
-      "title": "The Luxuries in Life",
+      "title": "The Real Luxuries In Life",
       "titleZh": "生活中的奢侈品",
       "url": "https://feld.com/archives/2026/09/the-real-luxuries-in-life/",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T17:46:16.000Z",
-      "score": 119.5,
-      "engagement": "190 points · 63 comments",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "score": 124.7,
+      "engagement": "240 points · 93 comments",
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T20:30:40.209Z"
+      "fetchedAt": "2026-09-05T21:00:44.576Z"
     }
   ]
 }
