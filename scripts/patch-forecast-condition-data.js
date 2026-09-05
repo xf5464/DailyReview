@@ -71,7 +71,7 @@ if (!source.includes(sourceSeriesNew)) {
 }
 
 const backtestAnchor = "  function forecastBacktestSeries(kind, sourceItems) {\n    if (kind !== 'ndx') return sourceItems;";
-if (!source.includes("kind === 'centralBankGoldTrend'")) {
+if (!source.includes("    if (kind === 'centralBankGoldTrend') {")) {
   if (!source.includes(backtestAnchor)) throw new Error('forecastBacktestSeries pattern changed.');
   const replacement = [
     "  function forecastBacktestSeries(kind, sourceItems) {",
