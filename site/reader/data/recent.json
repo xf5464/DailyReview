@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T13:30:39.351Z",
+  "updatedAt": "2026-09-05T14:00:42.027Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 26.4,
+      "score": 25.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "688fe6ba9cdb46aa",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 07:07:00 GMT",
-      "score": 39.6,
+      "score": 39.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "f0dc04164b041e3d",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 12:20:42 GMT",
-      "score": 38.8,
+      "score": 38.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "3d0f010c9a3e3f03",
@@ -60,7 +60,7 @@
       "publishedAt": "Fri, 04 Sep 2026 08:28:00 GMT",
       "score": 29.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "9bdc1ee2fe25b809",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 08:59:03 GMT",
-      "score": 39.7,
+      "score": 39.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "61a403bbcc1af309",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Fri, 04 Sep 2026 22:58:00 GMT",
-      "score": 31.5,
+      "score": 31,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "61ad7676e01b7894",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 38.4,
+      "score": 38.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "f0c0f379174692dc",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:03:00 GMT",
-      "score": 38.3,
+      "score": 37.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "7851080814ece1f2",
@@ -132,10 +132,10 @@
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 10:55:31 GMT",
-      "score": 43.4,
+      "publishedAt": "Sat, 05 Sep 2026 11:05:00 GMT",
+      "score": 43.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "d416b8908178994e",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Fri, 04 Sep 2026 19:48:27 GMT",
-      "score": 26.2,
+      "score": 26.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "813ae1cea3996ac8",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 08:14:09 GMT",
-      "score": 55.7,
+      "score": 55.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "234d1f722727c86c",
@@ -178,24 +178,24 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 23:36:14 GMT",
-      "score": 44.1,
+      "score": 60.6,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
-      "id": "5e6e436440229fb7",
+      "id": "b9982393b7628a00",
       "category": "tech",
-      "title": "AGI is whatever you want it to be",
-      "titleZh": "AGI是您想要的任何东西",
-      "url": "https://www.theverge.com/podcast/990323/agi-is-whatever-you-want-it-to-be",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5LRkNCTllWOHl6MFd2RWg3QmFYUWZDTkpHSUR2cTlaYXBBaFF3d21waEY1OGVhQTc2N0hXNVBXeG53QWMwb2twV0p0VW16aG85ZzlWNDVRVGxodlZuVTZYZ3RRTFQydkRBSXRuelZPbWs5WVo1UEZXZ1JzUXFGQQ?oc=5",
+      "title": "The weird and wonderful headphones of CanJam 2026",
+      "titleZh": "CanJam 2026奇怪而精彩的耳机",
+      "url": "https://www.theverge.com/tech/990706/a-day-at-canjam-socal-2026",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9DOUhJT1JvNGdvOGVjb3ZPV05tRTB2LS1Ua2dhSjFMWjlkSnVyZE01MlQ4STZlLWh3QlJRQnYxcUdjYTV2eFpiLUtoTnd2QkE0bFlmUFEyNUFoNVAtQUptSm1SbWh1RjExV3dOVUhJNW8?oc=5",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Fri, 04 Sep 2026 17:16:49 GMT",
-      "score": 35.8,
+      "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
+      "score": 55,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "df0ce962f556124f",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 23:07:59 GMT",
-      "score": 43.6,
+      "score": 43.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "1f6531d3c8c7a31f",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 12:30:00 GMT",
-      "score": 65.6,
+      "score": 64.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
-      "id": "78e6773e811e2d42",
+      "id": "858781058482c3d1",
       "category": "tech",
-      "title": "Taylor Clemons",
-      "titleZh": "泰勒·克莱蒙斯",
-      "url": "https://www.zdnet.com/meet-the-team/tclemons1/page/2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9pNElET0g4aFMwX18za29qeVdOaFpyZXc1dGJvdDJjVEllQTIzTmNZZVRNTE5qZl9LWVdRSWh2VWg1ZnplbXh2Rm0yWjF5dy10MVExUXNLalhvaUhIV2JRSGllMA?oc=5",
+      "title": "I tried the bezelless concept phone at IFA, and it’s more futuristic than I thought",
+      "titleZh": "我在IFA尝试了无边框概念手机，它比我想象的更具未来感",
+      "url": "https://www.zdnet.com/uncategorized/tecno-bezelless-phone-concept-ifa-berlin-2026/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNuZHRwaE03bG43MUhBZ1FUWENlcjRLMGpNdktUcDdGcUdYYW1aeWQ1VzVVcktoR0tGenNjRi12bzNHMGIxVE1WdFlZUlJHRVhJU3pNUEllelF6N3RfMDh5eEk5YV83blZSNUs3cjNNeDl2dVFOdi11aEFfMHgwRXB0YzRMZ1R4V0E?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 06:12:16 GMT",
-      "score": 45.7,
+      "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
+      "score": 50.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "9a5a1c020d5e8efc",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
-      "score": 44.7,
+      "score": 44.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "139acf68d7514890",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 12:12:20 GMT",
-      "score": 49.7,
+      "score": 49.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "016858d51c1355cd",
@@ -283,23 +283,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 12:00:00 GMT",
-      "score": 48.5,
+      "score": 48,
       "engagement": "",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
-      "id": "6a5cb4a438703700",
+      "id": "388819ff9e6f9d10",
       "category": "tech",
-      "title": "Actively exploited sandbox RCE in all Chromium versions",
-      "titleZh": "在所有Chromium版本中积极利用沙盒RCE",
-      "url": "https://nvd.nist.gov/vuln/detail/cve-2026-85046",
+      "title": "The \"$60 Gaming PC\" – AMD BC-250 (2025)",
+      "titleZh": "“$ 60游戏PC” – AMD BC-250 (2025)",
+      "url": "https://devquasar.com/hardware/the-60-gaming-pc-amd-bc-250/",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-04T21:52:01.000Z",
-      "score": 133,
-      "engagement": "596 points · 319 comments",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "publishedAt": "2026-09-05T13:36:38.000Z",
+      "score": 70.8,
+      "engagement": "13 points · 5 comments",
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T13:30:39.351Z"
+      "fetchedAt": "2026-09-05T14:00:42.027Z"
     }
   ]
 }
