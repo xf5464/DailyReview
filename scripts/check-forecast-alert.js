@@ -15,6 +15,11 @@ const CENTRAL_BANK_GOLD_DEFAULTS = {
   consecutiveQuarters: 2,
 };
 
+const ISM_NEW_ORDERS_DEFAULTS = {
+  dropThreshold: 10,
+  contractionLevel: 50,
+};
+
 function readNumber(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
@@ -113,6 +118,35 @@ function centralBankGoldTrendCondition(items, env = process.env) {
   };
 }
 
+function ismNewOrdersDeteriorationCondition(items, env = process.env) {
+  const series = normalizeSeries(items);
+  if (series.length < 2) return null;
+
+  const previous = series.at(-2);
+  const latest = series.at(-1);
+  if (!(previous.value > 0)) return null;
+
+  const dropThreshold = readNumber(
+    env.ISM_NEW_ORDERS_DROP_THRESHOLD,
+    ISM_NEW_ORDERS_DEFAULTS.dropThreshold,
+  );
+  const dropPercent = ((previous.value - latest.value) / previous.value) * 100;
+  if (latest.value >= ISM_NEW_ORDERS_DEFAULTS.contractionLevel || dropPercent < dropThreshold) return null;
+
+  return {
+    id: "ismNewOrdersDeterioration",
+    label: "ISM 新订单快速恶化",
+    threshold: dropThreshold,
+    unit: "%",
+    date: latest.date,
+    value: dropPercent,
+    episodeStart: latest.date,
+    latestLevel: latest.value,
+    previousLevel: previous.value,
+    contractionLevel: ISM_NEW_ORDERS_DEFAULTS.contractionLevel,
+  };
+}
+
 function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOString()) {
   const conditions = CONDITION_DEFINITIONS
     .map((definition) => activeCondition(
@@ -124,6 +158,9 @@ function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOS
 
   const goldTrend = centralBankGoldTrendCondition(seriesById.centralBankGoldPurchases, env);
   if (goldTrend) conditions.push(goldTrend);
+
+  const ismNewOrdersDeterioration = ismNewOrdersDeteriorationCondition(seriesById.ismNewOrders, env);
+  if (ismNewOrdersDeterioration) conditions.push(ismNewOrdersDeterioration);
 
   const identity = conditions
     .map((condition) => `${condition.id}:${condition.threshold}:${condition.episodeStart}`)
@@ -147,6 +184,7 @@ function loadOfflineSeries(distDirectory) {
   const wantedIds = new Set([
     ...CONDITION_DEFINITIONS.map((definition) => definition.id),
     "centralBankGoldPurchases",
+    "ismNewOrders",
   ]);
   const seriesById = {};
 
@@ -185,6 +223,7 @@ module.exports = {
   activeCondition,
   buildAlert,
   centralBankGoldTrendCondition,
+  ismNewOrdersDeteriorationCondition,
   ndxDrawdownSeries,
   normalizeSeries,
 };
