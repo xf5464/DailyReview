@@ -63,6 +63,7 @@ jobs:
           CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
           CENTRAL_BANK_GOLD_RISE_THRESHOLD: ${{ vars.CENTRAL_BANK_GOLD_RISE_THRESHOLD }}
           CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
+          ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: npm run build
 
       - name: Check forecast alert conditions
@@ -76,6 +77,7 @@ jobs:
           CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
           CENTRAL_BANK_GOLD_RISE_THRESHOLD: ${{ vars.CENTRAL_BANK_GOLD_RISE_THRESHOLD }}
           CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
+          ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Send forecast alert email
