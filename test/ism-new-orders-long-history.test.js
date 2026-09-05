@@ -46,8 +46,11 @@ test('ISM FRED-MD mapping uses the official St. Louis Fed data page and excludes
   assert.equal(normalizeFredMdDate('12/1/2008'), '2008-12-01');
 });
 
-test('current FRED-MD CSV URL is discovered from the official data page', () => {
-  const html = '<a href="/-/media/project/frbstl/stlouisfed/research/fred-md/monthly/2026-07-md.csv">current.csv</a>';
+test('current FRED-MD CSV discovery ignores the quarterly current.csv link', () => {
+  const html = [
+    '<a href="/-/media/project/frbstl/stlouisfed/research/fred-qd/quarterly/2026-07-qd.csv">current.csv</a>',
+    '<a href="/-/media/project/frbstl/stlouisfed/research/fred-md/monthly/2026-07-md.csv">current.csv</a>',
+  ].join('');
   assert.equal(
     findCurrentFredMdCsvUrl(html),
     'https://www.stlouisfed.org/-/media/project/frbstl/stlouisfed/research/fred-md/monthly/2026-07-md.csv',
