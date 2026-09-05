@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T07:30:45.634Z",
+  "updatedAt": "2026-09-05T08:00:42.449Z",
   "days": [
     {
       "date": "2026-09-05",
       "pushes": [
+        "2026-09-05T08:00:42.449Z",
         "2026-09-05T07:30:45.634Z",
         "2026-09-05T07:00:40.867Z",
         "2026-09-05T06:30:53.066Z",
@@ -50,9 +51,9 @@
           "url": "https://collusion.wiki/",
           "source": "collusion.wiki",
           "publishedAt": "2026-09-04T11:54:53.000Z",
-          "score": 152.3,
-          "engagement": "1650 points · 1286 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 151.9,
+          "engagement": "1666 points · 1298 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "4ac59570d769a269",
@@ -62,9 +63,9 @@
           "url": "https://bob.ibm.com/",
           "source": "bob.ibm.com",
           "publishedAt": "2026-09-04T12:50:29.000Z",
-          "score": 118.2,
-          "engagement": "257 points · 284 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 117.9,
+          "engagement": "260 points · 285 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "e94fc2f0f03f5691",
@@ -74,9 +75,9 @@
           "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
           "source": "anthropic.com",
           "publishedAt": "2026-09-04T18:42:56.000Z",
-          "score": 136.4,
-          "engagement": "584 points · 359 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 136.2,
+          "engagement": "590 points · 367 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "efb32cf2a2d830f1",
@@ -86,9 +87,9 @@
           "url": "https://torrentfreak.com/adult-film-producer-unmasks-prolific-john-doe-torrent-pirate-as-meta-executive/",
           "source": "torrentfreak.com",
           "publishedAt": "2026-09-04T16:46:59.000Z",
-          "score": 125.6,
-          "engagement": "382 points · 224 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 125.2,
+          "engagement": "384 points · 225 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "ffe246597ac60595",
@@ -99,9 +100,9 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNeHN0dDlKUW5GZFotZml1LU1iRHB2dkFERDZDbVhFTUdZcFJtQmdqNFhDS0RsUk9PNEdCVGhTdVEydUZWd1FfM3dENlVFYV9QeXRNX2NWSjN2cS1NRVZ6YjU0WGRqQmJKMkZGOEczeHBzenpSS3Z4aEdZUms1a0RhcWUyOGdKM0ZrUk43N0J1aXBRUi1neE1rcFFR?oc=5",
           "source": "Reuters",
           "publishedAt": "Fri, 04 Sep 2026 22:57:36 GMT",
-          "score": 73.4,
+          "score": 72.9,
           "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "fd4e0b99ad940433",
@@ -111,9 +112,9 @@
           "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
           "source": "mullvad.net",
           "publishedAt": "2026-09-04T18:50:28.000Z",
-          "score": 122.2,
-          "engagement": "322 points · 144 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 122.1,
+          "engagement": "325 points · 149 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "6a5cb4a438703700",
@@ -123,9 +124,9 @@
           "url": "https://nvd.nist.gov/vuln/detail/cve-2026-85046",
           "source": "nvd.nist.gov",
           "publishedAt": "2026-09-04T21:52:01.000Z",
-          "score": 133,
-          "engagement": "440 points · 242 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 133.3,
+          "engagement": "457 points · 251 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "969cb59a59bd8182",
@@ -135,9 +136,9 @@
           "url": "https://news.gallup.com/poll/713933/record-high-say-government-corruption-widespread.aspx",
           "source": "news.gallup.com",
           "publishedAt": "2026-09-04T22:03:16.000Z",
-          "score": 132.1,
-          "engagement": "374 points · 278 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 132.2,
+          "engagement": "387 points · 285 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "fc8b777bd4955741",
@@ -147,9 +148,9 @@
           "url": "https://eebench.org/blog/can-ai-design-circuit-boards-yet/",
           "source": "eebench.org",
           "publishedAt": "2026-09-04T19:48:29.000Z",
-          "score": 119.3,
-          "engagement": "238 points · 143 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "score": 119.1,
+          "engagement": "242 points · 146 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "d24d114a279304c1",
@@ -160,9 +161,137 @@
           "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTHZQS3hESmlXdVFIVXFCTE9PQ1lyZm5Edi05T09hU3JTREFHTUxTNVZNWUhZVGdUMEFUVFZpYTdTX2p5UHR5dkt0R1RxSHZHV0FtMEZGVVpDT0NoU1ItblluU01UcHlwYVk2UEhQWExwaTgwUVF6UnJhdkxYOFpibXdrUGdpMEVxTTZKSmRkLUhPUQ?oc=5",
           "source": "Yahoo Finance",
           "publishedAt": "Sat, 05 Sep 2026 01:08:00 GMT",
-          "score": 61,
+          "score": 60.5,
           "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "9ec0ebe21759072b",
+          "category": "market",
+          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
+          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
+          "score": 57.6,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "e7bf3bf26d9bc6fe",
+          "category": "market",
+          "title": "Berkshire Hathaway Outperformed the S&P 500 Over a 60-Year Period Under Warren Buffett. Here's the Stock That Could Help Continue the Streak Under Greg Abel.",
+          "titleZh": "在沃伦·巴菲特（ Warren Buffett ）执政的60年间，伯克希尔·哈撒韦（ Berkshire Hathaway ）的表现优于标准普尔500 以下是能够帮助Greg Abel继续保持连胜的股票。",
+          "url": "https://www.fool.com/investing/2026/09/05/berkshire-hathaway-outperformed-the-sp-500-over-a/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOUo2cHEwRHVzQ1N6dkhsaTBwOVdwVVB3b0w4UFlKZ2N0SlNpclY3WVQyV21jLVIwYk9RNlZJLWJnMW5IM3RPLTlXUElpb0o3Q2lXVDNicjVldi1ad3kwazNwNjYzUkNzZ0xaeklTWFk0RnhWeXRIdG9SUUdnbXF6MWdPQkwtZUpsMGNsSjUyN2xiVmdPYW9z?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Sat, 05 Sep 2026 06:00:00 GMT",
+          "score": 60.8,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "1f2abd83e90d07d3",
+          "category": "market",
+          "title": "Bloom Energy, Illumina, and Everpure Set to Join S&P 500; Others to Join S&P 100, S&P MidCap 400, and S&P SmallCap 600",
+          "titleZh": "Bloom Energy、Illumina和Everpure将加入S&P 500 ；其他公司将加入S&P 100、S&P MidCap 400和S&P SmallCap 600",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-illumina-everpure-set-231500760.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVM0bDBfTVUyb2Job2pTdHVobW1qSm9RVHMxWldNR3luV3ZZNXJ4dXhuQzRCbXZNeUlTZ0VuOGdMMUpOeUVPb3c3Q1NMTElTSDBzakFEZFdnSkItQWlMMjFUUUM2OTBSMjljQkdQMVRmSmcxTDkzaGJoSWR4bl9STVVMb2ZTaTRZV1FKX0NodURJSFg5dk5iNkdaNjZoaXVy?oc=5",
+          "source": "Yahoo Finance",
+          "publishedAt": "Fri, 04 Sep 2026 23:15:00 GMT",
+          "score": 55.6,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "0c6009cf40693d37",
+          "category": "tech",
+          "title": "GPT-6 Astra on OpenRouter",
+          "titleZh": "OpenRouter上的GPT-6 Astra",
+          "url": "https://openrouter.ai/openai/gpt-6-astra",
+          "source": "openrouter.ai",
+          "publishedAt": "2026-09-04T21:39:19.000Z",
+          "score": 117,
+          "engagement": "203 points · 116 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "c7bcca28abc8e3ff",
+          "category": "market",
+          "title": "Stock Market This Week Ends Flat Before Labor Day",
+          "titleZh": "本周股市在劳动节前结束",
+          "url": "https://www.stl.news/stock-market-this-week-ends-flat-before-labor-day/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1LcHIyeDRyOXotcFFGekg3c0lHMXRDSjFDMzl0R1BXR2pFdVZoOXBQaU5HSWhPTmt6ZjJKajdRcDI1ZzhYZFBqcThQMzJyYVIzUmNZbWJRS2xselNUeXhvWDJ4VTlMeG1USk51clVWcmZjbW5saTJaX0FnUQ?oc=5",
+          "source": "stl.news",
+          "publishedAt": "Sat, 05 Sep 2026 06:31:51 GMT",
+          "score": 54.4,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "482165f7c18efa07",
+          "category": "tech",
+          "title": "Why are European countries moving their gold out of North America?",
+          "titleZh": "欧洲国家为什么要将黄金从北美转移出去？",
+          "url": "https://www.bbc.com/news/articles/cvgyn8q8gqxo",
+          "source": "bbc.com",
+          "publishedAt": "2026-09-05T05:52:09.000Z",
+          "score": 118.7,
+          "engagement": "109 points · 142 comments",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "a566f7a32820b420",
+          "category": "market",
+          "title": "Forget AI chips. This is the hottest area of the stock market right now",
+          "titleZh": "别管AI芯片了，这是目前股市最热门的领域",
+          "url": "https://uk.finance.yahoo.com/news/forget-ai-chips-hottest-area-064400675.html",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWFkyNmpfaDZ4M29RTW5kNW85WmxQVTV0VjV6OXJLQXk3SGNGZGR5S0g3aTQzQ3RLWnQyelQxR3dwRFh6MGlhM0RvbWxrXzN0RkhDbTdzc1BRdVdBVDlsSFV0THZ0UDBUalVlRWp4eHdaeENTQXJmWlUxMWN2VW1mbmhFbw?oc=5",
+          "source": "Yahoo Finance UK",
+          "publishedAt": "Sat, 05 Sep 2026 06:44:00 GMT",
+          "score": 59.4,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "200905f74bb0fb74",
+          "category": "market",
+          "title": "The Stock Market Just Did Something for the First Time Ever. History Says Investors Should Be Worried. But Could This Time Be Different?",
+          "titleZh": "股市有史以来第一次有所作为。 历史表明，投资者应该感到担忧。 但这次会有所不同吗？",
+          "url": "https://www.fool.com/investing/2026/09/05/the-stock-market-just-did-something-for-the-first-time-ever-history-says-investors-should-be-worried-but-this-time-could-be-different/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQRGp0OXRpbFItWktaZml3MzhaVkFVTHJ6YVo4NU5HQWdkQTI0ei1iWFNIT1pnd2JOUGM4YjlsSGVWY2oyWUVOamxBUUl5YUlvUGVNQVRyRUo3UlQ4UEVlU21EZkhNbEFRRDdIWVFWcmJqd0dBeFVWVHhEV3pWYUxRekhkRHhWY1ozbFhxTFhrTnozSGs1SFEtaHUxcGtrX3ZMUlhXNVIzaWJUZ3dwcVU3bTlmcHBiUjhIeXVCMmNVQVhpY3dhX09EekNLaHNxTi1VWmpQV3dqN3BPV2d0UktYcFJJUnpydDVVVlIyT0t6b1BRYlJIUXlGQ2IwYzhKY1FMaU9mWndNVQ?oc=5",
+          "source": "The Motley Fool",
+          "publishedAt": "Sat, 05 Sep 2026 07:49:10 GMT",
+          "score": 60.5,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "771d398546c31cd1",
+          "category": "market",
+          "title": "Nasdaq Futures Edge Higher As Jobs Report Takes Center Stage: TSLA, LULU, ORCL, PL, NVDA, PLTR, RKLB In Focus",
+          "titleZh": "纳斯达克期货边缘更高，因为就业报告占据中心位置： TSLA ， LULU ， ORCL ， PL ， NVDA ， PLTR ， RKLB聚焦",
+          "url": "https://stocktwits.com/news-articles/markets/equity/why-nasdaq-futures-rising-today-jobs-report-fed-rate-hike-tsla-lulu-orcl-pl-nvda-stocks/cZswyykRJwZ",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQYlR2Zngza1RoUGU3VmRNMHdkMmJlak55b1QzOG1aNVNCNjNidmE3dXhOMHM3ODZXVUFET1NqT3RsbEhQNUc1em9FWnRrMFRQLTIwUWZqbTNQeHVkdDg4cDViM0Ytek85TWhGWENqVzhpWWpaMTdaTzN3M1N4Mm8wR0M3dFJDeklHbVh1RDctOWQ5MU82US1VVV80TXY3WXJVckJWTk9PQ3pRNVpvdTVwRFZMQ0x0blRKSE5LbnVxRVplcHpZN2pVS0Q1eHZtajdLRU9faHYzT0habENwX0t5ZllTLWU1Zw?oc=5",
+          "source": "Stocktwits",
+          "publishedAt": "Sat, 05 Sep 2026 06:06:05 GMT",
+          "score": 57.3,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
+        },
+        {
+          "id": "1ed72cefab19d677",
+          "category": "market",
+          "title": "ADADLXX Stock Price and Chart — NASDAQ:ADADLXX",
+          "titleZh": "ADADLXX股价和图表—纳斯达克： ADADLXX",
+          "url": "https://www.tradingview.com/symbols/NASDAQ-ADADLXX/",
+          "googleNewsUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE0xOUFZcXpFc0w0YUVjbUM5N2dwbGhzZ09aN3puVVM5dWxNbmZWZ0x5OUdRMmpwYmJXOUdaSnNfeWVYZUFpVWJvZ0ZneFZvaTlXanFjSl9HXy1uWk1uQWx5VA?oc=5",
+          "source": "TradingView",
+          "publishedAt": "Sat, 05 Sep 2026 06:55:46 GMT",
+          "score": 53.9,
+          "engagement": "",
+          "pushedAt": "2026-09-05T08:00:42.449Z"
         },
         {
           "id": "b24297b71d7302b5",
@@ -174,45 +303,6 @@
           "source": "CNBC",
           "publishedAt": "Fri, 04 Sep 2026 13:03:31 GMT",
           "score": 54.3,
-          "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "9ec0ebe21759072b",
-          "category": "market",
-          "title": "Jim Cramer Believes Nvidia Corp. (NASDAQ:NVDA) Buying Back Half A Trillion Worth In Stock Would Be Great",
-          "titleZh": "Jim Cramer认为Nvidia Corp. （纳斯达克股票代码： NVDA ）回购价值半万亿的股票将是一件好事",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-believes-nvidia-corp-224659401.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQenZsektJeFYwNFFaZEZxVHJweDRsemlyOXBTVDNmeHVUZ0YzNnh6anVMX09iUmpkX3JxX2VqaTJDNUNGZXpncm1VUkJIWXU4WS1xczBPZTVmaWFGNTNha1Z6dzB5LUczVy12VkUxYzh2ZU1URk91TlRva2FaVkVYXzA2UU1UdXRPS0sxM2tYTnR2YV81eHFvclRiZkk?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 22:46:59 GMT",
-          "score": 58.4,
-          "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "e7bf3bf26d9bc6fe",
-          "category": "market",
-          "title": "Berkshire Hathaway Outperformed the S&P 500 Over a 60-Year Period Under Warren Buffett. Here's the Stock That Could Help Continue the Streak Under Greg Abel.",
-          "titleZh": "在沃伦·巴菲特（ Warren Buffett ）执政的60年间，伯克希尔·哈撒韦（ Berkshire Hathaway ）的表现优于标准普尔500 以下是能够帮助Greg Abel继续保持连胜的股票。",
-          "url": "https://www.fool.com/investing/2026/09/05/berkshire-hathaway-outperformed-the-sp-500-over-a/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOUo2cHEwRHVzQ1N6dkhsaTBwOVdwVVB3b0w4UFlKZ2N0SlNpclY3WVQyV21jLVIwYk9RNlZJLWJnMW5IM3RPLTlXUElpb0o3Q2lXVDNicjVldi1ad3kwazNwNjYzUkNzZ0xaeklTWFk0RnhWeXRIdG9SUUdnbXF6MWdPQkwtZUpsMGNsSjUyN2xiVmdPYW9z?oc=5",
-          "source": "The Motley Fool",
-          "publishedAt": "Sat, 05 Sep 2026 06:00:00 GMT",
-          "score": 61.3,
-          "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "1f2abd83e90d07d3",
-          "category": "market",
-          "title": "Bloom Energy, Illumina, and Everpure Set to Join S&P 500; Others to Join S&P 100, S&P MidCap 400, and S&P SmallCap 600",
-          "titleZh": "Bloom Energy、Illumina和Everpure将加入S&P 500 ；其他公司将加入S&P 100、S&P MidCap 400和S&P SmallCap 600",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/bloom-energy-illumina-everpure-set-231500760.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVM0bDBfTVUyb2Job2pTdHVobW1qSm9RVHMxWldNR3luV3ZZNXJ4dXhuQzRCbXZNeUlTZ0VuOGdMMUpOeUVPb3c3Q1NMTElTSDBzakFEZFdnSkItQWlMMjFUUUM2OTBSMjljQkdQMVRmSmcxTDkzaGJoSWR4bl9STVVMb2ZTaTRZV1FKX0NodURJSFg5dk5iNkdaNjZoaXVy?oc=5",
-          "source": "Yahoo Finance",
-          "publishedAt": "Fri, 04 Sep 2026 23:15:00 GMT",
-          "score": 56.4,
           "engagement": "",
           "pushedAt": "2026-09-05T07:30:45.634Z"
         },
@@ -230,18 +320,6 @@
           "pushedAt": "2026-09-05T07:30:45.634Z"
         },
         {
-          "id": "0c6009cf40693d37",
-          "category": "tech",
-          "title": "GPT-6 Astra on OpenRouter",
-          "titleZh": "OpenRouter上的GPT-6 Astra",
-          "url": "https://openrouter.ai/openai/gpt-6-astra",
-          "source": "openrouter.ai",
-          "publishedAt": "2026-09-04T21:39:19.000Z",
-          "score": 116.9,
-          "engagement": "198 points · 111 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
           "id": "05f3c93495260c84",
           "category": "market",
           "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
@@ -251,44 +329,6 @@
           "source": "Yahoo Finance",
           "publishedAt": "Fri, 04 Sep 2026 22:52:29 GMT",
           "score": 54.9,
-          "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "c7bcca28abc8e3ff",
-          "category": "market",
-          "title": "Stock Market This Week Ends Flat Before Labor Day",
-          "titleZh": "本周股市在劳动节前结束",
-          "url": "https://www.stl.news/stock-market-this-week-ends-flat-before-labor-day/",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1LcHIyeDRyOXotcFFGekg3c0lHMXRDSjFDMzl0R1BXR2pFdVZoOXBQaU5HSWhPTmt6ZjJKajdRcDI1ZzhYZFBqcThQMzJyYVIzUmNZbWJRS2xselNUeXhvWDJ4VTlMeG1USk51clVWcmZjbW5saTJaX0FnUQ?oc=5",
-          "source": "stl.news",
-          "publishedAt": "Sat, 05 Sep 2026 06:31:51 GMT",
-          "score": 56.1,
-          "engagement": "",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "482165f7c18efa07",
-          "category": "tech",
-          "title": "Why are European countries moving their gold out of North America?",
-          "titleZh": "",
-          "url": "https://www.bbc.com/news/articles/cvgyn8q8gqxo",
-          "source": "bbc.com",
-          "publishedAt": "2026-09-05T05:52:09.000Z",
-          "score": 117,
-          "engagement": "102 points · 118 comments",
-          "pushedAt": "2026-09-05T07:30:45.634Z"
-        },
-        {
-          "id": "a566f7a32820b420",
-          "category": "market",
-          "title": "Forget AI chips. This is the hottest area of the stock market right now",
-          "titleZh": "",
-          "url": "https://uk.finance.yahoo.com/news/forget-ai-chips-hottest-area-064400675.html",
-          "googleNewsUrl": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWFkyNmpfaDZ4M29RTW5kNW85WmxQVTV0VjV6OXJLQXk3SGNGZGR5S0g3aTQzQ3RLWnQyelQxR3dwRFh6MGlhM0RvbWxrXzN0RkhDbTdzc1BRdVdBVDlsSFV0THZ0UDBUalVlRWp4eHdaeENTQXJmWlUxMWN2VW1mbmhFbw?oc=5",
-          "source": "Yahoo Finance UK",
-          "publishedAt": "Sat, 05 Sep 2026 06:44:00 GMT",
-          "score": 60.2,
           "engagement": "",
           "pushedAt": "2026-09-05T07:30:45.634Z"
         },
