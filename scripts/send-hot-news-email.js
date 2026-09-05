@@ -25,7 +25,7 @@ const NEWS_SOURCES = {
     { key: "marketwatch", name: "MarketWatch", query: "site:marketwatch.com stocks OR markets when:7d" },
     { key: "benzinga", name: "Benzinga", query: "site:benzinga.com stocks OR markets when:7d" },
     { key: "the-street", name: "TheStreet", query: "site:thestreet.com stocks OR markets when:7d" },
-    { key: "motley-fool", name: "The Motley Fool", query: "site:fool.com/investing-news when:7d" },
+    { key: "motley-fool", name: "The Motley Fool", query: "site:fool.com stocks OR market when:7d" },
     { key: "tradingview", name: "TradingView News", query: "site:tradingview.com/news stocks OR markets when:7d" },
   ],
 };
