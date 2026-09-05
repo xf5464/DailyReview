@@ -59,6 +59,10 @@ jobs:
         run: npm test
 
       - name: Build static site and refresh data
+        env:
+          CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
+          CENTRAL_BANK_GOLD_RISE_THRESHOLD: ${{ vars.CENTRAL_BANK_GOLD_RISE_THRESHOLD }}
+          CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
         run: npm run build
 
       - name: Check forecast alert conditions
