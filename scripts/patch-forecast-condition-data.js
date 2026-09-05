@@ -92,7 +92,16 @@ if (!source.includes("    if (kind === 'centralBankGoldTrend') {")) {
     "    if (kind === 'ismNewOrdersDrop') {",
     "      return sourceItems.map(function (item, index) {",
     "        if (index === 0) return { date: item.date, value: Number.NEGATIVE_INFINITY };",
-    "        var previous = Number(sourceItems[index - 1].value);",
+    "        var previousItem = sourceItems[index - 1];",
+    "        var previousDate = String(previousItem.date || '');",
+    "        var currentDate = String(item.date || '');",
+    "        if (!/^\\d{4}-\\d{2}/.test(previousDate) || !/^\\d{4}-\\d{2}/.test(currentDate)) return { date: item.date, value: Number.NEGATIVE_INFINITY };",
+    "        var previousMonth = new Date(previousDate.slice(0, 7) + '-01T00:00:00Z');",
+    "        var currentMonth = new Date(currentDate.slice(0, 7) + '-01T00:00:00Z');",
+    "        var expectedMonth = new Date(Date.UTC(previousMonth.getUTCFullYear(), previousMonth.getUTCMonth() + 1, 1));",
+    "        var consecutive = currentMonth.getUTCFullYear() === expectedMonth.getUTCFullYear() && currentMonth.getUTCMonth() === expectedMonth.getUTCMonth();",
+    "        if (!consecutive) return { date: item.date, value: Number.NEGATIVE_INFINITY };",
+    "        var previous = Number(previousItem.value);",
     "        var current = Number(item.value);",
     "        var drop = previous > 0 ? (previous - current) / previous * 100 : Number.NEGATIVE_INFINITY;",
     "        return { date: item.date, value: current < 50 ? drop : Number.NEGATIVE_INFINITY };",
@@ -125,4 +134,4 @@ if (source.includes('      input.checked = true;')) {
 }
 
 fs.writeFileSync(appPath, source, 'utf8');
-process.stdout.write('Forecast condition data list now mirrors all prediction conditions and defaults to unchecked.\n');
+process.stdout.write('Forecast condition data list now mirrors all prediction conditions, defaults to unchecked, and requires consecutive ISM months.\n');
