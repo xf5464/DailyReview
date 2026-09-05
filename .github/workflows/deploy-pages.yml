@@ -69,6 +69,9 @@ jobs:
           VIX_THRESHOLD: ${{ vars.VIX_THRESHOLD }}
           UNEMPLOYMENT_THRESHOLD: ${{ vars.UNEMPLOYMENT_THRESHOLD }}
           SAHM_THRESHOLD: ${{ vars.SAHM_THRESHOLD }}
+          CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
+          CENTRAL_BANK_GOLD_RISE_THRESHOLD: ${{ vars.CENTRAL_BANK_GOLD_RISE_THRESHOLD }}
+          CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
         run: node scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Send forecast alert email
