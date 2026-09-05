@@ -6,7 +6,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const distDirectory = path.join(projectRoot, 'dist');
 const outlookPath = path.join(distDirectory, 'data', 'outlook.json');
 const manifestPath = path.join(distDirectory, 'data', 'offline-manifest.json');
-const FRED_MD_URL = 'https://files.stlouisfed.org/files/htdocs/fred-md/monthly/current.csv';
+const FRED_MD_PAGE_URL = 'https://www.stlouisfed.org/research/economists/mccracken/fred-databases';
 const HISTORY_YEARS = 30;
 const REQUEST_TIMEOUT_MS = 20_000;
 
@@ -79,6 +79,14 @@ function parseFredMdSeries(text, seriesId) {
     .sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function findCurrentFredMdCsvUrl(html) {
+  const source = String(html ?? '');
+  const anchorPattern = /<a\b[^>]*href=["']([^"']+\.csv)["'][^>]*>\s*current\.csv\s*<\/a>/i;
+  const match = anchorPattern.exec(source);
+  if (!match) throw new Error('FRED-MD page does not expose current.csv');
+  return new URL(match[1].replace(/&amp;/gi, '&'), FRED_MD_PAGE_URL).href;
+}
+
 function mergeDatedItems(...groups) {
   return [...new Map(groups.flat().map((item) => [item.date, item])).values()]
     .sort((left, right) => left.date.localeCompare(right.date));
@@ -96,17 +104,24 @@ function contentHash(content) {
   return crypto.createHash('sha256').update(content).digest('hex').slice(0, 16);
 }
 
-async function fetchText(url, fetchImpl = globalThis.fetch) {
+async function fetchText(url, fetchImpl = globalThis.fetch, accept = '*/*') {
   if (typeof fetchImpl !== 'function') throw new Error('fetch unavailable');
-  const options = { headers: { Accept: 'text/csv', 'User-Agent': 'DailyReview/1.0' } };
+  const options = { headers: { Accept: accept, 'User-Agent': 'DailyReview/1.0' } };
   if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
     options.signal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   }
   const response = await fetchImpl(url, options);
-  if (!response?.ok) throw new Error(`FRED-MD HTTP ${response?.status ?? '--'}`);
+  if (!response?.ok) throw new Error(`FRED-MD HTTP ${response?.status ?? '--'} for ${url}`);
   const text = await response.text();
   if (!text.trim()) throw new Error('FRED-MD returned empty content');
   return text;
+}
+
+async function fetchCurrentFredMdCsv(fetchImpl = globalThis.fetch) {
+  const pageHtml = await fetchText(FRED_MD_PAGE_URL, fetchImpl, 'text/html');
+  const csvUrl = findCurrentFredMdCsvUrl(pageHtml);
+  const text = await fetchText(csvUrl, fetchImpl, 'text/csv,*/*');
+  return { text, csvUrl };
 }
 
 function rewriteOfflineChunks(chart, manifest) {
@@ -135,7 +150,10 @@ async function supplement(options = {}) {
   if (!fs.existsSync(outlookPath) || !fs.existsSync(manifestPath)) {
     throw new Error('built ISM files are missing; run normal build first');
   }
-  const text = options.text ?? await fetchText(FRED_MD_URL, options.fetchImpl);
+  const fetched = options.text
+    ? { text: options.text, csvUrl: options.csvUrl || 'test-fixture' }
+    : await fetchCurrentFredMdCsv(options.fetchImpl);
+  const text = fetched.text;
   const outlook = JSON.parse(fs.readFileSync(outlookPath, 'utf8'));
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   const results = {};
@@ -156,7 +174,8 @@ async function supplement(options = {}) {
     const cutoff = historyCutoff(merged);
     chart.items = merged.filter((item) => item.date >= cutoff);
     chart.sourceName = 'FRED-MD 历史 / ISM 官方最新月报';
-    chart.sourceUrl = 'https://www.stlouisfed.org/research/economists/mccracken/fred-databases';
+    chart.sourceUrl = FRED_MD_PAGE_URL;
+    chart.fredMdCsvUrl = fetched.csvUrl;
     chart.historyStart = chart.items[0]?.date || null;
     chart.fredMdSeriesId = seriesId;
     fs.writeFileSync(chartPath, JSON.stringify(chart) + '\n', 'utf8');
@@ -166,6 +185,7 @@ async function supplement(options = {}) {
       metadata.itemCount = chart.items.length;
       metadata.sourceName = chart.sourceName;
       metadata.sourceUrl = chart.sourceUrl;
+      metadata.fredMdCsvUrl = chart.fredMdCsvUrl;
       metadata.historyStart = chart.historyStart;
       metadata.fredMdSeriesId = seriesId;
     }
@@ -174,8 +194,6 @@ async function supplement(options = {}) {
   }
 
   // FRED-MD does not contain the ISM Backlog Orders diffusion index.
-  // Keep the existing DBnomics long/medium history + official ISM snapshot and
-  // state that exception explicitly in metadata rather than pretending it is FRED-MD.
   const backlogPath = path.join(distDirectory, 'data', 'charts', 'ismBacklogOrders.json');
   if (fs.existsSync(backlogPath)) {
     const backlog = JSON.parse(fs.readFileSync(backlogPath, 'utf8'));
@@ -189,8 +207,7 @@ async function supplement(options = {}) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest) + '\n', 'utf8');
 
   process.stdout.write(
-    'Unified ISM history: PMI=NAMPM, New Orders=NAPMNOI, Supplier Deliveries=NAPMSDI via FRED-MD; Backlog Orders remains DBnomics because FRED-MD does not include it.\n'
-      .replace('NAMPM', 'NAPM'),
+    `Unified ISM history from ${fetched.csvUrl}: PMI=NAPM, New Orders=NAPMNOI, Supplier Deliveries=NAPMSDI; Backlog Orders remains DBnomics.\n`,
   );
   return results;
 }
@@ -204,8 +221,10 @@ if (require.main === module) {
 
 module.exports = {
   FRED_MD_ISM_SERIES,
-  FRED_MD_URL,
+  FRED_MD_PAGE_URL,
   HISTORY_YEARS,
+  fetchCurrentFredMdCsv,
+  findCurrentFredMdCsvUrl,
   mergeDatedItems,
   normalizeFredMdDate,
   parseFredMdSeries,
