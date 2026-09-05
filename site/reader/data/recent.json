@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T20:00:46.821Z",
+  "updatedAt": "2026-09-05T20:30:40.209Z",
   "items": [
     {
       "id": "fbe2a4d07950ca5c",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Fri, 04 Sep 2026 23:56:00 GMT",
-      "score": 19.9,
+      "score": 19.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 64.2,
+      "score": 63.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 42.2,
+      "score": 41.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "24dda51b24e4f869",
@@ -73,39 +73,39 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:25:49 GMT",
-      "score": 44.8,
+      "score": 44.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
-      "id": "eb91ce01e3372d1f",
+      "id": "25046c1dbf437b57",
       "category": "market",
-      "title": "Opinion: Think you maxed out your 401(k)? The real limit is actually almost $50,000 higher.",
-      "titleZh": "意见：您认为您的401 (k)已用完？ 实际限额实际上高出近50,000 $。",
-      "url": "https://www.marketwatch.com/story/think-you-maxed-out-your-401-k-the-real-limit-is-actually-almost-50-000-higher-217a89ee",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhYOEtjNWRDbmNxZHEzWWJIQWRfUjE3UFZoemViMEN5MzA0dHlQdjhubFhXWV81RWJYQ2M3bGZXNXhHWmVLNzVtWE1kZlV6Qzg0NFpINVZ2LUZvWlRyYzYzSTNfRW00RWItNXNUOHFrMXpfS3ZfLTA5bi14dk5HelVtX09WaDRfa2tiRklGOWVMdjdhc1BCcF9oR2YzTlNpSW82eTN1ZlJfVkJHN2FuWjUzb3hHaW05SkJoLW9n?oc=5",
+      "title": "NVDA Stock Price | NVIDIA Corp. Stock Quote (U.S.: Nasdaq)",
+      "titleZh": "NVDA股价| NVIDIA Corp.股票报价（美国：纳斯达克）",
+      "url": "https://www.marketwatch.com/investing/stock/nvda",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9rTUx0am9SNU4zUG1rZG02REFwVHRBSmgyanJKb1ZFRHZNbG91b2RIN1NTUUxsTS1JX0xFWmVkTmxsQWxleG1nN1VXZnVJby13cEdlX1B2dUs4aEhr?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 18:59:00 GMT",
-      "score": 51.6,
+      "publishedAt": "Sat, 05 Sep 2026 19:11:42 GMT",
+      "score": 47.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
-      "id": "9e27686738dd7f81",
+      "id": "8c78f84832342d84",
       "category": "market",
-      "title": "Norges Bank Proposes $80B Shift From U.S. Treasuries to Mortgage-Backed Bonds",
-      "titleZh": "挪威央行建议将800亿美元从美国国债转向抵押贷款支持债券",
-      "url": "https://www.benzinga.com/markets/macro-economic-events/26/09/61643251/norges-bank-treasury-mortgage-backed-bonds-shift",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNTEd6VGJMSFdYcGJSMGhXdGFpYzhBdlBDLVRnVF9JUW1sb0VvVEktZUU2dEFCTktDTlJhU3o1S2d3bF9SaUc2eDJxN2l4MWE4bzU2UFNqcDNJXzliNERhM1dIVGRkaVVwbHdNclJ3LTdUazk5M3NLNEFZNXQ4QzBTa3VkcHd2T3B4ak5kR0NsMHNuSzY2ck1xb1RSSWdiQVVpXzVkMTVraTNpNUpSQ0p3X1R0cEd1aVV0aXc?oc=5",
+      "title": "This Week in Tesla: Elon Musk Touts 'Golden Era' With Cybercab Amid Fleet Expansion",
+      "titleZh": "本周在特斯拉： Elon Musk在车队扩张中吹嘘Cybercab的“黄金时代”",
+      "url": "https://www.benzinga.com/markets/tech/26/09/61643696/this-week-in-tesla-elon-musk-touts-golden-era-with-cybercab-amid-fleet-expansion",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNN1JlamV2cHZobG5NMExPQzg3YUxIcTJ1a0t4WFpFUE9JRE1meGx3emE2bDNzcFdUaktFckxHMnByX3JQN3c1RHpjcl9IVUI3RWRacmxCdFJSOGh0OVBmSC1sLTctNzl0d2l6bkhpUTBGMWdJNk0tQVVGNzMxRUg2S2FQeEFsNEktdmNWQnZqVWx1Ym11VnpnM0xtdmJDQld0elo4TnVZMWhaMnlLODZQVjA1Q25pTXZET0dramEzV2EzQ3FoX1FaOGJzNGJwdw?oc=5",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 42.5,
+      "publishedAt": "Sat, 05 Sep 2026 16:30:18 GMT",
+      "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "8108d90c6c101e16",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:08:08 GMT",
-      "score": 36.7,
+      "score": 36.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "954c0e42ee45f4cc",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 14:44:00 GMT",
-      "score": 55.4,
+      "score": 51.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "c460312cd3b974cb",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 10:52:04 GMT",
-      "score": 48.9,
+      "score": 48.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,24 +163,24 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 18:59:31 GMT",
-      "score": 60,
+      "score": 59.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
-      "id": "b86b5015c5da7a40",
+      "id": "6ef2aef9012f0dd0",
       "category": "tech",
-      "title": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
-      "titleZh": "OpenAI确认“维基事件” ，称其正在“开发一个框架”以进行更多披露",
-      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOaXFFeGc1SDlwN0VKcFZmZFRYdUFCdTZuOFVEVVA2dzdHWjVIOGN4ZlFrZ0toYVR2V1ZtNHJlRFFpaW1aNEJMSl9hS0NEWXZIQm1vcFB3NXdyQTI0NE9uRDNfVFBKNElfM193Ym1hX2dPMUNXZmMyZFRpaF85el9QU25OSFVkZDBvQjJ3dFVpZVpwTFU5VFJpVW14QzE0NUhEX0Z2SnNjLVJ1d3RydDduQkI3NzZOMWs?oc=5",
+      "title": "Hikers rescued after using Google Gemini for planning",
+      "titleZh": "徒步旅行者在使用Google Gemini进行规划后获救",
+      "url": "https://techcrunch.com/2026/09/05/hikers-rescued-after-using-google-gemini-for-planning/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQbUF5TV9XLXZ0c3MtcVIwRkZjajR6b0VHWmhnejVrNUVoeWpualpYMFFjNHRRV2IyMnBpS2NrWUp6ZWI3SkpoalJqczR4VlM5dVh2VGRkcXRJMFlyRVR1eFJkaGRORnU5S2pRUG16LV9kWGVFWkttVVhzR0ltc2ZZVm5tSVJyN05iZUhTbThEaDJ6dw?oc=5",
       "source": "TechCrunch",
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 18:05:27 GMT",
-      "score": 76.1,
+      "publishedAt": "Sat, 05 Sep 2026 19:35:24 GMT",
+      "score": 74.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 50.3,
+      "score": 49.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "cee0480452514b7d",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:39:57 GMT",
-      "score": 50.7,
+      "score": 50.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "1b162106c901be17",
@@ -223,39 +223,39 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:00:00 GMT",
-      "score": 58.6,
+      "score": 59,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
-      "id": "8a4890e0650899fa",
+      "id": "858781058482c3d1",
       "category": "tech",
-      "title": "Adrian Kingsley-Hughes",
-      "titleZh": "阿德里安·金斯利-休斯",
-      "url": "https://www.zdnet.com/meet-the-team/adrian-kingsley-hughes/page/20/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBQWDF4bnREdDFpOGVnQ2ZRSV9ta0ZSZ1Zab3BSZ085clhFb2ZFdmFIc3dYcExEX3RKbXJhVmlCU3BzUUNFSWhWY090NmFHbXBZTW8zSHNtVDl4RVloaFljWHo3Z2NDcExKbjE2TXRvX0pYXzd5ZGc?oc=5",
+      "title": "I tried the bezelless concept phone at IFA, and it’s more futuristic than I thought",
+      "titleZh": "我在IFA尝试了无边框概念手机，它比我想象的更具未来感",
+      "url": "https://www.zdnet.com/uncategorized/tecno-bezelless-phone-concept-ifa-berlin-2026/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNuZHRwaE03bG43MUhBZ1FUWENlcjRLMGpNdktUcDdGcUdYYW1aeWQ1VzVVcktoR0tGenNjRi12bzNHMGIxVE1WdFlZUlJHRVhJU3pNUEllelF6N3RfMDh5eEk5YV83blZSNUs3cjNNeDl2dVFOdi11aEFfMHgwRXB0YzRMZ1R4V0E?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 13:43:57 GMT",
-      "score": 46.7,
+      "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
+      "score": 42.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
-      "id": "b05084f15c3908f8",
+      "id": "9a5a1c020d5e8efc",
       "category": "tech",
-      "title": "Best TVs of 2026: Expert Tested, Compared and Reviewed",
-      "titleZh": "2026年最佳电视：经过专家测试、比较和评论",
-      "url": "https://www.cnet.com/tech/home-entertainment/best-tvs-of-2026-expert-tested-compared-and-reviewed/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPbmtVUjFCM3gyRUc1ZlctSWNmZWJxeXNsREREN0VjbUlMSGYwNDIzUUpjNWVKNlJJRzE2ajJ2X2U1VnJqYXVwdXlRZ0FkU3dORXJyaWtoRVBBZ2w0X2pEbGxlaFIwTnYwRlZJdnpISC1fc2NJOXpMTEgzSkdrLVA3OVQ4alUydXlmUkFVYlNDWmQzYXhnb1ItNnRLMEZOcmc?oc=5",
+      "title": "Today’s NYT Connections Hints and Answers for Sept. 5, #1182",
+      "titleZh": "今天的纽约时报连接提示和答案9月5日， # 1182",
+      "url": "https://www.cnet.com/tech/gaming/todays-nyt-connections-hints-and-answers-for-sept-5-1182/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQYVNsamFmRlozWjNpdjVQVERqVVdOcDltYmdPc25kcXd1LVBqVHpHNmltY3pFajVTcEJPUFhLQzBmUlJhQ3lpOEZwZDhzeWlSX3FlVUJXV1VWTDhPc0ZrY1BpdWxybmNWWXZ4Y3VaNS0xM0I1QXdNRll0emVRWW00SEplYlY4RWxyMVgtVTdTZnFXaG9u?oc=5",
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 19:22:13 GMT",
-      "score": 51.4,
+      "publishedAt": "Sat, 05 Sep 2026 06:14:00 GMT",
+      "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 48.3,
+      "score": 47.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 50.3,
+      "score": 49.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "415884a72ea16d83",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T17:46:16.000Z",
-      "score": 114.8,
-      "engagement": "148 points · 48 comments",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "score": 119.5,
+      "engagement": "190 points · 63 comments",
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T20:00:46.821Z"
+      "fetchedAt": "2026-09-05T20:30:40.209Z"
     }
   ]
 }
