@@ -2,76 +2,56 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const RETENTION_DAYS = 3;
-
-function chinaDate(value) {
-  return new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
-  }).format(new Date(value));
-}
-
 function itemId(url) {
   return crypto.createHash('sha256').update(String(url)).digest('hex').slice(0, 16);
 }
 
-function isGoogleNewsUrl(rawUrl) {
-  try {
-    const host = new URL(rawUrl).hostname.toLowerCase();
-    return host === 'news.google.com' || host.endsWith('.news.google.com');
-  } catch {
-    return false;
-  }
-}
-
 function emptyArchive() {
-  return { schemaVersion: 1, updatedAt: null, days: [] };
+  return { schemaVersion: 2, updatedAt: null, items: [] };
 }
 
-function pruneArchive(archive, now = Date.now()) {
-  const current = chinaDate(now);
-  const cutoff = new Date(`${current}T00:00:00+08:00`);
-  cutoff.setUTCDate(cutoff.getUTCDate() - (RETENTION_DAYS - 1));
-  const cutoffDate = chinaDate(cutoff);
+function normalizeItem(item, fallbackOrder = 0) {
   return {
-    schemaVersion: 1,
-    updatedAt: archive.updatedAt || null,
-    days: (Array.isArray(archive.days) ? archive.days : [])
-      .filter((day) => day && day.date >= cutoffDate && day.date <= current)
-      .sort((left, right) => right.date.localeCompare(left.date))
-      .slice(0, RETENTION_DAYS),
+    id: item.id || itemId(item.url), category: item.category, title: item.title,
+    titleZh: item.titleZh || '', url: item.url,
+    ...(item.googleNewsUrl ? { googleNewsUrl: item.googleNewsUrl } : {}),
+    source: item.source, sourceKey: item.sourceKey || '',
+    sourceOrder: Number.isFinite(Number(item.sourceOrder)) ? Number(item.sourceOrder) : fallbackOrder,
+    publishedAt: item.publishedAt, score: item.score,
+    engagement: item.engagement || '', fetchedAt: item.fetchedAt || item.pushedAt || '',
   };
 }
 
-function mergeNews(archive, news, now = Date.now(), shouldKeepItem = () => true) {
-  const pushedAt = new Date(now).toISOString();
-  const date = chinaDate(now);
-  const next = pruneArchive(archive || emptyArchive(), now);
-  let day = next.days.find((entry) => entry.date === date);
-  if (!day) {
-    day = { date, pushes: [], items: [] };
-    next.days.unshift(day);
-  }
-  day.pushes = [...new Set([pushedAt, ...(day.pushes || [])])].sort().reverse();
-  const incoming = [...(news.tech || []), ...(news.market || [])].map((item) => ({
-    id: itemId(item.url), category: item.category, title: item.title, titleZh: item.titleZh || '',
-    url: item.url, ...(item.googleNewsUrl ? { googleNewsUrl: item.googleNewsUrl } : {}),
-    source: item.source, publishedAt: item.publishedAt, score: item.score,
-    engagement: item.engagement || '', pushedAt,
-  }));
-  if (incoming.some((item) => item.googleNewsUrl)) {
-    next.days.forEach((entry) => {
-      entry.items = (entry.items || []).filter((item) => !isGoogleNewsUrl(item.url));
-    });
-  }
-  const byId = new Map((day.items || []).map((item) => [item.id, item]));
-  incoming.forEach((item) => byId.set(item.id, item));
-  day.items = [...byId.values()].sort((left, right) =>
-    Date.parse(right.pushedAt || right.publishedAt) - Date.parse(left.pushedAt || left.publishedAt));
-  next.days.forEach((entry) => {
-    entry.items = (entry.items || []).filter(shouldKeepItem);
+function legacyItems(archive) {
+  return (Array.isArray(archive?.days) ? archive.days : []).flatMap((day) => day.items || []);
+}
+
+function pruneArchive(archive) {
+  const rawItems = Array.isArray(archive?.items) ? archive.items : legacyItems(archive);
+  const bySource = new Map();
+  rawItems.forEach((item, index) => {
+    if (!item?.url) return;
+    const normalized = normalizeItem(item, index);
+    const key = normalized.sourceKey || normalized.id;
+    const previous = bySource.get(key);
+    if (!previous || Date.parse(normalized.fetchedAt || normalized.publishedAt) > Date.parse(previous.fetchedAt || previous.publishedAt)) {
+      bySource.set(key, normalized);
+    }
   });
-  next.updatedAt = pushedAt;
-  return pruneArchive(next, now);
+  return {
+    schemaVersion: 2,
+    updatedAt: archive?.updatedAt || null,
+    items: [...bySource.values()].sort((left, right) =>
+      String(left.category).localeCompare(String(right.category)) || left.sourceOrder - right.sourceOrder),
+  };
+}
+
+function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true) {
+  const fetchedAt = new Date(now).toISOString();
+  const items = [...(news.tech || []), ...(news.market || [])]
+    .map((item, index) => normalizeItem({ ...item, fetchedAt }, index % 10))
+    .filter(shouldKeepItem);
+  return pruneArchive({ schemaVersion: 2, updatedAt: fetchedAt, items });
 }
 
 function readArchive(filePath) {
@@ -85,13 +65,11 @@ function saveNewsArchive(news, filePath, now = Date.now(), shouldKeepItem = () =
   return next;
 }
 
-function pruneArchiveFile(filePath, now = Date.now()) {
-  const next = pruneArchive(readArchive(filePath), now);
+function pruneArchiveFile(filePath) {
+  const next = pruneArchive(readArchive(filePath));
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
   return next;
 }
 
-module.exports = {
-  RETENTION_DAYS, chinaDate, emptyArchive, isGoogleNewsUrl, itemId, mergeNews, pruneArchive, pruneArchiveFile, saveNewsArchive,
-};
+module.exports = { emptyArchive, itemId, mergeNews, pruneArchive, pruneArchiveFile, saveNewsArchive };

@@ -2,7 +2,7 @@
 
 const API_ROOT = 'https://dailyreview-reader.xf5464.workers.dev';
 const ARCHIVE_URL = 'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json';
-const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v1';
+const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v2';
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
 const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
@@ -11,7 +11,6 @@ const refs = {
   empty: document.querySelector('#emptyArchive'),
   archiveMeta: document.querySelector('#archiveMeta'),
   tabs: [...document.querySelectorAll('.category-tab')],
-  timeTabs: [...document.querySelectorAll('.time-tab')],
   dialog: document.querySelector('#readerDialog'),
   close: document.querySelector('#closeDialog'),
   loading: document.querySelector('#loadingState'),
@@ -28,10 +27,8 @@ const refs = {
   dialogFont: document.querySelector('#dialogFontButton'),
 };
 
-let archive = { days: [] };
+let archive = { schemaVersion: 2, updatedAt: null, items: [] };
 let activeCategory = localStorage.getItem('dailyreview-reader-category') === 'market' ? 'market' : 'tech';
-const savedHours = Number(localStorage.getItem('dailyreview-reader-hours'));
-let activeHours = [6, 12, 18, 24].includes(savedHours) ? savedHours : 24;
 let currentUrl = '';
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
 const fontSizes = [17, 19, 21, 23];
@@ -46,26 +43,21 @@ function chinaDate(value = Date.now()) {
   }).format(new Date(value));
 }
 
-function retainedDates() {
-  const dates = [];
-  const noon = new Date(`${chinaDate()}T12:00:00+08:00`);
-  for (let offset = 0; offset < 3; offset += 1) {
-    const value = new Date(noon);
-    value.setUTCDate(value.getUTCDate() - offset);
-    dates.push(chinaDate(value));
-  }
-  return new Set(dates);
-}
-
 function pruneArchive(value) {
-  const keep = retainedDates();
+  const items = Array.isArray(value?.items)
+    ? value.items
+    : (value?.days || []).flatMap((day) => day.items || []);
+  const bySource = new Map();
+  items.forEach((item) => {
+    const key = item.sourceKey || item.id || item.url;
+    if (!key) return;
+    const previous = bySource.get(key);
+    if (!previous || itemTimestamp(item) > itemTimestamp(previous)) bySource.set(key, item);
+  });
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     updatedAt: value?.updatedAt || null,
-    days: (Array.isArray(value?.days) ? value.days : [])
-      .filter((day) => keep.has(day?.date))
-      .sort((a, b) => b.date.localeCompare(a.date))
-      .slice(0, 3),
+    items: [...bySource.values()],
   };
 }
 
@@ -174,28 +166,16 @@ function itemTimestamp(item) {
 }
 
 function selectedItems(value) {
-  const now = Date.now();
-  const cutoff = now - activeHours * 60 * 60 * 1000;
-  const byId = new Map();
-  (value.days || []).flatMap((day) => day.items || []).forEach((item) => {
-    const timestamp = itemTimestamp(item);
-    if (item.category !== activeCategory || timestamp < cutoff || timestamp > now + 5 * 60 * 1000) return;
-    const key = item.id || item.url;
-    const previous = byId.get(key);
-    if (!previous || Date.parse(item.pushedAt || 0) > Date.parse(previous.pushedAt || 0)) byId.set(key, item);
-  });
-  return [...byId.values()]
+  return (value.items || [])
+    .filter((item) => item.category === activeCategory)
     .sort((left, right) =>
-      (Number(right.score) || 0) - (Number(left.score) || 0)
-      || itemTimestamp(right) - itemTimestamp(left))
+      (Number(left.sourceOrder) || 0) - (Number(right.sourceOrder) || 0))
     .slice(0, 10);
 }
 
-function updateTimeTabs() {
-  refs.timeTabs.forEach((tab) => {
-    const selected = Number(tab.dataset.hours) === activeHours;
-    tab.setAttribute('aria-pressed', String(selected));
-  });
+function updatedTimeLabel(value) {
+  if (!value) return '更新时间未知';
+  return `更新于 ${publishedTimeLabel(value)}`;
 }
 
 function renderArchive(value, fromCache = false) {
@@ -203,13 +183,12 @@ function renderArchive(value, fromCache = false) {
   localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive));
   refs.days.replaceChildren();
   updateCategoryTabs();
-  updateTimeTabs();
 
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
   refs.archiveMeta.textContent = items.length
-    ? `${categoryLabel(activeCategory)} · 最近${activeHours}小时 · ${items.length} 条${fromCache ? ' · 本地缓存' : ''}`
-    : `最近${activeHours}小时暂无${categoryLabel(activeCategory)}热点`;
+    ? `${categoryLabel(activeCategory)} · 每个来源最新 1 条 · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
+    : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
 
   if (!items.length) return;
   const section = document.createElement('section');
@@ -232,23 +211,15 @@ function selectCategory(category) {
   renderArchive(archive);
 }
 
-function selectHours(hours) {
-  const next = Number(hours);
-  if (![6, 12, 18, 24].includes(next) || next === activeHours) return;
-  activeHours = next;
-  localStorage.setItem('dailyreview-reader-hours', String(next));
-  renderArchive(archive);
-}
-
 async function loadArchive() {
-  const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { days: [] }));
-  if (cached.days.length) renderArchive(cached, true);
+  const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] }));
+  if (cached.items.length) renderArchive(cached, true);
   try {
     const response = await fetch(`${ARCHIVE_URL}?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(String(response.status));
     renderArchive(await response.json());
   } catch {
-    if (!cached.days.length) renderArchive(cached, true);
+    if (!cached.items.length) renderArchive(cached, true);
   }
 }
 
@@ -320,7 +291,6 @@ refs.days.addEventListener('click', (event) => {
   location.href = externalLink.getAttribute('href');
 });
 refs.tabs.forEach((tab) => tab.addEventListener('click', () => selectCategory(tab.dataset.category)));
-refs.timeTabs.forEach((tab) => tab.addEventListener('click', () => selectHours(tab.dataset.hours)));
 refs.retry.addEventListener('click', () => { if (currentUrl) loadArticle(currentUrl, true); });
 refs.close.addEventListener('click', () => refs.dialog.close());
 refs.dialog.addEventListener('click', (event) => { if (event.target === refs.dialog) refs.dialog.close(); });

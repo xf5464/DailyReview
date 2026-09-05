@@ -3,9 +3,24 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 
 const {
-  environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
+  NEWS_SOURCES, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
 } = require("../scripts/send-hot-news-email");
+
+test("uses ten fixed free sources for each reader tab", () => {
+  assert.equal(NEWS_SOURCES.tech.length, 10);
+  assert.equal(NEWS_SOURCES.market.length, 10);
+  assert.equal(new Set(NEWS_SOURCES.tech.map((source) => source.key)).size, 10);
+  assert.equal(new Set(NEWS_SOURCES.market.map((source) => source.key)).size, 10);
+});
+
+test("reader shows the latest snapshot without hour filters", () => {
+  const html = fs.readFileSync("site/reader/index.html", "utf8");
+  const script = fs.readFileSync("site/reader/reader.js", "utf8");
+  assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
+  assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
+  assert.match(html, /v2026\.09\.05\.17/);
+});
 
 test("parses Google News RSS and removes source suffix", () => {
   const xml = `<rss><channel><item><title><![CDATA[Nvidia launches a new chip - Reuters]]></title><link>https://example.com/a?x=1&amp;y=2</link><pubDate>Fri, 04 Sep 2026 01:00:00 GMT</pubDate><source url="https://reuters.com">Reuters</source></item></channel></rss>`;

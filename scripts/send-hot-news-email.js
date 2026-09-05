@@ -1,14 +1,38 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
-const DEFAULT_WINDOW_HOURS = 30;
 const MAX_ITEMS = 10;
 const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
 
-const SOURCE_WEIGHTS = new Map([
-  ["Reuters", 30], ["CNBC", 25], ["The Verge", 23],
-  ["Ars Technica", 23], ["TechCrunch", 22], ["MarketWatch", 21],
-  ["Yahoo Finance", 19], ["Forbes", 17],
-]);
+const NEWS_SOURCES = {
+  tech: [
+    { key: "reuters-technology", name: "Reuters Technology", query: "site:reuters.com technology OR AI OR chips when:7d" },
+    { key: "techcrunch", name: "TechCrunch", query: "site:techcrunch.com when:7d" },
+    { key: "the-verge", name: "The Verge", query: "site:theverge.com when:7d" },
+    { key: "ars-technica", name: "Ars Technica", query: "site:arstechnica.com when:7d" },
+    { key: "engadget", name: "Engadget", query: "site:engadget.com when:7d" },
+    { key: "zdnet", name: "ZDNET", query: "site:zdnet.com technology OR AI when:7d" },
+    { key: "cnet", name: "CNET", query: "site:cnet.com/tech when:7d" },
+    { key: "bleepingcomputer", name: "BleepingComputer", query: "site:bleepingcomputer.com when:7d" },
+    { key: "toms-hardware", name: "Tom's Hardware", query: "site:tomshardware.com when:7d" },
+    { key: "hacker-news", name: "Hacker News", special: "hacker-news" },
+  ],
+  market: [
+    { key: "reuters-markets", name: "Reuters Markets", query: "site:reuters.com stock market OR Wall Street when:7d" },
+    { key: "yahoo-finance", name: "Yahoo Finance", query: "site:finance.yahoo.com/news stocks OR markets when:7d" },
+    { key: "cnbc-markets", name: "CNBC Markets", query: "site:cnbc.com stocks OR markets when:7d" },
+    { key: "nasdaq-news", name: "Nasdaq News", query: "site:nasdaq.com/articles stocks OR markets when:7d" },
+    { key: "investing", name: "Investing.com", query: "site:investing.com/news/stock-market-news when:7d" },
+    { key: "marketwatch", name: "MarketWatch", query: "site:marketwatch.com stocks OR markets when:7d" },
+    { key: "benzinga", name: "Benzinga", query: "site:benzinga.com stocks OR markets when:7d" },
+    { key: "the-street", name: "TheStreet", query: "site:thestreet.com stocks OR markets when:7d" },
+    { key: "motley-fool", name: "The Motley Fool", query: "site:fool.com/investing-news when:7d" },
+    { key: "tradingview", name: "TradingView News", query: "site:tradingview.com/news stocks OR markets when:7d" },
+  ],
+};
+
+const SOURCE_WEIGHTS = new Map(
+  Object.values(NEWS_SOURCES).flat().map((source, index) => [source.name, 30 - index]),
+);
 
 const PAYWALL_SOURCE_NAMES = [
   "the wall street journal", "bloomberg", "financial times", "barron's",
@@ -307,61 +331,101 @@ async function addChineseTranslations(items, maxBatchBytes = 450) {
   return output;
 }
 
-async function fetchHackerNews(windowHours, now = Date.now()) {
+async function fetchHackerNewsTop(now = Date.now()) {
   const ids = JSON.parse(await fetchText("https://hacker-news.firebaseio.com/v0/topstories.json"));
-  const stories = await Promise.all(ids.slice(0, 80).map(async (id) => {
+  const stories = await Promise.all(ids.slice(0, 12).map(async (id) => {
     try {
       return JSON.parse(await fetchText(`https://hacker-news.firebaseio.com/v0/item/${id}.json`, 8_000));
     } catch {
       return null;
     }
   }));
-  return stories.filter((story) => story && story.type === "story" && story.url && hoursOld(story.time * 1000, now) <= windowHours)
-    .map((story, index) => ({
-      category: "tech",
-      title: story.title,
-      url: story.url,
-      source: new URL(story.url).hostname.replace(/^www\./, ""),
-      publishedAt: new Date(story.time * 1000).toISOString(),
-      feedRank: index,
-      score: Math.round((Math.log2((story.score || 0) + 1) * 9 + Math.log2((story.descendants || 0) + 1) * 5 + Math.max(0, 24 - hoursOld(story.time * 1000, now))) * 10) / 10,
-      engagement: `${story.score || 0} points · ${story.descendants || 0} comments`,
-    }));
+  const story = stories.find((entry) => entry && entry.type === "story" && entry.url);
+  if (!story) throw new Error("Hacker News returned no usable story.");
+  return {
+    category: "tech", title: story.title, url: story.url, source: "Hacker News",
+    sourceKey: "hacker-news", sourceOrder: 9,
+    publishedAt: new Date(story.time * 1000).toISOString(), feedRank: 0,
+    score: Math.round((Math.log2((story.score || 0) + 1) * 9 + Math.log2((story.descendants || 0) + 1) * 5 + Math.max(0, 24 - hoursOld(story.time * 1000, now))) * 10) / 10,
+    engagement: `${story.score || 0} points · ${story.descendants || 0} comments`,
+  };
+}
+
+function archivedItems(filePath) {
+  if (!filePath) return [];
+  try {
+    const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    if (Array.isArray(archive.items)) return archive.items;
+    return (archive.days || []).flatMap((day) => day.items || []);
+  } catch { return []; }
 }
 
 function archivedTitleTranslations(filePath) {
-  if (!filePath) return new Map();
-  try {
-    const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    return new Map((archive.days || []).flatMap((day) => day.items || [])
-      .filter((item) => item.url && item.titleZh)
-      .flatMap((item) => [
-        [item.url, item.titleZh],
-        ...(item.googleNewsUrl ? [[item.googleNewsUrl, item.titleZh]] : []),
-      ]));
-  } catch {
-    return new Map();
-  }
+  return new Map(archivedItems(filePath).filter((item) => item.url && item.titleZh)
+    .flatMap((item) => [[item.url, item.titleZh], ...(item.googleNewsUrl ? [[item.googleNewsUrl, item.titleZh]] : [])]));
 }
 
 function archivedGoogleNewsUrls(filePath) {
-  if (!filePath) return new Map();
-  try {
-    const archive = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    return new Map((archive.days || []).flatMap((day) => day.items || [])
-      .filter((item) => item.googleNewsUrl && item.url && !isGoogleNewsUrl(item.url))
-      .map((item) => [item.googleNewsUrl, item.url]));
-  } catch {
-    return new Map();
-  }
+  return new Map(archivedItems(filePath)
+    .filter((item) => item.googleNewsUrl && item.url && !isGoogleNewsUrl(item.url))
+    .map((item) => [item.googleNewsUrl, item.url]));
+}
+
+function archivedSourceItems(filePath) {
+  return new Map(archivedItems(filePath).filter((item) => item.sourceKey).map((item) => [item.sourceKey, item]));
+}
+
+async function fetchLatestSourceItem(source, category, sourceOrder, now = Date.now()) {
+  if (source.special === "hacker-news") return fetchHackerNewsTop(now);
+  const candidates = (await fetchGoogleFeed(source.query, category, 0))
+    .filter((item) => !isPaywalledItem(item))
+    .sort((left, right) => Date.parse(right.publishedAt) - Date.parse(left.publishedAt));
+  if (!candidates.length) throw new Error(`${source.name} returned no usable story.`);
+  return { ...candidates[0], source: source.name, sourceKey: source.key, sourceOrder, score: rankGoogleItem(candidates[0], now) };
 }
 
 async function collectHotNews(
-  windowHours = DEFAULT_WINDOW_HOURS,
+  _windowHours,
   now = Date.now(),
   knownTranslations = new Map(),
   knownGoogleNewsUrls = new Map(),
+  knownSourceItems = new Map(),
 ) {
+  const jobs = Object.entries(NEWS_SOURCES).flatMap(([category, sources]) =>
+    sources.map((source, sourceOrder) => ({ category, source, sourceOrder })));
+  const settled = await Promise.allSettled(jobs.map(({ source, category, sourceOrder }) =>
+    fetchLatestSourceItem(source, category, sourceOrder, now)));
+  let failureCount = 0;
+  const candidates = settled.map((result, index) => {
+    if (result.status === "fulfilled") return result.value;
+    const job = jobs[index];
+    const fallback = knownSourceItems.get(job.source.key);
+    if (!fallback) return null;
+    failureCount += 1;
+    console.warn(`${job.source.name} failed; reused its previous snapshot item: ${result.reason?.message || result.reason}`);
+    return { ...fallback, category: job.category, source: job.source.name, sourceKey: job.source.key, sourceOrder: job.sourceOrder };
+  }).filter(Boolean);
+  const techCandidates = candidates.filter((item) => item.category === "tech");
+  const marketCandidates = candidates.filter((item) => item.category === "market");
+  if (techCandidates.length !== MAX_ITEMS || marketCandidates.length !== MAX_ITEMS) {
+    throw new Error(`Incomplete source snapshot: tech=${techCandidates.length}/${MAX_ITEMS}, market=${marketCandidates.length}/${MAX_ITEMS}`);
+  }
+  const [resolvedTech, resolvedMarket] = await Promise.all([
+    resolveGoogleNewsItems(techCandidates, knownGoogleNewsUrls),
+    resolveGoogleNewsItems(marketCandidates, knownGoogleNewsUrls),
+  ]);
+  const reuseTranslations = (items) => items.map((item) => ({
+    ...item,
+    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || "",
+  }));
+  const [tech, market] = await Promise.all([
+    addChineseTranslations(reuseTranslations(resolvedTech.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
+    addChineseTranslations(reuseTranslations(resolvedMarket.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
+  ]);
+  console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount} Google News URL(s) before archiving.`);
+  return { tech, market, failureCount, fetchedAt: new Date(now).toISOString() };
+
+  /* Previous cross-source ranking implementation retained in history.
   const requests = [
     fetchHackerNews(windowHours, now),
     fetchGoogleFeed("technology OR AI OR chips OR software when:1d", "tech", 0),
@@ -394,6 +458,7 @@ async function collectHotNews(
   if (!tech.length || !market.length) throw new Error(`Not enough news: tech=${tech.length}, market=${market.length}`);
   console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount} Google News URL(s) before archiving.`);
   return { tech, market, failureCount: failures.length, fetchedAt: new Date(now).toISOString() };
+  */
 }
 
 function escapeHtml(value = "") {
@@ -458,18 +523,18 @@ function environmentFlag(value) {
 
 async function main() {
   const refreshOnly = environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY);
-  const windowHours = Math.min(72, Math.max(12, Number(process.env.HOT_NEWS_WINDOW_HOURS) || DEFAULT_WINDOW_HOURS));
   const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || "").trim();
   const news = await collectHotNews(
-    windowHours,
+    0,
     Date.now(),
     archivedTitleTranslations(archivePath),
     archivedGoogleNewsUrls(archivePath),
+    archivedSourceItems(archivePath),
   );
   if (refreshOnly) {
     if (!archivePath) throw new Error("HOT_NEWS_ARCHIVE_PATH is required in refresh-only mode.");
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) => !isPaywalledItem(item));
-    console.log(`Saved reader archive: ${archive.days.length} day(s), updated ${archive.updatedAt}.`);
+    console.log(`Saved latest reader snapshot: ${archive.items.length} item(s), updated ${archive.updatedAt}.`);
     console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}.`);
     return;
   }
@@ -489,7 +554,7 @@ async function main() {
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
 module.exports = {
-  addChineseTranslations, archivedGoogleNewsUrls, archivedTitleTranslations, collectHotNews, decodeXml,
+  NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, collectHotNews, decodeXml,
   environmentFlag, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
   parseRssItems, rankAndDedupe, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   translateBatch, translateTitle,
