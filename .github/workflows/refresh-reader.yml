@@ -44,7 +44,16 @@ jobs:
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
           HOT_NEWS_REFRESH_ONLY: "true"
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
-        run: node scripts/send-hot-news-email.js
+        run: |
+          for attempt in 1 2 3; do
+            if node scripts/send-hot-news-email.js; then
+              exit 0
+            fi
+            if [[ "$attempt" == "3" ]]; then
+              exit 1
+            fi
+            sleep $((attempt * 10))
+          done
 
       - name: Save the reader news archive
         run: |
@@ -55,5 +64,13 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh reader news archive"
-          git pull --rebase origin main
-          git push
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push; then
+              exit 0
+            fi
+            if [[ "$attempt" == "3" ]]; then
+              exit 1
+            fi
+            sleep $((attempt * 3))
+          done
