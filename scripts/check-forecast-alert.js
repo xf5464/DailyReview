@@ -9,9 +9,20 @@ const CONDITION_DEFINITIONS = [
   { id: "sahmRule", label: "萨姆规则", thresholdEnv: "SAHM_THRESHOLD", defaultThreshold: 0.5, unit: "" },
 ];
 
+const CENTRAL_BANK_GOLD_DEFAULTS = {
+  baselineQuarters: 4,
+  riseThreshold: 25,
+  consecutiveQuarters: 2,
+};
+
 function readNumber(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function readPositiveInteger(value, fallback) {
+  const parsed = Number(value);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function normalizeSeries(items) {
@@ -58,6 +69,50 @@ function activeCondition(definition, items, threshold) {
   };
 }
 
+function centralBankGoldTrendCondition(items, env = process.env) {
+  const series = normalizeSeries(items);
+  const baselineQuarters = readPositiveInteger(
+    env.CENTRAL_BANK_GOLD_BASE_QUARTERS,
+    CENTRAL_BANK_GOLD_DEFAULTS.baselineQuarters,
+  );
+  const riseThreshold = readNumber(
+    env.CENTRAL_BANK_GOLD_RISE_THRESHOLD,
+    CENTRAL_BANK_GOLD_DEFAULTS.riseThreshold,
+  );
+  const consecutiveQuarters = readPositiveInteger(
+    env.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS,
+    CENTRAL_BANK_GOLD_DEFAULTS.consecutiveQuarters,
+  );
+
+  const minimumPoints = Math.max(baselineQuarters + 1, consecutiveQuarters + 1);
+  if (series.length < minimumPoints) return null;
+
+  const latest = series.at(-1);
+  const baselineItems = series.slice(-(baselineQuarters + 1), -1);
+  const baselineAverage = baselineItems.reduce((sum, item) => sum + item.value, 0) / baselineItems.length;
+  if (!(baselineAverage > 0)) return null;
+
+  const risePercent = ((latest.value - baselineAverage) / baselineAverage) * 100;
+  const recent = series.slice(-(consecutiveQuarters + 1));
+  const consecutiveRise = recent.slice(1).every((item, index) => item.value > recent[index].value);
+  if (risePercent < riseThreshold || !consecutiveRise) return null;
+
+  return {
+    id: "centralBankGoldPurchases",
+    label: "全球央行净购金趋势启动",
+    threshold: riseThreshold,
+    unit: "%",
+    date: latest.date,
+    value: risePercent,
+    episodeStart: recent[0].date,
+    latestPurchaseTonnes: latest.value,
+    baselineAverageTonnes: baselineAverage,
+    baselineQuarters,
+    consecutiveQuarters,
+    consecutiveRise,
+  };
+}
+
 function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOString()) {
   const conditions = CONDITION_DEFINITIONS
     .map((definition) => activeCondition(
@@ -66,6 +121,10 @@ function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOS
       readNumber(env[definition.thresholdEnv], definition.defaultThreshold),
     ))
     .filter(Boolean);
+
+  const goldTrend = centralBankGoldTrendCondition(seriesById.centralBankGoldPurchases, env);
+  if (goldTrend) conditions.push(goldTrend);
+
   const identity = conditions
     .map((condition) => `${condition.id}:${condition.threshold}:${condition.episodeStart}`)
     .sort()
@@ -85,7 +144,10 @@ function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOS
 function loadOfflineSeries(distDirectory) {
   const manifestPath = path.join(distDirectory, "data", "offline-manifest.json");
   const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-  const wantedIds = new Set(CONDITION_DEFINITIONS.map((definition) => definition.id));
+  const wantedIds = new Set([
+    ...CONDITION_DEFINITIONS.map((definition) => definition.id),
+    "centralBankGoldPurchases",
+  ]);
   const seriesById = {};
 
   for (const chart of manifest.charts || []) {
@@ -119,4 +181,10 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { activeCondition, buildAlert, ndxDrawdownSeries, normalizeSeries };
+module.exports = {
+  activeCondition,
+  buildAlert,
+  centralBankGoldTrendCondition,
+  ndxDrawdownSeries,
+  normalizeSeries,
+};
