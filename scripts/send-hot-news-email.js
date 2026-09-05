@@ -400,7 +400,10 @@ async function collectHotNews(
     if (result.status === "fulfilled") return result.value;
     const job = jobs[index];
     const fallback = knownSourceItems.get(job.source.key);
-    if (!fallback) return null;
+    if (!fallback) {
+      console.warn(`${job.source.name} failed and has no previous snapshot item: ${result.reason?.message || result.reason}`);
+      return null;
+    }
     failureCount += 1;
     console.warn(`${job.source.name} failed; reused its previous snapshot item: ${result.reason?.message || result.reason}`);
     return { ...fallback, category: job.category, source: job.source.name, sourceKey: job.source.key, sourceOrder: job.sourceOrder };
