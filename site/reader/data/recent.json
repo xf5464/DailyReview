@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-05T21:00:44.576Z",
+  "updatedAt": "2026-09-05T21:30:47.029Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 35.8,
+      "score": 35.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "77bc949114463ee0",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:22:43 GMT",
-      "score": 63.2,
+      "score": 62.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 44.2,
+      "score": 50.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,37 +60,37 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
-      "id": "24dda51b24e4f869",
+      "id": "471ea4a5746f88c6",
       "category": "market",
-      "title": "UBS: Commodities can add diversification as inflation, geopolitical risks rise By Investing.com",
+      "title": "UBS: Commodities can add diversification as inflation, geopolitical risks rise",
       "titleZh": "瑞银：随着通货膨胀和地缘政治风险的上升，大宗商品可能会增加多元化",
-      "url": "https://za.investing.com/news/stock-market-news/ubs-commodities-can-add-diversification-as-inflation-geopolitical-risks-rise-4455213",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNa1E3dzlWeWVfSmp5d054alVQc1Vfa3ZXR3U4cW1oUllYRVVNUVNjbVNHWEtlMVM3YU9LUXVZc2dFQWhYT1I0d3Q2d0NpU2l2THFXWTlBbEtVb3kxckpqQnEybXBvbGN4SzhLUEtOeWNORndrNC1YNTBUZ1owa0YtVXpqbE9PUXc0NVFfWGUzOUNRcWRwa1BtMVlXQzQxbERlYWx5ZXNVY3ZRMlhYRktaWkhZQzJ1bkVvQTgxVnpWLVl6MmJFVnFJZ01YbFQ?oc=5",
+      "url": "https://www.investing.com/news/stock-market-news/ubs-commodities-can-add-diversification-as-inflation-geopolitical-risks-rise-4890234",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOMmsxUE1LbURxUWZfNDlZNTdTVUl5QlljSXRhbFllYXJsdnFjSGpiOWxpYXZRc196MzZNWUlRbnRtclVOU3ROa01IeVlZZjh3MURRQTYyOWlPblhkclRIMklDcjg4ZGU5akc1c2daRk1xY0FXLTg2X2RKUlBxLXUtZHRud3pKUjE5Y0VCY0c0aVpjQnYyOHpYVFN1WHRiSGRvbERBU0dXODRFNkc0OWVrdVp0bEZ0cnhJVWw3NHVmUUEzVE1TS00zNldJMEFzZw?oc=5",
       "source": "Investing.com",
       "sourceKey": "investing",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 19:25:49 GMT",
-      "score": 43.5,
+      "publishedAt": "Sat, 05 Sep 2026 19:21:27 GMT",
+      "score": 58.3,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
-      "id": "eb91ce01e3372d1f",
+      "id": "25046c1dbf437b57",
       "category": "market",
-      "title": "Opinion: Think you maxed out your 401(k)? The real limit is actually almost $50,000 higher.",
-      "titleZh": "意见：您认为您的401 (k)已用完？ 实际限额实际上高出近50,000 $。",
-      "url": "https://www.marketwatch.com/story/think-you-maxed-out-your-401-k-the-real-limit-is-actually-almost-50-000-higher-217a89ee",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhYOEtjNWRDbmNxZHEzWWJIQWRfUjE3UFZoemViMEN5MzA0dHlQdjhubFhXWV81RWJYQ2M3bGZXNXhHWmVLNzVtWE1kZlV6Qzg0NFpINVZ2LUZvWlRyYzYzSTNfRW00RWItNXNUOHFrMXpfS3ZfLTA5bi14dk5HelVtX09WaDRfa2tiRklGOWVMdjdhc1BCcF9oR2YzTlNpSW82eTN1ZlJfVkJHN2FuWjUzb3hHaW05SkJoLW9n?oc=5",
+      "title": "NVDA Stock Price | NVIDIA Corp. Stock Quote (U.S.: Nasdaq)",
+      "titleZh": "NVDA股价| NVIDIA Corp.股票报价（美国：纳斯达克）",
+      "url": "https://www.marketwatch.com/investing/stock/nvda",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9rTUx0am9SNU4zUG1rZG02REFwVHRBSmgyanJKb1ZFRHZNbG91b2RIN1NTUUxsTS1JX0xFWmVkTmxsQWxleG1nN1VXZnVJby13cEdlX1B2dUs4aEhr?oc=5",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 18:59:00 GMT",
-      "score": 50.6,
+      "publishedAt": "Sat, 05 Sep 2026 19:11:42 GMT",
+      "score": 46.7,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -105,7 +105,7 @@
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
       "score": 41.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "639afa9d0d097b41",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:03:00 GMT",
-      "score": 51.4,
+      "score": 51.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "c686985f2d1ee36a",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 19:01:42 GMT",
-      "score": 55.1,
+      "score": 54,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 54.8,
+      "score": 54,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -162,10 +162,10 @@
       "source": "Reuters Technology",
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 18:59:31 GMT",
-      "score": 59,
+      "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
+      "score": 60.9,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "6ef2aef9012f0dd0",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 19:35:24 GMT",
-      "score": 73.6,
+      "score": 73.1,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 49.3,
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "c9c8a76de54c12a5",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 20:31:03 GMT",
-      "score": 54.5,
+      "score": 54,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "02adb880bf455770",
@@ -223,39 +223,39 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 20:00:00 GMT",
-      "score": 53,
+      "score": 52.5,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
-      "id": "858781058482c3d1",
+      "id": "8a4890e0650899fa",
       "category": "tech",
-      "title": "I tried the bezelless concept phone at IFA, and it’s more futuristic than I thought",
-      "titleZh": "我在IFA尝试了无边框概念手机，它比我想象的更具未来感",
-      "url": "https://www.zdnet.com/uncategorized/tecno-bezelless-phone-concept-ifa-berlin-2026/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNuZHRwaE03bG43MUhBZ1FUWENlcjRLMGpNdktUcDdGcUdYYW1aeWQ1VzVVcktoR0tGenNjRi12bzNHMGIxVE1WdFlZUlJHRVhJU3pNUEllelF6N3RfMDh5eEk5YV83blZSNUs3cjNNeDl2dVFOdi11aEFfMHgwRXB0YzRMZ1R4V0E?oc=5",
+      "title": "Adrian Kingsley-Hughes",
+      "titleZh": "阿德里安·金斯利-休斯",
+      "url": "https://www.zdnet.com/meet-the-team/adrian-kingsley-hughes/page/20/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBQWDF4bnREdDFpOGVnQ2ZRSV9ta0ZSZ1Zab3BSZ085clhFb2ZFdmFIc3dYcExEX3RKbXJhVmlCU3BzUUNFSWhWY090NmFHbXBZTW8zSHNtVDl4RVloaFljWHo3Z2NDcExKbjE2TXRvX0pYXzd5ZGc?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 11:03:48 GMT",
-      "score": 55.1,
+      "publishedAt": "Sat, 05 Sep 2026 13:43:57 GMT",
+      "score": 45.2,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
-      "id": "357f424d60cb5760",
+      "id": "b05084f15c3908f8",
       "category": "tech",
-      "title": "I Can’t Put the Galaxy Z Fold 8 Down. Can Apple’s Foldable Change That?",
-      "titleZh": "我无法将Galaxy Z Fold 8放下。 苹果的可折叠产品能改变这种状况吗？",
-      "url": "https://www.cnet.com/tech/mobile/i-cant-put-the-galaxy-z-fold-8-down-can-apples-foldable-change-that/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPblhLMGNueW9wQmpQRmFLN0J3Y1V1WjV1RXNMZjNFSVN6LUNHLTJfMVpHOEQyMDJfUkRyay10SDdZdEhkTzVxZGRlUUFVcUFOY3hOb2dJVHotM2o0bWxHRWZONWI5dlJnSkFwUWdHSk8yMlNkSzdXSk01dWdnQ0lmNjNFSkJaNVR0dWNyaW1HWmFnNlcwYm1QT0tOM3RSWWZseFR3?oc=5",
+      "title": "Best TVs of 2026: Expert Tested, Compared and Reviewed",
+      "titleZh": "2026年最佳电视：经过专家测试、比较和评论",
+      "url": "https://www.cnet.com/tech/home-entertainment/best-tvs-of-2026-expert-tested-compared-and-reviewed/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPbmtVUjFCM3gyRUc1ZlctSWNmZWJxeXNsREREN0VjbUlMSGYwNDIzUUpjNWVKNlJJRzE2ajJ2X2U1VnJqYXVwdXlRZ0FkU3dORXJyaWtoRVBBZ2w0X2pEbGxlaFIwTnYwRlZJdnpISC1fc2NJOXpMTEgzSkdrLVA3OVQ4alUydXlmUkFVYlNDWmQzYXhnb1ItNnRLMEZOcmc?oc=5",
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 13:00:00 GMT",
-      "score": 47.6,
+      "publishedAt": "Sat, 05 Sep 2026 20:30:28 GMT",
+      "score": 51,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 47.3,
+      "score": 46.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 39.3,
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "415884a72ea16d83",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T17:46:16.000Z",
-      "score": 124.7,
-      "engagement": "240 points · 93 comments",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "score": 129.6,
+      "engagement": "310 points · 123 comments",
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-05T21:00:44.576Z"
+      "fetchedAt": "2026-09-05T21:30:47.029Z"
     }
   ]
 }
