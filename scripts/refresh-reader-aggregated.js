@@ -11,18 +11,24 @@ const {
 } = require('./send-hot-news-email');
 
 const ARCHIVE_PATH = String(process.env.HOT_NEWS_ARCHIVE_PATH || 'site/reader/data/recent.json').trim();
-const USER_AGENT = 'DailyReview/2.2 (+https://github.com/xf5464/DailyReview)';
+const USER_AGENT = 'DailyReview/2.3 (+https://github.com/xf5464/DailyReview)';
 const MARKET_WINDOW_HOURS = 48;
 const ITEMS_PER_SOURCE = 4;
+const CORROBORATION_ITEMS_PER_SOURCE = 6;
 
 const MARKET_AUTHORITY = new Map([
   ['guardian-business', 27], ['yahoo-finance', 27], ['cnbc-markets', 30], ['bbc-business', 28],
   ['cnn-business', 27], ['marketwatch', 28], ['benzinga', 22], ['the-street', 22],
   ['motley-fool', 21], ['ap-business', 30],
+  ['paid-reuters-market', 33], ['paid-bloomberg-market', 32], ['paid-ft-market', 32],
+  ['paid-wsj-market', 32], ['paid-barrons-market', 29], ['paid-seeking-alpha-market', 24],
+  ['paid-ibd-market', 25], ['paid-business-insider-market', 24], ['paid-fortune-market', 25],
 ]);
 const WORLD_AUTHORITY = new Map([
-  ['reuters-world', 32], ['ap-world', 31], ['bbc-world', 30], ['al-jazeera', 28], ['dw-world', 27],
+  ['reuters-world', 33], ['ap-world', 31], ['bbc-world', 30], ['al-jazeera', 28], ['dw-world', 27],
   ['france24', 27], ['guardian-world', 28], ['npr-world', 27], ['cnn-world', 27], ['un-news', 29],
+  ['paid-reuters-world', 33], ['paid-nyt-world', 32], ['paid-economist-world', 32],
+  ['paid-ft-world', 32], ['paid-wsj-world', 32], ['paid-bloomberg-world', 31],
 ]);
 const COMMON_STOP = new Set(['about','after','against','amid','and','are','but','could','from','has','have','into','its','new','over','says','that','the','their','this','with','will','would','news','latest','live','update','updates','report','reports']);
 const MARKET_IMPACT = [
@@ -35,6 +41,39 @@ const WORLD_IMPACT = [
   'russia','ukraine','china','taiwan','iran','israel','gaza','north korea','south china sea','nato','united nations','tariff','trade','oil','energy','shipping',
   'earthquake','flood','hurricane','typhoon','wildfire','disaster','killed','dead','crisis','refugee','border',
 ];
+
+// These sources are deliberately corroboration-only. They can raise confidence and rank
+// for an event, but can never become the clickable/displayed representative story.
+const PAID_CORROBORATION_SOURCES = {
+  tech: [
+    { key: 'paid-reuters-tech', name: 'Reuters', query: 'site:reuters.com (technology OR AI OR chip OR software) when:2d', authority: 33 },
+    { key: 'paid-bloomberg-tech', name: 'Bloomberg', query: 'site:bloomberg.com/technology when:2d', authority: 32 },
+    { key: 'paid-ft-tech', name: 'Financial Times', query: 'site:ft.com (technology OR AI OR chips) when:2d', authority: 32 },
+    { key: 'paid-wsj-tech', name: 'The Wall Street Journal', query: 'site:wsj.com/tech when:2d', authority: 32 },
+    { key: 'paid-the-information-tech', name: 'The Information', query: 'site:theinformation.com (AI OR technology) when:2d', authority: 31 },
+    { key: 'paid-business-insider-tech', name: 'Business Insider', query: 'site:businessinsider.com/tech when:2d', authority: 24 },
+    { key: 'paid-fortune-tech', name: 'Fortune', query: 'site:fortune.com (AI OR tech) when:2d', authority: 25 },
+  ],
+  market: [
+    { key: 'paid-reuters-market', name: 'Reuters', query: 'site:reuters.com/markets when:2d', authority: 33 },
+    { key: 'paid-bloomberg-market', name: 'Bloomberg', query: 'site:bloomberg.com/markets when:2d', authority: 32 },
+    { key: 'paid-ft-market', name: 'Financial Times', query: 'site:ft.com/markets when:2d', authority: 32 },
+    { key: 'paid-wsj-market', name: 'The Wall Street Journal', query: 'site:wsj.com (markets OR stocks OR economy) when:2d', authority: 32 },
+    { key: 'paid-barrons-market', name: "Barron's", query: 'site:barrons.com (markets OR stocks) when:2d', authority: 29 },
+    { key: 'paid-seeking-alpha-market', name: 'Seeking Alpha', query: 'site:seekingalpha.com (market OR stocks) when:2d', authority: 24 },
+    { key: 'paid-ibd-market', name: "Investor's Business Daily", query: 'site:investors.com/market-trend when:2d', authority: 25 },
+    { key: 'paid-business-insider-market', name: 'Business Insider', query: 'site:businessinsider.com/markets when:2d', authority: 24 },
+    { key: 'paid-fortune-market', name: 'Fortune', query: 'site:fortune.com (markets OR economy) when:2d', authority: 25 },
+  ],
+  world: [
+    { key: 'paid-reuters-world', name: 'Reuters', query: 'site:reuters.com/world when:2d', authority: 33 },
+    { key: 'paid-nyt-world', name: 'The New York Times', query: 'site:nytimes.com/section/world when:2d', authority: 32 },
+    { key: 'paid-economist-world', name: 'The Economist', query: 'site:economist.com (world OR international) when:2d', authority: 32 },
+    { key: 'paid-ft-world', name: 'Financial Times', query: 'site:ft.com/world when:2d', authority: 32 },
+    { key: 'paid-wsj-world', name: 'The Wall Street Journal', query: 'site:wsj.com/world when:2d', authority: 32 },
+    { key: 'paid-bloomberg-world', name: 'Bloomberg', query: 'site:bloomberg.com (politics OR geopolitics) when:2d', authority: 31 },
+  ],
+};
 
 function hoursOld(value, now = Date.now()) {
   const timestamp = Date.parse(value);
@@ -66,6 +105,10 @@ async function fetchText(url, timeout = 15000) {
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.text();
 }
+function googleNewsUrl(query) {
+  const params = new URLSearchParams({ q: query, hl: 'en-US', gl: 'US', ceid: 'US:en' });
+  return `https://news.google.com/rss/search?${params}`;
+}
 function words(title) {
   return new Set(String(title || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff+.-]+/g, ' ').split(/\s+/)
     .filter((token) => token.length > 2 && !COMMON_STOP.has(token)));
@@ -82,6 +125,12 @@ function impactScore(title, keywords, cap) {
   const text = String(title || '').toLowerCase();
   return Math.min(cap, keywords.reduce((sum, keyword) => sum + (text.includes(keyword) ? 5 : 0), 0));
 }
+function isReuters(item) {
+  return String(item?.sourceKey || '').toLowerCase().includes('reuters') || /\breuters\b/i.test(String(item?.source || ''));
+}
+function isDisplayable(item) {
+  return !item?.hiddenCorroboration && !isReuters(item) && !isPaywalledItem(item);
+}
 function rankClusters(items, { category, authorityMap, impactKeywords, windowHours, now }) {
   const clusters = [];
   for (const item of [...items].sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))) {
@@ -91,17 +140,20 @@ function rankClusters(items, { category, authorityMap, impactKeywords, windowHou
   }
   return clusters.map((cluster) => {
     const sources = new Set(cluster.items.map((item) => item.sourceKey || item.source));
-    const representative = [...cluster.items].sort((a, b) =>
+    const displayable = cluster.items.filter(isDisplayable);
+    if (!displayable.length) return null;
+    const representative = [...displayable].sort((a, b) =>
       (authorityMap.get(b.sourceKey) || 20) - (authorityMap.get(a.sourceKey) || 20) ||
       Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))[0];
     const newestAge = Math.min(...cluster.items.map((item) => hoursOld(item.publishedAt, now)));
     const freshness = Math.max(0, windowHours - newestAge);
-    const authority = Math.max(...cluster.items.map((item) => authorityMap.get(item.sourceKey) || 20));
+    const authority = Math.max(...cluster.items.map((item) => authorityMap.get(item.sourceKey) || Number(item.authority) || 20));
     const impact = impactScore(representative.title, impactKeywords, category === 'market' ? 45 : 50);
     const confirmation = sources.size * (category === 'market' ? 38 : 42);
+    const hiddenCount = cluster.items.filter((item) => item.hiddenCorroboration || isReuters(item) || isPaywalledItem(item)).length;
     const score = Math.round((confirmation + freshness * 1.25 + authority + impact) * 10) / 10;
-    return { representative, sourceCount: sources.size, score };
-  }).sort((a, b) => b.score - a.score || Date.parse(b.representative.publishedAt || 0) - Date.parse(a.representative.publishedAt || 0));
+    return { representative, sourceCount: sources.size, hiddenCount, score };
+  }).filter(Boolean).sort((a, b) => b.score - a.score || Date.parse(b.representative.publishedAt || 0) - Date.parse(a.representative.publishedAt || 0));
 }
 async function marketCandidates(now, existing) {
   const batches = await Promise.all((NEWS_SOURCES.market || []).map(async (source, sourceOrder) => {
@@ -117,6 +169,31 @@ async function marketCandidates(now, existing) {
     } catch (error) {
       console.warn(`${source.name} market feed failed: ${error.message}`);
       return existing.filter((item) => item.sourceKey === source.key).slice(0, 1);
+    }
+  }));
+  return batches.flat();
+}
+async function corroborationCandidates(category, now) {
+  const sources = PAID_CORROBORATION_SOURCES[category] || [];
+  const batches = await Promise.all(sources.map(async (source, sourceOrder) => {
+    try {
+      const xml = await fetchText(googleNewsUrl(source.query));
+      return parseFeed(xml, category)
+        .filter((item) => item.title && item.url)
+        .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= 48)
+        .slice(0, CORROBORATION_ITEMS_PER_SOURCE)
+        .map((item) => ({
+          ...item,
+          category,
+          source: source.name,
+          sourceKey: source.key,
+          sourceOrder,
+          authority: source.authority,
+          hiddenCorroboration: true,
+        }));
+    } catch (error) {
+      console.warn(`${source.name} ${category} corroboration feed failed: ${error.message}`);
+      return [];
     }
   }));
   return batches.flat();
@@ -137,14 +214,43 @@ function worldSourceKey(item) {
   const source = (NEWS_SOURCES.world || []).find((candidate) => name.includes(String(candidate.name || '').toLowerCase()));
   return source?.key || name;
 }
+function augmentTechWithPaidCorroboration(tech, paidTech) {
+  return tech.map((item) => {
+    const matchingPaid = paidTech.filter((candidate) => sameEvent(item.title, candidate.title));
+    const hiddenSourceCount = new Set(matchingPaid.map((candidate) => candidate.sourceKey)).size;
+    if (!hiddenSourceCount) return item;
+    const currentCount = Number(String(item.engagement || '').match(/(\d+)家/)?.[1] || 1);
+    const sourceCount = currentCount + hiddenSourceCount;
+    return {
+      ...item,
+      score: Math.round((Number(item.score || 0) + hiddenSourceCount * 34) * 10) / 10,
+      engagement: `${sourceCount}家科技媒体交叉确认`,
+    };
+  }).sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0));
+}
 async function main() {
   execFileSync(process.execPath, ['scripts/refresh-reader-news.js'], { stdio: 'inherit', env: process.env });
   const archive = JSON.parse(fs.readFileSync(ARCHIVE_PATH, 'utf8'));
   const now = Date.now();
   const existingMarket = (archive.items || []).filter((item) => item.category === 'market');
-  const existingWorld = (archive.items || []).filter((item) => item.category === 'world').map((item) => ({ ...item, sourceKey: worldSourceKey(item) }));
+  const existingWorld = (archive.items || []).filter((item) => item.category === 'world').map((item) => {
+    const sourceKey = worldSourceKey(item);
+    return {
+      ...item,
+      sourceKey,
+      hiddenCorroboration: sourceKey === 'reuters-world' || isReuters({ ...item, sourceKey }) || isPaywalledItem(item),
+    };
+  });
+  const existingTech = (archive.items || []).filter((item) => item.category === 'tech');
 
-  const marketPool = await marketCandidates(now, existingMarket);
+  const [marketFree, paidMarket, paidWorld, paidTech] = await Promise.all([
+    marketCandidates(now, existingMarket),
+    corroborationCandidates('market', now),
+    corroborationCandidates('world', now),
+    corroborationCandidates('tech', now),
+  ]);
+
+  const marketPool = [...marketFree, ...paidMarket];
   const marketClusters = rankClusters(marketPool, {
     category: 'market', authorityMap: MARKET_AUTHORITY, impactKeywords: MARKET_IMPACT, windowHours: MARKET_WINDOW_HOURS, now,
   }).slice(0, 10);
@@ -156,7 +262,8 @@ async function main() {
   }));
   market = await translateRepresentatives(market);
 
-  const worldClusters = rankClusters(existingWorld, {
+  const worldPool = [...existingWorld, ...paidWorld];
+  const worldClusters = rankClusters(worldPool, {
     category: 'world', authorityMap: WORLD_AUTHORITY, impactKeywords: WORLD_IMPACT, windowHours: 48, now,
   }).slice(0, 10);
   const world = worldClusters.map((cluster, index) => ({
@@ -166,11 +273,16 @@ async function main() {
     fetchedAt: new Date(now).toISOString(), sourceUpdatedAt: new Date(now).toISOString(), isCached: false,
   }));
 
-  archive.items = (archive.items || []).filter((item) => item.category !== 'market' && item.category !== 'world').concat(market, world);
+  const tech = augmentTechWithPaidCorroboration(existingTech, paidTech);
+
+  archive.items = (archive.items || [])
+    .filter((item) => !['tech', 'market', 'world'].includes(item.category))
+    .concat(tech, market, world);
   archive.updatedAt = new Date(now).toISOString();
   archive.refreshAttemptedAt = archive.updatedAt;
   fs.writeFileSync(ARCHIVE_PATH, `${JSON.stringify(archive, null, 2)}\n`, 'utf8');
-  console.log(`Event aggregation complete: market=${market.length}/${marketPool.length} candidates, world=${world.length}/${existingWorld.length} candidates.`);
+  console.log(`Event aggregation complete: tech=${tech.length} (+${paidTech.length} hidden corroborators), market=${market.length}/${marketPool.length} candidates, world=${world.length}/${worldPool.length} candidates.`);
+  console.log('Reuters and all configured paywalled sources are corroboration-only and cannot be displayed as representative links.');
 }
 
 main().catch((error) => {
