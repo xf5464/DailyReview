@@ -20,25 +20,25 @@ test("uses ten fixed free sources for each reader tab", () => {
 test("reader shows the latest snapshot without hour filters", () => {
   const html = fs.readFileSync("site/reader/index.html", "utf8");
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
+  const hnScript = fs.readFileSync("site/reader/reader-hn.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.37/);
+  assert.match(html, /v2026\.09\.06\.38/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
-  assert.match(html, /data-category="trends"[^>]*>事件</);
-  assert.match(script, /'tech', 'market', 'world', 'youtube', 'trends'/);
-  assert.match(script, /不包含 YouTube/);
+  assert.match(html, /data-category="hn"[^>]*>Hacker News</);
+  assert.doesNotMatch(html, /data-category="trends"/);
+  assert.match(hnScript, /'tech', 'market', 'world', 'youtube', 'hn'/);
+  assert.match(hnScript, /当前 Top 10 帖子/);
   assert.match(script, /dailyreview-recent-v4/);
   assert.match(script, /ARCHIVE_URLS/);
-  assert.match(script, /renderEventCloud/);
-  assert.doesNotMatch(script, /createElementNS\('http:\/\/www\.w3\.org\/2000\/svg'/);
 });
 
 test("takes a publisher homepage lead instead of a Google News search result", () => {
   const source = { name: "Example", hosts: ["example.com"], articlePattern: "^/news/" };
   const markdown = `[Markets](https://example.com/markets/)\n[Current lead story from the publisher](https://www.example.com/news/current-lead)\n[Older story](https://example.com/news/older)`;
   assert.deepEqual(parseHomepageHeadline(markdown, source), {
-    title: "Current lead story from the publisher", url: "https://www.example.com/news/current-lead",
+    title: "Current lead story from the publisher", url: "https://example.com/news/current-lead",
   });
   assert.equal(publishedDateFromHtml('<meta property="article:published_time" content="2026-09-06T02:03:00Z">'), "2026-09-06T02:03:00.000Z");
 });
@@ -199,12 +199,15 @@ test("does not treat a YouTube channel name as a paid news URL", () => {
   assert.equal(item.category === "youtube" || !isPaywalledItem(item), true);
 });
 
+
 test("resolves a signed Google News URL to its publisher during collection", async () => {
   const googleUrl = "https://news.google.com/rss/articles/CBMiTest?oc=5";
   const calls = [];
   const fetcher = async (url, options = {}) => {
     calls.push({ url, options });
-    if (calls.length === 1) return { ok: true, text: async () => '<div data-n-a-sg="signature" data-n-a-ts="1788480000"></div>' };
+    if (calls.length === 1) {
+      return { ok: true, text: async () => '<div data-n-a-sg="signature" data-n-a-ts="1788480000"></div>' };
+    }
     return { ok: true, text: async () => '[\\\"garturlres\\\",\\\"https://www.cnbc.com/2026/09/04/story.html\\\",' };
   };
   const resolved = await resolveGoogleNewsUrl(googleUrl, fetcher);
