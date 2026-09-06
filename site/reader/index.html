@@ -7,19 +7,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>DailyReview 中文阅读器</title>
-    <link rel="icon" href="icon-192.png?v=2026.09.06.36" type="image/png" />
-    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.06.36" />
-    <link rel="manifest" href="manifest.webmanifest?v=2026.09.06.36" />
-    <link rel="stylesheet" href="reader.css?v=2026.09.06.36" />
-    <script src="reader.js?v=2026.09.06.36" defer></script>
+    <link rel="icon" href="icon-192.png?v=2026.09.06.37" type="image/png" />
+    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.06.37" />
+    <link rel="manifest" href="manifest.webmanifest?v=2026.09.06.37" />
+    <link rel="stylesheet" href="reader.css?v=2026.09.06.37" />
+    <script src="reader.js?v=2026.09.06.37" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.06.36</span></div>
+      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.06.37</span></div>
     </header>
     <main>
       <section class="hero">
-        <p class="eyebrow">每日科技、美股、国际、YouTube与社交热词</p>
+        <p class="eyebrow">每日科技、美股、国际、YouTube与热点事件</p>
         <h1>热点 Top 10</h1>
         <p id="archiveMeta" class="subtle" aria-live="polite">正在载入…</p>
       </section>
@@ -29,7 +29,7 @@
         <button class="category-tab" type="button" role="tab" data-category="market" aria-controls="daysContainer">美股</button>
         <button class="category-tab" type="button" role="tab" data-category="world" aria-controls="daysContainer">国际</button>
         <button class="category-tab" type="button" role="tab" data-category="youtube" aria-controls="daysContainer">YouTube</button>
-        <button class="category-tab" type="button" role="tab" data-category="trends" aria-controls="daysContainer">词云</button>
+        <button class="category-tab" type="button" role="tab" data-category="trends" aria-controls="daysContainer">事件</button>
       </nav>
 
       <section id="daysContainer" class="days" aria-live="polite"></section>
@@ -38,7 +38,6 @@
         <h2>还没有热点记录</h2>
         <p>下一次阅读器新闻刷新后，列表会自动显示在这里。</p>
       </section>
-
     </main>
 
     <dialog id="readerDialog">
@@ -47,23 +46,18 @@
           <button id="closeDialog" class="icon-button" type="button" aria-label="关闭">关闭</button>
           <button id="dialogFontButton" class="icon-button" type="button">字号</button>
         </header>
-
         <section id="loadingState" class="dialog-state" aria-live="polite">
           <div class="spinner" aria-hidden="true"></div>
           <h2>正在提取并翻译</h2>
           <p>通常需要几秒，较长文章可能需要更久。</p>
         </section>
-
         <article id="article" hidden>
           <p id="siteName" class="eyebrow"></p>
           <h2 id="articleTitle"></h2>
           <p id="articleMeta" class="meta"></p>
           <div id="articleBody" class="article-body"></div>
-          <div class="article-footer">
-            <a id="footerSourceLink" target="_blank" rel="noopener noreferrer">查看英文原文</a>
-          </div>
+          <div class="article-footer"><a id="footerSourceLink" target="_blank" rel="noopener noreferrer">查看英文原文</a></div>
         </article>
-
         <section id="errorState" class="dialog-state error-state" hidden role="alert">
           <p class="eyebrow">暂时无法翻译</p>
           <h2>文章读取失败</h2>
