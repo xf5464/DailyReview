@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 
 const {
-  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe,
+  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSameWorldEvent, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, rankWorldCandidates,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
@@ -11,8 +11,10 @@ const {
 test("uses ten fixed free sources for each reader tab", () => {
   assert.equal(NEWS_SOURCES.tech.length, 10);
   assert.equal(NEWS_SOURCES.market.length, 10);
+  assert.equal(NEWS_SOURCES.world.length, 10);
   assert.equal(new Set(NEWS_SOURCES.tech.map((source) => source.key)).size, 10);
   assert.equal(new Set(NEWS_SOURCES.market.map((source) => source.key)).size, 10);
+  assert.equal(new Set(NEWS_SOURCES.world.map((source) => source.key)).size, 10);
 });
 
 test("reader shows the latest snapshot without hour filters", () => {
@@ -20,11 +22,23 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.05\.20/);
+  assert.match(html, /v2026\.09\.06\.21/);
+  assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
-  assert.match(script, /'tech', 'market', 'youtube'/);
+  assert.match(script, /'tech', 'market', 'world', 'youtube'/);
   assert.match(script, /dailyreview-recent-v3/);
   assert.match(script, /ARCHIVE_URLS/);
+});
+
+test("clusters international reports and labels cross-source confirmation", () => {
+  const now = Date.parse("2026-09-06T02:00:00Z");
+  const base = { category: "world", url: "https://example.com/a", publishedAt: "2026-09-06T01:00:00Z", feedRank: 0 };
+  const left = { ...base, title: "US military strikes three Iranian oil tankers", source: "Reuters World", sourceKey: "reuters-world" };
+  const right = { ...base, title: "US strike destroys three Iran oil tankers", source: "AP News", sourceKey: "ap-world" };
+  assert.equal(isSameWorldEvent(left.title, right.title), true);
+  const [ranked] = rankWorldCandidates([left, right], 10, now);
+  assert.equal(ranked.sourceCount, 2);
+  assert.match(ranked.engagement, /2家来源交叉确认/);
 });
 
 test("detects non-English YouTube title languages", () => {

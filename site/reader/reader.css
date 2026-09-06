@@ -41,7 +41,7 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
 .category-tabs {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 0 0 24px; padding: 4px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 0 0 24px; padding: 4px;
   border: 1px solid var(--line); border-radius: 14px; background: rgba(222, 216, 202, .45);
 }
 .category-tab {
@@ -84,6 +84,7 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .rank { padding-top: 2px; color: var(--blue); font-size: 13px; font-weight: 760; }
 .news-title { display: block; font-family: ui-serif, "Songti SC", STSong, serif; font-size: 18px; font-weight: 700; line-height: 1.45; }
 .news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.news-note { display: block; margin-top: 7px; color: #18794e; font-size: 11px; font-weight: 700; line-height: 1.35; }
 .news-details {
   align-self: start; max-width: 94px; padding-top: 3px; text-align: right;
 }

@@ -54,3 +54,9 @@ test('stores the YouTube Top 10 with the news snapshot', () => {
   const archive = mergeNews(null, { tech: [], market: [], youtube }, Date.parse('2026-09-04T03:00:00Z'));
   assert.equal(archive.items.filter((entry) => entry.category === 'youtube').length, 10);
 });
+
+test('stores the international Top 10 with the news snapshot', () => {
+  const world = Array.from({ length: 10 }, (_, index) => item('world', `world-${index}`, `world-${index}`));
+  const archive = mergeNews(null, { tech: [], market: [], world, youtube: [] }, Date.parse('2026-09-04T03:00:00Z'));
+  assert.equal(archive.items.filter((entry) => entry.category === 'world').length, 10);
+});

@@ -30,6 +30,18 @@ const NEWS_SOURCES = {
     { key: "motley-fool", name: "The Motley Fool", query: "site:fool.com stocks OR market when:7d" },
     { key: "tradingview", name: "TradingView News", query: "site:tradingview.com/news stocks OR markets when:7d" },
   ],
+  world: [
+    { key: "reuters-world", name: "Reuters World", query: "site:reuters.com/world when:7d" },
+    { key: "ap-world", name: "AP News", query: "site:apnews.com world when:7d" },
+    { key: "bbc-world", name: "BBC News", query: "site:bbc.com/news world when:7d" },
+    { key: "al-jazeera", name: "Al Jazeera", query: "site:aljazeera.com/news when:7d" },
+    { key: "dw-world", name: "DW", query: "site:dw.com/en when:7d" },
+    { key: "france24", name: "France 24", query: "site:france24.com/en when:7d" },
+    { key: "guardian-world", name: "The Guardian", query: "site:theguardian.com/world when:7d" },
+    { key: "npr-world", name: "NPR", query: "site:npr.org/sections/world when:7d" },
+    { key: "cnn-world", name: "CNN", query: "site:cnn.com world when:7d" },
+    { key: "un-news", name: "UN News", query: "site:news.un.org/en when:7d" },
+  ],
 };
 
 const SOURCE_WEIGHTS = new Map(
@@ -155,6 +167,54 @@ function rankAndDedupe(items, limit = MAX_ITEMS, now = Date.now()) {
     if (result.length >= limit) break;
   }
   return result;
+}
+
+const WORLD_STOP_WORDS = new Set([
+  "about", "after", "against", "amid", "from", "into", "over", "says", "that", "their", "this", "with",
+  "world", "news", "latest", "live", "update", "breaking", "report", "reports", "could", "would", "have", "has",
+]);
+const WORLD_IMPACT_KEYWORDS = [
+  "attack", "strike", "war", "military", "missile", "nuclear", "sanction", "ceasefire", "election", "president",
+  "government", "iran", "israel", "russia", "ukraine", "china", "taiwan", "oil", "tanker", "shipping", "energy",
+  "earthquake", "flood", "disaster", "killed", "crisis", "tariff", "trade",
+];
+
+function worldEventTokens(title) {
+  return new Set(normalizeTitle(title).split(" ")
+    .filter((token) => token.length > 2 && !WORLD_STOP_WORDS.has(token)));
+}
+
+function isSameWorldEvent(left, right) {
+  const a = worldEventTokens(left);
+  const b = worldEventTokens(right);
+  if (!a.size || !b.size) return normalizeTitle(left) === normalizeTitle(right);
+  let shared = 0;
+  for (const token of a) if (b.has(token)) shared += 1;
+  return shared >= 2 && shared / Math.min(a.size, b.size) >= 0.42;
+}
+
+function rankWorldCandidates(items, limit = MAX_ITEMS, now = Date.now()) {
+  const ranked = items.map((item) => {
+    const related = items.filter((candidate) => isSameWorldEvent(item.title, candidate.title));
+    const sourceCount = new Set(related.map((candidate) => candidate.sourceKey || candidate.source)).size;
+    const lower = item.title.toLowerCase();
+    const impact = Math.min(30, WORLD_IMPACT_KEYWORDS.reduce((sum, keyword) => sum + (lower.includes(keyword) ? 4 : 0), 0));
+    const freshness = Math.max(0, 48 - hoursOld(item.publishedAt, now));
+    const authority = SOURCE_WEIGHTS.get(item.source) || 16;
+    const score = Math.round((freshness * 1.4 + sourceCount * 18 + impact + authority - item.feedRank * 0.15) * 10) / 10;
+    return {
+      ...item, score, sourceCount,
+      engagement: sourceCount >= 2 ? `${sourceCount}家来源交叉确认` : "单一来源，待确认",
+    };
+  }).sort((a, b) => b.score - a.score || Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+  const selected = [];
+  for (const item of ranked) {
+    if (!selected.some((chosen) => isSameWorldEvent(chosen.title, item.title))) selected.push(item);
+    if (selected.length >= limit) break;
+  }
+  return selected.map((item, sourceOrder) => ({
+    ...item, sourceKey: `world-${item.sourceKey}-${sourceOrder}`, sourceOrder,
+  }));
 }
 
 async function fetchText(url, timeoutMs = 15_000) {
@@ -483,6 +543,28 @@ async function fetchLatestSourceItem(source, category, sourceOrder, now = Date.n
   return { ...candidates[0], source: source.name, sourceKey: source.key, sourceOrder, score: rankGoogleItem(candidates[0], now) };
 }
 
+async function fetchWorldTop(now, knownTranslations, knownGoogleNewsUrls) {
+  const settled = await Promise.allSettled(NEWS_SOURCES.world.map(async (source, sourceOrder) => {
+    const items = await fetchGoogleFeed(source.query, "world", sourceOrder * 20);
+    return items.slice(0, 10).map((item) => ({
+      ...item, source: source.name, sourceKey: source.key, sourceOrder,
+    }));
+  }));
+  const failures = settled.filter((result) => result.status === "rejected");
+  const candidates = settled.flatMap((result) => result.status === "fulfilled" ? result.value : [])
+    .filter((item) => !isPaywalledItem(item) && hoursOld(item.publishedAt, now) <= 7 * 24);
+  const ranked = rankWorldCandidates(candidates, MAX_ITEMS + 5, now);
+  if (ranked.length < MAX_ITEMS) throw new Error(`International sources returned only ${ranked.length}/${MAX_ITEMS} unique stories.`);
+  const resolved = await resolveGoogleNewsItems(ranked, knownGoogleNewsUrls);
+  const free = resolved.items.filter((item) => !isPaywalledItem(item)).slice(0, MAX_ITEMS);
+  if (free.length < MAX_ITEMS) throw new Error(`International sources returned only ${free.length}/${MAX_ITEMS} free stories.`);
+  const translated = await addChineseTranslations(free.map((item) => ({
+    ...item,
+    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || "",
+  })));
+  return { items: translated, failureCount: failures.length, resolvedCount: resolved.resolvedCount };
+}
+
 async function collectHotNews(
   _windowHours,
   now = Date.now(),
@@ -490,8 +572,8 @@ async function collectHotNews(
   knownGoogleNewsUrls = new Map(),
   knownSourceItems = new Map(),
 ) {
-  const jobs = Object.entries(NEWS_SOURCES).flatMap(([category, sources]) =>
-    sources.map((source, sourceOrder) => ({ category, source, sourceOrder })));
+  const jobs = ["tech", "market"].flatMap((category) => NEWS_SOURCES[category].map((source, sourceOrder) =>
+    ({ category, source, sourceOrder })));
   const settled = await Promise.allSettled(jobs.map(({ source, category, sourceOrder }) =>
     fetchLatestSourceItem(source, category, sourceOrder, now)));
   let failureCount = 0;
@@ -537,8 +619,25 @@ async function collectHotNews(
     youtube = previous;
     console.warn(`YouTube failed; reused the previous Top 10: ${error.message}`);
   }
-  console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount} Google News URL(s) before archiving.`);
-  return { tech, market, youtube, failureCount, fetchedAt: new Date(now).toISOString() };
+  let world;
+  let worldResolvedCount = 0;
+  try {
+    const result = await fetchWorldTop(now, knownTranslations, knownGoogleNewsUrls);
+    world = result.items;
+    failureCount += result.failureCount;
+    worldResolvedCount = result.resolvedCount;
+  } catch (error) {
+    const previous = [...knownSourceItems.values()]
+      .filter((item) => item.category === "world")
+      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+      .slice(0, MAX_ITEMS);
+    if (previous.length !== MAX_ITEMS) throw error;
+    failureCount += 1;
+    world = previous;
+    console.warn(`International news failed; reused the previous Top 10: ${error.message}`);
+  }
+  console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount + worldResolvedCount} Google News URL(s) before archiving.`);
+  return { tech, market, world, youtube, failureCount, fetchedAt: new Date(now).toISOString() };
 
   /* Previous cross-source ranking implementation retained in history.
   const requests = [
@@ -651,7 +750,7 @@ async function main() {
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) =>
       item.category === "youtube" || !isPaywalledItem(item));
     console.log(`Saved latest reader snapshot: ${archive.items.length} item(s), updated ${archive.updatedAt}.`);
-    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, youtube=${news.youtube.length}.`);
+    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, world=${news.world.length}, youtube=${news.youtube.length}.`);
     return;
   }
 
@@ -672,6 +771,6 @@ if (require.main === module) main().catch((error) => { console.error(error.stack
 module.exports = {
   NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, collectHotNews, decodeXml,
   detectTitleLanguage, environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
-  parseRssItems, rankAndDedupe, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
+  isSameWorldEvent, parseRssItems, rankAndDedupe, rankWorldCandidates, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   translateBatch, translateTitle, youtubeItemsFromResponses,
 };
