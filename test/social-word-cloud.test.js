@@ -7,12 +7,17 @@ test('removes Mastodon HTML before keyword extraction', () => {
 });
 
 test('normalizes important aliases and removes filler words', () => {
-  const terms = termsFromText('The latest artificial intelligence chips from Nvidia are here');
+  const terms = termsFromText('The latest best big artificial intelligence video chips from Nvidia are public here every day');
   assert.ok(terms.includes('AI'));
   assert.ok(terms.includes('芯片'));
   assert.ok(terms.includes('英伟达'));
   assert.ok(!terms.includes('the'));
   assert.ok(!terms.includes('https'));
+  assert.ok(!terms.includes('best'));
+  assert.ok(!terms.includes('big'));
+  assert.ok(!terms.includes('video'));
+  assert.ok(!terms.includes('public'));
+  assert.ok(!terms.includes('every'));
 });
 
 test('boosts terms confirmed across free platforms', () => {
