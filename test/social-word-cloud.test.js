@@ -24,6 +24,8 @@ test('normalizes important aliases and removes filler words', () => {
   assert.ok(!terms.includes('reading'));
   assert.ok(!terms.includes('ask'));
   assert.ok(!terms.includes('help'));
+  assert.ok(!termsFromText('nothing actually').length);
+  assert.ok(termsFromText('games').includes('游戏'));
 });
 
 test('boosts terms confirmed across free platforms', () => {
