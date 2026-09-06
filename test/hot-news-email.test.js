@@ -22,7 +22,7 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.32/);
+  assert.match(html, /v2026\.09\.06\.33/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(html, /data-category="trends"[^>]*>词云</);
