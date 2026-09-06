@@ -109,7 +109,7 @@ function itemButton(item, rank) {
   const translated = document.createElement('span'); translated.className = 'news-title'; translated.textContent = item.titleZh || item.title || '未命名新闻';
   const original = document.createElement('span'); original.className = 'news-original'; original.textContent = item.title || '';
   copy.append(translated, original);
-  if (item.category === 'world' && item.engagement) { const note = document.createElement('span'); note.className = 'news-note'; note.textContent = item.engagement; copy.append(note); }
+  if ((item.category === 'world' || item.category === 'tech') && item.engagement) { const note = document.createElement('span'); note.className = 'news-note'; note.textContent = item.engagement; copy.append(note); }
   const details = document.createElement('span'); details.className = 'news-details';
   const source = document.createElement('span'); source.className = 'news-source'; source.textContent = item.source || '来源未知';
   const published = document.createElement('span'); published.className = 'news-time'; published.textContent = ` · ${publishedTimeLabel(item.publishedAt)}`; details.append(source, published);
@@ -128,7 +128,9 @@ function updateCategoryTabs() {
   refs.tabs.forEach((tab) => { const selected = tab.dataset.category === activeCategory; tab.setAttribute('aria-selected', String(selected)); tab.tabIndex = selected ? 0 : -1; });
 }
 function selectedItems(value) {
-  return (value.items || []).filter((item) => item.category === activeCategory).sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
+  const items = (value.items || []).filter((item) => item.category === activeCategory);
+  if (activeCategory === 'tech') return items.sort((left, right) => Number(right.score || 0) - Number(left.score || 0)).slice(0, 10);
+  return items.sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
 }
 function categoryFreshness(items, fromCache) {
   const sourceTimes = items.map(sourceTimestamp).filter((value) => value > 0);
@@ -168,7 +170,8 @@ function renderArchive(value, fromCache = false) {
     if (trends.length) renderEventCloud(trends); return;
   }
   const items = selectedItems(archive); refs.empty.hidden = items.length > 0;
-  refs.archiveMeta.textContent = items.length ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个网站当前头条'} · ${categoryFreshness(items, fromCache)}` : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
+  const mode = activeCategory === 'tech' ? '17家优质科技来源综合热点前10' : activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个网站当前头条';
+  refs.archiveMeta.textContent = items.length ? `${categoryLabel(activeCategory)} · ${mode} · ${categoryFreshness(items, fromCache)}` : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
   if (!items.length) return;
   const section = document.createElement('section'); section.className = 'day'; const list = document.createElement('ol'); list.className = 'news-list';
   items.forEach((item, index) => { const li = document.createElement('li'); li.append(itemButton(item, index + 1)); list.append(li); }); section.append(list); refs.days.append(section);
