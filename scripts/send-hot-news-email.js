@@ -7,7 +7,7 @@ const { saveNewsArchive } = require('./hot-news-archive');
 
 const NEWS_SOURCES = {
   tech: [
-    { key: "reuters-technology", name: "Reuters Technology", homepage: "https://www.reuters.com/technology/", hosts: ["reuters.com"], articlePattern: "^/(technology|business)/.+-\\d{4}-\\d{2}-\\d{2}/" },
+    { key: "techradar", name: "TechRadar", homepage: "https://www.techradar.com/", headlineFeed: "https://www.techradar.com/rss", hosts: ["techradar.com"], articlePattern: "^/.+" },
     { key: "techcrunch", name: "TechCrunch", homepage: "https://techcrunch.com/", headlineFeed: "https://techcrunch.com/feed/", hosts: ["techcrunch.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
     { key: "the-verge", name: "The Verge", homepage: "https://www.theverge.com/tech", headlineFeed: "https://www.theverge.com/rss/index.xml", hosts: ["theverge.com"], articlePattern: "^/(news|tech|ai-artificial-intelligence)/" },
     { key: "ars-technica", name: "Ars Technica", homepage: "https://arstechnica.com/", headlineFeed: "https://feeds.arstechnica.com/arstechnica/index", hosts: ["arstechnica.com"], articlePattern: "^/[a-z-]+/\\d{4}/\\d{2}/" },
@@ -19,16 +19,16 @@ const NEWS_SOURCES = {
     { key: "hacker-news", name: "Hacker News", special: "hacker-news" },
   ],
   market: [
-    { key: "reuters-markets", name: "Reuters Markets", homepage: "https://www.reuters.com/markets/", hosts: ["reuters.com"], articlePattern: "^/(markets|business)/.+-\\d{4}-\\d{2}-\\d{2}/" },
+    { key: "guardian-business", name: "The Guardian Business", homepage: "https://www.theguardian.com/business", headlineFeed: "https://www.theguardian.com/business/rss", hosts: ["theguardian.com"], articlePattern: "^/business/" },
     { key: "yahoo-finance", name: "Yahoo Finance", homepage: "https://finance.yahoo.com/news/", hosts: ["finance.yahoo.com"], articlePattern: "^/(news|markets)/.+\\.html$" },
     { key: "cnbc-markets", name: "CNBC Markets", homepage: "https://www.cnbc.com/markets/", hosts: ["cnbc.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
-    { key: "nasdaq-news", name: "Nasdaq News", homepage: "https://www.nasdaq.com/news-and-insights/markets", hosts: ["nasdaq.com"], articlePattern: "^/articles/" },
-    { key: "investing", name: "Investing.com", homepage: "https://www.investing.com/news/stock-market-news", hosts: ["investing.com"], articlePattern: "^/news/stock-market-news/" },
+    { key: "bbc-business", name: "BBC Business", homepage: "https://www.bbc.com/news/business", headlineFeed: "https://feeds.bbci.co.uk/news/business/rss.xml", hosts: ["bbc.com", "bbc.co.uk"], articlePattern: "^/news/" },
+    { key: "cnn-business", name: "CNN Business", homepage: "https://www.cnn.com/business", hosts: ["cnn.com"], articlePattern: "^/\\d{4}/" },
     { key: "marketwatch", name: "MarketWatch", homepage: "https://www.marketwatch.com/markets", headlineFeed: "https://feeds.marketwatch.com/marketwatch/topstories/", hosts: ["marketwatch.com"], articlePattern: "^/story/" },
     { key: "benzinga", name: "Benzinga", homepage: "https://www.benzinga.com/markets", headlineFeed: "https://www.benzinga.com/feed", hosts: ["benzinga.com"], articlePattern: "^/(markets|news|trading-ideas)/" },
     { key: "the-street", name: "TheStreet", homepage: "https://www.thestreet.com/markets", headlineFeed: "https://www.thestreet.com/.rss/full/", hosts: ["thestreet.com"], articlePattern: "^/.+" },
     { key: "motley-fool", name: "The Motley Fool", homepage: "https://www.fool.com/investing-news/", headlineFeed: "https://www.fool.com/feeds/index.aspx?id=foolwatch&format=rss2", hosts: ["fool.com"], articlePattern: "^/investing/\\d{4}/\\d{2}/\\d{2}/" },
-    { key: "tradingview", name: "TradingView News", homepage: "https://www.tradingview.com/markets/stocks-usa/news/", hosts: ["tradingview.com"], articlePattern: "^/news/" },
+    { key: "ap-business", name: "AP Business", homepage: "https://apnews.com/hub/business", hosts: ["apnews.com"], articlePattern: "^/article/" },
   ],
   world: [
     { key: "reuters-world", name: "Reuters World", query: "site:reuters.com/world when:7d" },
