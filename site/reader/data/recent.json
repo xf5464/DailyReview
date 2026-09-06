@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T06:30:47.866Z",
+  "updatedAt": "2026-09-06T07:00:44.886Z",
   "items": [
     {
       "id": "91ebf4501aca5b86",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 16:49:28 GMT",
       "score": 41,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
-      "id": "956cc00164acfc01",
+      "id": "c671bd5fcba653df",
       "category": "market",
-      "title": "Quanex (NX) Expanded 3Q Margins and Repaid $42M of Debt on 1.3% Sales Growth. Can Execution Outrun Soft Volumes?",
-      "titleZh": "Quanex (NX)扩大了第三季度利润率并偿还了4200万美元的债务，实现了1.3%的销售增长。 执行能否超出软卷？",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/quanex-nx-expanded-3q-margins-223100856.html",
+      "title": "Marvell Raised Its Outlook but Fell as Google Chip Revenue Stayed Distant. Has the AI Payoff Been Priced In? (Ready for review)",
+      "titleZh": "Marvell提高了展望，但随着谷歌芯片收入保持距离而下跌。 人工智能回报是否已定价？ （可供审核）",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/marvell-raised-outlook-fell-google-225856871.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-04T22:31:00Z",
-      "score": 37,
+      "publishedAt": "2026-09-04T22:58:56Z",
+      "score": 36.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "89e0adf0c9c1b067",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:12:53 GMT",
-      "score": 55.7,
+      "score": 55.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "ffcfb18dc494fa6c",
@@ -56,7 +56,7 @@
       "publishedAt": "Fri, 04 Sep 2026 10:40:23 GMT",
       "score": 38,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 54.2,
+      "score": 53.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 43.7,
+      "score": 43.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "d0d6b5803f0e771f",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
-      "score": 57.5,
+      "score": 57,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
-      "id": "95f1f02fb1fead25",
+      "id": "8b73d0bd9a4cca15",
       "category": "market",
-      "title": "2 Tax Rules New Retirees Need to Know",
-      "titleZh": "2新退休人员需要了解的税务规则",
-      "url": "https://www.fool.com/taxes/2022/01/30/2-tax-rules-new-retirees-need-to-know/?source=iedfolrf0000001",
+      "title": "Prediction: SoundHound Passes $500 Million in Revenue Before It Turns a Profit",
+      "titleZh": "预测： SoundHound在盈利之前传递了$ 5亿的收入",
+      "url": "https://www.fool.com/investing/2026/09/06/prediction-soundhound-passes-usd500-million-in-revenue-before-it-turns-a-profit/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 30 Jan 2022 08:15:00 -0500",
-      "score": 30,
+      "publishedAt": "Sun, 06 Sep 2026 02:14:01 -0400",
+      "score": 57.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 69.5,
+      "score": 69,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 70.3,
+      "score": 69.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 57.8,
+      "score": 57.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
-      "id": "66e6f119dc5b1799",
+      "id": "8ea50880be9eeaab",
       "category": "tech",
-      "title": "How to sideload apps onto Android Auto",
-      "titleZh": "如何将应用旁加载到Android Auto",
-      "url": "https://www.engadget.com/2246259/how-to-sideload-android-auto-apps/",
+      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
+      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
+      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 65.5,
+      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
+      "score": 64.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 57.2,
+      "score": 56.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 63.5,
+      "score": 63,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 56,
+      "score": 55.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 59.4,
+      "score": 58.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 126.9,
-      "engagement": "302 points · 130 comments",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "score": 127.7,
+      "engagement": "325 points · 137 comments",
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 108.7,
+      "score": 108,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 105.7,
+      "score": 105,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -323,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 105.7,
+      "score": 105,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -338,9 +338,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 104.2,
+      "score": 103.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "024fd13de026decc",
@@ -353,9 +353,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 103.9,
+      "score": 102.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -368,9 +368,9 @@
       "sourceKey": "world-reuters-world-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 100.6,
+      "score": 100,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -383,9 +383,9 @@
       "sourceKey": "world-al-jazeera-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 88.7,
+      "score": 88,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -398,9 +398,9 @@
       "sourceKey": "world-bbc-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 87.4,
+      "score": 86.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "7470701fe158400f",
@@ -413,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 82.4,
+      "score": 81.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 79.6,
+      "score": 79.1,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 383092,
       "engagement": "383,092 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 281613,
       "engagement": "281,613 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 212541,
       "engagement": "212,541 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 191655,
       "engagement": "191,655 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "114483232b4c644f",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 169678,
       "engagement": "169,678 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T07:00:12Z",
       "score": 124380,
       "engagement": "124,380 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 114916,
       "engagement": "114,916 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T07:09:16Z",
       "score": 109520,
       "engagement": "109,520 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 98910,
       "engagement": "98,910 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T19:34:19Z",
       "score": 71661,
       "engagement": "71,661 次观看",
-      "fetchedAt": "2026-09-06T06:30:47.866Z"
+      "fetchedAt": "2026-09-06T07:00:44.886Z"
     }
   ]
 }
