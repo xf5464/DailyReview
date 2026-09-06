@@ -65,8 +65,16 @@ function isClearlyNonTechHeadline(title, url = '') {
     || (/\/streaming\//.test(text) && /\b(season|episode|series|movie|film)\b/.test(text));
 }
 
+function hasReadableHeadlineShape(title) {
+  const text = String(title || '').trim();
+  if (!text) return false;
+  // Compact navigation labels such as "iPhone18ProRumors" are not article headlines.
+  if (/^[A-Za-z0-9+._&'’-]+$/.test(text) && !/\s/.test(text) && text.length >= 14) return false;
+  return true;
+}
+
 function isAcceptableHeadline(category, title, url) {
-  if (!title || !url) return false;
+  if (!title || !url || !hasReadableHeadlineShape(title)) return false;
   if (category === 'tech' && isClearlyNonTechHeadline(title, url)) return false;
   return true;
 }
@@ -150,6 +158,10 @@ function normalizeBaselineFreshness(item, now) {
   return freshMetadata(item, now);
 }
 
+function containsChinese(value) {
+  return /[\u3400-\u9fff]/.test(String(value || ''));
+}
+
 function polishChineseTitle(item) {
   let titleZh = decodeXml(String(item.titleZh || item.title || '')).trim()
     .replace(/\s+([，。！？：；、）】》])/g, '$1')
@@ -163,13 +175,33 @@ function polishChineseTitle(item) {
   return { ...item, titleZh };
 }
 
-async function translateItems(items, knownTranslations) {
-  const prepared = items.map((item) => ({
-    ...item,
-    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '',
-  }));
-  const translated = await addChineseTranslations(prepared);
-  return translated.map(polishChineseTitle);
+async function translateItems(items, knownTranslations, previousBySource, baselineBySource) {
+  const output = [];
+  for (const item of items) {
+    const prepared = {
+      ...item,
+      titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '',
+    };
+    try {
+      const [translated] = await addChineseTranslations([prepared]);
+      output.push(polishChineseTitle(translated));
+    } catch (error) {
+      const fallback = previousBySource.get(item.sourceKey) || baselineBySource.get(item.sourceKey);
+      if (fallback && containsChinese(fallback.titleZh) && isAcceptableHeadline(item.category, fallback.title, fallback.url)) {
+        output.push(polishChineseTitle(cachedMetadata({
+          ...fallback,
+          category: item.category,
+          source: item.source,
+          sourceKey: item.sourceKey,
+          sourceOrder: item.sourceOrder,
+        })));
+        console.warn(`${item.source} translation failed; kept its previous translated headline as explicit cache: ${error.message}`);
+        continue;
+      }
+      console.warn(`${item.source} translation failed and no translated fallback was usable; source omitted: ${error.message}`);
+    }
+  }
+  return output;
 }
 
 async function fetchSectionSource(source, category, sourceOrder, now) {
@@ -195,8 +227,9 @@ async function collectSection(category, now, previousBySource, baselineBySource,
     const source = NEWS_SOURCES[category][sourceOrder];
     if (source.special) {
       const baseline = baselineBySource.get(source.key) || previousBySource.get(source.key);
-      if (!baseline) throw new Error(`${source.name} has no usable current or cached item`);
-      results.push(normalizeBaselineFreshness({ ...baseline, category, source: source.name, sourceKey: source.key, sourceOrder }, now));
+      if (baseline && isAcceptableHeadline(category, baseline.title, baseline.url)) {
+        results.push(normalizeBaselineFreshness({ ...baseline, category, source: source.name, sourceKey: source.key, sourceOrder }, now));
+      }
       continue;
     }
     try {
@@ -219,13 +252,15 @@ async function collectSection(category, now, previousBySource, baselineBySource,
         }
       } catch {}
       const fallback = previousBySource.get(source.key) || baselineBySource.get(source.key);
-      if (!fallback) throw new Error(`${source.name} failed and has no cached fallback: ${pageError.message}`);
-      results.push(cachedMetadata({ ...fallback, category, source: source.name, sourceKey: source.key, sourceOrder }));
-      console.warn(`${source.name} failed; kept its previous cached headline: ${pageError.message}`);
+      if (fallback && isAcceptableHeadline(category, fallback.title, fallback.url)) {
+        results.push(cachedMetadata({ ...fallback, category, source: source.name, sourceKey: source.key, sourceOrder }));
+        console.warn(`${source.name} failed; kept its previous cached headline: ${pageError.message}`);
+      } else {
+        console.warn(`${source.name} failed and no category-safe cached fallback was usable; source omitted: ${pageError.message}`);
+      }
     }
   }
-  if (results.length !== MAX_ITEMS) throw new Error(`${category} returned ${results.length}/${MAX_ITEMS} source headlines`);
-  return translateItems(results, knownTranslations);
+  return translateItems(results, knownTranslations, previousBySource, baselineBySource);
 }
 
 function readArchiveItems(filePath) {
@@ -292,6 +327,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  hasReadableHeadlineShape,
   isClearlyNonTechHeadline,
   parseSectionHeadline,
   polishChineseTitle,
