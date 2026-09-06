@@ -8,6 +8,7 @@ const chartPath = path.join(distDirectory, 'data', 'charts', 'aShareTurnover.jso
 const outlookPath = path.join(distDirectory, 'data', 'outlook.json');
 const manifestPath = path.join(distDirectory, 'data', 'offline-manifest.json');
 const REQUEST_TIMEOUT_MS = 20_000;
+const FETCH_RETRIES = 3;
 const EASTMONEY_SOURCE_URL = 'https://quote.eastmoney.com/zs000985.html';
 
 function contentHash(content) {
@@ -42,23 +43,39 @@ function parseEastmoneyTurnover(text) {
   }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function fetchText(url, fetchImpl = globalThis.fetch) {
   if (typeof fetchImpl !== 'function') throw new Error('fetch unavailable');
-  const options = {
-    headers: {
-      Accept: 'application/json,text/plain,*/*',
-      Referer: 'https://quote.eastmoney.com/',
-      'User-Agent': 'Mozilla/5.0 DailyReview/1.0',
-    },
-  };
-  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
-    options.signal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
+  let lastError;
+  for (let attempt = 1; attempt <= FETCH_RETRIES; attempt += 1) {
+    const options = {
+      headers: {
+        Accept: 'application/json,text/plain,*/*',
+        Referer: 'https://quote.eastmoney.com/',
+        'User-Agent': 'Mozilla/5.0 DailyReview/1.0',
+      },
+    };
+    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+      options.signal = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
+    }
+    try {
+      const response = await fetchImpl(url, options);
+      if (!response?.ok) throw new Error(`东方财富中证全指 HTTP ${response?.status ?? '--'}`);
+      const text = await response.text();
+      if (!text.trim()) throw new Error('东方财富中证全指返回空内容');
+      return text;
+    } catch (error) {
+      lastError = error;
+      if (attempt < FETCH_RETRIES) {
+        process.stderr.write(`A-share turnover fallback attempt ${attempt}/${FETCH_RETRIES} failed; retrying...\n`);
+        await sleep(attempt * 2000);
+      }
+    }
   }
-  const response = await fetchImpl(url, options);
-  if (!response?.ok) throw new Error(`东方财富中证全指 HTTP ${response?.status ?? '--'}`);
-  const text = await response.text();
-  if (!text.trim()) throw new Error('东方财富中证全指返回空内容');
-  return text;
+  throw lastError || new Error('东方财富中证全指请求失败');
 }
 
 function rewriteOfflineChunks(chart, manifest) {
@@ -130,8 +147,7 @@ async function supplement(options = {}) {
 
 if (require.main === module) {
   supplement().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
+    process.stderr.write(`A-share turnover fallback unavailable; keeping the normal build output and continuing deployment: ${error?.message || error}\n`);
   });
 }
 
