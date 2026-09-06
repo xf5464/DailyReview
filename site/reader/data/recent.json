@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T12:00:39.862Z",
+  "updatedAt": "2026-09-06T12:03:51.615Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "e5a2f5b5946be969",
@@ -28,35 +28,35 @@
       "publishedAt": "2026-09-05T12:38:38Z",
       "score": 27.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
-      "id": "582837bc2e2c3170",
+      "id": "033a8d954c64d876",
       "category": "market",
-      "title": "From ‘mystery vacations’ to hostels, budget travelers get thrifty as prices rise",
-      "titleZh": "从「神秘假期」到青年旅舍，预算有限的旅行者会随着价格上涨而节俭",
-      "url": "https://www.cnbc.com/2026/09/05/budget-travel-vacation-costs.html",
+      "title": "Iran warns of ‘more painful’ response to U.S. attacks as economic pressure mounts",
+      "titleZh": "伊朗警告说，随着经济压力的增加，对美国袭击的“更痛苦”的回应",
+      "url": "https://www.cnbc.com/2026/09/06/iran-us-response-oil-tanker-strikes.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 48.3,
+      "publishedAt": "Sun, 06 Sep 2026 12:02:47 GMT",
+      "score": 63.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
-      "id": "9146aeb602af863c",
+      "id": "8ee6bc2a199beaf1",
       "category": "market",
-      "title": "Minister to meet Jaguar Land Rover boss as thousands of job cuts expected",
-      "titleZh": "部长将与捷豹路虎老板会面，预计将裁员数千人",
-      "url": "https://www.bbc.co.uk/news/articles/crer948xq00o?at_medium=RSS&at_campaign=rss",
+      "title": "Fuel duty proposal withdrawn after discussions",
+      "titleZh": "燃油税提案经讨论后撤回",
+      "url": "https://www.bbc.co.uk/news/articles/cy8znkkn5rvo?at_medium=RSS&at_campaign=rss",
       "source": "BBC Business",
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
-      "publishedAt": "Sun, 06 Sep 2026 10:29:03 GMT",
-      "score": 61.5,
+      "publishedAt": "Sun, 06 Sep 2026 12:01:41 GMT",
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -84,7 +84,7 @@
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
       "score": 48.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 62.2,
+      "score": 62.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "8dcfffec7892dec0",
@@ -112,7 +112,7 @@
       "publishedAt": "Sun, 06 Sep 2026 11:37:00 GMT",
       "score": 64.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "8aa03bc3454fa894",
@@ -124,9 +124,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 07:35:00 -0400",
-      "score": 60.6,
+      "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,21 +140,21 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
-      "id": "bf684667ddcef7d7",
+      "id": "14415d52e3852d57",
       "category": "tech",
-      "title": "How to watch Futurama season 14 online – stream latest episodes of animated sci-fi sitcom from anywhere",
-      "titleZh": "如何在线观看Futurama第14季–从任何地方播放动画科幻情景喜剧的最新剧集",
-      "url": "https://www.techradar.com/how-to-watch/tv-shows/futurama-season-14",
+      "title": "‘It’s the singer, not the song’: Wildlife Photographer of the Year contender sparks huge debate about whether camera gear actually matters — as decade-old Nikon DSLR captures ‘wild shot’",
+      "titleZh": "“这是歌手，而不是歌曲” ：年度野生动物摄影师的竞争者引发了关于相机设备是否真正重要的巨大争论—因为十年前的尼康数码单反相机拍摄了“野生镜头”",
+      "url": "https://www.techradar.com/cameras/photography/its-the-singer-not-the-song-wildlife-photographer-of-the-year-contender-sparks-huge-debate-about-whether-camera-gear-actually-matters-as-decade-old-nikon-dslr-captures-wild-shot",
       "source": "TechRadar",
       "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 11:00:00 +0000",
-      "score": 75,
+      "publishedAt": "Sun, 06 Sep 2026 12:00:00 +0000",
+      "score": 75.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -168,7 +168,7 @@
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
       "score": 64.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,9 +194,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 52.3,
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "4d7cb63bbad84ee4",
@@ -208,9 +208,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
-      "score": 60.5,
+      "score": 60.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
-      "score": 70.2,
+      "score": 70.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "00c1641144f2567d",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 11:00:00 +0000",
-      "score": 69,
+      "score": 68.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 50.5,
+      "score": 50.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "1b2beb100715c63e",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 11:48:08 +0000",
-      "score": 67.8,
+      "score": 67.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
-      "score": 120.1,
-      "engagement": "253 points · 54 comments",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 120.6,
+      "engagement": "257 points · 56 comments",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 118.7,
+      "score": 118.6,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 105.5,
+      "score": 105.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -323,24 +323,9 @@
       "sourceKey": "world-bbc-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 98.8,
+      "score": 98.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
-    },
-    {
-      "id": "2e80cf72766c0f9a",
-      "category": "world",
-      "title": "Moscow not ruling out trilateral meeting of Russian, US and Chinese leaders, agencies report",
-      "titleZh": "塔斯社报道，莫斯科并未排除俄罗斯、美国、中国总统之间举行三方会晤的可能性",
-      "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPelNvcTNadU4zdzk5UEF0bUZNQTZTRDhJdDN2WnA4cEhWUi10QXJveUpzdmZEQi13bDhjNl91d2l5N3o4NEZWa0JqTm5kT0FOMTRHZzVTWWRFSnk5UmdPdjhlMnY1VDRSc0VFa2RoN3k0OWdVbkI2aTUwUE16WEhLY0pQTS1PRm5meWJCUVJUSFhmVEZZVUhQT3JYWHVUUkNGZ2dJTkVtLUQxMUVNMm9SZkJocjg1aVdsTWhmdDNMd1hteVpr?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-3",
-      "sourceOrder": 3,
-      "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
-      "score": 98.1,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -350,12 +335,27 @@
       "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
       "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-4",
-      "sourceOrder": 4,
+      "sourceKey": "world-al-jazeera-3",
+      "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
       "score": 98.1,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
+    },
+    {
+      "id": "2e80cf72766c0f9a",
+      "category": "world",
+      "title": "Moscow not ruling out trilateral meeting of Russian, US and Chinese leaders, agencies report",
+      "titleZh": "塔斯社报道，莫斯科并未排除俄罗斯、美国、中国总统之间举行三方会晤的可能性",
+      "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPelNvcTNadU4zdzk5UEF0bUZNQTZTRDhJdDN2WnA4cEhWUi10QXJveUpzdmZEQi13bDhjNl91d2l5N3o4NEZWa0JqTm5kT0FOMTRHZzVTWWRFSnk5UmdPdjhlMnY1VDRSc0VFa2RoN3k0OWdVbkI2aTUwUE16WEhLY0pQTS1PRm5meWJCUVJUSFhmVEZZVUhQT3JYWHVUUkNGZ2dJTkVtLUQxMUVNMm9SZkJocjg1aVdsTWhmdDNMd1hteVpr?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-4",
+      "sourceOrder": 4,
+      "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
+      "score": 98,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "43fa9a37eca2ddf4",
@@ -368,9 +368,9 @@
       "sourceKey": "world-reuters-world-5",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
-      "score": 97.7,
+      "score": 97.6,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -383,9 +383,9 @@
       "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 97.7,
+      "score": 97.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "024fd13de026decc",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 95.9,
+      "score": 95.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -413,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 95.9,
+      "score": 95.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -430,7 +430,7 @@
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
       "score": 92.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 385510,
-      "engagement": "385,510 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 386879,
+      "engagement": "386,879 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 305987,
-      "engagement": "305,987 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 306819,
+      "engagement": "306,819 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "114483232b4c644f",
@@ -470,9 +470,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 258895,
-      "engagement": "258,895 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 261271,
+      "engagement": "261,271 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -484,9 +484,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 214528,
-      "engagement": "214,528 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 215046,
+      "engagement": "215,046 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 124492,
-      "engagement": "124,492 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 124967,
+      "engagement": "124,967 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -512,23 +512,9 @@
       "sourceKey": "youtube-B8AR0gkEXpI",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T16:15:34Z",
-      "score": 124260,
-      "engagement": "124,260 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
-    },
-    {
-      "id": "c84e211fa0a44784",
-      "category": "youtube",
-      "title": "Tesla's New Taxi Has No Steering Wheel",
-      "titleZh": "特斯拉新出租车没有方向盘",
-      "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
-      "source": "AutomatiK",
-      "sourceKey": "youtube-_lYjci0bjNo",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 87178,
-      "engagement": "87,178 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 124627,
+      "engagement": "124,627 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -538,11 +524,25 @@
       "url": "https://www.youtube.com/watch?v=5II-Dkl3cfQ",
       "source": "6pek",
       "sourceKey": "youtube-5II-Dkl3cfQ",
-      "sourceOrder": 7,
+      "sourceOrder": 6,
       "publishedAt": "2026-09-05T19:29:08Z",
-      "score": 86892,
-      "engagement": "86,892 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 87626,
+      "engagement": "87,626 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
+    },
+    {
+      "id": "c84e211fa0a44784",
+      "category": "youtube",
+      "title": "Tesla's New Taxi Has No Steering Wheel",
+      "titleZh": "特斯拉新出租车没有方向盘",
+      "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
+      "source": "AutomatiK",
+      "sourceKey": "youtube-_lYjci0bjNo",
+      "sourceOrder": 7,
+      "publishedAt": "2026-09-05T17:09:47Z",
+      "score": 87615,
+      "engagement": "87,615 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -554,9 +554,9 @@
       "sourceKey": "youtube-b5igiJSgZCo",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T19:34:19Z",
-      "score": 81707,
-      "engagement": "81,707 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 81807,
+      "engagement": "81,807 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -568,9 +568,9 @@
       "sourceKey": "youtube-ycfYhLOkAJ4",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T20:27:10Z",
-      "score": 81309,
-      "engagement": "81,309 次观看",
-      "fetchedAt": "2026-09-06T12:00:39.862Z"
+      "score": 81644,
+      "engagement": "81,644 次观看",
+      "fetchedAt": "2026-09-06T12:03:51.615Z"
     }
   ],
   "trends": [
@@ -611,7 +611,7 @@
       "id": "38c84c8015",
       "term": "网络安全",
       "labelZh": "",
-      "score": 11.92,
+      "score": 11.91,
       "mentions": 33,
       "platformCount": 6,
       "platforms": [
@@ -628,7 +628,7 @@
       "id": "77b5d1a0f1",
       "term": "AI智能体",
       "labelZh": "",
-      "score": 10.21,
+      "score": 10.2,
       "mentions": 49,
       "platformCount": 3,
       "platforms": [
@@ -642,7 +642,7 @@
       "id": "2b681c0a24",
       "term": "Google",
       "labelZh": "",
-      "score": 7.14,
+      "score": 7.18,
       "mentions": 14,
       "platformCount": 4,
       "platforms": [
@@ -657,7 +657,7 @@
       "id": "88d650dd4f",
       "term": "浏览器",
       "labelZh": "",
-      "score": 6.93,
+      "score": 6.97,
       "mentions": 14,
       "platformCount": 5,
       "platforms": [
@@ -689,7 +689,7 @@
       "id": "4ed766e0c3",
       "term": "互联网",
       "labelZh": "",
-      "score": 4.91,
+      "score": 4.94,
       "mentions": 10,
       "platformCount": 3,
       "platforms": [
@@ -698,21 +698,6 @@
         "GitHub Trending"
       ],
       "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
-    },
-    {
-      "id": "83ad8510bb",
-      "term": "Linux",
-      "labelZh": "",
-      "score": 4.32,
-      "mentions": 9,
-      "platformCount": 4,
-      "platforms": [
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://social.treehouse.systems/@AsahiLinux/117221302190818078"
     },
     {
       "id": "e2ae20d9ae",
@@ -730,10 +715,25 @@
       "url": "https://sofiabelen.github.io/projects/visualizing-rusts-vtables-how-dyn-trait-works-in-memory/"
     },
     {
+      "id": "83ad8510bb",
+      "term": "Linux",
+      "labelZh": "",
+      "score": 3.81,
+      "mentions": 8,
+      "platformCount": 4,
+      "platforms": [
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://social.treehouse.systems/@AsahiLinux/117221302190818078"
+    },
+    {
       "id": "fc4b0426b1",
       "term": "大语言模型",
       "labelZh": "",
-      "score": 3.49,
+      "score": 3.48,
       "mentions": 19,
       "platformCount": 3,
       "platforms": [
@@ -744,38 +744,10 @@
       "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
     },
     {
-      "id": "c5f5e4d752",
-      "term": "best",
-      "labelZh": "",
-      "score": 3.25,
-      "mentions": 7,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview",
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending"
-      ],
-      "url": "https://www.benzinga.com/money/best-energy-stocks"
-    },
-    {
-      "id": "95c4bea12e",
-      "term": "big",
-      "labelZh": "",
-      "score": 3.07,
-      "mentions": 6,
-      "platformCount": 2,
-      "platforms": [
-        "Mastodon",
-        "Bluesky"
-      ],
-      "url": "https://infosec.exchange/@david_chisnall/117223400721389401"
-    },
-    {
       "id": "4d2f8c7f17",
       "term": "微软",
       "labelZh": "",
-      "score": 2.98,
+      "score": 2.99,
       "mentions": 6,
       "platformCount": 3,
       "platforms": [
@@ -830,64 +802,6 @@
       "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
     },
     {
-      "id": "5873f666d0",
-      "term": "every",
-      "labelZh": "",
-      "score": 2.85,
-      "mentions": 8,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://blog.val.town/connectors"
-    },
-    {
-      "id": "ffbaf58f12",
-      "term": "video",
-      "labelZh": "",
-      "score": 2.66,
-      "mentions": 10,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending"
-      ],
-      "url": "https://www.youtube.com/watch?v=Ss1DUqLjecc"
-    },
-    {
-      "id": "c5fe0200d1",
-      "term": "any",
-      "labelZh": "",
-      "score": 2.62,
-      "mentions": 5,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "Lobsters"
-      ],
-      "url": "https://anyhumanever.com/"
-    },
-    {
-      "id": "1902e3d6fc",
-      "term": "bad",
-      "labelZh": "",
-      "score": 2.53,
-      "mentions": 5,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "Lobsters"
-      ],
-      "url": "https://buttondown.com/suchbadtechads/archive/spartan-and-the-mime/"
-    },
-    {
       "id": "89749fe500",
       "term": "putin",
       "labelZh": "",
@@ -919,7 +833,7 @@
       "id": "43c2c72f66",
       "term": "silentsunday",
       "labelZh": "",
-      "score": 2.29,
+      "score": 2.3,
       "mentions": 8,
       "platformCount": 1,
       "platforms": [
@@ -944,7 +858,7 @@
       "id": "37651447bd",
       "term": "saxony-anhalt",
       "labelZh": "",
-      "score": 2.22,
+      "score": 2.26,
       "mentions": 4,
       "platformCount": 3,
       "platforms": [
@@ -953,21 +867,6 @@
         "Bluesky"
       ],
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/"
-    },
-    {
-      "id": "61c9b2b17d",
-      "term": "public",
-      "labelZh": "",
-      "score": 2.18,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead"
     },
     {
       "id": "d5a63c95d4",
@@ -983,6 +882,20 @@
         "DEV Community"
       ],
       "url": "https://packagemain.tech/p/gitignore-everything-by-default"
+    },
+    {
+      "id": "cae355b615",
+      "term": "please",
+      "labelZh": "",
+      "score": 2.17,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "Lobsters"
+      ],
+      "url": "https://blog.hofstede.it/bespoke-a-programming-language-for-people-who-say-please/"
     },
     {
       "id": "a19ee5a9fd",
@@ -1012,6 +925,90 @@
         "DEV Community"
       ],
       "url": "https://eupolicy.social/@edri/117223176315639771"
+    },
+    {
+      "id": "4d0fb475b2",
+      "term": "internet",
+      "labelZh": "",
+      "score": 2.15,
+      "mentions": 5,
+      "platformCount": 2,
+      "platforms": [
+        "Hacker News",
+        "Mastodon"
+      ],
+      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
+    },
+    {
+      "id": "227f38db8f",
+      "term": "reading",
+      "labelZh": "",
+      "score": 2.14,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
+    },
+    {
+      "id": "e80721793c",
+      "term": "private",
+      "labelZh": "",
+      "score": 2.14,
+      "mentions": 5,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://www.space.com/space-exploration/launches-spacecraft/isar-aerospace-second-launch-norway-andoya-spaceport-spectrum-rocket"
+    },
+    {
+      "id": "1c8f09270f",
+      "term": "ask",
+      "labelZh": "",
+      "score": 2.13,
+      "mentions": 7,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "Lobsters"
+      ],
+      "url": "https://news.ycombinator.com/item?id=49533840"
+    },
+    {
+      "id": "92005ecf37",
+      "term": "help",
+      "labelZh": "",
+      "score": 2.13,
+      "mentions": 6,
+      "platformCount": 2,
+      "platforms": [
+        "Mastodon",
+        "DEV Community"
+      ],
+      "url": "https://mastodon.social/@greenpeace/117223279751733702"
+    },
+    {
+      "id": "468da084e9",
+      "term": "gemini",
+      "labelZh": "",
+      "score": 2.12,
+      "mentions": 7,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "DEV Community"
+      ],
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
     }
   ]
 }
