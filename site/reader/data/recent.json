@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T10:00:40.071Z",
+  "updatedAt": "2026-09-06T10:30:40.485Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "e87a1551a6f7ce7a",
+      "id": "977d21153f147e88",
       "category": "market",
-      "title": "Scott Galloway warns chasing a raise with every job switch could backfire — especially for older workers",
-      "titleZh": "斯科特·加洛韦（ Scott Galloway ）警告说，每次换工作都可能适得其反，尤其是对老年工人而言",
-      "url": "https://finance.yahoo.com/small-business/articles/scott-galloway-warns-chasing-raise-113000182.html",
+      "title": "Mortgage and refinance interest rates today, Sunday, September 6, 2026: Rates much higher week-over-week",
+      "titleZh": "2026年9月6日（星期日）抵押贷款和再融资利率：利率周比高得多",
+      "url": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-and-refinance-interest-rates-today-sunday-september-6-2026-rates-much-higher-week-over-week-100000794.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T11:30:00Z",
-      "score": 28.1,
+      "publishedAt": "2026-09-06T10:00:00Z",
+      "score": 49.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 50.6,
+      "score": 50.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "aa7f4b19575d566a",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 06:04:51 GMT",
-      "score": 45.6,
+      "score": 45.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,37 +82,37 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 50.7,
+      "score": 50.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "22045b1496ce4267",
+      "id": "dd65d3e6b34936c0",
       "category": "market",
-      "title": "Toncoin (TON) Price Prediction 2025, 2026, 2027-2030",
-      "titleZh": "吨币（ TON ）价格预测2025、2026、2027-2030",
-      "url": "https://www.benzinga.com/money/toncoin-ton-price-prediction",
+      "title": "Top Performing Green Penny Stocks",
+      "titleZh": "表现最佳的绿色便士股票",
+      "url": "https://www.benzinga.com/money/best-green-penny-stocks",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 40.2,
+      "publishedAt": "Sun, 06 Sep 2026 10:12:34 +0000",
+      "score": 62.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "ca52c45e780b623d",
+      "id": "3d6aa8a26ceeae0f",
       "category": "market",
-      "title": "Amazon is selling noise-canceling wireless earbuds for just $18",
-      "titleZh": "亚马逊的降噪无线耳机售价仅为$ 18",
-      "url": "https://www.thestreet.com/deals/leemc-s12-wireless-earbuds-amazon-sale-september-2026",
+      "title": "Suze Orman says one mistake crushed SpaceX IPO returns",
+      "titleZh": "Suze Orman说，一个错误粉碎了SpaceX的IPO回报",
+      "url": "https://www.thestreet.com/investing/suze-orman-spacex-ipo-entry-price-lesson",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 08:00:00 GMT",
-      "score": 57,
+      "publishedAt": "Sun, 06 Sep 2026 10:03:00 GMT",
+      "score": 58.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "c3ab7f988bc8b19d",
@@ -124,9 +124,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 05:25:00 -0400",
-      "score": 60.4,
+      "score": 59.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,21 +140,21 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "bd466c324918949e",
+      "id": "e38e0e6327751377",
       "category": "tech",
-      "title": "Casualty star teases potential future romance between Flynn and Stevie after 40th anniversary special episodes — 'I think there's a lot more to come'",
-      "titleZh": "伤亡明星戏弄弗林和史蒂夫在40周年特别剧集后潜在的未来浪漫— “我认为还有很多事情要做”",
-      "url": "https://www.techradar.com/streaming/bbc-iplayer/casualty-star-teases-potential-future-romance-between-flynn-and-stevie-after-40th-anniversary-special-episodes-i-think-theres-a-lot-more-to-come",
+      "title": "Will the iPhone Ultra really be 'Ultra'? 5 features the foldable could surprisingly ditch, from Face ID to MagSafe",
+      "titleZh": "IPhone Ultra真的会是“Ultra”吗？从Face ID到MagSafe ， 5个可折叠功能可能会令人惊讶地抛弃",
+      "url": "https://www.techradar.com/phones/iphone/will-the-iphone-ultra-really-be-ultra-5-features-the-foldable-could-surprisingly-ditch-from-face-id-to-magsafe",
       "source": "TechRadar",
       "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 09:00:00 +0000",
-      "score": 75,
+      "publishedAt": "Sun, 06 Sep 2026 10:00:00 +0000",
+      "score": 75.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 66.8,
+      "score": 66.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 54.3,
+      "score": 53.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "8ea50880be9eeaab",
+      "id": "4d7cb63bbad84ee4",
       "category": "tech",
-      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
-      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
-      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
+      "title": "Why are iPhones more expensive than iPads?",
+      "titleZh": "为什么iPhone比iPad更贵？",
+      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
-      "score": 61.5,
+      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
+      "score": 62,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 53.7,
+      "score": 53.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 60,
+      "score": 59.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,23 +250,23 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 52.5,
+      "score": 52,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "33456732d03842db",
+      "id": "aeee3a59f535670f",
       "category": "tech",
-      "title": "Save nearly 50% on this awesome 16-inch OLED laptop with a Ryzen AI 5 430 CPU & 16GB RAM — HP's MacBook Neo-beating OmniBook X Flip is down to just $699",
-      "titleZh": "这款出色的16英寸OLED笔记本电脑配备Ryzen AI 5 430 CPU和16GB RAM ，可节省近50 ％ —惠普的MacBook Neo-beating OmniBook X Flip降至仅$ 699",
-      "url": "https://www.tomshardware.com/pc-components/save-nearly-50-percent-on-this-awesome-16-inch-oled-laptop-with-a-ryzen-ai-5-430-cpu-and-16gb-ram-hps-macbook-neo-beating-omnibook-x-flip-is-down-to-just-usd699",
+      "title": "This 246TB SSD media server is built for millionaire cinephiles —Kaleidescape's newest home theater vault supports 25 simultaneous 4K streams, stores up to 2,300 4K cinematic movies",
+      "titleZh": "这款246TB SSD媒体服务器专为百万富翁电影制作- Kaleidescape最新的家庭影院存储库支持25个同时4K流，最多可存储2,300部4K电影",
+      "url": "https://www.tomshardware.com/pc-components/storage/this-246tb-ssd-media-server-is-built-for-millionaire-cinephiles-kaleidescapes-newest-home-theater-vault-supports-25-simultaneous-4k-streams-stores-up-to-2-300-4k-cinematic-movies",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 55.9,
+      "publishedAt": "Sun, 06 Sep 2026 10:00:00 +0000",
+      "score": 70.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -278,24 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
-      "score": 101.4,
-      "engagement": "125 points · 10 comments",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "6847c23a039f513f",
-      "category": "world",
-      "title": "US carrier Abraham Lincoln departs Thailand after respite visit",
-      "titleZh": "美国航空公司亚伯拉罕·林肯（ Abraham Lincoln ）在喘息后离开泰国",
-      "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMjhwclJ2ZDZRMEdnU1NQQkwtRGNvMV9CZG9UaHBkSjJBRzZDX3UyOTBCUjBxU29Lc0U2ejl0a24wakRWX0tlM3oxUDlEWnJiYXVCekwxYVoyQ1B4VjhkX1ViOS1XWXJsU3VlaE1XVXdDVGIwYmFGbFp1ZWhUc3NFenBzSDVtVzJIOTdKMFUxcVlndzA5eUhKaHhCeTR6YXVFV2dOOGNyZjJiRGN0LUxKNnJqbWg3bXRLLUE?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-0",
-      "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 108.4,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "score": 109.4,
+      "engagement": "156 points · 23 comments",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -305,117 +290,42 @@
       "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-1",
-      "sourceOrder": 1,
+      "sourceKey": "world-bbc-world-0",
+      "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 103.9,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "score": 121.1,
+      "engagement": "3家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
-      "id": "e08fd24cc8f863ce",
+      "id": "6847c23a039f513f",
       "category": "world",
-      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
-      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
-      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
+      "title": "US carrier Abraham Lincoln departs Thailand after respite visit",
+      "titleZh": "美国航空公司亚伯拉罕·林肯（ Abraham Lincoln ）在喘息后离开泰国",
+      "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMjhwclJ2ZDZRMEdnU1NQQkwtRGNvMV9CZG9UaHBkSjJBRzZDX3UyOTBCUjBxU29Lc0U2ejl0a24wakRWX0tlM3oxUDlEWnJiYXVCekwxYVoyQ1B4VjhkX1ViOS1XWXJsU3VlaE1XVXdDVGIwYmFGbFp1ZWhUc3NFenBzSDVtVzJIOTdKMFUxcVlndzA5eUhKaHhCeTR6YXVFV2dOOGNyZjJiRGN0LUxKNnJqbWg3bXRLLUE?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-1",
+      "sourceOrder": 1,
+      "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
+      "score": 107.6,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "2e80cf72766c0f9a",
+      "category": "world",
+      "title": "Moscow has not ruled out trilateral meeting between presidents of Russia, US, China, TASS reports",
+      "titleZh": "塔斯社报道，莫斯科并未排除俄罗斯、美国、中国总统之间举行三方会晤的可能性",
+      "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPelNvcTNadU4zdzk5UEF0bUZNQTZTRDhJdDN2WnA4cEhWUi10QXJveUpzdmZEQi13bDhjNl91d2l5N3o4NEZWa0JqTm5kT0FOMTRHZzVTWWRFSnk5UmdPdjhlMnY1VDRSc0VFa2RoN3k0OWdVbkI2aTUwUE16WEhLY0pQTS1PRm5meWJCUVJUSFhmVEZZVUhQT3JYWHVUUkNGZ2dJTkVtLUQxMUVNMm9SZkJocjg1aVdsTWhmdDNMd1hteVpr?oc=5",
       "source": "Reuters World",
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 100.8,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "6bca4b2d5e9c7663",
-      "category": "world",
-      "title": "UN votes to adopt new world map that reflects Africa’s true size",
-      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
-      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
-      "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-3",
-      "sourceOrder": 3,
-      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 100.8,
-      "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "024fd13de026decc",
-      "category": "world",
-      "title": "Israeli military says it strikes southern Lebanon after Hezbollah launched drones",
-      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
-      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-4",
-      "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 99,
+      "publishedAt": "Sun, 06 Sep 2026 08:43:43 GMT",
+      "score": 104.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "f422f75a95ba4f97",
-      "category": "world",
-      "title": "Germany's far-right AfD seeks landmark state victory as Saxony-Anhalt votes",
-      "titleZh": "德国极右翼AfD在萨克森-安哈特州投票中寻求具有里程碑意义的国家胜利",
-      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-5",
-      "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 99,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "e1459cfd25a3e1ec",
-      "category": "world",
-      "title": "TV presenter among 11 sentenced to death in Egypt drugs case",
-      "titleZh": "在埃及毒品案中被判处死刑的11人中的电视节目主持人",
-      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
-      "source": "BBC News",
-      "sourceKey": "world-bbc-world-6",
-      "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
-      "score": 97.5,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "2123dae601a63c42",
-      "category": "world",
-      "title": "Putin says US-Russia contacts beneficial as talks begin with Witkoff and Kushner",
-      "titleZh": "普京表示，随着与维特科夫和库什纳会谈的开始，美俄接触是有益的",
-      "url": "https://www.reuters.com/world/europe/putin-says-us-russia-contacts-beneficial-talks-begin-with-witkoff-kushner-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 95.5,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
-    },
-    {
-      "id": "50a233748d900c4d",
-      "category": "world",
-      "title": "Thousands protest in Croatia to demand government clean up toxic waste",
-      "titleZh": "克罗地亚数千人抗议要求政府清理有毒废物",
-      "url": "https://www.aljazeera.com/news/2026/9/5/thousands-protest-in-croatia-to-demand-government-clean-up-toxic-waste",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxORElJQ0l1V2IwRUFJOE9FZEI5U19DdUozQzMzaWtIQnhvVm5DLUc3Zkl1SnVkdVhRbDBfUUtxQkR4QUh0eGdMWXFieEp2VEFnZlRmOXcwVVd1UzZHaHg1UGM2eHZ6YXFrVnFUNmF0Y3BnOGlBc2QwWDRrVFhNbFRJN18xM281Z0U3ZzBsd0pIQkpLWFdfby1xRF9BMmdReXZoeEs5a0xnZUpLTXZDN3hJ0gG0AUFVX3lxTE9QbVZRT3NlYWVGVTVNTjQzYnpPS2JQUmw5bXVLekdCX00xUm9BenJKZmpMUmxqRWt0UzZrRnRHYzF5UW1BdkpfcVV3S0xZdU16c0s5MnI5RHA3ano1U1dnRTFkdEZraFBDdnQ1dXliT3hTZm04QzRXY0hYcFB6bTBWRzNkRlFJNGYySnFPdDVMNGxOSWF4Zm9YMnp0aUl5Q2lhMVRGbEhtWlFIRTVJWXhzVHdBeA?oc=5",
-      "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 83.6,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "8237d8a583b3c72e",
@@ -425,12 +335,102 @@
       "url": "https://www.bbc.com/news/articles/cvgy5k4n07ko",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1ZNEhUQWx2LW9xazZvT09ZT3Q1YjB2dlhlVTVvMEJWZGZ1d0RiZGdEaVR3TUxaSVF1c1h1RGFTVTNRV3NyN2RUekgyeWtjdFJyRnBtN1hMNkFyUQ?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-9",
-      "sourceOrder": 9,
+      "sourceKey": "world-bbc-world-3",
+      "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 07:06:50 GMT",
-      "score": 83,
+      "score": 100.3,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "6bca4b2d5e9c7663",
+      "category": "world",
+      "title": "UN votes to adopt new world map that reflects Africa’s true size",
+      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
+      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
+      "source": "Al Jazeera",
+      "sourceKey": "world-al-jazeera-4",
+      "sourceOrder": 4,
+      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
+      "score": 100.1,
+      "engagement": "5家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "e08fd24cc8f863ce",
+      "category": "world",
+      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
+      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
+      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-5",
+      "sourceOrder": 5,
+      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
+      "score": 100,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "f422f75a95ba4f97",
+      "category": "world",
+      "title": "Germany's far-right AfD seeks landmark state victory as Saxony-Anhalt votes",
+      "titleZh": "德国极右翼AfD在萨克森-安哈特州投票中寻求具有里程碑意义的国家胜利",
+      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
+      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
+      "score": 98.2,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "024fd13de026decc",
+      "category": "world",
+      "title": "Israeli military says it strikes southern Lebanon after Hezbollah launched drones",
+      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
+      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
+      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
+      "score": 98.1,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "e1459cfd25a3e1ec",
+      "category": "world",
+      "title": "TV presenter among 11 sentenced to death in Egypt drugs case",
+      "titleZh": "在埃及毒品案中被判处死刑的11人中的电视节目主持人",
+      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-8",
+      "sourceOrder": 8,
+      "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
+      "score": 96.7,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
+    },
+    {
+      "id": "2123dae601a63c42",
+      "category": "world",
+      "title": "Putin says US-Russia contacts beneficial as talks begin with Witkoff and Kushner",
+      "titleZh": "普京表示，随着与维特科夫和库什纳会谈的开始，美俄接触是有益的",
+      "url": "https://www.reuters.com/world/europe/putin-says-us-russia-contacts-beneficial-talks-begin-with-witkoff-kushner-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-9",
+      "sourceOrder": 9,
+      "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
+      "score": 94.7,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 395990,
       "engagement": "395,990 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 313676,
       "engagement": "313,676 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 252700,
       "engagement": "252,700 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "114483232b4c644f",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 209100,
       "engagement": "209,100 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 199892,
       "engagement": "199,892 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "0128da0780432f60",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T09:15:08Z",
       "score": 163970,
       "engagement": "163,970 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "8d96a3ba04e7b33f",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-06T00:21:42Z",
       "score": 150269,
       "engagement": "150,269 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 123095,
       "engagement": "123,095 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 107558,
       "engagement": "107,558 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 66034,
       "engagement": "66,034 次观看",
-      "fetchedAt": "2026-09-06T10:00:40.071Z"
+      "fetchedAt": "2026-09-06T10:30:40.485Z"
     }
   ]
 }
