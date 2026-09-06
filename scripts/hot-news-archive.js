@@ -7,7 +7,7 @@ function itemId(url) {
 }
 
 function emptyArchive() {
-  return { schemaVersion: 2, updatedAt: null, items: [], trends: [] };
+  return { schemaVersion: 2, updatedAt: null, refreshAttemptedAt: null, items: [], trends: [], failureCount: 0 };
 }
 
 function normalizeTrend(trend) {
@@ -21,6 +21,7 @@ function normalizeTrend(trend) {
 }
 
 function normalizeItem(item, fallbackOrder = 0) {
+  const fetchedAt = item.fetchedAt || item.pushedAt || '';
   return {
     id: item.id || itemId(item.url), category: item.category, title: item.title,
     titleZh: item.titleZh || '', url: item.url,
@@ -28,7 +29,10 @@ function normalizeItem(item, fallbackOrder = 0) {
     source: item.source, sourceKey: item.sourceKey || '',
     sourceOrder: Number.isFinite(Number(item.sourceOrder)) ? Number(item.sourceOrder) : fallbackOrder,
     publishedAt: item.publishedAt, score: item.score,
-    engagement: item.engagement || '', fetchedAt: item.fetchedAt || item.pushedAt || '',
+    engagement: item.engagement || '',
+    fetchedAt,
+    sourceUpdatedAt: item.sourceUpdatedAt || fetchedAt,
+    isCached: Boolean(item.isCached),
   };
 }
 
@@ -51,6 +55,8 @@ function pruneArchive(archive) {
   return {
     schemaVersion: 2,
     updatedAt: archive?.updatedAt || null,
+    refreshAttemptedAt: archive?.refreshAttemptedAt || archive?.updatedAt || null,
+    failureCount: Number(archive?.failureCount) || 0,
     items: [...bySource.values()].sort((left, right) =>
       String(left.category).localeCompare(String(right.category)) || left.sourceOrder - right.sourceOrder),
     trends: (Array.isArray(archive?.trends) ? archive.trends : []).map(normalizeTrend).filter((trend) => trend.term).slice(0, 30),
@@ -58,11 +64,23 @@ function pruneArchive(archive) {
 }
 
 function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true) {
-  const fetchedAt = new Date(now).toISOString();
+  const refreshAttemptedAt = new Date(now).toISOString();
   const items = [...(news.tech || []), ...(news.market || []), ...(news.world || []), ...(news.youtube || [])]
-    .map((item, index) => normalizeItem({ ...item, fetchedAt }, index % 10))
+    .map((item, index) => normalizeItem({
+      ...item,
+      fetchedAt: item.fetchedAt || refreshAttemptedAt,
+      sourceUpdatedAt: item.sourceUpdatedAt || item.fetchedAt || refreshAttemptedAt,
+      isCached: Boolean(item.isCached),
+    }, index % 10))
     .filter(shouldKeepItem);
-  return pruneArchive({ schemaVersion: 2, updatedAt: fetchedAt, items, trends: news.trends || [] });
+  return pruneArchive({
+    schemaVersion: 2,
+    updatedAt: refreshAttemptedAt,
+    refreshAttemptedAt,
+    failureCount: Number(news.failureCount) || items.filter((item) => item.isCached).length,
+    items,
+    trends: news.trends || [],
+  });
 }
 
 function readArchive(filePath) {
