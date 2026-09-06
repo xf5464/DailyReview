@@ -5,7 +5,7 @@ const CLOUD_SIZE = 30;
 const HN_LIMIT = 180;
 const MASTODON_INSTANCES = ['mastodon.social', 'fosstodon.org', 'techhub.social'];
 
-const STOP_WORDS = new Set(`a an and are as at be been but by can could did do does for from had has have how i if in into is it its may more most new no not of on one or our out over so than that the their there these they this to two up us was we were what when where which who why will with would you your after all about just only says say using use used get gets got now today video watch via here first latest make makes made like time people report reports amid among since still take top want way year years day days good bad big best much many some any every other another really thing things news world live breaking meet thought know then few old open state services september history limit vote http https www com org net payload payloads`.split(/\s+/));
+const STOP_WORDS = new Set(`a an and are as at be been but by can could did do does for from had has have how i if in into is it its may more most new no not of on one or our out over so than that the their there these they them this to two three up us was we were what when where which who why will with would you your after all about just only says say using use used get gets got now next today video watch via here first latest make makes made making like time people report reports amid among since still take top want way year years day days good bad big best much many some any every other another really thing things news world live breaking meet thought know then few old open state services september history limit vote running working work free don http https www com org net payload payloads`.split(/\s+/));
 
 const ALIASES = new Map([
   ['ai', 'AI'], ['artificial intelligence', 'AI'], ['machine learning', '机器学习'],
@@ -18,6 +18,8 @@ const ALIASES = new Map([
   ['cloud', '云计算'], ['linux', 'Linux'], ['rust', 'Rust'], ['python', 'Python'], ['privacy', '隐私'],
   ['space', '太空'], ['launch', '发射'], ['orbit', '轨道'], ['aerospace', '航空航天'],
   ['trump', '特朗普'], ['iran', '伊朗'], ['ukraine', '乌克兰'],
+  ['agent', 'AI智能体'], ['agents', 'AI智能体'], ['llm', '大语言模型'], ['model', '模型'],
+  ['programming', '编程'], ['coding', '编程'], ['game', '游戏'],
 ]);
 
 async function fetchJson(url, timeoutMs = 15_000, fetcher = fetch) {
