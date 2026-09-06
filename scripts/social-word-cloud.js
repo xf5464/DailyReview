@@ -20,13 +20,17 @@ const MAINSTREAM_EVENT_SOURCES = [
   { key: 'independent', name: 'The Independent', query: 'site:independent.co.uk when:2d' },
 ];
 
-function stripHtml(value = '') {
+function decodeEntities(value = '') {
   return String(value)
-    .replace(/<br\s*\/?>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)));
+}
+
+function stripHtml(value = '') {
+  return decodeEntities(value)
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
     .replace(/https?:\/\/\S+|www\.\S+/gi, ' ')
     .replace(/\s+/g, ' ').trim();
 }
@@ -146,6 +150,12 @@ function tagValue(block, tag) {
   return match ? stripHtml(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')) : '';
 }
 
+function rawTagValue(block, tag) {
+  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, 'i'));
+  if (!match) return '';
+  return decodeEntities(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')).trim();
+}
+
 function parseMainstreamRss(xml, source) {
   const blocks = String(xml).match(/<item\b[\s\S]*?<\/item>/gi) || [];
   return blocks.slice(0, 8).map((block, index) => {
@@ -153,10 +163,10 @@ function parseMainstreamRss(xml, source) {
     const suffix = ` - ${source.name}`;
     const title = rawTitle.endsWith(suffix) ? rawTitle.slice(0, -suffix.length) : rawTitle;
     return {
-      category: 'mainstream', title, titleZh: '', url: tagValue(block, 'link'), source: source.name,
+      category: 'mainstream', title, titleZh: '', url: rawTagValue(block, 'link'), source: source.name,
       sourceKey: `${source.key}-${index}`, sourceOrder: index, publishedAt: tagValue(block, 'pubDate'), score: Math.max(1, 100 - index * 6),
     };
-  }).filter((item) => item.title && item.url);
+  }).filter((item) => item.title && /^https?:\/\//i.test(item.url));
 }
 
 async function translateToChinese(title, fetcher = fetch) {
@@ -173,6 +183,9 @@ async function fetchMainstreamEventItems(now = Date.now(), fetcher = fetch) {
     const xml = await fetchText(googleNewsUrl(source.query), 15000, fetcher);
     return parseMainstreamRss(xml, source);
   }));
+  settled.forEach((result, index) => {
+    if (result.status === 'rejected') console.warn(`${MAINSTREAM_EVENT_SOURCES[index].name} event feed failed: ${result.reason?.message || result.reason}`);
+  });
   const items = settled.flatMap((result) => result.status === 'fulfilled' ? result.value : [])
     .filter((item) => {
       const parsed = Date.parse(item.publishedAt || '');
