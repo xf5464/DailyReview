@@ -6,37 +6,38 @@ test('removes Mastodon HTML before keyword extraction', () => {
   assert.equal(stripHtml('<p>OpenAI &amp; robots<br>are trending https://example.com/post</p>'), 'OpenAI & robots are trending');
 });
 
-test('normalizes important aliases and removes filler words', () => {
-  const terms = termsFromText('Please ask for help reading everything about the latest best big artificial intelligence video chips from Nvidia on the public internet every day');
-  assert.ok(terms.includes('AI'));
-  assert.ok(terms.includes('芯片'));
+test('prefers specific entities/products and removes generic filler topics', () => {
+  const terms = termsFromText('Please ask for help reading the latest artificial intelligence programming agents news about OpenAI, Nvidia Rubin, Claude and GPT-5.6');
+  assert.ok(terms.includes('OpenAI'));
   assert.ok(terms.includes('英伟达'));
-  assert.ok(terms.includes('互联网'));
+  assert.ok(terms.includes('Rubin'));
+  assert.ok(terms.includes('Claude'));
+  assert.ok(terms.includes('GPT-5.6'));
+  assert.ok(!terms.includes('AI'));
+  assert.ok(!terms.includes('编程'));
+  assert.ok(!terms.includes('AI智能体'));
   assert.ok(!terms.includes('the'));
   assert.ok(!terms.includes('https'));
-  assert.ok(!terms.includes('best'));
-  assert.ok(!terms.includes('big'));
-  assert.ok(!terms.includes('video'));
-  assert.ok(!terms.includes('public'));
-  assert.ok(!terms.includes('every'));
-  assert.ok(!terms.includes('everything'));
   assert.ok(!terms.includes('please'));
   assert.ok(!terms.includes('reading'));
   assert.ok(!terms.includes('ask'));
   assert.ok(!terms.includes('help'));
   assert.ok(!termsFromText('nothing actually').length);
-  assert.ok(termsFromText('games').includes('游戏'));
 });
 
-test('boosts terms confirmed across free platforms', () => {
+test('boosts specific topics confirmed across free sources and excludes YouTube', () => {
   const now = Date.parse('2026-09-06T08:00:00Z');
   const trends = buildWordCloud([
-    { text: 'OpenAI releases AI model', platform: 'Hacker News', engagement: 100, publishedAt: '2026-09-06T07:00:00Z', url: 'a' },
-    { text: 'AI model discussion', platform: 'Bluesky', engagement: 200, publishedAt: '2026-09-06T07:30:00Z', url: 'b' },
-    { text: 'AI chips and Nvidia', platform: 'Mastodon', engagement: 40, publishedAt: '2026-09-06T07:45:00Z', url: 'c' },
-    { text: 'Rust compiler release', platform: 'Lobsters', engagement: 20, publishedAt: '2026-09-06T07:45:00Z', url: 'd' },
+    { text: 'OpenAI releases GPT-5.6', platform: 'Reuters', engagement: 100, publishedAt: '2026-09-06T07:00:00Z', url: 'a', rank: 0 },
+    { text: 'OpenAI GPT-5.6 discussion', platform: 'Hacker News', engagement: 200, publishedAt: '2026-09-06T07:30:00Z', url: 'b', rank: 1 },
+    { text: 'AI agents improve coding', platform: 'DEV Community', engagement: 400, publishedAt: '2026-09-06T07:45:00Z', url: 'c', rank: 0 },
+    { text: 'Nvidia Rubin GPUs', platform: 'TechCrunch', engagement: 40, publishedAt: '2026-09-06T07:45:00Z', url: 'd', rank: 0 },
+    { text: 'OpenAI GPT-5.6 video', platform: 'YouTube', engagement: 999999, publishedAt: '2026-09-06T07:55:00Z', url: 'e', rank: 0 },
   ], now, 10);
-  assert.equal(trends[0].term, 'AI');
-  assert.equal(trends[0].platformCount, 3);
+  assert.ok(['OpenAI', 'GPT-5.6'].includes(trends[0].term));
+  assert.equal(trends.find((trend) => trend.term === 'GPT-5.6').platformCount, 2);
+  assert.equal(trends.find((trend) => trend.term === 'OpenAI').platformCount, 2);
+  assert.ok(trends.some((trend) => trend.term === '英伟达'));
+  assert.ok(!trends.some((trend) => ['AI', '编程', 'AI智能体'].includes(trend.term)));
   assert.ok(trends.every((trend) => !trend.platforms.includes('YouTube')));
 });
