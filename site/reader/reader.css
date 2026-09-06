@@ -65,9 +65,7 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .day-toggle[aria-expanded="false"] .day-caret { transform: rotate(-90deg); }
 .day-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .news-list { list-style: none; margin: 0; padding: 0; }
-.news-row {
-  display: flex; align-items: stretch; border-bottom: 1px solid rgba(128, 119, 101, .13);
-}
+.news-row { display: flex; align-items: stretch; border-bottom: 1px solid rgba(128, 119, 101, .13); }
 .news-item {
   display: grid; flex: 1; grid-template-columns: 26px 1fr auto; gap: 11px; min-width: 0;
   padding: 17px 12px 17px 19px; border: 0;
@@ -85,31 +83,39 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .news-title { display: block; font-family: ui-serif, "Songti SC", STSong, serif; font-size: 18px; font-weight: 700; line-height: 1.45; }
 .news-original { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.35; }
 .news-note { display: block; margin-top: 7px; color: #18794e; font-size: 11px; font-weight: 700; line-height: 1.35; }
-.news-details {
-  align-self: start; max-width: 94px; padding-top: 3px; text-align: right;
-}
-.news-source {
-  display: block; color: var(--muted); font-size: 11px; font-weight: 650;
-  line-height: 1.35; overflow-wrap: anywhere;
-}
-.news-time {
-  display: block; margin-top: 5px; color: var(--blue); font-size: 10px;
-  font-variant-numeric: tabular-nums; line-height: 1.3; white-space: nowrap;
-}
-.news-views {
-  display: block; margin-top: 5px; color: var(--muted); font-size: 10px;
-  font-variant-numeric: tabular-nums; font-weight: 650; line-height: 1.3;
-}
+.news-details { align-self: start; max-width: 94px; padding-top: 3px; text-align: right; }
+.news-source { display: block; color: var(--muted); font-size: 11px; font-weight: 650; line-height: 1.35; overflow-wrap: anywhere; }
+.news-time { display: block; margin-top: 5px; color: var(--blue); font-size: 10px; font-variant-numeric: tabular-nums; line-height: 1.3; white-space: nowrap; }
+.news-views { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; font-weight: 650; line-height: 1.3; }
 
 .panel { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
 .panel h2 { font-size: 24px; }
-.word-cloud-panel { padding: 18px; }
-.word-cloud {
-  display: block; width: 100%; aspect-ratio: 1; overflow: visible;
-  border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.96) 0 64%, rgba(231,238,251,.7) 100%);
+.word-cloud-panel { padding: 12px; }
+.event-cloud {
+  min-height: 520px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 16px;
+  padding: 36px 22px;
+  border-radius: 28px;
+  background: radial-gradient(circle, rgba(255,255,255,.98) 0 64%, rgba(231,238,251,.68) 100%);
 }
-.cloud-word { font-family: ui-serif, "Songti SC", STSong, serif; font-weight: 760; cursor: pointer; }
-.cloud-word:hover, .cloud-word:focus { opacity: .72; outline: none; }
+.event-topic {
+  display: inline-block;
+  max-width: 100%;
+  padding: 5px 8px;
+  border-radius: 10px;
+  font-family: ui-serif, "Songti SC", STSong, serif;
+  font-weight: 760;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.event-topic:active { background: rgba(23, 92, 211, .08); }
 .cloud-meta { margin: 14px 4px 2px; color: var(--muted); font-size: 12px; line-height: 1.6; text-align: center; }
 .primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: white; font-weight: 700; }
 
@@ -130,10 +136,7 @@ article h2 { font-size: clamp(30px, 7vw, 45px); }
 .article-footer a, .error-actions a { color: var(--blue); text-decoration: none; }
 .error-actions { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 24px; }
 
-@media (min-width: 720px) {
-  dialog { margin-bottom: 4vh; border-radius: 24px; }
-}
-
+@media (min-width: 720px) { dialog { margin-bottom: 4vh; border-radius: 24px; } }
 @media (max-width: 520px) {
   main { padding-top: 20px; }
   .news-title { font-size: 17px; }
@@ -143,4 +146,6 @@ article h2 { font-size: clamp(30px, 7vw, 45px); }
   .news-item { padding-inline: 16px; }
   .category-tab { padding-inline: 5px; font-size: 13px; }
   .word-cloud-panel { padding: 8px; }
+  .event-cloud { min-height: 470px; gap: 9px 10px; padding: 28px 12px; }
+  .event-topic { padding: 4px 5px; }
 }
