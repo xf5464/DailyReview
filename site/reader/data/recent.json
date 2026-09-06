@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T13:30:40.516Z",
+  "updatedAt": "2026-09-06T14:00:41.332Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "977d21153f147e88",
@@ -26,23 +26,23 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-06T10:00:00Z",
-      "score": 47.4,
+      "score": 46.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "4533aac93b7f8c28",
+      "id": "cf39226707eb395e",
       "category": "market",
-      "title": "Sugar is outperforming the stock market this year. Here's what's driving it, and where it can go from here",
-      "titleZh": "Sugar今年的表现优于股市。 这就是驱动它的原因，以及它可以从这里走向何方",
-      "url": "https://www.cnbc.com/2026/09/06/sugar-is-outperforming-the-stock-market-this-year-whats-driving-it.html",
+      "title": "Parents who are really good at handling tantrums do 5 things—their kids become more emotionally intelligent, says psychologist",
+      "titleZh": "心理学家说，真正擅长处理发脾气的父母会做5件事--他们的孩子在情感上变得更加聪明",
+      "url": "https://www.cnbc.com/2026/09/06/parents-who-are-really-good-at-handling-tantrums-do-things-psychologist.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sun, 06 Sep 2026 13:19:01 GMT",
-      "score": 68.9,
+      "publishedAt": "Sun, 06 Sep 2026 13:36:01 GMT",
+      "score": 60,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "8ee6bc2a199beaf1",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 12:01:41 GMT",
-      "score": 50.7,
+      "score": 50.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "02d9e428fff3108f",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 13:15:00 GMT",
-      "score": 60.7,
+      "score": 60.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,37 +96,37 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 60.7,
+      "score": 60.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "ff5bc2c46a3dcb5d",
+      "id": "5da524bb2e6e826e",
       "category": "market",
-      "title": "Nvidia's cash could reshape an AI cloud contender",
-      "titleZh": "英伟达的现金可能会重塑人工智能云竞争者",
-      "url": "https://www.thestreet.com/investing/nvidia-nscale-pre-ipo-investment",
+      "title": "Global dining leader closing 261 restaurants, steakhouse chain",
+      "titleZh": "全球餐饮领导者关闭261家餐厅、牛排连锁店",
+      "url": "https://www.thestreet.com/restaurants/global-dining-leader-whitbread-closing-261-restaurants-steakhouse-chain",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 13:03:00 GMT",
-      "score": 58.5,
+      "publishedAt": "Sun, 06 Sep 2026 13:35:00 GMT",
+      "score": 58.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "6557dae2442b4b46",
+      "id": "22d933f891cf3d73",
       "category": "market",
-      "title": "Social Security's Trump Bump-Led 2027 COLA Should Have Its First Silver Lining Since 2023, but There's a Steep Price to Pay for This Victory",
-      "titleZh": "社会保障特朗普领导的2027年可乐应该自2023年以来首次亮相，但这场胜利需要付出高昂的代价",
-      "url": "https://www.fool.com/retirement/2026/09/06/social-security-trump-bump-led-2027-cola-first-silver-lining-since-2023-steep-price-to-pay/?source=iedfolrf0000001",
+      "title": "Retirees Face a Familiar Trap: Chase Yield or Chase Growth?",
+      "titleZh": "退休人员面临一个熟悉的陷阱：追逐收益还是追逐成长？",
+      "url": "https://www.fool.com/investing/2026/09/06/retirees-face-a-familiar-trap-chase-yield-or-chase/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 09:06:01 -0400",
-      "score": 57.6,
+      "publishedAt": "Sun, 06 Sep 2026 09:28:00 -0400",
+      "score": 57.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,21 +140,21 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "2d5070639e913623",
+      "id": "033d070536913484",
       "category": "tech",
-      "title": "What is the release date for Reacher season 4 episode 7 on Prime Video?",
-      "titleZh": "Reacher第4季第7集在Prime Video上发布的日期是什么时候？",
-      "url": "https://www.techradar.com/streaming/amazon-prime-video/reacher-season-4-episode-7-release-date-time",
+      "title": "‘It was a literal breath of fresh air’ — I reviewed Blueair’s T10i air purifier and found a smart solution for year round comfort, whether you’re sweating through a heatwave or shivering during a cold snap",
+      "titleZh": "“这简直是呼吸新鲜空气” —我查看了Blueair的T10i空气净化器，并找到了一种全年舒适的智能解决方案，无论您是在热浪中出汗还是在寒流中颤抖",
+      "url": "https://www.techradar.com/home/air-quality/blueair-t10-review",
       "source": "TechRadar",
       "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 13:00:00 +0000",
-      "score": 75.5,
+      "publishedAt": "Sun, 06 Sep 2026 13:30:00 +0000",
+      "score": 78.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 63.3,
+      "score": 62.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "3ebfdfa2baadde71",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-06T13:00:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "09d8173c4081c82b",
@@ -194,9 +194,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 11:55:26 +0000",
-      "score": 71.4,
+      "score": 70.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "030110b636a37bac",
@@ -208,9 +208,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 13:00:00 +0000",
-      "score": 71.5,
+      "score": 71,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -222,23 +222,23 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sun, 6 Sep 2026 08:11 -0500",
-      "score": 70.7,
+      "score": 70.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "312d6097f00c1135",
+      "id": "99a0cbbbf6c1bfd1",
       "category": "tech",
-      "title": "OpenAI Agents Take Over German Wiki To Talk to Each Other",
-      "titleZh": "OpenAI特工接管德语维基互相交谈",
-      "url": "https://www.pcmag.com/news/openai-agents-take-over-german-wiki-to-talk-to-each-other",
+      "title": "Labor Day Weekend Headphone and Earbud Deals Are Live, Save Up to 50% on Apple, Bose, and More",
+      "titleZh": "劳动节周末耳机和耳塞优惠现已上线，苹果、Bose等产品最高可节省50%",
+      "url": "https://www.pcmag.com/news/best-headphone-earbud-deals-labor-day-weekend-2026-sale",
       "source": "PCMag",
       "sourceKey": "pcmag",
       "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 26 13:17:43 +0000",
-      "score": 72.8,
+      "publishedAt": "Sun, 06 Sep 26 13:30:45 +0000",
+      "score": 69.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,23 +250,23 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 49,
+      "score": 48.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
-      "id": "d5e57734c64db4ca",
+      "id": "20e8fbcd4b9fd009",
       "category": "tech",
-      "title": "Samsung 990 2TB PCIe 4.0 SSD falls to $339.99 on Amazon — $190 discount makes high-capacity storage more affordable",
-      "titleZh": "三星990 2TB PCIe 4.0 SSD在亚马逊上跌至339.99 $ — 190 $的折扣使高容量存储更实惠",
-      "url": "https://www.tomshardware.com/pc-components/ssds/samsung-990-2tb-pcie-4-0-ssd-falls-to-usd339-99-on-amazon-usd190-discount-makes-high-capacity-storage-more-affordable",
+      "title": "FSP Mega GM 1200W power supply review: An in-house FSP platform that quietly overshoots its own Gold label",
+      "titleZh": "FSP MEGA GM 1200W电源回顾：悄然超越自身金牌的内部FSP平台",
+      "url": "https://www.tomshardware.com/pc-components/power-supplies/fsp-mega-gm-1200w-power-supply-review",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 13:08:31 +0000",
-      "score": 67.6,
+      "publishedAt": "Sun, 06 Sep 2026 13:57:18 +0000",
+      "score": 67.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "d0e645f9ae1a95ae",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T11:56:43.000Z",
-      "score": 112.6,
-      "engagement": "104 points · 61 comments",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "score": 118.2,
+      "engagement": "142 points · 82 comments",
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -293,9 +293,9 @@
       "sourceKey": "world-reuters-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 103.1,
+      "score": 102.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "e2269a4b499db6f2",
@@ -308,9 +308,24 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 13:10:32 GMT",
-      "score": 102.7,
+      "score": 102,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
+    },
+    {
+      "id": "43fa9a37eca2ddf4",
+      "category": "world",
+      "title": "At flood-destroyed border, China teams scour ruins of once-busy port",
+      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
+      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-2",
+      "sourceOrder": 2,
+      "publishedAt": "Sun, 06 Sep 2026 13:28:51 GMT",
+      "score": 101.9,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "2ff7aa428e578579",
@@ -320,27 +335,12 @@
       "url": "https://www.reuters.com/world/russias-lavrov-calls-accusations-moscows-involvement-leipzig-drone-incident-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc25LWXEwUFU4bnJKZk1QZWVPMHV4NjlMcDUydTJCTFd1RzYtTG5qM0xsa1M5dW1WOVZqYlFlRXVRYWFrMldheHQ1a0RUMXNLRUZrbzU4clpaVFoycWVicDh1TmloUDdDVm9VNEtaRTlvd080Y1liekQwQVYxM0RjczlOSXA2RXFhc1V6dGR0R1g5aXpXX0NoMDlGZ2VqQ0RTNnlLV2NaTHpsOHJoSVFiU29ONXNqcVRq?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-2",
-      "sourceOrder": 2,
-      "publishedAt": "Sun, 06 Sep 2026 11:29:43 GMT",
-      "score": 100.2,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
-    },
-    {
-      "id": "43fa9a37eca2ddf4",
-      "category": "world",
-      "title": "At flood-destroyed China-Nepal border, no sign of a once-busy port",
-      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
-      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
-      "source": "Reuters World",
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
-      "publishedAt": "Sun, 06 Sep 2026 11:16:55 GMT",
+      "publishedAt": "Sun, 06 Sep 2026 11:29:43 GMT",
       "score": 99.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -353,9 +353,24 @@
       "sourceKey": "world-bbc-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 98.6,
+      "score": 98,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
+    },
+    {
+      "id": "a14304819505c431",
+      "category": "world",
+      "title": "China to pump $54 billion into state banks, insurers in capital-boosting push",
+      "titleZh": "中国向国有银行和保险公司注资540 $",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPang2d09TQ3Q1cEd0QVJXaWc5aWpIcVh5MUQ5UEhud1R1OVFKV2lYSXEtb2hGMHNqR0xjUWx1cXJNZ3NFcTV3RmR5LXliVHNuWEJDdUVLVld1OU5mMURmLWFieGxGZzdYbTdhMUZkeXk2UTM2QS1QRWt2M2JJelM4VUlXZ2pxd2I5ZFZyX1k2TmJLNHVURHNwTEVQOHNuOV9rZTM1UFh6d1c0RFAwVFBLaG1yQVAzSEpRQWptMg?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPang2d09TQ3Q1cEd0QVJXaWc5aWpIcVh5MUQ5UEhud1R1OVFKV2lYSXEtb2hGMHNqR0xjUWx1cXJNZ3NFcTV3RmR5LXliVHNuWEJDdUVLVld1OU5mMURmLWFieGxGZzdYbTdhMUZkeXk2UTM2QS1QRWt2M2JJelM4VUlXZ2pxd2I5ZFZyX1k2TmJLNHVURHNwTEVQOHNuOV9rZTM1UFh6d1c0RFAwVFBLaG1yQVAzSEpRQWptMg?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-5",
+      "sourceOrder": 5,
+      "publishedAt": "Sun, 06 Sep 2026 13:26:19 GMT",
+      "score": 97.6,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -365,27 +380,12 @@
       "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-5",
-      "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 96.7,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
-    },
-    {
-      "id": "6bca4b2d5e9c7663",
-      "category": "world",
-      "title": "UN votes to adopt new world map that reflects Africa’s true size",
-      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
-      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
-      "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-6",
+      "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
-      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 96,
-      "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
+      "score": 96.2,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -398,24 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
-      "score": 95.7,
+      "score": 95,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
-    },
-    {
-      "id": "e08fd24cc8f863ce",
-      "category": "world",
-      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
-      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
-      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 95.3,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -425,12 +410,27 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
       "source": "Reuters World",
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
+      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
+      "score": 92.7,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
+    },
+    {
+      "id": "b7fedf8a0707891b",
+      "category": "world",
+      "title": "Putin says US-Russia contacts beneficial as talks begin with Witkoff and Kushner",
+      "titleZh": "普京表示，随着与维特科夫和库什纳会谈的开始，美俄接触是有益的",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
+      "source": "Reuters World",
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
-      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 93.5,
+      "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
+      "score": 89.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 403904,
       "engagement": "403,904 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 313931,
       "engagement": "313,931 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "114483232b4c644f",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 277825,
       "engagement": "277,825 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 217823,
       "engagement": "217,823 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 129162,
       "engagement": "129,162 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T16:15:34Z",
       "score": 129033,
       "engagement": "129,033 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 92061,
       "engagement": "92,061 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T19:29:08Z",
       "score": 90845,
       "engagement": "90,845 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "345d12a5eb2ff460",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-06T05:50:52Z",
       "score": 87409,
       "engagement": "87,409 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T20:27:10Z",
       "score": 85386,
       "engagement": "85,386 次观看",
-      "fetchedAt": "2026-09-06T13:30:40.516Z"
+      "fetchedAt": "2026-09-06T14:00:41.332Z"
     }
   ],
   "trends": []
