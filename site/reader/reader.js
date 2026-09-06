@@ -182,8 +182,7 @@ function itemTimestamp(item) {
 function selectedItems(value) {
   return (value.items || [])
     .filter((item) => item.category === activeCategory)
-    .sort((left, right) =>
-      (Number(left.sourceOrder) || 0) - (Number(right.sourceOrder) || 0))
+    .sort((left, right) => itemTimestamp(right) - itemTimestamp(left))
     .slice(0, 10);
 }
 
