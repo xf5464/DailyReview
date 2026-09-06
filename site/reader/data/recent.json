@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T00:00:43.798Z",
+  "updatedAt": "2026-09-06T00:30:57.781Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 32.8,
+      "score": 32.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "4fb2d78b55b16a55",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 15:14:12 GMT",
-      "score": 46.5,
+      "score": 46,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 46.9,
+      "score": 44,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "471ea4a5746f88c6",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:21:27 GMT",
-      "score": 57.3,
+      "score": 56.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 22:57:08 GMT",
-      "score": 64.1,
+      "score": 63.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 43.6,
+      "score": 41.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "8108d90c6c101e16",
@@ -117,10 +117,10 @@
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 19:28:31 GMT",
-      "score": 35.5,
+      "publishedAt": "Sat, 05 Sep 2026 22:56:56 GMT",
+      "score": 38.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "c686985f2d1ee36a",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 19:15:00 GMT",
-      "score": 50.5,
+      "score": 50,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 51.2,
+      "score": 50.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,24 +163,24 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 58.4,
+      "score": 57.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
-      "id": "6ef2aef9012f0dd0",
+      "id": "6df0f5d81c2b28a3",
       "category": "tech",
-      "title": "Hikers rescued after using Google Gemini for planning",
-      "titleZh": "徒步旅行者在使用Google Gemini进行规划后获救",
-      "url": "https://techcrunch.com/2026/09/05/hikers-rescued-after-using-google-gemini-for-planning/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQbUF5TV9XLXZ0c3MtcVIwRkZjajR6b0VHWmhnejVrNUVoeWpualpYMFFjNHRRV2IyMnBpS2NrWUp6ZWI3SkpoalJqczR4VlM5dVh2VGRkcXRJMFlyRVR1eFJkaGRORnU5S2pRUG16LV9kWGVFWkttVVhzR0ltc2ZZVm5tSVJyN05iZUhTbThEaDJ6dw?oc=5",
+      "title": "Seattle Times and Newsday are the latest publications to sue OpenAI and Microsoft",
+      "titleZh": "《西雅图时报》和《新闻日报》是起诉OpenAI和微软的最新出版物",
+      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxONTdOTkJNdUJEQng2RTROVzFoM1NjeUN2d1ROa0xmNlItOFpfQkctMHhVQ0pFUVcwVlY0bzcxSXBsUVFRU3lhX1JFQ0U0NXhmNzF5RnZucmdodFJvWElrS3dnck1IWGMtSEtXZHpjRU9nWkxMZTZKcXdsVlpJcGp3OE15amdkejVkTnk2dWd2bVRJR29IMmNpNzdNb1BDOV85aFlIN3VEQkFNVkJwcHhFSkRGaGdRXzQ?oc=5",
       "source": "TechCrunch",
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 19:35:24 GMT",
-      "score": 53.6,
+      "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
+      "score": 76.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 46.3,
+      "score": 45.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "8a782c3a7897017c",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 54.5,
+      "score": 53.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 GMT",
-      "score": 63.9,
+      "score": 63.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
-      "id": "50ac2ebb30523602",
+      "id": "0c81aa9ad82d9367",
       "category": "tech",
-      "title": "The best Labor Day 2026 laptop deals: Apple, Lenovo, Dell, and more",
-      "titleZh": "2026年最佳劳动节笔记本电脑优惠：苹果、联想、戴尔等",
-      "url": "https://www.zdnet.com/article/best-labor-day-laptop-deals-2026-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTE40NTRud2xvWFc1TlQ2ck1pZ3dFbU1DV0RMR1dpeEdUenhCanJwTmdrUWQ5MkRUeTNpUkVLZG9KcF9rM2NpcEN3Y0EteHFaUFA4cW5fVDA2UG53MW8tV2VweW05X251NkxDNmlDNXFaaGo3dlE?oc=5",
+      "title": "The best Labor Day 2026 TV deals: Samsung, LG, and more",
+      "titleZh": "2026年最佳劳动节电视优惠：三星、LG等",
+      "url": "https://www.zdnet.com/home-and-office/home-entertainment/best-labor-day-tv-deals-2026-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNMnpmWm5xWUdWTVppMzR1LWdNQlJqalM0UUhqQWdOckI0dFAzVUotNFd6TW5vSllZMzg4cHYxT040TUhuV0QzYk9sb1E3N1ZLRFlneHZUZFZKeTlxWlNPajJ2YXEzNGJySVZUeEc2LS1sVkswTGxXeDRwSjdWbTNOZ3lNUDhXaWVrcGNvUXB4cXdkdw?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 23:48:11 GMT",
-      "score": 65.4,
+      "publishedAt": "Sat, 05 Sep 2026 23:59:36 GMT",
+      "score": 57.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "62a906606b29f2aa",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 20:26:00 GMT",
-      "score": 65.8,
+      "score": 53.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 44.3,
+      "score": 43.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,23 +283,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 46.3,
+      "score": 45.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
-      "id": "630bf109ed96599c",
+      "id": "6a2258e1c0b90d7f",
       "category": "tech",
-      "title": "Private German rocket makes history, reaches orbit from European soil",
-      "titleZh": "私人德国火箭创造历史，从欧洲土壤到达轨道",
-      "url": "https://www.space.com/space-exploration/launches-spacecraft/isar-aerospace-second-launch-norway-andoya-spaceport-spectrum-rocket",
+      "title": "Cloud in a Bottle: making self-hosting accessible to everyone",
+      "titleZh": "瓶中云：让所有人都可以使用自助出租服务",
+      "url": "https://cloudinabottle.org/blog/launch-post",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-05T20:31:38.000Z",
-      "score": 130.7,
-      "engagement": "298 points · 150 comments",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "publishedAt": "2026-09-06T00:03:29.000Z",
+      "score": 75.9,
+      "engagement": "22 points · 4 comments",
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-06T00:00:43.798Z"
+      "fetchedAt": "2026-09-06T00:30:57.781Z"
     }
   ]
 }
