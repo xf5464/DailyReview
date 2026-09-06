@@ -1,21 +1,20 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T05:43:23.045Z",
+  "updatedAt": "2026-09-06T05:47:15.614Z",
   "items": [
     {
-      "id": "52f9dfbd15d2b656",
+      "id": "91ebf4501aca5b86",
       "category": "market",
-      "title": "Spire Healthcare agrees £1.03 billion takeover by Toscafund and others",
-      "titleZh": "Spire Healthcare同意Toscafund及其他公司以10.3亿英镑收购",
-      "url": "https://www.reuters.com/legal/litigation/spire-healthcare-agrees-103-billion-takeover-by-toscafund-others-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbEZ1aGtYY1FlV19VUDlHZHkxWUlmelVuenZQRDJqeF92YWM4c0YyYTZsNzNxQnVvcDE5SmFhaTgtdjBDZVZWRmxYLWY3QjFZdXBWYmhfbE5iRUxfY2FETWhkSldUNGVkR1JHTDh2d3FCQ0lUOGpLbGEtdll0Z1BwVGtCWXF1M3lUaVFqT0NfbUlPdFd4b3pma0FtcE0tTVRrc0M1YUJpcWZVOGQ5U0ZBMGI1ZTJPdng3?oc=5",
-      "source": "Reuters Markets",
-      "sourceKey": "reuters-markets",
+      "title": "‘There’s no plan’: as instability in global bond markets rises, what are the knock-on effects?",
+      "titleZh": "“没有计划” ：随着全球债券市场的不稳定性上升，有什么连锁反应？",
+      "url": "https://www.theguardian.com/business/2026/sep/04/instability-in-global-bond-markets-rising-knock-on-effects",
+      "source": "The Guardian Business",
+      "sourceKey": "guardian-business",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 27.3,
+      "publishedAt": "Fri, 04 Sep 2026 16:49:28 GMT",
+      "score": 41,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "a7053cdaa9524a9b",
@@ -29,7 +28,7 @@
       "publishedAt": "2026-08-17T21:18:10.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "d646d9dc06ae3234",
@@ -43,37 +42,35 @@
       "publishedAt": "2025-12-19T17:42:24.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "54a7f8919276e817",
+      "id": "ffcfb18dc494fa6c",
       "category": "market",
-      "title": "Liquidity Risk Solutions Compatible with Common U.S. Core Banking Systems: What Banks Should Evaluate",
-      "titleZh": "与美国常见核心银行系统兼容的流动性风险解决方案：银行应评估哪些内容",
-      "url": "https://www.nasdaq.com/articles/fintech/liquidity-risk-solutions-core-banking-systems",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQTVd2TVpiMW00YlpoanV2b0xHTXhFVHJidGRnVnFyRG8tWm1Pd3VzRkxhcXRJcWpfUHI0N0hqOE1BcVNmY2pHQjVmV04za3VTVzdMeW9yWjM2NW5MZ0hqdkVFZTFCX2oxS25PM1d3cGxkeWRQSHlKYzJiRUs0UXZ5Uk9RZXVOU3VUS2dzZFVn?oc=5",
-      "source": "Nasdaq News",
-      "sourceKey": "nasdaq-news",
+      "title": "Stock up on food to prepare for extreme weather, minister says",
+      "titleZh": "部长说，储备食物以应对极端天气",
+      "url": "https://www.bbc.co.uk/news/articles/cp931m8n3p5o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC Business",
+      "sourceKey": "bbc-business",
       "sourceOrder": 3,
-      "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
-      "score": 29.4,
+      "publishedAt": "Fri, 04 Sep 2026 10:40:23 GMT",
+      "score": 38,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "d15b6a37c32630be",
+      "id": "029207623cb29a91",
       "category": "market",
-      "title": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
-      "titleZh": "俄罗斯股市在交易结束时走低； MOEX俄罗斯指数保持不变",
-      "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4890240",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPSURab0dqOVZzZEN0WENJazJXaUVuUGxkT1duMnd6SjFWb21VZ1FPSEQ3SGJCdzlQV0NfdGFYNUpsMm5Nd05Welo2el9ObUJWNFI3NU8ycW8xOW1mMThtdks0TDlEcnpNMkhUa0NtblZ5UjFTVlFKcFhTLWhKZDVNdnpPbFN0ZGQ0MGNvVTRwQmNhY2FWSjNEa01lQTBKLUV0TzdrMFR1eFB5SnA1cDhYdldSNGV2UzZ6Vnk2WEZQbw?oc=5",
-      "source": "Investing.com",
-      "sourceKey": "investing",
+      "title": "Some homeowners have been waiting years for mortgage relief. It keeps slipping away",
+      "titleZh": "一些房主多年来一直在等待抵押贷款减免。 它不断溜走",
+      "url": "https://www.cnn.com/2026/09/05/economy/homeowners-locked-in-to-higher-mortgage-rates",
+      "source": "CNN Business",
+      "sourceKey": "cnn-business",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 04:28:17 GMT",
-      "score": 59.2,
+      "publishedAt": "2026-09-05T16:00:29.447Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -87,7 +84,7 @@
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
       "score": 55,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -99,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 44.5,
+      "score": 44.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "d0d6b5803f0e771f",
@@ -113,53 +110,51 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
-      "score": 58.3,
+      "score": 58.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "dddb8315a2eeca7d",
+      "id": "e0bf107cee4e6d27",
       "category": "market",
-      "title": "The S&P 500's Yield Is at Historic Lows. Here Are 3 Dividend Stocks I'd Buy in September.",
-      "titleZh": "标准普尔500指数收益率处于历史低点。 以下是我在9月份购买的3只股息股票。",
-      "url": "https://www.fool.com/investing/2026/09/06/the-sp-500s-yield-is-at-historic-lows-here-are-3-d/?source=iedfolrf0000001",
+      "title": "Rocket Lab CFO Dumps Over 140,000 Company Shares Worth $8.8 Million Amid a 28% One-Year Return",
+      "titleZh": "Rocket Lab首席财务官抛售价值880万美元的14万股公司股票，一年回报率为28%",
+      "url": "https://www.fool.com/coverage/filings/2026/09/06/rocket-lab-cfo-dumps-over-140-000-company-shares-worth-usd8-8-million-amid-a-28-one-year-return/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 01:00:00 -0400",
-      "score": 63.3,
+      "publishedAt": "Sun, 06 Sep 2026 01:16:35 -0400",
+      "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "22a3ebb29c1e0518",
+      "id": "ed6ae9fb62e40c36",
       "category": "market",
-      "title": "Wall Street Veteran Jordi Visser Says Crypto Isn't A Binary Bet - It Doesn't Have To Be 'Worth A Million' To Be 'Worth Something'",
-      "titleZh": "华尔街资深人士乔迪·维瑟（ Jordi Visser ）表示，加密货币不是二元赌注-它不一定要“价值一百万”才能“有价值”",
-      "url": "https://www.tradingview.com/news/stocktwits:3c3433b52094b:0-wall-street-veteran-jordi-visser-says-crypto-isn-t-a-binary-bet-it-doesn-t-have-to-be-worth-a-million-to-be-worth-something/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgJBVV95cUxOZ0NXaTN3Zk9NQ3lLR081TnI3bDNBVEVPdHRWLS1pUVlvY2tjdllyVWRiLTlaLVRLY3FqX0J2dVJsVXlwRUJYSkt3NXFwLS02ekxHb3lCX0dINnVPSW0ySURTMTZfaDNvakRLVWNvZTlzX2JBWlNiYXhzdGFNQkNDZDlhLUVjS2dUdXBHVC02OUF2Z0JEYUQtUHRWckpjTFhqVERYLTJrdEhNbVo4aTBTdWJwVWhDYjBPdkRZMDJ3MFRTQkZLRDVwOWk3NmxpZURsMEp0Sm5VN2tMZTFmX1VsWGYwelF2ZFd6aVVhZVA5ajMzWlZHNldNaHNxWThpb3VSZVJMRkpxUUZkQ05fTWJfQnZR?oc=5",
-      "source": "TradingView News",
-      "sourceKey": "tradingview",
+      "title": "US strikes 3 Iranian oil tankers after saying warships were targeted with ballistic missiles",
+      "titleZh": "美国袭击3艘伊朗油轮，称军舰成为弹道导弹袭击目标",
+      "url": "https://apnews.com/article/iran-us-war-oil-tankers-b3650799901c56a6deeca962cbaa4109",
+      "source": "AP Business",
+      "sourceKey": "ap-business",
       "sourceOrder": 9,
-      "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 46,
+      "publishedAt": "2026-09-05T13:53:47.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "bceb38cca4a556ee",
+      "id": "9a8c0e7e63aecfeb",
       "category": "tech",
-      "title": "OpenAI acknowledges 'wiki incident' and need for more transparency around unintended AI behavior",
-      "titleZh": "OpenAI承认“wiki事件” ，需要提高意外AI行为的透明度",
-      "url": "https://www.reuters.com/business/media-telecom/openai-acknowledges-wiki-incident-need-more-transparency-around-unintended-ai-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPU0FtQktXNWY5eEpHaUxBVGI2YWpHWE9SUGUtb1BhUkxLQmJvODRPX01WMnFqeEI2RThKMi1IT0E1eDBSUngtQkIwTUtiQWFjSHpFbXY0Q1BFcjZuUnBkVEZFMnFtOWpLUHVOZ1lZZzIwT3NxSnJnNG5DdHBvWi1STnFWSk1reWZRVkpEQjlCT05fdm8tV3ItQU5kSThCSjZON3ZvNXJhNXB2dWV0Zmt6NlJ1UUxoUDY4ZjZERk1qWmNUNkIxaW01anhRSURSaGlPZkE?oc=5",
-      "source": "Reuters Technology",
-      "sourceKey": "reuters-technology",
+      "title": "I tested Sony’s affordable Bravia 5 TV, and it offers a lot of punch for its price tag, throwing serious shade on Sony’s previous mid-range screens",
+      "titleZh": "我测试了索尼经济实惠的Bravia 5电视，它为价格标签提供了很多冲击，给索尼以前的中档屏幕带来了严重的阴影",
+      "url": "https://www.techradar.com/televisions/i-tested-sonys-affordable-bravia-5-tv-and-it-offers-a-lot-of-punch-for-its-price-tag-throwing-serious-shade-on-sonys-previous-mid-range-screens",
+      "source": "TechRadar",
+      "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 52.9,
+      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
+      "score": 70.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -171,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 71.1,
+      "score": 71,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -187,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -199,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 58.6,
+      "score": 58.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "66e6f119dc5b1799",
+      "id": "8ea50880be9eeaab",
       "category": "tech",
-      "title": "How to sideload apps onto Android Auto",
-      "titleZh": "如何将应用旁加载到Android Auto",
-      "url": "https://www.engadget.com/2246259/how-to-sideload-android-auto-apps/",
+      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
+      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
+      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 66.3,
+      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
+      "score": 65.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "df79edd46fd49dc1",
@@ -229,7 +224,7 @@
       "publishedAt": "2026-07-09T14:00:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "a6a6d680b69b9b9f",
@@ -243,7 +238,7 @@
       "publishedAt": "2026-07-17T09:30:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "1305dd241c305356",
@@ -255,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 56.8,
+      "score": 56.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "33456732d03842db",
@@ -271,7 +266,7 @@
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
       "score": 60.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -284,8 +279,8 @@
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
       "score": 125.3,
-      "engagement": "273 points · 111 comments",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "engagement": "275 points · 112 comments",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -298,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 127.8,
+      "score": 127.7,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -313,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 107,
+      "score": 106.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -328,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 106.8,
+      "score": 106.7,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -343,9 +338,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 105.3,
+      "score": 105.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -358,9 +353,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 101.8,
+      "score": 101.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -373,9 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 89.8,
+      "score": 89.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -388,9 +383,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 88.5,
+      "score": 88.4,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "7470701fe158400f",
@@ -403,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 83.7,
+      "score": 83.6,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -418,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 82.8,
+      "score": 82.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -433,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 80.9,
+      "score": 80.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -449,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 382927,
       "engagement": "382,927 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -461,9 +456,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 278895,
-      "engagement": "278,895 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 280525,
+      "engagement": "280,525 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -475,9 +470,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 207203,
-      "engagement": "207,203 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 210733,
+      "engagement": "210,733 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -491,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 191384,
       "engagement": "191,384 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "114483232b4c644f",
@@ -505,7 +500,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 167313,
       "engagement": "167,313 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -517,9 +512,9 @@
       "sourceKey": "youtube-ONuWCsB7ULU",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T07:00:12Z",
-      "score": 124074,
-      "engagement": "124,074 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 124215,
+      "engagement": "124,215 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -531,9 +526,9 @@
       "sourceKey": "youtube-5MqJKUJtoNY",
       "sourceOrder": 6,
       "publishedAt": "2026-09-05T11:01:03Z",
-      "score": 114167,
-      "engagement": "114,167 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 114644,
+      "engagement": "114,644 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -545,9 +540,9 @@
       "sourceKey": "youtube-uemH0o2joFA",
       "sourceOrder": 7,
       "publishedAt": "2026-09-05T07:09:16Z",
-      "score": 109387,
-      "engagement": "109,387 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 109520,
+      "engagement": "109,520 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -559,23 +554,23 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 98077,
-      "engagement": "98,077 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "score": 98546,
+      "engagement": "98,546 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     },
     {
-      "id": "dcffa09b52e13268",
+      "id": "f4446961f1e848a6",
       "category": "youtube",
-      "title": "車CAM直擊 - 利園Tesla撞跌交通警 事發一刻",
-      "titleZh": "車CAM直擊 - 利園Tesla撞跌交通警 事發一刻",
-      "url": "https://www.youtube.com/watch?v=cOi19CUIjXQ",
-      "source": "車CAM特警",
-      "sourceKey": "youtube-cOi19CUIjXQ",
+      "title": "Bessent vs Wall Street: They Don't Understand This Economy",
+      "titleZh": "贝森特与华尔街：他们不了解这种经济",
+      "url": "https://www.youtube.com/watch?v=b5igiJSgZCo",
+      "source": "Promethean Updates",
+      "sourceKey": "youtube-b5igiJSgZCo",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-05T13:14:17Z",
-      "score": 66095,
-      "engagement": "66,095 次观看",
-      "fetchedAt": "2026-09-06T05:43:23.045Z"
+      "publishedAt": "2026-09-05T19:34:19Z",
+      "score": 71317,
+      "engagement": "71,317 次观看",
+      "fetchedAt": "2026-09-06T05:47:15.614Z"
     }
   ]
 }
