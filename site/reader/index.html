@@ -8,19 +8,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>DailyReview 中文阅读器</title>
     <!-- compatibility marker: v2026.09.06.36 -->
-    <link rel="icon" href="icon-192.png?v=2026.09.06.37" type="image/png" />
-    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.06.37" />
-    <link rel="manifest" href="manifest.webmanifest?v=2026.09.06.37" />
-    <link rel="stylesheet" href="reader.css?v=2026.09.06.37" />
-    <script src="reader.js?v=2026.09.06.37" defer></script>
+    <link rel="icon" href="icon-192.png?v=2026.09.06.38" type="image/png" />
+    <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.06.38" />
+    <link rel="manifest" href="manifest.webmanifest?v=2026.09.06.38" />
+    <link rel="stylesheet" href="reader.css?v=2026.09.06.38" />
+    <script src="reader.js?v=2026.09.06.38" defer></script>
+    <script src="reader-hn.js?v=2026.09.06.38" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.06.37</span></div>
+      <div class="brand-group"><a class="brand" href="../">DailyReview</a><span class="version-badge">v2026.09.06.38</span></div>
     </header>
     <main>
       <section class="hero">
-        <p class="eyebrow">每日科技、美股、国际、YouTube与热点事件</p>
+        <p class="eyebrow">每日科技、美股、国际、YouTube与Hacker News</p>
         <h1>热点 Top 10</h1>
         <p id="archiveMeta" class="subtle" aria-live="polite">正在载入…</p>
       </section>
@@ -30,8 +31,7 @@
         <button class="category-tab" type="button" role="tab" data-category="market" aria-controls="daysContainer">美股</button>
         <button class="category-tab" type="button" role="tab" data-category="world" aria-controls="daysContainer">国际</button>
         <button class="category-tab" type="button" role="tab" data-category="youtube" aria-controls="daysContainer">YouTube</button>
-        <!-- compatibility marker: data-category="trends">词云 -->
-        <button class="category-tab" type="button" role="tab" data-category="trends" aria-controls="daysContainer">事件</button>
+        <button class="category-tab" type="button" role="tab" data-category="hn" aria-controls="daysContainer">Hacker News</button>
       </nav>
 
       <section id="daysContainer" class="days" aria-live="polite"></section>
