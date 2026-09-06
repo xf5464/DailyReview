@@ -5,7 +5,7 @@ const ARCHIVE_URLS = [
   'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json',
   new URL('data/recent.json', location.href).toString(),
 ];
-const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v4';
+const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v4'; // compatibility: dailyreview-recent-v3
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
 const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 const RESUME_REFRESH_MS = 5 * 60 * 1000;
@@ -110,13 +110,13 @@ function updateCategoryTabs() {
   refs.tabs.forEach((tab) => { const selected = tab.dataset.category === activeCategory; tab.setAttribute('aria-selected', String(selected)); tab.tabIndex = selected ? 0 : -1; });
 }
 function selectedItems(value) {
-  return (value.items || []).filter((item) => item.category === activeCategory).sort((a, b) => itemTimestamp(b) - itemTimestamp(a)).slice(0, 10);
+  return (value.items || []).filter((item) => item.category === activeCategory).sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
 }
 
 function renderEventCloud(trends) {
   const panel = document.createElement('section'); panel.className = 'day word-cloud-panel';
   const cloud = document.createElement('div'); cloud.className = 'event-cloud'; cloud.setAttribute('role', 'list'); cloud.setAttribute('aria-label', '今日热点事件');
-  const sorted = [...trends].sort((a, b) => Number(b.score) - Number(a.score));
+  const sorted = [...trends].sort((left, right) => Number(right.score) - Number(left.score));
   const scores = sorted.map((item) => Number(item.score) || 0);
   const min = Math.min(...scores); const max = Math.max(...scores);
   const colors = ['#175cd3', '#7f56d9', '#c4320a', '#087443', '#b54708', '#344054'];
