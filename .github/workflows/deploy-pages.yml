@@ -58,6 +58,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Apply reader event-ranking UI
+        run: node scripts/patch-reader-event-ranking.js
+
       - name: Build static site and refresh data
         env:
           CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
@@ -118,7 +121,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
