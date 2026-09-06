@@ -1,5 +1,6 @@
 const USER_AGENT = "DailyReview/1.0 (+https://github.com/xf5464/DailyReview)";
 const MAX_ITEMS = 10;
+const MAX_HEADLINE_AGE_HOURS = 24 * 7;
 const YOUTUBE_LOOKBACK_HOURS = 24;
 const YOUTUBE_QUERY = '"artificial intelligence"|"technology news"|"stock market"|"Wall Street"|Nvidia|Tesla -movie -film -trailer -music';
 const fs = require("node:fs");
@@ -395,7 +396,9 @@ async function fetchHomepageHeadline(source, category, sourceOrder, now = Date.n
   if (source.headlineFeed) {
     try {
       const feedItems = parseRssItems(await fetchText(source.headlineFeed, 15_000), category, 0)
-        .filter((item) => !isPaywalledItem(item));
+        .filter((item) => !isPaywalledItem(item))
+        .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= MAX_HEADLINE_AGE_HOURS)
+        .sort((left, right) => Date.parse(right.publishedAt || 0) - Date.parse(left.publishedAt || 0));
       if (feedItems.length) {
         const item = feedItems[0];
         return {
@@ -483,6 +486,31 @@ async function translateTitleFallback(title) {
   return translated;
 }
 
+function wait(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function translateTitleWithRetry(title, attempts = 4) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await translateTitleFallback(title);
+    } catch (error) {
+      lastError = error;
+      if (attempt < attempts) await wait(350 * attempt);
+    }
+  }
+  throw lastError;
+}
+
+function assertChineseTranslations(items) {
+  const missing = items.filter((item) => !containsChinese(item.title) && !containsChinese(item.titleZh));
+  if (missing.length) {
+    throw new Error(`Refusing to publish ${missing.length} untranslated title(s): ${missing.map((item) => item.source || item.title).join(", ")}`);
+  }
+  return items;
+}
+
 async function addChineseTranslations(items, maxBatchBytes = 450) {
   const output = items.map((item) => ({
     ...item,
@@ -506,8 +534,10 @@ async function addChineseTranslations(items, maxBatchBytes = 450) {
         await translateIndexes(indexes.slice(0, middle), language);
         await translateIndexes(indexes.slice(middle), language);
       } else {
-        try { output[indexes[0]].titleZh = await translateTitleFallback(items[indexes[0]].title); }
-        catch { console.warn(`Could not translate title from ${language}: ${error.message}`); }
+        try { output[indexes[0]].titleZh = await translateTitleWithRetry(items[indexes[0]].title); }
+        catch (fallbackError) {
+          console.warn(`Could not translate title from ${language}: MyMemory: ${error.message}; Google fallback: ${fallbackError.message}`);
+        }
       }
     }
   }
@@ -523,7 +553,7 @@ async function addChineseTranslations(items, maxBatchBytes = 450) {
     }
     if (batch.length) await translateIndexes(batch, language);
   }
-  return output;
+  return assertChineseTranslations(output);
 }
 
 async function fetchHackerNewsTop(now = Date.now()) {
@@ -850,7 +880,7 @@ async function main() {
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
 module.exports = {
-  NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, cleanMarkdownTitle, collectHotNews, decodeXml,
+  NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, assertChineseTranslations, cleanMarkdownTitle, collectHotNews, decodeXml,
   detectTitleLanguage, environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
   isSameWorldEvent, parseHomepageHeadline, parseRssItems, publishedDateFromHtml, rankAndDedupe, rankWorldCandidates, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   translateBatch, translateTitle, youtubeItemsFromResponses,
