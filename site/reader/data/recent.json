@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T04:00:43.435Z",
+  "updatedAt": "2026-09-06T04:30:46.502Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 28.8,
+      "score": 28.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "5c697b153db7cf70",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 23:40:14 GMT",
-      "score": 46.2,
+      "score": 46,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "42d32f0ffc994442",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 22:30:25 GMT",
-      "score": 34.5,
+      "score": 34,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "f8a89c216653a841",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 00:47:28 GMT",
-      "score": 61.5,
+      "score": 61,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 01:42:44 GMT",
-      "score": 60.2,
+      "score": 62.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "8edac8fda07750f0",
@@ -103,24 +103,24 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 16:15:40 GMT",
-      "score": 44.3,
+      "score": 43.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
-      "id": "bb719505c8acd28c",
+      "id": "59c0bb36a439900d",
       "category": "market",
-      "title": "Fidelity 401(k) balances signal good news for American retirees",
-      "titleZh": "富达401 (k)余额给美国退休人员带来好消息",
-      "url": "https://www.thestreet.com/retirement/fidelity-401k-balances-signal-good-news-for-american-retirees",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZWFLNDQ1MTQycXRkUTdPMmhhd2NjY2pJU1RxQzNGbVlmWFZUZnQ3enBBSHdKWlJCV1RzT1E1YU10eVpGY0xuNXZ0UUVWS0VQMmx4TURtZE84eHNnb2F3TndPOHFzaXdMend3ei1fZTdSVmtZVzYzN0lxM0MxSld2aDNhZEJibE9pT21aS2xqQVloVW8yZVhmNGF4SVdOb28?oc=5",
+      "title": "After 130 closures, seafood chain now has just 13 restaurants",
+      "titleZh": "关闭 130 家海鲜连锁店后，现在只剩下 13 家餐厅",
+      "url": "https://www.thestreet.com/restaurants/after-130-closures-seafood-chain-now-has-just-13-restaurants",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOaGdqcmp5TzkzaUszam5PRDg5MTQ0c21URWlIVnZwUmFKS0ZSMkFtbXVyRElzLXRlSUZSMC1Nb0ItNmQ3aDZlRjUwX1hWVklGaTdleVBKN0Q4RENZamRuUWlFdGlfTDlmMXY5azJGbGhGT1B0aGxVcUwtT3BvbXl4dnUwWFF4UU9nSjVsQ243MTBRYXRfVlBBVXhPd08zQlU?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 23:47:00 GMT",
-      "score": 38.2,
+      "publishedAt": "Sun, 06 Sep 2026 01:12:00 GMT",
+      "score": 36.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "323ec3cdc74d087d",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
-      "score": 52.3,
+      "score": 51.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 47.2,
+      "score": 46.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 54.4,
+      "score": 53.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 72.8,
+      "score": 72.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "3c803508656819f2",
@@ -193,54 +193,54 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 16:49:33 GMT",
-      "score": 44.8,
+      "score": 44.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
-      "id": "8a782c3a7897017c",
+      "id": "e520ddfabab05814",
       "category": "tech",
-      "title": "Tesla’s Cybercab has been deployed, and it’s already under investigation | Page 3 | Ars OpenForum",
-      "titleZh": "特斯拉的Cybercab已经部署，并且已经在调查中|第3页| Ars OpenForum",
-      "url": "https://arstechnica.com/civis/threads/tesla%E2%80%99s-cybercab-has-been-deployed-and-it%E2%80%99s-already-under-investigation.1514677/page-3",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOSVF2QS1LYkFmdTYzUWdIMHJlSUs2aGNEcWdJTVVlSG9RdHc5b2I5UjZyS0U1N3dLSzljY0JsTGRPMG5PRlNuSy13b2hpb1pyS2hKYzNhWVJSMTNDU1VBRF9RNzl0cDd3c2k3VG1xakVjUHVpTGpPeUtlTlpwcS1Hdm1NdEZlakxhM3dxX3V6dEdlbU1BbEUxazlmUVZZUU5TYjlTUjQ1TC16RUszdXlrdE5BM1hvTGc1ZjRXaDFybFhqcGhHMTNIaGQtTTZNRGlRbTJqdnZrRQ?oc=5",
+      "title": "Trump admin fights ABC lawsuit as watchdogs worry Disney will settle with FCC",
+      "titleZh": "监管机构担心迪士尼将与 FCC 达成和解，特朗普政府与 ABC 诉讼作斗争",
+      "url": "https://arstechnica.com/civis/threads/trump-admin-fights-abc-lawsuit-as-watchdogs-worry-disney-will-settle-with-fcc.1514670/page-2",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQT01SWTFmUWUxbnZRNjhkQUhRczVhMENiZElrUm1URjVSRHk0VXRvY0h3TVZIcFB5RGhPOXhTSnpkb09jLW9NRER0VjVaV0l2QXkwdm9SV2hTdndKQ0NOam1EdVhTcEoyMDFRRDRfTmItMlcxQjlyY1h3U0sxdWFwWGNxTzJtZmZlejQ0b0V1SUVaMG5MOFBaaFJxWkc1V05BRnNNUGptRERiOVRvZ1cxdXZvVXloWHhyZmV0TlZKN3E2QzN1TkdwSGN3?oc=5",
       "source": "Ars Technica",
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
-      "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 50.5,
+      "publishedAt": "Sun, 06 Sep 2026 03:42:43 GMT",
+      "score": 54.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
-      "id": "f4396035237fc098",
+      "id": "8ea50880be9eeaab",
       "category": "tech",
-      "title": "Apple iTunes Still Exists, But Not The Way It Used To",
-      "titleZh": "Apple iTunes仍然存在，但不是以前的方式",
-      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZFQyemlQZ3B4bG9Jb0ZVd3ZFZHJHbzRhcTZhTVBhWTFWdVRJUzFEdTZoQW9WSU1vTFFydk8xMG9QSkt3ZldJOXhUa3FNOFdJN0pJanhMdE1KWHJzckJTdU9vSmRtZklXR0cyQmdDaUNnQVhaY3Voeks1VG1Hblk0aWJXQW5XaUxST05R?oc=5",
+      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
+      "titleZh": "让手机的蓝牙一直运行安全吗？",
+      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOX3dTSzVpZ1dmeENBZnl6ODA3cE5FNkVqTU84TDBDQkZrV3pCN0M4N2VwN3lLaElLTHhMem1DNUYtRXlNM29lVE1QWWlwdzczTFRSS2JkTUVxVlFnTlp4NmdBNWMxWmJObEJtVnJlaXJoWjUwX3VWeGs5ZGF0M2hsQQ?oc=5",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:00:00 GMT",
-      "score": 61.6,
+      "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
+      "score": 49,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
-      "id": "7d7bec08c2641a2a",
+      "id": "50ac2ebb30523602",
       "category": "tech",
-      "title": "The best Labor Day Costco deals 2026: TVs, smartwatches, Apple devices, and more",
-      "titleZh": "Costco 2026年最佳劳动节优惠：电视、智能手表、苹果设备等",
-      "url": "https://www.zdnet.com/home-and-office/best-labor-day-costco-deals-2026-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1LTWt1RGRIZlF3LU4wanludW9QR3JIZG5LRzUwc3VIeFNhbjlkcVlHY3dYVWpLVFo5Qm1ja2J5WVh1cVpZWmNxYWJrOXAyMC1TUjdUYWUzemZ6U1hCME1FWEpqcUR0bDB0aTQwQ3Njd25iZUc4MzY4a0ttVXd4Zw?oc=5",
+      "title": "The best Labor Day 2026 laptop deals: Apple, Lenovo, Dell, and more",
+      "titleZh": "2026 年劳动节笔记本电脑最佳优惠：Apple、Lenovo、Dell 等",
+      "url": "https://www.zdnet.com/article/best-labor-day-laptop-deals-2026-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTE40NTRud2xvWFc1TlQ2ck1pZ3dFbU1DV0RMR1dpeEdUenhCanJwTmdrUWQ5MkRUeTNpUkVLZG9KcF9rM2NpcEN3Y0EteHFaUFA4cW5fVDA2UG53MW8tV2VweW05X251NkxDNmlDNXFaaGo3dlE?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 03:11:36 GMT",
-      "score": 67.5,
+      "publishedAt": "Sun, 06 Sep 2026 04:18:11 GMT",
+      "score": 65.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "7997ebd4268c1319",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 03:35:00 GMT",
-      "score": 39.6,
+      "score": 51.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "79e92c2970dc6346",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 00:42:25 GMT",
-      "score": 47.7,
+      "score": 47.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 42.6,
+      "score": 42.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 122,
-      "engagement": "214 points · 86 comments",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "score": 123.3,
+      "engagement": "229 points · 98 comments",
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -312,9 +312,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 130.2,
+      "score": 129.5,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -327,9 +327,9 @@
       "sourceKey": "world-al-jazeera-1",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 109.5,
+      "score": 108.8,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -342,9 +342,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 109.2,
+      "score": 108.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -357,9 +357,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 107.7,
+      "score": 107,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -372,9 +372,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 104.2,
+      "score": 103.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -387,9 +387,9 @@
       "sourceKey": "world-bbc-world-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 90.9,
+      "score": 90.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "7470701fe158400f",
@@ -402,24 +402,9 @@
       "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 86.2,
+      "score": 85.4,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
-    },
-    {
-      "id": "0cc200b64aa9af71",
-      "category": "world",
-      "title": "US ambassador visits Palestinian town amid rise in West Bank settler violence",
-      "titleZh": "在约旦河西岸定居者暴力事件增加之际，美国大使访问巴勒斯坦城镇",
-      "url": "https://www.reuters.com/world/middle-east/us-ambassador-visits-palestinian-town-amid-rise-west-bank-settler-violence-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQcHpLU3NTaHlMWHZGRnJIYmY5RGkzZkNPbnJyVXJLSmN4M3NyMjhZaUlzbDFURzZ4VW1LOTc2SFhqc05SMURsMV84dHZhcHhLcUhlM1AyNHlyWmVlYmdSbWp0Vl9xbjBqSGllSjlCVGxySDJRMl95ZFI4V1FwVjAwT2tzWWNWdjJqWnpKMjA3V1c2QzkzWFphemhVdWRIRW53YWNjNFlkMGlMOTZMZTc5NXVtZ1NKblFMVUZObzYtSEpsODAxNDlr?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 22:29:12 GMT",
-      "score": 86.1,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -429,12 +414,12 @@
       "url": "https://www.reuters.com/world/china/chinese-national-rescued-nepal-tunnel-day-after-2-nepalis-pulled-out-alive-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOaG1aeTdsTDc5NHp0U0J2UFV0eGtnY1k4TjBqT3FzS3hmM3o1Um1hRW1Xa0UtcmV3YlRFZTVROFVVRVBYY2t5MF9WekJzLXZMdWJLa1ZYeWpIZmpjcC1Vamt3bzJvd21WeWFnTjB2QWJqXzA5bWM5dHJhLTNwLXRDMnJ0SVNqUmo4cjBQYXNjWi15aURhVTE4NXhtVHJFcVJxeUlVZVRERUlXa1dZY01PVGpmclFnMkpldFZGQkdXdw?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 85.3,
+      "score": 84.4,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -444,12 +429,27 @@
       "url": "https://www.reuters.com/world/berlin-launches-crisis-response-after-hackers-publish-stolen-data-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMWpiamMtMTlEdUI0amU3Wjk2Rkt1SGdtVkFOZXRtVDY0ZXhXNTJFQVJBZnB0WEowZjFtM1luUUl5dnZnODFCTEV1ai1fR2dMZ1VmWl9BaUhOM2NNakhQWDVaV291ejU4YXpZcy1hMHVaZksydW90c25HOFp2UHlLbXU0SlVMcGJMTzF0VzBNZlZack40WjJUaGREY3g3TVBuZm5EWHFaNTRxdk0?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-9",
-      "sourceOrder": 9,
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 83.3,
+      "score": 82.6,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
+    },
+    {
+      "id": "b63b2905c00dba12",
+      "category": "world",
+      "title": "'He was a lifeline' - Families at a loss after Haitian caregivers let go in US",
+      "titleZh": "“他是生命线”——海地护理人员在美国被解雇后，家庭一片茫然",
+      "url": "https://www.bbc.com/news/articles/cg491zp13qqo",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE10c0VVczRCS3hWYS1Fc3picHYzdVVGOElreWpTbnZqTHFGQnRnenhJbDE2ckpLc2JHZmpkY2NDNWZZNW1BUnFFSms2T0VTWEN5ZWFpU2VTaHR6UQ?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-9",
+      "sourceOrder": 9,
+      "publishedAt": "Sun, 06 Sep 2026 00:17:05 GMT",
+      "score": 81.3,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -463,7 +463,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 370232,
       "engagement": "370,232 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "5e7c16d375405632",
@@ -477,7 +477,7 @@
       "publishedAt": "2026-09-05T04:00:39Z",
       "score": 264091,
       "engagement": "264,091 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -491,7 +491,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 168608,
       "engagement": "168,608 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -505,7 +505,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 152543,
       "engagement": "152,543 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -519,7 +519,7 @@
       "publishedAt": "2026-09-05T07:00:12Z",
       "score": 118383,
       "engagement": "118,383 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -533,7 +533,7 @@
       "publishedAt": "2026-09-05T07:09:16Z",
       "score": 97826,
       "engagement": "97,826 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "c4eca05ec613e3bc",
@@ -547,7 +547,7 @@
       "publishedAt": "2026-09-05T04:01:43Z",
       "score": 96546,
       "engagement": "96,546 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -561,7 +561,7 @@
       "publishedAt": "2026-09-05T16:15:34Z",
       "score": 66122,
       "engagement": "66,122 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "77bae84d54dfa79b",
@@ -575,7 +575,7 @@
       "publishedAt": "2026-09-05T11:08:47Z",
       "score": 65032,
       "engagement": "65,032 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     },
     {
       "id": "dcffa09b52e13268",
@@ -589,7 +589,7 @@
       "publishedAt": "2026-09-05T13:14:17Z",
       "score": 54843,
       "engagement": "54,843 次观看",
-      "fetchedAt": "2026-09-06T04:00:43.435Z"
+      "fetchedAt": "2026-09-06T04:30:46.502Z"
     }
   ]
 }
