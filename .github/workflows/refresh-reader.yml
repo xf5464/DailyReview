@@ -41,8 +41,10 @@ jobs:
         run: |
           npm test
           node --check scripts/refresh-reader-news.js
+          node --check scripts/refresh-reader-aggregated.js
+          node --check scripts/patch-reader-event-ranking.js
 
-      - name: Fetch current publisher headlines and update reader only
+      - name: Fetch and aggregate current headlines
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
@@ -50,7 +52,7 @@ jobs:
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
         run: |
           for attempt in 1 2 3; do
-            if node scripts/refresh-reader-news.js; then
+            if node scripts/refresh-reader-aggregated.js; then
               exit 0
             fi
             if [[ "$attempt" == "3" ]]; then
