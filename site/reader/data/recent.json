@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T07:57:09.435Z",
+  "updatedAt": "2026-09-06T08:00:43.673Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
-      "id": "b207e1567fb1820a",
+      "id": "f2310f159a2356d2",
       "category": "market",
-      "title": "California Just Hit a Cannabis Tax Milestone: Gavin Newsom Announces $8.4 Billion Haul, Vows to 'Keep Strengthening Our Legal Market'",
-      "titleZh": "加利福尼亚州刚刚达到大麻税收里程碑： Gavin Newsom宣布84亿美元的货运量，誓言“继续加强我们的合法市场”",
-      "url": "https://finance.yahoo.com/economy/policy/articles/california-just-hit-cannabis-tax-023007913.html",
+      "title": "Honeywell Is Now Three Companies. Here's Which Piece I'd Actually Own.",
+      "titleZh": "霍尼韦尔现在是三家公司。 以下是我实际拥有的物品。",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/honeywell-now-three-companies-heres-023500905.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T02:30:07Z",
-      "score": 27.7,
+      "publishedAt": "2026-09-05T02:35:00Z",
+      "score": 29.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 52.7,
+      "score": 52.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "aa7f4b19575d566a",
@@ -56,7 +56,7 @@
       "publishedAt": "Sun, 06 Sep 2026 06:04:51 GMT",
       "score": 47.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 52.8,
+      "score": 52.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,23 +96,23 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 42.3,
+      "score": 42.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
-      "id": "d0d6b5803f0e771f",
+      "id": "ca52c45e780b623d",
       "category": "market",
-      "title": "Citizen’s Eco-Drive Luxury watch is now $175 at Amazon",
-      "titleZh": "Citizen的Eco-Drive Luxury手表现在在亚马逊售价为175 $",
-      "url": "https://www.thestreet.com/deals/citizen-dress-classic-eco-drive-luxury-watch-amazon-sale-september-2026",
+      "title": "Amazon is selling noise-canceling wireless earbuds for just $18",
+      "titleZh": "亚马逊的降噪无线耳机售价仅为$ 18",
+      "url": "https://www.thestreet.com/deals/leemc-s12-wireless-earbuds-amazon-sale-september-2026",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
-      "score": 56,
+      "publishedAt": "Sun, 06 Sep 2026 08:00:00 GMT",
+      "score": 59,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "a79aaccbcca77552",
@@ -126,7 +126,7 @@
       "publishedAt": "Sun, 06 Sep 2026 03:12:01 -0400",
       "score": 66.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -154,7 +154,7 @@
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
       "score": 68,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 68.9,
+      "score": 68.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -196,7 +196,7 @@
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
       "score": 56.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -210,7 +210,7 @@
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
       "score": 62.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 55.8,
+      "score": 55.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -238,7 +238,7 @@
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
       "score": 62,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "1305dd241c305356",
@@ -252,7 +252,7 @@
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
       "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "33456732d03842db",
@@ -266,7 +266,7 @@
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
       "score": 57.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "0954f87590575e13",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T06:23:05.000Z",
-      "score": 97.3,
-      "engagement": "48 points · 28 comments",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "score": 100.3,
+      "engagement": "54 points · 35 comments",
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 107,
+      "score": 106.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -310,7 +310,7 @@
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
       "score": 103.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -323,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 103.7,
+      "score": 103.6,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -338,9 +338,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 102.2,
+      "score": 102.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "024fd13de026decc",
@@ -353,9 +353,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 101.3,
+      "score": 101.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -368,9 +368,9 @@
       "sourceKey": "world-bbc-world-5",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
-      "score": 100.6,
+      "score": 100.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -383,9 +383,9 @@
       "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 98.7,
+      "score": 98.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -398,9 +398,9 @@
       "sourceKey": "world-al-jazeera-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 86.7,
+      "score": 86.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -415,7 +415,7 @@
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
       "score": 85.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "7470701fe158400f",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 80,
+      "score": 79.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 395990,
       "engagement": "395,990 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 313676,
       "engagement": "313,676 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 252700,
       "engagement": "252,700 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "114483232b4c644f",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 209100,
       "engagement": "209,100 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 199892,
       "engagement": "199,892 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "0128da0780432f60",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T09:15:08Z",
       "score": 163970,
       "engagement": "163,970 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "8d96a3ba04e7b33f",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-06T00:21:42Z",
       "score": 150269,
       "engagement": "150,269 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 123095,
       "engagement": "123,095 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 107558,
       "engagement": "107,558 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 66034,
       "engagement": "66,034 次观看",
-      "fetchedAt": "2026-09-06T07:57:09.435Z"
+      "fetchedAt": "2026-09-06T08:00:43.673Z"
     }
   ]
 }
