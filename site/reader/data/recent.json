@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T11:46:55.671Z",
+  "updatedAt": "2026-09-06T11:50:18.604Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "e5a2f5b5946be969",
@@ -26,9 +26,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T12:38:38Z",
-      "score": 27.2,
+      "score": 27.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -42,7 +42,7 @@
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
       "score": 48.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "9146aeb602af863c",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 10:29:03 GMT",
-      "score": 61.7,
+      "score": 61.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 49,
+      "score": 48.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -98,7 +98,7 @@
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
       "score": 62.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "8dcfffec7892dec0",
@@ -112,21 +112,21 @@
       "publishedAt": "Sun, 06 Sep 2026 11:37:00 GMT",
       "score": 64.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
-      "id": "348f0bfe1740727d",
+      "id": "5341a92ed2f9cff2",
       "category": "market",
-      "title": "The Stock Market Is Doing Something for Only the 2nd Time in Nearly 156 Years, and History Says It Foreshadows Disaster for Wall Street",
-      "titleZh": "近156年来，股市仅第二次有所作为，历史表明这预示着华尔街的灾难",
-      "url": "https://www.fool.com/investing/2026/09/06/stock-market-is-doing-something-only-2nd-time-in-156-years-history-says-disaster-for-wall-street/?source=iedfolrf0000001",
+      "title": "Visa vs. American Express: Which Financial Stock Is the Better Buy?",
+      "titleZh": "Visa与美国运通：哪种金融股更合适？",
+      "url": "https://www.fool.com/investing/2026/09/06/visa-vs-american-express-which-financial-stock-is/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 06:36:01 -0400",
-      "score": 68.8,
+      "publishedAt": "Sun, 06 Sep 2026 07:24:00 -0400",
+      "score": 60.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "bf684667ddcef7d7",
@@ -154,7 +154,7 @@
       "publishedAt": "Sun, 06 Sep 2026 11:00:00 +0000",
       "score": 75.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -168,7 +168,7 @@
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
       "score": 65,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -196,21 +196,21 @@
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
       "score": 52.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
-      "id": "f4396035237fc098",
+      "id": "4d7cb63bbad84ee4",
       "category": "tech",
-      "title": "Apple iTunes still exists, but not the way it used to",
-      "titleZh": "Apple iTunes仍然存在，但不像以前那样",
-      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/",
+      "title": "Why are iPhones more expensive than iPads?",
+      "titleZh": "为什么iPhone比iPad更贵？",
+      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:00:00 +0000",
-      "score": 59.2,
+      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
+      "score": 60.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
-      "score": 70.4,
+      "score": 70.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "00c1641144f2567d",
@@ -238,7 +238,7 @@
       "publishedAt": "Sun, 06 Sep 26 11:00:00 +0000",
       "score": 69.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 50.7,
+      "score": 50.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "ebe05b314969ffc7",
@@ -266,7 +266,7 @@
       "publishedAt": "Sun, 06 Sep 2026 10:30:00 +0000",
       "score": 69.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -279,8 +279,8 @@
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
       "score": 119.4,
-      "engagement": "247 points · 49 comments",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "engagement": "248 points · 49 comments",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 119,
+      "score": 118.9,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 105.8,
+      "score": 105.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -323,9 +323,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 08:43:43 GMT",
-      "score": 102.9,
+      "score": 102.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "8237d8a583b3c72e",
@@ -338,9 +338,9 @@
       "sourceKey": "world-bbc-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 09:56:39 GMT",
-      "score": 102.5,
+      "score": 102.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -355,7 +355,7 @@
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
       "score": 99.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -370,22 +370,7 @@
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
       "score": 98.4,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
-    },
-    {
-      "id": "43fa9a37eca2ddf4",
-      "category": "world",
-      "title": "At flood-destroyed China-Nepal border, no sign of a once-busy port",
-      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
-      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
-      "score": 98,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -395,27 +380,27 @@
       "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
       "score": 98,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
-      "id": "024fd13de026decc",
+      "id": "43fa9a37eca2ddf4",
       "category": "world",
-      "title": "Four killed in Israeli strikes on southern Lebanon",
-      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
-      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
+      "title": "At flood-destroyed China-Nepal border, no sign of a once-busy port",
+      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
+      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 96.2,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
+      "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
+      "score": 97.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -425,12 +410,27 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-9",
-      "sourceOrder": 9,
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
       "score": 96.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
+    },
+    {
+      "id": "024fd13de026decc",
+      "category": "world",
+      "title": "Four killed in Israeli strikes on southern Lebanon",
+      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
+      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-9",
+      "sourceOrder": 9,
+      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
+      "score": 96.1,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 382207,
-      "engagement": "382,207 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 383877,
+      "engagement": "383,877 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 304282,
-      "engagement": "304,282 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 304977,
+      "engagement": "304,977 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "114483232b4c644f",
@@ -470,9 +470,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 256563,
-      "engagement": "256,563 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 257627,
+      "engagement": "257,627 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -484,9 +484,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 213940,
-      "engagement": "213,940 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 214157,
+      "engagement": "214,157 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 123682,
-      "engagement": "123,682 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 124098,
+      "engagement": "124,098 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -512,23 +512,9 @@
       "sourceKey": "youtube-B8AR0gkEXpI",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T16:15:34Z",
-      "score": 123396,
-      "engagement": "123,396 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
-    },
-    {
-      "id": "c84e211fa0a44784",
-      "category": "youtube",
-      "title": "Tesla's New Taxi Has No Steering Wheel",
-      "titleZh": "特斯拉新出租车没有方向盘",
-      "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
-      "source": "AutomatiK",
-      "sourceKey": "youtube-_lYjci0bjNo",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 86317,
-      "engagement": "86,317 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 123858,
+      "engagement": "123,858 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -538,11 +524,25 @@
       "url": "https://www.youtube.com/watch?v=5II-Dkl3cfQ",
       "source": "6pek",
       "sourceKey": "youtube-5II-Dkl3cfQ",
-      "sourceOrder": 7,
+      "sourceOrder": 6,
       "publishedAt": "2026-09-05T19:29:08Z",
-      "score": 85988,
-      "engagement": "85,988 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 86407,
+      "engagement": "86,407 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
+    },
+    {
+      "id": "c84e211fa0a44784",
+      "category": "youtube",
+      "title": "Tesla's New Taxi Has No Steering Wheel",
+      "titleZh": "特斯拉新出租车没有方向盘",
+      "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
+      "source": "AutomatiK",
+      "sourceKey": "youtube-_lYjci0bjNo",
+      "sourceOrder": 7,
+      "publishedAt": "2026-09-05T17:09:47Z",
+      "score": 86317,
+      "engagement": "86,317 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -554,9 +554,9 @@
       "sourceKey": "youtube-b5igiJSgZCo",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T19:34:19Z",
-      "score": 81539,
-      "engagement": "81,539 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "score": 81597,
+      "engagement": "81,597 次观看",
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T20:27:10Z",
       "score": 80473,
       "engagement": "80,473 次观看",
-      "fetchedAt": "2026-09-06T11:46:55.671Z"
+      "fetchedAt": "2026-09-06T11:50:18.604Z"
     }
   ],
   "trends": [
@@ -578,14 +578,13 @@
       "id": "560040c54a",
       "term": "AI",
       "labelZh": "",
-      "score": 58.99,
-      "mentions": 88,
-      "platformCount": 8,
+      "score": 45.01,
+      "mentions": 89,
+      "platformCount": 7,
       "platforms": [
-        "DailyReview · Yahoo Finance",
+        "DailyReview",
         "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · techhub.social",
+        "Mastodon",
         "Bluesky",
         "GitHub Trending",
         "DEV Community",
@@ -594,368 +593,28 @@
       "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
     },
     {
-      "id": "8eec7bc461",
-      "term": "security",
+      "id": "38c84c8015",
+      "term": "网络安全",
       "labelZh": "",
-      "score": 22.72,
-      "mentions": 32,
-      "platformCount": 7,
-      "platforms": [
-        "DailyReview · MarketWatch",
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
-    },
-    {
-      "id": "9a71ad6ad1",
-      "term": "股票",
-      "labelZh": "",
-      "score": 20.16,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview · Benzinga",
-        "DailyReview · TheStreet",
-        "DailyReview · The Motley Fool",
-        "GitHub Trending"
-      ],
-      "url": "https://www.benzinga.com/money/best-energy-stocks"
-    },
-    {
-      "id": "392d787194",
-      "term": "meet",
-      "labelZh": "",
-      "score": 20.07,
-      "mentions": 6,
+      "score": 11.98,
+      "mentions": 33,
       "platformCount": 6,
       "platforms": [
-        "DailyReview · BBC Business",
-        "DailyReview · CNN Business",
-        "DailyReview · BBC News",
+        "DailyReview",
         "Hacker News",
-        "Mastodon · mastodon.social",
-        "Bluesky"
-      ],
-      "url": "https://www.bbc.co.uk/news/articles/crer948xq00o?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "id": "c3437dbc7c",
-      "term": "https",
-      "labelZh": "",
-      "score": 17.99,
-      "mentions": 19,
-      "platformCount": 3,
-      "platforms": [
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://mastodon.social/@Tutanota/117223765496863185"
-    },
-    {
-      "id": "2b681c0a24",
-      "term": "Google",
-      "labelZh": "",
-      "score": 14.68,
-      "mentions": 14,
-      "platformCount": 6,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://lapcatsoftware.com/articles/2026/9/1.html"
-    },
-    {
-      "id": "b38d961e70",
-      "term": "苹果",
-      "labelZh": "",
-      "score": 13.81,
-      "mentions": 5,
-      "platformCount": 5,
-      "platforms": [
-        "DailyReview · Engadget",
-        "DailyReview · CNN Business",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/"
-    },
-    {
-      "id": "85f2aea244",
-      "term": "september",
-      "labelZh": "",
-      "score": 13.08,
-      "mentions": 6,
-      "platformCount": 5,
-      "platforms": [
-        "DailyReview · PCMag",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "DEV Community"
-      ],
-      "url": "https://www.pcmag.com/deals/lock-in-lifetime-fastestvpn-pro-access-for-just-30-through-september-10"
-    },
-    {
-      "id": "4d2f8c7f17",
-      "term": "微软",
-      "labelZh": "",
-      "score": 12.72,
-      "mentions": 7,
-      "platformCount": 5,
-      "platforms": [
-        "DailyReview · TechCrunch",
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
-    },
-    {
-      "id": "af93b3913b",
-      "term": "thought",
-      "labelZh": "",
-      "score": 12.01,
-      "mentions": 9,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview · MarketWatch",
-        "Mastodon · mastodon.social",
-        "Mastodon · techhub.social",
-        "DEV Community"
-      ],
-      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
-    },
-    {
-      "id": "ef98362b8a",
-      "term": "browser",
-      "labelZh": "",
-      "score": 11.91,
-      "mentions": 13,
-      "platformCount": 7,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
+        "Mastodon",
         "GitHub Trending",
         "DEV Community",
         "Lobsters"
       ],
-      "url": "https://quenq.com/apps/vice-city-online/"
-    },
-    {
-      "id": "ca84d1343b",
-      "term": "web",
-      "labelZh": "",
-      "score": 11.27,
-      "mentions": 9,
-      "platformCount": 5,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "GitHub Trending"
-      ],
-      "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
-    },
-    {
-      "id": "5fc7e38bff",
-      "term": "open",
-      "labelZh": "",
-      "score": 10.87,
-      "mentions": 11,
-      "platformCount": 5,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "GitHub Trending"
-      ],
-      "url": "https://www.circuitvalley.com/2026/08/chc5-open-camera-sensor-comparison-specification.html"
-    },
-    {
-      "id": "81c5d49be9",
-      "term": "memory",
-      "labelZh": "",
-      "score": 10.8,
-      "mentions": 7,
-      "platformCount": 5,
-      "platforms": [
-        "DailyReview · TechSpot",
-        "Hacker News",
-        "GitHub Trending",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html"
-    },
-    {
-      "id": "930f2e66d9",
-      "term": "市场",
-      "labelZh": "",
-      "score": 10.64,
-      "mentions": 3,
-      "platformCount": 3,
-      "platforms": [
-        "DailyReview · Tom's Hardware",
-        "DailyReview · The Motley Fool",
-        "GitHub Trending"
-      ],
-      "url": "https://www.tomshardware.com/video-games/former-old-school-runescape-dev-gets-jail-time-for-stealing-usd400-000-from-players-virtual-gold-stolen-and-sold-on-the-black-market-before-jagex-caught-the-culprit-using-hidden-firewall-tweaks"
-    },
-    {
-      "id": "97accafb53",
-      "term": "know",
-      "labelZh": "",
-      "score": 9.4,
-      "mentions": 10,
-      "platformCount": 3,
-      "platforms": [
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://ec.social-network.europa.eu/@EUCommission/117222919584567363"
-    },
-    {
-      "id": "6f8f8e9f76",
-      "term": "then",
-      "labelZh": "",
-      "score": 8.84,
-      "mentions": 5,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview · MarketWatch",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
       "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
     },
     {
-      "id": "86bd16eba3",
-      "term": "payloads",
+      "id": "3b70f4e442",
+      "term": "编程",
       "labelZh": "",
-      "score": 8.47,
-      "mentions": 3,
-      "platformCount": 3,
-      "platforms": [
-        "DailyReview · BleepingComputer",
-        "DailyReview · Hacker News",
-        "Hacker News"
-      ],
-      "url": "https://www.bleepingcomputer.com/news/security/over-5-400-hacked-sites-serve-clickfix-payloads-stored-on-the-blockchain/"
-    },
-    {
-      "id": "66f79d8a63",
-      "term": "history",
-      "labelZh": "",
-      "score": 8.42,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview · The Motley Fool",
-        "Hacker News",
-        "Mastodon · techhub.social",
-        "GitHub Trending"
-      ],
-      "url": "https://www.fool.com/investing/2026/09/06/stock-market-is-doing-something-only-2nd-time-in-156-years-history-says-disaster-for-wall-street/?source=iedfolrf0000001"
-    },
-    {
-      "id": "c00dbbc9da",
-      "term": "old",
-      "labelZh": "",
-      "score": 8.17,
-      "mentions": 4,
-      "platformCount": 3,
-      "platforms": [
-        "DailyReview · Tom's Hardware",
-        "Mastodon · mastodon.social",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://www.tomshardware.com/video-games/former-old-school-runescape-dev-gets-jail-time-for-stealing-usd400-000-from-players-virtual-gold-stolen-and-sold-on-the-black-market-before-jagex-caught-the-culprit-using-hidden-firewall-tweaks"
-    },
-    {
-      "id": "aa4a5f8125",
-      "term": "state",
-      "labelZh": "",
-      "score": 8.01,
-      "mentions": 7,
-      "platformCount": 5,
-      "platforms": [
-        "DailyReview · Reuters World",
-        "Mastodon · mastodon.social",
-        "Mastodon · techhub.social",
-        "Bluesky",
-        "DEV Community"
-      ],
-      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/"
-    },
-    {
-      "id": "fd63f1ed32",
-      "term": "vote",
-      "labelZh": "",
-      "score": 7.77,
-      "mentions": 7,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://wikiworkersunited.org/announcements/2026-09-04-us-wikimedia-foundation-workers-overwhelmingly-vote-to-form-union-with-cwa/"
-    },
-    {
-      "id": "8def4372cd",
-      "term": "few",
-      "labelZh": "",
-      "score": 7.22,
-      "mentions": 7,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social"
-      ],
-      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
-    },
-    {
-      "id": "3e7aaa7960",
-      "term": "services",
-      "labelZh": "",
-      "score": 7.22,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "DailyReview · Yahoo Finance",
-        "Mastodon · mastodon.social",
-        "Mastodon · techhub.social",
-        "GitHub Trending"
-      ],
-      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
-    },
-    {
-      "id": "e6fb06210f",
-      "term": "code",
-      "labelZh": "",
-      "score": 7.14,
-      "mentions": 17,
+      "score": 7.91,
+      "mentions": 21,
       "platformCount": 4,
       "platforms": [
         "Hacker News",
@@ -966,77 +625,399 @@
       "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
     },
     {
-      "id": "db4baacb8d",
-      "term": "orbit",
+      "id": "2b681c0a24",
+      "term": "Google",
       "labelZh": "",
-      "score": 7.05,
-      "mentions": 5,
-      "platformCount": 3,
+      "score": 7.15,
+      "mentions": 14,
+      "platformCount": 4,
       "platforms": [
-        "DailyReview · Hacker News",
         "Hacker News",
-        "Bluesky"
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
       ],
-      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
+      "url": "https://lapcatsoftware.com/articles/2026/9/1.html"
     },
     {
-      "id": "dc724af18f",
-      "term": "testing",
+      "id": "88d650dd4f",
+      "term": "浏览器",
       "labelZh": "",
-      "score": 7.02,
-      "mentions": 10,
+      "score": 6.9,
+      "mentions": 14,
       "platformCount": 5,
       "platforms": [
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://quenq.com/apps/vice-city-online/"
+    },
+    {
+      "id": "e7052aeb5d",
+      "term": "agents",
+      "labelZh": "",
+      "score": 6.81,
+      "mentions": 30,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://github.com/okf-memory/okf-agent-memory"
+    },
+    {
+      "id": "d014ab7703",
+      "term": "内存",
+      "labelZh": "",
+      "score": 4.96,
+      "mentions": 9,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html"
+    },
+    {
+      "id": "4ed766e0c3",
+      "term": "互联网",
+      "labelZh": "",
+      "score": 4.91,
+      "mentions": 10,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending"
+      ],
+      "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
+    },
+    {
+      "id": "98910a6e9a",
+      "term": "them",
+      "labelZh": "",
+      "score": 3.92,
+      "mentions": 9,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://trellner.com/reports/manufactured-sources-behind-ai-recommendations/"
+    },
+    {
+      "id": "83ad8510bb",
+      "term": "Linux",
+      "labelZh": "",
+      "score": 3.83,
+      "mentions": 8,
+      "platformCount": 4,
+      "platforms": [
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://social.treehouse.systems/@AsahiLinux/117221302190818078"
+    },
+    {
+      "id": "0608c40546",
+      "term": "agent",
+      "labelZh": "",
+      "score": 3.53,
+      "mentions": 18,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://collusion.wiki/"
+    },
+    {
+      "id": "e2ae20d9ae",
+      "term": "Rust",
+      "labelZh": "",
+      "score": 3.51,
+      "mentions": 12,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://sofiabelen.github.io/projects/visualizing-rusts-vtables-how-dyn-trait-works-in-memory/"
+    },
+    {
+      "id": "3c49d9cc3c",
+      "term": "running",
+      "labelZh": "",
+      "score": 3.33,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://anticapitalist.party/@dirtycommo/117223561405782267"
+    },
+    {
+      "id": "5b07397be4",
+      "term": "programming",
+      "labelZh": "",
+      "score": 3.25,
+      "mentions": 13,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://usr.lmf.cnrs.fr/lpo/"
+    },
+    {
+      "id": "4ff88aaddb",
+      "term": "free",
+      "labelZh": "",
+      "score": 3.11,
+      "mentions": 10,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://quad9.net/"
+    },
+    {
+      "id": "3097ef218a",
+      "term": "making",
+      "labelZh": "",
+      "score": 3.09,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://cloudinabottle.org/blog/launch-post"
+    },
+    {
+      "id": "8178ea208a",
+      "term": "working",
+      "labelZh": "",
+      "score": 3.07,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://codeberg.org/mv12star/shitter/wiki/Instances"
+    },
+    {
+      "id": "4d2f8c7f17",
+      "term": "微软",
+      "labelZh": "",
+      "score": 3,
+      "mentions": 6,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "Mastodon"
+      ],
+      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
+    },
+    {
+      "id": "0b5d7ed54b",
+      "term": "测试",
+      "labelZh": "",
+      "score": 2.92,
+      "mentions": 10,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon",
         "DEV Community",
         "Lobsters"
       ],
       "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
     },
     {
-      "id": "e4d68c5a97",
-      "term": "limit",
+      "id": "ab43a7c9cb",
+      "term": "coding",
       "labelZh": "",
-      "score": 6.97,
-      "mentions": 6,
+      "score": 2.83,
+      "mentions": 7,
       "platformCount": 4,
       "platforms": [
-        "Mastodon · mastodon.social",
-        "Mastodon · fosstodon.org",
-        "Mastodon · techhub.social",
-        "Lobsters"
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
       ],
-      "url": "https://ec.social-network.europa.eu/@EUCommission/117222919584567363"
+      "url": "https://github.com/okf-memory/okf-agent-memory"
+    },
+    {
+      "id": "4cddc093d5",
+      "term": "llm",
+      "labelZh": "",
+      "score": 2.82,
+      "mentions": 15,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
+    },
+    {
+      "id": "2663e4c35d",
+      "term": "轨道",
+      "labelZh": "",
+      "score": 2.82,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "Bluesky"
+      ],
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
+    },
+    {
+      "id": "edee9402d1",
+      "term": "next",
+      "labelZh": "",
+      "score": 2.8,
+      "mentions": 7,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "DEV Community"
+      ],
+      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
+    },
+    {
+      "id": "cda051c901",
+      "term": "game",
+      "labelZh": "",
+      "score": 2.73,
+      "mentions": 8,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Bluesky",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://michaelteter.com/flyby.html"
+    },
+    {
+      "id": "b802f38430",
+      "term": "three",
+      "labelZh": "",
+      "score": 2.72,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "Mastodon",
+        "DEV Community"
+      ],
+      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/"
+    },
+    {
+      "id": "e274eeff76",
+      "term": "work",
+      "labelZh": "",
+      "score": 2.68,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://victoriametrics.com/blog/go-swiss-table-map/index.html"
+    },
+    {
+      "id": "6cab529f6d",
+      "term": "航空航天",
+      "labelZh": "",
+      "score": 2.68,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "Bluesky"
+      ],
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     },
     {
       "id": "63a4d2ed10",
       "term": "isar",
       "labelZh": "",
-      "score": 6.92,
+      "score": 2.68,
       "mentions": 5,
       "platformCount": 3,
       "platforms": [
-        "DailyReview · Hacker News",
+        "DailyReview",
         "Hacker News",
         "Bluesky"
       ],
       "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     },
     {
-      "id": "c6670de6f0",
-      "term": "aerospace",
+      "id": "1d06a0d76f",
+      "term": "model",
       "labelZh": "",
-      "score": 6.92,
-      "mentions": 5,
+      "score": 2.62,
+      "mentions": 11,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview",
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
+    },
+    {
+      "id": "1f1e67e5fd",
+      "term": "don",
+      "labelZh": "",
+      "score": 2.58,
+      "mentions": 7,
       "platformCount": 3,
       "platforms": [
-        "DailyReview · Hacker News",
         "Hacker News",
-        "Bluesky"
+        "Mastodon",
+        "DEV Community"
       ],
-      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
+      "url": "https://www.motherjones.com/politics/2026/09/drinking-water-mississippi-lawsuit/"
     }
   ]
 }
