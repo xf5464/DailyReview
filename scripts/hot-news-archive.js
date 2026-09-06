@@ -63,9 +63,8 @@ function pruneArchive(archive) {
   };
 }
 
-function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true) {
+function mergeNews(archive, news, now = Date.now(), shouldKeepItem = () => true) {
   const refreshAttemptedAt = new Date(now).toISOString();
-  const previous = pruneArchive(_archive || emptyArchive());
   const items = [...(news.tech || []), ...(news.market || []), ...(news.world || []), ...(news.youtube || [])]
     .map((item, index) => normalizeItem({
       ...item,
@@ -74,14 +73,15 @@ function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true
       isCached: Boolean(item.isCached),
     }, index % 10))
     .filter(shouldKeepItem);
-  const freshTrends = Array.isArray(news.trends) ? news.trends.filter((trend) => trend?.term || trend?.labelZh) : [];
+  const previousTrends = Array.isArray(archive?.trends) ? archive.trends : [];
+  const incomingTrends = Array.isArray(news?.trends) ? news.trends.filter((trend) => trend?.term || trend?.labelZh) : [];
   return pruneArchive({
     schemaVersion: 2,
     updatedAt: refreshAttemptedAt,
     refreshAttemptedAt,
     failureCount: Number(news.failureCount) || items.filter((item) => item.isCached).length,
     items,
-    trends: freshTrends.length ? freshTrends : previous.trends,
+    trends: incomingTrends.length ? incomingTrends : previousTrends,
   });
 }
 
