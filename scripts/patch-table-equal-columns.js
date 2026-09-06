@@ -5,24 +5,40 @@ const projectRoot = path.resolve(__dirname, '..');
 const stylesPath = path.join(projectRoot, 'dist', 'styles.css');
 
 let styles = fs.readFileSync(stylesPath, 'utf8');
-const marker = '/* Overall table: chart name and latest value use equal width on mobile. */';
+const marker = '/* Overall table mobile layout: hide frequency/action; keep chart/latest equal width. */';
 
 if (!styles.includes(marker)) {
   styles += [
     '',
     marker,
     '@media (max-width: 680px) {',
+    '  .overall-table-view {',
+    '    overflow-x: hidden;',
+    '  }',
+    '',
     '  .overall-table-view table {',
     '    width: 100%;',
     '    min-width: 0;',
     '    table-layout: fixed;',
     '  }',
     '',
+    '  .overall-table-view th:nth-child(4),',
+    '  .overall-table-view td:nth-child(4),',
+    '  .overall-table-view th:nth-child(5),',
+    '  .overall-table-view td:nth-child(5) {',
+    '    display: none;',
+    '  }',
+    '',
     '  .overall-table-view th:first-child,',
     '  .overall-table-view td:first-child,',
     '  .overall-table-view th:nth-child(2),',
     '  .overall-table-view td:nth-child(2) {',
-    '    width: 50%;',
+    '    width: 35%;',
+    '  }',
+    '',
+    '  .overall-table-view th:nth-child(3),',
+    '  .overall-table-view td:nth-child(3) {',
+    '    width: 30%;',
     '  }',
     '}',
     '',
@@ -30,4 +46,4 @@ if (!styles.includes(marker)) {
 }
 
 fs.writeFileSync(stylesPath, styles, 'utf8');
-console.log('Patched overall table to 50/50 name and latest-value columns on mobile.');
+console.log('Patched mobile overall table: hidden frequency/action columns; chart/latest remain equal width.');
