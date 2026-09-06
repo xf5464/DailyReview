@@ -7,28 +7,28 @@ const { saveNewsArchive } = require('./hot-news-archive');
 
 const NEWS_SOURCES = {
   tech: [
-    { key: "reuters-technology", name: "Reuters Technology", query: "site:reuters.com technology OR AI OR chips when:7d" },
-    { key: "techcrunch", name: "TechCrunch", query: "site:techcrunch.com when:7d" },
-    { key: "the-verge", name: "The Verge", query: "site:theverge.com when:7d" },
-    { key: "ars-technica", name: "Ars Technica", query: "site:arstechnica.com when:7d" },
-    { key: "engadget", name: "Engadget", query: "site:engadget.com when:7d" },
-    { key: "zdnet", name: "ZDNET", query: "site:zdnet.com technology OR AI when:7d" },
-    { key: "cnet", name: "CNET", query: "site:cnet.com/tech when:7d" },
-    { key: "bleepingcomputer", name: "BleepingComputer", query: "site:bleepingcomputer.com when:7d" },
-    { key: "toms-hardware", name: "Tom's Hardware", query: "site:tomshardware.com when:7d" },
+    { key: "reuters-technology", name: "Reuters Technology", homepage: "https://www.reuters.com/technology/", hosts: ["reuters.com"], articlePattern: "^/(technology|business)/.+-\\d{4}-\\d{2}-\\d{2}/" },
+    { key: "techcrunch", name: "TechCrunch", homepage: "https://techcrunch.com/", hosts: ["techcrunch.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
+    { key: "the-verge", name: "The Verge", homepage: "https://www.theverge.com/tech", hosts: ["theverge.com"], articlePattern: "^/(news|tech|ai-artificial-intelligence)/" },
+    { key: "ars-technica", name: "Ars Technica", homepage: "https://arstechnica.com/", hosts: ["arstechnica.com"], articlePattern: "^/[a-z-]+/\\d{4}/\\d{2}/" },
+    { key: "engadget", name: "Engadget", homepage: "https://www.engadget.com/", hosts: ["engadget.com"], articlePattern: "\\.html$" },
+    { key: "zdnet", name: "ZDNET", homepage: "https://www.zdnet.com/", hosts: ["zdnet.com"], articlePattern: "^/article/" },
+    { key: "cnet", name: "CNET", homepage: "https://www.cnet.com/tech/", hosts: ["cnet.com"], articlePattern: "^/(tech|news)/.+/" },
+    { key: "bleepingcomputer", name: "BleepingComputer", homepage: "https://www.bleepingcomputer.com/", hosts: ["bleepingcomputer.com"], articlePattern: "^/news/" },
+    { key: "toms-hardware", name: "Tom's Hardware", homepage: "https://www.tomshardware.com/", hosts: ["tomshardware.com"], articlePattern: "^/(pc-components|tech-industry|hardware|computing)/" },
     { key: "hacker-news", name: "Hacker News", special: "hacker-news" },
   ],
   market: [
-    { key: "reuters-markets", name: "Reuters Markets", query: "site:reuters.com stock market OR Wall Street when:7d" },
-    { key: "yahoo-finance", name: "Yahoo Finance", query: "site:finance.yahoo.com/news stocks OR markets when:7d" },
-    { key: "cnbc-markets", name: "CNBC Markets", query: "site:cnbc.com stocks OR markets when:7d" },
-    { key: "nasdaq-news", name: "Nasdaq News", query: "site:nasdaq.com/articles stocks OR markets when:7d" },
-    { key: "investing", name: "Investing.com", query: "site:investing.com/news/stock-market-news when:7d" },
-    { key: "marketwatch", name: "MarketWatch", query: "site:marketwatch.com stocks OR markets when:7d" },
-    { key: "benzinga", name: "Benzinga", query: "site:benzinga.com stocks OR markets when:7d" },
-    { key: "the-street", name: "TheStreet", query: "site:thestreet.com stocks OR markets when:7d" },
-    { key: "motley-fool", name: "The Motley Fool", query: "site:fool.com stocks OR market when:7d" },
-    { key: "tradingview", name: "TradingView News", query: "site:tradingview.com/news stocks OR markets when:7d" },
+    { key: "reuters-markets", name: "Reuters Markets", homepage: "https://www.reuters.com/markets/", hosts: ["reuters.com"], articlePattern: "^/(markets|business)/.+-\\d{4}-\\d{2}-\\d{2}/" },
+    { key: "yahoo-finance", name: "Yahoo Finance", homepage: "https://finance.yahoo.com/news/", hosts: ["finance.yahoo.com"], articlePattern: "^/(news|markets)/.+\\.html$" },
+    { key: "cnbc-markets", name: "CNBC Markets", homepage: "https://www.cnbc.com/markets/", hosts: ["cnbc.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
+    { key: "nasdaq-news", name: "Nasdaq News", homepage: "https://www.nasdaq.com/news-and-insights/markets", hosts: ["nasdaq.com"], articlePattern: "^/articles/" },
+    { key: "investing", name: "Investing.com", homepage: "https://www.investing.com/news/stock-market-news", hosts: ["investing.com"], articlePattern: "^/news/stock-market-news/" },
+    { key: "marketwatch", name: "MarketWatch", homepage: "https://www.marketwatch.com/markets", hosts: ["marketwatch.com"], articlePattern: "^/story/" },
+    { key: "benzinga", name: "Benzinga", homepage: "https://www.benzinga.com/markets", hosts: ["benzinga.com"], articlePattern: "^/(markets|news|trading-ideas)/" },
+    { key: "the-street", name: "TheStreet", homepage: "https://www.thestreet.com/markets", hosts: ["thestreet.com"], articlePattern: "^/(markets|investing|stocks)/" },
+    { key: "motley-fool", name: "The Motley Fool", homepage: "https://www.fool.com/investing-news/", hosts: ["fool.com"], articlePattern: "^/investing/\\d{4}/\\d{2}/\\d{2}/" },
+    { key: "tradingview", name: "TradingView News", homepage: "https://www.tradingview.com/markets/stocks-usa/news/", hosts: ["tradingview.com"], articlePattern: "^/news/" },
   ],
   world: [
     { key: "reuters-world", name: "Reuters World", query: "site:reuters.com/world when:7d" },
@@ -347,6 +347,65 @@ async function fetchGoogleFeed(query, category, feedRank) {
   return parseRssItems(xml, category, feedRank);
 }
 
+function cleanMarkdownTitle(value) {
+  return decodeXml(String(value || ""))
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/[*_`#]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function parseHomepageHeadline(markdown, source) {
+  const links = String(markdown || "").matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)[^)]*\)/g);
+  const pattern = source.articlePattern ? new RegExp(source.articlePattern, "i") : null;
+  const blocked = /^(home|news|markets?|technology|tech|read more|view all|latest|subscribe|sign in|log in)$/i;
+  for (const match of links) {
+    const title = cleanMarkdownTitle(match[1]);
+    if (title.length < 15 || title.length > 240 || blocked.test(title)) continue;
+    try {
+      const url = new URL(match[2]);
+      const host = url.hostname.toLowerCase().replace(/^www\./, "");
+      if (!(source.hosts || []).some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
+      if (pattern && !pattern.test(url.pathname)) continue;
+      url.hash = "";
+      return { title, url: url.toString() };
+    } catch { /* Ignore malformed homepage links. */ }
+  }
+  throw new Error(`${source.name} homepage returned no usable lead story.`);
+}
+
+function publishedDateFromHtml(html) {
+  const patterns = [
+    /["']datePublished["']\s*:\s*["']([^"']+)["']/i,
+    /property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i,
+    /content=["']([^"']+)["'][^>]+property=["']article:published_time["']/i,
+    /<time[^>]+datetime=["']([^"']+)["']/i,
+  ];
+  for (const pattern of patterns) {
+    const value = String(html || "").match(pattern)?.[1];
+    if (value && Number.isFinite(Date.parse(value))) return new Date(value).toISOString();
+  }
+  return "";
+}
+
+async function fetchHomepageHeadline(source, category, sourceOrder, now = Date.now()) {
+  const homepage = new URL(source.homepage);
+  const readerUrl = `https://r.jina.ai/http://${homepage.host}${homepage.pathname}${homepage.search}`;
+  const lead = parseHomepageHeadline(await fetchText(readerUrl, 20_000), source);
+  let publishedAt = "";
+  try { publishedAt = publishedDateFromHtml(await fetchText(lead.url, 10_000)); } catch { /* Try the index below. */ }
+  if (!publishedAt) {
+    const query = `site:${new URL(lead.url).hostname} "${lead.title.replaceAll('"', ' ')}" when:30d`;
+    try {
+      const indexed = await fetchGoogleFeed(query, category, 0);
+      publishedAt = (indexed.find((item) => isSimilarTitle(item.title, lead.title)) || indexed[0])?.publishedAt || "";
+    } catch { /* An unknown date is preferable to inventing one. */ }
+  }
+  return {
+    category, title: lead.title, url: lead.url, source: source.name,
+    sourceKey: source.key, sourceOrder, publishedAt,
+    feedRank: 0, score: rankGoogleItem({ ...lead, source: source.name, category, publishedAt }, now),
+  };
+}
+
 function containsChinese(value) {
   return /[\u3400-\u9fff]/.test(String(value));
 }
@@ -536,11 +595,7 @@ function archivedSourceItems(filePath) {
 
 async function fetchLatestSourceItem(source, category, sourceOrder, now = Date.now()) {
   if (source.special === "hacker-news") return fetchHackerNewsTop(now);
-  const candidates = (await fetchGoogleFeed(source.query, category, 0))
-    .filter((item) => !isPaywalledItem(item))
-    .sort((left, right) => Date.parse(right.publishedAt) - Date.parse(left.publishedAt));
-  if (!candidates.length) throw new Error(`${source.name} returned no usable story.`);
-  return { ...candidates[0], source: source.name, sourceKey: source.key, sourceOrder, score: rankGoogleItem(candidates[0], now) };
+  return fetchHomepageHeadline(source, category, sourceOrder, now);
 }
 
 async function fetchWorldTop(now, knownTranslations, knownGoogleNewsUrls) {
@@ -769,8 +824,8 @@ async function main() {
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
 
 module.exports = {
-  NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, collectHotNews, decodeXml,
+  NEWS_SOURCES, addChineseTranslations, archivedGoogleNewsUrls, archivedSourceItems, archivedTitleTranslations, cleanMarkdownTitle, collectHotNews, decodeXml,
   detectTitleLanguage, environmentFlag, fetchYouTubeTop, isGoogleNewsUrl, isPaywalledItem, isSimilarTitle, newsMessage, normalizeTitle,
-  isSameWorldEvent, parseRssItems, rankAndDedupe, rankWorldCandidates, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
+  isSameWorldEvent, parseHomepageHeadline, parseRssItems, publishedDateFromHtml, rankAndDedupe, rankWorldCandidates, readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   translateBatch, translateTitle, youtubeItemsFromResponses,
 };

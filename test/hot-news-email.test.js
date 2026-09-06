@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 
 const {
-  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSameWorldEvent, isSimilarTitle, newsMessage, parseRssItems, rankAndDedupe, rankWorldCandidates,
+  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSameWorldEvent, isSimilarTitle, newsMessage, parseHomepageHeadline, parseRssItems, publishedDateFromHtml, rankAndDedupe, rankWorldCandidates,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
@@ -22,12 +22,21 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.23/);
+  assert.match(html, /v2026\.09\.06\.24/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'world', 'youtube'/);
   assert.match(script, /dailyreview-recent-v3/);
   assert.match(script, /ARCHIVE_URLS/);
+});
+
+test("takes a publisher homepage lead instead of a Google News search result", () => {
+  const source = { name: "Example", hosts: ["example.com"], articlePattern: "^/news/" };
+  const markdown = `[Markets](https://example.com/markets/)\n[Current lead story from the publisher](https://www.example.com/news/current-lead)\n[Older story](https://example.com/news/older)`;
+  assert.deepEqual(parseHomepageHeadline(markdown, source), {
+    title: "Current lead story from the publisher", url: "https://www.example.com/news/current-lead",
+  });
+  assert.equal(publishedDateFromHtml('<meta property="article:published_time" content="2026-09-06T02:03:00Z">'), "2026-09-06T02:03:00.000Z");
 });
 
 test("recovers tab interaction after the iOS app resumes", () => {

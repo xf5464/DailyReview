@@ -200,7 +200,7 @@ function renderArchive(value, fromCache = false) {
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
   refs.archiveMeta.textContent = items.length
-    ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个来源最新 1 条'} · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
+    ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个网站当前头条'} · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
     : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
 
   if (!items.length) return;
