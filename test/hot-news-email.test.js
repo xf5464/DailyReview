@@ -38,7 +38,7 @@ test("takes a publisher homepage lead instead of a Google News search result", (
   const source = { name: "Example", hosts: ["example.com"], articlePattern: "^/news/" };
   const markdown = `[Markets](https://example.com/markets/)\n[Current lead story from the publisher](https://www.example.com/news/current-lead)\n[Older story](https://example.com/news/older)`;
   assert.deepEqual(parseHomepageHeadline(markdown, source), {
-    title: "Current lead story from the publisher", url: "https://example.com/news/current-lead",
+    title: "Current lead story from the publisher", url: "https://www.example.com/news/current-lead",
   });
   assert.equal(publishedDateFromHtml('<meta property="article:published_time" content="2026-09-06T02:03:00Z">'), "2026-09-06T02:03:00.000Z");
 });
