@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T05:30:43.164Z",
+  "updatedAt": "2026-09-06T05:39:13.765Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -15,37 +15,35 @@
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
       "score": 27.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "71e5450ea43c617a",
+      "id": "8b685c2094d47869",
       "category": "market",
-      "title": "Smart Reads of the Week: Singapore Dividend Stocks, Bank Returns, and Next 50 Opportunities",
-      "titleZh": "本周SMART读物：新加坡股息股、银行回报和未来50个机会",
-      "url": "https://sg.finance.yahoo.com/news/smart-reads-week-singapore-dividend-233000607.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQTl9xcmdlT240bnlyVW82Z2Y2b0xIYkduR054TXpYZHB1em42SG1hdWFiMC1iOW1tOXkxNU9fWUktajhURlBEUGYxVUQ1ODJ3LXE5Mk1GQU52NGRGN1huZXRMQW1WNWVadF9Sa2thamZYeUdRRGxHMFY4cDZpRnV1SkhaUEJ4VTNHUEVQZA?oc=5",
+      "title": "Edison International (EIX) Dividend Declarations Put Its Valuation Back In Focus",
+      "titleZh": "爱迪生国际（ EIX ）股息声明重新聚焦其估值",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/edison-international-eix-dividend-declarations-121607476.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
-      "score": 45.1,
+      "publishedAt": "2026-09-01T12:16:07.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "42d32f0ffc994442",
+      "id": "13e23cdc4da4d454",
       "category": "market",
-      "title": "Trump’s first major midterm money move: A $10 million Texas Senate ad blitz",
-      "titleZh": "特朗普的首次重大中期资金转移： 1000万美元的德克萨斯州参议院广告闪电战",
-      "url": "https://www.cnbc.com/2026/09/05/trumps-first-major-midterm-spend-is-10-million-texas-senate-ad-blitz.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOQkN6TVF4WFJCbFNlR2RQenV3Xy1QTGRienhWUUdGWUFzRzQ4Q1QteUlFdHV6MHZNRVQzV21HdDVsVmFtU0hwVlpBTDYtWTBia19Wc2ljOWlkUmtsTWxXN014M0RIdlpEZmRBSEFxY3UxNGhQcHlYa2cyVnVXc2k5cmFXcmJzSVVVWngtUVk5YTJzQUk0Y2JfRTRnb2pPbDNMbzRyRWliWVLSAa4BQVVfeXFMTWxGSDhrMFlTWEhUR2xtQXlvRUtMbTZWVFlhUUd0SkVCdVdJdV9uZ3hacE9mc1pmNVdyVFJTT1lFS1lnVFpyc3JlcEVGclJxdlFtcWExWko1azJrUGxXMWlNaGlwMk5iUFFlbngxQWtkNlhmTk44V3dfXzZKX2ZUX3BONGFEM2pMdzNCMHItbW1teHVkTjRVT2xvZ0NBZ3JacUFBS1gyOElrbHFlbHJB?oc=5",
+      "title": "Market Forecast",
+      "titleZh": "市场预测",
+      "url": "http://www.cnbc.com/2023/05/11/market-strategist-survey-forecast.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 22:30:25 GMT",
-      "score": 33,
+      "publishedAt": "2025-12-19T17:42:24.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +58,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "d15b6a37c32630be",
@@ -75,7 +73,7 @@
       "publishedAt": "Sun, 06 Sep 2026 04:28:17 GMT",
       "score": 59.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -90,22 +88,21 @@
       "publishedAt": "Sun, 06 Sep 2026 02:52:59 GMT",
       "score": 62.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "61ad7676e01b7894",
+      "id": "d3e707dc92d3197a",
       "category": "market",
-      "title": "Congressman Who Has Bought Over $1 Million in Apple Stock Isn’t Selling with Tim Cook’s Exit",
-      "titleZh": "买入超过100万美元苹果股票的国会议员不在蒂姆·库克退出的情况下出售",
-      "url": "https://www.benzinga.com/news/politics/26/09/61640254/congressman-who-has-bought-over-1-million-in-apple-stock-isnt-selling-with-tim-cooks-exit",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPTTl0WGZQeHc4R1pWcjktbHNzcDNxWTQ0ZWpjWGdWWUNUcTMycl9WQThwQU1JNk1GM0h5TGE4T3B4UE5CVVVvdkNzSjk5SHJrYi04QnpNUnVZOHowZG44dWpqR01jTW5IS1BfMzVxcHpUSmx3d0tDUThaQWZGUUMxUklacklwdFUwQmFxeG1YRHBoY3I5VW96SF9NVk5XemlMRHEzQXpaRXg1WVNjaC1ZLWM2R28tQWdMOWY3SnJ5aDFpeUxnRzJScE51TllzUE1pellzczF1VERUazQ?oc=5",
+      "title": "Large Cap Stocks",
+      "titleZh": "大盘股",
+      "url": "http://www.benzinga.com/news/large-cap",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Fri, 04 Sep 2026 20:04:33 GMT",
-      "score": 27.2,
+      "publishedAt": "Thu, 03 Sep 2026 20:27:44 GMT",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "59c0bb36a439900d",
@@ -120,22 +117,21 @@
       "publishedAt": "Sun, 06 Sep 2026 01:12:00 GMT",
       "score": 35.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "323ec3cdc74d087d",
+      "id": "dec081ab82fba073",
       "category": "market",
-      "title": "3 Nuclear Stocks to Buy With $2,000 After One Fell 83%",
-      "titleZh": "一次下跌83%后以2000 $购买3只核股",
-      "url": "https://www.fool.com/investing/2026/09/05/3-nuclear-stocks-to-buy-with-usd2-000-after-one-fell-83/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPTlU1Z3dGbGJMMjd6RFZyZW55Y3FVa0VYRjNiQW05dzdEc0dYSmI4bDkxM3pVY2NNUFVwbnpoRDBXV2pvSUJXamlZVS01QXNTcG1PRjB0Z3p4SG82bkdBZ0RCMFZhNmQyYmk1c0tBY3N3Ul9pM25rY0Vfc1F4c0gyMVlhbGN0QUNtLUtjbHRQN3NzNllfMVRCNWNWSzRsQlU?oc=5",
+      "title": "Where Will Rigetti Computing Stock Be in 3 Years? The stock has had impressive gains over the past three years, but recreating that success will be very hard.",
+      "titleZh": "3年后Rigetti计算库存将如何？ 该股票在过去三年中取得了令人印象深刻的收益，但重现这一成功将非常困难。",
+      "url": "http://www.fool.com/investing/2026/09/06/where-will-rigetti-computing-stock-be-in-3-years/",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
-      "score": 50.2,
+      "publishedAt": "2026-09-06T04:00:00.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -150,7 +146,7 @@
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
       "score": 46,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -165,22 +161,21 @@
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
       "score": 52.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "6df0f5d81c2b28a3",
+      "id": "b86b5015c5da7a40",
       "category": "tech",
-      "title": "Seattle Times and Newsday are the latest publications to sue OpenAI and Microsoft",
-      "titleZh": "《西雅图时报》和《新闻日报》是起诉OpenAI和微软的最新出版物",
-      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMitwFBVV95cUxONTdOTkJNdUJEQng2RTROVzFoM1NjeUN2d1ROa0xmNlItOFpfQkctMHhVQ0pFUVcwVlY0bzcxSXBsUVFRU3lhX1JFQ0U0NXhmNzF5RnZucmdodFJvWElrS3dnck1IWGMtSEtXZHpjRU9nWkxMZTZKcXdsVlpJcGp3OE15amdkejVkTnk2dWd2bVRJR29IMmNpNzdNb1BDOV85aFlIN3VEQkFNVkJwcHhFSkRGaGdRXzQ?oc=5",
+      "title": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
+      "titleZh": "OpenAI确认“维基事件” ，称其正在“开发一个框架”以进行更多披露",
+      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/",
       "source": "TechCrunch",
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 71.3,
+      "publishedAt": "2026-09-05T18:05:27.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "3c803508656819f2",
@@ -195,22 +190,21 @@
       "publishedAt": "Sat, 05 Sep 2026 16:49:33 GMT",
       "score": 27.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "e520ddfabab05814",
+      "id": "f0e41de37211bf37",
       "category": "tech",
-      "title": "Trump admin fights ABC lawsuit as watchdogs worry Disney will settle with FCC",
-      "titleZh": "监管机构担心迪士尼将与 FCC 达成和解，特朗普政府与 ABC 诉讼作斗争",
-      "url": "https://arstechnica.com/civis/threads/trump-admin-fights-abc-lawsuit-as-watchdogs-worry-disney-will-settle-with-fcc.1514670/page-2",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQT01SWTFmUWUxbnZRNjhkQUhRczVhMENiZElrUm1URjVSRHk0VXRvY0h3TVZIcFB5RGhPOXhTSnpkb09jLW9NRER0VjVaV0l2QXkwdm9SV2hTdndKQ0NOam1EdVhTcEoyMDFRRDRfTmItMlcxQjlyY1h3U0sxdWFwWGNxTzJtZmZlejQ0b0V1SUVaMG5MOFBaaFJxWkc1V05BRnNNUGptRERiOVRvZ1cxdXZvVXloWHhyZmV0TlZKN3E2QzN1TkdwSGN3?oc=5",
+      "title": "Nearly impossible? How Fairphone built the ethical, repairable Fairphone Gen 6+",
+      "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
+      "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
       "source": "Ars Technica",
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
-      "publishedAt": "Sun, 06 Sep 2026 03:42:43 GMT",
-      "score": 53.2,
+      "publishedAt": "2026-09-04T11:00:05.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "8ea50880be9eeaab",
@@ -225,52 +219,49 @@
       "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
       "score": 48,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "50ac2ebb30523602",
+      "id": "fedd9daf849e7e53",
       "category": "tech",
-      "title": "The best Labor Day 2026 laptop deals: Apple, Lenovo, Dell, and more",
-      "titleZh": "2026年最佳劳动节笔记本电脑优惠：苹果、联想、戴尔等",
-      "url": "https://www.zdnet.com/article/best-labor-day-laptop-deals-2026-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTE40NTRud2xvWFc1TlQ2ck1pZ3dFbU1DV0RMR1dpeEdUenhCanJwTmdrUWQ5MkRUeTNpUkVLZG9KcF9rM2NpcEN3Y0EteHFaUFA4cW5fVDA2UG53MW8tV2VweW05X251NkxDNmlDNXFaaGo3dlE?oc=5",
+      "title": "The best Labor Day 2026 Garmin watch deals: Gear up for marathon training for less",
+      "titleZh": "2026年最佳劳动节Garmin手表优惠：以更低的价格为马拉松训练做好准备",
+      "url": "https://www.zdnet.com/article/labor-day-garmin-watch-deals-2026/",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 04:52:40 GMT",
-      "score": 65,
+      "publishedAt": "2026-09-05T22:33:05.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "7997ebd4268c1319",
+      "id": "a6a6d680b69b9b9f",
       "category": "tech",
-      "title": "Today’s NYT Strands Hints, Answers and Help for Sept. 6, #917",
-      "titleZh": "今日纽约时报Strands 9月6日提示、答案和帮助， # 917",
-      "url": "https://www.cnet.com/tech/gaming/todays-nyt-strands-hints-answers-and-help-for-sept-6-917/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQUlh6X1FHektFdmhUZ2NadTdJdXVtN2lJenVUYWIxWlRGcDJMQmM2UE1nWGZid1F3V3JCM09LYU1wUDNMcW4tVGNGd3M5N2RxLVpQZC1JT3JJTG1KdUtBUkZnT2lzdU8wRUUyQXFVakN3amhvUmh1anRxUXk1TWlXOWVQb0NvOGJMRHFQbDA3V0s0OFds?oc=5",
+      "title": "Best AI Image Generators",
+      "titleZh": "最佳AI图像生成器",
+      "url": "https://www.cnet.com/tech/services-and-software/best-ai-image-generators/",
       "source": "CNET",
       "sourceKey": "cnet",
       "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 2026 03:40:00 GMT",
-      "score": 50.2,
+      "publishedAt": "2026-07-17T09:30:00.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "79e92c2970dc6346",
+      "id": "1305dd241c305356",
       "category": "tech",
-      "title": "mouse actions - External Hardware",
-      "titleZh": "鼠标操作-外部硬件",
-      "url": "https://www.bleepingcomputer.com/forums/t/818459/mouse-actions/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMicEFVX3lxTE00UnF4YnJZT21WQUhEMFhqQUs1OUNEOTdjSGRiRW1CX3ltXzMweDBVRkJlbGpoSG9oTFJyY09Hd3Fmc2tCVm82NWFBYU1Ya08yRmVPQ3VYaUpERzVrZG1vQVY2LXB2NURqZEVXMWlrRkY?oc=5",
+      "title": "Over 5,400 hacked sites serve ClickFix payloads stored on the blockchain",
+      "titleZh": "超过5,400个黑客网站为存储在区块链上的ClickFix有效负载提供服务",
+      "url": "https://www.bleepingcomputer.com/news/security/over-5-400-hacked-sites-serve-clickfix-payloads-stored-on-the-blockchain/",
       "source": "BleepingComputer",
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 00:42:25 GMT",
-      "score": 46.2,
+      "publishedAt": "2026-09-05T14:29:13.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -285,7 +276,7 @@
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
       "score": 41.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,9 +288,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 125,
-      "engagement": "268 points · 107 comments",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "score": 125.1,
+      "engagement": "272 points · 109 comments",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -312,9 +303,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 128.1,
+      "score": 127.9,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -327,9 +318,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 107.3,
+      "score": 107.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -342,9 +333,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 107.1,
+      "score": 106.9,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -357,9 +348,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 105.6,
+      "score": 105.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -372,9 +363,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 102.1,
+      "score": 101.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -387,9 +378,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 90.1,
+      "score": 89.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -402,9 +393,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 88.8,
+      "score": 88.6,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "7470701fe158400f",
@@ -417,9 +408,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 84,
+      "score": 83.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -432,9 +423,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 83,
+      "score": 82.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -447,9 +438,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 81.2,
+      "score": 81,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -461,37 +452,23 @@
       "sourceKey": "youtube-wBJKzDgwDqA",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T09:00:26Z",
-      "score": 370232,
-      "engagement": "370,232 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "score": 382655,
+      "engagement": "382,655 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "5e7c16d375405632",
+      "id": "a3b79ac2cba5abd2",
       "category": "youtube",
-      "title": "“Cuando se te olvida algo importante💀” #pcgaming #benchmark #rtx5050 #gtx1080ti",
-      "titleZh": "“当你忘记重要的事情时💀” # pcgaming # benchmark # rtx5050 # gtx1080ti",
-      "url": "https://www.youtube.com/watch?v=ILaUdxW4xD0",
-      "source": "computadora impresionante",
-      "sourceKey": "youtube-ILaUdxW4xD0",
+      "title": "WTF Is Happening To The Stock Market?",
+      "titleZh": "WTF正在发生在股市？",
+      "url": "https://www.youtube.com/watch?v=xPjop4OC1XY",
+      "source": "GEN",
+      "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T04:00:39Z",
-      "score": 264091,
-      "engagement": "264,091 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
-    },
-    {
-      "id": "e353acbfad7d1be8",
-      "category": "youtube",
-      "title": "Tesla's New Motor: No Rare Earths, 25% Lighter, More Efficient, Built In 10 Seconds",
-      "titleZh": "特斯拉新电机：无稀土，重量轻25% ，效率更高， 10秒内建",
-      "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
-      "source": "The Electric Viking",
-      "sourceKey": "youtube-td0lyo8hLJo",
-      "sourceOrder": 2,
-      "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 168608,
-      "engagement": "168,608 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "publishedAt": "2026-09-05T17:00:30Z",
+      "score": 276716,
+      "engagement": "276,716 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -501,11 +478,39 @@
       "url": "https://www.youtube.com/watch?v=mGpLMflEuCc",
       "source": "Pushkar Raj Thakur: Stock Market Educator 📈",
       "sourceKey": "youtube-mGpLMflEuCc",
-      "sourceOrder": 3,
+      "sourceOrder": 2,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 152543,
-      "engagement": "152,543 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "score": 207203,
+      "engagement": "207,203 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
+    },
+    {
+      "id": "e353acbfad7d1be8",
+      "category": "youtube",
+      "title": "Tesla's New Motor: No Rare Earths, 25% Lighter, More Efficient, Built In 10 Seconds",
+      "titleZh": "特斯拉新电机：无稀土，重量轻25% ，效率更高， 10秒内建",
+      "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
+      "source": "The Electric Viking",
+      "sourceKey": "youtube-td0lyo8hLJo",
+      "sourceOrder": 3,
+      "publishedAt": "2026-09-05T13:15:15Z",
+      "score": 190762,
+      "engagement": "190,762 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
+    },
+    {
+      "id": "114483232b4c644f",
+      "category": "youtube",
+      "title": "Tesla Really Had Me Confused Here 💀",
+      "titleZh": "特斯拉真的让我在这里感到困惑 💀",
+      "url": "https://www.youtube.com/watch?v=aGtsFSNJu4g",
+      "source": "Bdakzz",
+      "sourceKey": "youtube-aGtsFSNJu4g",
+      "sourceOrder": 4,
+      "publishedAt": "2026-09-05T14:05:34Z",
+      "score": 162949,
+      "engagement": "162,949 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -515,11 +520,25 @@
       "url": "https://www.youtube.com/watch?v=ONuWCsB7ULU",
       "source": "ТАК ОСТРО!",
       "sourceKey": "youtube-ONuWCsB7ULU",
-      "sourceOrder": 4,
+      "sourceOrder": 5,
       "publishedAt": "2026-09-05T07:00:12Z",
-      "score": 118383,
-      "engagement": "118,383 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "score": 123894,
+      "engagement": "123,894 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
+    },
+    {
+      "id": "0193f38236708cd1",
+      "category": "youtube",
+      "title": "Tesla Cybercab doors aren’t just a flex",
+      "titleZh": "特斯拉Cybercab车门不仅仅是柔性",
+      "url": "https://www.youtube.com/watch?v=5MqJKUJtoNY",
+      "source": "Jeremy Judkins",
+      "sourceKey": "youtube-5MqJKUJtoNY",
+      "sourceOrder": 6,
+      "publishedAt": "2026-09-05T11:01:03Z",
+      "score": 113418,
+      "engagement": "113,418 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -529,53 +548,25 @@
       "url": "https://www.youtube.com/watch?v=uemH0o2joFA",
       "source": "僕はバズ",
       "sourceKey": "youtube-uemH0o2joFA",
-      "sourceOrder": 5,
-      "publishedAt": "2026-09-05T07:09:16Z",
-      "score": 97826,
-      "engagement": "97,826 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
-    },
-    {
-      "id": "c4eca05ec613e3bc",
-      "category": "youtube",
-      "title": "Tesla car  feature  explained and  experiencing self driving mode, experiments  with E-car #tesla",
-      "titleZh": "特斯拉汽车功能讲解和体验自动驾驶模式，试用电动车# tesla",
-      "url": "https://www.youtube.com/watch?v=ctwG3eQlI_Q",
-      "source": "SandyDeepalifestyle",
-      "sourceKey": "youtube-ctwG3eQlI_Q",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-05T04:01:43Z",
-      "score": 96546,
-      "engagement": "96,546 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
-    },
-    {
-      "id": "a0c831ec04c52b71",
-      "category": "youtube",
-      "title": "He Got an RTX 5070 for JUST $129 at Walmart 💀",
-      "titleZh": "他在沃尔玛以129 $的价格获得了RTX 5070 💀",
-      "url": "https://www.youtube.com/watch?v=B8AR0gkEXpI",
-      "source": "PCFUNSTORE",
-      "sourceKey": "youtube-B8AR0gkEXpI",
       "sourceOrder": 7,
-      "publishedAt": "2026-09-05T16:15:34Z",
-      "score": 66122,
-      "engagement": "66,122 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "publishedAt": "2026-09-05T07:09:16Z",
+      "score": 109027,
+      "engagement": "109,027 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
-      "id": "77bae84d54dfa79b",
+      "id": "0f02883aaa59228e",
       "category": "youtube",
-      "title": "💡Get your Tesla Coil here⚡️Link in bio #teslacoil #lighting #ideas #experiment",
-      "titleZh": "在这里💡获取您的特斯拉线圈⚡️链接BIO # teslacoil #照明#创意#实验",
-      "url": "https://www.youtube.com/watch?v=QkxClw3oDHY",
-      "source": "makeitcoil",
-      "sourceKey": "youtube-QkxClw3oDHY",
+      "title": "앞차가 있는데도 쌍라이트를 안 끕니다",
+      "titleZh": "即使前面有车，我也不关灯",
+      "url": "https://www.youtube.com/watch?v=rgzovlRt3Io",
+      "source": "MuskLab",
+      "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 8,
-      "publishedAt": "2026-09-05T11:08:47Z",
-      "score": 65032,
-      "engagement": "65,032 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "publishedAt": "2026-09-05T13:10:41Z",
+      "score": 97365,
+      "engagement": "97,365 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     },
     {
       "id": "dcffa09b52e13268",
@@ -587,9 +578,9 @@
       "sourceKey": "youtube-cOi19CUIjXQ",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:14:17Z",
-      "score": 54843,
-      "engagement": "54,843 次观看",
-      "fetchedAt": "2026-09-06T05:30:43.164Z"
+      "score": 65838,
+      "engagement": "65,838 次观看",
+      "fetchedAt": "2026-09-06T05:39:13.765Z"
     }
   ]
 }
