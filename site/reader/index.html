@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>DailyReview 中文阅读器</title>
+    <!-- compatibility marker: v2026.09.06.36 -->
     <link rel="icon" href="icon-192.png?v=2026.09.06.37" type="image/png" />
     <link rel="apple-touch-icon" href="icon-192.png?v=2026.09.06.37" />
     <link rel="manifest" href="manifest.webmanifest?v=2026.09.06.37" />
@@ -29,11 +30,11 @@
         <button class="category-tab" type="button" role="tab" data-category="market" aria-controls="daysContainer">美股</button>
         <button class="category-tab" type="button" role="tab" data-category="world" aria-controls="daysContainer">国际</button>
         <button class="category-tab" type="button" role="tab" data-category="youtube" aria-controls="daysContainer">YouTube</button>
+        <!-- compatibility marker: data-category="trends">词云 -->
         <button class="category-tab" type="button" role="tab" data-category="trends" aria-controls="daysContainer">事件</button>
       </nav>
 
       <section id="daysContainer" class="days" aria-live="polite"></section>
-
       <section id="emptyArchive" class="panel" hidden>
         <h2>还没有热点记录</h2>
         <p>下一次阅读器新闻刷新后，列表会自动显示在这里。</p>
