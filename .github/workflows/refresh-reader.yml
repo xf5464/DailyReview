@@ -37,9 +37,11 @@ jobs:
         run: npm ci
 
       - name: Test
-        run: npm test
+        run: |
+          npm test
+          node --check scripts/refresh-reader-news.js
 
-      - name: Fetch hot news and update reader only
+      - name: Fetch current publisher headlines and update reader only
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
@@ -47,7 +49,7 @@ jobs:
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
         run: |
           for attempt in 1 2 3; do
-            if node scripts/send-hot-news-email.js; then
+            if node scripts/refresh-reader-news.js; then
               exit 0
             fi
             if [[ "$attempt" == "3" ]]; then
