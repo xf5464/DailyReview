@@ -5,10 +5,8 @@ const CLOUD_SIZE = 40;
 const HN_LIMIT = 180;
 const MASTODON_INSTANCES = ['mastodon.social', 'fosstodon.org', 'techhub.social'];
 
-const STOP_WORDS = new Set(`a an and are as at be been being but by can could did do does doing done for from had has have having how i if in into is it its may might must more most new no not nothing of on one or our out over so than that the their there these they them this to two three four up us was we were what when where which who why will with would you your after all about above across actually again against ago almost along already also although always among around away back became become becomes before behind below between both came come coming down during each either else enough even ever everything far find found get gets getting give given going gone got here however just keep last less let life like look looking lot made make makes making many maybe meet much near need never next now off often once only other own per perhaps place please put rather really report reports right same safe say says search see seem seen services should show side since six some soon start state still such sure take tell ten than then thing things through time today together too took top toward under until upon use used using very via want watch way while within without work working world would year years yet news live breaking latest first people thought know few old open september history limit vote running free don job reaches name built case best big every video any bad public reading private ask help http https www com org net payload payloads`.split(/\s+/));
+const STOP_WORDS = new Set(`a an and are as at be been being but by can could did do does doing done for from had has have having how i if in into is it its may might must more most new no not nothing of on one or our out over so than that the their there these they them this to two three four up us was we were what when where which who why will with would you your after all about above across actually again against ago almost along already also although always among around away back became become becomes before behind below between both came come coming down during each either else enough even ever everything far find found get gets getting give given going gone got here however just keep last less let life like look looking lot made make makes making many maybe meet much near need never next now off often once only other own per perhaps place please put rather really report reports right same safe say says search see seem seen services should show side since six some soon start state still such sure take tell ten than then thing things through time today together too took top toward under until upon use used using very via want watch way while within without work working world would year years yet news live breaking latest first people thought know few old open september history limit vote running free don job reaches name built case best big every video any bad public reading private ask help http https www com org net payload payloads company companies user users think thinks thinking`.split(/\s+/));
 
-// Terms that describe a broad category rather than a current event/entity. They may be
-// useful during extraction but must never dominate the final cloud.
 const GENERIC_TERMS = new Set([
   'ai', '人工智能', '编程', 'ai智能体', '模型', '大语言模型', '软件', '开发者', '互联网',
   '市场', '股票', '科技', '技术', '公司', '企业', '产品', '服务', '新闻', '最新', '今日',
@@ -160,13 +158,11 @@ function termsFromText(text) {
   const lower = original.toLowerCase();
   const terms = new Set();
 
-  // Prefer known people, companies, products, policies and places over broad nouns.
   for (const [phrase, alias] of ALIASES) {
     const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
     if (new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, 'i').test(lower)) addTerm(terms, alias);
   }
 
-  // Product/model names are often the real topic even when they only appear once.
   const modelPatterns = [
     /\bGPT\s*-?\s*\d+(?:\.\d+)*\b/gi,
     /\biPhone\s*\d+(?:\s*(?:Pro|Max|Air|Plus))?\b/gi,
@@ -177,27 +173,18 @@ function termsFromText(text) {
     for (const match of original.match(pattern) || []) addTerm(terms, normalizeModelToken(match));
   }
 
-  // Hashtags and title-case entities add useful emerging names that are not in the alias table yet.
-  for (const match of original.match(/#[\p{L}\p{N}_+-]{3,30}/gu) || []) addTerm(terms, match.slice(1));
-  for (const match of original.match(/\b(?:[A-Z][A-Za-z0-9+.-]{1,}|[A-Z]{2,})(?:\s+(?:[A-Z][A-Za-z0-9+.-]{1,}|[A-Z]{2,})){0,2}\b/g) || []) {
+  for (const match of original.match(/\b(?:[A-Z][A-Za-z0-9+.-]{1,}|[A-Z]{2,})(?:\s+(?:[A-Z][A-Za-z0-9+.-]{1,}|[A-Z]{2,})){1,2}\b/g) || []) {
     const words = match.split(/\s+/).filter((word) => !STOP_WORDS.has(word.toLowerCase()));
-    if (!words.length) continue;
-    const candidate = words.join(' ');
-    // Avoid broad all-caps/category tokens that are already represented by aliases.
-    if (candidate.length >= 3 && !isGenericTerm(ALIASES.get(candidate.toLowerCase()) || candidate)) {
-      addTerm(terms, ALIASES.get(candidate.toLowerCase()) || candidate);
-    }
+    const specific = words.map((word) => ALIASES.get(word.toLowerCase()) || word).filter((word) => !isGenericTerm(word));
+    if (specific.length >= 2) addTerm(terms, specific.join(' '));
   }
 
-  // Keep specific aliases and repeated long nouns as fallback candidates; final aggregation
-  // will require repetition/cross-source confirmation for plain lowercase words.
   for (const raw of lower.match(/[\p{L}\p{N}+#.-]+/gu) || []) {
     const word = raw.replace(/^[#.+-]+|[#.+-]+$/g, '');
     if (word.length < 4 || word.length > 28 || STOP_WORDS.has(word) || /^\d+$/.test(word)) continue;
     const mapped = ALIASES.get(word);
     if (mapped) addTerm(terms, mapped);
     else if (/^gpt-?\d+(?:\.\d+)*$/.test(word)) addTerm(terms, normalizeModelToken(word));
-    else if (/^[a-z][a-z0-9+.-]+$/.test(word)) addTerm(terms, word);
   }
 
   return [...terms].slice(0, 24);
@@ -246,7 +233,6 @@ function buildWordCloud(signals, now = Date.now(), limit = CLOUD_SIZE) {
   }
 
   return [...aggregate.values()].map((entry) => {
-    // Cross-source confirmation is intentionally worth more than raw repetition on one site.
     const score = entry.rawScore + entry.mentions * 1.8 + entry.platforms.size * 5.2;
     return {
       id: crypto.createHash('sha1').update(entry.term).digest('hex').slice(0, 10),
