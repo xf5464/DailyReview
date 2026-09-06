@@ -1,62 +1,62 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T07:30:40.754Z",
+  "updatedAt": "2026-09-06T07:57:09.435Z",
   "items": [
     {
-      "id": "91ebf4501aca5b86",
+      "id": "ddcfe677e89a116d",
       "category": "market",
-      "title": "‘There’s no plan’: as instability in global bond markets rises, what are the knock-on effects?",
-      "titleZh": "“没有计划” ：随着全球债券市场的不稳定性上升，有什么连锁反应？",
-      "url": "https://www.theguardian.com/business/2026/sep/04/instability-in-global-bond-markets-rising-knock-on-effects",
+      "title": "Maria Bartiromo’s lawyer denies she was fired from Fox News anchor role",
+      "titleZh": "玛丽亚·巴蒂罗莫（ Maria Bartiromo ）的律师否认她被福克斯新闻主播解雇",
+      "url": "https://www.theguardian.com/media/2026/sep/04/maria-bartiromo-lawyer-denies-fox-news-firing",
       "source": "The Guardian Business",
       "sourceKey": "guardian-business",
       "sourceOrder": 0,
-      "publishedAt": "Fri, 04 Sep 2026 16:49:28 GMT",
-      "score": 41,
+      "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
+      "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "68e369b694471fa7",
+      "id": "b207e1567fb1820a",
       "category": "market",
-      "title": "Ambarella (AMBA) Grew 2Q Revenue 13.2% and Signed 7-Year Channel Agreements. Can Edge-AI Scale Reverse Margin Compression?",
-      "titleZh": "",
-      "url": "https://finance.yahoo.com/technology/ai/articles/ambarella-amba-grew-2q-revenue-231537538.html",
+      "title": "California Just Hit a Cannabis Tax Milestone: Gavin Newsom Announces $8.4 Billion Haul, Vows to 'Keep Strengthening Our Legal Market'",
+      "titleZh": "加利福尼亚州刚刚达到大麻税收里程碑： Gavin Newsom宣布84亿美元的货运量，誓言“继续加强我们的合法市场”",
+      "url": "https://finance.yahoo.com/economy/policy/articles/california-just-hit-cannabis-tax-023007913.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-04T23:15:37Z",
-      "score": 37,
+      "publishedAt": "2026-09-05T02:30:07Z",
+      "score": 27.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "89e0adf0c9c1b067",
+      "id": "582837bc2e2c3170",
       "category": "market",
-      "title": "Trump turns up the heat on Warsh as Fed rate hike looms",
-      "titleZh": "随着美联储加息迫在眉睫，特朗普加大了对沃什的热情",
-      "url": "https://www.cnbc.com/2026/09/05/trump-warsh-fed-september-rate-hike.html",
+      "title": "From ‘mystery vacations’ to hostels, budget travelers get thrifty as prices rise",
+      "titleZh": "从「神秘假期」到青年旅舍，预算有限的旅行者会随着价格上涨而节俭",
+      "url": "https://www.cnbc.com/2026/09/05/budget-travel-vacation-costs.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 19:12:53 GMT",
-      "score": 54.7,
+      "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
+      "score": 52.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "ffcfb18dc494fa6c",
+      "id": "aa7f4b19575d566a",
       "category": "market",
-      "title": "Stock up on food to prepare for extreme weather, minister says",
-      "titleZh": "部长说，储备食物以应对极端天气",
-      "url": "https://www.bbc.co.uk/news/articles/cp931m8n3p5o?at_medium=RSS&at_campaign=rss",
+      "title": "Why a famous Montreal sandwich shop has been forced to swap its soda",
+      "titleZh": "为什么一家著名的蒙特利尔三明治店被迫更换苏打水",
+      "url": "https://www.bbc.co.uk/news/videos/c99dpd083v9o?at_medium=RSS&at_campaign=rss",
       "source": "BBC Business",
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
-      "publishedAt": "Fri, 04 Sep 2026 10:40:23 GMT",
-      "score": 38,
+      "publishedAt": "Sun, 06 Sep 2026 06:04:51 GMT",
+      "score": 47.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 53.2,
+      "score": 52.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 42.7,
+      "score": 42.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "d0d6b5803f0e771f",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
-      "score": 56.5,
+      "score": 56,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "95f1f02fb1fead25",
+      "id": "a79aaccbcca77552",
       "category": "market",
-      "title": "2 Tax Rules New Retirees Need to Know",
-      "titleZh": "",
-      "url": "https://www.fool.com/taxes/2022/01/30/2-tax-rules-new-retirees-need-to-know/?source=iedfolrf0000001",
+      "title": "The Stock Market Has Done This Only 2 Times Since 1871 — and Both Times Ended Badly. Could Trump’s Policies Raise the Risk of Another Market Meltdown?",
+      "titleZh": "自1871年以来，股市只做过两次这样的事情--两次都以糟糕的结局告终。特朗普的政策是否会增加另一次市场崩溃的风险？",
+      "url": "https://www.fool.com/investing/2026/09/06/the-stock-market-has-done-this-only-2-times-since-1871-and-both-times-ended-badly-could-trump-s-policies-raise-the-risk-of-another-market-meltdown/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 30 Jan 2022 08:15:00 -0500",
-      "score": 30,
+      "publishedAt": "Sun, 06 Sep 2026 03:12:01 -0400",
+      "score": 66.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 68.5,
+      "score": 68,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 69.3,
+      "score": 68.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 56.8,
+      "score": 56.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "4d7cb63bbad84ee4",
+      "id": "0b166caf3c482188",
       "category": "tech",
-      "title": "Why are iPhones more expensive than iPads?",
-      "titleZh": "",
-      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
+      "title": "Is the Steam Deck still worth it in 2026?",
+      "titleZh": "2026年的蒸汽卡组还值得吗？",
+      "url": "https://www.engadget.com/2248094/is-steam-deck-still-worth-it/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
-      "score": 65,
+      "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
+      "score": 62.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 56.2,
+      "score": 55.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 62.5,
+      "score": 62,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 55,
+      "score": 54.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,23 +264,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 58.4,
+      "score": 57.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "6a2258e1c0b90d7f",
+      "id": "0954f87590575e13",
       "category": "tech",
-      "title": "Cloud in a Bottle: making self-hosting accessible to everyone",
-      "titleZh": "瓶中云：让所有人都可以使用自助出租服务",
-      "url": "https://cloudinabottle.org/blog/launch-post",
+      "title": "Site Is Closed on Sundays",
+      "titleZh": "网站周日关闭",
+      "url": "https://v7.robweychert.com/",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 128.4,
-      "engagement": "341 points · 147 comments",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "publishedAt": "2026-09-06T06:23:05.000Z",
+      "score": 97.3,
+      "engagement": "48 points · 28 comments",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 107.3,
+      "score": 107,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 104.5,
+      "score": 103.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -323,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 104.3,
+      "score": 103.7,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -338,9 +338,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 102.8,
+      "score": 102.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "024fd13de026decc",
@@ -353,9 +353,24 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 101.9,
+      "score": 101.3,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
+    },
+    {
+      "id": "e1459cfd25a3e1ec",
+      "category": "world",
+      "title": "TV presenter among 11 sentenced to death in Egypt drugs case",
+      "titleZh": "在埃及毒品案中被判处死刑的11人中的电视节目主持人",
+      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-5",
+      "sourceOrder": 5,
+      "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
+      "score": 100.6,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -365,12 +380,12 @@
       "url": "https://www.reuters.com/world/europe/putin-says-us-russia-contacts-beneficial-talks-begin-with-witkoff-kushner-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-5",
-      "sourceOrder": 5,
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 99.3,
+      "score": 98.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -380,12 +395,12 @@
       "url": "https://www.aljazeera.com/news/2026/9/5/thousands-protest-in-croatia-to-demand-government-clean-up-toxic-waste",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxORElJQ0l1V2IwRUFJOE9FZEI5U19DdUozQzMzaWtIQnhvVm5DLUc3Zkl1SnVkdVhRbDBfUUtxQkR4QUh0eGdMWXFieEp2VEFnZlRmOXcwVVd1UzZHaHg1UGM2eHZ6YXFrVnFUNmF0Y3BnOGlBc2QwWDRrVFhNbFRJN18xM281Z0U3ZzBsd0pIQkpLWFdfby1xRF9BMmdReXZoeEs5a0xnZUpLTXZDN3hJ0gG0AUFVX3lxTE9QbVZRT3NlYWVGVTVNTjQzYnpPS2JQUmw5bXVLekdCX00xUm9BenJKZmpMUmxqRWt0UzZrRnRHYzF5UW1BdkpfcVV3S0xZdU16c0s5MnI5RHA3ano1U1dnRTFkdEZraFBDdnQ1dXliT3hTZm04QzRXY0hYcFB6bTBWRzNkRlFJNGYySnFPdDVMNGxOSWF4Zm9YMnp0aUl5Q2lhMVRGbEhtWlFIRTVJWXhzVHdBeA?oc=5",
       "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-6",
-      "sourceOrder": 6,
+      "sourceKey": "world-al-jazeera-7",
+      "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 87.3,
+      "score": 86.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -395,27 +410,12 @@
       "url": "https://www.bbc.com/news/articles/cj64rrne643o",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MR2lQUEVfWHpBVV9NQjVxS0x6WldUNHB1RzFWSzlDa0hYWm1wYVpxMEVhdkRiT1dCeGVlY2Y5d25uR3lQOEtxbW5CVG5VNDRhRmFvU2NLQlN5UQ?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-7",
-      "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 86,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
-    },
-    {
-      "id": "e1459cfd25a3e1ec",
-      "category": "world",
-      "title": "TV presenter among 11 sentenced to death in Egypt drugs case",
-      "titleZh": "",
-      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
-      "source": "BBC News",
       "sourceKey": "world-bbc-world-8",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
-      "score": 83.2,
+      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
+      "score": 85.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "7470701fe158400f",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 80.6,
+      "score": 80,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-wBJKzDgwDqA",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T09:00:26Z",
-      "score": 383092,
-      "engagement": "383,092 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "score": 395990,
+      "engagement": "395,990 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 281613,
-      "engagement": "281,613 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "score": 313676,
+      "engagement": "313,676 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -470,23 +470,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 212541,
-      "engagement": "212,541 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
-    },
-    {
-      "id": "e353acbfad7d1be8",
-      "category": "youtube",
-      "title": "Tesla's New Motor: No Rare Earths, 25% Lighter, More Efficient, Built In 10 Seconds",
-      "titleZh": "特斯拉新电机：无稀土，重量轻25% ，效率更高， 10秒内建",
-      "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
-      "source": "The Electric Viking",
-      "sourceKey": "youtube-td0lyo8hLJo",
-      "sourceOrder": 3,
-      "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 191655,
-      "engagement": "191,655 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "score": 252700,
+      "engagement": "252,700 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "114483232b4c644f",
@@ -496,25 +482,53 @@
       "url": "https://www.youtube.com/watch?v=aGtsFSNJu4g",
       "source": "Bdakzz",
       "sourceKey": "youtube-aGtsFSNJu4g",
-      "sourceOrder": 4,
+      "sourceOrder": 3,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 169678,
-      "engagement": "169,678 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "score": 209100,
+      "engagement": "209,100 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "8aede991afe3180c",
+      "id": "e353acbfad7d1be8",
       "category": "youtube",
-      "title": "Компьютеры кончаются, Nvidia объявила войну, слив DLSS 5, ложь вендоров видеокарт!",
-      "titleZh": "电脑耗尽，英伟达宣战， DLSS 5耗尽，显卡供应商撒谎！",
-      "url": "https://www.youtube.com/watch?v=ONuWCsB7ULU",
-      "source": "ТАК ОСТРО!",
-      "sourceKey": "youtube-ONuWCsB7ULU",
+      "title": "Tesla's New Motor: No Rare Earths, 25% Lighter, More Efficient, Built In 10 Seconds",
+      "titleZh": "特斯拉新电机：无稀土，重量轻25% ，效率更高， 10秒内建",
+      "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
+      "source": "The Electric Viking",
+      "sourceKey": "youtube-td0lyo8hLJo",
+      "sourceOrder": 4,
+      "publishedAt": "2026-09-05T13:15:15Z",
+      "score": 199892,
+      "engagement": "199,892 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
+    },
+    {
+      "id": "0128da0780432f60",
+      "category": "youtube",
+      "title": "When Nvidia makes the GPU gamers asking for",
+      "titleZh": "当英伟达让GPU游戏玩家要求",
+      "url": "https://www.youtube.com/watch?v=loRcHi1-IX4",
+      "source": "Deadrig Gaming",
+      "sourceKey": "youtube-loRcHi1-IX4",
       "sourceOrder": 5,
-      "publishedAt": "2026-09-05T07:00:12Z",
-      "score": 124380,
-      "engagement": "124,380 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "publishedAt": "2026-09-05T09:15:08Z",
+      "score": 163970,
+      "engagement": "163,970 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
+    },
+    {
+      "id": "8d96a3ba04e7b33f",
+      "category": "youtube",
+      "title": "Nike Goes Bankrupt! Nike Stock Gets *Delisted* From Stock Market After Dylan Mulvaney Partnership…🤣",
+      "titleZh": "耐克破产！耐克股票在Dylan Mulvaney合伙后从股市*退市* …🤣",
+      "url": "https://www.youtube.com/watch?v=kVEH0R-6m28",
+      "source": "Benny Johnson",
+      "sourceKey": "youtube-kVEH0R-6m28",
+      "sourceOrder": 6,
+      "publishedAt": "2026-09-06T00:21:42Z",
+      "score": 150269,
+      "engagement": "150,269 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -524,25 +538,11 @@
       "url": "https://www.youtube.com/watch?v=5MqJKUJtoNY",
       "source": "Jeremy Judkins",
       "sourceKey": "youtube-5MqJKUJtoNY",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-05T11:01:03Z",
-      "score": 114916,
-      "engagement": "114,916 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
-    },
-    {
-      "id": "bf78585446ecad9a",
-      "category": "youtube",
-      "title": "テスラのタクシーが未来すぎる",
-      "titleZh": "テスラのタクシーが未来すぎる",
-      "url": "https://www.youtube.com/watch?v=uemH0o2joFA",
-      "source": "僕はバズ",
-      "sourceKey": "youtube-uemH0o2joFA",
       "sourceOrder": 7,
-      "publishedAt": "2026-09-05T07:09:16Z",
-      "score": 109520,
-      "engagement": "109,520 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "publishedAt": "2026-09-05T11:01:03Z",
+      "score": 123095,
+      "engagement": "123,095 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -554,23 +554,23 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 98910,
-      "engagement": "98,910 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "score": 107558,
+      "engagement": "107,558 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     },
     {
-      "id": "f4446961f1e848a6",
+      "id": "c84e211fa0a44784",
       "category": "youtube",
-      "title": "Bessent vs Wall Street: They Don't Understand This Economy",
-      "titleZh": "贝森特与华尔街：他们不了解这种经济",
-      "url": "https://www.youtube.com/watch?v=b5igiJSgZCo",
-      "source": "Promethean Updates",
-      "sourceKey": "youtube-b5igiJSgZCo",
+      "title": "Tesla's New Taxi Has No Steering Wheel",
+      "titleZh": "特斯拉新出租车没有方向盘",
+      "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
+      "source": "AutomatiK",
+      "sourceKey": "youtube-_lYjci0bjNo",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-05T19:34:19Z",
-      "score": 71661,
-      "engagement": "71,661 次观看",
-      "fetchedAt": "2026-09-06T07:30:40.754Z"
+      "publishedAt": "2026-09-05T17:09:47Z",
+      "score": 66034,
+      "engagement": "66,034 次观看",
+      "fetchedAt": "2026-09-06T07:57:09.435Z"
     }
   ]
 }
