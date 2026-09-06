@@ -22,10 +22,12 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.29/);
+  assert.match(html, /v2026\.09\.06\.30/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
-  assert.match(script, /'tech', 'market', 'world', 'youtube'/);
+  assert.match(html, /data-category="trends"[^>]*>词云</);
+  assert.match(script, /'tech', 'market', 'world', 'youtube', 'trends'/);
+  assert.match(script, /不包含 YouTube/);
   assert.match(script, /dailyreview-recent-v3/);
   assert.match(script, /ARCHIVE_URLS/);
 });
