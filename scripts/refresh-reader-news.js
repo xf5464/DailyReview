@@ -1,4 +1,3 @@
-const fs = require('node:fs');
 const {
   NEWS_SOURCES,
   addChineseTranslations,
@@ -17,15 +16,13 @@ const { saveNewsArchive } = require('./hot-news-archive');
 const { collectSocialWordCloud } = require('./social-word-cloud');
 
 const USER_AGENT = 'DailyReview/2.0 (+https://github.com/xf5464/DailyReview)';
-const MAX_ITEMS = 10;
 const FEED_FALLBACK_MAX_AGE_HOURS = 72;
 const TECH_SECTION_OVERRIDES = new Map([
   ['techradar', 'https://www.techradar.com/computing'],
+  ['pcmag', 'https://www.pcmag.com/news'],
 ]);
 
-function environmentFlag(value) {
-  return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase());
-}
+function environmentFlag(value) { return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase()); }
 function hoursOld(value, now = Date.now()) {
   const timestamp = Date.parse(value);
   return Number.isFinite(timestamp) ? Math.max(0, (now - timestamp) / 3_600_000) : 999;
@@ -45,14 +42,23 @@ function sourceHomepage(source, category) {
   if (category === 'tech' && TECH_SECTION_OVERRIDES.has(source.key)) return TECH_SECTION_OVERRIDES.get(source.key);
   return source.homepage;
 }
+function cleanHeadlineText(value = '') {
+  return cleanMarkdownTitle(decodeXml(String(value)))
+    .replace(/\s+Published\s+\d{1,2}\s+[A-Za-z]+\s+\d{2,4}\s*$/i, '')
+    .replace(/\s+Published\s+[A-Za-z]+\s+\d{1,2},?\s+\d{4}\s*$/i, '')
+    .replace(/\s+Updated\s+\d{1,2}\s+[A-Za-z]+\s+\d{2,4}\s*$/i, '')
+    .replace(/\s+\d+\s+(?:mins?|hours?|days?)\s+ago(?:\s+.+)?$/i, '')
+    .replace(/\s+/g, ' ').trim();
+}
 function isClearlyNonTechHeadline(title, url = '') {
   const text = `${title} ${url}`.toLowerCase();
-  return /\b(season\s*\d+|episode\s*\d+|release date|trailer|movie|film|tv series|tv show|prime video series|netflix series|hulu series|disney\+ series)\b/.test(text)
-    || (/\/streaming\//.test(text) && /\b(season|episode|series|movie|film)\b/.test(text));
+  return /\b(season\s*\d+|episode\s*\d+|release date|trailer|movie|film|tv series|tv show|prime video series|netflix series|hulu series|disney\+ series|premier league|champions league|arsenal|chelsea|manchester united|liverpool|watch .* free|free stream|live stream|kickoff|kick-off)\b/.test(text)
+    || /\b(best .* deals?|deal of the day|save up to|sale|coupon|discount)\b/.test(text)
+    || (/\/streaming\//.test(text) && /\b(season|episode|series|movie|film|sports?|football|soccer)\b/.test(text));
 }
 function isClearlyNonMarketHeadline(title) {
   const text = String(title || '').toLowerCase();
-  return /\b(tantrum|parenting|recipe|dating advice|relationship advice|horoscope|celebrity gossip)\b/.test(text);
+  return /\b(tantrum|parenting|recipe|dating advice|relationship advice|horoscope|celebrity gossip|meat allergy|ostrich farming)\b/.test(text);
 }
 function hasReadableHeadlineShape(title) {
   const text = String(title || '').trim();
@@ -65,11 +71,11 @@ function isUtilityOrSectionUrl(rawUrl, homepage) {
   try {
     const url = new URL(rawUrl, homepage); const home = new URL(homepage);
     if (url.origin === home.origin && normalizedPath(url) === normalizedPath(home)) return true;
-    return /\/(?:category|series|tag|topic|membership|subscribe|newsletter|podcasts?)(?:\/|$)/i.test(url.pathname);
+    return /\/(?:category|series|tag|topic|membership|subscribe|newsletter|podcasts?|deals?|coupons?|sports?|streaming)(?:\/|$)/i.test(url.pathname);
   } catch { return true; }
 }
 function isAcceptableHeadline(category, title, url, homepage = '') {
-  const blockedTitle = /^(?:skip to (?:main )?content|become a member|project syndicate|market forecast|evs?\s*&\s*transportation|home|news|markets?|technology|tech|read more|view all|latest|subscribe|sign in|log in)$/i;
+  const blockedTitle = /^(?:skip to (?:main )?content|become a member|project syndicate|market forecast|evs?\s*&\s*transportation|large cap stocks|home|news|markets?|technology|tech|read more|view all|latest|subscribe|sign in|log in)$/i;
   if (!title || !url || !hasReadableHeadlineShape(title) || blockedTitle.test(String(title).trim())) return false;
   if (homepage && isUtilityOrSectionUrl(url, homepage)) return false;
   if (category === 'tech' && isClearlyNonTechHeadline(title, url)) return false;
@@ -88,8 +94,8 @@ function linkCandidates(content) {
 function parseSectionHeadline(content, source, category, homepage) {
   const pattern = source.articlePattern ? new RegExp(source.articlePattern, 'i') : null;
   for (const [rawTitle, rawUrl] of linkCandidates(content)) {
-    const title = cleanMarkdownTitle(rawTitle);
-    if (title.length < 15 || title.length > 240) continue;
+    const title = cleanHeadlineText(rawTitle);
+    if (title.length < 15 || title.length > 220) continue;
     try {
       const url = new URL(decodeXml(rawUrl), homepage); const host = url.hostname.toLowerCase().replace(/^www\./, '');
       if (!(source.hosts || []).some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
@@ -105,6 +111,7 @@ async function fetchOfficialFeed(source, category, now) {
   if (!source.headlineFeed) return [];
   const xml = await fetchText(source.headlineFeed, 15_000);
   return parseRssItems(xml, category, 0)
+    .map((item) => ({ ...item, title: cleanHeadlineText(item.title) }))
     .filter((item) => !isPaywalledItem(item))
     .filter((item) => isAcceptableHeadline(category, item.title, item.url))
     .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= FEED_FALLBACK_MAX_AGE_HOURS)
@@ -134,16 +141,18 @@ function containsChinese(value) { return /[\u3400-\u9fff]/.test(String(value || 
 function polishChineseTitle(item) {
   let titleZh = decodeXml(String(item.titleZh || item.title || '')).trim()
     .replace(/\s+([，。！？：；、）】》])/g, '$1').replace(/([（【《])\s+/g, '$1').replace(/\s{2,}/g, ' ')
-    .replace(/(\d+(?:\.\d+)?)\s*\$/g, '$$$1').replace(/\$\s+(\d)/g, '$$$1');
+    .replace(/(\d+(?:\.\d+)?)\s*\$/g, '$$$1').replace(/\$\s+(\d)/g, '$$$1')
+    .replace(/\s*(?:26年)?9月6日发布\s*$/i, '').replace(/\s*发布于?\s*\d{1,2}月\d{1,2}日\s*$/i, '');
   if (/\bagents?\b/i.test(item.title || '')) titleZh = titleZh.replace(/特工|代理人|代理/g, '智能体');
   if (/\bstocks?\b/i.test(item.title || '')) titleZh = titleZh.replace(/库存/g, '股票');
   if (/\bsolid[- ]state drive\b|\bssd\b/i.test(item.title || '')) titleZh = titleZh.replace(/固态驱动器/g, '固态硬盘');
-  return { ...item, titleZh };
+  if (/intellectual fly is open/i.test(item.title || '')) titleZh = '你的“知识裤链”没拉上';
+  return { ...item, title: cleanHeadlineText(item.title), titleZh };
 }
 async function translateItems(items, knownTranslations, previousBySource, baselineBySource) {
   const output = [];
   for (const item of items) {
-    const prepared = { ...item, titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '' };
+    const prepared = { ...item, title: cleanHeadlineText(item.title), titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '' };
     try { const [translated] = await addChineseTranslations([prepared]); output.push(polishChineseTitle(translated)); }
     catch (error) {
       const fallback = previousBySource.get(item.sourceKey) || baselineBySource.get(item.sourceKey);
@@ -209,4 +218,4 @@ async function main() {
   if (!environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY)) console.log('refresh-reader-news.js is intended for reader refresh mode; no email was sent.');
 }
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
-module.exports = { hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, sourceHomepage };
+module.exports = { cleanHeadlineText, hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, sourceHomepage };
