@@ -10,6 +10,21 @@ categoryLabel = function categoryLabel(category) {
   return category === 'market' ? '美股' : category === 'world' ? '国际' : category === 'youtube' ? 'YouTube' : category === 'hn' ? 'Hacker News' : '科技';
 };
 
+const baseItemButton = itemButton;
+itemButton = function itemButtonWithHackerNewsStats(item, rank) {
+  const row = baseItemButton(item, rank);
+  if (item.category !== 'hn' || !item.engagement) return row;
+  const details = row.querySelector('.news-details');
+  if (!details) return row;
+  const stats = document.createElement('span');
+  stats.className = 'news-views';
+  stats.textContent = ` · ${String(item.engagement)
+    .replace(/\bpoints?\b/gi, '分')
+    .replace(/\bcomments?\b/gi, '条评论')}`;
+  details.append(stats);
+  return row;
+};
+
 selectedItems = function selectedItems(value) {
   const items = (value.items || []).filter((item) => item.category === activeCategory);
   if (activeCategory === 'tech') return items.sort((left, right) => Number(right.score || 0) - Number(left.score || 0)).slice(0, 10);
