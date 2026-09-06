@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T12:49:56.117Z",
+  "updatedAt": "2026-09-06T12:55:10.614Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "977d21153f147e88",
@@ -26,23 +26,23 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-06T10:00:00Z",
-      "score": 48.7,
+      "score": 48.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
-      "id": "40ff8d57a306d228",
+      "id": "4533aac93b7f8c28",
       "category": "market",
-      "title": "‘Model fatigue’ sets in as AI labs race to roll out new versions at frenetic pace",
-      "titleZh": "随着人工智能实验室竞相以疯狂的速度推出新版本， “模型疲劳”开始出现",
-      "url": "https://www.cnbc.com/2026/09/06/meta-google-openai-anthropic-ai-model-fatigue.html",
+      "title": "Sugar is outperforming the stock market this year. Here's what's driving it, and where it can go from here",
+      "titleZh": "Sugar今年的表现优于股市。 这就是驱动它的原因，以及它可以从这里走向何方",
+      "url": "https://www.cnbc.com/2026/09/06/sugar-is-outperforming-the-stock-market-this-year-whats-driving-it.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sun, 06 Sep 2026 12:13:49 GMT",
-      "score": 63.4,
+      "publishedAt": "Sun, 06 Sep 2026 12:48:18 GMT",
+      "score": 69,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "8ee6bc2a199beaf1",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 12:01:41 GMT",
-      "score": 51.4,
+      "score": 51.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 12:15:00 GMT",
-      "score": 60.4,
+      "score": 60.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 61.4,
+      "score": 61.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "7b33e3a22f3f6b02",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 12:33:00 GMT",
-      "score": 61.7,
+      "score": 61.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
-      "id": "c897cb22cd0eeca5",
+      "id": "ae723be1a39e6596",
       "category": "market",
-      "title": "Should You Buy Snowflake Stock After Its Recent Surge? The Answer Might Shock You.",
-      "titleZh": "在最近激增之后，您是否应该购买Snowflake股票？ 答案可能会让你震惊。",
-      "url": "https://www.fool.com/investing/2026/09/06/should-buy-snowflake-stock-surge-answer-shock-you/",
+      "title": "GitLab Is Starting to Prove the Bears Wrong",
+      "titleZh": "GitLab开始证明熊是错的",
+      "url": "https://www.fool.com/investing/2026/09/06/gitlab-is-starting-to-prove-the-bears-wrong/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "2026-09-06T12:45:00.000Z",
-      "score": null,
+      "publishedAt": "Sun, 06 Sep 2026 08:30:00 -0400",
+      "score": 57.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "5db5b30099096237",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 12:30:00 +0000",
-      "score": 75.7,
+      "score": 75.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 64,
+      "score": 63.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "09d8173c4081c82b",
@@ -194,9 +194,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 11:55:26 +0000",
-      "score": 72.1,
+      "score": 72,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "13708f75c7191fbe",
@@ -208,9 +208,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 12:30:00 +0000",
-      "score": 74.7,
+      "score": 74.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -222,23 +222,23 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
-      "score": 69.4,
+      "score": 69.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
-      "id": "836d203efb7e4fc2",
+      "id": "1c4bb20a236ec9d0",
       "category": "tech",
-      "title": "Big Time Storage Savings: Labor Day Weekend SSD Deals From Samsung, SanDisk, and More",
-      "titleZh": "大幅节省存储时间：三星、闪迪等公司提供的劳动节周末固态硬盘优惠",
-      "url": "https://www.pcmag.com/news/best-ssd-deals-labor-day-weekend-2026-sale",
+      "title": "Labor Day Weekend Amazon Deals Are Here: Save Up to 50% Off on Tech by Bose, Garmin, HP, LG, and More",
+      "titleZh": "劳动节周末亚马逊优惠在这里： Bose、Garmin、HP、LG等科技产品节省高达50 ％的折扣",
+      "url": "https://www.pcmag.com/news/best-amazon-tech-deals-labor-day-weekend-2026-sale",
       "source": "PCMag",
       "sourceKey": "pcmag",
       "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 26 12:00:16 +0000",
-      "score": 69.2,
+      "publishedAt": "Sun, 06 Sep 26 12:32:35 +0000",
+      "score": 72.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,23 +250,23 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 49.7,
+      "score": 49.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
-      "id": "47b08313a6c87d81",
+      "id": "da9a2d1d7de3e6b3",
       "category": "tech",
-      "title": "Sales of CD and vinyl music sees strong resurgence amid physical media backlash — US sales of ‘retro media’ were up 59% and 18%, respectively, in H1 2026",
-      "titleZh": "在实体媒体强烈反弹的情况下， CD和乙烯基音乐的销量出现强劲复苏--2026年上半年，美国“复古媒体”的销量分别增长了59%和18%",
-      "url": "https://www.tomshardware.com/service-providers/streaming/sales-of-cd-and-vinyl-music-sees-strong-resurgence-amid-physical-media-backlash-us-sales-of-retro-media-were-up-59-percent-and-18-percent-respectively-in-h1-2026",
+      "title": "MSI MEG CoreLiquid E15 360 AIO Review: Bold and stunning, with market-leading performance",
+      "titleZh": "MSI MEG CoreLiquid E15 360 AIO评论：大胆而令人惊叹，具有市场领先的性能",
+      "url": "https://www.tomshardware.com/pc-components/liquid-cooling/msi-meg-coreliquid-e15-360-aio-review-bold-and-stunning-with-market-leading-performance",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 12:16:13 +0000",
-      "score": 67.4,
+      "publishedAt": "Sun, 06 Sep 2026 12:48:03 +0000",
+      "score": 70.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "d0e645f9ae1a95ae",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T11:56:43.000Z",
-      "score": 96.3,
-      "engagement": "52 points · 19 comments",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 100.5,
+      "engagement": "59 points · 28 comments",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -293,9 +293,9 @@
       "sourceKey": "world-reuters-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 104.2,
+      "score": 104.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "2ff7aa428e578579",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 11:29:43 GMT",
-      "score": 101.3,
+      "score": 101.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "43fa9a37eca2ddf4",
@@ -323,9 +323,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 11:16:55 GMT",
-      "score": 100.6,
+      "score": 100.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -338,9 +338,9 @@
       "sourceKey": "world-bbc-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 99.5,
+      "score": 99.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -353,9 +353,9 @@
       "sourceKey": "world-bbc-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 97.7,
+      "score": 97.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -368,9 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 97,
+      "score": 96.9,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -383,9 +383,9 @@
       "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
-      "score": 96.8,
+      "score": 96.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 96.4,
+      "score": 96.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "6a4a77ec9a811799",
@@ -413,9 +413,9 @@
       "sourceKey": "world-dw-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 11:57:34 GMT",
-      "score": 96,
+      "score": 95.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "024fd13de026decc",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 94.6,
+      "score": 94.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 399808,
-      "engagement": "399,808 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 403904,
+      "engagement": "403,904 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 313037,
-      "engagement": "313,037 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 313931,
+      "engagement": "313,931 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "114483232b4c644f",
@@ -470,9 +470,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 275532,
-      "engagement": "275,532 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 277825,
+      "engagement": "277,825 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -484,9 +484,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 217434,
-      "engagement": "217,434 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 217823,
+      "engagement": "217,823 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 128482,
-      "engagement": "128,482 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 129162,
+      "engagement": "129,162 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -512,9 +512,9 @@
       "sourceKey": "youtube-B8AR0gkEXpI",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T16:15:34Z",
-      "score": 127521,
-      "engagement": "127,521 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 129033,
+      "engagement": "129,033 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -526,9 +526,9 @@
       "sourceKey": "youtube-_lYjci0bjNo",
       "sourceOrder": 6,
       "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 91479,
-      "engagement": "91,479 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 92061,
+      "engagement": "92,061 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -540,9 +540,9 @@
       "sourceKey": "youtube-5II-Dkl3cfQ",
       "sourceOrder": 7,
       "publishedAt": "2026-09-05T19:29:08Z",
-      "score": 90340,
-      "engagement": "90,340 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 90845,
+      "engagement": "90,845 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "345d12a5eb2ff460",
@@ -554,9 +554,9 @@
       "sourceKey": "youtube-E4iHHc_sO9Q",
       "sourceOrder": 8,
       "publishedAt": "2026-09-06T05:50:52Z",
-      "score": 85907,
-      "engagement": "85,907 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 87409,
+      "engagement": "87,409 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -568,17 +568,17 @@
       "sourceKey": "youtube-ycfYhLOkAJ4",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T20:27:10Z",
-      "score": 84898,
-      "engagement": "84,898 次观看",
-      "fetchedAt": "2026-09-06T12:49:56.117Z"
+      "score": 85386,
+      "engagement": "85,386 次观看",
+      "fetchedAt": "2026-09-06T12:55:10.614Z"
     }
   ],
   "trends": [
     {
-      "id": "3be7d97d95",
-      "term": "塔斯社报道，俄罗斯拉夫罗夫称莫斯科参与莱比锡无…",
-      "labelZh": "塔斯社报道，俄罗斯拉夫罗夫称莫斯科参与莱比锡无…",
-      "score": 102.53,
+      "id": "59c8f0fd97",
+      "term": "拉夫罗夫称莱比锡无人机指控意味着真正战…",
+      "labelZh": "拉夫罗夫称莱比锡无人机指控意味着真正战…",
+      "score": 102.41,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -587,10 +587,10 @@
       "url": "https://www.reuters.com/world/russias-lavrov-calls-accusations-moscows-involvement-leipzig-drone-incident-2026-09-06/"
     },
     {
-      "id": "9a74710416",
-      "term": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
-      "labelZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
-      "score": 102.23,
+      "id": "c43e53c74b",
+      "term": "中尼边境洪水摧毁繁忙港口",
+      "labelZh": "中尼边境洪水摧毁繁忙港口",
+      "score": 102.11,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -599,22 +599,10 @@
       "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/"
     },
     {
-      "id": "fa1ffd6ea6",
-      "term": "智力飞翔是开放的",
-      "labelZh": "智力飞翔是开放的",
-      "score": 101.49,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Hacker News"
-      ],
-      "url": "https://bcantrill.dtrace.org/2025/12/05/your-intellectual-fly-is-open/"
-    },
-    {
-      "id": "681f506e29",
-      "term": "莫斯科并未排除俄罗斯、美国、中国总统之间举行三…",
-      "labelZh": "莫斯科并未排除俄罗斯、美国、中国总统之间举行三…",
-      "score": 100.73,
+      "id": "611eec4a90",
+      "term": "俄美中领导人三方会晤仍有可能",
+      "labelZh": "俄美中领导人三方会晤仍有可能",
+      "score": 100.56,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -623,10 +611,10 @@
       "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/"
     },
     {
-      "id": "aebde79312",
-      "term": "在埃及毒品案中被判处死刑的11人中的电视节目主…",
-      "labelZh": "在埃及毒品案中被判处死刑的11人中的电视节目主…",
-      "score": 96.73,
+      "id": "ca8062c5e1",
+      "term": "埃及毒品案11人被判死刑",
+      "labelZh": "埃及毒品案11人被判死刑",
+      "score": 96.51,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -635,10 +623,10 @@
       "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo"
     },
     {
-      "id": "b6921f50ae",
-      "term": "美国航空公司亚伯拉罕·林肯（ Abraham …",
-      "labelZh": "美国航空公司亚伯拉罕·林肯（ Abraham …",
-      "score": 95.67,
+      "id": "ab332ac53c",
+      "term": "美军林肯号航母",
+      "labelZh": "美军林肯号航母",
+      "score": 95.55,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -647,34 +635,10 @@
       "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/"
     },
     {
-      "id": "f43ade5256",
-      "term": "如何观看阿森纳对阵切尔西",
-      "labelZh": "如何观看阿森纳对阵切尔西",
-      "score": 93,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "TechRadar"
-      ],
-      "url": "https://www.techradar.com/how-to-watch/football/arsenal-vs-chelsea-premier-league-2026-27"
-    },
-    {
-      "id": "66ed4a6ad7",
-      "term": "不要扔掉你的旧手机，把它变成一个监控摄像头",
-      "labelZh": "不要扔掉你的旧手机，把它变成一个监控摄像头",
-      "score": 92.55,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Engadget"
-      ],
-      "url": "https://www.engadget.com/2248434/keep-old-phone-turn-into-security-camera/"
-    },
-    {
-      "id": "6499c0c0e8",
-      "term": "德国公司成为欧洲第一家发射完全商业化轨道火箭的…",
-      "labelZh": "德国公司成为欧洲第一家发射完全商业化轨道火箭的…",
-      "score": 90.57,
+      "id": "541ccc8c14",
+      "term": "德国公司完成欧洲首个商业轨道火箭发射",
+      "labelZh": "德国公司完成欧洲首个商业轨道火箭发射",
+      "score": 90.41,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -686,7 +650,7 @@
       "id": "e231d9d7e4",
       "term": "在真主党发射无人机后",
       "labelZh": "在真主党发射无人机后",
-      "score": 89.95,
+      "score": 89.79,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -695,34 +659,10 @@
       "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/"
     },
     {
-      "id": "4ab7b8e41e",
-      "term": "大幅节省存储时间",
-      "labelZh": "大幅节省存储时间",
-      "score": 89.38,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "PCMag"
-      ],
-      "url": "https://www.pcmag.com/news/best-ssd-deals-labor-day-weekend-2026-sale"
-    },
-    {
-      "id": "c6a7bf975e",
-      "term": "在实体媒体强烈反弹的情况下",
-      "labelZh": "在实体媒体强烈反弹的情况下",
-      "score": 88.94,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Tom's Hardware"
-      ],
-      "url": "https://www.tomshardware.com/service-providers/streaming/sales-of-cd-and-vinyl-music-sees-strong-resurgence-amid-physical-media-backlash-us-sales-of-retro-media-were-up-59-percent-and-18-percent-respectively-in-h1-2026"
-    },
-    {
       "id": "eb3841adfd",
       "term": "但GPU出货量仍飙升12%",
       "labelZh": "但GPU出货量仍飙升12%",
-      "score": 88.32,
+      "score": 88.15,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -731,10 +671,10 @@
       "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html"
     },
     {
-      "id": "71ac48b052",
-      "term": "俄乌战争：美国特使在莫斯科会晤普京参加乌克兰会谈",
-      "labelZh": "俄乌战争：美国特使在莫斯科会晤普京参加乌克兰会谈",
-      "score": 87.85,
+      "id": "0d2345b190",
+      "term": "美国特使在莫斯科会晤普京参加乌克兰会谈",
+      "labelZh": "美国特使在莫斯科会晤普京参加乌克兰会谈",
+      "score": 87.69,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -743,22 +683,10 @@
       "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo"
     },
     {
-      "id": "2ce53bf005",
-      "term": "随着人工智能实验室竞相以疯狂的速度推出新版本",
-      "labelZh": "随着人工智能实验室竞相以疯狂的速度推出新版本",
-      "score": 87.09,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "CNBC Markets"
-      ],
-      "url": "https://www.cnbc.com/2026/09/06/meta-google-openai-anthropic-ai-model-fatigue.html"
-    },
-    {
-      "id": "7b74e1024d",
-      "term": "特斯拉的Cybercab刚刚通过了第一次真正的…",
-      "labelZh": "特斯拉的Cybercab刚刚通过了第一次真正的…",
-      "score": 86.77,
+      "id": "8deccaa44f",
+      "term": "特斯拉的Cybercab刚刚通过了第一…",
+      "labelZh": "特斯拉的Cybercab刚刚通过了第一…",
+      "score": 86.6,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -767,34 +695,10 @@
       "url": "https://www.thestreet.com/automotive/teslas-cybercab-just-met-its-first-real-test-and-its-federal"
     },
     {
-      "id": "4b701764f2",
-      "term": "贫困不一定是我的现实 ：我想我必须依靠社会保障",
-      "labelZh": "贫困不一定是我的现实 ：我想我必须依靠社会保障",
-      "score": 85.76,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "MarketWatch"
-      ],
-      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
-    },
-    {
-      "id": "474967c1e3",
-      "term": "最佳能源库存",
-      "labelZh": "最佳能源库存",
-      "score": 84.76,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Benzinga"
-      ],
-      "url": "https://www.benzinga.com/money/best-energy-stocks"
-    },
-    {
       "id": "e4b22241c0",
       "term": "燃油税提案经讨论后撤回",
       "labelZh": "燃油税提案经讨论后撤回",
-      "score": 81.4,
+      "score": 81.24,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -803,10 +707,10 @@
       "url": "https://www.bbc.co.uk/news/articles/cy8znkkn5rvo?at_medium=RSS&at_campaign=rss"
     },
     {
-      "id": "e6747057f9",
-      "term": "2026年9月6日（星期日）抵押贷款和再融资利率",
-      "labelZh": "2026年9月6日（星期日）抵押贷款和再融资利率",
-      "score": 77.35,
+      "id": "fd51c33c8d",
+      "term": "利率周比高得多",
+      "labelZh": "利率周比高得多",
+      "score": 77.18,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -815,10 +719,10 @@
       "url": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-and-refinance-interest-rates-today-sunday-september-6-2026-rates-much-higher-week-over-week-100000794.html"
     },
     {
-      "id": "d2edba619a",
-      "term": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
-      "labelZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
-      "score": 71.19,
+      "id": "bdcd534a3a",
+      "term": "美国军方袭击三艘伊朗原油运输船",
+      "labelZh": "美国军方袭击三艘伊朗原油运输船",
+      "score": 71.02,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -827,10 +731,10 @@
       "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/"
     },
     {
-      "id": "4cd5325d5a",
-      "term": "《西雅图时报》和《新闻日报》是起诉OpenAI…",
-      "labelZh": "《西雅图时报》和《新闻日报》是起诉OpenAI…",
-      "score": 68.6,
+      "id": "02ecd73b45",
+      "term": "《西雅图时报》和《新闻日报》是起诉Op…",
+      "labelZh": "《西雅图时报》和《新闻日报》是起诉Op…",
+      "score": 68.43,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
@@ -839,28 +743,40 @@
       "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
     },
     {
-      "id": "59a0c92e44",
-      "term": "在最近激增之后，您是否应该购买Snowflak…",
-      "labelZh": "在最近激增之后，您是否应该购买Snowflak…",
-      "score": 59.28,
+      "id": "35ecb8e3c6",
+      "term": "联合国投票通过反映非洲真实规模的新世界…",
+      "labelZh": "联合国投票通过反映非洲真实规模的新世界…",
+      "score": 52.61,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
-        "The Motley Fool"
+        "Al Jazeera"
       ],
-      "url": "https://www.fool.com/investing/2026/09/06/should-buy-snowflake-stock-surge-answer-shock-you/"
+      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size"
     },
     {
-      "id": "9d00b4f605",
-      "term": "世界即将迎来苹果新任首席执行官。",
-      "labelZh": "世界即将迎来苹果新任首席执行官。",
-      "score": 56.15,
+      "id": "28f14a547d",
+      "term": "通过野外录音探索世界",
+      "labelZh": "通过野外录音探索世界",
+      "score": 37.85,
       "mentions": 1,
       "platformCount": 1,
       "platforms": [
-        "CNN Business"
+        "The Verge"
       ],
-      "url": "https://www.cnn.com/2026/09/06/tech/apple-ceo-john-ternus-challenges"
+      "url": "https://www.theverge.com/tech/990873/earth-garden-globe-field-recordings"
+    },
+    {
+      "id": "e4b5962791",
+      "term": "美国袭击3艘伊朗油轮",
+      "labelZh": "美国袭击3艘伊朗油轮",
+      "score": 27.17,
+      "mentions": 1,
+      "platformCount": 1,
+      "platforms": [
+        "AP Business"
+      ],
+      "url": "https://apnews.com/article/iran-us-war-oil-tankers-b3650799901c56a6deeca962cbaa4109"
     }
   ]
 }
