@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { buildWordCloud, stripHtml, termsFromText } = require('../scripts/social-word-cloud');
 
 test('removes Mastodon HTML before keyword extraction', () => {
-  assert.equal(stripHtml('<p>OpenAI &amp; robots<br>are trending</p>'), 'OpenAI & robots are trending');
+  assert.equal(stripHtml('<p>OpenAI &amp; robots<br>are trending https://example.com/post</p>'), 'OpenAI & robots are trending');
 });
 
 test('normalizes important aliases and removes filler words', () => {
@@ -12,6 +12,7 @@ test('normalizes important aliases and removes filler words', () => {
   assert.ok(terms.includes('芯片'));
   assert.ok(terms.includes('英伟达'));
   assert.ok(!terms.includes('the'));
+  assert.ok(!terms.includes('https'));
 });
 
 test('boosts terms confirmed across free platforms', () => {
