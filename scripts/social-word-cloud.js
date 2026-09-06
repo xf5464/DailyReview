@@ -1,16 +1,32 @@
 const crypto = require('node:crypto');
 
 const CLOUD_SIZE = 24;
-const EVENT_VERBS = /(起诉|发布|推出|上线|宣布|裁员|收购|批准|禁用|调查|袭击|攻击|会晤|会谈|通过|发射|部署|撤回|辞职|任命|判处|飙升|上涨|下跌|增长|下降|创.*新高|刷新.*纪录|达成|签署|制裁|停火|起飞|首飞|获批|开放|关闭|接管|管理|摧毁|离开|撤离|被捕|获释|当选|辞任|禁售|停售|召回|停产|量产|交付|扩产|融资|上市|破产|重组|拒绝|允许|要求|警告|击落|恢复|停止|爆炸|坠毁|突破)/;
-const IMPACT_WORDS = /(战争|导弹|无人机|油轮|航母|洪水|地震|火灾|死亡|死刑|关税|贸易|利率|降息|加息|失业|通胀|铜价|油价|股价|出货量|CEO|首席执行官|火箭|轨道|GPU|芯片|诉讼|制裁)/i;
-const NON_EVENT = /(如何|how to|最佳|best |购买|buy |优惠|deal|折扣|省钱|观看|watch |直播|live stream|评测|review|教程|guide|值得买吗|盘点|推荐|不要扔掉|把它变成|强烈反弹|开放的|original link|store|商城|智力飞翔|技巧|攻略)/i;
+const EVENT_LOOKBACK_HOURS = 72;
+const EVENT_VERBS = /(起诉|发布|推出|上线|宣布|裁员|收购|批准|禁用|调查|袭击|攻击|会晤|会谈|通过|发射|部署|撤回|辞职|任命|判处|飙升|上涨|下跌|增长|下降|创.*新高|刷新.*纪录|达成|签署|制裁|停火|起飞|首飞|获批|开放|关闭|接管|管理|摧毁|离开|撤离|被捕|获释|当选|辞任|禁售|停售|召回|停产|量产|交付|扩产|融资|上市|破产|重组|举行|确认|拒绝|同意|批准|推迟|取消|恢复|暂停)/;
+const IMPACT_WORDS = /(战争|导弹|无人机|油轮|航母|洪水|地震|火灾|死亡|死刑|关税|贸易|利率|降息|加息|失业|通胀|铜价|油价|股价|出货量|CEO|首席执行官|火箭|轨道|GPU|芯片|诉讼|制裁|选举|总统|首相|政府|央行|美联储)/i;
+const NON_EVENT = /(如何|how to|最佳|best |购买|buy |优惠|deal|折扣|省钱|观看|watch |直播|live stream|评测|review|教程|guide|值得买吗|盘点|推荐|不要扔掉|把它变成|强烈反弹|开放的|original link|store|商城)/i;
+
+// Event cloud uses only large free-access US/UK general-news publishers.
+const MAINSTREAM_EVENT_SOURCES = [
+  { key: 'reuters', name: 'Reuters', query: 'site:reuters.com when:2d' },
+  { key: 'ap', name: 'AP News', query: 'site:apnews.com when:2d' },
+  { key: 'bbc', name: 'BBC News', query: 'site:bbc.com/news when:2d' },
+  { key: 'cnn', name: 'CNN', query: 'site:cnn.com when:2d' },
+  { key: 'nbc', name: 'NBC News', query: 'site:nbcnews.com when:2d' },
+  { key: 'abc', name: 'ABC News', query: 'site:abcnews.go.com when:2d' },
+  { key: 'cbs', name: 'CBS News', query: 'site:cbsnews.com when:2d' },
+  { key: 'sky', name: 'Sky News', query: 'site:news.sky.com when:2d' },
+  { key: 'guardian', name: 'The Guardian', query: 'site:theguardian.com when:2d' },
+  { key: 'independent', name: 'The Independent', query: 'site:independent.co.uk when:2d' },
+];
 
 function stripHtml(value = '') {
   return String(value)
     .replace(/<br\s*\/?>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/https?:\/\/\S+|www\.\S+/gi, ' ')
     .replace(/\s+/g, ' ').trim();
 }
@@ -22,9 +38,10 @@ function cleanEventLabel(value = '') {
     .replace(/[“”‘’]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-
   text = text
-    .replace(/^(塔斯社|路透社|美联社|新华社|BBC|CNN)报道[，,:：\s]*/i, '')
+    .replace(/^塔斯社报道[，,:：\s]*/i, '')
+    .replace(/^路透社报道[，,:：\s]*/i, '')
+    .replace(/^美联社报道[，,:：\s]*/i, '')
     .replace(/^据[^，,]{2,12}报道[，,:：\s]*/i, '')
     .replace(/以下是.*$/i, '')
     .replace(/这里是.*$/i, '')
@@ -33,35 +50,15 @@ function cleanEventLabel(value = '') {
     .replace(/点击.*$/i, '')
     .replace(/\s*[-—–]\s*.*$/i, '')
     .trim();
-
-  // Repair a few recurring bad machine translations and turn them into event phrases.
-  text = text
-    .replace(/美国航空公司亚伯拉罕·林肯[^，。]*/i, '美军林肯号航母')
-    .replace(/俄罗斯拉夫罗夫/g, '拉夫罗夫')
-    .replace(/莫斯科并未排除俄罗斯、美国、中国总统之间举行三方会晤的可能性/g, '俄美中领导人三方会晤仍有可能')
-    .replace(/在埃及毒品案中被判处死刑的11人中的电视节目主持人/g, '埃及毒品案11人被判死刑')
-    .replace(/德国公司成为欧洲第一家发射完全商业化轨道火箭的公司/g, '德国公司完成欧洲首个商业轨道火箭发射')
-    .replace(/在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口/g, '中尼边境洪水摧毁繁忙港口')
-    .replace(/莫斯科参与莱比锡无人机事件的指控是.?真正的战争开始.?/g, '莱比锡无人机指控意味着真正战争开始')
-    .trim();
-
   const clauses = text.split(/[。！？!?；;]/).map((part) => part.trim()).filter(Boolean);
   if (clauses.length > 1) text = clauses.find((part) => EVENT_VERBS.test(part) || IMPACT_WORDS.test(part)) || clauses[0];
-
-  text = text
-    .replace(/^在([^，,]{2,14})[，,]\s*/, '$1：')
-    .replace(/，?以下是.*$/, '')
-    .replace(/，?此前.*$/, '')
-    .replace(/，?原因是.*$/, '')
-    .trim();
-
-  if (text.length > 20) {
+  if (text.length > 22) {
     const parts = text.split(/[，,:：]/).map((part) => part.trim()).filter(Boolean);
-    const eventPart = parts.find((part) => (EVENT_VERBS.test(part) || IMPACT_WORDS.test(part)) && part.length >= 6 && part.length <= 20);
-    if (eventPart) text = eventPart;
-    else if (parts.length >= 2 && `${parts[0]}${parts[1]}`.length <= 20) text = `${parts[0]}：${parts[1]}`;
+    const eventPart = parts.find((part) => EVENT_VERBS.test(part) || IMPACT_WORDS.test(part));
+    if (eventPart && eventPart.length >= 7) text = eventPart;
+    else if (parts[0]?.length >= 8) text = parts[0];
   }
-  if (text.length > 20) text = `${text.slice(0, 19)}…`;
+  if (text.length > 22) text = `${text.slice(0, 21)}…`;
   return text;
 }
 
@@ -71,32 +68,36 @@ function titleTokens(value = '') {
   const chinese = normalized.match(/[\u4e00-\u9fff]{2,6}/g) || [];
   return new Set([...latin, ...chinese]);
 }
+
 function sameEvent(left, right) {
   const a = titleTokens(left); const b = titleTokens(right);
   if (!a.size || !b.size) return false;
   let shared = 0; for (const token of a) if (b.has(token)) shared += 1;
   return shared >= 2 && shared / Math.min(a.size, b.size) >= 0.35;
 }
-function hoursOld(value, now) {
-  const parsed = Date.parse(value || '');
-  return Number.isFinite(parsed) ? Math.max(0, (now - parsed) / 3_600_000) : 999;
-}
+
 function freshnessScore(value, now) {
-  const ageHours = hoursOld(value, now);
-  return Math.max(0, 36 - ageHours) * 1.4;
+  const parsed = Date.parse(value || '');
+  if (!Number.isFinite(parsed)) return 0;
+  const ageHours = Math.max(0, (now - parsed) / 3_600_000);
+  return Math.max(0, EVENT_LOOKBACK_HOURS - ageHours) * 0.9;
 }
+
 function isConcreteEvent(item, label) {
   const sourceText = `${item.titleZh || ''} ${item.title || ''}`;
   if (NON_EVENT.test(sourceText) || NON_EVENT.test(label)) return false;
   if (EVENT_VERBS.test(label) || EVENT_VERBS.test(sourceText)) return true;
-  if (item.category === 'world' && IMPACT_WORDS.test(sourceText)) return true;
+  if (IMPACT_WORDS.test(label) || IMPACT_WORDS.test(sourceText)) return true;
   if (/\d/.test(label) && /(增长|下降|上涨|下跌|裁员|死亡|获利|亏损|出货|销量|营收|利润|失业|通胀)/.test(sourceText)) return true;
   return false;
 }
 
 function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
-  const usable = items.filter((item) => item && item.category !== 'youtube' && (item.titleZh || item.title)
-    && hoursOld(item.publishedAt, now) <= 72);
+  const usable = items.filter((item) => {
+    if (!item || item.category === 'youtube' || !(item.titleZh || item.title)) return false;
+    const parsed = Date.parse(item.publishedAt || '');
+    return !Number.isFinite(parsed) || (now - parsed) / 3_600_000 <= EVENT_LOOKBACK_HOURS;
+  });
   const ranked = usable.map((item) => {
     const related = usable.filter((other) => other !== item && sameEvent(item.title || item.titleZh, other.title || other.titleZh));
     const sources = new Set([item.source, ...related.map((other) => other.source)].filter(Boolean));
@@ -104,7 +105,7 @@ function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
     const label = cleanEventLabel(item.titleZh || item.title);
     return {
       item, label,
-      score: base * 0.45 + freshnessScore(item.publishedAt, now) + sources.size * 9 + related.length * 4,
+      score: base * 0.3 + freshnessScore(item.publishedAt, now) + sources.size * 16 + related.length * 7,
       mentions: related.length + 1,
       platformCount: sources.size,
       platforms: [...sources],
@@ -121,10 +122,79 @@ function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
     id: crypto.createHash('sha1').update(entry.label).digest('hex').slice(0, 10),
     term: entry.label, labelZh: entry.label, score: Math.round(entry.score * 100) / 100,
     mentions: entry.mentions, platformCount: entry.platformCount, platforms: entry.platforms,
-    url: entry.item.url || '', category: entry.item.category || '',
+    url: entry.item.url || '', category: 'mainstream',
   }));
 }
 
+function googleNewsUrl(query) {
+  const params = new URLSearchParams({ q: query, hl: 'en-US', gl: 'US', ceid: 'US:en' });
+  return `https://news.google.com/rss/search?${params}`;
+}
+
+async function fetchText(url, timeoutMs = 15000, fetcher = fetch) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetcher(url, { headers: { 'user-agent': 'DailyReview/1.0', accept: 'application/rss+xml,text/xml,text/plain,*/*' }, signal: controller.signal });
+    if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
+    return response.text();
+  } finally { clearTimeout(timer); }
+}
+
+function tagValue(block, tag) {
+  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, 'i'));
+  return match ? stripHtml(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')) : '';
+}
+
+function parseMainstreamRss(xml, source) {
+  const blocks = String(xml).match(/<item\b[\s\S]*?<\/item>/gi) || [];
+  return blocks.slice(0, 8).map((block, index) => {
+    const rawTitle = tagValue(block, 'title');
+    const suffix = ` - ${source.name}`;
+    const title = rawTitle.endsWith(suffix) ? rawTitle.slice(0, -suffix.length) : rawTitle;
+    return {
+      category: 'mainstream', title, titleZh: '', url: tagValue(block, 'link'), source: source.name,
+      sourceKey: `${source.key}-${index}`, sourceOrder: index, publishedAt: tagValue(block, 'pubDate'), score: Math.max(1, 100 - index * 6),
+    };
+  }).filter((item) => item.title && item.url);
+}
+
+async function translateToChinese(title, fetcher = fetch) {
+  if (/\p{Script=Han}/u.test(title)) return title;
+  const params = new URLSearchParams({ client: 'gtx', sl: 'auto', tl: 'zh-CN', dt: 't', q: title });
+  const text = await fetchText(`https://translate.googleapis.com/translate_a/single?${params}`, 15000, fetcher);
+  const payload = JSON.parse(text);
+  const translated = (payload?.[0] || []).map((part) => part?.[0] || '').join('').trim();
+  return translated || title;
+}
+
+async function fetchMainstreamEventItems(now = Date.now(), fetcher = fetch) {
+  const settled = await Promise.allSettled(MAINSTREAM_EVENT_SOURCES.map(async (source) => {
+    const xml = await fetchText(googleNewsUrl(source.query), 15000, fetcher);
+    return parseMainstreamRss(xml, source);
+  }));
+  const items = settled.flatMap((result) => result.status === 'fulfilled' ? result.value : [])
+    .filter((item) => {
+      const parsed = Date.parse(item.publishedAt || '');
+      return !Number.isFinite(parsed) || (now - parsed) / 3_600_000 <= EVENT_LOOKBACK_HOURS;
+    });
+  if (items.length < 10) throw new Error(`Mainstream event sources returned only ${items.length} usable stories.`);
+
+  // Translate only the strongest candidates to reduce latency and API load.
+  const candidates = items.sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0)).slice(0, 45);
+  const translated = [];
+  for (let index = 0; index < candidates.length; index += 5) {
+    const batch = candidates.slice(index, index + 5);
+    const results = await Promise.all(batch.map(async (item) => {
+      try { return { ...item, titleZh: await translateToChinese(item.title, fetcher) }; }
+      catch { return { ...item, titleZh: item.title }; }
+    }));
+    translated.push(...results);
+  }
+  return translated;
+}
+
+// Compatibility helpers retained for unit tests and older callers.
 function termsFromText(text) {
   const lower = String(text || '').toLowerCase();
   const terms = [];
@@ -136,6 +206,7 @@ function termsFromText(text) {
   for (const match of String(text || '').match(/\bGPT\s*-?\s*\d+(?:\.\d+)*\b/gi) || []) add(match.replace(/\s+/g, '').replace(/^gpt/i, 'GPT'));
   return terms;
 }
+
 function buildWordCloud(signals, now = Date.now(), limit = CLOUD_SIZE) {
   const aggregate = new Map();
   for (const item of (signals || []).filter((signal) => signal?.platform !== 'YouTube')) {
@@ -152,12 +223,19 @@ function buildWordCloud(signals, now = Date.now(), limit = CLOUD_SIZE) {
   })).sort((a, b) => b.score - a.score).slice(0, limit);
 }
 
-async function collectSocialWordCloud(baseItems = [], now = Date.now()) {
-  const trends = buildEventCloud(baseItems, now);
+async function collectSocialWordCloud(_baseItems = [], now = Date.now(), fetcher = fetch) {
+  const newsItems = await fetchMainstreamEventItems(now, fetcher);
+  const trends = buildEventCloud(newsItems, now);
   if (trends.length < 8) throw new Error(`Event cloud returned only ${trends.length}/8 usable events.`);
-  const newsItems = baseItems.filter((item) => item?.category !== 'youtube');
   const names = [...new Set(newsItems.map((item) => item.source).filter(Boolean))];
-  return { trends, sources: names.map((name) => ({ name, count: newsItems.filter((item) => item.source === name).length })), signalCount: newsItems.length };
+  return {
+    trends,
+    sources: names.map((name) => ({ name, count: newsItems.filter((item) => item.source === name).length })),
+    signalCount: newsItems.length,
+  };
 }
 
-module.exports = { buildEventCloud, buildWordCloud, cleanEventLabel, collectSocialWordCloud, stripHtml, termsFromText };
+module.exports = {
+  MAINSTREAM_EVENT_SOURCES, buildEventCloud, buildWordCloud, cleanEventLabel, collectSocialWordCloud,
+  fetchMainstreamEventItems, parseMainstreamRss, stripHtml, termsFromText,
+};
