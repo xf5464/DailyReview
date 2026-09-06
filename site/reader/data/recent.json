@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T13:00:39.691Z",
+  "updatedAt": "2026-09-06T13:30:40.516Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "977d21153f147e88",
@@ -26,9 +26,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-06T10:00:00Z",
-      "score": 48.2,
+      "score": 47.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "4533aac93b7f8c28",
@@ -39,10 +39,10 @@
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "Sun, 06 Sep 2026 12:48:18 GMT",
+      "publishedAt": "Sun, 06 Sep 2026 13:19:01 GMT",
       "score": 68.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "8ee6bc2a199beaf1",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 12:01:41 GMT",
-      "score": 51.2,
+      "score": 50.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,21 +70,21 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "e68be410a3e868e5",
+      "id": "02d9e428fff3108f",
       "category": "market",
-      "title": "We&#x2019;re in our 60s. We earn $345,000 and have $1 million in 403(b)s. Is it too late for Roth conversions?",
-      "titleZh": "我们已经60多岁了。我们赚取$ 345,000 ，在403 (b)中拥有$ 100万。罗斯转换是否为时已晚？",
-      "url": "https://www.marketwatch.com/story/were-in-our-60s-my-wife-and-i-have-345-000-in-annual-pensions-and-1-million-in-403-b-s-is-it-too-late-for-roth-conversions-5df35d42?mod=mw_rss_topstories",
+      "title": "&#x2018;I&#x2019;m leaving money on the table&#x2019;: I&#x2019;m 64 and my husband is 70. Should I take spousal benefits or wait for my own?",
+      "titleZh": "“我把钱留在桌子上” ：我64岁，我丈夫70岁。 我应该领取配偶福利还是等待自己的福利？",
+      "url": "https://www.marketwatch.com/story/im-leaving-money-on-the-table-im-64-and-my-husband-is-70-should-i-take-spousal-benefits-or-wait-for-my-own-2490f5cd?mod=mw_rss_topstories",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 12:55:00 GMT",
-      "score": 60.9,
+      "publishedAt": "Sun, 06 Sep 2026 13:15:00 GMT",
+      "score": 60.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,37 +96,37 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 61.2,
+      "score": 60.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "7b33e3a22f3f6b02",
+      "id": "ff5bc2c46a3dcb5d",
       "category": "market",
-      "title": "Tesla's Cybercab just met its first real test, and it's federal",
-      "titleZh": "特斯拉的Cybercab刚刚通过了第一次真正的测试，",
-      "url": "https://www.thestreet.com/automotive/teslas-cybercab-just-met-its-first-real-test-and-its-federal",
+      "title": "Nvidia's cash could reshape an AI cloud contender",
+      "titleZh": "英伟达的现金可能会重塑人工智能云竞争者",
+      "url": "https://www.thestreet.com/investing/nvidia-nscale-pre-ipo-investment",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 12:33:00 GMT",
-      "score": 61.5,
+      "publishedAt": "Sun, 06 Sep 2026 13:03:00 GMT",
+      "score": 58.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "050f2f427a282b55",
+      "id": "6557dae2442b4b46",
       "category": "market",
-      "title": "Where Will Shopify Stock Be in 5 Years?",
-      "titleZh": "5年后Shopify的库存情况如何？",
-      "url": "https://www.fool.com/investing/2026/09/06/where-will-shopify-stock-be-in-5-years/?source=iedfolrf0000001",
+      "title": "Social Security's Trump Bump-Led 2027 COLA Should Have Its First Silver Lining Since 2023, but There's a Steep Price to Pay for This Victory",
+      "titleZh": "社会保障特朗普领导的2027年可乐应该自2023年以来首次亮相，但这场胜利需要付出高昂的代价",
+      "url": "https://www.fool.com/retirement/2026/09/06/social-security-trump-bump-led-2027-cola-first-silver-lining-since-2023-steep-price-to-pay/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 08:22:01 -0400",
-      "score": 60.4,
+      "publishedAt": "Sun, 06 Sep 2026 09:06:01 -0400",
+      "score": 57.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,21 +140,21 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "5db5b30099096237",
+      "id": "2d5070639e913623",
       "category": "tech",
-      "title": "How to watch Arsenal vs Chelsea: Live streams, TV channels for Premier League 2026/27",
-      "titleZh": "如何观看阿森纳对阵切尔西： 2026/27赛季英超直播、电视频道",
-      "url": "https://www.techradar.com/how-to-watch/football/arsenal-vs-chelsea-premier-league-2026-27",
+      "title": "What is the release date for Reacher season 4 episode 7 on Prime Video?",
+      "titleZh": "Reacher第4季第7集在Prime Video上发布的日期是什么时候？",
+      "url": "https://www.techradar.com/streaming/amazon-prime-video/reacher-season-4-episode-7-release-date-time",
       "source": "TechRadar",
       "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 12:30:00 +0000",
+      "publishedAt": "Sun, 06 Sep 2026 13:00:00 +0000",
       "score": 75.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 63.8,
+      "score": 63.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "3ebfdfa2baadde71",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-06T13:00:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "09d8173c4081c82b",
@@ -194,51 +194,51 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 11:55:26 +0000",
-      "score": 71.9,
+      "score": 71.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "13708f75c7191fbe",
+      "id": "030110b636a37bac",
       "category": "tech",
-      "title": "Don't get rid of your old phone, turn it into a security camera",
-      "titleZh": "不要扔掉你的旧手机，把它变成一个监控摄像头",
-      "url": "https://www.engadget.com/2248434/keep-old-phone-turn-into-security-camera/",
+      "title": "How to check your PC's hard-drive health",
+      "titleZh": "如何检查电脑的硬盘健康状况",
+      "url": "https://www.engadget.com/2248471/how-to-check-hard-drive-health-pc/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 12:30:00 +0000",
-      "score": 74.5,
+      "publishedAt": "Sun, 06 Sep 2026 13:00:00 +0000",
+      "score": 71.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "7cfe2259cee6fb57",
+      "id": "21d3791dcc297fe6",
       "category": "tech",
-      "title": "CERN is moving more than 2,200 specialized computers from RHEL to Debian",
-      "titleZh": "CERN正在将2,200多台专业计算机从RHEL迁移到Debian",
-      "url": "https://www.techspot.com/news/113745-cern-moving-more-than-2200-specialized-computers-rhel.html",
+      "title": "GPU shipments surged 12% despite weaker PC demand and higher memory costs",
+      "titleZh": "尽管PC需求疲软且内存成本较高，但GPU出货量仍飙升12%",
+      "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html",
       "source": "TechSpot",
       "sourceKey": "techspot",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 50.7,
+      "publishedAt": "Sun, 6 Sep 2026 08:11 -0500",
+      "score": 70.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "1c4bb20a236ec9d0",
+      "id": "312d6097f00c1135",
       "category": "tech",
-      "title": "Labor Day Weekend Amazon Deals Are Here: Save Up to 50% Off on Tech by Bose, Garmin, HP, LG, and More",
-      "titleZh": "劳动节周末亚马逊优惠在这里： Bose、Garmin、HP、LG等科技产品节省高达50 ％的折扣",
-      "url": "https://www.pcmag.com/news/best-amazon-tech-deals-labor-day-weekend-2026-sale",
+      "title": "OpenAI Agents Take Over German Wiki To Talk to Each Other",
+      "titleZh": "OpenAI特工接管德语维基互相交谈",
+      "url": "https://www.pcmag.com/news/openai-agents-take-over-german-wiki-to-talk-to-each-other",
       "source": "PCMag",
       "sourceKey": "pcmag",
       "sourceOrder": 6,
-      "publishedAt": "Sun, 06 Sep 26 12:32:35 +0000",
-      "score": 72.5,
+      "publishedAt": "Sun, 06 Sep 26 13:17:43 +0000",
+      "score": 72.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,23 +250,23 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 49.5,
+      "score": 49,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
-      "id": "da9a2d1d7de3e6b3",
+      "id": "d5e57734c64db4ca",
       "category": "tech",
-      "title": "MSI MEG CoreLiquid E15 360 AIO Review: Bold and stunning, with market-leading performance",
-      "titleZh": "MSI MEG CoreLiquid E15 360 AIO评论：大胆而令人惊叹，具有市场领先的性能",
-      "url": "https://www.tomshardware.com/pc-components/liquid-cooling/msi-meg-coreliquid-e15-360-aio-review-bold-and-stunning-with-market-leading-performance",
+      "title": "Samsung 990 2TB PCIe 4.0 SSD falls to $339.99 on Amazon — $190 discount makes high-capacity storage more affordable",
+      "titleZh": "三星990 2TB PCIe 4.0 SSD在亚马逊上跌至339.99 $ — 190 $的折扣使高容量存储更实惠",
+      "url": "https://www.tomshardware.com/pc-components/ssds/samsung-990-2tb-pcie-4-0-ssd-falls-to-usd339-99-on-amazon-usd190-discount-makes-high-capacity-storage-more-affordable",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 12:48:03 +0000",
-      "score": 70.8,
+      "publishedAt": "Sun, 06 Sep 2026 13:08:31 +0000",
+      "score": 67.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "d0e645f9ae1a95ae",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T11:56:43.000Z",
-      "score": 102.8,
-      "engagement": "63 points · 35 comments",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "score": 112.6,
+      "engagement": "104 points · 61 comments",
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -293,9 +293,24 @@
       "sourceKey": "world-reuters-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 103.9,
+      "score": 103.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
+    },
+    {
+      "id": "e2269a4b499db6f2",
+      "category": "world",
+      "title": "Iran to tackle economic issues, says further attacks will be 'more painful'",
+      "titleZh": "伊朗将解决经济问题，称进一步的袭击将“更痛苦”",
+      "url": "https://www.reuters.com/world/middle-east/iran-tackle-economic-issues-says-further-attacks-will-be-more-painful-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNa2JCeUZJRmd5UEhfaFJjQ2U3UDRValp0Y0ZVOVBiWXE0YzBVZHhTd3RlR0FQMlZHMFRadXJvS01XOHBvb0p2Qzg0V1FYeDdUWC1uMDBFZU5JNnZCRVh1M1lLLWZCQ2Jhb1djdlJxTGEtNGNHWk96czEzUm13VE9wMVp1YjhEQ21WSVZwUlZOMEpBbkJVRm1tRV9wTy13Z0RaMXpvd29RMFdRUkg5ZjVUaTRuRkhCZ3doLTJtWnRoZFU?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-1",
+      "sourceOrder": 1,
+      "publishedAt": "Sun, 06 Sep 2026 13:10:32 GMT",
+      "score": 102.7,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "2ff7aa428e578579",
@@ -305,12 +320,12 @@
       "url": "https://www.reuters.com/world/russias-lavrov-calls-accusations-moscows-involvement-leipzig-drone-incident-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc25LWXEwUFU4bnJKZk1QZWVPMHV4NjlMcDUydTJCTFd1RzYtTG5qM0xsa1M5dW1WOVZqYlFlRXVRYWFrMldheHQ1a0RUMXNLRUZrbzU4clpaVFoycWVicDh1TmloUDdDVm9VNEtaRTlvd080Y1liekQwQVYxM0RjczlOSXA2RXFhc1V6dGR0R1g5aXpXX0NoMDlGZ2VqQ0RTNnlLV2NaTHpsOHJoSVFiU29ONXNqcVRq?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-1",
-      "sourceOrder": 1,
+      "sourceKey": "world-reuters-world-2",
+      "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 11:29:43 GMT",
-      "score": 101.1,
+      "score": 100.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "43fa9a37eca2ddf4",
@@ -320,12 +335,12 @@
       "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-2",
-      "sourceOrder": 2,
+      "sourceKey": "world-reuters-world-3",
+      "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 11:16:55 GMT",
-      "score": 100.3,
+      "score": 99.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -335,12 +350,12 @@
       "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-3",
-      "sourceOrder": 3,
+      "sourceKey": "world-bbc-world-4",
+      "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 99.3,
+      "score": 98.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -350,12 +365,12 @@
       "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-4",
-      "sourceOrder": 4,
+      "sourceKey": "world-bbc-world-5",
+      "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 97.4,
+      "score": 96.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -365,12 +380,12 @@
       "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
       "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-5",
-      "sourceOrder": 5,
+      "sourceKey": "world-al-jazeera-6",
+      "sourceOrder": 6,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 96.7,
+      "score": 96,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -380,12 +395,12 @@
       "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPelNvcTNadU4zdzk5UEF0bUZNQTZTRDhJdDN2WnA4cEhWUi10QXJveUpzdmZEQi13bDhjNl91d2l5N3o4NEZWa0JqTm5kT0FOMTRHZzVTWWRFSnk5UmdPdjhlMnY1VDRSc0VFa2RoN3k0OWdVbkI2aTUwUE16WEhLY0pQTS1PRm5meWJCUVJUSFhmVEZZVUhQT3JYWHVUUkNGZ2dJTkVtLUQxMUVNMm9SZkJocjg1aVdsTWhmdDNMd1hteVpr?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
-      "score": 96.6,
+      "score": 95.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -395,12 +410,12 @@
       "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 96.2,
+      "score": 95.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -410,27 +425,12 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 94.4,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
-    },
-    {
-      "id": "024fd13de026decc",
-      "category": "world",
-      "title": "Four killed in Israeli strikes on southern Lebanon",
-      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
-      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
-      "source": "Reuters World",
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
-      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 94.3,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
+      "score": 93.5,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 403904,
       "engagement": "403,904 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 313931,
       "engagement": "313,931 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "114483232b4c644f",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 277825,
       "engagement": "277,825 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 217823,
       "engagement": "217,823 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 129162,
       "engagement": "129,162 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T16:15:34Z",
       "score": 129033,
       "engagement": "129,033 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 92061,
       "engagement": "92,061 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T19:29:08Z",
       "score": 90845,
       "engagement": "90,845 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "345d12a5eb2ff460",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-06T05:50:52Z",
       "score": 87409,
       "engagement": "87,409 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -570,189 +570,8 @@
       "publishedAt": "2026-09-05T20:27:10Z",
       "score": 85386,
       "engagement": "85,386 次观看",
-      "fetchedAt": "2026-09-06T13:00:39.691Z"
+      "fetchedAt": "2026-09-06T13:30:40.516Z"
     }
   ],
-  "trends": [
-    {
-      "id": "59c8f0fd97",
-      "term": "拉夫罗夫称莱比锡无人机指控意味着真正战…",
-      "labelZh": "拉夫罗夫称莱比锡无人机指控意味着真正战…",
-      "score": 102.28,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/russias-lavrov-calls-accusations-moscows-involvement-leipzig-drone-incident-2026-09-06/"
-    },
-    {
-      "id": "c43e53c74b",
-      "term": "中尼边境洪水摧毁繁忙港口",
-      "labelZh": "中尼边境洪水摧毁繁忙港口",
-      "score": 101.98,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/"
-    },
-    {
-      "id": "611eec4a90",
-      "term": "俄美中领导人三方会晤仍有可能",
-      "labelZh": "俄美中领导人三方会晤仍有可能",
-      "score": 100.39,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/"
-    },
-    {
-      "id": "ca8062c5e1",
-      "term": "埃及毒品案11人被判死刑",
-      "labelZh": "埃及毒品案11人被判死刑",
-      "score": 96.34,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "BBC News"
-      ],
-      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo"
-    },
-    {
-      "id": "ab332ac53c",
-      "term": "美军林肯号航母",
-      "labelZh": "美军林肯号航母",
-      "score": 95.42,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/"
-    },
-    {
-      "id": "541ccc8c14",
-      "term": "德国公司完成欧洲首个商业轨道火箭发射",
-      "labelZh": "德国公司完成欧洲首个商业轨道火箭发射",
-      "score": 90.23,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Ars Technica"
-      ],
-      "url": "https://arstechnica.com/space/2026/09/german-company-becomes-first-in-europe-to-launch-fully-commercial-orbital-rocket/"
-    },
-    {
-      "id": "e231d9d7e4",
-      "term": "在真主党发射无人机后",
-      "labelZh": "在真主党发射无人机后",
-      "score": 89.57,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/"
-    },
-    {
-      "id": "0d2345b190",
-      "term": "美国特使在莫斯科会晤普京参加乌克兰会谈",
-      "labelZh": "美国特使在莫斯科会晤普京参加乌克兰会谈",
-      "score": 87.51,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "BBC News"
-      ],
-      "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo"
-    },
-    {
-      "id": "8deccaa44f",
-      "term": "特斯拉的Cybercab刚刚通过了第一…",
-      "labelZh": "特斯拉的Cybercab刚刚通过了第一…",
-      "score": 86.43,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "TheStreet"
-      ],
-      "url": "https://www.thestreet.com/automotive/teslas-cybercab-just-met-its-first-real-test-and-its-federal"
-    },
-    {
-      "id": "e4b22241c0",
-      "term": "燃油税提案经讨论后撤回",
-      "labelZh": "燃油税提案经讨论后撤回",
-      "score": 81.06,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "BBC Business"
-      ],
-      "url": "https://www.bbc.co.uk/news/articles/cy8znkkn5rvo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "id": "fd51c33c8d",
-      "term": "利率周比高得多",
-      "labelZh": "利率周比高得多",
-      "score": 76.87,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Yahoo Finance"
-      ],
-      "url": "https://finance.yahoo.com/personal-finance/mortgages/article/mortgage-and-refinance-interest-rates-today-sunday-september-6-2026-rates-much-higher-week-over-week-100000794.html"
-    },
-    {
-      "id": "bdcd534a3a",
-      "term": "美国军方袭击三艘伊朗原油运输船",
-      "labelZh": "美国军方袭击三艘伊朗原油运输船",
-      "score": 70.85,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Reuters World"
-      ],
-      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/"
-    },
-    {
-      "id": "02ecd73b45",
-      "term": "《西雅图时报》和《新闻日报》是起诉Op…",
-      "labelZh": "《西雅图时报》和《新闻日报》是起诉Op…",
-      "score": 68.26,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "TechCrunch"
-      ],
-      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
-    },
-    {
-      "id": "35ecb8e3c6",
-      "term": "联合国投票通过反映非洲真实规模的新世界…",
-      "labelZh": "联合国投票通过反映非洲真实规模的新世界…",
-      "score": 52.52,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "Al Jazeera"
-      ],
-      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size"
-    },
-    {
-      "id": "e4b5962791",
-      "term": "美国袭击3艘伊朗油轮",
-      "labelZh": "美国袭击3艘伊朗油轮",
-      "score": 27.04,
-      "mentions": 1,
-      "platformCount": 1,
-      "platforms": [
-        "AP Business"
-      ],
-      "url": "https://apnews.com/article/iran-us-war-oil-tankers-b3650799901c56a6deeca962cbaa4109"
-    }
-  ]
+  "trends": []
 }
