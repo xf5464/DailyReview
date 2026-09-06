@@ -5,7 +5,7 @@ const CLOUD_SIZE = 30;
 const HN_LIMIT = 180;
 const MASTODON_INSTANCES = ['mastodon.social', 'fosstodon.org', 'techhub.social'];
 
-const STOP_WORDS = new Set(`a an and are as at be been being but by can could did do does doing done for from had has have having how i if in into is it its may might must more most new no not of on one or our out over so than that the their there these they them this to two three four up us was we were what when where which who why will with would you your after all about above across again against ago almost along already also although always among around away back became become becomes before behind below between both came come coming down during each either else enough even ever far find found get gets getting give given going gone got here however just keep last less let life like look looking lot made make makes making many maybe meet much near need never next now off often once only other own per perhaps place put rather really report reports right same safe say says search see seem seen services should show side since six some soon start state still such sure take tell ten than then thing things through time today together too took top toward under until upon use used using very via want watch way while within without work working world would year years yet news live breaking latest first people thought know few old open september history limit vote running free don job reaches name built case best big every video any bad public http https www com org net payload payloads`.split(/\s+/));
+const STOP_WORDS = new Set(`a an and are as at be been being but by can could did do does doing done for from had has have having how i if in into is it its may might must more most new no not of on one or our out over so than that the their there these they them this to two three four up us was we were what when where which who why will with would you your after all about above across again against ago almost along already also although always among around away back became become becomes before behind below between both came come coming down during each either else enough even ever everything far find found get gets getting give given going gone got here however just keep last less let life like look looking lot made make makes making many maybe meet much near need never next now off often once only other own per perhaps place please put rather really report reports right same safe say says search see seem seen services should show side since six some soon start state still such sure take tell ten than then thing things through time today together too took top toward under until upon use used using very via want watch way while within without work working world would year years yet news live breaking latest first people thought know few old open september history limit vote running free don job reaches name built case best big every video any bad public reading private ask help http https www com org net payload payloads`.split(/\s+/));
 
 const ALIASES = new Map([
   ['ai', 'AI'], ['artificial intelligence', 'AI'], ['machine learning', '机器学习'],
@@ -13,13 +13,13 @@ const ALIASES = new Map([
   ['microsoft', '微软'], ['google', 'Google'], ['tesla', '特斯拉'], ['bitcoin', '比特币'],
   ['crypto', '加密货币'], ['stock', '股票'], ['stocks', '股票'], ['market', '市场'],
   ['markets', '市场'], ['chip', '芯片'], ['chips', '芯片'], ['robot', '机器人'], ['robots', '机器人'],
-  ['security', '网络安全'], ['browser', '浏览器'], ['web', '互联网'], ['memory', '内存'],
+  ['security', '网络安全'], ['browser', '浏览器'], ['web', '互联网'], ['internet', '互联网'], ['memory', '内存'],
   ['code', '编程'], ['testing', '测试'], ['software', '软件'], ['developer', '开发者'], ['developers', '开发者'],
   ['cloud', '云计算'], ['linux', 'Linux'], ['rust', 'Rust'], ['python', 'Python'], ['privacy', '隐私'],
   ['space', '太空'], ['launch', '发射'], ['orbit', '轨道'], ['aerospace', '航空航天'],
-  ['trump', '特朗普'], ['iran', '伊朗'], ['ukraine', '乌克兰'],
+  ['trump', '特朗普'], ['putin', '普京'], ['iran', '伊朗'], ['ukraine', '乌克兰'],
   ['agent', 'AI智能体'], ['agents', 'AI智能体'], ['llm', '大语言模型'], ['model', '模型'],
-  ['programming', '编程'], ['coding', '编程'], ['game', '游戏'],
+  ['programming', '编程'], ['coding', '编程'], ['game', '游戏'], ['productivity', '生产力'],
 ]);
 
 async function fetchJson(url, timeoutMs = 15_000, fetcher = fetch) {
