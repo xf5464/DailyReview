@@ -33,7 +33,7 @@ const refs = {
 
 let archive = { schemaVersion: 2, updatedAt: null, items: [] };
 const savedCategory = localStorage.getItem('dailyreview-reader-category');
-let activeCategory = ['tech', 'market', 'world', 'youtube'].includes(savedCategory) ? savedCategory : 'tech';
+let activeCategory = ['tech', 'market', 'world', 'youtube', 'trends'].includes(savedCategory) ? savedCategory : 'tech';
 let currentUrl = '';
 let backgroundedAt = 0;
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
@@ -64,6 +64,7 @@ function pruneArchive(value) {
     schemaVersion: 2,
     updatedAt: value?.updatedAt || null,
     items: [...bySource.values()],
+    trends: Array.isArray(value?.trends) ? value.trends.slice(0, 30) : [],
   };
 }
 
@@ -77,7 +78,7 @@ function pruneArticleCache() {
 }
 
 function categoryLabel(category) {
-  return category === 'market' ? '美股' : category === 'world' ? '国际' : category === 'youtube' ? 'YouTube' : '科技';
+  return category === 'market' ? '美股' : category === 'world' ? '国际' : category === 'youtube' ? 'YouTube' : category === 'trends' ? '热点词云' : '科技';
 }
 
 function publishedTimeLabel(value) {
@@ -197,11 +198,77 @@ function updatedTimeLabel(value) {
   return `更新于 ${publishedTimeLabel(value)}`;
 }
 
+function renderWordCloud(trends) {
+  const panel = document.createElement('section');
+  panel.className = 'day word-cloud-panel';
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.classList.add('word-cloud');
+  svg.setAttribute('viewBox', '0 0 600 600');
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', '社交平台与公开社区热点关键词词云');
+  const sorted = [...trends].sort((left, right) => Number(right.score) - Number(left.score));
+  const scores = sorted.map((item) => Number(item.score) || 0);
+  const minimum = Math.min(...scores, 0);
+  const maximum = Math.max(...scores, 1);
+  const boxes = [];
+  const colors = ['#175cd3', '#7f56d9', '#c4320a', '#087443', '#b54708', '#344054'];
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  sorted.forEach((trend, index) => {
+    const ratio = (Number(trend.score) - minimum) / Math.max(1, maximum - minimum);
+    const size = Math.round(20 + Math.sqrt(Math.max(0, ratio)) * 48);
+    const label = trend.labelZh || trend.term;
+    context.font = `760 ${size}px serif`;
+    const width = Math.min(260, context.measureText(label).width + 12);
+    const height = size * 1.1;
+    let position = null;
+    for (let step = 0; step < 900; step += 1) {
+      const angle = step * 0.43;
+      const radius = 2.35 * Math.sqrt(step);
+      const x = 300 + Math.cos(angle) * radius;
+      const y = 300 + Math.sin(angle) * radius;
+      const box = { left: x - width / 2, right: x + width / 2, top: y - height / 2, bottom: y + height / 2 };
+      const corners = [[box.left, box.top], [box.right, box.top], [box.left, box.bottom], [box.right, box.bottom]];
+      const inside = corners.every(([cx, cy]) => Math.hypot(cx - 300, cy - 300) <= 286);
+      const overlaps = boxes.some((other) => !(box.right + 4 < other.left || box.left - 4 > other.right || box.bottom + 3 < other.top || box.top - 3 > other.bottom));
+      if (inside && !overlaps) { position = { x, y, box }; break; }
+    }
+    if (!position) return;
+    boxes.push(position.box);
+    const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+    if (trend.url) { anchor.setAttribute('href', trend.url); anchor.setAttribute('target', '_blank'); }
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.classList.add('cloud-word');
+    text.setAttribute('x', position.x); text.setAttribute('y', position.y);
+    text.setAttribute('text-anchor', 'middle'); text.setAttribute('dominant-baseline', 'middle');
+    text.setAttribute('font-size', size); text.setAttribute('fill', colors[index % colors.length]);
+    text.textContent = label;
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = `${label} · ${trend.mentions || 0}次出现 · ${trend.platformCount || 0}个平台`;
+    text.append(title); anchor.append(text); svg.append(anchor);
+  });
+  const meta = document.createElement('p');
+  meta.className = 'cloud-meta';
+  meta.textContent = '字号综合出现次数、跨平台数量、互动量和发布时间；不包含 YouTube。点击词语可打开代表内容。';
+  panel.append(svg, meta);
+  refs.days.append(panel);
+}
+
 function renderArchive(value, fromCache = false) {
   archive = pruneArchive(value);
   localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive));
   refs.days.replaceChildren();
   updateCategoryTabs();
+
+  if (activeCategory === 'trends') {
+    const trends = archive.trends || [];
+    refs.empty.hidden = trends.length > 0;
+    refs.archiveMeta.textContent = trends.length
+      ? `热点词云 · ${trends.length}个关键词 · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}`
+      : '本次抓取暂无热点关键词';
+    if (trends.length) renderWordCloud(trends);
+    return;
+  }
 
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
@@ -224,7 +291,7 @@ function renderArchive(value, fromCache = false) {
 }
 
 function selectCategory(category) {
-  if (!['tech', 'market', 'world', 'youtube'].includes(category) || category === activeCategory) return;
+  if (!['tech', 'market', 'world', 'youtube', 'trends'].includes(category) || category === activeCategory) return;
   activeCategory = category;
   localStorage.setItem('dailyreview-reader-category', category);
   renderArchive(archive);
