@@ -2,11 +2,10 @@ const crypto = require('node:crypto');
 
 const CLOUD_SIZE = 24;
 const EVENT_LOOKBACK_HOURS = 72;
-const EVENT_VERBS = /(起诉|发布|推出|上线|宣布|裁员|收购|批准|禁用|调查|袭击|攻击|会晤|会谈|通过|发射|部署|撤回|辞职|任命|判处|飙升|上涨|下跌|增长|下降|创.*新高|刷新.*纪录|达成|签署|制裁|停火|起飞|首飞|获批|开放|关闭|接管|管理|摧毁|离开|撤离|被捕|获释|当选|辞任|禁售|停售|召回|停产|量产|交付|扩产|融资|上市|破产|重组|举行|确认|拒绝|同意|批准|推迟|取消|恢复|暂停)/;
+const EVENT_VERBS = /(起诉|发布|推出|上线|宣布|裁员|收购|批准|禁用|调查|袭击|攻击|会晤|会谈|通过|发射|部署|撤回|辞职|任命|判处|飙升|上涨|下跌|增长|下降|创.*新高|刷新.*纪录|达成|签署|制裁|停火|起飞|首飞|获批|开放|关闭|接管|管理|摧毁|离开|撤离|被捕|获释|当选|辞任|禁售|停售|召回|停产|量产|交付|扩产|融资|上市|破产|重组|举行|确认|拒绝|同意|推迟|取消|恢复|暂停)/;
 const IMPACT_WORDS = /(战争|导弹|无人机|油轮|航母|洪水|地震|火灾|死亡|死刑|关税|贸易|利率|降息|加息|失业|通胀|铜价|油价|股价|出货量|CEO|首席执行官|火箭|轨道|GPU|芯片|诉讼|制裁|选举|总统|首相|政府|央行|美联储)/i;
 const NON_EVENT = /(如何|how to|最佳|best |购买|buy |优惠|deal|折扣|省钱|观看|watch |直播|live stream|评测|review|教程|guide|值得买吗|盘点|推荐|不要扔掉|把它变成|强烈反弹|开放的|original link|store|商城)/i;
 
-// Event cloud uses only large free-access US/UK general-news publishers.
 const MAINSTREAM_EVENT_SOURCES = [
   { key: 'reuters', name: 'Reuters', query: 'site:reuters.com when:2d' },
   { key: 'ap', name: 'AP News', query: 'site:apnews.com when:2d' },
@@ -20,17 +19,13 @@ const MAINSTREAM_EVENT_SOURCES = [
   { key: 'independent', name: 'The Independent', query: 'site:independent.co.uk when:2d' },
 ];
 
-function decodeEntities(value = '') {
-  return String(value)
-    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)));
-}
-
 function stripHtml(value = '') {
-  return decodeEntities(value)
+  return String(value)
     .replace(/<br\s*\/?>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/https?:\/\/\S+|www\.\S+/gi, ' ')
     .replace(/\s+/g, ' ').trim();
 }
@@ -76,7 +71,8 @@ function titleTokens(value = '') {
 function sameEvent(left, right) {
   const a = titleTokens(left); const b = titleTokens(right);
   if (!a.size || !b.size) return false;
-  let shared = 0; for (const token of a) if (b.has(token)) shared += 1;
+  let shared = 0;
+  for (const token of a) if (b.has(token)) shared += 1;
   return shared >= 2 && shared / Math.min(a.size, b.size) >= 0.35;
 }
 
@@ -96,12 +92,16 @@ function isConcreteEvent(item, label) {
   return false;
 }
 
-function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
-  const usable = items.filter((item) => {
+function eligibleRecentItems(items, now) {
+  return (items || []).filter((item) => {
     if (!item || item.category === 'youtube' || !(item.titleZh || item.title)) return false;
     const parsed = Date.parse(item.publishedAt || '');
     return !Number.isFinite(parsed) || (now - parsed) / 3_600_000 <= EVENT_LOOKBACK_HOURS;
   });
+}
+
+function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
+  const usable = eligibleRecentItems(items, now);
   const ranked = usable.map((item) => {
     const related = usable.filter((other) => other !== item && sameEvent(item.title || item.titleZh, other.title || other.titleZh));
     const sources = new Set([item.source, ...related.map((other) => other.source)].filter(Boolean));
@@ -130,6 +130,31 @@ function buildEventCloud(items = [], now = Date.now(), limit = CLOUD_SIZE) {
   }));
 }
 
+function buildHeadlineFallback(items = [], now = Date.now(), limit = CLOUD_SIZE) {
+  const usable = eligibleRecentItems(items, now)
+    .filter((item) => !NON_EVENT.test(`${item.titleZh || ''} ${item.title || ''}`))
+    .sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0));
+  const selected = [];
+  for (const item of usable) {
+    const label = cleanEventLabel(item.titleZh || item.title);
+    if (label.length < 6) continue;
+    if (selected.some((entry) => sameEvent(entry.original, item.title || item.titleZh))) continue;
+    selected.push({ item, label, original: item.title || item.titleZh });
+    if (selected.length >= limit) break;
+  }
+  return selected.map(({ item, label }, index) => ({
+    id: crypto.createHash('sha1').update(`fallback:${label}`).digest('hex').slice(0, 10),
+    term: label,
+    labelZh: label,
+    score: Math.max(1, 100 - index * 3) + freshnessScore(item.publishedAt, now),
+    mentions: 1,
+    platformCount: 1,
+    platforms: [item.source || '综合新闻'],
+    url: item.url || '',
+    category: 'mainstream',
+  }));
+}
+
 function googleNewsUrl(query) {
   const params = new URLSearchParams({ q: query, hl: 'en-US', gl: 'US', ceid: 'US:en' });
   return `https://news.google.com/rss/search?${params}`;
@@ -139,7 +164,7 @@ async function fetchText(url, timeoutMs = 15000, fetcher = fetch) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetcher(url, { headers: { 'user-agent': 'DailyReview/1.0', accept: 'application/rss+xml,text/xml,text/plain,*/*' }, signal: controller.signal });
+    const response = await fetcher(url, { headers: { 'user-agent': 'Mozilla/5.0 DailyReview/2.0', accept: 'application/rss+xml,text/xml,text/plain,*/*', 'accept-language': 'en-US,en;q=0.9' }, signal: controller.signal });
     if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
     return response.text();
   } finally { clearTimeout(timer); }
@@ -150,23 +175,25 @@ function tagValue(block, tag) {
   return match ? stripHtml(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')) : '';
 }
 
-function rawTagValue(block, tag) {
-  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, 'i'));
-  if (!match) return '';
-  return decodeEntities(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')).trim();
-}
-
 function parseMainstreamRss(xml, source) {
   const blocks = String(xml).match(/<item\b[\s\S]*?<\/item>/gi) || [];
-  return blocks.slice(0, 8).map((block, index) => {
+  return blocks.slice(0, 10).map((block, index) => {
     const rawTitle = tagValue(block, 'title');
-    const suffix = ` - ${source.name}`;
-    const title = rawTitle.endsWith(suffix) ? rawTitle.slice(0, -suffix.length) : rawTitle;
+    const sourceMatch = block.match(/<source(?:\s[^>]*)?>([\s\S]*?)<\/source>/i);
+    const actualSource = sourceMatch ? stripHtml(sourceMatch[1]) : source.name;
+    const suffix = actualSource && rawTitle.endsWith(` - ${actualSource}`) ? ` - ${actualSource}` : '';
     return {
-      category: 'mainstream', title, titleZh: '', url: rawTagValue(block, 'link'), source: source.name,
-      sourceKey: `${source.key}-${index}`, sourceOrder: index, publishedAt: tagValue(block, 'pubDate'), score: Math.max(1, 100 - index * 6),
+      category: 'mainstream',
+      title: suffix ? rawTitle.slice(0, -suffix.length) : rawTitle,
+      titleZh: '',
+      url: tagValue(block, 'link'),
+      source: actualSource || source.name,
+      sourceKey: `${source.key}-${index}`,
+      sourceOrder: index,
+      publishedAt: tagValue(block, 'pubDate'),
+      score: Math.max(1, 100 - index * 5),
     };
-  }).filter((item) => item.title && /^https?:\/\//i.test(item.url));
+  }).filter((item) => item.title && item.url);
 }
 
 async function translateToChinese(title, fetcher = fetch) {
@@ -183,17 +210,12 @@ async function fetchMainstreamEventItems(now = Date.now(), fetcher = fetch) {
     const xml = await fetchText(googleNewsUrl(source.query), 15000, fetcher);
     return parseMainstreamRss(xml, source);
   }));
-  settled.forEach((result, index) => {
-    if (result.status === 'rejected') console.warn(`${MAINSTREAM_EVENT_SOURCES[index].name} event feed failed: ${result.reason?.message || result.reason}`);
-  });
   const items = settled.flatMap((result) => result.status === 'fulfilled' ? result.value : [])
     .filter((item) => {
       const parsed = Date.parse(item.publishedAt || '');
       return !Number.isFinite(parsed) || (now - parsed) / 3_600_000 <= EVENT_LOOKBACK_HOURS;
     });
   if (items.length < 10) throw new Error(`Mainstream event sources returned only ${items.length} usable stories.`);
-
-  // Translate only the strongest candidates to reduce latency and API load.
   const candidates = items.sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0)).slice(0, 45);
   const translated = [];
   for (let index = 0; index < candidates.length; index += 5) {
@@ -207,7 +229,6 @@ async function fetchMainstreamEventItems(now = Date.now(), fetcher = fetch) {
   return translated;
 }
 
-// Compatibility helpers retained for unit tests and older callers.
 function termsFromText(text) {
   const lower = String(text || '').toLowerCase();
   const terms = [];
@@ -226,29 +247,45 @@ function buildWordCloud(signals, now = Date.now(), limit = CLOUD_SIZE) {
     for (const term of termsFromText(item.text || '')) {
       const key = term.toLowerCase();
       if (!aggregate.has(key)) aggregate.set(key, { term, score: 0, mentions: 0, platforms: new Set(), url: item.url || '' });
-      const entry = aggregate.get(key); entry.mentions += 1; entry.platforms.add(item.platform || 'source'); entry.score += 1 + Math.log10(1 + Number(item.engagement || 0));
+      const entry = aggregate.get(key);
+      entry.mentions += 1;
+      entry.platforms.add(item.platform || 'source');
+      entry.score += 1 + Math.log10(1 + Number(item.engagement || 0));
     }
   }
   return [...aggregate.values()].map((entry) => ({
-    id: crypto.createHash('sha1').update(entry.term).digest('hex').slice(0, 10), term: entry.term,
-    score: Math.round((entry.score + entry.platforms.size * 5) * 100) / 100, mentions: entry.mentions,
-    platformCount: entry.platforms.size, platforms: [...entry.platforms], url: entry.url,
+    id: crypto.createHash('sha1').update(entry.term).digest('hex').slice(0, 10),
+    term: entry.term,
+    score: Math.round((entry.score + entry.platforms.size * 5) * 100) / 100,
+    mentions: entry.mentions,
+    platformCount: entry.platforms.size,
+    platforms: [...entry.platforms],
+    url: entry.url,
   })).sort((a, b) => b.score - a.score).slice(0, limit);
 }
 
-async function collectSocialWordCloud(_baseItems = [], now = Date.now(), fetcher = fetch) {
-  const newsItems = await fetchMainstreamEventItems(now, fetcher);
-  const trends = buildEventCloud(newsItems, now);
-  if (trends.length < 8) throw new Error(`Event cloud returned only ${trends.length}/8 usable events.`);
-  const names = [...new Set(newsItems.map((item) => item.source).filter(Boolean))];
-  return {
-    trends,
-    sources: names.map((name) => ({ name, count: newsItems.filter((item) => item.source === name).length })),
-    signalCount: newsItems.length,
-  };
+async function collectSocialWordCloud(baseItems = [], now = Date.now(), fetcher = fetch) {
+  try {
+    const mainstream = await fetchMainstreamEventItems(now, fetcher);
+    const trends = buildEventCloud(mainstream, now);
+    if (trends.length >= 8) {
+      const names = [...new Set(mainstream.map((item) => item.source).filter(Boolean))];
+      return { trends, sources: names.map((name) => ({ name, count: mainstream.filter((item) => item.source === name).length })), signalCount: mainstream.length };
+    }
+  } catch (error) {
+    console.warn(`Mainstream event fetch failed; using current international headlines: ${error.message}`);
+  }
+
+  const worldItems = (baseItems || []).filter((item) => item?.category === 'world');
+  let trends = buildEventCloud(worldItems, now);
+  if (trends.length < 8) trends = buildHeadlineFallback(worldItems, now);
+  if (trends.length < 8) trends = buildHeadlineFallback((baseItems || []).filter((item) => item?.category !== 'youtube'), now);
+  if (!trends.length) throw new Error('Event cloud fallback also returned no usable headlines.');
+  const names = [...new Set(worldItems.map((item) => item.source).filter(Boolean))];
+  return { trends, sources: names.map((name) => ({ name, count: worldItems.filter((item) => item.source === name).length })), signalCount: worldItems.length };
 }
 
 module.exports = {
-  MAINSTREAM_EVENT_SOURCES, buildEventCloud, buildWordCloud, cleanEventLabel, collectSocialWordCloud,
+  MAINSTREAM_EVENT_SOURCES, buildEventCloud, buildHeadlineFallback, buildWordCloud, cleanEventLabel, collectSocialWordCloud,
   fetchMainstreamEventItems, parseMainstreamRss, stripHtml, termsFromText,
 };
