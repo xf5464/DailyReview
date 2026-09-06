@@ -5,6 +5,7 @@ const YOUTUBE_LOOKBACK_HOURS = 24;
 const YOUTUBE_QUERY = '"artificial intelligence"|"technology news"|"stock market"|"Wall Street"|Nvidia|Tesla -movie -film -trailer -music';
 const fs = require("node:fs");
 const { saveNewsArchive } = require('./hot-news-archive');
+const { collectSocialWordCloud } = require('./social-word-cloud');
 
 const NEWS_SOURCES = {
   tech: [
@@ -747,8 +748,16 @@ async function collectHotNews(
     world = previous;
     console.warn(`International news failed; reused the previous Top 10: ${error.message}`);
   }
+  let trends = [];
+  try {
+    const cloud = await collectSocialWordCloud([...tech, ...market, ...world], now);
+    trends = cloud.trends;
+    console.log(`Built ${trends.length} word-cloud terms from ${cloud.signalCount} non-YouTube signals across ${cloud.sources.length} public sources.`);
+  } catch (error) {
+    console.warn(`Word cloud failed; the news snapshot will still update: ${error.message}`);
+  }
   console.log(`Resolved ${resolvedTech.resolvedCount + resolvedMarket.resolvedCount + worldResolvedCount} Google News URL(s) before archiving.`);
-  return { tech, market, world, youtube, failureCount, fetchedAt: new Date(now).toISOString() };
+  return { tech, market, world, youtube, trends, failureCount, fetchedAt: new Date(now).toISOString() };
 
   /* Previous cross-source ranking implementation retained in history.
   const requests = [
@@ -861,7 +870,7 @@ async function main() {
     const archive = saveNewsArchive(news, archivePath, Date.parse(news.fetchedAt), (item) =>
       item.category === "youtube" || !isPaywalledItem(item));
     console.log(`Saved latest reader snapshot: ${archive.items.length} item(s), updated ${archive.updatedAt}.`);
-    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, world=${news.world.length}, youtube=${news.youtube.length}.`);
+    console.log(`Reader refresh completed without email: tech=${news.tech.length}, market=${news.market.length}, world=${news.world.length}, youtube=${news.youtube.length}, trends=${news.trends.length}.`);
     return;
   }
 
