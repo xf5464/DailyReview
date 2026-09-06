@@ -3,7 +3,7 @@
 // scripts/build.js replaces this placeholder so every published shell revision
 // produces a different worker and cache name.
 const APP_CACHE = 'daily-review-app-__APP_VERSION__';
-const DATA_CACHE = 'daily-review-data-v2';
+const DATA_CACHE = 'daily-review-data-v3';
 const APP_SHELL = [
   './',
   'index.html',
@@ -18,7 +18,6 @@ const APP_SHELL = [
   'reader/manifest.webmanifest',
   'reader/icon-192.png',
   'reader/icon-512.png',
-  'reader/data/recent.json',
 ];
 
 self.addEventListener('install', (event) => {
@@ -30,9 +29,10 @@ self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const names = await caches.keys();
     const previousAppCaches = names.filter((name) => name.startsWith('daily-review-app-') && name !== APP_CACHE);
-    await Promise.all(previousAppCaches.map((name) => caches.delete(name)));
+    const previousDataCaches = names.filter((name) => name.startsWith('daily-review-data-') && name !== DATA_CACHE);
+    await Promise.all([...previousAppCaches, ...previousDataCaches].map((name) => caches.delete(name)));
     await self.clients.claim();
-    if (previousAppCaches.length) {
+    if (previousAppCaches.length || previousDataCaches.length) {
       const windows = await self.clients.matchAll({ type: 'window' });
       await Promise.all(windows.map((client) => client.navigate(client.url)));
     }
@@ -44,7 +44,7 @@ async function networkFirst(request, cacheName, fallbackPath, normalizeSearch) {
   const requestUrl = new URL(request.url);
   const cacheKey = normalizeSearch ? new Request(requestUrl.origin + requestUrl.pathname) : request;
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, normalizeSearch ? { cache: 'no-store' } : undefined);
     if (response.ok) await cache.put(cacheKey, response.clone());
     return response;
   } catch (error) {
