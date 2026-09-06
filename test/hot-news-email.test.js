@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 
 const {
-  NEWS_SOURCES, detectTitleLanguage, environmentFlag, isPaywalledItem, isSameWorldEvent, isSimilarTitle, newsMessage, parseHomepageHeadline, parseRssItems, publishedDateFromHtml, rankAndDedupe, rankWorldCandidates,
+  NEWS_SOURCES, assertChineseTranslations, detectTitleLanguage, environmentFlag, isPaywalledItem, isSameWorldEvent, isSimilarTitle, newsMessage, parseHomepageHeadline, parseRssItems, publishedDateFromHtml, rankAndDedupe, rankWorldCandidates,
   readerUrl, recipients, resolveGoogleNewsItems, resolveGoogleNewsUrl,
   youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
@@ -22,7 +22,7 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.28/);
+  assert.match(html, /v2026\.09\.06\.29/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'world', 'youtube'/);
@@ -172,6 +172,16 @@ test("recognizes refresh-only environment values", () => {
 test("reuses an existing Chinese title without calling the translation service", async () => {
   const items = [{ title: "Existing English headline", titleZh: "已有中文标题" }];
   assert.deepEqual(await require("../scripts/send-hot-news-email").addChineseTranslations(items), items);
+});
+
+test("refuses to publish a snapshot with untranslated foreign titles", () => {
+  assert.throws(() => assertChineseTranslations([
+    { title: "An untranslated headline", titleZh: "", source: "Example" },
+  ]), /Refusing to publish 1 untranslated title/);
+  assert.doesNotThrow(() => assertChineseTranslations([
+    { title: "An English headline", titleZh: "中文标题", source: "Example" },
+    { title: "原本就是中文", titleZh: "原本就是中文", source: "中文来源" },
+  ]));
 });
 
 test("filters strict paid-subscription sources by publisher or domain", () => {
