@@ -11,9 +11,11 @@ const {
 } = require('./send-hot-news-email');
 
 const ARCHIVE_PATH = String(process.env.HOT_NEWS_ARCHIVE_PATH || 'site/reader/data/recent.json').trim();
-const USER_AGENT = 'DailyReview/2.3 (+https://github.com/xf5464/DailyReview)';
+const USER_AGENT = 'DailyReview/2.4 (+https://github.com/xf5464/DailyReview)';
 const MARKET_WINDOW_HOURS = 48;
+const WORLD_WINDOW_HOURS = 48;
 const ITEMS_PER_SOURCE = 4;
+const WORLD_ITEMS_PER_SOURCE = 8;
 const CORROBORATION_ITEMS_PER_SOURCE = 6;
 
 const MARKET_AUTHORITY = new Map([
@@ -42,8 +44,6 @@ const WORLD_IMPACT = [
   'earthquake','flood','hurricane','typhoon','wildfire','disaster','killed','dead','crisis','refugee','border',
 ];
 
-// These sources are deliberately corroboration-only. They can raise confidence and rank
-// for an event, but can never become the clickable/displayed representative story.
 const PAID_CORROBORATION_SOURCES = {
   tech: [
     { key: 'paid-reuters-tech', name: 'Reuters', query: 'site:reuters.com (technology OR AI OR chip OR software) when:2d', authority: 33 },
@@ -79,9 +79,7 @@ function hoursOld(value, now = Date.now()) {
   const timestamp = Date.parse(value);
   return Number.isFinite(timestamp) ? Math.max(0, (now - timestamp) / 3_600_000) : 999;
 }
-function stripTags(value = '') {
-  return decodeXml(String(value)).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-}
+function stripTags(value = '') { return decodeXml(String(value)).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); }
 function parseAtomItems(xml, category) {
   const blocks = String(xml).match(/<entry\b[\s\S]*?<\/entry>/gi) || [];
   return blocks.map((block, index) => {
@@ -91,84 +89,82 @@ function parseAtomItems(xml, category) {
     return { category, title, url: link, publishedAt, feedRank: index };
   }).filter((item) => item.title && item.url);
 }
-function parseFeed(xml, category) {
-  const rss = parseRssItems(xml, category, 0);
-  return rss.length ? rss : parseAtomItems(xml, category);
-}
+function parseFeed(xml, category) { const rss = parseRssItems(xml, category, 0); return rss.length ? rss : parseAtomItems(xml, category); }
 async function fetchText(url, timeout = 15000) {
-  const target = new URL(url);
-  target.searchParams.set('_dr', String(Date.now()));
-  const response = await fetch(target, {
-    redirect: 'follow', cache: 'no-store', signal: AbortSignal.timeout(timeout),
-    headers: { 'user-agent': USER_AGENT, 'cache-control': 'no-cache', pragma: 'no-cache' },
-  });
+  const target = new URL(url); target.searchParams.set('_dr', String(Date.now()));
+  const response = await fetch(target, { redirect: 'follow', cache: 'no-store', signal: AbortSignal.timeout(timeout), headers: { 'user-agent': USER_AGENT, 'cache-control': 'no-cache', pragma: 'no-cache' } });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.text();
 }
-function googleNewsUrl(query) {
-  const params = new URLSearchParams({ q: query, hl: 'en-US', gl: 'US', ceid: 'US:en' });
-  return `https://news.google.com/rss/search?${params}`;
-}
+function googleNewsUrl(query) { const params = new URLSearchParams({ q: query, hl: 'en-US', gl: 'US', ceid: 'US:en' }); return `https://news.google.com/rss/search?${params}`; }
 function words(title) {
-  return new Set(String(title || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff+.-]+/g, ' ').split(/\s+/)
-    .filter((token) => token.length > 2 && !COMMON_STOP.has(token)));
+  return new Set(String(title || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff+.-]+/g, ' ').split(/\s+/).filter((token) => token.length > 2 && !COMMON_STOP.has(token)));
+}
+function overlapRatio(a, b) {
+  const left = words(a); const right = words(b);
+  if (!left.size || !right.size) return 0;
+  let shared = 0; for (const token of left) if (right.has(token)) shared += 1;
+  return shared / Math.min(left.size, right.size);
 }
 function sameEvent(a, b) {
   if (isSimilarTitle(a, b)) return true;
-  const left = words(a); const right = words(b);
-  if (!left.size || !right.size) return false;
-  let shared = 0;
-  for (const token of left) if (right.has(token)) shared += 1;
+  const left = words(a); const right = words(b); if (!left.size || !right.size) return false;
+  let shared = 0; for (const token of left) if (right.has(token)) shared += 1;
   return shared >= 2 && shared / Math.min(left.size, right.size) >= 0.34;
 }
-function impactScore(title, keywords, cap) {
-  const text = String(title || '').toLowerCase();
-  return Math.min(cap, keywords.reduce((sum, keyword) => sum + (text.includes(keyword) ? 5 : 0), 0));
+function sameWorldEvent(a, b) {
+  if (isSimilarTitle(a, b)) return true;
+  const left = words(a); const right = words(b); if (!left.size || !right.size) return false;
+  let shared = 0; for (const token of left) if (right.has(token)) shared += 1;
+  return shared >= 3 && shared / Math.min(left.size, right.size) >= 0.42;
 }
-function isReuters(item) {
-  return String(item?.sourceKey || '').toLowerCase().includes('reuters') || /\breuters\b/i.test(String(item?.source || ''));
-}
-function isDisplayable(item) {
-  return !item?.hiddenCorroboration && !isReuters(item) && !isPaywalledItem(item);
-}
-function rankClusters(items, { category, authorityMap, impactKeywords, windowHours, now }) {
+function impactScore(title, keywords, cap) { const text = String(title || '').toLowerCase(); return Math.min(cap, keywords.reduce((sum, keyword) => sum + (text.includes(keyword) ? 5 : 0), 0)); }
+function isReuters(item) { return String(item?.sourceKey || '').toLowerCase().includes('reuters') || /\breuters\b/i.test(String(item?.source || '')); }
+function isDisplayable(item) { return !item?.hiddenCorroboration && !isReuters(item) && !isPaywalledItem(item); }
+function rankClusters(items, { category, authorityMap, impactKeywords, windowHours, now, matcher = sameEvent }) {
   const clusters = [];
   for (const item of [...items].sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))) {
-    let cluster = clusters.find((candidate) => candidate.items.some((other) => sameEvent(item.title, other.title)));
+    let cluster = clusters.find((candidate) => candidate.items.some((other) => matcher(item.title, other.title)));
     if (!cluster) { cluster = { items: [] }; clusters.push(cluster); }
     cluster.items.push(item);
   }
   return clusters.map((cluster) => {
     const sources = new Set(cluster.items.map((item) => item.sourceKey || item.source));
-    const displayable = cluster.items.filter(isDisplayable);
-    if (!displayable.length) return null;
-    const representative = [...displayable].sort((a, b) =>
-      (authorityMap.get(b.sourceKey) || 20) - (authorityMap.get(a.sourceKey) || 20) ||
-      Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))[0];
+    const displayable = cluster.items.filter(isDisplayable); if (!displayable.length) return null;
+    const representative = [...displayable].sort((a, b) => (authorityMap.get(b.sourceKey) || 20) - (authorityMap.get(a.sourceKey) || 20) || Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))[0];
     const newestAge = Math.min(...cluster.items.map((item) => hoursOld(item.publishedAt, now)));
     const freshness = Math.max(0, windowHours - newestAge);
     const authority = Math.max(...cluster.items.map((item) => authorityMap.get(item.sourceKey) || Number(item.authority) || 20));
     const impact = impactScore(representative.title, impactKeywords, category === 'market' ? 45 : 50);
     const confirmation = sources.size * (category === 'market' ? 38 : 42);
-    const hiddenCount = cluster.items.filter((item) => item.hiddenCorroboration || isReuters(item) || isPaywalledItem(item)).length;
     const score = Math.round((confirmation + freshness * 1.25 + authority + impact) * 10) / 10;
-    return { representative, sourceCount: sources.size, hiddenCount, score };
+    return { representative, sourceCount: sources.size, score };
   }).filter(Boolean).sort((a, b) => b.score - a.score || Date.parse(b.representative.publishedAt || 0) - Date.parse(a.representative.publishedAt || 0));
 }
 async function marketCandidates(now, existing) {
   const batches = await Promise.all((NEWS_SOURCES.market || []).map(async (source, sourceOrder) => {
-    const feedUrl = source.headlineFeed || source.feed;
-    if (!feedUrl) return [];
+    const feedUrl = source.headlineFeed || source.feed; if (!feedUrl) return [];
     try {
       const xml = await fetchText(feedUrl);
-      return parseFeed(xml, 'market')
+      return parseFeed(xml, 'market').filter((item) => item.title && item.url && !isPaywalledItem(item)).filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= MARKET_WINDOW_HOURS).slice(0, ITEMS_PER_SOURCE).map((item) => ({ ...item, category: 'market', source: source.name, sourceKey: source.key, sourceOrder }));
+    } catch (error) { console.warn(`${source.name} market feed failed: ${error.message}`); return existing.filter((item) => item.sourceKey === source.key).slice(0, 1); }
+  }));
+  return batches.flat();
+}
+async function worldCandidates(now, existing) {
+  const visibleSources = (NEWS_SOURCES.world || []).filter((source) => source.key !== 'reuters-world');
+  const batches = await Promise.all(visibleSources.map(async (source, sourceOrder) => {
+    if (!source.query) return [];
+    try {
+      const xml = await fetchText(googleNewsUrl(source.query));
+      return parseFeed(xml, 'world')
         .filter((item) => item.title && item.url && !isPaywalledItem(item))
-        .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= MARKET_WINDOW_HOURS)
-        .slice(0, ITEMS_PER_SOURCE)
-        .map((item) => ({ ...item, category: 'market', source: source.name, sourceKey: source.key, sourceOrder }));
+        .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= WORLD_WINDOW_HOURS)
+        .slice(0, WORLD_ITEMS_PER_SOURCE)
+        .map((item) => ({ ...item, category: 'world', source: source.name, sourceKey: source.key, sourceOrder, hiddenCorroboration: false }));
     } catch (error) {
-      console.warn(`${source.name} market feed failed: ${error.message}`);
-      return existing.filter((item) => item.sourceKey === source.key).slice(0, 1);
+      console.warn(`${source.name} world feed failed: ${error.message}`);
+      return existing.filter((item) => item.sourceKey === source.key && isDisplayable(item)).slice(0, 2);
     }
   }));
   return batches.flat();
@@ -178,114 +174,50 @@ async function corroborationCandidates(category, now) {
   const batches = await Promise.all(sources.map(async (source, sourceOrder) => {
     try {
       const xml = await fetchText(googleNewsUrl(source.query));
-      return parseFeed(xml, category)
-        .filter((item) => item.title && item.url)
-        .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= 48)
-        .slice(0, CORROBORATION_ITEMS_PER_SOURCE)
-        .map((item) => ({
-          ...item,
-          category,
-          source: source.name,
-          sourceKey: source.key,
-          sourceOrder,
-          authority: source.authority,
-          hiddenCorroboration: true,
-        }));
-    } catch (error) {
-      console.warn(`${source.name} ${category} corroboration feed failed: ${error.message}`);
-      return [];
-    }
+      return parseFeed(xml, category).filter((item) => item.title && item.url).filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= 48).slice(0, CORROBORATION_ITEMS_PER_SOURCE).map((item) => ({ ...item, category, source: source.name, sourceKey: source.key, sourceOrder, authority: source.authority, hiddenCorroboration: true }));
+    } catch (error) { console.warn(`${source.name} ${category} corroboration feed failed: ${error.message}`); return []; }
   }));
   return batches.flat();
 }
 async function translateRepresentatives(items) {
-  const known = archivedTitleTranslations(ARCHIVE_PATH);
-  const prepared = items.map((item) => ({ ...item, titleZh: known.get(item.url) || item.titleZh || '' }));
-  try {
-    return await addChineseTranslations(prepared);
-  } catch (error) {
-    console.warn(`Aggregated headline translation failed: ${error.message}`);
-    return prepared;
-  }
-}
-function worldSourceKey(item) {
-  if (item.sourceKey) return item.sourceKey;
-  const name = String(item.source || '').toLowerCase();
-  const source = (NEWS_SOURCES.world || []).find((candidate) => name.includes(String(candidate.name || '').toLowerCase()));
-  return source?.key || name;
+  const known = archivedTitleTranslations(ARCHIVE_PATH); const prepared = items.map((item) => ({ ...item, titleZh: known.get(item.url) || item.titleZh || '' }));
+  try { return await addChineseTranslations(prepared); } catch (error) { console.warn(`Aggregated headline translation failed: ${error.message}`); return prepared; }
 }
 function augmentTechWithPaidCorroboration(tech, paidTech) {
   return tech.map((item) => {
     const matchingPaid = paidTech.filter((candidate) => sameEvent(item.title, candidate.title));
-    const hiddenSourceCount = new Set(matchingPaid.map((candidate) => candidate.sourceKey)).size;
-    if (!hiddenSourceCount) return item;
-    const currentCount = Number(String(item.engagement || '').match(/(\d+)家/)?.[1] || 1);
-    const sourceCount = currentCount + hiddenSourceCount;
-    return {
-      ...item,
-      score: Math.round((Number(item.score || 0) + hiddenSourceCount * 34) * 10) / 10,
-      engagement: `${sourceCount}家科技媒体交叉确认`,
-    };
+    const hiddenSourceCount = new Set(matchingPaid.map((candidate) => candidate.sourceKey)).size; if (!hiddenSourceCount) return item;
+    const currentCount = Number(String(item.engagement || '').match(/(\d+)家/)?.[1] || 1); const sourceCount = currentCount + hiddenSourceCount;
+    return { ...item, score: Math.round((Number(item.score || 0) + hiddenSourceCount * 34) * 10) / 10, engagement: `${sourceCount}家科技媒体交叉确认` };
   }).sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0));
 }
 async function main() {
   execFileSync(process.execPath, ['scripts/refresh-reader-news.js'], { stdio: 'inherit', env: process.env });
-  const archive = JSON.parse(fs.readFileSync(ARCHIVE_PATH, 'utf8'));
-  const now = Date.now();
+  const archive = JSON.parse(fs.readFileSync(ARCHIVE_PATH, 'utf8')); const now = Date.now();
   const existingMarket = (archive.items || []).filter((item) => item.category === 'market');
-  const existingWorld = (archive.items || []).filter((item) => item.category === 'world').map((item) => {
-    const sourceKey = worldSourceKey(item);
-    return {
-      ...item,
-      sourceKey,
-      hiddenCorroboration: sourceKey === 'reuters-world' || isReuters({ ...item, sourceKey }) || isPaywalledItem(item),
-    };
-  });
+  const existingWorld = (archive.items || []).filter((item) => item.category === 'world');
   const existingTech = (archive.items || []).filter((item) => item.category === 'tech');
 
-  const [marketFree, paidMarket, paidWorld, paidTech] = await Promise.all([
-    marketCandidates(now, existingMarket),
-    corroborationCandidates('market', now),
-    corroborationCandidates('world', now),
-    corroborationCandidates('tech', now),
+  const [marketFree, worldFree, paidMarket, paidWorld, paidTech] = await Promise.all([
+    marketCandidates(now, existingMarket), worldCandidates(now, existingWorld), corroborationCandidates('market', now), corroborationCandidates('world', now), corroborationCandidates('tech', now),
   ]);
 
   const marketPool = [...marketFree, ...paidMarket];
-  const marketClusters = rankClusters(marketPool, {
-    category: 'market', authorityMap: MARKET_AUTHORITY, impactKeywords: MARKET_IMPACT, windowHours: MARKET_WINDOW_HOURS, now,
-  }).slice(0, 10);
-  let market = marketClusters.map((cluster, index) => ({
-    ...cluster.representative,
-    category: 'market', sourceKey: `market-event-${index + 1}`, sourceOrder: index, score: cluster.score,
-    engagement: cluster.sourceCount >= 2 ? `${cluster.sourceCount}家财经媒体交叉确认` : '单一来源',
-    fetchedAt: new Date(now).toISOString(), sourceUpdatedAt: new Date(now).toISOString(), isCached: false,
-  }));
+  const marketClusters = rankClusters(marketPool, { category: 'market', authorityMap: MARKET_AUTHORITY, impactKeywords: MARKET_IMPACT, windowHours: MARKET_WINDOW_HOURS, now }).slice(0, 10);
+  let market = marketClusters.map((cluster, index) => ({ ...cluster.representative, category: 'market', sourceKey: `market-event-${index + 1}`, sourceOrder: index, score: cluster.score, engagement: cluster.sourceCount >= 2 ? `${cluster.sourceCount}家财经媒体交叉确认` : '单一来源', fetchedAt: new Date(now).toISOString(), sourceUpdatedAt: new Date(now).toISOString(), isCached: false }));
   market = await translateRepresentatives(market);
 
-  const worldPool = [...existingWorld, ...paidWorld];
-  const worldClusters = rankClusters(worldPool, {
-    category: 'world', authorityMap: WORLD_AUTHORITY, impactKeywords: WORLD_IMPACT, windowHours: 48, now,
-  }).slice(0, 10);
-  const world = worldClusters.map((cluster, index) => ({
-    ...cluster.representative,
-    category: 'world', sourceKey: `world-event-${index + 1}`, sourceOrder: index, score: cluster.score,
-    engagement: cluster.sourceCount >= 2 ? `${cluster.sourceCount}家国际媒体交叉确认` : (cluster.representative.engagement || '单一来源'),
-    fetchedAt: new Date(now).toISOString(), sourceUpdatedAt: new Date(now).toISOString(), isCached: false,
-  }));
+  const worldPool = [...worldFree, ...paidWorld];
+  const worldClusters = rankClusters(worldPool, { category: 'world', authorityMap: WORLD_AUTHORITY, impactKeywords: WORLD_IMPACT, windowHours: WORLD_WINDOW_HOURS, now, matcher: sameWorldEvent }).slice(0, 10);
+  let world = worldClusters.map((cluster, index) => ({ ...cluster.representative, category: 'world', sourceKey: `world-event-${index + 1}`, sourceOrder: index, score: cluster.score, engagement: cluster.sourceCount >= 2 ? `${cluster.sourceCount}家国际媒体交叉确认` : '单一来源', fetchedAt: new Date(now).toISOString(), sourceUpdatedAt: new Date(now).toISOString(), isCached: false }));
+  world = await translateRepresentatives(world);
 
   const tech = augmentTechWithPaidCorroboration(existingTech, paidTech);
-
-  archive.items = (archive.items || [])
-    .filter((item) => !['tech', 'market', 'world'].includes(item.category))
-    .concat(tech, market, world);
-  archive.updatedAt = new Date(now).toISOString();
-  archive.refreshAttemptedAt = archive.updatedAt;
+  archive.items = (archive.items || []).filter((item) => !['tech', 'market', 'world'].includes(item.category)).concat(tech, market, world);
+  archive.updatedAt = new Date(now).toISOString(); archive.refreshAttemptedAt = archive.updatedAt;
   fs.writeFileSync(ARCHIVE_PATH, `${JSON.stringify(archive, null, 2)}\n`, 'utf8');
   console.log(`Event aggregation complete: tech=${tech.length} (+${paidTech.length} hidden corroborators), market=${market.length}/${marketPool.length} candidates, world=${world.length}/${worldPool.length} candidates.`);
   console.log('Reuters and all configured paywalled sources are corroboration-only and cannot be displayed as representative links.');
 }
 
-main().catch((error) => {
-  console.error(error.stack || error.message);
-  process.exitCode = 1;
-});
+main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
