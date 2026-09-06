@@ -22,12 +22,20 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.21/);
+  assert.match(html, /v2026\.09\.06\.22/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'world', 'youtube'/);
   assert.match(script, /dailyreview-recent-v3/);
   assert.match(script, /ARCHIVE_URLS/);
+});
+
+test("recovers tab interaction after the iOS app resumes", () => {
+  const script = fs.readFileSync("site/reader/reader.js", "utf8");
+  assert.match(script, /visibilitychange/);
+  assert.match(script, /pageshow/);
+  assert.match(script, /recoverAfterResume/);
+  assert.doesNotMatch(script, /event\.preventDefault\(\);\s*location\.href/);
 });
 
 test("clusters international reports and labels cross-source confirmation", () => {
@@ -52,7 +60,7 @@ test("detects non-English YouTube title languages", () => {
 test("uses YouTube universal links for the native-app button", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.match(script, /browser\.href = youtube \? item\.url/);
-  assert.match(script, /dataset\.nativeApp === 'youtube'/);
+  assert.match(script, /browser\.dataset\.nativeApp = 'youtube'/);
 });
 
 test("orders YouTube results by views and creates direct video links", () => {

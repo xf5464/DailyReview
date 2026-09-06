@@ -8,6 +8,7 @@ const ARCHIVE_URLS = [
 const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v3';
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
 const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+const RESUME_REFRESH_MS = 5 * 60 * 1000;
 
 const refs = {
   days: document.querySelector('#daysContainer'),
@@ -34,6 +35,7 @@ let archive = { schemaVersion: 2, updatedAt: null, items: [] };
 const savedCategory = localStorage.getItem('dailyreview-reader-category');
 let activeCategory = ['tech', 'market', 'world', 'youtube'].includes(savedCategory) ? savedCategory : 'tech';
 let currentUrl = '';
+let backgroundedAt = 0;
 let fontStep = Number(localStorage.getItem('dailyreview-reader-font') || 1);
 const fontSizes = [17, 19, 21, 23];
 
@@ -224,6 +226,14 @@ function selectCategory(category) {
   if (!selectedItems(archive).length) loadArchive();
 }
 
+function recoverAfterResume() {
+  document.documentElement.style.pointerEvents = '';
+  document.body.style.pointerEvents = '';
+  updateCategoryTabs();
+  if (archive.items.length) renderArchive(archive, true);
+  if (!archive.updatedAt || Date.now() - Date.parse(archive.updatedAt) >= RESUME_REFRESH_MS) loadArchive();
+}
+
 async function loadArchive() {
   const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] }));
   if (cached.items.length) renderArchive(cached, true);
@@ -307,19 +317,28 @@ function changeFont() {
   document.documentElement.style.setProperty('--reader-size', `${fontSizes[fontStep]}px`);
 }
 
-refs.days.addEventListener('click', (event) => {
-  const externalLink = event.target.closest('.news-item, .safari-link');
-  if (!externalLink) return;
-  if (externalLink.dataset.nativeApp === 'youtube') return;
-  event.preventDefault();
-  location.href = externalLink.getAttribute('href');
+refs.tabs[0]?.parentElement.addEventListener('click', (event) => {
+  const tab = event.target.closest('.category-tab');
+  if (tab) selectCategory(tab.dataset.category);
 });
-refs.tabs.forEach((tab) => tab.addEventListener('click', () => selectCategory(tab.dataset.category)));
 refs.retry.addEventListener('click', () => { if (currentUrl) loadArticle(currentUrl, true); });
 refs.close.addEventListener('click', () => refs.dialog.close());
 refs.dialog.addEventListener('click', (event) => { if (event.target === refs.dialog) refs.dialog.close(); });
 refs.dialogFont.addEventListener('click', changeFont);
 document.documentElement.style.setProperty('--reader-size', `${fontSizes[fontStep] || 19}px`);
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    backgroundedAt = Date.now();
+    return;
+  }
+  if (backgroundedAt) recoverAfterResume();
+  backgroundedAt = 0;
+});
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted || backgroundedAt) recoverAfterResume();
+  backgroundedAt = 0;
+});
 
 pruneArticleCache();
 loadArchive();
