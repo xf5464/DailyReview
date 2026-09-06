@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T05:50:47.456Z",
+  "updatedAt": "2026-09-06T06:00:44.834Z",
   "items": [
     {
       "id": "91ebf4501aca5b86",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 16:49:28 GMT",
       "score": 41,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
-      "id": "3f369e589d161a93",
+      "id": "a22a316d58751fd4",
       "category": "market",
-      "title": "Exclusive-China's Xi seeks to bring large CEO delegation on US visit, sources say",
-      "titleZh": "独家-消息人士称，中国的习近平寻求将大型首席执行官代表团带到美国访问",
-      "url": "https://finance.yahoo.com/news/exclusive-chinas-xi-bring-large-104707459.html",
+      "title": "Jim Cramer Highlights AeroVironment’s (AVAV) Steep Competition",
+      "titleZh": "Jim Cramer重点介绍AeroVironment （ AVAV ）的激烈竞争",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-highlights-aerovironment-avav-222638913.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-04T22:02:51Z",
-      "score": 36.7,
+      "publishedAt": "2026-09-04T22:26:38Z",
+      "score": 37,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "89e0adf0c9c1b067",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:12:53 GMT",
-      "score": 56.4,
+      "score": 56.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "ffcfb18dc494fa6c",
@@ -56,7 +56,7 @@
       "publishedAt": "Fri, 04 Sep 2026 10:40:23 GMT",
       "score": 38,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 54.9,
+      "score": 54.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 44.4,
+      "score": 44.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "d0d6b5803f0e771f",
@@ -110,9 +110,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
-      "score": 58.2,
+      "score": 58,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "e0bf107cee4e6d27",
@@ -124,9 +124,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 01:16:35 -0400",
-      "score": 60.4,
+      "score": 60.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 70.2,
+      "score": 70,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 71,
+      "score": 70.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 58.4,
+      "score": 58.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
-      "id": "0b166caf3c482188",
+      "id": "f4396035237fc098",
       "category": "tech",
-      "title": "Is the Steam Deck still worth it in 2026?",
-      "titleZh": "2026年的蒸汽卡组还值得吗？",
-      "url": "https://www.engadget.com/2248094/is-steam-deck-still-worth-it/",
+      "title": "Apple iTunes still exists, but not the way it used to",
+      "titleZh": "Apple iTunes仍然存在，但不像以前那样",
+      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
-      "score": 64.7,
+      "publishedAt": "Sat, 05 Sep 2026 23:00:00 +0000",
+      "score": 65,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 57.9,
+      "score": 57.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 64.2,
+      "score": 64,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 56.6,
+      "score": 56.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 60,
+      "score": 59.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 125.4,
-      "engagement": "275 points · 114 comments",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "score": 125.9,
+      "engagement": "280 points · 121 comments",
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 127.6,
-      "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "score": 109.4,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 106.8,
+      "score": 106.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -323,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 106.6,
+      "score": 106.4,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -338,9 +338,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 105.2,
+      "score": 104.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -353,9 +353,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 101.7,
+      "score": 101.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -368,9 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 89.6,
+      "score": 89.4,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -383,9 +383,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 88.3,
+      "score": 88.1,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "7470701fe158400f",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 83.5,
+      "score": 83.3,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -413,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 82.6,
+      "score": 82.3,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 80.7,
+      "score": 80.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 383092,
       "engagement": "383,092 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 281613,
       "engagement": "281,613 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 212541,
       "engagement": "212,541 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 191655,
       "engagement": "191,655 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "114483232b4c644f",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 169678,
       "engagement": "169,678 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T07:00:12Z",
       "score": 124380,
       "engagement": "124,380 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 114916,
       "engagement": "114,916 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T07:09:16Z",
       "score": 109520,
       "engagement": "109,520 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 98910,
       "engagement": "98,910 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T19:34:19Z",
       "score": 71661,
       "engagement": "71,661 次观看",
-      "fetchedAt": "2026-09-06T05:50:47.456Z"
+      "fetchedAt": "2026-09-06T06:00:44.834Z"
     }
   ]
 }
