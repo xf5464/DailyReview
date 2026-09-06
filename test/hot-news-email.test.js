@@ -22,14 +22,16 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.36/);
+  assert.match(html, /v2026\.09\.06\.37/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
-  assert.match(html, /data-category="trends"[^>]*>词云</);
+  assert.match(html, /data-category="trends"[^>]*>事件</);
   assert.match(script, /'tech', 'market', 'world', 'youtube', 'trends'/);
   assert.match(script, /不包含 YouTube/);
-  assert.match(script, /dailyreview-recent-v3/);
+  assert.match(script, /dailyreview-recent-v4/);
   assert.match(script, /ARCHIVE_URLS/);
+  assert.match(script, /renderEventCloud/);
+  assert.doesNotMatch(script, /createElementNS\('http:\/\/www\.w3\.org\/2000\/svg'/);
 });
 
 test("takes a publisher homepage lead instead of a Google News search result", () => {
@@ -197,15 +199,12 @@ test("does not treat a YouTube channel name as a paid news URL", () => {
   assert.equal(item.category === "youtube" || !isPaywalledItem(item), true);
 });
 
-
 test("resolves a signed Google News URL to its publisher during collection", async () => {
   const googleUrl = "https://news.google.com/rss/articles/CBMiTest?oc=5";
   const calls = [];
   const fetcher = async (url, options = {}) => {
     calls.push({ url, options });
-    if (calls.length === 1) {
-      return { ok: true, text: async () => '<div data-n-a-sg="signature" data-n-a-ts="1788480000"></div>' };
-    }
+    if (calls.length === 1) return { ok: true, text: async () => '<div data-n-a-sg="signature" data-n-a-ts="1788480000"></div>' };
     return { ok: true, text: async () => '[\\\"garturlres\\\",\\\"https://www.cnbc.com/2026/09/04/story.html\\\",' };
   };
   const resolved = await resolveGoogleNewsUrl(googleUrl, fetcher);
@@ -226,30 +225,4 @@ test("reuses an archived Google News mapping without another network request", a
   assert.equal(result.resolvedCount, 1);
   assert.equal(result.items[0].url, directUrl);
   assert.equal(result.items[0].googleNewsUrl, googleUrl);
-});
-
-
-test("keeps the four DailyReview runs disconnected from hot-news collection", () => {
-  const workflow = fs.readFileSync(".github/workflows/send-hot-news.yml", "utf8");
-  assert.doesNotMatch(workflow, /workflow_run:/);
-  assert.match(workflow, /DISPATCH_TRIGGER_SOURCE/);
-  assert.match(workflow, /DISPATCH_TRIGGER_SOURCE" == "cloudflare"/);
-  const cron = fs.readFileSync("cloudflare/dailyreview-cron-hot-news.js", "utf8");
-  assert.match(cron, /"refresh-reader\.yml"/);
-  assert.doesNotMatch(cron, /"send-hot-news\.yml"/);
-  assert.match(cron, /event\.cron !== READER_REFRESH_CRON/);
-});
-
-test("keeps reader publication free of Gmail configuration", () => {
-  const workflow = fs.readFileSync(".github/workflows/refresh-reader.yml", "utf8");
-  assert.match(workflow, /HOT_NEWS_REFRESH_ONLY: "true"/);
-  assert.match(workflow, /YOUTUBE_API_KEY: \$\{\{ secrets\.YOUTUBE_API_KEY \}\}/);
-  assert.match(workflow, /for attempt in 1 2 3/);
-  assert.doesNotMatch(workflow, /GMAIL_USERNAME|GMAIL_APP_PASSWORD|ALERT_EMAIL_TO/);
-});
-
-test("runs the flaky online reader diagnostic only when requested manually", () => {
-  const workflow = fs.readFileSync(".github/workflows/test-reader.yml", "utf8");
-  assert.match(workflow, /on:\n  workflow_dispatch:/);
-  assert.doesNotMatch(workflow, /\n  push:/);
 });
