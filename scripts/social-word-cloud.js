@@ -5,7 +5,7 @@ const CLOUD_SIZE = 30;
 const HN_LIMIT = 180;
 const MASTODON_INSTANCES = ['mastodon.social', 'fosstodon.org', 'techhub.social'];
 
-const STOP_WORDS = new Set(`a an and are as at be been but by can could did do does for from had has have how i if in into is it its may more most new no not of on one or our out over so than that the their there these they this to two up us was we were what when where which who why will with would you your after all about just only says say using use used get gets got now today video watch via here first latest make makes made like time people report reports amid among since still take top want way year years day days good bad big best much many some any every other another really thing things news world live breaking`.split(/\s+/));
+const STOP_WORDS = new Set(`a an and are as at be been but by can could did do does for from had has have how i if in into is it its may more most new no not of on one or our out over so than that the their there these they this to two up us was we were what when where which who why will with would you your after all about just only says say using use used get gets got now today video watch via here first latest make makes made like time people report reports amid among since still take top want way year years day days good bad big best much many some any every other another really thing things news world live breaking meet thought know then few old open state services september history limit vote http https www com org net payload payloads`.split(/\s+/));
 
 const ALIASES = new Map([
   ['ai', 'AI'], ['artificial intelligence', 'AI'], ['machine learning', '机器学习'],
@@ -13,6 +13,11 @@ const ALIASES = new Map([
   ['microsoft', '微软'], ['google', 'Google'], ['tesla', '特斯拉'], ['bitcoin', '比特币'],
   ['crypto', '加密货币'], ['stock', '股票'], ['stocks', '股票'], ['market', '市场'],
   ['markets', '市场'], ['chip', '芯片'], ['chips', '芯片'], ['robot', '机器人'], ['robots', '机器人'],
+  ['security', '网络安全'], ['browser', '浏览器'], ['web', '互联网'], ['memory', '内存'],
+  ['code', '编程'], ['testing', '测试'], ['software', '软件'], ['developer', '开发者'], ['developers', '开发者'],
+  ['cloud', '云计算'], ['linux', 'Linux'], ['rust', 'Rust'], ['python', 'Python'], ['privacy', '隐私'],
+  ['space', '太空'], ['launch', '发射'], ['orbit', '轨道'], ['aerospace', '航空航天'],
+  ['trump', '特朗普'], ['iran', '伊朗'], ['ukraine', '乌克兰'],
 ]);
 
 async function fetchJson(url, timeoutMs = 15_000, fetcher = fetch) {
@@ -34,6 +39,7 @@ function stripHtml(value = '') {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/https?:\/\/\S+|www\.\S+/gi, ' ')
     .replace(/\s+/g, ' ').trim();
 }
 
@@ -57,7 +63,7 @@ async function hackerNewsSignals(fetcher = fetch) {
 async function mastodonSignals(instance, fetcher = fetch) {
   const items = await fetchJson(`https://${instance}/api/v1/trends/statuses?limit=40`, 15_000, fetcher);
   return (items || []).map((item) => signal(
-    item.content, `Mastodon · ${instance}`,
+    item.content, 'Mastodon',
     Number(item.favourites_count) + Number(item.reblogs_count) * 2 + Number(item.replies_count) * 1.5,
     item.url || '', item.created_at || '',
   )).filter((item) => item.text);
@@ -146,7 +152,7 @@ function buildWordCloud(signals, now = Date.now(), limit = CLOUD_SIZE) {
 
 async function collectSocialWordCloud(baseItems = [], now = Date.now(), fetcher = fetch) {
   const baseSignals = baseItems.filter((item) => item?.category !== 'youtube').map((item) => signal(
-    `${item.titleZh || ''} ${item.title || ''}`, `DailyReview · ${item.source || item.category}`,
+    `${item.titleZh || ''} ${item.title || ''}`, 'DailyReview',
     Number(item.score) || 1, item.url || '', item.publishedAt || '',
   ));
   const jobs = [
