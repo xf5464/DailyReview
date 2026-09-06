@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T11:30:44.083Z",
+  "updatedAt": "2026-09-06T11:46:55.671Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
-      "id": "abb58f74cd6c5f36",
+      "id": "e5a2f5b5946be969",
       "category": "market",
-      "title": "OpenAI’s $1 Billion Cyber Push Backs Cloudflare and SentinelOne. Which Has the Better AI Security Model?",
-      "titleZh": "OpenAI的$ 10亿网络反击Cloudflare和SentinelOne。 哪个具有更好的人工智能安全模型？",
-      "url": "https://finance.yahoo.com/technology/ai/articles/openai-1-billion-cyber-push-122609472.html",
+      "title": "Palantir Jumped 7.7% on an Expanded PwC Alliance as Globant Launched a Salesforce AI Pod. Which Services Model Scales Better?",
+      "titleZh": "随着Globant推出Salesforce AI Pod ， Palantir在扩大的PwC联盟中跃升7.7%。 哪种服务模式可以更好地扩展？",
+      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T12:26:09Z",
+      "publishedAt": "2026-09-05T12:38:38Z",
       "score": 27.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 48.8,
+      "score": 48.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "9146aeb602af863c",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 10:29:03 GMT",
-      "score": 62,
+      "score": 61.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 49.2,
+      "score": 49,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,37 +96,37 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 62.7,
+      "score": 62.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
-      "id": "773c59c915a388f4",
+      "id": "8dcfffec7892dec0",
       "category": "market",
-      "title": "Act early: Medicare Advantage enrollment could change in 2027",
-      "titleZh": "及早采取行动： Medicare Advantage的注册可能会在2027年发生变化",
-      "url": "https://www.thestreet.com/retirement/medicare-advantage-enrollment-limits-2027-act-early",
+      "title": "Michael Burry sends a strong warning to Palantir stock investors",
+      "titleZh": "Michael Burry向Palantir股票投资者发出强烈警告",
+      "url": "https://www.thestreet.com/investing/stocks/michael-burry-warns-palantir-stock-investors-bear-case",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 11:07:00 GMT",
-      "score": 58.6,
+      "publishedAt": "Sun, 06 Sep 2026 11:37:00 GMT",
+      "score": 64.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
-      "id": "d323841af4d5d59b",
+      "id": "348f0bfe1740727d",
       "category": "market",
-      "title": "Why Palo Alto Networks Stock Plummeted This Week",
-      "titleZh": "为什么Palo Alto Networks股票本周暴跌",
-      "url": "https://www.fool.com/investing/2026/09/06/why-palo-alto-networks-stock-plummeted-this-week/?source=iedfolrf0000001",
+      "title": "The Stock Market Is Doing Something for Only the 2nd Time in Nearly 156 Years, and History Says It Foreshadows Disaster for Wall Street",
+      "titleZh": "近156年来，股市仅第二次有所作为，历史表明这预示着华尔街的灾难",
+      "url": "https://www.fool.com/investing/2026/09/06/stock-market-is-doing-something-only-2nd-time-in-156-years-history-says-disaster-for-wall-street/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 07:00:12 -0400",
-      "score": 60.5,
+      "publishedAt": "Sun, 06 Sep 2026 06:36:01 -0400",
+      "score": 68.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "bf684667ddcef7d7",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 11:00:00 +0000",
-      "score": 75.5,
+      "score": 75.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 65.3,
+      "score": 65,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 52.8,
+      "score": 52.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
-      "id": "0b166caf3c482188",
+      "id": "f4396035237fc098",
       "category": "tech",
-      "title": "Is the Steam Deck still worth it in 2026?",
-      "titleZh": "2026年的蒸汽卡组还值得吗？",
-      "url": "https://www.engadget.com/2248094/is-steam-deck-still-worth-it/",
+      "title": "Apple iTunes still exists, but not the way it used to",
+      "titleZh": "Apple iTunes仍然存在，但不像以前那样",
+      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
-      "score": 59,
+      "publishedAt": "Sat, 05 Sep 2026 23:00:00 +0000",
+      "score": 59.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
-      "score": 70.7,
+      "score": 70.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "00c1641144f2567d",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 11:00:00 +0000",
-      "score": 69.5,
+      "score": 69.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 51,
+      "score": 50.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "ebe05b314969ffc7",
@@ -264,23 +264,23 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 10:30:00 +0000",
-      "score": 70,
+      "score": 69.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
-      "id": "452ea522d7fd1992",
+      "id": "6c45c914258f8293",
       "category": "tech",
-      "title": "I Changed My License",
-      "titleZh": "我更改了执照",
-      "url": "https://bergie.iki.fi/blog/eupl/",
+      "title": "Isar Aerospace reaches orbit and deploys payloads on second flight",
+      "titleZh": "ISAR Aerospace到达轨道并在第二次飞行中部署有效载荷",
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-06T10:39:44.000Z",
-      "score": 95.9,
-      "engagement": "36 points · 35 comments",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "publishedAt": "2026-09-06T07:21:06.000Z",
+      "score": 119.4,
+      "engagement": "247 points · 49 comments",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 119.4,
+      "score": 119,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 106.2,
+      "score": 105.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -323,9 +323,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 08:43:43 GMT",
-      "score": 103.3,
+      "score": 102.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "8237d8a583b3c72e",
@@ -338,9 +338,9 @@
       "sourceKey": "world-bbc-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 09:56:39 GMT",
-      "score": 102.9,
+      "score": 102.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -353,9 +353,9 @@
       "sourceKey": "world-bbc-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 99.5,
+      "score": 99.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -368,9 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 98.8,
+      "score": 98.4,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "43fa9a37eca2ddf4",
@@ -383,9 +383,9 @@
       "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
-      "score": 98.4,
+      "score": 98,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 98.4,
+      "score": 98,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "024fd13de026decc",
@@ -413,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 96.6,
+      "score": 96.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -428,23 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 96.6,
+      "score": 96.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
-    },
-    {
-      "id": "79fa21f8dd177a20",
-      "category": "youtube",
-      "title": "I BOUGHT A TESLA CYBER TRUCK AT 17 IN AMERICA!!",
-      "titleZh": "我在17岁时在美国买了一辆特斯拉网络卡车！ ！",
-      "url": "https://www.youtube.com/watch?v=wBJKzDgwDqA",
-      "source": "Lulutho Peanuts",
-      "sourceKey": "youtube-wBJKzDgwDqA",
-      "sourceOrder": 0,
-      "publishedAt": "2026-09-05T09:00:26Z",
-      "score": 395990,
-      "engagement": "395,990 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -454,11 +440,11 @@
       "url": "https://www.youtube.com/watch?v=xPjop4OC1XY",
       "source": "GEN",
       "sourceKey": "youtube-xPjop4OC1XY",
-      "sourceOrder": 1,
+      "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 313676,
-      "engagement": "313,676 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 382207,
+      "engagement": "382,207 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -468,11 +454,11 @@
       "url": "https://www.youtube.com/watch?v=mGpLMflEuCc",
       "source": "Pushkar Raj Thakur: Stock Market Educator 📈",
       "sourceKey": "youtube-mGpLMflEuCc",
-      "sourceOrder": 2,
+      "sourceOrder": 1,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 252700,
-      "engagement": "252,700 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 304282,
+      "engagement": "304,282 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "114483232b4c644f",
@@ -482,11 +468,11 @@
       "url": "https://www.youtube.com/watch?v=aGtsFSNJu4g",
       "source": "Bdakzz",
       "sourceKey": "youtube-aGtsFSNJu4g",
-      "sourceOrder": 3,
+      "sourceOrder": 2,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 209100,
-      "engagement": "209,100 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 256563,
+      "engagement": "256,563 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -496,53 +482,11 @@
       "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
       "source": "The Electric Viking",
       "sourceKey": "youtube-td0lyo8hLJo",
-      "sourceOrder": 4,
+      "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 199892,
-      "engagement": "199,892 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
-    },
-    {
-      "id": "0128da0780432f60",
-      "category": "youtube",
-      "title": "When Nvidia makes the GPU gamers asking for",
-      "titleZh": "当英伟达让GPU游戏玩家要求",
-      "url": "https://www.youtube.com/watch?v=loRcHi1-IX4",
-      "source": "Deadrig Gaming",
-      "sourceKey": "youtube-loRcHi1-IX4",
-      "sourceOrder": 5,
-      "publishedAt": "2026-09-05T09:15:08Z",
-      "score": 163970,
-      "engagement": "163,970 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
-    },
-    {
-      "id": "8d96a3ba04e7b33f",
-      "category": "youtube",
-      "title": "Nike Goes Bankrupt! Nike Stock Gets *Delisted* From Stock Market After Dylan Mulvaney Partnership…🤣",
-      "titleZh": "耐克破产！耐克股票在Dylan Mulvaney合伙后从股市*退市* …🤣",
-      "url": "https://www.youtube.com/watch?v=kVEH0R-6m28",
-      "source": "Benny Johnson",
-      "sourceKey": "youtube-kVEH0R-6m28",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-06T00:21:42Z",
-      "score": 150269,
-      "engagement": "150,269 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
-    },
-    {
-      "id": "0193f38236708cd1",
-      "category": "youtube",
-      "title": "Tesla Cybercab doors aren’t just a flex",
-      "titleZh": "特斯拉Cybercab车门不仅仅是柔性",
-      "url": "https://www.youtube.com/watch?v=5MqJKUJtoNY",
-      "source": "Jeremy Judkins",
-      "sourceKey": "youtube-5MqJKUJtoNY",
-      "sourceOrder": 7,
-      "publishedAt": "2026-09-05T11:01:03Z",
-      "score": 123095,
-      "engagement": "123,095 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 213940,
+      "engagement": "213,940 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -552,11 +496,25 @@
       "url": "https://www.youtube.com/watch?v=rgzovlRt3Io",
       "source": "MuskLab",
       "sourceKey": "youtube-rgzovlRt3Io",
-      "sourceOrder": 8,
+      "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 107558,
-      "engagement": "107,558 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 123682,
+      "engagement": "123,682 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
+    },
+    {
+      "id": "a0c831ec04c52b71",
+      "category": "youtube",
+      "title": "He Got an RTX 5070 for JUST $129 at Walmart 💀",
+      "titleZh": "他在沃尔玛以129 $的价格获得了RTX 5070 💀",
+      "url": "https://www.youtube.com/watch?v=B8AR0gkEXpI",
+      "source": "PCFUNSTORE",
+      "sourceKey": "youtube-B8AR0gkEXpI",
+      "sourceOrder": 5,
+      "publishedAt": "2026-09-05T16:15:34Z",
+      "score": 123396,
+      "engagement": "123,396 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -566,11 +524,519 @@
       "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
       "source": "AutomatiK",
       "sourceKey": "youtube-_lYjci0bjNo",
-      "sourceOrder": 9,
+      "sourceOrder": 6,
       "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 66034,
-      "engagement": "66,034 次观看",
-      "fetchedAt": "2026-09-06T11:30:44.083Z"
+      "score": 86317,
+      "engagement": "86,317 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
+    },
+    {
+      "id": "3c372d2db927869b",
+      "category": "youtube",
+      "title": "Artificial Intelligence is Getting Scary... 🤖❌",
+      "titleZh": "人工智能变得越来越可怕…… 🤖❌",
+      "url": "https://www.youtube.com/watch?v=5II-Dkl3cfQ",
+      "source": "6pek",
+      "sourceKey": "youtube-5II-Dkl3cfQ",
+      "sourceOrder": 7,
+      "publishedAt": "2026-09-05T19:29:08Z",
+      "score": 85988,
+      "engagement": "85,988 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
+    },
+    {
+      "id": "f4446961f1e848a6",
+      "category": "youtube",
+      "title": "Bessent vs Wall Street: They Don't Understand This Economy",
+      "titleZh": "贝森特与华尔街：他们不了解这种经济",
+      "url": "https://www.youtube.com/watch?v=b5igiJSgZCo",
+      "source": "Promethean Updates",
+      "sourceKey": "youtube-b5igiJSgZCo",
+      "sourceOrder": 8,
+      "publishedAt": "2026-09-05T19:34:19Z",
+      "score": 81539,
+      "engagement": "81,539 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
+    },
+    {
+      "id": "68eb7c610bd6e09d",
+      "category": "youtube",
+      "title": "Local Disk C 💀#pcgaming #benchmark #rtx5050 #gtx1080ti",
+      "titleZh": "本地磁盘C 💀# pcgaming #基准# rtx5050 # gtx1080ti",
+      "url": "https://www.youtube.com/watch?v=ycfYhLOkAJ4",
+      "source": "SignalRGB",
+      "sourceKey": "youtube-ycfYhLOkAJ4",
+      "sourceOrder": 9,
+      "publishedAt": "2026-09-05T20:27:10Z",
+      "score": 80473,
+      "engagement": "80,473 次观看",
+      "fetchedAt": "2026-09-06T11:46:55.671Z"
+    }
+  ],
+  "trends": [
+    {
+      "id": "560040c54a",
+      "term": "AI",
+      "labelZh": "",
+      "score": 58.99,
+      "mentions": 88,
+      "platformCount": 8,
+      "platforms": [
+        "DailyReview · Yahoo Finance",
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · techhub.social",
+        "Bluesky",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
+    },
+    {
+      "id": "8eec7bc461",
+      "term": "security",
+      "labelZh": "",
+      "score": 22.72,
+      "mentions": 32,
+      "platformCount": 7,
+      "platforms": [
+        "DailyReview · MarketWatch",
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
+    },
+    {
+      "id": "9a71ad6ad1",
+      "term": "股票",
+      "labelZh": "",
+      "score": 20.16,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview · Benzinga",
+        "DailyReview · TheStreet",
+        "DailyReview · The Motley Fool",
+        "GitHub Trending"
+      ],
+      "url": "https://www.benzinga.com/money/best-energy-stocks"
+    },
+    {
+      "id": "392d787194",
+      "term": "meet",
+      "labelZh": "",
+      "score": 20.07,
+      "mentions": 6,
+      "platformCount": 6,
+      "platforms": [
+        "DailyReview · BBC Business",
+        "DailyReview · CNN Business",
+        "DailyReview · BBC News",
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Bluesky"
+      ],
+      "url": "https://www.bbc.co.uk/news/articles/crer948xq00o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "c3437dbc7c",
+      "term": "https",
+      "labelZh": "",
+      "score": 17.99,
+      "mentions": 19,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://mastodon.social/@Tutanota/117223765496863185"
+    },
+    {
+      "id": "2b681c0a24",
+      "term": "Google",
+      "labelZh": "",
+      "score": 14.68,
+      "mentions": 14,
+      "platformCount": 6,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://lapcatsoftware.com/articles/2026/9/1.html"
+    },
+    {
+      "id": "b38d961e70",
+      "term": "苹果",
+      "labelZh": "",
+      "score": 13.81,
+      "mentions": 5,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview · Engadget",
+        "DailyReview · CNN Business",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://www.engadget.com/2246423/apple-itunes-still-exists-how-different-from-past/"
+    },
+    {
+      "id": "85f2aea244",
+      "term": "september",
+      "labelZh": "",
+      "score": 13.08,
+      "mentions": 6,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview · PCMag",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "DEV Community"
+      ],
+      "url": "https://www.pcmag.com/deals/lock-in-lifetime-fastestvpn-pro-access-for-just-30-through-september-10"
+    },
+    {
+      "id": "4d2f8c7f17",
+      "term": "微软",
+      "labelZh": "",
+      "score": 12.72,
+      "mentions": 7,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview · TechCrunch",
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
+    },
+    {
+      "id": "af93b3913b",
+      "term": "thought",
+      "labelZh": "",
+      "score": 12.01,
+      "mentions": 9,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview · MarketWatch",
+        "Mastodon · mastodon.social",
+        "Mastodon · techhub.social",
+        "DEV Community"
+      ],
+      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
+    },
+    {
+      "id": "ef98362b8a",
+      "term": "browser",
+      "labelZh": "",
+      "score": 11.91,
+      "mentions": 13,
+      "platformCount": 7,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://quenq.com/apps/vice-city-online/"
+    },
+    {
+      "id": "ca84d1343b",
+      "term": "web",
+      "labelZh": "",
+      "score": 11.27,
+      "mentions": 9,
+      "platformCount": 5,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "GitHub Trending"
+      ],
+      "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
+    },
+    {
+      "id": "5fc7e38bff",
+      "term": "open",
+      "labelZh": "",
+      "score": 10.87,
+      "mentions": 11,
+      "platformCount": 5,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "GitHub Trending"
+      ],
+      "url": "https://www.circuitvalley.com/2026/08/chc5-open-camera-sensor-comparison-specification.html"
+    },
+    {
+      "id": "81c5d49be9",
+      "term": "memory",
+      "labelZh": "",
+      "score": 10.8,
+      "mentions": 7,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview · TechSpot",
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html"
+    },
+    {
+      "id": "930f2e66d9",
+      "term": "市场",
+      "labelZh": "",
+      "score": 10.64,
+      "mentions": 3,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · Tom's Hardware",
+        "DailyReview · The Motley Fool",
+        "GitHub Trending"
+      ],
+      "url": "https://www.tomshardware.com/video-games/former-old-school-runescape-dev-gets-jail-time-for-stealing-usd400-000-from-players-virtual-gold-stolen-and-sold-on-the-black-market-before-jagex-caught-the-culprit-using-hidden-firewall-tweaks"
+    },
+    {
+      "id": "97accafb53",
+      "term": "know",
+      "labelZh": "",
+      "score": 9.4,
+      "mentions": 10,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://ec.social-network.europa.eu/@EUCommission/117222919584567363"
+    },
+    {
+      "id": "6f8f8e9f76",
+      "term": "then",
+      "labelZh": "",
+      "score": 8.84,
+      "mentions": 5,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview · MarketWatch",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
+    },
+    {
+      "id": "86bd16eba3",
+      "term": "payloads",
+      "labelZh": "",
+      "score": 8.47,
+      "mentions": 3,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · BleepingComputer",
+        "DailyReview · Hacker News",
+        "Hacker News"
+      ],
+      "url": "https://www.bleepingcomputer.com/news/security/over-5-400-hacked-sites-serve-clickfix-payloads-stored-on-the-blockchain/"
+    },
+    {
+      "id": "66f79d8a63",
+      "term": "history",
+      "labelZh": "",
+      "score": 8.42,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview · The Motley Fool",
+        "Hacker News",
+        "Mastodon · techhub.social",
+        "GitHub Trending"
+      ],
+      "url": "https://www.fool.com/investing/2026/09/06/stock-market-is-doing-something-only-2nd-time-in-156-years-history-says-disaster-for-wall-street/?source=iedfolrf0000001"
+    },
+    {
+      "id": "c00dbbc9da",
+      "term": "old",
+      "labelZh": "",
+      "score": 8.17,
+      "mentions": 4,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · Tom's Hardware",
+        "Mastodon · mastodon.social",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://www.tomshardware.com/video-games/former-old-school-runescape-dev-gets-jail-time-for-stealing-usd400-000-from-players-virtual-gold-stolen-and-sold-on-the-black-market-before-jagex-caught-the-culprit-using-hidden-firewall-tweaks"
+    },
+    {
+      "id": "aa4a5f8125",
+      "term": "state",
+      "labelZh": "",
+      "score": 8.01,
+      "mentions": 7,
+      "platformCount": 5,
+      "platforms": [
+        "DailyReview · Reuters World",
+        "Mastodon · mastodon.social",
+        "Mastodon · techhub.social",
+        "Bluesky",
+        "DEV Community"
+      ],
+      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/"
+    },
+    {
+      "id": "fd63f1ed32",
+      "term": "vote",
+      "labelZh": "",
+      "score": 7.77,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://wikiworkersunited.org/announcements/2026-09-04-us-wikimedia-foundation-workers-overwhelmingly-vote-to-form-union-with-cwa/"
+    },
+    {
+      "id": "8def4372cd",
+      "term": "few",
+      "labelZh": "",
+      "score": 7.22,
+      "mentions": 7,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social"
+      ],
+      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
+    },
+    {
+      "id": "3e7aaa7960",
+      "term": "services",
+      "labelZh": "",
+      "score": 7.22,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "DailyReview · Yahoo Finance",
+        "Mastodon · mastodon.social",
+        "Mastodon · techhub.social",
+        "GitHub Trending"
+      ],
+      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
+    },
+    {
+      "id": "e6fb06210f",
+      "term": "code",
+      "labelZh": "",
+      "score": 7.14,
+      "mentions": 17,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
+    },
+    {
+      "id": "db4baacb8d",
+      "term": "orbit",
+      "labelZh": "",
+      "score": 7.05,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · Hacker News",
+        "Hacker News",
+        "Bluesky"
+      ],
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
+    },
+    {
+      "id": "dc724af18f",
+      "term": "testing",
+      "labelZh": "",
+      "score": 7.02,
+      "mentions": 10,
+      "platformCount": 5,
+      "platforms": [
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
+    },
+    {
+      "id": "e4d68c5a97",
+      "term": "limit",
+      "labelZh": "",
+      "score": 6.97,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "Mastodon · mastodon.social",
+        "Mastodon · fosstodon.org",
+        "Mastodon · techhub.social",
+        "Lobsters"
+      ],
+      "url": "https://ec.social-network.europa.eu/@EUCommission/117222919584567363"
+    },
+    {
+      "id": "63a4d2ed10",
+      "term": "isar",
+      "labelZh": "",
+      "score": 6.92,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · Hacker News",
+        "Hacker News",
+        "Bluesky"
+      ],
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
+    },
+    {
+      "id": "c6670de6f0",
+      "term": "aerospace",
+      "labelZh": "",
+      "score": 6.92,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview · Hacker News",
+        "Hacker News",
+        "Bluesky"
+      ],
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     }
   ]
 }
