@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T12:03:51.615Z",
+  "updatedAt": "2026-09-06T12:06:40.763Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "e5a2f5b5946be969",
@@ -26,9 +26,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T12:38:38Z",
-      "score": 27.2,
+      "score": 27.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "033a8d954c64d876",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sun, 06 Sep 2026 12:02:47 GMT",
-      "score": 63.7,
+      "score": 63.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "8ee6bc2a199beaf1",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 12:01:41 GMT",
-      "score": 52.2,
+      "score": 52.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 48.7,
+      "score": 48.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -98,7 +98,7 @@
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
       "score": 62.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "8dcfffec7892dec0",
@@ -110,9 +110,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 11:37:00 GMT",
-      "score": 64.6,
+      "score": 64.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "8aa03bc3454fa894",
@@ -126,7 +126,7 @@
       "publishedAt": "Sun, 06 Sep 2026 07:35:00 -0400",
       "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "14415d52e3852d57",
@@ -154,7 +154,7 @@
       "publishedAt": "Sun, 06 Sep 2026 12:00:00 +0000",
       "score": 75.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 64.8,
+      "score": 64.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -196,21 +196,21 @@
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
       "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
-      "id": "4d7cb63bbad84ee4",
+      "id": "735754dd7fbc2edf",
       "category": "tech",
-      "title": "Why are iPhones more expensive than iPads?",
-      "titleZh": "为什么iPhone比iPad更贵？",
-      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
+      "title": "Claude can help manage your email inbox, but there are some risks involved",
+      "titleZh": "Claude可以帮助管理您的电子邮件收件箱，但存在一些风险",
+      "url": "https://www.engadget.com/2247891/claude-help-manage-emails-risks-involved/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
-      "score": 60.4,
+      "publishedAt": "Sun, 06 Sep 2026 12:00:00 +0000",
+      "score": 74.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -224,7 +224,7 @@
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
       "score": 70.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "00c1641144f2567d",
@@ -238,7 +238,7 @@
       "publishedAt": "Sun, 06 Sep 26 11:00:00 +0000",
       "score": 68.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "1305dd241c305356",
@@ -252,7 +252,7 @@
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
       "score": 50.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "1b2beb100715c63e",
@@ -266,7 +266,7 @@
       "publishedAt": "Sun, 06 Sep 2026 11:48:08 +0000",
       "score": 67.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -278,24 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
-      "score": 120.6,
-      "engagement": "257 points · 56 comments",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
-    },
-    {
-      "id": "cb16d9b868091db6",
-      "category": "world",
-      "title": "Russia-Ukraine war: US envoys meet Putin in Moscow for Ukraine talks",
-      "titleZh": "俄乌战争：美国特使在莫斯科会晤普京参加乌克兰会谈",
-      "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
-      "source": "BBC News",
-      "sourceKey": "world-bbc-world-0",
-      "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 118.6,
-      "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 120.8,
+      "engagement": "261 points · 57 comments",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -305,12 +290,27 @@
       "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMjhwclJ2ZDZRMEdnU1NQQkwtRGNvMV9CZG9UaHBkSjJBRzZDX3UyOTBCUjBxU29Lc0U2ejl0a24wakRWX0tlM3oxUDlEWnJiYXVCekwxYVoyQ1B4VjhkX1ViOS1XWXJsU3VlaE1XVXdDVGIwYmFGbFp1ZWhUc3NFenBzSDVtVzJIOTdKMFUxcVlndzA5eUhKaHhCeTR6YXVFV2dOOGNyZjJiRGN0LUxKNnJqbWg3bXRLLUE?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-1",
-      "sourceOrder": 1,
+      "sourceKey": "world-reuters-world-0",
+      "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 105.4,
+      "score": 105.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
+    },
+    {
+      "id": "cb16d9b868091db6",
+      "category": "world",
+      "title": "Russia-Ukraine war: US envoys meet Putin in Moscow for Ukraine talks",
+      "titleZh": "俄乌战争：美国特使在莫斯科会晤普京参加乌克兰会谈",
+      "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-1",
+      "sourceOrder": 1,
+      "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
+      "score": 100.5,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -325,22 +325,7 @@
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
       "score": 98.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
-    },
-    {
-      "id": "6bca4b2d5e9c7663",
-      "category": "world",
-      "title": "UN votes to adopt new world map that reflects Africa’s true size",
-      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
-      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
-      "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-3",
-      "sourceOrder": 3,
-      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 98.1,
-      "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -350,27 +335,27 @@
       "url": "https://www.reuters.com/world/china/moscow-has-not-ruled-out-trilateral-meeting-between-presidents-russia-us-china-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPelNvcTNadU4zdzk5UEF0bUZNQTZTRDhJdDN2WnA4cEhWUi10QXJveUpzdmZEQi13bDhjNl91d2l5N3o4NEZWa0JqTm5kT0FOMTRHZzVTWWRFSnk5UmdPdjhlMnY1VDRSc0VFa2RoN3k0OWdVbkI2aTUwUE16WEhLY0pQTS1PRm5meWJCUVJUSFhmVEZZVUhQT3JYWHVUUkNGZ2dJTkVtLUQxMUVNMm9SZkJocjg1aVdsTWhmdDNMd1hteVpr?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-4",
-      "sourceOrder": 4,
+      "sourceKey": "world-reuters-world-3",
+      "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 11:14:27 GMT",
       "score": 98,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
-      "id": "43fa9a37eca2ddf4",
+      "id": "6bca4b2d5e9c7663",
       "category": "world",
-      "title": "At flood-destroyed China-Nepal border, no sign of a once-busy port",
-      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
-      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-5",
-      "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
-      "score": 97.6,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "title": "UN votes to adopt new world map that reflects Africa’s true size",
+      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
+      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
+      "source": "Al Jazeera",
+      "sourceKey": "world-al-jazeera-4",
+      "sourceOrder": 4,
+      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
+      "score": 98,
+      "engagement": "5家来源交叉确认",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -380,27 +365,27 @@
       "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
+      "sourceKey": "world-reuters-world-5",
+      "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
       "score": 97.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
-      "id": "024fd13de026decc",
+      "id": "43fa9a37eca2ddf4",
       "category": "world",
-      "title": "Four killed in Israeli strikes on southern Lebanon",
-      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
-      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
+      "title": "At flood-destroyed China-Nepal border, no sign of a once-busy port",
+      "titleZh": "在洪水摧毁的中尼边境，没有迹象表明曾经繁忙的港口",
+      "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 95.8,
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
+      "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
+      "score": 97.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -410,12 +395,27 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
       "score": 95.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
+    },
+    {
+      "id": "024fd13de026decc",
+      "category": "world",
+      "title": "Four killed in Israeli strikes on southern Lebanon",
+      "titleZh": "以色列军方表示，在真主党发射无人机后，它袭击了黎巴嫩南部",
+      "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
+      "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
+      "score": 95.7,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 92.4,
+      "score": 92.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 386879,
-      "engagement": "386,879 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 388247,
+      "engagement": "388,247 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 306819,
-      "engagement": "306,819 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 307408,
+      "engagement": "307,408 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "114483232b4c644f",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 261271,
       "engagement": "261,271 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 215046,
       "engagement": "215,046 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 124967,
-      "engagement": "124,967 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 125361,
+      "engagement": "125,361 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -512,23 +512,9 @@
       "sourceKey": "youtube-B8AR0gkEXpI",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T16:15:34Z",
-      "score": 124627,
-      "engagement": "124,627 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
-    },
-    {
-      "id": "3c372d2db927869b",
-      "category": "youtube",
-      "title": "Artificial Intelligence is Getting Scary... 🤖❌",
-      "titleZh": "人工智能变得越来越可怕…… 🤖❌",
-      "url": "https://www.youtube.com/watch?v=5II-Dkl3cfQ",
-      "source": "6pek",
-      "sourceKey": "youtube-5II-Dkl3cfQ",
-      "sourceOrder": 6,
-      "publishedAt": "2026-09-05T19:29:08Z",
-      "score": 87626,
-      "engagement": "87,626 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 124941,
+      "engagement": "124,941 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -538,25 +524,25 @@
       "url": "https://www.youtube.com/watch?v=_lYjci0bjNo",
       "source": "AutomatiK",
       "sourceKey": "youtube-_lYjci0bjNo",
-      "sourceOrder": 7,
+      "sourceOrder": 6,
       "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 87615,
-      "engagement": "87,615 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 88154,
+      "engagement": "88,154 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
-      "id": "f4446961f1e848a6",
+      "id": "3c372d2db927869b",
       "category": "youtube",
-      "title": "Bessent vs Wall Street: They Don't Understand This Economy",
-      "titleZh": "贝森特与华尔街：他们不了解这种经济",
-      "url": "https://www.youtube.com/watch?v=b5igiJSgZCo",
-      "source": "Promethean Updates",
-      "sourceKey": "youtube-b5igiJSgZCo",
-      "sourceOrder": 8,
-      "publishedAt": "2026-09-05T19:34:19Z",
-      "score": 81807,
-      "engagement": "81,807 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "title": "Artificial Intelligence is Getting Scary... 🤖❌",
+      "titleZh": "人工智能变得越来越可怕…… 🤖❌",
+      "url": "https://www.youtube.com/watch?v=5II-Dkl3cfQ",
+      "source": "6pek",
+      "sourceKey": "youtube-5II-Dkl3cfQ",
+      "sourceOrder": 7,
+      "publishedAt": "2026-09-05T19:29:08Z",
+      "score": 87626,
+      "engagement": "87,626 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -566,11 +552,25 @@
       "url": "https://www.youtube.com/watch?v=ycfYhLOkAJ4",
       "source": "SignalRGB",
       "sourceKey": "youtube-ycfYhLOkAJ4",
-      "sourceOrder": 9,
+      "sourceOrder": 8,
       "publishedAt": "2026-09-05T20:27:10Z",
-      "score": 81644,
-      "engagement": "81,644 次观看",
-      "fetchedAt": "2026-09-06T12:03:51.615Z"
+      "score": 82022,
+      "engagement": "82,022 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
+    },
+    {
+      "id": "f4446961f1e848a6",
+      "category": "youtube",
+      "title": "Bessent vs Wall Street: They Don't Understand This Economy",
+      "titleZh": "贝森特与华尔街：他们不了解这种经济",
+      "url": "https://www.youtube.com/watch?v=b5igiJSgZCo",
+      "source": "Promethean Updates",
+      "sourceKey": "youtube-b5igiJSgZCo",
+      "sourceOrder": 9,
+      "publishedAt": "2026-09-05T19:34:19Z",
+      "score": 81899,
+      "engagement": "81,899 次观看",
+      "fetchedAt": "2026-09-06T12:06:40.763Z"
     }
   ],
   "trends": [
@@ -578,7 +578,7 @@
       "id": "560040c54a",
       "term": "AI",
       "labelZh": "",
-      "score": 38.51,
+      "score": 38.49,
       "mentions": 88,
       "platformCount": 6,
       "platforms": [
@@ -595,7 +595,7 @@
       "id": "3b70f4e442",
       "term": "编程",
       "labelZh": "",
-      "score": 18.18,
+      "score": 18.19,
       "mentions": 43,
       "platformCount": 5,
       "platforms": [
@@ -611,7 +611,7 @@
       "id": "38c84c8015",
       "term": "网络安全",
       "labelZh": "",
-      "score": 11.91,
+      "score": 11.9,
       "mentions": 33,
       "platformCount": 6,
       "platforms": [
@@ -628,15 +628,31 @@
       "id": "77b5d1a0f1",
       "term": "AI智能体",
       "labelZh": "",
-      "score": 10.2,
-      "mentions": 49,
+      "score": 9.9,
+      "mentions": 48,
       "platformCount": 3,
       "platforms": [
         "Hacker News",
         "GitHub Trending",
         "DEV Community"
       ],
-      "url": "https://github.com/pigeonlabsHQ/pigeon"
+      "url": "https://collusion.wiki/"
+    },
+    {
+      "id": "88d650dd4f",
+      "term": "浏览器",
+      "labelZh": "",
+      "score": 7.24,
+      "mentions": 15,
+      "platformCount": 5,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://quenq.com/apps/vice-city-online/"
     },
     {
       "id": "2b681c0a24",
@@ -654,26 +670,24 @@
       "url": "https://lapcatsoftware.com/articles/2026/9/1.html"
     },
     {
-      "id": "88d650dd4f",
-      "term": "浏览器",
+      "id": "4ed766e0c3",
+      "term": "互联网",
       "labelZh": "",
-      "score": 6.97,
-      "mentions": 14,
-      "platformCount": 5,
+      "score": 6.53,
+      "mentions": 13,
+      "platformCount": 3,
       "platforms": [
         "Hacker News",
         "Mastodon",
-        "GitHub Trending",
-        "DEV Community",
-        "Lobsters"
+        "GitHub Trending"
       ],
-      "url": "https://quenq.com/apps/vice-city-online/"
+      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
     },
     {
       "id": "d014ab7703",
       "term": "内存",
       "labelZh": "",
-      "score": 4.94,
+      "score": 4.93,
       "mentions": 9,
       "platformCount": 5,
       "platforms": [
@@ -686,24 +700,25 @@
       "url": "https://www.techspot.com/news/113751-discrete-gpu-shipments-surged-122-despite-weaker-pc.html"
     },
     {
-      "id": "4ed766e0c3",
-      "term": "互联网",
+      "id": "f1dda22f6c",
+      "term": "claude",
       "labelZh": "",
-      "score": 4.94,
-      "mentions": 10,
-      "platformCount": 3,
+      "score": 4.26,
+      "mentions": 13,
+      "platformCount": 4,
       "platforms": [
+        "DailyReview",
         "Hacker News",
-        "Mastodon",
-        "GitHub Trending"
+        "GitHub Trending",
+        "DEV Community"
       ],
-      "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
+      "url": "https://www.engadget.com/2247891/claude-help-manage-emails-risks-involved/"
     },
     {
       "id": "e2ae20d9ae",
       "term": "Rust",
       "labelZh": "",
-      "score": 4.05,
+      "score": 4.04,
       "mentions": 13,
       "platformCount": 4,
       "platforms": [
@@ -747,7 +762,7 @@
       "id": "4d2f8c7f17",
       "term": "微软",
       "labelZh": "",
-      "score": 2.99,
+      "score": 2.98,
       "mentions": 6,
       "platformCount": 3,
       "platforms": [
@@ -761,7 +776,7 @@
       "id": "98fd0cbd9c",
       "term": "模型",
       "labelZh": "",
-      "score": 2.97,
+      "score": 2.96,
       "mentions": 13,
       "platformCount": 4,
       "platforms": [
@@ -776,7 +791,7 @@
       "id": "2305ee3ca3",
       "term": "游戏",
       "labelZh": "",
-      "score": 2.94,
+      "score": 2.93,
       "mentions": 9,
       "platformCount": 4,
       "platforms": [
@@ -802,10 +817,10 @@
       "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
     },
     {
-      "id": "89749fe500",
-      "term": "putin",
+      "id": "d014120916",
+      "term": "普京",
       "labelZh": "",
-      "score": 2.53,
+      "score": 2.51,
       "mentions": 4,
       "platformCount": 3,
       "platforms": [
@@ -814,20 +829,6 @@
         "Bluesky"
       ],
       "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo"
-    },
-    {
-      "id": "f1dda22f6c",
-      "term": "claude",
-      "labelZh": "",
-      "score": 2.45,
-      "mentions": 12,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
     },
     {
       "id": "43c2c72f66",
@@ -840,19 +841,6 @@
         "Mastodon"
       ],
       "url": "https://mastodon.social/@NellytheWillow/117223335364087804"
-    },
-    {
-      "id": "6e3604888c",
-      "term": "Python",
-      "labelZh": "",
-      "score": 2.27,
-      "mentions": 13,
-      "platformCount": 2,
-      "platforms": [
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://github.com/2akouwu/reverify"
     },
     {
       "id": "37651447bd",
@@ -869,33 +857,31 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/"
     },
     {
-      "id": "d5a63c95d4",
-      "term": "everything",
+      "id": "6e3604888c",
+      "term": "Python",
       "labelZh": "",
-      "score": 2.18,
-      "mentions": 5,
-      "platformCount": 4,
+      "score": 2.26,
+      "mentions": 13,
+      "platformCount": 2,
       "platforms": [
-        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://github.com/2akouwu/reverify"
+    },
+    {
+      "id": "0feca720e2",
+      "term": "nothing",
+      "labelZh": "",
+      "score": 2.25,
+      "mentions": 7,
+      "platformCount": 3,
+      "platforms": [
         "Mastodon",
         "GitHub Trending",
         "DEV Community"
       ],
-      "url": "https://packagemain.tech/p/gitignore-everything-by-default"
-    },
-    {
-      "id": "cae355b615",
-      "term": "please",
-      "labelZh": "",
-      "score": 2.17,
-      "mentions": 5,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "Lobsters"
-      ],
-      "url": "https://blog.hofstede.it/bespoke-a-programming-language-for-people-who-say-please/"
+      "url": "https://mastodon.social/@dangillmor/117222646052609496"
     },
     {
       "id": "a19ee5a9fd",
@@ -913,8 +899,8 @@
       "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
     },
     {
-      "id": "0d117e422a",
-      "term": "productivity",
+      "id": "377ba471e8",
+      "term": "生产力",
       "labelZh": "",
       "score": 2.16,
       "mentions": 7,
@@ -927,74 +913,17 @@
       "url": "https://eupolicy.social/@edri/117223176315639771"
     },
     {
-      "id": "4d0fb475b2",
-      "term": "internet",
-      "labelZh": "",
-      "score": 2.15,
-      "mentions": 5,
-      "platformCount": 2,
-      "platforms": [
-        "Hacker News",
-        "Mastodon"
-      ],
-      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
-    },
-    {
-      "id": "227f38db8f",
-      "term": "reading",
-      "labelZh": "",
-      "score": 2.14,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
-    },
-    {
-      "id": "e80721793c",
-      "term": "private",
-      "labelZh": "",
-      "score": 2.14,
-      "mentions": 5,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://www.space.com/space-exploration/launches-spacecraft/isar-aerospace-second-launch-norway-andoya-spaceport-spectrum-rocket"
-    },
-    {
-      "id": "1c8f09270f",
-      "term": "ask",
-      "labelZh": "",
-      "score": 2.13,
-      "mentions": 7,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "GitHub Trending",
-        "Lobsters"
-      ],
-      "url": "https://news.ycombinator.com/item?id=49533840"
-    },
-    {
-      "id": "92005ecf37",
-      "term": "help",
+      "id": "492b7ebef5",
+      "term": "太空",
       "labelZh": "",
       "score": 2.13,
       "mentions": 6,
       "platformCount": 2,
       "platforms": [
         "Mastodon",
-        "DEV Community"
+        "GitHub Trending"
       ],
-      "url": "https://mastodon.social/@greenpeace/117223279751733702"
+      "url": "https://ec.social-network.europa.eu/@EUCommission/117222919584567363"
     },
     {
       "id": "468da084e9",
@@ -1009,6 +938,74 @@
         "DEV Community"
       ],
       "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+    },
+    {
+      "id": "d617b5ef5a",
+      "term": "actually",
+      "labelZh": "",
+      "score": 2.1,
+      "mentions": 8,
+      "platformCount": 2,
+      "platforms": [
+        "DailyReview",
+        "DEV Community"
+      ],
+      "url": "https://www.techradar.com/cameras/photography/its-the-singer-not-the-song-wildlife-photographer-of-the-year-contender-sparks-huge-debate-about-whether-camera-gear-actually-matters-as-decade-old-nikon-dslr-captures-wild-shot"
+    },
+    {
+      "id": "0dbe529c4d",
+      "term": "social",
+      "labelZh": "",
+      "score": 2.09,
+      "mentions": 5,
+      "platformCount": 2,
+      "platforms": [
+        "DailyReview",
+        "Mastodon"
+      ],
+      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
+    },
+    {
+      "id": "dd27204535",
+      "term": "games",
+      "labelZh": "",
+      "score": 2.08,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon",
+        "Bluesky",
+        "GitHub Trending"
+      ],
+      "url": "https://mastodon.gamedev.place/@eniko/117223186440461742"
+    },
+    {
+      "id": "6347b76c94",
+      "term": "attacks",
+      "labelZh": "",
+      "score": 2.07,
+      "mentions": 4,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Mastodon",
+        "DEV Community"
+      ],
+      "url": "https://www.cnbc.com/2026/09/06/iran-us-response-oil-tanker-strikes.html"
+    },
+    {
+      "id": "f380cbcd9a",
+      "term": "architecture",
+      "labelZh": "",
+      "score": 2.03,
+      "mentions": 8,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://mastodon.social/@sylvia_ritter/117223765489388916"
     }
   ]
 }
