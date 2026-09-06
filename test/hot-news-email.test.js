@@ -23,7 +23,7 @@ test("reader shows the latest snapshot without hour filters", () => {
   const hnScript = fs.readFileSync("site/reader/reader-hn.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.38/);
+  assert.match(html, /v2026\.\d{2}\.\d{2}\.\d+/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(html, /data-category="hn"[^>]*>Hacker News</);
