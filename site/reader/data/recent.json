@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T01:36:38.010Z",
+  "updatedAt": "2026-09-06T02:00:42.002Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,24 +13,24 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 31.2,
+      "score": 30.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
-      "id": "71e5450ea43c617a",
+      "id": "5c697b153db7cf70",
       "category": "market",
-      "title": "Smart Reads of the Week: Singapore Dividend Stocks, Bank Returns, and Next 50 Opportunities",
-      "titleZh": "本周SMART读物：新加坡股息股、银行回报和未来50个机会",
-      "url": "https://sg.finance.yahoo.com/news/smart-reads-week-singapore-dividend-233000607.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQTl9xcmdlT240bnlyVW82Z2Y2b0xIYkduR054TXpYZHB1em42SG1hdWFiMC1iOW1tOXkxNU9fWUktajhURlBEUGYxVUQ1ODJ3LXE5Mk1GQU52NGRGN1huZXRMQW1WNWVadF9Sa2thamZYeUdRRGxHMFY4cDZpRnV1SkhaUEJ4VTNHUEVQZA?oc=5",
+      "title": "Are Local Banks Dangerously Overvalued? What DBS, OCBC, and UOB Aren’t Telling Shareholders",
+      "titleZh": "当地银行是否被危险地高估了？星展银行、华侨银行和大华银行没有告诉股东什么",
+      "url": "https://sg.finance.yahoo.com/news/dbs-record-high-buy-hold-033000120.html",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1tT0l6YTBpeUZpdk1RMlBrUXVEdnBtVkZ3bFVTMGY5Q1FmVjhCNmFRWmZVODNwX1BEaF9hWkRneXptQTN2S0tBNUdaVHp5UERoZS1Ld0gwakpnOVBaZmM2aWVKektOdDFJWmIyRlpsOWxIS2dsbGVZSHVqS18xZw?oc=5",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
-      "score": 49.3,
+      "publishedAt": "Sat, 05 Sep 2026 23:40:14 GMT",
+      "score": 48.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 43.5,
+      "score": 48.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "5a921f86ca004a2b",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 00:45:40 GMT",
-      "score": 42.2,
+      "score": 41.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -87,10 +87,10 @@
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 22:57:08 GMT",
-      "score": 62.5,
+      "publishedAt": "Sat, 05 Sep 2026 23:58:35 GMT",
+      "score": 63.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 41.7,
+      "score": 41,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "bb719505c8acd28c",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 23:47:00 GMT",
-      "score": 40,
+      "score": 39.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "323ec3cdc74d087d",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
-      "score": 56.2,
+      "score": 56.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 49.6,
+      "score": 49.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 56.8,
+      "score": 56.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 75.2,
+      "score": 74.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 44.7,
+      "score": 44.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "8a782c3a7897017c",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 52.9,
+      "score": 52.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -223,9 +223,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 GMT",
-      "score": 68.6,
+      "score": 54.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "50ac2ebb30523602",
@@ -237,10 +237,10 @@
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 01:18:11 GMT",
-      "score": 65,
+      "publishedAt": "Sun, 06 Sep 2026 01:51:54 GMT",
+      "score": 65.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "62a906606b29f2aa",
@@ -253,24 +253,24 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 20:26:00 GMT",
-      "score": 52.2,
+      "score": 63.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
-      "id": "0e7a1ed8f2c6c127",
+      "id": "79e92c2970dc6346",
       "category": "tech",
-      "title": "DEV7 Gang infection — same/similar infecti...",
-      "titleZh": "DEV7帮派感染—相同/相似感染…",
-      "url": "https://www.bleepingcomputer.com/forums/t/818461/dev7-gang-infection-samesimilar-infection-vector-as-other-cases/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWENac0FZZ3EyY2hqWjdQcTVHOU4zNENlV2dEWnEyQmFVcFA3LXNTQTMxSXJPV2Y1X3NVajZZRE5wVU9lMHQ5eGRIYldyVDVsTjJ5Rzlsem9jV1NFc01MSEJkRHhpa3UtQy14RmtGWVhVLVEzQTR6dkJCOXBWTnN5TVFWczhldnc0bmstZGp1UzNRcVQ1TktQRUxMZmR5Ukd2X0h1cUZJdWFTTmlNMDd0TF9ROA?oc=5",
+      "title": "mouse actions - External Hardware",
+      "titleZh": "鼠标操作-外部硬件",
+      "url": "https://www.bleepingcomputer.com/forums/t/818459/mouse-actions/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMicEFVX3lxTE00UnF4YnJZT21WQUhEMFhqQUs1OUNEOTdjSGRiRW1CX3ltXzMweDBVRkJlbGpoSG9oTFJyY09Hd3Fmc2tCVm82NWFBYU1Ya08yRmVPQ3VYaUpERzVrZG1vQVY2LXB2NURqZEVXMWlrRkY?oc=5",
       "source": "BleepingComputer",
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 42.7,
+      "publishedAt": "Sun, 06 Sep 2026 00:42:25 GMT",
+      "score": 49.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 34.7,
+      "score": 44.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 104.2,
-      "engagement": "77 points · 32 comments",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "score": 108.7,
+      "engagement": "104 points · 37 comments",
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -312,9 +312,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:39:02 GMT",
-      "score": 128.8,
+      "score": 128.2,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -327,9 +327,9 @@
       "sourceKey": "world-al-jazeera-1",
       "sourceOrder": 1,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 112.8,
+      "score": 112.3,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -342,9 +342,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 112.7,
+      "score": 112.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -357,39 +357,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 107.7,
+      "score": 107.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
-    },
-    {
-      "id": "7beb136ef81aaeb3",
-      "category": "world",
-      "title": "US and Iran trade retaliatory attacks on ships as conflict flares",
-      "titleZh": "美国和伊朗在冲突爆发时对船只进行报复性攻击",
-      "url": "https://www.bbc.com/news/articles/cj64rrne643o",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MR2lQUEVfWHpBVV9NQjVxS0x6WldUNHB1RzFWSzlDa0hYWm1wYVpxMEVhdkRiT1dCeGVlY2Y5d25uR3lQOEtxbW5CVG5VNDRhRmFvU2NLQlN5UQ?oc=5",
-      "source": "BBC News",
-      "sourceKey": "world-bbc-world-4",
-      "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 94.4,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
-    },
-    {
-      "id": "f66a6863d7bb34bf",
-      "category": "world",
-      "title": "Kremlin says Ukraine talks with US envoys were useful; no sign of breakthrough",
-      "titleZh": "克里姆林宫表示，乌克兰与美国特使的会谈是有用的；没有突破的迹象",
-      "url": "https://www.reuters.com/world/europe/putins-envoy-dmitriev-meet-witkoff-kushner-upon-their-arrival-moscow-sources-say-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPUkQ0OXgwdkJCdnZWd0VsRWZIZThHY3FrWG8xYXhVZ3FMVmJrZ2VzN1MtQmw5T3RhNTFMTzNaWk9jQVpTcnlvY0hNQmNYdWN4ZmJ4OXlEZDUtTFI5elpNc3RublQ4MWFBVjV5aTFsQnZOYW4tWDBncXBWRUgyUWNPNFFlcFpRc2R5eDZ2eFZTaWlobWEwVnRuOEVscm5RWDg3THR3QlNVdFoyQkQ3LVUtSXVWLWduNmJ6UjFXRFFJV0tweUdWbGhSeA?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-5",
-      "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 22:27:49 GMT",
-      "score": 93.9,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "d4d6b0ea707495f0",
@@ -399,12 +369,27 @@
       "url": "https://www.reuters.com/world/middle-east/explosions-heard-near-irans-kharg-island-gulf-origin-unknown-fars-news-says-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQc1hXR2o4Smo3UnZmTTJmM2V4bldFYkpPekNpM2NhUGozMnVKcWZWOHNyUDdmSm5YR2dWT3FRd0FHWnM1Nlc2c3pxSk1XNVdlM1VNb0VyOVRpRG9vMnMyenFVbFVNdERKVEpyeVAtQ0poemwzNTdkYkF4VENfUzhVd1pkQ2djaldJdUZFVThZVktLdXd3anlpZlBCVWpuMi1lTUw1TFA1anU1YWVEeEhIdTI1Q05zOVJqcUNnZkRTc1JxdU82RVRUSw?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 21:37:37 GMT",
-      "score": 92.3,
+      "sourceKey": "world-reuters-world-4",
+      "sourceOrder": 4,
+      "publishedAt": "Sat, 05 Sep 2026 23:09:21 GMT",
+      "score": 93.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
+    },
+    {
+      "id": "7beb136ef81aaeb3",
+      "category": "world",
+      "title": "US and Iran trade retaliatory attacks on ships as conflict flares",
+      "titleZh": "美国和伊朗在冲突爆发时对船只进行报复性攻击",
+      "url": "https://www.bbc.com/news/articles/cj64rrne643o",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MR2lQUEVfWHpBVV9NQjVxS0x6WldUNHB1RzFWSzlDa0hYWm1wYVpxMEVhdkRiT1dCeGVlY2Y5d25uR3lQOEtxbW5CVG5VNDRhRmFvU2NLQlN5UQ?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-5",
+      "sourceOrder": 5,
+      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
+      "score": 93.9,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "7470701fe158400f",
@@ -414,12 +399,12 @@
       "url": "https://www.reuters.com/world/middle-east/fuel-tanker-explosion-after-traffic-accident-kills-10-western-iran-state-media-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxORW1OZWlZUzItUmdsYlhnaXMzU2djTWZBVERaNG4zbzhvZTcxaWtPaGJWamowRDgwTTZRX3Ftekl0bDgxMkJEdTZJbmVzei1ya245RGdiUEx4cHltelZzVTdZVlVhVUEza0dNZ0hqbFR1cTNYMHllLTAwRGdxVVVOazdEb1poa3lyTld2V0ZxR0VHZUNONVJlWFlGaXhKU0ZkamxkZ1N4Vkt4N0YzVmhDM3RYWnlmeE9FbVZzeWFZT0pLaFlwalpnQUVrRDk?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 89.8,
+      "score": 89.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "0cc200b64aa9af71",
@@ -429,12 +414,12 @@
       "url": "https://www.reuters.com/world/middle-east/us-ambassador-visits-palestinian-town-amid-rise-west-bank-settler-violence-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQcHpLU3NTaHlMWHZGRnJIYmY5RGkzZkNPbnJyVXJLSmN4M3NyMjhZaUlzbDFURzZ4VW1LOTc2SFhqc05SMURsMV84dHZhcHhLcUhlM1AyNHlyWmVlYmdSbWp0Vl9xbjBqSGllSjlCVGxySDJRMl95ZFI4V1FwVjAwT2tzWWNWdjJqWnpKMjA3V1c2QzkzWFphemhVdWRIRW53YWNjNFlkMGlMOTZMZTc5NXVtZ1NKblFMVUZObzYtSEpsODAxNDlr?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 22:29:12 GMT",
-      "score": 89.6,
+      "score": 89.1,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -444,12 +429,27 @@
       "url": "https://www.reuters.com/world/china/chinese-national-rescued-nepal-tunnel-day-after-2-nepalis-pulled-out-alive-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOaG1aeTdsTDc5NHp0U0J2UFV0eGtnY1k4TjBqT3FzS3hmM3o1Um1hRW1Xa0UtcmV3YlRFZTVROFVVRVBYY2t5MF9WekJzLXZMdWJLa1ZYeWpIZmpjcC1Vamt3bzJvd21WeWFnTjB2QWJqXzA5bWM5dHJhLTNwLXRDMnJ0SVNqUmo4cjBQYXNjWi15aURhVTE4NXhtVHJFcVJxeUlVZVRERUlXa1dZY01PVGpmclFnMkpldFZGQkdXdw?oc=5",
       "source": "Reuters World",
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
+      "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
+      "score": 88.2,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
+    },
+    {
+      "id": "8ed0f82e8cf98c3f",
+      "category": "world",
+      "title": "Berlin launches crisis response after hackers publish stolen data",
+      "titleZh": "在黑客发布被盗数据后，柏林启动危机应对措施",
+      "url": "https://www.reuters.com/world/berlin-launches-crisis-response-after-hackers-publish-stolen-data-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMWpiamMtMTlEdUI0amU3Wjk2Rkt1SGdtVkFOZXRtVDY0ZXhXNTJFQVJBZnB0WEowZjFtM1luUUl5dnZnODFCTEV1ai1fR2dMZ1VmWl9BaUhOM2NNakhQWDVaV291ejU4YXpZcy1hMHVaZksydW90c25HOFp2UHlLbXU0SlVMcGJMTzF0VzBNZlZack40WjJUaGREY3g3TVBuZm5EWHFaNTRxdk0?oc=5",
+      "source": "Reuters World",
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
-      "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 88.8,
+      "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
+      "score": 86.3,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -463,7 +463,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 370232,
       "engagement": "370,232 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "5e7c16d375405632",
@@ -477,7 +477,7 @@
       "publishedAt": "2026-09-05T04:00:39Z",
       "score": 264091,
       "engagement": "264,091 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -491,7 +491,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 168608,
       "engagement": "168,608 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -505,7 +505,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 152543,
       "engagement": "152,543 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -519,7 +519,7 @@
       "publishedAt": "2026-09-05T07:00:12Z",
       "score": 118383,
       "engagement": "118,383 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -533,7 +533,7 @@
       "publishedAt": "2026-09-05T07:09:16Z",
       "score": 97826,
       "engagement": "97,826 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "c4eca05ec613e3bc",
@@ -547,7 +547,7 @@
       "publishedAt": "2026-09-05T04:01:43Z",
       "score": 96546,
       "engagement": "96,546 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -561,7 +561,7 @@
       "publishedAt": "2026-09-05T16:15:34Z",
       "score": 66122,
       "engagement": "66,122 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "77bae84d54dfa79b",
@@ -575,7 +575,7 @@
       "publishedAt": "2026-09-05T11:08:47Z",
       "score": 65032,
       "engagement": "65,032 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     },
     {
       "id": "dcffa09b52e13268",
@@ -589,7 +589,7 @@
       "publishedAt": "2026-09-05T13:14:17Z",
       "score": 54843,
       "engagement": "54,843 次观看",
-      "fetchedAt": "2026-09-06T01:36:38.010Z"
+      "fetchedAt": "2026-09-06T02:00:42.002Z"
     }
   ]
 }
