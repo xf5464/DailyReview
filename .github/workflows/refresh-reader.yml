@@ -42,6 +42,7 @@ jobs:
           npm test
           node --check scripts/refresh-reader-news.js
           node --check scripts/refresh-reader-aggregated.js
+          node --check scripts/add-hacker-news-top10.js
           node --check scripts/patch-reader-event-ranking.js
 
       - name: Fetch and aggregate current headlines
@@ -53,13 +54,14 @@ jobs:
         run: |
           for attempt in 1 2 3; do
             if node scripts/refresh-reader-aggregated.js; then
-              exit 0
+              break
             fi
             if [[ "$attempt" == "3" ]]; then
               exit 1
             fi
             sleep $((attempt * 10))
           done
+          node scripts/add-hacker-news-top10.js
 
       - name: Save the reader news archive
         run: |
