@@ -1,0 +1,299 @@
+const fs = require('node:fs');
+const {
+  NEWS_SOURCES,
+  addChineseTranslations,
+  archivedGoogleNewsUrls,
+  archivedSourceItems,
+  archivedTitleTranslations,
+  cleanMarkdownTitle,
+  collectHotNews,
+  decodeXml,
+  isPaywalledItem,
+  isSimilarTitle,
+  parseRssItems,
+  publishedDateFromHtml,
+} = require('./send-hot-news-email');
+const { saveNewsArchive } = require('./hot-news-archive');
+const { collectSocialWordCloud } = require('./social-word-cloud');
+
+const USER_AGENT = 'DailyReview/2.0 (+https://github.com/xf5464/DailyReview)';
+const MAX_ITEMS = 10;
+const FEED_FALLBACK_MAX_AGE_HOURS = 72;
+const TECH_SECTION_OVERRIDES = new Map([
+  ['techradar', 'https://www.techradar.com/computing'],
+]);
+
+function environmentFlag(value) {
+  return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase());
+}
+
+function hoursOld(value, now = Date.now()) {
+  const timestamp = Date.parse(value);
+  return Number.isFinite(timestamp) ? Math.max(0, (now - timestamp) / 3_600_000) : 999;
+}
+
+async function fetchText(url, timeout = 15_000) {
+  const target = new URL(url);
+  target.searchParams.set('_dr', String(Date.now()));
+  const response = await fetch(target, {
+    redirect: 'follow',
+    cache: 'no-store',
+    headers: {
+      'user-agent': USER_AGENT,
+      accept: 'text/html,application/xhtml+xml,application/xml,text/xml;q=0.9,*/*;q=0.8',
+      'cache-control': 'no-cache',
+      pragma: 'no-cache',
+    },
+    signal: AbortSignal.timeout(timeout),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.text();
+}
+
+function stripTags(value = '') {
+  return decodeXml(String(value)).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function sourceHomepage(source, category) {
+  if (category === 'tech' && TECH_SECTION_OVERRIDES.has(source.key)) return TECH_SECTION_OVERRIDES.get(source.key);
+  return source.homepage;
+}
+
+function isClearlyNonTechHeadline(title, url = '') {
+  const text = `${title} ${url}`.toLowerCase();
+  return /\b(season\s*\d+|episode\s*\d+|release date|trailer|movie|film|tv series|tv show|prime video series|netflix series|hulu series|disney\+ series)\b/.test(text)
+    || (/\/streaming\//.test(text) && /\b(season|episode|series|movie|film)\b/.test(text));
+}
+
+function isAcceptableHeadline(category, title, url) {
+  if (!title || !url) return false;
+  if (category === 'tech' && isClearlyNonTechHeadline(title, url)) return false;
+  return true;
+}
+
+function parseSectionHeadline(content, source, category, homepage) {
+  const markdownLinks = [...String(content || '').matchAll(/\[([^\]]+)\]\(([^\s)]+)[^)]*\)/g)]
+    .map((match) => [match[1], match[2]]);
+  const htmlLinks = [...String(content || '').matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => [stripTags(match[2]), match[1]]);
+  const pattern = source.articlePattern ? new RegExp(source.articlePattern, 'i') : null;
+  const blocked = /^(home|news|markets?|technology|tech|read more|view all|latest|subscribe|sign in|log in)$/i;
+  for (const [rawTitle, rawUrl] of [...markdownLinks, ...htmlLinks]) {
+    const title = cleanMarkdownTitle(rawTitle);
+    if (title.length < 15 || title.length > 240 || blocked.test(title)) continue;
+    try {
+      const url = new URL(decodeXml(rawUrl), homepage);
+      const host = url.hostname.toLowerCase().replace(/^www\./, '');
+      if (!(source.hosts || []).some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
+      if (pattern && !pattern.test(url.pathname)) continue;
+      url.hash = '';
+      if (!isAcceptableHeadline(category, title, url.toString())) continue;
+      return { title, url: url.toString() };
+    } catch {}
+  }
+  throw new Error(`${source.name} section page returned no usable lead story`);
+}
+
+async function fetchOfficialFeed(source, category, now) {
+  if (!source.headlineFeed) return [];
+  const xml = await fetchText(source.headlineFeed, 15_000);
+  return parseRssItems(xml, category, 0)
+    .filter((item) => !isPaywalledItem(item))
+    .filter((item) => isAcceptableHeadline(category, item.title, item.url))
+    .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= FEED_FALLBACK_MAX_AGE_HOURS)
+    .sort((left, right) => Date.parse(right.publishedAt || 0) - Date.parse(left.publishedAt || 0));
+}
+
+async function readSectionLead(source, category) {
+  const homepage = sourceHomepage(source, category);
+  let firstError;
+  try {
+    return parseSectionHeadline(await fetchText(homepage, 15_000), source, category, homepage);
+  } catch (error) {
+    firstError = error;
+  }
+  const target = new URL(homepage);
+  const jinaUrl = `https://r.jina.ai/http://${target.host}${target.pathname}${target.search}`;
+  try {
+    return parseSectionHeadline(await fetchText(jinaUrl, 20_000), source, category, homepage);
+  } catch (error) {
+    throw new Error(`${firstError?.message || 'section fetch failed'}; reader fallback: ${error.message}`);
+  }
+}
+
+async function publishedAtForLead(lead, source, category, now) {
+  try {
+    const publishedAt = publishedDateFromHtml(await fetchText(lead.url, 10_000));
+    if (publishedAt) return publishedAt;
+  } catch {}
+  try {
+    const feedItems = await fetchOfficialFeed(source, category, now);
+    const exact = feedItems.find((item) => item.url === lead.url);
+    const similar = exact || feedItems.find((item) => isSimilarTitle(item.title, lead.title));
+    if (similar?.publishedAt) return similar.publishedAt;
+  } catch {}
+  return '';
+}
+
+function freshMetadata(item, now) {
+  const stamp = new Date(now).toISOString();
+  return { ...item, fetchedAt: stamp, sourceUpdatedAt: stamp, isCached: false };
+}
+
+function cachedMetadata(item) {
+  const stamp = item?.sourceUpdatedAt || item?.fetchedAt || item?.pushedAt || '';
+  return { ...item, fetchedAt: item?.fetchedAt || stamp, sourceUpdatedAt: stamp, isCached: true };
+}
+
+function normalizeBaselineFreshness(item, now) {
+  if (item?.fetchedAt || item?.sourceUpdatedAt) return cachedMetadata(item);
+  return freshMetadata(item, now);
+}
+
+function polishChineseTitle(item) {
+  let titleZh = decodeXml(String(item.titleZh || item.title || '')).trim()
+    .replace(/\s+([，。！？：；、）】》])/g, '$1')
+    .replace(/([（【《])\s+/g, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/(\d+(?:\.\d+)?)\s*\$/g, '$$$1')
+    .replace(/\$\s+(\d)/g, '$$$1');
+  if (/\bagents?\b/i.test(item.title || '')) titleZh = titleZh.replace(/特工|代理人|代理/g, '智能体');
+  if (/\bstocks?\b/i.test(item.title || '')) titleZh = titleZh.replace(/库存/g, '股票');
+  if (/\bsolid[- ]state drive\b|\bssd\b/i.test(item.title || '')) titleZh = titleZh.replace(/固态驱动器/g, '固态硬盘');
+  return { ...item, titleZh };
+}
+
+async function translateItems(items, knownTranslations) {
+  const prepared = items.map((item) => ({
+    ...item,
+    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '',
+  }));
+  const translated = await addChineseTranslations(prepared);
+  return translated.map(polishChineseTitle);
+}
+
+async function fetchSectionSource(source, category, sourceOrder, now) {
+  const lead = await readSectionLead(source, category);
+  const publishedAt = await publishedAtForLead(lead, source, category, now);
+  return freshMetadata({
+    category,
+    title: lead.title,
+    url: lead.url,
+    source: source.name,
+    sourceKey: source.key,
+    sourceOrder,
+    publishedAt,
+    feedRank: 0,
+    score: 0,
+    engagement: '',
+  }, now);
+}
+
+async function collectSection(category, now, previousBySource, baselineBySource, knownTranslations) {
+  const results = [];
+  for (let sourceOrder = 0; sourceOrder < NEWS_SOURCES[category].length; sourceOrder += 1) {
+    const source = NEWS_SOURCES[category][sourceOrder];
+    if (source.special) {
+      const baseline = baselineBySource.get(source.key) || previousBySource.get(source.key);
+      if (!baseline) throw new Error(`${source.name} has no usable current or cached item`);
+      results.push(normalizeBaselineFreshness({ ...baseline, category, source: source.name, sourceKey: source.key, sourceOrder }, now));
+      continue;
+    }
+    try {
+      results.push(await fetchSectionSource(source, category, sourceOrder, now));
+      continue;
+    } catch (pageError) {
+      try {
+        const [feedItem] = await fetchOfficialFeed(source, category, now);
+        if (feedItem) {
+          results.push(freshMetadata({
+            ...feedItem,
+            category,
+            source: source.name,
+            sourceKey: source.key,
+            sourceOrder,
+            engagement: '',
+          }, now));
+          console.warn(`${source.name} section page failed; used its official feed: ${pageError.message}`);
+          continue;
+        }
+      } catch {}
+      const fallback = previousBySource.get(source.key) || baselineBySource.get(source.key);
+      if (!fallback) throw new Error(`${source.name} failed and has no cached fallback: ${pageError.message}`);
+      results.push(cachedMetadata({ ...fallback, category, source: source.name, sourceKey: source.key, sourceOrder }));
+      console.warn(`${source.name} failed; kept its previous cached headline: ${pageError.message}`);
+    }
+  }
+  if (results.length !== MAX_ITEMS) throw new Error(`${category} returned ${results.length}/${MAX_ITEMS} source headlines`);
+  return translateItems(results, knownTranslations);
+}
+
+function readArchiveItems(filePath) {
+  try {
+    const archive = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return Array.isArray(archive.items) ? archive.items : [];
+  } catch {
+    return [];
+  }
+}
+
+async function main() {
+  const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || 'site/reader/data/recent.json').trim();
+  const now = Date.now();
+  const knownTranslations = archivedTitleTranslations(archivePath);
+  const knownGoogleNewsUrls = archivedGoogleNewsUrls(archivePath);
+  const previousBySource = archivedSourceItems(archivePath);
+
+  const baseline = await collectHotNews(0, now, knownTranslations, knownGoogleNewsUrls, previousBySource);
+  const baselineBySource = new Map(
+    [...baseline.tech, ...baseline.market, ...baseline.world, ...baseline.youtube]
+      .filter((item) => item.sourceKey)
+      .map((item) => [item.sourceKey, item]),
+  );
+
+  const [tech, market] = await Promise.all([
+    collectSection('tech', now, previousBySource, baselineBySource, knownTranslations),
+    collectSection('market', now, previousBySource, baselineBySource, knownTranslations),
+  ]);
+  const world = (baseline.world || []).map((item) => normalizeBaselineFreshness(item, now)).map(polishChineseTitle);
+  const youtube = (baseline.youtube || []).map((item) => normalizeBaselineFreshness(item, now)).map(polishChineseTitle);
+
+  let trends = baseline.trends || [];
+  try {
+    const cloud = await collectSocialWordCloud([...tech, ...market, ...world], now);
+    trends = cloud.trends;
+  } catch (error) {
+    console.warn(`Event cloud refresh failed; kept the baseline cloud: ${error.message}`);
+  }
+
+  const cachedCount = [...tech, ...market, ...world, ...youtube].filter((item) => item.isCached).length;
+  const news = {
+    tech,
+    market,
+    world,
+    youtube,
+    trends,
+    failureCount: cachedCount,
+    fetchedAt: new Date(now).toISOString(),
+  };
+  const archive = saveNewsArchive(news, archivePath, now, (item) => item.category === 'youtube' || !isPaywalledItem(item));
+  console.log(`Saved current reader snapshot: ${archive.items.length} items; cached fallbacks=${cachedCount}; updated=${archive.updatedAt}.`);
+
+  if (!environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY)) {
+    console.log('refresh-reader-news.js is intended for reader refresh mode; no email was sent.');
+  }
+}
+
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error.stack || error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = {
+  isClearlyNonTechHeadline,
+  parseSectionHeadline,
+  polishChineseTitle,
+  sourceHomepage,
+};
