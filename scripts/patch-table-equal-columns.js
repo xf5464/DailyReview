@@ -5,7 +5,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const stylesPath = path.join(projectRoot, 'dist', 'styles.css');
 
 let styles = fs.readFileSync(stylesPath, 'utf8');
-const marker = '/* Overall table mobile layout: hide frequency/action; keep chart/latest equal width. */';
+const marker = '/* Overall table mobile layout: keep only chart/latest columns at equal width. */';
 
 if (!styles.includes(marker)) {
   styles += [
@@ -22,6 +22,8 @@ if (!styles.includes(marker)) {
     '    table-layout: fixed;',
     '  }',
     '',
+    '  .overall-table-view th:nth-child(3),',
+    '  .overall-table-view td:nth-child(3),',
     '  .overall-table-view th:nth-child(4),',
     '  .overall-table-view td:nth-child(4),',
     '  .overall-table-view th:nth-child(5),',
@@ -33,12 +35,7 @@ if (!styles.includes(marker)) {
     '  .overall-table-view td:first-child,',
     '  .overall-table-view th:nth-child(2),',
     '  .overall-table-view td:nth-child(2) {',
-    '    width: 35%;',
-    '  }',
-    '',
-    '  .overall-table-view th:nth-child(3),',
-    '  .overall-table-view td:nth-child(3) {',
-    '    width: 30%;',
+    '    width: 50%;',
     '  }',
     '}',
     '',
@@ -46,4 +43,4 @@ if (!styles.includes(marker)) {
 }
 
 fs.writeFileSync(stylesPath, styles, 'utf8');
-console.log('Patched mobile overall table: hidden frequency/action columns; chart/latest remain equal width.');
+console.log('Patched mobile overall table to keep only chart/latest columns at 50/50 width.');
