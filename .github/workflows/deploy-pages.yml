@@ -69,6 +69,11 @@ jobs:
           ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: npm run build
 
+      - name: Fingerprint reader assets
+        run: |
+          node --check scripts/fingerprint-reader-assets.js
+          node scripts/fingerprint-reader-assets.js
+
       - name: Check forecast alert conditions
         if: github.event_name == 'workflow_dispatch' && (inputs.run_alert_check || inputs.test_notifications)
         id: forecast
