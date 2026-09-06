@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T00:30:57.781Z",
+  "updatedAt": "2026-09-06T01:00:42.006Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,24 +13,24 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 32.3,
+      "score": 31.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
-      "id": "4fb2d78b55b16a55",
+      "id": "71e5450ea43c617a",
       "category": "market",
-      "title": "US military hits 3 Iranian oil tankers after saying Navy warships were targeted with missiles",
-      "titleZh": "美国军方称海军战舰遭到导弹袭击后击中3艘伊朗油轮",
-      "url": "https://ca.finance.yahoo.com/news/us-military-hits-3-iranian-151412221.html",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxObjRPOGhuaVZOck1FeWlMYjdLYjhDdEVjY1Q0M2FiV2NwRDBHQ2xfR1JtUFk5SVlSQ1ZIRFBrYXdoeENKWm9MbVZCU0RaR0c4U3gzWUtjVHVCcTNkRnF1a2NPYXByR3FzWE5CdzdXaVhDYlZ6OHdCWkhsY2xYQ3VJLQ?oc=5",
+      "title": "Smart Reads of the Week: Singapore Dividend Stocks, Bank Returns, and Next 50 Opportunities",
+      "titleZh": "本周SMART读物：新加坡股息股、银行回报和未来50个机会",
+      "url": "https://sg.finance.yahoo.com/news/smart-reads-week-singapore-dividend-233000607.html",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQTl9xcmdlT240bnlyVW82Z2Y2b0xIYkduR054TXpYZHB1em42SG1hdWFiMC1iOW1tOXkxNU9fWUktajhURlBEUGYxVUQ1ODJ3LXE5Mk1GQU52NGRGN1huZXRMQW1WNWVadF9Sa2thamZYeUdRRGxHMFY4cDZpRnV1SkhaUEJ4VTNHUEVQZA?oc=5",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "Sat, 05 Sep 2026 15:14:12 GMT",
-      "score": 46,
+      "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
+      "score": 49.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 44,
+      "score": 44.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "471ea4a5746f88c6",
@@ -73,9 +73,9 @@
       "sourceKey": "investing",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 19:21:27 GMT",
-      "score": 56.8,
+      "score": 56.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 22:57:08 GMT",
-      "score": 63.6,
+      "score": 63.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 41.1,
+      "score": 42.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "8108d90c6c101e16",
@@ -118,24 +118,24 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 22:56:56 GMT",
-      "score": 38.4,
+      "score": 37.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
-      "id": "c686985f2d1ee36a",
+      "id": "323ec3cdc74d087d",
       "category": "market",
-      "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
-      "titleZh": "苹果新任首席执行官约翰·特纳斯（ John Ternus ）领导下的首款iPhone于9月推出 9.现在是时候买入股票了。",
-      "url": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPTzlWVnBZRmZFVzBjOUoxMmV2XzRrSjVRTkhyeWh6QWU1cUpDckZqWkhVMW5CbExucEZJdkd3UmViM0VXakowNG9qeGY4S1pXeUxnT1VpQmxpcWtDRmpKYUxJRHhNc0ItXzdMS1VWNWJCWENWQXJ5ZjF3NUNVZkZVdFZJdDh5WlM3VGdndWZCS2JoV0d0bXc?oc=5",
+      "title": "3 Nuclear Stocks to Buy With $2,000 After One Fell 83%",
+      "titleZh": "一次下跌83%后以2000 $购买3只核股",
+      "url": "https://www.fool.com/investing/2026/09/05/3-nuclear-stocks-to-buy-with-usd2-000-after-one-fell-83/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPTlU1Z3dGbGJMMjd6RFZyZW55Y3FVa0VYRjNiQW05dzdEc0dYSmI4bDkxM3pVY2NNUFVwbnpoRDBXV2pvSUJXamlZVS01QXNTcG1PRjB0Z3p4SG82bkdBZ0RCMFZhNmQyYmk1c0tBY3N3Ul9pM25rY0Vfc1F4c0gyMVlhbGN0QUNtLUtjbHRQN3NzNllfMVRCNWNWSzRsQlU?oc=5",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 19:15:00 GMT",
-      "score": 50,
+      "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
+      "score": 57.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 50.7,
+      "score": 50.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 57.9,
+      "score": 57.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 76.3,
+      "score": 75.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 45.7,
+      "score": 45.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "8a782c3a7897017c",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 53.9,
+      "score": 53.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 GMT",
-      "score": 63.4,
+      "score": 62.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
-      "id": "0c81aa9ad82d9367",
+      "id": "7d7bec08c2641a2a",
       "category": "tech",
-      "title": "The best Labor Day 2026 TV deals: Samsung, LG, and more",
-      "titleZh": "2026年最佳劳动节电视优惠：三星、LG等",
-      "url": "https://www.zdnet.com/home-and-office/home-entertainment/best-labor-day-tv-deals-2026-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNMnpmWm5xWUdWTVppMzR1LWdNQlJqalM0UUhqQWdOckI0dFAzVUotNFd6TW5vSllZMzg4cHYxT040TUhuV0QzYk9sb1E3N1ZLRFlneHZUZFZKeTlxWlNPajJ2YXEzNGJySVZUeEc2LS1sVkswTGxXeDRwSjdWbTNOZ3lNUDhXaWVrcGNvUXB4cXdkdw?oc=5",
+      "title": "The best Labor Day Costco deals 2026: TVs, smartwatches, Apple devices, and more",
+      "titleZh": "Costco 2026年最佳劳动节优惠：电视、智能手表、苹果设备等",
+      "url": "https://www.zdnet.com/home-and-office/best-labor-day-costco-deals-2026-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1LTWt1RGRIZlF3LU4wanludW9QR3JIZG5LRzUwc3VIeFNhbjlkcVlHY3dYVWpLVFo5Qm1ja2J5WVh1cVpZWmNxYWJrOXAyMC1TUjdUYWUzemZ6U1hCME1FWEpqcUR0bDB0aTQwQ3Njd25iZUc4MzY4a0ttVXd4Zw?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sat, 05 Sep 2026 23:59:36 GMT",
-      "score": 57.3,
+      "publishedAt": "Sun, 06 Sep 2026 00:11:36 GMT",
+      "score": 67.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "62a906606b29f2aa",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 20:26:00 GMT",
-      "score": 53.3,
+      "score": 53.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 43.8,
+      "score": 43.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 45.8,
+      "score": 45.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 75.9,
-      "engagement": "22 points · 4 comments",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "score": 94.4,
+      "engagement": "48 points · 17 comments",
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-06T00:30:57.781Z"
+      "fetchedAt": "2026-09-06T01:00:42.006Z"
     }
   ]
 }
