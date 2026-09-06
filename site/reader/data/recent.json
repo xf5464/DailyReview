@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T01:30:44.458Z",
+  "updatedAt": "2026-09-06T01:36:38.010Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 31.3,
+      "score": 31.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "71e5450ea43c617a",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
-      "score": 49.4,
+      "score": 49.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 43.6,
+      "score": 43.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,7 +60,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "5a921f86ca004a2b",
@@ -75,7 +75,7 @@
       "publishedAt": "Sun, 06 Sep 2026 00:45:40 GMT",
       "score": 42.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 22:57:08 GMT",
-      "score": 62.6,
+      "score": 62.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,24 +103,24 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 41.8,
+      "score": 41.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "8108d90c6c101e16",
+      "id": "bb719505c8acd28c",
       "category": "market",
-      "title": "Kroger, Publix, and regional grocery chains face pricing problem",
-      "titleZh": "Kroger、Publix和区域生鲜杂货连锁店面临定价问题",
-      "url": "https://www.thestreet.com/retail/kroger-publix-and-regional-grocery-chains-face-pricing-problem",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORDhwaUM5QURpRVYxZi00WmdEaS0ydV9QY3JBQllJWnBOZTZQSHg1MVFFcWczaUNhTGdYak5yLWNtb3FucTYyLVQ2a0JPUVpfWDBlb01BYWVPWmZUekdCNk5fbG1HSndRdkZMQjVaNjRLUUZVVGNHRnNoNzlwQ2Z3aWEwck5NRTBndHpTTHdJOEQtemxEVEd0M3ZQcw?oc=5",
+      "title": "Fidelity 401(k) balances signal good news for American retirees",
+      "titleZh": "富达401 (k)余额给美国退休人员带来好消息",
+      "url": "https://www.thestreet.com/retirement/fidelity-401k-balances-signal-good-news-for-american-retirees",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZWFLNDQ1MTQycXRkUTdPMmhhd2NjY2pJU1RxQzNGbVlmWFZUZnQ3enBBSHdKWlJCV1RzT1E1YU10eVpGY0xuNXZ0UUVWS0VQMmx4TURtZE84eHNnb2F3TndPOHFzaXdMend3ei1fZTdSVmtZVzYzN0lxM0MxSld2aDNhZEJibE9pT21aS2xqQVloVW8yZVhmNGF4SVdOb28?oc=5",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sat, 05 Sep 2026 22:56:56 GMT",
-      "score": 37.4,
+      "publishedAt": "Sat, 05 Sep 2026 23:47:00 GMT",
+      "score": 40,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "323ec3cdc74d087d",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
-      "score": 56.3,
+      "score": 56.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 49.7,
+      "score": 49.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 56.9,
+      "score": 56.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 75.3,
+      "score": 75.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 44.8,
+      "score": 44.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "8a782c3a7897017c",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 53,
+      "score": 52.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -223,9 +223,9 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 GMT",
-      "score": 68.7,
+      "score": 68.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "50ac2ebb30523602",
@@ -238,9 +238,9 @@
       "sourceKey": "zdnet",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 01:18:11 GMT",
-      "score": 65.1,
+      "score": 65,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "62a906606b29f2aa",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 20:26:00 GMT",
-      "score": 52.3,
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 42.8,
+      "score": 42.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 34.8,
+      "score": 34.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,149 +297,299 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 102.5,
-      "engagement": "73 points · 27 comments",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "score": 104.2,
+      "engagement": "77 points · 32 comments",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "ef437131ff88001b",
-      "category": "youtube",
-      "title": "Jobs Report Crushes Expectations... Stock Market Hates It",
-      "titleZh": "就业报告压低预期...股市讨厌它",
-      "url": "https://www.youtube.com/watch?v=kLw0TWFKxT4",
-      "source": "ClearValue Tax",
-      "sourceKey": "youtube-kLw0TWFKxT4",
+      "id": "cb16d9b868091db6",
+      "category": "world",
+      "title": "Russia-Ukraine war: US envoys meet Putin in Moscow for Ukraine talks",
+      "titleZh": "俄乌战争：美国特使在莫斯科会晤普京参加乌克兰会谈",
+      "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
-      "publishedAt": "2026-09-04T20:08:42Z",
-      "score": 245867,
-      "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 21:39:02 GMT",
+      "score": 128.8,
+      "engagement": "3家来源交叉确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "7b1113c85eade454",
-      "category": "youtube",
-      "title": "車行銷量掉 70%，Tesla 交車卻創新高｜加州車行老闆：原廠正在逼死車行",
-      "titleZh": "車行銷量掉 70%，Tesla 交車卻創新高｜加州車行老闆：原廠正在逼死車行",
-      "url": "https://www.youtube.com/watch?v=iBgKWE1WBKA",
-      "source": "Terry Chen 泰瑞",
-      "sourceKey": "youtube-iBgKWE1WBKA",
+      "id": "6bca4b2d5e9c7663",
+      "category": "world",
+      "title": "UN votes to adopt new world map that reflects Africa’s true size",
+      "titleZh": "联合国投票通过反映非洲真实规模的新世界地图",
+      "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
+      "source": "Al Jazeera",
+      "sourceKey": "world-al-jazeera-1",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-04T10:00:25Z",
-      "score": 232331,
-      "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
+      "score": 112.8,
+      "engagement": "5家来源交叉确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "2790a991b4c3e318",
-      "category": "youtube",
-      "title": "Riding in the Tesla Cybercab for the First Time! 😳🤯",
-      "titleZh": "首次乘坐特斯拉网络驾驶室！ 😳🤯",
-      "url": "https://www.youtube.com/watch?v=DwF2ouJm-FI",
-      "source": "Tesla Flex",
-      "sourceKey": "youtube-DwF2ouJm-FI",
+      "id": "e08fd24cc8f863ce",
+      "category": "world",
+      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
+      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
+      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
-      "publishedAt": "2026-09-04T15:07:38Z",
-      "score": 214411,
-      "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
+      "score": 112.7,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "2ad32c2e9c6e3434",
-      "category": "youtube",
-      "title": "Tesla Taksiciliği Bitirebilir Mi?  #cüneytözdemir #gündem #haber  #canlıyayın  #fyp  #keşfet",
-      "titleZh": "特斯拉可以完成出租车驾驶吗？ # cüneytözdemir # agenda # news # livestream # fyp # explore",
-      "url": "https://www.youtube.com/watch?v=q2yH8cb-How",
-      "source": "Cüneyt Özdemir",
-      "sourceKey": "youtube-q2yH8cb-How",
+      "id": "2123dae601a63c42",
+      "category": "world",
+      "title": "Putin says US-Russia contacts beneficial as talks begin with Witkoff and Kushner",
+      "titleZh": "普京表示，随着与维特科夫和库什纳会谈的开始，美俄接触是有益的",
+      "url": "https://www.reuters.com/world/europe/putin-says-us-russia-contacts-beneficial-talks-begin-with-witkoff-kushner-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
-      "publishedAt": "2026-09-04T16:00:16Z",
-      "score": 213840,
-      "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
+      "score": 107.7,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "39102722396f6ece",
-      "category": "youtube",
-      "title": "The Latest Nvidia GPU Driver is BAD",
-      "titleZh": "最新的Nvidia GPU驱动程序很糟糕",
-      "url": "https://www.youtube.com/watch?v=hj8rCr2lYCY",
-      "source": "Zach's Tech Turf",
-      "sourceKey": "youtube-hj8rCr2lYCY",
+      "id": "7beb136ef81aaeb3",
+      "category": "world",
+      "title": "US and Iran trade retaliatory attacks on ships as conflict flares",
+      "titleZh": "美国和伊朗在冲突爆发时对船只进行报复性攻击",
+      "url": "https://www.bbc.com/news/articles/cj64rrne643o",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MR2lQUEVfWHpBVV9NQjVxS0x6WldUNHB1RzFWSzlDa0hYWm1wYVpxMEVhdkRiT1dCeGVlY2Y5d25uR3lQOEtxbW5CVG5VNDRhRmFvU2NLQlN5UQ?oc=5",
+      "source": "BBC News",
+      "sourceKey": "world-bbc-world-4",
       "sourceOrder": 4,
-      "publishedAt": "2026-09-04T13:52:04Z",
-      "score": 209135,
-      "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
+      "score": 94.4,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "60d4f30abce08daf",
-      "category": "youtube",
-      "title": "нвидиа поддерживает творческое виденье",
-      "titleZh": "英伟达支持创意愿景",
-      "url": "https://www.youtube.com/watch?v=0oLivAVOe4s",
-      "source": "chopocompik_shorts",
-      "sourceKey": "youtube-0oLivAVOe4s",
+      "id": "f66a6863d7bb34bf",
+      "category": "world",
+      "title": "Kremlin says Ukraine talks with US envoys were useful; no sign of breakthrough",
+      "titleZh": "克里姆林宫表示，乌克兰与美国特使的会谈是有用的；没有突破的迹象",
+      "url": "https://www.reuters.com/world/europe/putins-envoy-dmitriev-meet-witkoff-kushner-upon-their-arrival-moscow-sources-say-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPUkQ0OXgwdkJCdnZWd0VsRWZIZThHY3FrWG8xYXhVZ3FMVmJrZ2VzN1MtQmw5T3RhNTFMTzNaWk9jQVpTcnlvY0hNQmNYdWN4ZmJ4OXlEZDUtTFI5elpNc3RublQ4MWFBVjV5aTFsQnZOYW4tWDBncXBWRUgyUWNPNFFlcFpRc2R5eDZ2eFZTaWlobWEwVnRuOEVscm5RWDg3THR3QlNVdFoyQkQ3LVUtSXVWLWduNmJ6UjFXRFFJV0tweUdWbGhSeA?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-5",
       "sourceOrder": 5,
-      "publishedAt": "2026-09-04T12:09:55Z",
-      "score": 183499,
-      "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 22:27:49 GMT",
+      "score": 93.9,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "e4b10fe78a890372",
-      "category": "youtube",
-      "title": "\"POV You test PSUs💀\" #pcgaming #benchmark #rtx5050 #gtx1080ti",
-      "titleZh": "“POV 你测试 PSU💀”#pcgaming #benchmark #rtx5050 #gtx1080ti",
-      "url": "https://www.youtube.com/watch?v=_CWt4Lr9ito",
-      "source": "LGA1155",
-      "sourceKey": "youtube-_CWt4Lr9ito",
+      "id": "d4d6b0ea707495f0",
+      "category": "world",
+      "title": "US, Iranian forces fire at vessels in waters near Iran",
+      "titleZh": "美国、伊朗军队向伊朗附近水域的船只开火",
+      "url": "https://www.reuters.com/world/middle-east/explosions-heard-near-irans-kharg-island-gulf-origin-unknown-fars-news-says-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQc1hXR2o4Smo3UnZmTTJmM2V4bldFYkpPekNpM2NhUGozMnVKcWZWOHNyUDdmSm5YR2dWT3FRd0FHWnM1Nlc2c3pxSk1XNVdlM1VNb0VyOVRpRG9vMnMyenFVbFVNdERKVEpyeVAtQ0poemwzNTdkYkF4VENfUzhVd1pkQ2djaldJdUZFVThZVktLdXd3anlpZlBCVWpuMi1lTUw1TFA1anU1YWVEeEhIdTI1Q05zOVJqcUNnZkRTc1JxdU82RVRUSw?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-6",
       "sourceOrder": 6,
-      "publishedAt": "2026-09-04T18:32:18Z",
-      "score": 140972,
-      "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 21:37:37 GMT",
+      "score": 92.3,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "da36e08de20db544",
-      "category": "youtube",
-      "title": "The Most Expensive GPU Ever #nvidia #jensenhuang #faker #korea",
-      "titleZh": "有史以来最昂贵的GPU # nvidia # jensenhuang # faker # korea",
-      "url": "https://www.youtube.com/watch?v=pJc1JMpnIw0",
-      "source": "The Founders Vision",
-      "sourceKey": "youtube-pJc1JMpnIw0",
+      "id": "7470701fe158400f",
+      "category": "world",
+      "title": "Fuel tanker explosion after traffic accident kills 10 in Western Iran, state media says",
+      "titleZh": "伊朗官方媒体称，伊朗西部交通事故造成10人死亡后油箱爆炸",
+      "url": "https://www.reuters.com/world/middle-east/fuel-tanker-explosion-after-traffic-accident-kills-10-western-iran-state-media-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxORW1OZWlZUzItUmdsYlhnaXMzU2djTWZBVERaNG4zbzhvZTcxaWtPaGJWamowRDgwTTZRX3Ftekl0bDgxMkJEdTZJbmVzei1ya245RGdiUEx4cHltelZzVTdZVlVhVUEza0dNZ0hqbFR1cTNYMHllLTAwRGdxVVVOazdEb1poa3lyTld2V0ZxR0VHZUNONVJlWFlGaXhKU0ZkamxkZ1N4Vkt4N0YzVmhDM3RYWnlmeE9FbVZzeWFZT0pLaFlwalpnQUVrRDk?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
-      "publishedAt": "2026-09-04T15:46:50Z",
-      "score": 112189,
-      "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
+      "score": 89.8,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "39a6c4ebcc789812",
-      "category": "youtube",
-      "title": "Tesla lanza el Cybercab: el coche sin volante que lo cambiará todo",
-      "titleZh": "特斯拉推出Cybercab ：将改变一切的无人驾驶汽车",
-      "url": "https://www.youtube.com/watch?v=cP_jFIKBIYI",
-      "source": "Juan Ramón Rallo",
-      "sourceKey": "youtube-cP_jFIKBIYI",
+      "id": "0cc200b64aa9af71",
+      "category": "world",
+      "title": "US ambassador visits Palestinian town amid rise in West Bank settler violence",
+      "titleZh": "在约旦河西岸定居者暴力事件增加之际，美国大使访问巴勒斯坦城镇",
+      "url": "https://www.reuters.com/world/middle-east/us-ambassador-visits-palestinian-town-amid-rise-west-bank-settler-violence-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQcHpLU3NTaHlMWHZGRnJIYmY5RGkzZkNPbnJyVXJLSmN4M3NyMjhZaUlzbDFURzZ4VW1LOTc2SFhqc05SMURsMV84dHZhcHhLcUhlM1AyNHlyWmVlYmdSbWp0Vl9xbjBqSGllSjlCVGxySDJRMl95ZFI4V1FwVjAwT2tzWWNWdjJqWnpKMjA3V1c2QzkzWFphemhVdWRIRW53YWNjNFlkMGlMOTZMZTc5NXVtZ1NKblFMVUZObzYtSEpsODAxNDlr?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
-      "publishedAt": "2026-09-04T18:30:10Z",
-      "score": 110227,
-      "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 22:29:12 GMT",
+      "score": 89.6,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     },
     {
-      "id": "e1705f0167c1ab26",
-      "category": "youtube",
-      "title": "Tesla's worst nightmare is here",
-      "titleZh": "特斯拉最糟糕的噩梦就在这里",
-      "url": "https://www.youtube.com/watch?v=Zy2VUeIMw2Y",
-      "source": "Chris Norlund",
-      "sourceKey": "youtube-Zy2VUeIMw2Y",
+      "id": "a9dd8c904298b8b6",
+      "category": "world",
+      "title": "Chinese national rescued from Nepal tunnel 10 days after flash flood",
+      "titleZh": "中国国民在山洪暴发10天后从尼泊尔隧道获救",
+      "url": "https://www.reuters.com/world/china/chinese-national-rescued-nepal-tunnel-day-after-2-nepalis-pulled-out-alive-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOaG1aeTdsTDc5NHp0U0J2UFV0eGtnY1k4TjBqT3FzS3hmM3o1Um1hRW1Xa0UtcmV3YlRFZTVROFVVRVBYY2t5MF9WekJzLXZMdWJLa1ZYeWpIZmpjcC1Vamt3bzJvd21WeWFnTjB2QWJqXzA5bWM5dHJhLTNwLXRDMnJ0SVNqUmo4cjBQYXNjWi15aURhVTE4NXhtVHJFcVJxeUlVZVRERUlXa1dZY01PVGpmclFnMkpldFZGQkdXdw?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-04T10:46:25Z",
-      "score": 107027,
-      "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-06T01:30:44.458Z"
+      "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
+      "score": 88.8,
+      "engagement": "单一来源，待确认",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "79fa21f8dd177a20",
+      "category": "youtube",
+      "title": "I BOUGHT A TESLA CYBER TRUCK AT 17 IN AMERICA!!",
+      "titleZh": "我在17岁时在美国买了一辆特斯拉网络卡车！ ！",
+      "url": "https://www.youtube.com/watch?v=wBJKzDgwDqA",
+      "source": "Lulutho Peanuts",
+      "sourceKey": "youtube-wBJKzDgwDqA",
+      "sourceOrder": 0,
+      "publishedAt": "2026-09-05T09:00:26Z",
+      "score": 370232,
+      "engagement": "370,232 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "5e7c16d375405632",
+      "category": "youtube",
+      "title": "“Cuando se te olvida algo importante💀” #pcgaming #benchmark #rtx5050 #gtx1080ti",
+      "titleZh": "“当你忘记重要的事情时💀” # pcgaming # benchmark # rtx5050 # gtx1080ti",
+      "url": "https://www.youtube.com/watch?v=ILaUdxW4xD0",
+      "source": "computadora impresionante",
+      "sourceKey": "youtube-ILaUdxW4xD0",
+      "sourceOrder": 1,
+      "publishedAt": "2026-09-05T04:00:39Z",
+      "score": 264091,
+      "engagement": "264,091 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "e353acbfad7d1be8",
+      "category": "youtube",
+      "title": "Tesla's New Motor: No Rare Earths, 25% Lighter, More Efficient, Built In 10 Seconds",
+      "titleZh": "特斯拉新电机：无稀土，重量轻25% ，效率更高， 10秒内建",
+      "url": "https://www.youtube.com/watch?v=td0lyo8hLJo",
+      "source": "The Electric Viking",
+      "sourceKey": "youtube-td0lyo8hLJo",
+      "sourceOrder": 2,
+      "publishedAt": "2026-09-05T13:15:15Z",
+      "score": 168608,
+      "engagement": "168,608 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "d5c0da33b8f7fe41",
+      "category": "youtube",
+      "title": "6 Big Changes in Stock Market form 7th September!",
+      "titleZh": "9月7日股市的6大变化！",
+      "url": "https://www.youtube.com/watch?v=mGpLMflEuCc",
+      "source": "Pushkar Raj Thakur: Stock Market Educator 📈",
+      "sourceKey": "youtube-mGpLMflEuCc",
+      "sourceOrder": 3,
+      "publishedAt": "2026-09-05T15:59:31Z",
+      "score": 152543,
+      "engagement": "152,543 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "8aede991afe3180c",
+      "category": "youtube",
+      "title": "Компьютеры кончаются, Nvidia объявила войну, слив DLSS 5, ложь вендоров видеокарт!",
+      "titleZh": "电脑耗尽，英伟达宣战， DLSS 5耗尽，显卡供应商撒谎！",
+      "url": "https://www.youtube.com/watch?v=ONuWCsB7ULU",
+      "source": "ТАК ОСТРО!",
+      "sourceKey": "youtube-ONuWCsB7ULU",
+      "sourceOrder": 4,
+      "publishedAt": "2026-09-05T07:00:12Z",
+      "score": 118383,
+      "engagement": "118,383 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "bf78585446ecad9a",
+      "category": "youtube",
+      "title": "テスラのタクシーが未来すぎる",
+      "titleZh": "テスラのタクシーが未来すぎる",
+      "url": "https://www.youtube.com/watch?v=uemH0o2joFA",
+      "source": "僕はバズ",
+      "sourceKey": "youtube-uemH0o2joFA",
+      "sourceOrder": 5,
+      "publishedAt": "2026-09-05T07:09:16Z",
+      "score": 97826,
+      "engagement": "97,826 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "c4eca05ec613e3bc",
+      "category": "youtube",
+      "title": "Tesla car  feature  explained and  experiencing self driving mode, experiments  with E-car #tesla",
+      "titleZh": "特斯拉汽车功能讲解和体验自动驾驶模式，试用电动车# tesla",
+      "url": "https://www.youtube.com/watch?v=ctwG3eQlI_Q",
+      "source": "SandyDeepalifestyle",
+      "sourceKey": "youtube-ctwG3eQlI_Q",
+      "sourceOrder": 6,
+      "publishedAt": "2026-09-05T04:01:43Z",
+      "score": 96546,
+      "engagement": "96,546 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "a0c831ec04c52b71",
+      "category": "youtube",
+      "title": "He Got an RTX 5070 for JUST $129 at Walmart 💀",
+      "titleZh": "他在沃尔玛以129 $的价格获得了RTX 5070 💀",
+      "url": "https://www.youtube.com/watch?v=B8AR0gkEXpI",
+      "source": "PCFUNSTORE",
+      "sourceKey": "youtube-B8AR0gkEXpI",
+      "sourceOrder": 7,
+      "publishedAt": "2026-09-05T16:15:34Z",
+      "score": 66122,
+      "engagement": "66,122 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "77bae84d54dfa79b",
+      "category": "youtube",
+      "title": "💡Get your Tesla Coil here⚡️Link in bio #teslacoil #lighting #ideas #experiment",
+      "titleZh": "在这里💡获取您的特斯拉线圈⚡️链接BIO # teslacoil #照明#创意#实验",
+      "url": "https://www.youtube.com/watch?v=QkxClw3oDHY",
+      "source": "makeitcoil",
+      "sourceKey": "youtube-QkxClw3oDHY",
+      "sourceOrder": 8,
+      "publishedAt": "2026-09-05T11:08:47Z",
+      "score": 65032,
+      "engagement": "65,032 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
+    },
+    {
+      "id": "dcffa09b52e13268",
+      "category": "youtube",
+      "title": "車CAM直擊 - 利園Tesla撞跌交通警 事發一刻",
+      "titleZh": "車CAM直擊 - 利園Tesla撞跌交通警 事發一刻",
+      "url": "https://www.youtube.com/watch?v=cOi19CUIjXQ",
+      "source": "車CAM特警",
+      "sourceKey": "youtube-cOi19CUIjXQ",
+      "sourceOrder": 9,
+      "publishedAt": "2026-09-05T13:14:17Z",
+      "score": 54843,
+      "engagement": "54,843 次观看",
+      "fetchedAt": "2026-09-06T01:36:38.010Z"
     }
   ]
 }
