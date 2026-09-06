@@ -7,10 +7,11 @@ test('removes Mastodon HTML before keyword extraction', () => {
 });
 
 test('normalizes important aliases and removes filler words', () => {
-  const terms = termsFromText('The latest best big artificial intelligence video chips from Nvidia are public here every day');
+  const terms = termsFromText('Please ask for help reading everything about the latest best big artificial intelligence video chips from Nvidia on the public internet every day');
   assert.ok(terms.includes('AI'));
   assert.ok(terms.includes('芯片'));
   assert.ok(terms.includes('英伟达'));
+  assert.ok(terms.includes('互联网'));
   assert.ok(!terms.includes('the'));
   assert.ok(!terms.includes('https'));
   assert.ok(!terms.includes('best'));
@@ -18,6 +19,11 @@ test('normalizes important aliases and removes filler words', () => {
   assert.ok(!terms.includes('video'));
   assert.ok(!terms.includes('public'));
   assert.ok(!terms.includes('every'));
+  assert.ok(!terms.includes('everything'));
+  assert.ok(!terms.includes('please'));
+  assert.ok(!terms.includes('reading'));
+  assert.ok(!terms.includes('ask'));
+  assert.ok(!terms.includes('help'));
 });
 
 test('boosts terms confirmed across free platforms', () => {
