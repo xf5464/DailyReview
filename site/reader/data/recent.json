@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T01:00:42.006Z",
+  "updatedAt": "2026-09-06T01:30:44.458Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -13,9 +13,9 @@
       "sourceKey": "reuters-markets",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
-      "score": 31.8,
+      "score": 31.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "71e5450ea43c617a",
@@ -28,9 +28,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
-      "score": 49.6,
+      "score": 49.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "7bef401b23d6c68f",
@@ -43,9 +43,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 19:14:59 GMT",
-      "score": 44.1,
+      "score": 43.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -60,22 +60,22 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
-      "id": "471ea4a5746f88c6",
+      "id": "5a921f86ca004a2b",
       "category": "market",
-      "title": "UBS: Commodities can add diversification as inflation, geopolitical risks rise",
-      "titleZh": "瑞银：随着通货膨胀和地缘政治风险的上升，大宗商品可能会增加多元化",
-      "url": "https://www.investing.com/news/stock-market-news/ubs-commodities-can-add-diversification-as-inflation-geopolitical-risks-rise-4890234",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOMmsxUE1LbURxUWZfNDlZNTdTVUl5QlljSXRhbFllYXJsdnFjSGpiOWxpYXZRc196MzZNWUlRbnRtclVOU3ROa01IeVlZZjh3MURRQTYyOWlPblhkclRIMklDcjg4ZGU5akc1c2daRk1xY0FXLTg2X2RKUlBxLXUtZHRud3pKUjE5Y0VCY0c0aVpjQnYyOHpYVFN1WHRiSGRvbERBU0dXODRFNkc0OWVrdVp0bEZ0cnhJVWw3NHVmUUEzVE1TS00zNldJMEFzZw?oc=5",
+      "title": "Why some investors say Volkswagen is simply \"not fixable\" By Investing.com",
+      "titleZh": "为什么一些投资者说大众汽车是Investing.com “不可修复的”",
+      "url": "https://in.investing.com/news/stock-market-news/why-some-investors-say-volkswagen-is-simply-not-fixable-5583382",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPcWFSOHlZcWlkRnhaRkpSSHdILWltaVA5aDRjWUxMZzNvQThDdDZWa1NDeTY0dUxPOHhldTdOUzUyMDlBTFY2STMxaFVEV0VXVE53aEpTTU1pVnI1OG9JMUYySkVSSGxGU1VyY3VOcXVUQ1lBTnBMWnM1ZlBXZXR5TzhGOXU1b0N2aGlOZU45c1RnQmRla1hPQ2tRaE9KMTBTcVBJVEV4MWlsZDlpSDdZcw?oc=5",
       "source": "Investing.com",
       "sourceKey": "investing",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 19:21:27 GMT",
-      "score": 56.3,
+      "publishedAt": "Sun, 06 Sep 2026 00:45:40 GMT",
+      "score": 42.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "61c13362079f8a3e",
@@ -88,9 +88,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 22:57:08 GMT",
-      "score": 63.1,
+      "score": 62.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "9e27686738dd7f81",
@@ -103,9 +103,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 09:21:59 GMT",
-      "score": 42.6,
+      "score": 41.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "8108d90c6c101e16",
@@ -118,9 +118,9 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 22:56:56 GMT",
-      "score": 37.9,
+      "score": 37.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "323ec3cdc74d087d",
@@ -133,9 +133,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 21:23:00 GMT",
-      "score": 57.1,
+      "score": 56.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -148,9 +148,9 @@
       "sourceKey": "tradingview",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
-      "score": 50.2,
+      "score": 49.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -163,9 +163,9 @@
       "sourceKey": "reuters-technology",
       "sourceOrder": 0,
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
-      "score": 57.4,
+      "score": 56.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -178,9 +178,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 GMT",
-      "score": 75.8,
+      "score": 75.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "5b13087810689101",
@@ -193,9 +193,9 @@
       "sourceKey": "the-verge",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 11:15:55 GMT",
-      "score": 45.3,
+      "score": 44.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "8a782c3a7897017c",
@@ -208,9 +208,9 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 23:27:53 GMT",
-      "score": 53.5,
+      "score": 53,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "0b166caf3c482188",
@@ -223,24 +223,24 @@
       "sourceKey": "engadget",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 22:30:00 GMT",
-      "score": 62.6,
+      "score": 68.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
-      "id": "7d7bec08c2641a2a",
+      "id": "50ac2ebb30523602",
       "category": "tech",
-      "title": "The best Labor Day Costco deals 2026: TVs, smartwatches, Apple devices, and more",
-      "titleZh": "Costco 2026年最佳劳动节优惠：电视、智能手表、苹果设备等",
-      "url": "https://www.zdnet.com/home-and-office/best-labor-day-costco-deals-2026-2/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1LTWt1RGRIZlF3LU4wanludW9QR3JIZG5LRzUwc3VIeFNhbjlkcVlHY3dYVWpLVFo5Qm1ja2J5WVh1cVpZWmNxYWJrOXAyMC1TUjdUYWUzemZ6U1hCME1FWEpqcUR0bDB0aTQwQ3Njd25iZUc4MzY4a0ttVXd4Zw?oc=5",
+      "title": "The best Labor Day 2026 laptop deals: Apple, Lenovo, Dell, and more",
+      "titleZh": "2026年最佳劳动节笔记本电脑优惠：苹果、联想、戴尔等",
+      "url": "https://www.zdnet.com/article/best-labor-day-laptop-deals-2026-2/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTE40NTRud2xvWFc1TlQ2ck1pZ3dFbU1DV0RMR1dpeEdUenhCanJwTmdrUWQ5MkRUeTNpUkVLZG9KcF9rM2NpcEN3Y0EteHFaUFA4cW5fVDA2UG53MW8tV2VweW05X251NkxDNmlDNXFaaGo3dlE?oc=5",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 00:11:36 GMT",
-      "score": 67.5,
+      "publishedAt": "Sun, 06 Sep 2026 01:18:11 GMT",
+      "score": 65.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "62a906606b29f2aa",
@@ -253,9 +253,9 @@
       "sourceKey": "cnet",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 20:26:00 GMT",
-      "score": 53.1,
+      "score": 52.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "0e7a1ed8f2c6c127",
@@ -268,9 +268,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 17:18:44 GMT",
-      "score": 43.3,
+      "score": 42.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "ce85c40651f4070e",
@@ -283,9 +283,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 45.3,
+      "score": 34.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -297,9 +297,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 94.4,
-      "engagement": "48 points · 17 comments",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "score": 102.5,
+      "engagement": "73 points · 27 comments",
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "ef437131ff88001b",
@@ -313,7 +313,7 @@
       "publishedAt": "2026-09-04T20:08:42Z",
       "score": 245867,
       "engagement": "245,867 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "7b1113c85eade454",
@@ -327,7 +327,7 @@
       "publishedAt": "2026-09-04T10:00:25Z",
       "score": 232331,
       "engagement": "232,331 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "2790a991b4c3e318",
@@ -341,7 +341,7 @@
       "publishedAt": "2026-09-04T15:07:38Z",
       "score": 214411,
       "engagement": "214,411 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "2ad32c2e9c6e3434",
@@ -355,7 +355,7 @@
       "publishedAt": "2026-09-04T16:00:16Z",
       "score": 213840,
       "engagement": "213,840 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "39102722396f6ece",
@@ -369,7 +369,7 @@
       "publishedAt": "2026-09-04T13:52:04Z",
       "score": 209135,
       "engagement": "209,135 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "60d4f30abce08daf",
@@ -383,7 +383,7 @@
       "publishedAt": "2026-09-04T12:09:55Z",
       "score": 183499,
       "engagement": "183,499 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "e4b10fe78a890372",
@@ -397,7 +397,7 @@
       "publishedAt": "2026-09-04T18:32:18Z",
       "score": 140972,
       "engagement": "140,972 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "da36e08de20db544",
@@ -411,7 +411,7 @@
       "publishedAt": "2026-09-04T15:46:50Z",
       "score": 112189,
       "engagement": "112,189 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "39a6c4ebcc789812",
@@ -425,7 +425,7 @@
       "publishedAt": "2026-09-04T18:30:10Z",
       "score": 110227,
       "engagement": "110,227 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     },
     {
       "id": "e1705f0167c1ab26",
@@ -439,7 +439,7 @@
       "publishedAt": "2026-09-04T10:46:25Z",
       "score": 107027,
       "engagement": "107,027 次观看",
-      "fetchedAt": "2026-09-06T01:00:42.006Z"
+      "fetchedAt": "2026-09-06T01:30:44.458Z"
     }
   ]
 }
