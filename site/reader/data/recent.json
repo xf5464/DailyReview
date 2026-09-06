@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T09:00:45.160Z",
+  "updatedAt": "2026-09-06T09:30:42.163Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
-      "id": "670dde9e60572a3b",
+      "id": "92802afbdc4f8b59",
       "category": "market",
-      "title": "A niece allegedly stole nearly $700,000 from the aunt she cared for — experts warn longer lifespans worsen the issue",
-      "titleZh": "据称，一名侄女从她照顾的姑姑那里偷走了近70万$ —专家警告说，寿命更长会加剧这个问题",
-      "url": "https://finance.yahoo.com/healthcare/articles/niece-allegedly-stole-nearly-700-093000162.html",
+      "title": "‘Come to take your money’: Stephen A. Smith says taxes would eat 2/3 of his income in California — so he fled to Florida",
+      "titleZh": "“来拿你的钱” ：史蒂芬· A ·史密斯（ Stephen A. Smith ）说，税收将吞噬他在加利福尼亚收入的三分之二—所以他逃到了佛罗",
+      "url": "https://finance.yahoo.com/economy/policy/articles/come-money-stephen-smith-says-104500432.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T09:30:00Z",
-      "score": 30.1,
+      "publishedAt": "2026-09-05T10:45:00Z",
+      "score": 29,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 51.6,
+      "score": 51.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "aa7f4b19575d566a",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 06:04:51 GMT",
-      "score": 46.6,
+      "score": 46.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 51.7,
+      "score": 51.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 41.2,
+      "score": 40.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "ca52c45e780b623d",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 08:00:00 GMT",
-      "score": 58,
+      "score": 57.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
-      "id": "ea7e3fab6f061f51",
+      "id": "fec28dbf9b8b230e",
       "category": "market",
-      "title": "Got $10,000 to Invest This September? These Energy Stocks Could Turn It Into $639 in Annual Income.",
-      "titleZh": "今年9月有$ 10,000的投资机会吗？ 这些能源股可以将其转化为年收入639 $。",
-      "url": "https://www.fool.com/investing/2026/09/06/got-x-to-invest-this-september-these-sector-stocks/?source=iedfolrf0000001",
+      "title": "PepsiCo Loses to 30-year U.S. Treasury Bonds on Yield. Here's Why It Wins on Everything Else.",
+      "titleZh": "百事公司在收益率上损失了30年期美国国债。 以下是它赢得其他一切的原因。",
+      "url": "https://www.fool.com/investing/2026/09/06/pepsico-loses-to-30-year-us-treasury-bonds-on-yiel/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 04:35:00 -0400",
-      "score": 60.6,
+      "publishedAt": "Sun, 06 Sep 2026 05:05:00 -0400",
+      "score": 57.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,21 +140,21 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
-      "id": "9a8c0e7e63aecfeb",
+      "id": "bd466c324918949e",
       "category": "tech",
-      "title": "I tested Sony’s affordable Bravia 5 TV, and it offers a lot of punch for its price tag, throwing serious shade on Sony’s previous mid-range screens",
-      "titleZh": "我测试了索尼经济实惠的Bravia 5电视，它为价格标签提供了很多冲击，给索尼以前的中档屏幕带来了严重的阴影",
-      "url": "https://www.techradar.com/televisions/i-tested-sonys-affordable-bravia-5-tv-and-it-offers-a-lot-of-punch-for-its-price-tag-throwing-serious-shade-on-sonys-previous-mid-range-screens",
+      "title": "Casualty star teases potential future romance between Flynn and Stevie after 40th anniversary special episodes — 'I think there's a lot more to come'",
+      "titleZh": "伤亡明星戏弄弗林和史蒂夫在40周年特别剧集后潜在的未来浪漫— “我认为还有很多事情要做”",
+      "url": "https://www.techradar.com/streaming/bbc-iplayer/casualty-star-teases-potential-future-romance-between-flynn-and-stevie-after-40th-anniversary-special-episodes-i-think-theres-a-lot-more-to-come",
       "source": "TechRadar",
       "sourceKey": "techradar",
       "sourceOrder": 0,
-      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 67,
+      "publishedAt": "Sun, 06 Sep 2026 09:00:00 +0000",
+      "score": 75.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 67.8,
+      "score": 67.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 55.3,
+      "score": 54.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
-      "id": "8ea50880be9eeaab",
+      "id": "4d7cb63bbad84ee4",
       "category": "tech",
-      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
-      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
-      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
+      "title": "Why are iPhones more expensive than iPads?",
+      "titleZh": "为什么iPhone比iPad更贵？",
+      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
-      "score": 62.5,
+      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
+      "score": 63,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 54.7,
+      "score": 54.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 61,
+      "score": 60.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 53.5,
+      "score": 53,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 56.9,
+      "score": 56.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
-      "score": 75.3,
-      "engagement": "31 points · 2 comments",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "score": 88.4,
+      "engagement": "77 points · 3 comments",
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -293,9 +293,9 @@
       "sourceKey": "world-reuters-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
-      "score": 109.8,
+      "score": 109.1,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -308,9 +308,9 @@
       "sourceKey": "world-bbc-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 105.3,
+      "score": 104.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -323,9 +323,9 @@
       "sourceKey": "world-reuters-world-2",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 102.2,
+      "score": 101.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -338,9 +338,9 @@
       "sourceKey": "world-al-jazeera-3",
       "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 102.2,
+      "score": 101.5,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "024fd13de026decc",
@@ -353,9 +353,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
-      "score": 100.4,
+      "score": 99.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -368,9 +368,9 @@
       "sourceKey": "world-reuters-world-5",
       "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 100.4,
+      "score": 99.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -383,9 +383,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
-      "score": 98.9,
+      "score": 98.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 96.9,
+      "score": 96.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -413,9 +413,9 @@
       "sourceKey": "world-al-jazeera-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 85.2,
+      "score": 84.5,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "8237d8a583b3c72e",
@@ -428,9 +428,9 @@
       "sourceKey": "world-bbc-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sun, 06 Sep 2026 07:06:50 GMT",
-      "score": 84.4,
+      "score": 83.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 395990,
       "engagement": "395,990 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 313676,
       "engagement": "313,676 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 252700,
       "engagement": "252,700 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "114483232b4c644f",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 209100,
       "engagement": "209,100 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 199892,
       "engagement": "199,892 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "0128da0780432f60",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T09:15:08Z",
       "score": 163970,
       "engagement": "163,970 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "8d96a3ba04e7b33f",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-06T00:21:42Z",
       "score": 150269,
       "engagement": "150,269 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 123095,
       "engagement": "123,095 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 107558,
       "engagement": "107,558 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 66034,
       "engagement": "66,034 次观看",
-      "fetchedAt": "2026-09-06T09:00:45.160Z"
+      "fetchedAt": "2026-09-06T09:30:42.163Z"
     }
   ]
 }
