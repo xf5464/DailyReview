@@ -7,7 +7,17 @@ function itemId(url) {
 }
 
 function emptyArchive() {
-  return { schemaVersion: 2, updatedAt: null, items: [] };
+  return { schemaVersion: 2, updatedAt: null, items: [], trends: [] };
+}
+
+function normalizeTrend(trend) {
+  return {
+    id: trend.id || itemId(`trend:${trend.term}`), term: String(trend.term || '').trim(),
+    labelZh: String(trend.labelZh || '').trim(), score: Number(trend.score) || 0,
+    mentions: Number(trend.mentions) || 0, platformCount: Number(trend.platformCount) || 0,
+    platforms: Array.isArray(trend.platforms) ? trend.platforms.map(String) : [],
+    url: String(trend.url || ''),
+  };
 }
 
 function normalizeItem(item, fallbackOrder = 0) {
@@ -43,6 +53,7 @@ function pruneArchive(archive) {
     updatedAt: archive?.updatedAt || null,
     items: [...bySource.values()].sort((left, right) =>
       String(left.category).localeCompare(String(right.category)) || left.sourceOrder - right.sourceOrder),
+    trends: (Array.isArray(archive?.trends) ? archive.trends : []).map(normalizeTrend).filter((trend) => trend.term).slice(0, 30),
   };
 }
 
@@ -51,7 +62,7 @@ function mergeNews(_archive, news, now = Date.now(), shouldKeepItem = () => true
   const items = [...(news.tech || []), ...(news.market || []), ...(news.world || []), ...(news.youtube || [])]
     .map((item, index) => normalizeItem({ ...item, fetchedAt }, index % 10))
     .filter(shouldKeepItem);
-  return pruneArchive({ schemaVersion: 2, updatedAt: fetchedAt, items });
+  return pruneArchive({ schemaVersion: 2, updatedAt: fetchedAt, items, trends: news.trends || [] });
 }
 
 function readArchive(filePath) {

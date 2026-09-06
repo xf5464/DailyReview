@@ -41,7 +41,7 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 .subtle { margin: 12px 0 0; font-size: 14px; }
 
 .category-tabs {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 0 0 24px; padding: 4px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 0 0 24px; padding: 4px;
   border: 1px solid var(--line); border-radius: 14px; background: rgba(222, 216, 202, .45);
 }
 .category-tab {
@@ -103,6 +103,14 @@ h2 { margin: 0; font-size: 28px; line-height: 1.25; }
 
 .panel { margin-top: 24px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
 .panel h2 { font-size: 24px; }
+.word-cloud-panel { padding: 18px; }
+.word-cloud {
+  display: block; width: 100%; aspect-ratio: 1; overflow: visible;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.96) 0 64%, rgba(231,238,251,.7) 100%);
+}
+.cloud-word { font-family: ui-serif, "Songti SC", STSong, serif; font-weight: 760; cursor: pointer; }
+.cloud-word:hover, .cloud-word:focus { opacity: .72; outline: none; }
+.cloud-meta { margin: 14px 4px 2px; color: var(--muted); font-size: 12px; line-height: 1.6; text-align: center; }
 .primary { border: 0; border-radius: 12px; padding: 13px 17px; background: var(--blue); color: white; font-weight: 700; }
 
 dialog { width: min(760px, 100%); height: min(92vh, 920px); margin: auto auto 0; padding: 0; border: 0; border-radius: 24px 24px 0 0; background: var(--paper); color: var(--ink); }
@@ -133,4 +141,6 @@ article h2 { font-size: clamp(30px, 7vw, 45px); }
   .news-details { max-width: 72px; }
   .day-header { padding-inline: 17px; }
   .news-item { padding-inline: 16px; }
+  .category-tab { padding-inline: 5px; font-size: 13px; }
+  .word-cloud-panel { padding: 8px; }
 }

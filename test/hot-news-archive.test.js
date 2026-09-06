@@ -60,3 +60,10 @@ test('stores the international Top 10 with the news snapshot', () => {
   const archive = mergeNews(null, { tech: [], market: [], world, youtube: [] }, Date.parse('2026-09-04T03:00:00Z'));
   assert.equal(archive.items.filter((entry) => entry.category === 'world').length, 10);
 });
+
+test('stores the current non-YouTube word cloud with the snapshot', () => {
+  const trends = [{ term: 'AI', score: 99, mentions: 8, platformCount: 3, platforms: ['Hacker News', 'Bluesky'], url: 'https://example.com/ai' }];
+  const archive = mergeNews(null, { tech: [], market: [], world: [], youtube: [], trends }, Date.parse('2026-09-04T03:00:00Z'));
+  assert.deepEqual(archive.trends.map((entry) => entry.term), ['AI']);
+  assert.deepEqual(archive.trends[0].platforms, ['Hacker News', 'Bluesky']);
+});
