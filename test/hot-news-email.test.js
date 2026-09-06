@@ -22,7 +22,7 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.27/);
+  assert.match(html, /v2026\.09\.06\.28/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'world', 'youtube'/);
@@ -83,6 +83,8 @@ test("uses YouTube universal links for the native-app button", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.match(script, /browser\.href = youtube \? item\.url/);
   assert.match(script, /browser\.dataset\.nativeApp = 'youtube'/);
+  assert.match(script, /item\.category === 'youtube' && item\.engagement/);
+  assert.match(script, /views\.className = 'news-views'/);
 });
 
 test("orders YouTube results by views and creates direct video links", () => {

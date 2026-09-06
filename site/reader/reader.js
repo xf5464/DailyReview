@@ -150,6 +150,12 @@ function itemButton(item, rank) {
   published.className = 'news-time';
   published.textContent = publishedTimeLabel(item.publishedAt);
   details.append(source, published);
+  if (item.category === 'youtube' && item.engagement) {
+    const views = document.createElement('span');
+    views.className = 'news-views';
+    views.textContent = item.engagement;
+    details.append(views);
+  }
   button.append(number, copy, details);
 
   const browser = document.createElement('a');
