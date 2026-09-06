@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T05:39:13.765Z",
+  "updatedAt": "2026-09-06T05:43:23.045Z",
   "items": [
     {
       "id": "52f9dfbd15d2b656",
@@ -15,35 +15,35 @@
       "publishedAt": "Sat, 05 Sep 2026 16:47:22 GMT",
       "score": 27.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "8b685c2094d47869",
+      "id": "a7053cdaa9524a9b",
       "category": "market",
-      "title": "Edison International (EIX) Dividend Declarations Put Its Valuation Back In Focus",
-      "titleZh": "爱迪生国际（ EIX ）股息声明重新聚焦其估值",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/edison-international-eix-dividend-declarations-121607476.html",
+      "title": "Wendy’s U.S. president goes back to his old job",
+      "titleZh": "温迪的美国总统回到他以前的工作",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/wendy-u-president-resigns-position-211810971.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-01T12:16:07.000Z",
+      "publishedAt": "2026-08-17T21:18:10.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "13e23cdc4da4d454",
+      "id": "d646d9dc06ae3234",
       "category": "market",
       "title": "Market Forecast",
       "titleZh": "市场预测",
-      "url": "http://www.cnbc.com/2023/05/11/market-strategist-survey-forecast.html",
+      "url": "https://www.cnbc.com/2023/05/11/market-strategist-survey-forecast.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "2025-12-19T17:42:24.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "54a7f8919276e817",
@@ -58,7 +58,7 @@
       "publishedAt": "Wed, 02 Sep 2026 15:36:00 GMT",
       "score": 29.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "d15b6a37c32630be",
@@ -73,65 +73,63 @@
       "publishedAt": "Sun, 06 Sep 2026 04:28:17 GMT",
       "score": 59.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "61c13362079f8a3e",
+      "id": "36b1a72a9e74fc62",
       "category": "market",
-      "title": "MarketWatch: Stock Market News - Financial News",
-      "titleZh": "MarketWatch ：股市新闻-财经新闻",
-      "url": "https://www.marketwatch.com/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE1BdVhUUlFwZmxHeFhzWGdpZHFTOGFReXUxTUVWR2JYd3d6ZjZBM2FuSWt6eUFSRUUwcTdkRHVrLVB3UQ?oc=5",
+      "title": "&#x2018;Poverty doesn&#x2019;t have to be my reality&#x2019;: I thought I&#x2019;d have to rely on Social Security. Then I taught myself how to invest.",
+      "titleZh": "“贫困不一定是我的现实” ：我想我必须依靠社会保障。 然后我自学了如何投资。",
+      "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories",
       "source": "MarketWatch",
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
-      "publishedAt": "Sun, 06 Sep 2026 02:52:59 GMT",
-      "score": 62.9,
+      "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
+      "score": 55,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "d3e707dc92d3197a",
+      "id": "22045b1496ce4267",
       "category": "market",
-      "title": "Large Cap Stocks",
-      "titleZh": "大盘股",
-      "url": "http://www.benzinga.com/news/large-cap",
+      "title": "Toncoin (TON) Price Prediction 2025, 2026, 2027-2030",
+      "titleZh": "吨币（ TON ）价格预测2025、2026、2027-2030",
+      "url": "https://www.benzinga.com/money/toncoin-ton-price-prediction",
       "source": "Benzinga",
       "sourceKey": "benzinga",
       "sourceOrder": 6,
-      "publishedAt": "Thu, 03 Sep 2026 20:27:44 GMT",
-      "score": null,
+      "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
+      "score": 44.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "59c0bb36a439900d",
+      "id": "d0d6b5803f0e771f",
       "category": "market",
-      "title": "After 130 closures, seafood chain now has just 13 restaurants",
-      "titleZh": "关闭 130 家海鲜连锁店后，现在只剩下 13 家餐厅",
-      "url": "https://www.thestreet.com/restaurants/after-130-closures-seafood-chain-now-has-just-13-restaurants",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOaGdqcmp5TzkzaUszam5PRDg5MTQ0c21URWlIVnZwUmFKS0ZSMkFtbXVyRElzLXRlSUZSMC1Nb0ItNmQ3aDZlRjUwX1hWVklGaTdleVBKN0Q4RENZamRuUWlFdGlfTDlmMXY5azJGbGhGT1B0aGxVcUwtT3BvbXl4dnUwWFF4UU9nSjVsQ243MTBRYXRfVlBBVXhPd08zQlU?oc=5",
+      "title": "Citizen’s Eco-Drive Luxury watch is now $175 at Amazon",
+      "titleZh": "Citizen的Eco-Drive Luxury手表现在在亚马逊售价为175 $",
+      "url": "https://www.thestreet.com/deals/citizen-dress-classic-eco-drive-luxury-watch-amazon-sale-september-2026",
       "source": "TheStreet",
       "sourceKey": "the-street",
       "sourceOrder": 7,
-      "publishedAt": "Sun, 06 Sep 2026 01:12:00 GMT",
-      "score": 35.7,
+      "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
+      "score": 58.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "dec081ab82fba073",
+      "id": "dddb8315a2eeca7d",
       "category": "market",
-      "title": "Where Will Rigetti Computing Stock Be in 3 Years? The stock has had impressive gains over the past three years, but recreating that success will be very hard.",
-      "titleZh": "3年后Rigetti计算库存将如何？ 该股票在过去三年中取得了令人印象深刻的收益，但重现这一成功将非常困难。",
-      "url": "http://www.fool.com/investing/2026/09/06/where-will-rigetti-computing-stock-be-in-3-years/",
+      "title": "The S&P 500's Yield Is at Historic Lows. Here Are 3 Dividend Stocks I'd Buy in September.",
+      "titleZh": "标准普尔500指数收益率处于历史低点。 以下是我在9月份购买的3只股息股票。",
+      "url": "https://www.fool.com/investing/2026/09/06/the-sp-500s-yield-is-at-historic-lows-here-are-3-d/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "2026-09-06T04:00:00.000Z",
-      "score": null,
+      "publishedAt": "Sun, 06 Sep 2026 01:00:00 -0400",
+      "score": 63.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "22a3ebb29c1e0518",
@@ -146,7 +144,7 @@
       "publishedAt": "Sat, 05 Sep 2026 16:02:08 GMT",
       "score": 46,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "bceb38cca4a556ee",
@@ -161,79 +159,77 @@
       "publishedAt": "Sat, 05 Sep 2026 21:23:43 GMT",
       "score": 52.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "b86b5015c5da7a40",
+      "id": "6df0f5d81c2b28a3",
       "category": "tech",
-      "title": "OpenAI confirms ‘wiki incident,’ says it’s ‘working on a framework’ for more disclosure",
-      "titleZh": "OpenAI确认“维基事件” ，称其正在“开发一个框架”以进行更多披露",
-      "url": "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/",
+      "title": "Seattle Times and Newsday are the latest publications to sue OpenAI and Microsoft",
+      "titleZh": "《西雅图时报》和《新闻日报》是起诉OpenAI和微软的最新出版物",
+      "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/",
       "source": "TechCrunch",
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T18:05:27.000Z",
-      "score": null,
+      "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
+      "score": 71.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "3c803508656819f2",
+      "id": "1fdfa6bf0e2f0ff7",
       "category": "tech",
-      "title": "CD sales are booming as physical media continues its resurgence",
-      "titleZh": "随着实体媒体的持续复苏， CD销量正在蓬勃发展",
-      "url": "https://www.theverge.com/entertainment/990794/cd-sales-are-booming-as-physical-media-continues-its-resurgence",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQd0NDWWFoVDZYZXJ5cDA4MFQ1RmtXU3kyOUJYMG5WOE81MXdBVGF3Qi1XVzV5Ul82Z1R2b2ZhSXhmTDB0MUlUemFMNlp0VnJHcW9UdkRyY1RhTlFnRGFmNlowWUFBWEkwS3ZsQ3JFa0toRXdqREYzNGY3S0xyNklVTkYtNkFTZjVMUF9LRzZabkhjNU1yZzBuZWsybzhRbnB2Q0JrQjNXei0xcHlqQnc?oc=5",
+      "title": "Explore the globe in field recordings",
+      "titleZh": "通过野外录音探索世界",
+      "url": "https://www.theverge.com/tech/990873/earth-garden-globe-field-recordings",
       "source": "The Verge",
       "sourceKey": "the-verge",
       "sourceOrder": 2,
-      "publishedAt": "Sat, 05 Sep 2026 16:49:33 GMT",
-      "score": 27.3,
+      "publishedAt": "2026-09-05T21:31:34.000Z",
+      "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "f0e41de37211bf37",
+      "id": "5d8b342437f848f9",
       "category": "tech",
-      "title": "Nearly impossible? How Fairphone built the ethical, repairable Fairphone Gen 6+",
-      "titleZh": "几乎不可能？ Fairphone如何打造合乎道德、可维修的Fairphone Gen 6 +",
-      "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/",
+      "title": "Tesla’s Cybercab has been deployed, and it’s already under investigation",
+      "titleZh": "特斯拉的Cybercab已经部署，并且已经在调查中",
+      "url": "https://arstechnica.com/cars/2026/09/teslas-cybercab-has-been-deployed-and-its-already-under-investigation/",
       "source": "Ars Technica",
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
-      "publishedAt": "2026-09-04T11:00:05.000Z",
-      "score": null,
+      "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
+      "score": 58.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "8ea50880be9eeaab",
+      "id": "66e6f119dc5b1799",
       "category": "tech",
-      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
-      "titleZh": "让手机的蓝牙一直运行安全吗？",
-      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOX3dTSzVpZ1dmeENBZnl6ODA3cE5FNkVqTU84TDBDQkZrV3pCN0M4N2VwN3lLaElLTHhMem1DNUYtRXlNM29lVE1QWWlwdzczTFRSS2JkTUVxVlFnTlp4NmdBNWMxWmJObEJtVnJlaXJoWjUwX3VWeGs5ZGF0M2hsQQ?oc=5",
+      "title": "How to sideload apps onto Android Auto",
+      "titleZh": "如何将应用旁加载到Android Auto",
+      "url": "https://www.engadget.com/2246259/how-to-sideload-android-auto-apps/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 GMT",
-      "score": 48,
+      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
+      "score": 66.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "fedd9daf849e7e53",
+      "id": "df79edd46fd49dc1",
       "category": "tech",
-      "title": "The best Labor Day 2026 Garmin watch deals: Gear up for marathon training for less",
-      "titleZh": "2026年最佳劳动节Garmin手表优惠：以更低的价格为马拉松训练做好准备",
-      "url": "https://www.zdnet.com/article/labor-day-garmin-watch-deals-2026/",
+      "title": "Best blood pressure watches",
+      "titleZh": "最佳血压表",
+      "url": "https://www.zdnet.com/article/best-blood-pressure-watch/",
       "source": "ZDNET",
       "sourceKey": "zdnet",
       "sourceOrder": 5,
-      "publishedAt": "2026-09-05T22:33:05.000Z",
+      "publishedAt": "2026-07-09T14:00:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "a6a6d680b69b9b9f",
@@ -247,7 +243,7 @@
       "publishedAt": "2026-07-17T09:30:00.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "1305dd241c305356",
@@ -258,25 +254,24 @@
       "source": "BleepingComputer",
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
-      "publishedAt": "2026-09-05T14:29:13.000Z",
-      "score": null,
+      "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
+      "score": 56.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
-      "id": "ce85c40651f4070e",
+      "id": "33456732d03842db",
       "category": "tech",
-      "title": "Stripped-down Windows 11 for AI developers demands 64GB RAM and insane 250 GB/s bandwidth — Project Zenith will debut on AMD's flagship Ryzen AI Halo platform",
-      "titleZh": "适用于人工智能开发人员的精简版Windows 11要求64GB RAM和疯狂的250 GB/s带宽— Project Zenith将在AMD的旗舰Ryzen AI Halo平台上首次亮相",
-      "url": "https://www.tomshardware.com/software/windows/stripped-down-windows-11-for-ai-developers-demands-64gb-ram-and-insane-250-gb-s-bandwidth-project-zenith-will-debut-on-amds-flagship-ryzen-ai-halo-platform",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxPcWhMVnBRa0ZYYXd2b3FjRHpfckpPVTlWR1M2SWVjNnI1ZkhpcDVrRGpzNDh1SzhQWExrZ0tzdUpXSXBNUm9pYnB5UVhjdFA2VDlDUTVYcGFzakNHUFpSUDBzdHp5akRpYkV3c29OYmMweWhvQzVxTnBKeWtHRk5LckRuc3ZHR2lTZlE2Wl9FMHdJZWc4VEFlMG5ITUFtb21VcTNFYmc3NUc2NHpPQmpGRl9xRW1zNVF1M21qV2N0MDdKSHltbnZiejd3QWw2djFDSlV6RTdmaE5EWE9faVJYTEw0SDZZM1pBVnF2VlB2V2xzd293T2FSR2FGT0FHZjNSUGhja2pzMm5HS1VYdmJDQWltVGs0RDBXVG1PeWxNUDd2SzlnYm0tOA?oc=5",
+      "title": "Save nearly 50% on this awesome 16-inch OLED laptop with a Ryzen AI 5 430 CPU & 16GB RAM — HP's MacBook Neo-beating OmniBook X Flip is down to just $699",
+      "titleZh": "这款出色的16英寸OLED笔记本电脑配备Ryzen AI 5 430 CPU和16GB RAM ，可节省近50 ％ —惠普的MacBook Neo-beating OmniBook X Flip降至仅$ 699",
+      "url": "https://www.tomshardware.com/pc-components/save-nearly-50-percent-on-this-awesome-16-inch-oled-laptop-with-a-ryzen-ai-5-430-cpu-and-16gb-ram-hps-macbook-neo-beating-omnibook-x-flip-is-down-to-just-usd699",
       "source": "Tom's Hardware",
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 17:18:57 GMT",
-      "score": 41.4,
+      "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
+      "score": 60.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -288,9 +283,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 125.1,
-      "engagement": "272 points · 109 comments",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 125.3,
+      "engagement": "273 points · 111 comments",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -303,9 +298,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 127.9,
+      "score": 127.8,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -318,9 +313,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 107.1,
+      "score": 107,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -333,9 +328,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 106.9,
+      "score": 106.8,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -348,9 +343,9 @@
       "sourceKey": "world-reuters-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 105.4,
+      "score": 105.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -363,9 +358,9 @@
       "sourceKey": "world-reuters-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 101.9,
+      "score": 101.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -378,9 +373,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 89.9,
+      "score": 89.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -393,9 +388,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 88.6,
+      "score": 88.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "7470701fe158400f",
@@ -408,9 +403,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 83.8,
+      "score": 83.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -425,7 +420,7 @@
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
       "score": 82.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -438,9 +433,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 81,
+      "score": 80.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -452,9 +447,9 @@
       "sourceKey": "youtube-wBJKzDgwDqA",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T09:00:26Z",
-      "score": 382655,
-      "engagement": "382,655 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 382927,
+      "engagement": "382,927 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -466,9 +461,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 276716,
-      "engagement": "276,716 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 278895,
+      "engagement": "278,895 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -482,7 +477,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 207203,
       "engagement": "207,203 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -494,9 +489,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 190762,
-      "engagement": "190,762 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 191384,
+      "engagement": "191,384 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "114483232b4c644f",
@@ -508,9 +503,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 162949,
-      "engagement": "162,949 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 167313,
+      "engagement": "167,313 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -522,9 +517,9 @@
       "sourceKey": "youtube-ONuWCsB7ULU",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T07:00:12Z",
-      "score": 123894,
-      "engagement": "123,894 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 124074,
+      "engagement": "124,074 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -536,9 +531,9 @@
       "sourceKey": "youtube-5MqJKUJtoNY",
       "sourceOrder": 6,
       "publishedAt": "2026-09-05T11:01:03Z",
-      "score": 113418,
-      "engagement": "113,418 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 114167,
+      "engagement": "114,167 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -550,9 +545,9 @@
       "sourceKey": "youtube-uemH0o2joFA",
       "sourceOrder": 7,
       "publishedAt": "2026-09-05T07:09:16Z",
-      "score": 109027,
-      "engagement": "109,027 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 109387,
+      "engagement": "109,387 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -564,9 +559,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 97365,
-      "engagement": "97,365 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 98077,
+      "engagement": "98,077 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     },
     {
       "id": "dcffa09b52e13268",
@@ -578,9 +573,9 @@
       "sourceKey": "youtube-cOi19CUIjXQ",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T13:14:17Z",
-      "score": 65838,
-      "engagement": "65,838 次观看",
-      "fetchedAt": "2026-09-06T05:39:13.765Z"
+      "score": 66095,
+      "engagement": "66,095 次观看",
+      "fetchedAt": "2026-09-06T05:43:23.045Z"
     }
   ]
 }
