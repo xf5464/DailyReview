@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T11:50:18.604Z",
+  "updatedAt": "2026-09-06T11:53:07.230Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,7 +14,7 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "e5a2f5b5946be969",
@@ -26,9 +26,9 @@
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T12:38:38Z",
-      "score": 27.1,
+      "score": 27.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 48.5,
+      "score": 48.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "9146aeb602af863c",
@@ -56,7 +56,7 @@
       "publishedAt": "Sun, 06 Sep 2026 10:29:03 GMT",
       "score": 61.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "7d5cd4a3c1018c74",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-06T10:30:29.694Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -84,7 +84,7 @@
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
       "score": 48.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "a01a69f50bd5caa7",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 11:12:51 +0000",
-      "score": 62.4,
+      "score": 62.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "8dcfffec7892dec0",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 11:37:00 GMT",
-      "score": 64.8,
+      "score": 64.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
-      "id": "5341a92ed2f9cff2",
+      "id": "741b103ad8bbf42f",
       "category": "market",
-      "title": "Visa vs. American Express: Which Financial Stock Is the Better Buy?",
-      "titleZh": "Visa与美国运通：哪种金融股更合适？",
-      "url": "https://www.fool.com/investing/2026/09/06/visa-vs-american-express-which-financial-stock-is/?source=iedfolrf0000001",
+      "title": "Here's Why Oklo Stock Trades at a 900% Premium to NuScale Power",
+      "titleZh": "这就是Oklo股票以NuScale Power 900%溢价交易的原因",
+      "url": "https://www.fool.com/investing/2026/09/06/heres-why-oklo-stock-trades-at-a-900-premium-to-nu/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 07:24:00 -0400",
-      "score": 60.6,
+      "publishedAt": "Sun, 06 Sep 2026 06:43:00 -0400",
+      "score": 59.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "bf684667ddcef7d7",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 11:00:00 +0000",
-      "score": 75.2,
+      "score": 75.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 65,
+      "score": 64.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 52.5,
+      "score": 52.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
-      "id": "4d7cb63bbad84ee4",
+      "id": "8ea50880be9eeaab",
       "category": "tech",
-      "title": "Why are iPhones more expensive than iPads?",
-      "titleZh": "为什么iPhone比iPad更贵？",
-      "url": "https://www.engadget.com/2246356/why-iphones-more-expensive-than-ipads/",
+      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
+      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
+      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sun, 06 Sep 2026 00:30:00 +0000",
-      "score": 60.7,
+      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
+      "score": 59.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "21d3791dcc297fe6",
@@ -224,7 +224,7 @@
       "publishedAt": "Sun, 6 Sep 2026 06:11 -0500",
       "score": 70.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "00c1641144f2567d",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 11:00:00 +0000",
-      "score": 69.2,
+      "score": 69.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "1305dd241c305356",
@@ -252,7 +252,7 @@
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
       "score": 50.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "ebe05b314969ffc7",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 10:30:00 +0000",
-      "score": 69.7,
+      "score": 69.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "6c45c914258f8293",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T07:21:06.000Z",
-      "score": 119.4,
-      "engagement": "248 points · 49 comments",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 119.8,
+      "engagement": "250 points · 52 comments",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -295,7 +295,7 @@
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
       "score": 118.9,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "6847c23a039f513f",
@@ -310,7 +310,7 @@
       "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
       "score": 105.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "2e80cf72766c0f9a",
@@ -325,7 +325,7 @@
       "publishedAt": "Sun, 06 Sep 2026 08:43:43 GMT",
       "score": 102.8,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "8237d8a583b3c72e",
@@ -338,9 +338,9 @@
       "sourceKey": "world-bbc-world-3",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 09:56:39 GMT",
-      "score": 102.4,
+      "score": 102.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -353,9 +353,9 @@
       "sourceKey": "world-bbc-world-4",
       "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 08:05:22 GMT",
-      "score": 99.1,
+      "score": 99,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -368,24 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 98.4,
+      "score": 98.3,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
-    },
-    {
-      "id": "e08fd24cc8f863ce",
-      "category": "world",
-      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
-      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
-      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
-      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 98,
-      "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "43fa9a37eca2ddf4",
@@ -395,27 +380,27 @@
       "url": "https://www.reuters.com/world/china/flood-destroyed-china-nepal-border-no-sign-once-busy-port-reuters-witnesses-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQbndid2VJNko4cVpiOGlLdFlhX0JEN0trbG1oWjh0cTlsdml4SVF1TWNtTFY0Vlp2ckhTb2JOR3NaZ0hoTThOeG9JRWlTVVd3djNKRFpwWnk3eGxEYTM5bkVKSmloRm4wQnptWUlyTGE3a1FpOEpyQ1pRbFFSX2V2VE5iN2ZTN2EyRzdwaUh0R0d4cFI3NFMyWjhSNTJWOGQ2RnVsM2FZcmtIZmNzQXpCUk9vblhPOUw4WXNBd1V5LTI?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-7",
-      "sourceOrder": 7,
+      "sourceKey": "world-reuters-world-6",
+      "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 08:17:00 GMT",
       "score": 97.9,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
-      "id": "f422f75a95ba4f97",
+      "id": "e08fd24cc8f863ce",
       "category": "world",
-      "title": "Germany's far-right AfD seeks landmark state victory as Saxony-Anhalt votes",
-      "titleZh": "德国极右翼AfD在萨克森-安哈特州投票中寻求具有里程碑意义的国家胜利",
-      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
+      "title": "US military strikes three Iranian crude oil carriers, Central Command says",
+      "titleZh": "美国军方袭击三艘伊朗原油运输船，中央司令部说",
+      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 96.2,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
+      "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
+      "score": 97.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "024fd13de026decc",
@@ -425,12 +410,27 @@
       "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-9",
-      "sourceOrder": 9,
+      "sourceKey": "world-reuters-world-8",
+      "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
       "score": 96.1,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
+    },
+    {
+      "id": "f422f75a95ba4f97",
+      "category": "world",
+      "title": "Germany's far-right AfD seeks landmark state victory as Saxony-Anhalt votes",
+      "titleZh": "德国极右翼AfD在萨克森-安哈特州投票中寻求具有里程碑意义的国家胜利",
+      "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-9",
+      "sourceOrder": 9,
+      "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
+      "score": 96.1,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 383877,
-      "engagement": "383,877 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 383880,
+      "engagement": "383,880 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 304977,
       "engagement": "304,977 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "114483232b4c644f",
@@ -470,9 +470,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 257627,
-      "engagement": "257,627 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 257648,
+      "engagement": "257,648 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -484,9 +484,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 214157,
-      "engagement": "214,157 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 214528,
+      "engagement": "214,528 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 124098,
-      "engagement": "124,098 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 124099,
+      "engagement": "124,099 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "a0c831ec04c52b71",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T16:15:34Z",
       "score": 123858,
       "engagement": "123,858 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "3c372d2db927869b",
@@ -526,9 +526,9 @@
       "sourceKey": "youtube-5II-Dkl3cfQ",
       "sourceOrder": 6,
       "publishedAt": "2026-09-05T19:29:08Z",
-      "score": 86407,
-      "engagement": "86,407 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 86888,
+      "engagement": "86,888 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -540,9 +540,9 @@
       "sourceKey": "youtube-_lYjci0bjNo",
       "sourceOrder": 7,
       "publishedAt": "2026-09-05T17:09:47Z",
-      "score": 86317,
-      "engagement": "86,317 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 86792,
+      "engagement": "86,792 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T19:34:19Z",
       "score": 81597,
       "engagement": "81,597 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     },
     {
       "id": "68eb7c610bd6e09d",
@@ -568,9 +568,9 @@
       "sourceKey": "youtube-ycfYhLOkAJ4",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T20:27:10Z",
-      "score": 80473,
-      "engagement": "80,473 次观看",
-      "fetchedAt": "2026-09-06T11:50:18.604Z"
+      "score": 80841,
+      "engagement": "80,841 次观看",
+      "fetchedAt": "2026-09-06T11:53:07.230Z"
     }
   ],
   "trends": [
@@ -578,7 +578,7 @@
       "id": "560040c54a",
       "term": "AI",
       "labelZh": "",
-      "score": 45.01,
+      "score": 44.95,
       "mentions": 89,
       "platformCount": 7,
       "platforms": [
@@ -593,10 +593,26 @@
       "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
     },
     {
+      "id": "3b70f4e442",
+      "term": "编程",
+      "labelZh": "",
+      "score": 18.18,
+      "mentions": 43,
+      "platformCount": 5,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://usr.lmf.cnrs.fr/lpo/"
+    },
+    {
       "id": "38c84c8015",
       "term": "网络安全",
       "labelZh": "",
-      "score": 11.98,
+      "score": 11.96,
       "mentions": 33,
       "platformCount": 6,
       "platforms": [
@@ -610,25 +626,24 @@
       "url": "https://www.marketwatch.com/story/i-didnt-know-what-i-didnt-know-i-thought-id-have-to-depend-on-social-security-then-i-taught-myself-how-to-invest-0129870b?mod=mw_rss_topstories"
     },
     {
-      "id": "3b70f4e442",
-      "term": "编程",
+      "id": "77b5d1a0f1",
+      "term": "AI智能体",
       "labelZh": "",
-      "score": 7.91,
-      "mentions": 21,
-      "platformCount": 4,
+      "score": 10.23,
+      "mentions": 49,
+      "platformCount": 3,
       "platforms": [
         "Hacker News",
         "GitHub Trending",
-        "DEV Community",
-        "Lobsters"
+        "DEV Community"
       ],
-      "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
+      "url": "https://github.com/pigeonlabsHQ/pigeon"
     },
     {
       "id": "2b681c0a24",
       "term": "Google",
       "labelZh": "",
-      "score": 7.15,
+      "score": 7.14,
       "mentions": 14,
       "platformCount": 4,
       "platforms": [
@@ -643,7 +658,7 @@
       "id": "88d650dd4f",
       "term": "浏览器",
       "labelZh": "",
-      "score": 6.9,
+      "score": 6.91,
       "mentions": 14,
       "platformCount": 5,
       "platforms": [
@@ -654,20 +669,6 @@
         "Lobsters"
       ],
       "url": "https://quenq.com/apps/vice-city-online/"
-    },
-    {
-      "id": "e7052aeb5d",
-      "term": "agents",
-      "labelZh": "",
-      "score": 6.81,
-      "mentions": 30,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://github.com/okf-memory/okf-agent-memory"
     },
     {
       "id": "d014ab7703",
@@ -689,7 +690,7 @@
       "id": "4ed766e0c3",
       "term": "互联网",
       "labelZh": "",
-      "score": 4.91,
+      "score": 4.9,
       "mentions": 10,
       "platformCount": 3,
       "platforms": [
@@ -698,21 +699,6 @@
         "GitHub Trending"
       ],
       "url": "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/"
-    },
-    {
-      "id": "98910a6e9a",
-      "term": "them",
-      "labelZh": "",
-      "score": 3.92,
-      "mentions": 9,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://trellner.com/reports/manufactured-sources-behind-ai-recommendations/"
     },
     {
       "id": "83ad8510bb",
@@ -730,20 +716,6 @@
       "url": "https://social.treehouse.systems/@AsahiLinux/117221302190818078"
     },
     {
-      "id": "0608c40546",
-      "term": "agent",
-      "labelZh": "",
-      "score": 3.53,
-      "mentions": 18,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://collusion.wiki/"
-    },
-    {
       "id": "e2ae20d9ae",
       "term": "Rust",
       "labelZh": "",
@@ -759,84 +731,39 @@
       "url": "https://sofiabelen.github.io/projects/visualizing-rusts-vtables-how-dyn-trait-works-in-memory/"
     },
     {
-      "id": "3c49d9cc3c",
-      "term": "running",
+      "id": "fc4b0426b1",
+      "term": "大语言模型",
       "labelZh": "",
-      "score": 3.33,
-      "mentions": 7,
-      "platformCount": 4,
-      "platforms": [
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://anticapitalist.party/@dirtycommo/117223561405782267"
-    },
-    {
-      "id": "5b07397be4",
-      "term": "programming",
-      "labelZh": "",
-      "score": 3.25,
-      "mentions": 13,
+      "score": 3.5,
+      "mentions": 19,
       "platformCount": 3,
       "platforms": [
         "Hacker News",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://usr.lmf.cnrs.fr/lpo/"
-    },
-    {
-      "id": "4ff88aaddb",
-      "term": "free",
-      "labelZh": "",
-      "score": 3.11,
-      "mentions": 10,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
         "GitHub Trending",
         "DEV Community"
       ],
-      "url": "https://quad9.net/"
+      "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
     },
     {
-      "id": "3097ef218a",
-      "term": "making",
+      "id": "bf31c52c32",
+      "term": "safe",
       "labelZh": "",
-      "score": 3.09,
-      "mentions": 7,
+      "score": 3.1,
+      "mentions": 5,
       "platformCount": 4,
       "platforms": [
+        "DailyReview",
         "Hacker News",
         "Mastodon",
-        "GitHub Trending",
         "DEV Community"
       ],
-      "url": "https://cloudinabottle.org/blog/launch-post"
-    },
-    {
-      "id": "8178ea208a",
-      "term": "working",
-      "labelZh": "",
-      "score": 3.07,
-      "mentions": 6,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://codeberg.org/mv12star/shitter/wiki/Instances"
+      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/"
     },
     {
       "id": "4d2f8c7f17",
       "term": "微软",
       "labelZh": "",
-      "score": 3,
+      "score": 2.99,
       "mentions": 6,
       "platformCount": 3,
       "platforms": [
@@ -847,82 +774,26 @@
       "url": "https://techcrunch.com/2026/09/05/seattle-times-and-newsday-are-the-latest-publications-to-sue-openai-and-microsoft/"
     },
     {
-      "id": "0b5d7ed54b",
-      "term": "测试",
+      "id": "98fd0cbd9c",
+      "term": "模型",
       "labelZh": "",
-      "score": 2.92,
-      "mentions": 10,
-      "platformCount": 3,
-      "platforms": [
-        "Mastodon",
-        "DEV Community",
-        "Lobsters"
-      ],
-      "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
-    },
-    {
-      "id": "ab43a7c9cb",
-      "term": "coding",
-      "labelZh": "",
-      "score": 2.83,
-      "mentions": 7,
+      "score": 2.98,
+      "mentions": 13,
       "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://github.com/okf-memory/okf-agent-memory"
-    },
-    {
-      "id": "4cddc093d5",
-      "term": "llm",
-      "labelZh": "",
-      "score": 2.82,
-      "mentions": 15,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/"
-    },
-    {
-      "id": "2663e4c35d",
-      "term": "轨道",
-      "labelZh": "",
-      "score": 2.82,
-      "mentions": 5,
-      "platformCount": 3,
       "platforms": [
         "DailyReview",
         "Hacker News",
-        "Bluesky"
-      ],
-      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
-    },
-    {
-      "id": "edee9402d1",
-      "term": "next",
-      "labelZh": "",
-      "score": 2.8,
-      "mentions": 7,
-      "platformCount": 3,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
+        "GitHub Trending",
         "DEV Community"
       ],
-      "url": "https://www.trendingtopics.eu/emad-mostaque-ai-internet-outlook-english/"
+      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
     },
     {
-      "id": "cda051c901",
-      "term": "game",
+      "id": "2305ee3ca3",
+      "term": "游戏",
       "labelZh": "",
-      "score": 2.73,
-      "mentions": 8,
+      "score": 2.93,
+      "mentions": 9,
       "platformCount": 4,
       "platforms": [
         "Hacker News",
@@ -933,34 +804,32 @@
       "url": "https://michaelteter.com/flyby.html"
     },
     {
-      "id": "b802f38430",
-      "term": "three",
+      "id": "0b5d7ed54b",
+      "term": "测试",
       "labelZh": "",
-      "score": 2.72,
-      "mentions": 7,
-      "platformCount": 4,
+      "score": 2.91,
+      "mentions": 10,
+      "platformCount": 3,
+      "platforms": [
+        "Mastodon",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://cyberplace.social/@GossiTheDog/117222967212667695"
+    },
+    {
+      "id": "2663e4c35d",
+      "term": "轨道",
+      "labelZh": "",
+      "score": 2.81,
+      "mentions": 5,
+      "platformCount": 3,
       "platforms": [
         "DailyReview",
         "Hacker News",
-        "Mastodon",
-        "DEV Community"
+        "Bluesky"
       ],
-      "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/"
-    },
-    {
-      "id": "e274eeff76",
-      "term": "work",
-      "labelZh": "",
-      "score": 2.68,
-      "mentions": 7,
-      "platformCount": 4,
-      "platforms": [
-        "Hacker News",
-        "Mastodon",
-        "GitHub Trending",
-        "DEV Community"
-      ],
-      "url": "https://victoriametrics.com/blog/go-swiss-table-map/index.html"
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     },
     {
       "id": "6cab529f6d",
@@ -991,33 +860,155 @@
       "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     },
     {
-      "id": "1d06a0d76f",
-      "term": "model",
+      "id": "2eda8ad163",
+      "term": "job",
       "labelZh": "",
-      "score": 2.62,
-      "mentions": 11,
-      "platformCount": 4,
+      "score": 2.58,
+      "mentions": 4,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Mastodon",
+        "Lobsters"
+      ],
+      "url": "https://www.bbc.co.uk/news/articles/crer948xq00o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "9a71ad6ad1",
+      "term": "股票",
+      "labelZh": "",
+      "score": 2.56,
+      "mentions": 6,
+      "platformCount": 2,
+      "platforms": [
+        "DailyReview",
+        "GitHub Trending"
+      ],
+      "url": "https://www.benzinga.com/money/best-energy-stocks"
+    },
+    {
+      "id": "7e412298bf",
+      "term": "reaches",
+      "labelZh": "",
+      "score": 2.53,
+      "mentions": 4,
+      "platformCount": 3,
       "platforms": [
         "DailyReview",
         "Hacker News",
-        "GitHub Trending",
-        "DEV Community"
+        "Bluesky"
       ],
-      "url": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html"
+      "url": "https://isaraerospace.com/press/history-for-european-spaceflight-isar-aerospace-reaches-orbit-and-deploys-payloads-on-second-flight"
     },
     {
-      "id": "1f1e67e5fd",
-      "term": "don",
+      "id": "6ae999552a",
+      "term": "name",
       "labelZh": "",
-      "score": 2.58,
-      "mentions": 7,
+      "score": 2.5,
+      "mentions": 6,
       "platformCount": 3,
       "platforms": [
         "Hacker News",
         "Mastodon",
         "DEV Community"
       ],
+      "url": "https://neil.fraser.name/news/2026/09/03/"
+    },
+    {
+      "id": "3559d7accf",
+      "term": "search",
+      "labelZh": "",
+      "score": 2.47,
+      "mentions": 6,
+      "platformCount": 4,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community",
+        "Lobsters"
+      ],
+      "url": "https://productrise.app/blog/google-ai-mode-prefers-more-expensive-products"
+    },
+    {
+      "id": "f1dda22f6c",
+      "term": "claude",
+      "labelZh": "",
+      "score": 2.46,
+      "mentions": 12,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
+    },
+    {
+      "id": "164a5c24f5",
+      "term": "too",
+      "labelZh": "",
+      "score": 2.44,
+      "mentions": 5,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "Mastodon",
+        "Lobsters"
+      ],
+      "url": "https://www.smithsonianmag.com/science-nature/earths-organisms-developed-via-evolution-some-theorists-wonder-what-if-the-entire-cosmos-did-too-180989338/"
+    },
+    {
+      "id": "d27a1f1177",
+      "term": "right",
+      "labelZh": "",
+      "score": 2.44,
+      "mentions": 6,
+      "platformCount": 2,
+      "platforms": [
+        "Hacker News",
+        "Mastodon"
+      ],
       "url": "https://www.motherjones.com/politics/2026/09/drinking-water-mississippi-lawsuit/"
+    },
+    {
+      "id": "353c847ec3",
+      "term": "built",
+      "labelZh": "",
+      "score": 2.38,
+      "mentions": 12,
+      "platformCount": 3,
+      "platforms": [
+        "Hacker News",
+        "GitHub Trending",
+        "DEV Community"
+      ],
+      "url": "https://arstechnica.com/gadgets/2026/09/nearly-impossible-how-fairphone-built-the-ethical-repairable-fairphone-gen-6/"
+    },
+    {
+      "id": "43c2c72f66",
+      "term": "silentsunday",
+      "labelZh": "",
+      "score": 2.3,
+      "mentions": 8,
+      "platformCount": 1,
+      "platforms": [
+        "Mastodon"
+      ],
+      "url": "https://mastodon.social/@NellytheWillow/117223335364087804"
+    },
+    {
+      "id": "6406510c31",
+      "term": "case",
+      "labelZh": "",
+      "score": 2.29,
+      "mentions": 3,
+      "platformCount": 3,
+      "platforms": [
+        "DailyReview",
+        "Mastodon",
+        "Bluesky"
+      ],
+      "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo"
     }
   ]
 }
