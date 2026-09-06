@@ -15,12 +15,40 @@ const {
 const { saveNewsArchive } = require('./hot-news-archive');
 const { collectSocialWordCloud } = require('./social-word-cloud');
 
-const USER_AGENT = 'DailyReview/2.0 (+https://github.com/xf5464/DailyReview)';
+const USER_AGENT = 'DailyReview/2.1 (+https://github.com/xf5464/DailyReview)';
 const FEED_FALLBACK_MAX_AGE_HOURS = 72;
-const TECH_SECTION_OVERRIDES = new Map([
-  ['techradar', 'https://www.techradar.com/computing'],
-  ['pcmag', 'https://www.pcmag.com/news'],
+const TECH_WINDOW_HOURS = 48;
+const TECH_ITEMS_PER_SOURCE = 4;
+
+// Main technology pool: broad, high-quality, mostly free sources. Consumer-deal-heavy
+// outlets (TechRadar/PCMag/Tom's Hardware) are intentionally excluded from this tab.
+const TECH_SOURCES = [
+  { key: 'techcrunch', name: 'TechCrunch', homepage: 'https://techcrunch.com/', feed: 'https://techcrunch.com/feed/', hosts: ['techcrunch.com'], pattern: '^/\\d{4}/\\d{2}/\\d{2}/', authority: 30 },
+  { key: 'the-verge', name: 'The Verge', homepage: 'https://www.theverge.com/tech', feed: 'https://www.theverge.com/rss/index.xml', hosts: ['theverge.com'], pattern: '^/(news|tech|ai-artificial-intelligence)/', authority: 29 },
+  { key: 'ars-technica', name: 'Ars Technica', homepage: 'https://arstechnica.com/', feed: 'https://feeds.arstechnica.com/arstechnica/index', hosts: ['arstechnica.com'], pattern: '^/[a-z-]+/\\d{4}/\\d{2}/', authority: 30 },
+  { key: 'wired', name: 'WIRED', homepage: 'https://www.wired.com/category/tech/', feed: 'https://www.wired.com/feed/rss', hosts: ['wired.com'], pattern: '^/story/', authority: 30 },
+  { key: 'mit-tech-review', name: 'MIT Technology Review', homepage: 'https://www.technologyreview.com/', feed: 'https://www.technologyreview.com/feed/', hosts: ['technologyreview.com'], pattern: '^/\\d{4}/', authority: 31 },
+  { key: 'ieee-spectrum', name: 'IEEE Spectrum', homepage: 'https://spectrum.ieee.org/', feed: 'https://spectrum.ieee.org/feeds/feed.rss', hosts: ['spectrum.ieee.org'], pattern: '^/', authority: 31 },
+  { key: 'engadget', name: 'Engadget', homepage: 'https://www.engadget.com/', feed: 'https://www.engadget.com/rss.xml', hosts: ['engadget.com'], pattern: '^/', authority: 25 },
+  { key: 'techspot', name: 'TechSpot', homepage: 'https://www.techspot.com/', feed: 'https://www.techspot.com/backend.xml', hosts: ['techspot.com'], pattern: '^/news/', authority: 25 },
+  { key: 'bleepingcomputer', name: 'BleepingComputer', homepage: 'https://www.bleepingcomputer.com/', feed: 'https://www.bleepingcomputer.com/feed/', hosts: ['bleepingcomputer.com'], pattern: '^/news/', authority: 27 },
+  { key: 'venturebeat', name: 'VentureBeat', homepage: 'https://venturebeat.com/', feed: 'https://venturebeat.com/feed/', hosts: ['venturebeat.com'], pattern: '^/', authority: 24 },
+  { key: 'zdnet', name: 'ZDNET', homepage: 'https://www.zdnet.com/', feed: 'https://www.zdnet.com/news/rss.xml', hosts: ['zdnet.com'], pattern: '^/article/', authority: 25 },
+  { key: '9to5mac', name: '9to5Mac', homepage: 'https://9to5mac.com/', feed: 'https://9to5mac.com/feed/', hosts: ['9to5mac.com'], pattern: '^/\\d{4}/', authority: 22 },
+  { key: 'android-authority', name: 'Android Authority', homepage: 'https://www.androidauthority.com/', feed: 'https://www.androidauthority.com/feed/', hosts: ['androidauthority.com'], pattern: '^/', authority: 21 },
+  { key: 'digital-trends', name: 'Digital Trends', homepage: 'https://www.digitaltrends.com/computing/', feed: 'https://www.digitaltrends.com/feed/', hosts: ['digitaltrends.com'], pattern: '^/', authority: 21 },
+  { key: 'securityweek', name: 'SecurityWeek', homepage: 'https://www.securityweek.com/', feed: 'https://www.securityweek.com/feed/', hosts: ['securityweek.com'], pattern: '^/', authority: 25 },
+  { key: 'siliconangle', name: 'SiliconANGLE', homepage: 'https://siliconangle.com/', feed: 'https://siliconangle.com/feed/', hosts: ['siliconangle.com'], pattern: '^/', authority: 22 },
+  { key: 'hacker-news', name: 'Hacker News', special: 'hacker-news', authority: 23 },
+];
+
+const TECH_STOP_WORDS = new Set([
+  'about','after','again','against','amid','and','are','but','could','from','gets','has','have','into','its','new','now','over','says','that','the','their','this','through','to','with','will','your',
+  'tech','technology','report','reports','latest','live','update','updates','review','reviews','best','why','how','what','when','where',
 ]);
+const TECH_IMPACT_KEYWORDS = [
+  'ai','artificial intelligence','openai','chatgpt','anthropic','google','gemini','apple','iphone','microsoft','meta','nvidia','amd','intel','chip','semiconductor','robot','robotics','quantum','security','cyber','zero-day','breach','startup','funding','ipo','acquisition','merger','ban','regulation','lawsuit','launch','release','model','datacenter','data center','cloud','space','rocket',
+];
 
 function environmentFlag(value) { return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase()); }
 function hoursOld(value, now = Date.now()) {
@@ -38,10 +66,6 @@ async function fetchText(url, timeout = 15_000) {
   return response.text();
 }
 function stripTags(value = '') { return decodeXml(String(value)).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); }
-function sourceHomepage(source, category) {
-  if (category === 'tech' && TECH_SECTION_OVERRIDES.has(source.key)) return TECH_SECTION_OVERRIDES.get(source.key);
-  return source.homepage;
-}
 function cleanHeadlineText(value = '') {
   return cleanMarkdownTitle(decodeXml(String(value)))
     .replace(/\s+Published\s+\d{1,2}\s+[A-Za-z]+\s+\d{2,4}\s*$/i, '')
@@ -53,7 +77,7 @@ function cleanHeadlineText(value = '') {
 function isClearlyNonTechHeadline(title, url = '') {
   const text = `${title} ${url}`.toLowerCase();
   return /\b(season\s*\d+|episode\s*\d+|release date|trailer|movie|film|tv series|tv show|prime video series|netflix series|hulu series|disney\+ series|premier league|champions league|arsenal|chelsea|manchester united|liverpool|watch .* free|free stream|live stream|kickoff|kick-off)\b/.test(text)
-    || /\b(best .* deals?|deal of the day|save up to|sale|coupon|discount)\b/.test(text)
+    || /\b(best .* deals?|deal of the day|save up to|coupon|discount|labor day sale|black friday|prime day)\b/.test(text)
     || (/\/streaming\//.test(text) && /\b(season|episode|series|movie|film|sports?|football|soccer)\b/.test(text));
 }
 function isClearlyNonMarketHeadline(title) {
@@ -92,13 +116,15 @@ function linkCandidates(content) {
   return [...markdownHeadings, ...headingLinks, ...linkedHeadings, ...markdownLinks, ...htmlLinks];
 }
 function parseSectionHeadline(content, source, category, homepage) {
-  const pattern = source.articlePattern ? new RegExp(source.articlePattern, 'i') : null;
+  const patternText = source.articlePattern || source.pattern;
+  const pattern = patternText ? new RegExp(patternText, 'i') : null;
   for (const [rawTitle, rawUrl] of linkCandidates(content)) {
     const title = cleanHeadlineText(rawTitle);
     if (title.length < 15 || title.length > 220) continue;
     try {
       const url = new URL(decodeXml(rawUrl), homepage); const host = url.hostname.toLowerCase().replace(/^www\./, '');
-      if (!(source.hosts || []).some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
+      const hosts = source.hosts || [];
+      if (hosts.length && !hosts.some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
       if (pattern && !pattern.test(url.pathname)) continue;
       url.hash = '';
       if (!isAcceptableHeadline(category, title, url.toString(), homepage)) continue;
@@ -107,18 +133,32 @@ function parseSectionHeadline(content, source, category, homepage) {
   }
   throw new Error(`${source.name} section page returned no usable lead story`);
 }
-async function fetchOfficialFeed(source, category, now) {
-  if (!source.headlineFeed) return [];
-  const xml = await fetchText(source.headlineFeed, 15_000);
-  return parseRssItems(xml, category, 0)
-    .map((item) => ({ ...item, title: cleanHeadlineText(item.title) }))
+function parseAtomItems(xml, category) {
+  const blocks = String(xml).match(/<entry\b[\s\S]*?<\/entry>/gi) || [];
+  return blocks.map((block, index) => {
+    const title = stripTags((block.match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i) || [])[1] || '');
+    const linkMatch = block.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*>/i);
+    const published = stripTags((block.match(/<(?:published|updated)(?:\s[^>]*)?>([\s\S]*?)<\/(?:published|updated)>/i) || [])[1] || '');
+    return { category, title, url: linkMatch?.[1] || '', publishedAt: published, feedRank: index, score: 0 };
+  }).filter((item) => item.title && item.url);
+}
+function parseFeedItems(xml, category) {
+  const rss = parseRssItems(xml, category, 0);
+  return rss.length ? rss : parseAtomItems(xml, category);
+}
+async function fetchOfficialFeed(source, category, now, maxAge = FEED_FALLBACK_MAX_AGE_HOURS) {
+  const feedUrl = source.headlineFeed || source.feed;
+  if (!feedUrl) return [];
+  const xml = await fetchText(feedUrl, 15_000);
+  return parseFeedItems(xml, category)
+    .map((item) => ({ ...item, title: cleanHeadlineText(item.title), source: source.name, sourceKey: source.key }))
     .filter((item) => !isPaywalledItem(item))
     .filter((item) => isAcceptableHeadline(category, item.title, item.url))
-    .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= FEED_FALLBACK_MAX_AGE_HOURS)
+    .filter((item) => !item.publishedAt || hoursOld(item.publishedAt, now) <= maxAge)
     .sort((left, right) => Date.parse(right.publishedAt || 0) - Date.parse(left.publishedAt || 0));
 }
 async function readSectionLead(source, category) {
-  const homepage = sourceHomepage(source, category); let firstError;
+  const homepage = source.homepage; let firstError;
   try { return parseSectionHeadline(await fetchText(homepage, 15_000), source, category, homepage); }
   catch (error) { firstError = error; }
   const target = new URL(homepage); const jinaUrl = `https://r.jina.ai/http://${target.host}${target.pathname}${target.search}`;
@@ -164,6 +204,82 @@ async function translateItems(items, knownTranslations, previousBySource, baseli
   }
   return output;
 }
+
+function techTokens(title) {
+  return new Set(cleanHeadlineText(title).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff+.-]+/g, ' ').split(/\s+/)
+    .filter((token) => token.length > 2 && !TECH_STOP_WORDS.has(token)));
+}
+function sameTechEvent(left, right) {
+  if (isSimilarTitle(left, right)) return true;
+  const a = techTokens(left); const b = techTokens(right);
+  if (!a.size || !b.size) return false;
+  let shared = 0;
+  for (const token of a) if (b.has(token)) shared += 1;
+  const ratio = shared / Math.min(a.size, b.size);
+  return shared >= 3 && ratio >= 0.38;
+}
+function techImpact(title) {
+  const text = String(title || '').toLowerCase();
+  return Math.min(32, TECH_IMPACT_KEYWORDS.reduce((score, keyword) => score + (text.includes(keyword) ? 4 : 0), 0));
+}
+function rankTechClusters(candidates, now) {
+  const clusters = [];
+  for (const item of candidates.sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))) {
+    let cluster = clusters.find((entry) => entry.items.some((other) => sameTechEvent(item.title, other.title)));
+    if (!cluster) { cluster = { items: [] }; clusters.push(cluster); }
+    cluster.items.push(item);
+  }
+  return clusters.map((cluster) => {
+    const sourceCount = new Set(cluster.items.map((item) => item.sourceKey)).size;
+    const representative = [...cluster.items].sort((a, b) => b.authority - a.authority || Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))[0];
+    const freshestHours = Math.min(...cluster.items.map((item) => hoursOld(item.publishedAt, now)));
+    const freshness = Math.max(0, 48 - freshestHours);
+    const authority = Math.max(...cluster.items.map((item) => item.authority || 20));
+    const score = Math.round((sourceCount * 34 + freshness * 1.15 + authority + techImpact(representative.title)) * 10) / 10;
+    return { representative, sourceCount, score };
+  }).sort((a, b) => b.score - a.score || Date.parse(b.representative.publishedAt || 0) - Date.parse(a.representative.publishedAt || 0));
+}
+async function collectTechSource(source, sourceOrder, now, baselineBySource) {
+  if (source.special === 'hacker-news') {
+    const item = baselineBySource.get('hacker-news');
+    if (!item || !isAcceptableHeadline('tech', item.title, item.url)) return [];
+    return [{ ...normalizeBaselineFreshness(item, now), category: 'tech', source: source.name, sourceKey: source.key, sourceOrder, authority: source.authority }];
+  }
+  const found = [];
+  try {
+    const feed = await fetchOfficialFeed(source, 'tech', now, TECH_WINDOW_HOURS);
+    found.push(...feed.slice(0, TECH_ITEMS_PER_SOURCE));
+  } catch (error) { console.warn(`${source.name} feed failed: ${error.message}`); }
+  try {
+    const lead = await readSectionLead(source, 'tech');
+    const publishedAt = await publishedAtForLead(lead, source, 'tech', now);
+    if (!publishedAt || hoursOld(publishedAt, now) <= TECH_WINDOW_HOURS) {
+      found.unshift({ category: 'tech', title: lead.title, url: lead.url, publishedAt, source: source.name, sourceKey: source.key, feedRank: -1, score: 0 });
+    }
+  } catch (error) { console.warn(`${source.name} lead failed: ${error.message}`); }
+  const unique = [];
+  for (const item of found) {
+    if (!item.url || unique.some((old) => old.url === item.url || isSimilarTitle(old.title, item.title))) continue;
+    unique.push({ ...freshMetadata(item, now), source: source.name, sourceKey: source.key, sourceOrder, authority: source.authority });
+    if (unique.length >= TECH_ITEMS_PER_SOURCE) break;
+  }
+  return unique;
+}
+async function collectTechTop10(now, baselineBySource, knownTranslations, previousBySource) {
+  const batches = await Promise.all(TECH_SOURCES.map((source, index) => collectTechSource(source, index, now, baselineBySource)));
+  const candidates = batches.flat().filter((item) => isAcceptableHeadline('tech', item.title, item.url));
+  const ranked = rankTechClusters(candidates, now).slice(0, 10).map((cluster, rank) => ({
+    ...cluster.representative,
+    category: 'tech',
+    sourceKey: `tech-event-${rank + 1}`,
+    sourceOrder: rank,
+    score: cluster.score,
+    engagement: cluster.sourceCount >= 2 ? `${cluster.sourceCount}家科技媒体交叉确认` : '单一来源',
+  }));
+  console.log(`Tech aggregation: ${TECH_SOURCES.length} sources, ${candidates.length} candidates, ${ranked.length} ranked events.`);
+  return translateItems(ranked, knownTranslations, previousBySource, baselineBySource);
+}
+
 async function fetchSectionSource(source, category, sourceOrder, now) {
   const lead = await readSectionLead(source, category);
   const publishedAt = await publishedAtForLead(lead, source, category, now);
@@ -203,7 +319,7 @@ async function main() {
   const baseline = await collectHotNews(0, now, knownTranslations, knownGoogleNewsUrls, previousBySource);
   const baselineBySource = new Map([...(baseline.tech || []), ...(baseline.market || []), ...(baseline.world || []), ...(baseline.youtube || [])].filter((item) => item.sourceKey).map((item) => [item.sourceKey, item]));
   const [tech, market] = await Promise.all([
-    collectSection('tech', now, previousBySource, baselineBySource, knownTranslations),
+    collectTechTop10(now, baselineBySource, knownTranslations, previousBySource),
     collectSection('market', now, previousBySource, baselineBySource, knownTranslations),
   ]);
   const world = (baseline.world || []).map((item) => normalizeBaselineFreshness(item, now)).map(polishChineseTitle);
@@ -218,4 +334,4 @@ async function main() {
   if (!environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY)) console.log('refresh-reader-news.js is intended for reader refresh mode; no email was sent.');
 }
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
-module.exports = { cleanHeadlineText, hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, sourceHomepage };
+module.exports = { TECH_SOURCES, cleanHeadlineText, collectTechTop10, hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, rankTechClusters, sameTechEvent };
