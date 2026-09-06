@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T05:47:15.614Z",
+  "updatedAt": "2026-09-06T05:50:47.456Z",
   "items": [
     {
       "id": "91ebf4501aca5b86",
@@ -14,35 +14,35 @@
       "publishedAt": "Fri, 04 Sep 2026 16:49:28 GMT",
       "score": 41,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
-      "id": "a7053cdaa9524a9b",
+      "id": "3f369e589d161a93",
       "category": "market",
-      "title": "Wendy’s U.S. president goes back to his old job",
-      "titleZh": "温迪的美国总统回到他以前的工作",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/wendy-u-president-resigns-position-211810971.html",
+      "title": "Exclusive-China's Xi seeks to bring large CEO delegation on US visit, sources say",
+      "titleZh": "独家-消息人士称，中国的习近平寻求将大型首席执行官代表团带到美国访问",
+      "url": "https://finance.yahoo.com/news/exclusive-chinas-xi-bring-large-104707459.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-08-17T21:18:10.000Z",
-      "score": null,
+      "publishedAt": "2026-09-04T22:02:51Z",
+      "score": 36.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
-      "id": "d646d9dc06ae3234",
+      "id": "89e0adf0c9c1b067",
       "category": "market",
-      "title": "Market Forecast",
-      "titleZh": "市场预测",
-      "url": "https://www.cnbc.com/2023/05/11/market-strategist-survey-forecast.html",
+      "title": "Trump turns up the heat on Warsh as Fed rate hike looms",
+      "titleZh": "随着美联储加息迫在眉睫，特朗普加大了对沃什的热情",
+      "url": "https://www.cnbc.com/2026/09/05/trump-warsh-fed-september-rate-hike.html",
       "source": "CNBC Markets",
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
-      "publishedAt": "2025-12-19T17:42:24.000Z",
-      "score": null,
+      "publishedAt": "Sat, 05 Sep 2026 19:12:53 GMT",
+      "score": 56.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "ffcfb18dc494fa6c",
@@ -56,7 +56,7 @@
       "publishedAt": "Fri, 04 Sep 2026 10:40:23 GMT",
       "score": 38,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 55,
+      "score": 54.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -98,7 +98,7 @@
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
       "score": 44.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "d0d6b5803f0e771f",
@@ -112,7 +112,7 @@
       "publishedAt": "Sun, 06 Sep 2026 05:00:00 GMT",
       "score": 58.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "e0bf107cee4e6d27",
@@ -124,9 +124,9 @@
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
       "publishedAt": "Sun, 06 Sep 2026 01:16:35 -0400",
-      "score": 60.5,
+      "score": 60.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -154,7 +154,7 @@
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
       "score": 70.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -168,7 +168,7 @@
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
       "score": 71,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,51 +194,51 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 58.5,
+      "score": 58.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
-      "id": "8ea50880be9eeaab",
+      "id": "0b166caf3c482188",
       "category": "tech",
-      "title": "Is It Safe To Leave Your Phone's Bluetooth Running All The Time?",
-      "titleZh": "让手机的蓝牙始终处于运行状态是否安全？",
-      "url": "https://www.engadget.com/2245488/is-it-safe-leave-bluetooth-when-not-using/",
+      "title": "Is the Steam Deck still worth it in 2026?",
+      "titleZh": "2026年的蒸汽卡组还值得吗？",
+      "url": "https://www.engadget.com/2248094/is-steam-deck-still-worth-it/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 23:30:00 +0000",
-      "score": 65.7,
+      "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
+      "score": 64.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
-      "id": "df79edd46fd49dc1",
+      "id": "7cfe2259cee6fb57",
       "category": "tech",
-      "title": "Best blood pressure watches",
-      "titleZh": "最佳血压表",
-      "url": "https://www.zdnet.com/article/best-blood-pressure-watch/",
-      "source": "ZDNET",
-      "sourceKey": "zdnet",
+      "title": "CERN is moving more than 2,200 specialized computers from RHEL to Debian",
+      "titleZh": "CERN正在将2,200多台专业计算机从RHEL迁移到Debian",
+      "url": "https://www.techspot.com/news/113745-cern-moving-more-than-2200-specialized-computers-rhel.html",
+      "source": "TechSpot",
+      "sourceKey": "techspot",
       "sourceOrder": 5,
-      "publishedAt": "2026-07-09T14:00:00.000Z",
-      "score": null,
+      "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
+      "score": 57.9,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
-      "id": "a6a6d680b69b9b9f",
+      "id": "809b1ee6d7d4a122",
       "category": "tech",
-      "title": "Best AI Image Generators",
-      "titleZh": "最佳AI图像生成器",
-      "url": "https://www.cnet.com/tech/services-and-software/best-ai-image-generators/",
-      "source": "CNET",
-      "sourceKey": "cnet",
+      "title": "Rate Your Top Personal Finance Tools, Stock Trading Services, and Cash Apps",
+      "titleZh": "为您的顶级个人理财工具、股票交易服务和现金应用评分",
+      "url": "https://www.pcmag.com/articles/readers-choice-sweeps-4",
+      "source": "PCMag",
+      "sourceKey": "pcmag",
       "sourceOrder": 6,
-      "publishedAt": "2026-07-17T09:30:00.000Z",
-      "score": null,
+      "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
+      "score": 64.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 56.7,
+      "score": 56.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,9 +264,9 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 60.1,
+      "score": 60,
       "engagement": "",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "6a2258e1c0b90d7f",
@@ -278,9 +278,9 @@
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
       "publishedAt": "2026-09-06T00:03:29.000Z",
-      "score": 125.3,
-      "engagement": "275 points · 112 comments",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 125.4,
+      "engagement": "275 points · 114 comments",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -293,9 +293,9 @@
       "sourceKey": "world-bbc-world-0",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 127.7,
+      "score": 127.6,
       "engagement": "3家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -308,9 +308,9 @@
       "sourceKey": "world-reuters-world-1",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 106.9,
+      "score": 106.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -323,9 +323,9 @@
       "sourceKey": "world-al-jazeera-2",
       "sourceOrder": 2,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 106.7,
+      "score": 106.6,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -340,7 +340,7 @@
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
       "score": 105.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -355,7 +355,7 @@
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
       "score": 101.7,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -368,9 +368,9 @@
       "sourceKey": "world-al-jazeera-5",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 89.7,
+      "score": 89.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -383,9 +383,9 @@
       "sourceKey": "world-bbc-world-6",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 88.4,
+      "score": 88.3,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "7470701fe158400f",
@@ -398,9 +398,9 @@
       "sourceKey": "world-reuters-world-7",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 83.6,
+      "score": 83.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "a9dd8c904298b8b6",
@@ -413,9 +413,9 @@
       "sourceKey": "world-reuters-world-8",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:56:16 GMT",
-      "score": 82.7,
+      "score": 82.6,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "8ed0f82e8cf98c3f",
@@ -428,9 +428,9 @@
       "sourceKey": "world-reuters-world-9",
       "sourceOrder": 9,
       "publishedAt": "Sat, 05 Sep 2026 16:45:43 GMT",
-      "score": 80.8,
+      "score": 80.7,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -442,9 +442,9 @@
       "sourceKey": "youtube-wBJKzDgwDqA",
       "sourceOrder": 0,
       "publishedAt": "2026-09-05T09:00:26Z",
-      "score": 382927,
-      "engagement": "382,927 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 383092,
+      "engagement": "383,092 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -456,9 +456,9 @@
       "sourceKey": "youtube-xPjop4OC1XY",
       "sourceOrder": 1,
       "publishedAt": "2026-09-05T17:00:30Z",
-      "score": 280525,
-      "engagement": "280,525 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 281613,
+      "engagement": "281,613 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -470,9 +470,9 @@
       "sourceKey": "youtube-mGpLMflEuCc",
       "sourceOrder": 2,
       "publishedAt": "2026-09-05T15:59:31Z",
-      "score": 210733,
-      "engagement": "210,733 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 212541,
+      "engagement": "212,541 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -484,9 +484,9 @@
       "sourceKey": "youtube-td0lyo8hLJo",
       "sourceOrder": 3,
       "publishedAt": "2026-09-05T13:15:15Z",
-      "score": 191384,
-      "engagement": "191,384 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 191655,
+      "engagement": "191,655 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "114483232b4c644f",
@@ -498,9 +498,9 @@
       "sourceKey": "youtube-aGtsFSNJu4g",
       "sourceOrder": 4,
       "publishedAt": "2026-09-05T14:05:34Z",
-      "score": 167313,
-      "engagement": "167,313 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 169678,
+      "engagement": "169,678 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "8aede991afe3180c",
@@ -512,9 +512,9 @@
       "sourceKey": "youtube-ONuWCsB7ULU",
       "sourceOrder": 5,
       "publishedAt": "2026-09-05T07:00:12Z",
-      "score": 124215,
-      "engagement": "124,215 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 124380,
+      "engagement": "124,380 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -526,9 +526,9 @@
       "sourceKey": "youtube-5MqJKUJtoNY",
       "sourceOrder": 6,
       "publishedAt": "2026-09-05T11:01:03Z",
-      "score": 114644,
-      "engagement": "114,644 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 114916,
+      "engagement": "114,916 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "bf78585446ecad9a",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T07:09:16Z",
       "score": 109520,
       "engagement": "109,520 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -554,9 +554,9 @@
       "sourceKey": "youtube-rgzovlRt3Io",
       "sourceOrder": 8,
       "publishedAt": "2026-09-05T13:10:41Z",
-      "score": 98546,
-      "engagement": "98,546 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 98910,
+      "engagement": "98,910 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     },
     {
       "id": "f4446961f1e848a6",
@@ -568,9 +568,9 @@
       "sourceKey": "youtube-b5igiJSgZCo",
       "sourceOrder": 9,
       "publishedAt": "2026-09-05T19:34:19Z",
-      "score": 71317,
-      "engagement": "71,317 次观看",
-      "fetchedAt": "2026-09-06T05:47:15.614Z"
+      "score": 71661,
+      "engagement": "71,661 次观看",
+      "fetchedAt": "2026-09-06T05:50:47.456Z"
     }
   ]
 }
