@@ -2,8 +2,8 @@
 
 const API_ROOT = 'https://dailyreview-reader.xf5464.workers.dev';
 const ARCHIVE_URLS = [
-  'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json',
   new URL('data/recent.json', location.href).toString(),
+  'https://raw.githubusercontent.com/xf5464/DailyReview/main/site/reader/data/recent.json',
 ];
 const ARCHIVE_CACHE_KEY = 'dailyreview-recent-v4'; // compatibility: dailyreview-recent-v3
 const ARTICLE_CACHE_KEY = 'dailyreview-articles-v1';
@@ -22,7 +22,8 @@ const refs = {
   retry: document.querySelector('#retryButton'), dialogFont: document.querySelector('#dialogFontButton'),
 };
 
-let archive = { schemaVersion: 2, updatedAt: null, items: [] };
+let archive = { schemaVersion: 2, updatedAt: null, refreshAttemptedAt: null, items: [] };
+let archiveLoadedFromCache = false;
 const savedCategory = localStorage.getItem('dailyreview-reader-category');
 let activeCategory = ['tech', 'market', 'world', 'youtube', 'trends'].includes(savedCategory) ? savedCategory : 'tech';
 let currentUrl = '';
@@ -40,6 +41,12 @@ function itemTimestamp(item) {
   const pushed = Date.parse(item?.pushedAt);
   return Number.isFinite(pushed) ? pushed : 0;
 }
+function sourceTimestamp(item) {
+  const sourceUpdated = Date.parse(item?.sourceUpdatedAt);
+  if (Number.isFinite(sourceUpdated)) return sourceUpdated;
+  const fetched = Date.parse(item?.fetchedAt);
+  return Number.isFinite(fetched) ? fetched : 0;
+}
 function pruneArchive(value) {
   const items = Array.isArray(value?.items) ? value.items : (value?.days || []).flatMap((day) => day.items || []);
   const bySource = new Map();
@@ -49,7 +56,14 @@ function pruneArchive(value) {
     const old = bySource.get(key);
     if (!old || itemTimestamp(item) > itemTimestamp(old)) bySource.set(key, item);
   });
-  return { schemaVersion: 2, updatedAt: value?.updatedAt || null, items: [...bySource.values()], trends: Array.isArray(value?.trends) ? value.trends.slice(0, 30) : [] };
+  return {
+    schemaVersion: 2,
+    updatedAt: value?.updatedAt || null,
+    refreshAttemptedAt: value?.refreshAttemptedAt || value?.updatedAt || null,
+    failureCount: Number(value?.failureCount) || 0,
+    items: [...bySource.values()],
+    trends: Array.isArray(value?.trends) ? value.trends.slice(0, 30) : [],
+  };
 }
 function pruneArticleCache() {
   const cached = jsonStorage(ARTICLE_CACHE_KEY, {});
@@ -71,7 +85,7 @@ function publishedTimeLabel(value) {
   const day = new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', month: 'numeric', day: 'numeric' }).format(date);
   return `${day} ${time}`;
 }
-function updatedTimeLabel(value) { return value ? `更新于 ${publishedTimeLabel(value)}` : '更新时间未知'; }
+function updatedTimeLabel(value) { return value ? `抓取于 ${publishedTimeLabel(value)}` : '抓取时间未知'; }
 function directArticleUrl(url) {
   try {
     const target = new URL(url);
@@ -88,20 +102,24 @@ function chromeUrl(url) {
 }
 function itemButton(item, rank) {
   const row = document.createElement('div'); row.className = 'news-row';
-  const button = document.createElement('a'); button.className = 'news-item'; button.href = chromeUrl(directArticleUrl(item.url)); button.dataset.id = item.id || '';
+  const youtube = item.category === 'youtube';
+  const button = document.createElement('a'); button.className = 'news-item'; button.href = youtube ? item.url : chromeUrl(directArticleUrl(item.url)); button.dataset.id = item.id || '';
   const number = document.createElement('span'); number.className = 'rank'; number.textContent = String(rank);
-  const copy = document.createElement('span');
+  const copy = document.createElement('span'); copy.className = 'news-copy';
   const translated = document.createElement('span'); translated.className = 'news-title'; translated.textContent = item.titleZh || item.title || '未命名新闻';
   const original = document.createElement('span'); original.className = 'news-original'; original.textContent = item.title || '';
   copy.append(translated, original);
   if (item.category === 'world' && item.engagement) { const note = document.createElement('span'); note.className = 'news-note'; note.textContent = item.engagement; copy.append(note); }
   const details = document.createElement('span'); details.className = 'news-details';
   const source = document.createElement('span'); source.className = 'news-source'; source.textContent = item.source || '来源未知';
-  const published = document.createElement('span'); published.className = 'news-time'; published.textContent = publishedTimeLabel(item.publishedAt); details.append(source, published);
-  if (item.category === 'youtube' && item.engagement) { const views = document.createElement('span'); views.className = 'news-views'; views.textContent = item.engagement; details.append(views); }
-  button.append(number, copy, details);
+  const published = document.createElement('span'); published.className = 'news-time'; published.textContent = ` · ${publishedTimeLabel(item.publishedAt)}`; details.append(source, published);
+  if (item.category === 'youtube' && item.engagement) { const views = document.createElement('span'); views.className = 'news-views'; views.textContent = ` · ${item.engagement}`; details.append(views); }
+  if (item.isCached) { const cache = document.createElement('span'); cache.className = 'news-cache'; cache.textContent = ` · 缓存 ${publishedTimeLabel(item.sourceUpdatedAt || item.fetchedAt)}`; details.append(cache); }
+  copy.append(details);
+  button.append(number, copy);
   const browser = document.createElement('a'); browser.className = 'safari-link';
-  const youtube = item.category === 'youtube'; browser.href = youtube ? item.url : chromeUrl(directArticleUrl(item.url)); browser.textContent = youtube ? 'YouTube' : 'Chrome';
+  browser.href = youtube ? item.url : chromeUrl(directArticleUrl(item.url)); browser.textContent = '↗';
+  browser.title = youtube ? '使用 YouTube 打开' : '使用 Chrome 打开';
   browser.setAttribute('aria-label', `${youtube ? '使用 YouTube 打开' : '使用 Chrome 打开'}：${translated.textContent}`);
   if (youtube) browser.dataset.nativeApp = 'youtube';
   row.append(button, browser); return row;
@@ -111,6 +129,15 @@ function updateCategoryTabs() {
 }
 function selectedItems(value) {
   return (value.items || []).filter((item) => item.category === activeCategory).sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
+}
+function categoryFreshness(items, fromCache) {
+  const sourceTimes = items.map(sourceTimestamp).filter((value) => value > 0);
+  const latestSourceTime = sourceTimes.length ? Math.max(...sourceTimes) : Date.parse(archive.updatedAt || 0);
+  const cachedItems = items.filter((item) => item.isCached);
+  if (fromCache) return `网络加载失败 · 当前显示本地缓存 · 缓存时间 ${publishedTimeLabel(latestSourceTime)}`;
+  if (items.length && cachedItems.length === items.length) return `本次抓取失败 · 当前显示缓存数据 · 缓存时间 ${publishedTimeLabel(latestSourceTime)}`;
+  if (cachedItems.length) return `${updatedTimeLabel(archive.updatedAt)} · ${cachedItems.length}条来源使用旧缓存`;
+  return updatedTimeLabel(archive.updatedAt);
 }
 
 function renderEventCloud(trends) {
@@ -134,39 +161,53 @@ function renderEventCloud(trends) {
 }
 
 function renderArchive(value, fromCache = false) {
-  archive = pruneArchive(value); localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive)); refs.days.replaceChildren(); updateCategoryTabs();
+  archive = pruneArchive(value); archiveLoadedFromCache = fromCache; localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive)); refs.days.replaceChildren(); updateCategoryTabs();
   if (activeCategory === 'trends') {
     const trends = archive.trends || []; refs.empty.hidden = trends.length > 0;
-    refs.archiveMeta.textContent = trends.length ? `热点事件 · ${trends.length}个事件 · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}` : '本次抓取暂无热点事件';
+    refs.archiveMeta.textContent = trends.length ? `热点事件 · ${trends.length}个事件 · ${fromCache ? '网络加载失败 · 当前显示本地缓存 · ' : ''}${updatedTimeLabel(archive.updatedAt)}` : '本次抓取暂无热点事件';
     if (trends.length) renderEventCloud(trends); return;
   }
   const items = selectedItems(archive); refs.empty.hidden = items.length > 0;
-  refs.archiveMeta.textContent = items.length ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个网站当前头条'} · ${updatedTimeLabel(archive.updatedAt)}${fromCache ? ' · 本地缓存' : ''}` : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
+  refs.archiveMeta.textContent = items.length ? `${categoryLabel(activeCategory)} · ${activeCategory === 'youtube' ? '最近24小时热度前10' : activeCategory === 'world' ? '免费来源综合热点前10' : '每个网站当前头条'} · ${categoryFreshness(items, fromCache)}` : `本次抓取暂无${categoryLabel(activeCategory)}新闻`;
   if (!items.length) return;
   const section = document.createElement('section'); section.className = 'day'; const list = document.createElement('ol'); list.className = 'news-list';
   items.forEach((item, index) => { const li = document.createElement('li'); li.append(itemButton(item, index + 1)); list.append(li); }); section.append(list); refs.days.append(section);
 }
 function selectCategory(category) {
   if (!['tech', 'market', 'world', 'youtube', 'trends'].includes(category) || category === activeCategory) return;
-  activeCategory = category; localStorage.setItem('dailyreview-reader-category', category); renderArchive(archive);
+  activeCategory = category; localStorage.setItem('dailyreview-reader-category', category); renderArchive(archive, archiveLoadedFromCache);
   if (category === 'trends' ? !(archive.trends || []).length : !selectedItems(archive).length) loadArchive();
 }
 function recoverAfterResume() {
   document.documentElement.style.pointerEvents = ''; document.body.style.pointerEvents = ''; updateCategoryTabs();
-  if (archive.items.length) renderArchive(archive, true);
+  if (archive.items.length) renderArchive(archive, archiveLoadedFromCache);
   if (!archive.updatedAt || Date.now() - Date.parse(archive.updatedAt) >= RESUME_REFRESH_MS) loadArchive();
 }
 async function loadArchive() {
-  const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] })); if (cached.items.length) renderArchive(cached, true);
+  const cached = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] }));
+  const cachedUpdatedAt = Date.parse(cached.updatedAt || 0) || 0;
+  let best = null;
+  let bestUpdatedAt = 0;
   let lastError;
   for (const archiveUrl of ARCHIVE_URLS) {
     try {
       const target = new URL(archiveUrl); target.searchParams.set('v', String(Date.now()));
-      const response = await fetch(target, { cache: 'no-store' }); if (!response.ok) throw new Error(String(response.status));
-      const next = await response.json(); if (!Array.isArray(next?.items)) throw new Error('数据格式错误'); renderArchive(next); return;
+      const response = await fetch(target, { cache: 'no-store', headers: { 'cache-control': 'no-cache', pragma: 'no-cache' } });
+      if (!response.ok) throw new Error(String(response.status));
+      const next = await response.json(); if (!Array.isArray(next?.items)) throw new Error('数据格式错误');
+      const nextUpdatedAt = Date.parse(next.updatedAt || 0) || 0;
+      if (!best || nextUpdatedAt > bestUpdatedAt) { best = next; bestUpdatedAt = nextUpdatedAt; }
     } catch (error) { lastError = error; }
   }
-  if (!cached.items.length) renderArchive(cached, true);
+  if (best && bestUpdatedAt >= cachedUpdatedAt) { renderArchive(best, false); return; }
+  if (cached.items.length) {
+    renderArchive(cached, true);
+    if (best && bestUpdatedAt < cachedUpdatedAt) refs.archiveMeta.textContent += ' · 服务器返回的数据比本地缓存更旧，已拒绝降级';
+    else if (lastError) refs.archiveMeta.textContent += ` · 加载失败（${lastError.message || '网络错误'}）`;
+    return;
+  }
+  if (best) { renderArchive(best, false); return; }
+  renderArchive(cached, true);
   refs.archiveMeta.textContent += ` · 加载失败，点击页签重试（${lastError?.message || '网络错误'}）`;
 }
 function showDialogState(name) { refs.loading.hidden = name !== 'loading'; refs.article.hidden = name !== 'article'; refs.error.hidden = name !== 'error'; }
