@@ -8,14 +8,14 @@ const { saveNewsArchive } = require('./hot-news-archive');
 const NEWS_SOURCES = {
   tech: [
     { key: "reuters-technology", name: "Reuters Technology", homepage: "https://www.reuters.com/technology/", hosts: ["reuters.com"], articlePattern: "^/(technology|business)/.+-\\d{4}-\\d{2}-\\d{2}/" },
-    { key: "techcrunch", name: "TechCrunch", homepage: "https://techcrunch.com/", hosts: ["techcrunch.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
-    { key: "the-verge", name: "The Verge", homepage: "https://www.theverge.com/tech", hosts: ["theverge.com"], articlePattern: "^/(news|tech|ai-artificial-intelligence)/" },
-    { key: "ars-technica", name: "Ars Technica", homepage: "https://arstechnica.com/", hosts: ["arstechnica.com"], articlePattern: "^/[a-z-]+/\\d{4}/\\d{2}/" },
-    { key: "engadget", name: "Engadget", homepage: "https://www.engadget.com/", hosts: ["engadget.com"], articlePattern: "\\.html$" },
-    { key: "zdnet", name: "ZDNET", homepage: "https://www.zdnet.com/", hosts: ["zdnet.com"], articlePattern: "^/article/" },
-    { key: "cnet", name: "CNET", homepage: "https://www.cnet.com/tech/", hosts: ["cnet.com"], articlePattern: "^/(tech|news)/.+/" },
-    { key: "bleepingcomputer", name: "BleepingComputer", homepage: "https://www.bleepingcomputer.com/", hosts: ["bleepingcomputer.com"], articlePattern: "^/news/" },
-    { key: "toms-hardware", name: "Tom's Hardware", homepage: "https://www.tomshardware.com/", hosts: ["tomshardware.com"], articlePattern: "^/(pc-components|tech-industry|hardware|computing)/" },
+    { key: "techcrunch", name: "TechCrunch", homepage: "https://techcrunch.com/", headlineFeed: "https://techcrunch.com/feed/", hosts: ["techcrunch.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
+    { key: "the-verge", name: "The Verge", homepage: "https://www.theverge.com/tech", headlineFeed: "https://www.theverge.com/rss/index.xml", hosts: ["theverge.com"], articlePattern: "^/(news|tech|ai-artificial-intelligence)/" },
+    { key: "ars-technica", name: "Ars Technica", homepage: "https://arstechnica.com/", headlineFeed: "https://feeds.arstechnica.com/arstechnica/index", hosts: ["arstechnica.com"], articlePattern: "^/[a-z-]+/\\d{4}/\\d{2}/" },
+    { key: "engadget", name: "Engadget", homepage: "https://www.engadget.com/", headlineFeed: "https://www.engadget.com/rss.xml", hosts: ["engadget.com"], articlePattern: "^/.+" },
+    { key: "zdnet", name: "ZDNET", homepage: "https://www.zdnet.com/", headlineFeed: "https://www.zdnet.com/news/rss.xml", hosts: ["zdnet.com"], articlePattern: "^/article/" },
+    { key: "cnet", name: "CNET", homepage: "https://www.cnet.com/tech/", headlineFeed: "https://www.cnet.com/rss/news/", hosts: ["cnet.com"], articlePattern: "^/(tech|news)/.+/" },
+    { key: "bleepingcomputer", name: "BleepingComputer", homepage: "https://www.bleepingcomputer.com/", headlineFeed: "https://www.bleepingcomputer.com/feed/", hosts: ["bleepingcomputer.com"], articlePattern: "^/news/" },
+    { key: "toms-hardware", name: "Tom's Hardware", homepage: "https://www.tomshardware.com/", headlineFeed: "https://www.tomshardware.com/feeds/all", hosts: ["tomshardware.com"], articlePattern: "^/.+" },
     { key: "hacker-news", name: "Hacker News", special: "hacker-news" },
   ],
   market: [
@@ -24,10 +24,10 @@ const NEWS_SOURCES = {
     { key: "cnbc-markets", name: "CNBC Markets", homepage: "https://www.cnbc.com/markets/", hosts: ["cnbc.com"], articlePattern: "^/\\d{4}/\\d{2}/\\d{2}/" },
     { key: "nasdaq-news", name: "Nasdaq News", homepage: "https://www.nasdaq.com/news-and-insights/markets", hosts: ["nasdaq.com"], articlePattern: "^/articles/" },
     { key: "investing", name: "Investing.com", homepage: "https://www.investing.com/news/stock-market-news", hosts: ["investing.com"], articlePattern: "^/news/stock-market-news/" },
-    { key: "marketwatch", name: "MarketWatch", homepage: "https://www.marketwatch.com/markets", hosts: ["marketwatch.com"], articlePattern: "^/story/" },
-    { key: "benzinga", name: "Benzinga", homepage: "https://www.benzinga.com/markets", hosts: ["benzinga.com"], articlePattern: "^/(markets|news|trading-ideas)/" },
-    { key: "the-street", name: "TheStreet", homepage: "https://www.thestreet.com/markets", hosts: ["thestreet.com"], articlePattern: "^/(markets|investing|stocks)/" },
-    { key: "motley-fool", name: "The Motley Fool", homepage: "https://www.fool.com/investing-news/", hosts: ["fool.com"], articlePattern: "^/investing/\\d{4}/\\d{2}/\\d{2}/" },
+    { key: "marketwatch", name: "MarketWatch", homepage: "https://www.marketwatch.com/markets", headlineFeed: "https://feeds.marketwatch.com/marketwatch/topstories/", hosts: ["marketwatch.com"], articlePattern: "^/story/" },
+    { key: "benzinga", name: "Benzinga", homepage: "https://www.benzinga.com/markets", headlineFeed: "https://www.benzinga.com/feed", hosts: ["benzinga.com"], articlePattern: "^/(markets|news|trading-ideas)/" },
+    { key: "the-street", name: "TheStreet", homepage: "https://www.thestreet.com/markets", headlineFeed: "https://www.thestreet.com/.rss/full/", hosts: ["thestreet.com"], articlePattern: "^/.+" },
+    { key: "motley-fool", name: "The Motley Fool", homepage: "https://www.fool.com/investing-news/", headlineFeed: "https://www.fool.com/feeds/index.aspx?id=foolwatch&format=rss2", hosts: ["fool.com"], articlePattern: "^/investing/\\d{4}/\\d{2}/\\d{2}/" },
     { key: "tradingview", name: "TradingView News", homepage: "https://www.tradingview.com/markets/stocks-usa/news/", hosts: ["tradingview.com"], articlePattern: "^/news/" },
   ],
   world: [
@@ -354,14 +354,19 @@ function cleanMarkdownTitle(value) {
 }
 
 function parseHomepageHeadline(markdown, source) {
-  const links = String(markdown || "").matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)[^)]*\)/g);
+  const content = String(markdown || "");
+  const markdownLinks = [...content.matchAll(/\[([^\]]+)\]\(([^\s)]+)[^)]*\)/g)]
+    .map((match) => [match[1], match[2]]);
+  const htmlLinks = [...content.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => [stripTags(match[2]), match[1]]);
+  const links = [...markdownLinks, ...htmlLinks];
   const pattern = source.articlePattern ? new RegExp(source.articlePattern, "i") : null;
   const blocked = /^(home|news|markets?|technology|tech|read more|view all|latest|subscribe|sign in|log in)$/i;
-  for (const match of links) {
-    const title = cleanMarkdownTitle(match[1]);
+  for (const [rawTitle, rawUrl] of links) {
+    const title = cleanMarkdownTitle(rawTitle);
     if (title.length < 15 || title.length > 240 || blocked.test(title)) continue;
     try {
-      const url = new URL(match[2]);
+      const url = new URL(decodeXml(rawUrl), source.homepage);
       const host = url.hostname.toLowerCase().replace(/^www\./, "");
       if (!(source.hosts || []).some((allowed) => host === allowed || host.endsWith(`.${allowed}`))) continue;
       if (pattern && !pattern.test(url.pathname)) continue;
@@ -387,9 +392,30 @@ function publishedDateFromHtml(html) {
 }
 
 async function fetchHomepageHeadline(source, category, sourceOrder, now = Date.now()) {
+  if (source.headlineFeed) {
+    try {
+      const feedItems = parseRssItems(await fetchText(source.headlineFeed, 15_000), category, 0)
+        .filter((item) => !isPaywalledItem(item));
+      if (feedItems.length) {
+        const item = feedItems[0];
+        return {
+          ...item, source: source.name, sourceKey: source.key, sourceOrder,
+          score: rankGoogleItem({ ...item, source: source.name }, now),
+        };
+      }
+    } catch (error) {
+      console.warn(`${source.name} official feed failed; trying its section page: ${error.message}`);
+    }
+  }
   const homepage = new URL(source.homepage);
-  const readerUrl = `https://r.jina.ai/http://${homepage.host}${homepage.pathname}${homepage.search}`;
-  const lead = parseHomepageHeadline(await fetchText(readerUrl, 20_000), source);
+  let lead;
+  try {
+    lead = parseHomepageHeadline(await fetchText(source.homepage, 15_000), source);
+  } catch (directError) {
+    const readerUrl = `https://r.jina.ai/http://${homepage.host}${homepage.pathname}${homepage.search}`;
+    try { lead = parseHomepageHeadline(await fetchText(readerUrl, 20_000), source); }
+    catch (readerError) { throw new Error(`${directError.message}; reader fallback: ${readerError.message}`); }
+  }
   let publishedAt = "";
   try { publishedAt = publishedDateFromHtml(await fetchText(lead.url, 10_000)); } catch { /* Try the index below. */ }
   if (!publishedAt) {

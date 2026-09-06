@@ -22,7 +22,7 @@ test("reader shows the latest snapshot without hour filters", () => {
   const script = fs.readFileSync("site/reader/reader.js", "utf8");
   assert.doesNotMatch(html, /time-tab|6小时|12小时|18小时|24小时/);
   assert.doesNotMatch(script, /activeHours|selectHours|timeTabs/);
-  assert.match(html, /v2026\.09\.06\.24/);
+  assert.match(html, /v2026\.09\.06\.25/);
   assert.match(html, /data-category="world"[^>]*>国际</);
   assert.match(html, /data-category="youtube"[^>]*>YouTube</);
   assert.match(script, /'tech', 'market', 'world', 'youtube'/);
@@ -37,6 +37,13 @@ test("takes a publisher homepage lead instead of a Google News search result", (
     title: "Current lead story from the publisher", url: "https://www.example.com/news/current-lead",
   });
   assert.equal(publishedDateFromHtml('<meta property="article:published_time" content="2026-09-06T02:03:00Z">'), "2026-09-06T02:03:00.000Z");
+});
+
+test("accepts relative links from a publisher section page", () => {
+  const source = { name: "Example", homepage: "https://example.com/markets/", hosts: ["example.com"], articlePattern: "^/story/" };
+  assert.deepEqual(parseHomepageHeadline('<a href="/story/current">Current headline from this publisher</a>', source), {
+    title: "Current headline from this publisher", url: "https://example.com/story/current",
+  });
 });
 
 test("recovers tab interaction after the iOS app resumes", () => {
