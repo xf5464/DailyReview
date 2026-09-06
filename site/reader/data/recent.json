@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-06T08:00:43.673Z",
+  "updatedAt": "2026-09-06T08:30:38.987Z",
   "items": [
     {
       "id": "ddcfe677e89a116d",
@@ -14,21 +14,21 @@
       "publishedAt": "Fri, 04 Sep 2026 17:56:11 GMT",
       "score": 37.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
-      "id": "f2310f159a2356d2",
+      "id": "b5e027303c3524cf",
       "category": "market",
-      "title": "Honeywell Is Now Three Companies. Here's Which Piece I'd Actually Own.",
-      "titleZh": "霍尼韦尔现在是三家公司。 以下是我实际拥有的物品。",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/honeywell-now-three-companies-heres-023500905.html",
+      "title": "Lam Research Legal Chief Sold $1.5 Million as AI Chip Demand Booms. Is the Signal Bearish?",
+      "titleZh": "Lam Research法务主管在人工智能芯片需求激增之际售出150万美元$。 信号是否看跌？",
+      "url": "https://finance.yahoo.com/technology/ai/articles/lam-research-legal-chief-sold-062159762.html",
       "source": "Yahoo Finance",
       "sourceKey": "yahoo-finance",
       "sourceOrder": 1,
-      "publishedAt": "2026-09-05T02:35:00Z",
-      "score": 29.8,
+      "publishedAt": "2026-09-05T06:21:59Z",
+      "score": 29,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "582837bc2e2c3170",
@@ -40,9 +40,9 @@
       "sourceKey": "cnbc-markets",
       "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 23:55:52 GMT",
-      "score": 52.6,
+      "score": 52.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "aa7f4b19575d566a",
@@ -54,9 +54,9 @@
       "sourceKey": "bbc-business",
       "sourceOrder": 3,
       "publishedAt": "Sun, 06 Sep 2026 06:04:51 GMT",
-      "score": 47.9,
+      "score": 47.1,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "029207623cb29a91",
@@ -70,7 +70,7 @@
       "publishedAt": "2026-09-05T16:00:29.447Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "36b1a72a9e74fc62",
@@ -82,9 +82,9 @@
       "sourceKey": "marketwatch",
       "sourceOrder": 5,
       "publishedAt": "Sat, 05 Sep 2026 23:45:00 GMT",
-      "score": 52.7,
+      "score": 52.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "22045b1496ce4267",
@@ -96,9 +96,9 @@
       "sourceKey": "benzinga",
       "sourceOrder": 6,
       "publishedAt": "Sat, 05 Sep 2026 14:12:55 +0000",
-      "score": 42.2,
+      "score": 41.7,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "ca52c45e780b623d",
@@ -110,23 +110,23 @@
       "sourceKey": "the-street",
       "sourceOrder": 7,
       "publishedAt": "Sun, 06 Sep 2026 08:00:00 GMT",
-      "score": 59,
+      "score": 58.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
-      "id": "a79aaccbcca77552",
+      "id": "07cd225993aad823",
       "category": "market",
-      "title": "The Stock Market Has Done This Only 2 Times Since 1871 — and Both Times Ended Badly. Could Trump’s Policies Raise the Risk of Another Market Meltdown?",
-      "titleZh": "自1871年以来，股市只做过两次这样的事情--两次都以糟糕的结局告终。特朗普的政策是否会增加另一次市场崩溃的风险？",
-      "url": "https://www.fool.com/investing/2026/09/06/the-stock-market-has-done-this-only-2-times-since-1871-and-both-times-ended-badly-could-trump-s-policies-raise-the-risk-of-another-market-meltdown/?source=iedfolrf0000001",
+      "title": "Home Depot Just Reported Earnings. Here's Whether the Dow Dividend Stock Is Still a Buy.",
+      "titleZh": "家得宝刚刚报告了收入。 以下是道指股息股票是否仍然是买入。",
+      "url": "https://www.fool.com/investing/2026/09/06/home-depot-just-reported-earnings-heres-whether-th/?source=iedfolrf0000001",
       "source": "The Motley Fool",
       "sourceKey": "motley-fool",
       "sourceOrder": 8,
-      "publishedAt": "Sun, 06 Sep 2026 03:12:01 -0400",
-      "score": 66.2,
+      "publishedAt": "Sun, 06 Sep 2026 04:05:00 -0400",
+      "score": 66.6,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "ed6ae9fb62e40c36",
@@ -140,7 +140,7 @@
       "publishedAt": "2026-09-05T13:53:47.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "9a8c0e7e63aecfeb",
@@ -152,9 +152,9 @@
       "sourceKey": "techradar",
       "sourceOrder": 0,
       "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
-      "score": 68,
+      "score": 67.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "6df0f5d81c2b28a3",
@@ -166,9 +166,9 @@
       "sourceKey": "techcrunch",
       "sourceOrder": 1,
       "publishedAt": "Sat, 05 Sep 2026 22:49:55 +0000",
-      "score": 68.8,
+      "score": 68.3,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "1fdfa6bf0e2f0ff7",
@@ -182,7 +182,7 @@
       "publishedAt": "2026-09-05T21:31:34.000Z",
       "score": null,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "5d8b342437f848f9",
@@ -194,23 +194,23 @@
       "sourceKey": "ars-technica",
       "sourceOrder": 3,
       "publishedAt": "Sat, 05 Sep 2026 15:17:36 +0000",
-      "score": 56.3,
+      "score": 55.8,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
-      "id": "0b166caf3c482188",
+      "id": "66e6f119dc5b1799",
       "category": "tech",
-      "title": "Is the Steam Deck still worth it in 2026?",
-      "titleZh": "2026年的蒸汽卡组还值得吗？",
-      "url": "https://www.engadget.com/2248094/is-steam-deck-still-worth-it/",
+      "title": "How to sideload apps onto Android Auto",
+      "titleZh": "如何将应用旁加载到Android Auto",
+      "url": "https://www.engadget.com/2246259/how-to-sideload-android-auto-apps/",
       "source": "Engadget",
       "sourceKey": "engadget",
       "sourceOrder": 4,
-      "publishedAt": "Sat, 05 Sep 2026 22:30:00 +0000",
-      "score": 62.5,
+      "publishedAt": "Sun, 06 Sep 2026 00:00:00 +0000",
+      "score": 63.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "7cfe2259cee6fb57",
@@ -222,9 +222,9 @@
       "sourceKey": "techspot",
       "sourceOrder": 5,
       "publishedAt": "Sat, 5 Sep 2026 11:44 -0500",
-      "score": 55.7,
+      "score": 55.2,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "809b1ee6d7d4a122",
@@ -236,9 +236,9 @@
       "sourceKey": "pcmag",
       "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 26 00:00:00 +0000",
-      "score": 62,
+      "score": 61.5,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "1305dd241c305356",
@@ -250,9 +250,9 @@
       "sourceKey": "bleepingcomputer",
       "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 10:29:13 -0400",
-      "score": 54.5,
+      "score": 54,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "33456732d03842db",
@@ -264,23 +264,38 @@
       "sourceKey": "toms-hardware",
       "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:51:54 +0000",
-      "score": 57.9,
+      "score": 57.4,
       "engagement": "",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
-      "id": "0954f87590575e13",
+      "id": "6a2258e1c0b90d7f",
       "category": "tech",
-      "title": "Site Is Closed on Sundays",
-      "titleZh": "网站周日关闭",
-      "url": "https://v7.robweychert.com/",
+      "title": "Cloud in a Bottle: making self-hosting accessible to everyone",
+      "titleZh": "瓶中云：让所有人都可以使用自助出租服务",
+      "url": "https://cloudinabottle.org/blog/launch-post",
       "source": "Hacker News",
       "sourceKey": "hacker-news",
       "sourceOrder": 9,
-      "publishedAt": "2026-09-06T06:23:05.000Z",
-      "score": 100.3,
-      "engagement": "54 points · 35 comments",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "publishedAt": "2026-09-06T00:03:29.000Z",
+      "score": 128.9,
+      "engagement": "361 points · 165 comments",
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
+    },
+    {
+      "id": "6847c23a039f513f",
+      "category": "world",
+      "title": "US carrier Abraham Lincoln departs Thailand after respite visit",
+      "titleZh": "美国航空公司亚伯拉罕·林肯（ Abraham Lincoln ）在喘息后离开泰国",
+      "url": "https://www.reuters.com/world/asia-pacific/us-carrier-abraham-lincoln-departs-thailand-after-respite-visit-2026-09-06/",
+      "googleNewsUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMjhwclJ2ZDZRMEdnU1NQQkwtRGNvMV9CZG9UaHBkSjJBRzZDX3UyOTBCUjBxU29Lc0U2ejl0a24wakRWX0tlM3oxUDlEWnJiYXVCekwxYVoyQ1B4VjhkX1ViOS1XWXJsU3VlaE1XVXdDVGIwYmFGbFp1ZWhUc3NFenBzSDVtVzJIOTdKMFUxcVlndzA5eUhKaHhCeTR6YXVFV2dOOGNyZjJiRGN0LUxKNnJqbWg3bXRLLUE?oc=5",
+      "source": "Reuters World",
+      "sourceKey": "world-reuters-world-0",
+      "sourceOrder": 0,
+      "publishedAt": "Sun, 06 Sep 2026 06:36:00 GMT",
+      "score": 110.2,
+      "engagement": "2家来源交叉确认",
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "cb16d9b868091db6",
@@ -290,12 +305,12 @@
       "url": "https://www.bbc.com/news/articles/cx2zqp46g8eo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hbWFaVHAzX3NCR3BCWjdSTjJsVHJubUhkVjRabXBjdHY5Ry1IZU1xemJPbHlXMzlydHRpaW53eXlmV3p5MTl6MWxsOGR3VzlXZXB5cjcyUEY3Zw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-0",
-      "sourceOrder": 0,
+      "sourceKey": "world-bbc-world-1",
+      "sourceOrder": 1,
       "publishedAt": "Sun, 06 Sep 2026 01:10:25 GMT",
-      "score": 106.9,
+      "score": 106.2,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "e08fd24cc8f863ce",
@@ -305,12 +320,12 @@
       "url": "https://www.reuters.com/world/middle-east/us-military-strikes-three-iranian-crude-oil-carriers-central-command-says-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnduS0xfeWF0NWZJUEpneWJOWTU3ZXNmUEZrVUY2a0U2b0FPejBkR21SMGxfRjVhWENDdUJOMTJKVm9MbjBBTkVTeHRGZmRfVkhKNnlyR1dySzBPUXBEUm1CVlVsQkhCTnlhMXBPMFM0NEJ5QTE0aDNxLU5SbzRVX09fZ3NpbnIycXVzZG9XM0dnb1JaS3pvbnI3UDUxNG1VUVhTWWFfbGQ5T2NQR0N6WnRzbzhINGlVRmRPUHhKT0xGVmhWc1E?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-1",
-      "sourceOrder": 1,
+      "sourceKey": "world-reuters-world-2",
+      "sourceOrder": 2,
       "publishedAt": "Sat, 05 Sep 2026 14:16:10 GMT",
-      "score": 103.8,
+      "score": 102.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "6bca4b2d5e9c7663",
@@ -320,12 +335,12 @@
       "url": "https://www.aljazeera.com/news/2026/9/4/un-votes-to-adopt-new-world-map-that-reflects-africas-true-size",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOWkxYalNQYWJGQ01iX1NfZTlSdFFtMWQtSy1iTWJKZ2hDeGRod1JRWXQ2dkptcVdkWHdSVEFaSENDSnR5dUV5S3BsQ0xUMl9ia3F5dG8wMTg3eGcxcDlZNDZmd2dMQlc0Z2xvcXJVYUxxYXJwZksySzlvRlJyNWd3NEF6T05zNjV6S3RTekR4clB5WlZmMGt0TjZ6TVhQd2k2TjB2QWtB0gGrAUFVX3lxTE5xNk9hV1JvUmZDUFNUZm9LZTZTVTlkbWhMSHNkRm53QVdQWnBRYUtvTXBkYVFJOHhpQlRibktjWnNUT05TQkZCZEhoTnVXNWdKaWVxRWJXMGRUaTB5aXd5QjN3c0Zqdy1NTUd6OHVQWmN0XzNfTVctLWFpbEVWemo2VndtUTVKaTdFbExNMC1lWVEyQTU4NjhKa1Jqb3oyd1REZDk5RVJ6cE5lZw?oc=5",
       "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-2",
-      "sourceOrder": 2,
+      "sourceKey": "world-al-jazeera-3",
+      "sourceOrder": 3,
       "publishedAt": "Fri, 04 Sep 2026 19:27:28 GMT",
-      "score": 103.6,
+      "score": 102.9,
       "engagement": "5家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "f422f75a95ba4f97",
@@ -335,12 +350,12 @@
       "url": "https://www.reuters.com/world/germanys-far-right-afd-seeks-landmark-state-victory-saxony-anhalt-votes-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHlKLTRObzFSci1rMWZ6aTRzcFhXUGtKc0JQakJVb1FBUmdNTFowMHU4X0tiRkdFUkVnbWhremU0V05zSUtYVzBxUkZ0bHdPZjhadEF4T3lZLXdrajlidkQ2b05OVTdydG1va0NjbGp4TEVHXzJNUmI2dkF5ZEJneUtta19hT0tnTDE2OEZiS2V0SFh6VFE0YVpXOFhqS3pENV9idTd6V0lwd0lOcEdCV3J2UQ?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-3",
-      "sourceOrder": 3,
+      "sourceKey": "world-reuters-world-4",
+      "sourceOrder": 4,
       "publishedAt": "Sun, 06 Sep 2026 00:06:00 GMT",
-      "score": 102.1,
+      "score": 101.3,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "024fd13de026decc",
@@ -350,12 +365,12 @@
       "url": "https://www.reuters.com/world/middle-east/israeli-military-says-it-strikes-southern-lebanon-after-hezbollah-launched-2026-09-06/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPNi1QZjVMMzI3QlpNZ2pKMVNjZFNqU2RWb093aGtUS3ZmZWdBNHNjbXFMdVZZS2NkMnd3cWlQZlVqenBlRGpQdkFJSjNuMU5wVlNCa1pqNXVzV0NIRVFGc3Z6bGpMZXp3dzc1Y3dfM2xTNnZCSi0weHFlMUtaZG0yS2p6S2ZhWXRUeS0xYkFOOE5vLUlYaFJnMy1KdGh0ejFDbEpzOFRlaEs2ZG1ZY09hUW05WjhYYVBndHBtVjFIQ0szMVVOVzc4?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-4",
-      "sourceOrder": 4,
+      "sourceKey": "world-reuters-world-5",
+      "sourceOrder": 5,
       "publishedAt": "Sun, 06 Sep 2026 04:15:00 GMT",
       "score": 101.2,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "e1459cfd25a3e1ec",
@@ -365,12 +380,12 @@
       "url": "https://www.bbc.com/news/articles/c5y7gk9knnlo",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE01dmJFQXd1VFdYQmtvU2p0OGJmemowaUVHZTItYjlHN0xMU1E1TE0xc2J2WlJ0X1hHU0UzaTNkLVhMVnQ0SlpsLTkySnliNTg4Ym9HanNnenFvZw?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-5",
-      "sourceOrder": 5,
+      "sourceKey": "world-bbc-world-6",
+      "sourceOrder": 6,
       "publishedAt": "Sun, 06 Sep 2026 05:04:04 GMT",
-      "score": 100.5,
+      "score": 99.8,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "2123dae601a63c42",
@@ -380,12 +395,12 @@
       "url": "https://www.reuters.com/world/europe/putin-says-us-russia-contacts-beneficial-talks-begin-with-witkoff-kushner-2026-09-05/",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPM3NpSzg5T0lwZ2VwSkh6VjJtLUF5N0U2TWZoM2dhSW1sUDRsUk5nRWJpNkZPaXNhWkNQNFl3S25QVkRNcUxWRno0SU1uVU84NzczVzhWODl0UXZBWkoxNGlwbjU3eGxIV3R4MGhRS1d0ZVN1bDBFWTRDRmU5ZlZvQXM3a2gycDZ2cWoxR2ZtTUFkUWRBR1otODM1Z010SkY3NGMxRjVVakxINXdDT2VRLVdoN3NFSGxuUWowS1FaOA?oc=5",
       "source": "Reuters World",
-      "sourceKey": "world-reuters-world-6",
-      "sourceOrder": 6,
+      "sourceKey": "world-reuters-world-7",
+      "sourceOrder": 7,
       "publishedAt": "Sat, 05 Sep 2026 18:57:45 GMT",
-      "score": 98.6,
+      "score": 97.6,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "50a233748d900c4d",
@@ -395,12 +410,12 @@
       "url": "https://www.aljazeera.com/news/2026/9/5/thousands-protest-in-croatia-to-demand-government-clean-up-toxic-waste",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMirwFBVV95cUxORElJQ0l1V2IwRUFJOE9FZEI5U19DdUozQzMzaWtIQnhvVm5DLUc3Zkl1SnVkdVhRbDBfUUtxQkR4QUh0eGdMWXFieEp2VEFnZlRmOXcwVVd1UzZHaHg1UGM2eHZ6YXFrVnFUNmF0Y3BnOGlBc2QwWDRrVFhNbFRJN18xM281Z0U3ZzBsd0pIQkpLWFdfby1xRF9BMmdReXZoeEs5a0xnZUpLTXZDN3hJ0gG0AUFVX3lxTE9QbVZRT3NlYWVGVTVNTjQzYnpPS2JQUmw5bXVLekdCX00xUm9BenJKZmpMUmxqRWt0UzZrRnRHYzF5UW1BdkpfcVV3S0xZdU16c0s5MnI5RHA3ano1U1dnRTFkdEZraFBDdnQ1dXliT3hTZm04QzRXY0hYcFB6bTBWRzNkRlFJNGYySnFPdDVMNGxOSWF4Zm9YMnp0aUl5Q2lhMVRGbEhtWlFIRTVJWXhzVHdBeA?oc=5",
       "source": "Al Jazeera",
-      "sourceKey": "world-al-jazeera-7",
-      "sourceOrder": 7,
+      "sourceKey": "world-al-jazeera-8",
+      "sourceOrder": 8,
       "publishedAt": "Sat, 05 Sep 2026 18:48:42 GMT",
-      "score": 86.6,
+      "score": 85.9,
       "engagement": "2家来源交叉确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "7beb136ef81aaeb3",
@@ -410,27 +425,12 @@
       "url": "https://www.bbc.com/news/articles/cj64rrne643o",
       "googleNewsUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MR2lQUEVfWHpBVV9NQjVxS0x6WldUNHB1RzFWSzlDa0hYWm1wYVpxMEVhdkRiT1dCeGVlY2Y5d25uR3lQOEtxbW5CVG5VNDRhRmFvU2NLQlN5UQ?oc=5",
       "source": "BBC News",
-      "sourceKey": "world-bbc-world-8",
-      "sourceOrder": 8,
-      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
-      "score": 85.2,
-      "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
-    },
-    {
-      "id": "7470701fe158400f",
-      "category": "world",
-      "title": "Fuel tanker explosion after traffic accident kills 10 in Western Iran, state media says",
-      "titleZh": "伊朗官方媒体称，伊朗西部交通事故造成10人死亡后油箱爆炸",
-      "url": "https://www.reuters.com/world/middle-east/fuel-tanker-explosion-after-traffic-accident-kills-10-western-iran-state-media-2026-09-05/",
-      "googleNewsUrl": "https://news.google.com/rss/articles/CBMizAFBVV95cUxORW1OZWlZUzItUmdsYlhnaXMzU2djTWZBVERaNG4zbzhvZTcxaWtPaGJWamowRDgwTTZRX3Ftekl0bDgxMkJEdTZJbmVzei1ya245RGdiUEx4cHltelZzVTdZVlVhVUEza0dNZ0hqbFR1cTNYMHllLTAwRGdxVVVOazdEb1poa3lyTld2V0ZxR0VHZUNONVJlWFlGaXhKU0ZkamxkZ1N4Vkt4N0YzVmhDM3RYWnlmeE9FbVZzeWFZT0pLaFlwalpnQUVrRDk?oc=5",
-      "source": "Reuters World",
-      "sourceKey": "world-reuters-world-9",
+      "sourceKey": "world-bbc-world-9",
       "sourceOrder": 9,
-      "publishedAt": "Sat, 05 Sep 2026 16:19:53 GMT",
-      "score": 79.9,
+      "publishedAt": "Sat, 05 Sep 2026 22:44:07 GMT",
+      "score": 84.5,
       "engagement": "单一来源，待确认",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "79fa21f8dd177a20",
@@ -444,7 +444,7 @@
       "publishedAt": "2026-09-05T09:00:26Z",
       "score": 395990,
       "engagement": "395,990 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "a3b79ac2cba5abd2",
@@ -458,7 +458,7 @@
       "publishedAt": "2026-09-05T17:00:30Z",
       "score": 313676,
       "engagement": "313,676 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "d5c0da33b8f7fe41",
@@ -472,7 +472,7 @@
       "publishedAt": "2026-09-05T15:59:31Z",
       "score": 252700,
       "engagement": "252,700 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "114483232b4c644f",
@@ -486,7 +486,7 @@
       "publishedAt": "2026-09-05T14:05:34Z",
       "score": 209100,
       "engagement": "209,100 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "e353acbfad7d1be8",
@@ -500,7 +500,7 @@
       "publishedAt": "2026-09-05T13:15:15Z",
       "score": 199892,
       "engagement": "199,892 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "0128da0780432f60",
@@ -514,7 +514,7 @@
       "publishedAt": "2026-09-05T09:15:08Z",
       "score": 163970,
       "engagement": "163,970 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "8d96a3ba04e7b33f",
@@ -528,7 +528,7 @@
       "publishedAt": "2026-09-06T00:21:42Z",
       "score": 150269,
       "engagement": "150,269 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "0193f38236708cd1",
@@ -542,7 +542,7 @@
       "publishedAt": "2026-09-05T11:01:03Z",
       "score": 123095,
       "engagement": "123,095 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "0f02883aaa59228e",
@@ -556,7 +556,7 @@
       "publishedAt": "2026-09-05T13:10:41Z",
       "score": 107558,
       "engagement": "107,558 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     },
     {
       "id": "c84e211fa0a44784",
@@ -570,7 +570,7 @@
       "publishedAt": "2026-09-05T17:09:47Z",
       "score": 66034,
       "engagement": "66,034 次观看",
-      "fetchedAt": "2026-09-06T08:00:43.673Z"
+      "fetchedAt": "2026-09-06T08:30:38.987Z"
     }
   ]
 }
