@@ -1,0 +1,91 @@
+name: Check Cloudflare Worker Schedules
+
+on:
+  push:
+    paths:
+      - .github/workflows/check-cloudflare.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect Cloudflare Workers and Cron Triggers
+        env:
+          CF_TOKEN_1: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_TOKEN_2: ${{ secrets.CF_API_TOKEN }}
+          CF_TOKEN_3: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CF_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CF_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CF_ACCOUNT_ID_1: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCOUNT_ID_2: ${{ secrets.CF_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TOKEN="${CF_TOKEN_1:-${CF_TOKEN_2:-${CF_TOKEN_3:-}}}"
+          ACCOUNT_ID="${CF_ACCOUNT_ID_1:-${CF_ACCOUNT_ID_2:-}}"
+
+          auth_args=()
+          if [[ -n "$TOKEN" ]]; then
+            auth_args=(-H "Authorization: Bearer $TOKEN")
+            echo "Authentication: API token"
+          elif [[ -n "${CF_API_KEY:-}" && -n "${CF_EMAIL:-}" ]]; then
+            auth_args=(-H "X-Auth-Email: $CF_EMAIL" -H "X-Auth-Key: $CF_API_KEY")
+            echo "Authentication: global API key"
+          else
+            echo "No supported Cloudflare credential secret was found."
+            echo "Supported token secret names: CLOUDFLARE_API_TOKEN, CF_API_TOKEN, CLOUDFLARE_TOKEN"
+            echo "Supported key pair: CLOUDFLARE_API_KEY + CLOUDFLARE_EMAIL"
+            exit 1
+          fi
+
+          api() {
+            curl --fail-with-body --silent --show-error "${auth_args[@]}" -H "Content-Type: application/json" "$1"
+          }
+
+          if [[ -z "$ACCOUNT_ID" ]]; then
+            accounts_json="$(api "https://api.cloudflare.com/client/v4/accounts?per_page=50")"
+            ACCOUNT_ID="$(printf '%s' "$accounts_json" | jq -r '.result[0].id // empty')"
+            if [[ -z "$ACCOUNT_ID" ]]; then
+              echo "Could not determine a Cloudflare account ID from the token."
+              printf '%s' "$accounts_json" | jq '{success, errors, result_count:(.result|length)}'
+              exit 1
+            fi
+          fi
+
+          echo "Account ID: ${ACCOUNT_ID:0:6}...${ACCOUNT_ID: -4}"
+          scripts_json="$(api "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts")"
+          mapfile -t scripts < <(printf '%s' "$scripts_json" | jq -r '.result[]?.id')
+
+          if [[ ${#scripts[@]} -eq 0 ]]; then
+            echo "No Workers scripts were returned for this account."
+            printf '%s' "$scripts_json" | jq '{success, errors}'
+            exit 0
+          fi
+
+          echo "Workers: ${#scripts[@]}"
+          found=0
+          for script in "${scripts[@]}"; do
+            schedules_json="$(api "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts/$script/schedules" 2>/tmp/cf_schedule_error || true)"
+            if [[ -z "$schedules_json" ]]; then
+              echo "$script: unable to read schedules"
+              cat /tmp/cf_schedule_error || true
+              continue
+            fi
+            count="$(printf '%s' "$schedules_json" | jq -r '.result | length')"
+            if [[ "$count" -gt 0 ]]; then
+              found=1
+              printf '%s' "$schedules_json" | jq -r --arg script "$script" '.result[] | "WORKER=\($script) CRON=\(.cron) CREATED=\(.created_on // \"\") MODIFIED=\(.modified_on // \"\")"'
+            else
+              echo "$script: no Cron Triggers"
+            fi
+          done
+
+          if [[ "$found" -eq 0 ]]; then
+            echo "No Cron Triggers found on readable Workers."
+          fi
