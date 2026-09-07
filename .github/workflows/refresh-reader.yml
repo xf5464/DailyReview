@@ -46,6 +46,10 @@ jobs:
           node --check scripts/resolve-world-original-urls.js
           node --check scripts/patch-reader-event-ranking.js
           node --check scripts/refresh-youtube-top10-best-effort.js
+          node --check scripts/enable-best-effort-title-translations.js
+
+      - name: Enable best-effort title translation
+        run: node scripts/enable-best-effort-title-translations.js
 
       - name: Fetch and aggregate current headlines
         env:
