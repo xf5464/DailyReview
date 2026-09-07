@@ -77,14 +77,34 @@ jobs:
               cat /tmp/cf_schedule_error || true
               continue
             fi
-            count="$(printf '%s' "$schedules_json" | jq -r '.result | length')"
-            if [[ "$count" -gt 0 ]]; then
+
+            mapfile -t cron_rows < <(
+              printf '%s' "$schedules_json" | jq -r '
+                def row:
+                  if type == "object" then
+                    [(.cron // .schedule // empty), (.created_on // ""), (.modified_on // "")] | @tsv
+                  elif type == "array" then
+                    if length > 0 and (.[0] | type) == "string" then
+                      [.[0], "", ""] | @tsv
+                    else empty end
+                  elif type == "string" then
+                    [., "", ""] | @tsv
+                  else empty end;
+                .result
+                | if type == "array" then .[] else . end
+                | row
+              '
+            )
+
+            if [[ ${#cron_rows[@]} -gt 0 ]]; then
               found=1
-              printf '%s' "$schedules_json" | jq -r --arg script "$script" '.result[] | [$script, .cron, (.created_on // ""), (.modified_on // "")] | @tsv' | while IFS=$'\t' read -r worker cron created modified; do
-                echo "WORKER=$worker CRON=$cron CREATED=$created MODIFIED=$modified"
+              for row in "${cron_rows[@]}"; do
+                IFS=$'\t' read -r cron created modified <<< "$row"
+                echo "WORKER=$script CRON=$cron CREATED=$created MODIFIED=$modified"
               done
             else
               echo "$script: no Cron Triggers"
+              printf '%s' "$schedules_json" | jq '{success, result_type:(.result|type), result_count:(if (.result|type)=="array" then (.result|length) else 1 end)}'
             fi
           done
 
