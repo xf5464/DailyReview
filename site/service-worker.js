@@ -1,9 +1,11 @@
 'use strict';
 
 // scripts/build.js replaces this placeholder so every published shell revision
-// produces a different worker and cache name.
+// produces a different worker and app-shell cache name.
 const APP_CACHE = 'daily-review-app-__APP_VERSION__';
-const DATA_CACHE = 'daily-review-data-v3';
+// Keep this aligned with site/app.js OFFLINE_DATA_CACHE so app updates do not
+// delete the user's downloaded offline dataset.
+const DATA_CACHE = 'daily-review-data-v1';
 const APP_SHELL = [
   './',
   'index.html',
