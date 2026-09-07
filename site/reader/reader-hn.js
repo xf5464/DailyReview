@@ -142,4 +142,12 @@ selectCategory = function selectCategory(category) {
 
 ensureHnSubtabs();
 updateCategoryTabs();
-if (archive?.items?.length) renderArchive(archive, archiveLoadedFromCache);
+
+// Mobile startup optimization: paint the last good snapshot synchronously from localStorage.
+// reader.js continues its network refresh in the background and replaces this view only when newer data arrives.
+const startupCachedArchive = pruneArchive(jsonStorage(ARCHIVE_CACHE_KEY, { items: [] }));
+if (startupCachedArchive.items.length) {
+  renderArchive(startupCachedArchive, false);
+} else if (archive?.items?.length) {
+  renderArchive(archive, archiveLoadedFromCache);
+}
