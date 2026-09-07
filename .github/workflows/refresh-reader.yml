@@ -45,6 +45,7 @@ jobs:
           node --check scripts/add-hacker-news-top10.js
           node --check scripts/resolve-world-original-urls.js
           node --check scripts/patch-reader-event-ranking.js
+          node --check scripts/refresh-youtube-top10-best-effort.js
 
       - name: Fetch and aggregate current headlines
         env:
@@ -62,6 +63,7 @@ jobs:
             fi
             sleep $((attempt * 10))
           done
+          node scripts/refresh-youtube-top10-best-effort.js
           node scripts/resolve-world-original-urls.js
           node scripts/add-hacker-news-top10.js
 
