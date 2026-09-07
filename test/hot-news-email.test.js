@@ -29,7 +29,9 @@ test("reader shows the latest snapshot without hour filters", () => {
   assert.match(html, /data-category="hn"[^>]*>Hacker News</);
   assert.doesNotMatch(html, /data-category="trends"/);
   assert.match(hnScript, /'tech', 'market', 'world', 'youtube', 'hn'/);
-  assert.match(hnScript, /当前 Top 10 帖子/);
+  assert.match(hnScript, /当前 Top 10/);
+  assert.match(hnScript, /Front 日榜 Top 10/);
+  assert.match(hnScript, /whiteSpace = 'nowrap'/);
   assert.match(script, /dailyreview-recent-v4/);
   assert.match(script, /ARCHIVE_URLS/);
 });
@@ -225,7 +227,7 @@ test("reuses an archived Google News mapping without another network request", a
     new Map([[googleUrl, directUrl]]),
     async () => { throw new Error("fetch should not run"); },
   );
-  assert.equal(result.resolvedCount, 1);
   assert.equal(result.items[0].url, directUrl);
   assert.equal(result.items[0].googleNewsUrl, googleUrl);
+  assert.equal(result.resolvedCount, 1);
 });
