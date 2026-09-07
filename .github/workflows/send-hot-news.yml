@@ -1,0 +1,48 @@
+name: Hot News Compatibility
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: Compatibility label from Cloudflare or manual callers
+        required: false
+        default: "compat"
+        type: string
+      window_hours:
+        description: News lookback window (12-72 hours)
+        required: false
+        default: "30"
+        type: string
+      refresh_only:
+        description: Legacy compatibility flag; refreshes now use the unified reader pipeline
+        required: false
+        default: "true"
+        type: string
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: send-hot-news-compat
+  cancel-in-progress: false
+
+jobs:
+  forward:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Forward to unified reader refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
+          TRIGGER_SOURCE: ${{ inputs.trigger_source || 'compat' }}
+          REFRESH_ONLY: ${{ inputs.refresh_only || 'true' }}
+        run: |
+          set -euo pipefail
+          echo "Forwarding legacy send-hot-news dispatch to refresh-reader.yml"
+          echo "trigger_source=$TRIGGER_SOURCE refresh_only=$REFRESH_ONLY window_hours=$WINDOW_HOURS"
+          gh workflow run refresh-reader.yml \
+            --repo "${{ github.repository }}" \
+            --ref main \
+            -f window_hours="$WINDOW_HOURS"
