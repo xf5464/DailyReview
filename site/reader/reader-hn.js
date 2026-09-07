@@ -1,19 +1,68 @@
 'use strict';
 
-// Replace the retired event-cloud tab with Hacker News Top 10.
+// Replace the retired event-cloud tab with Hacker News, with current and /front Top 10 views.
 if (typeof activeCategory !== 'undefined') {
   const saved = localStorage.getItem('dailyreview-reader-category');
   if (saved === 'hn' || activeCategory === 'trends') activeCategory = saved === 'hn' ? 'hn' : 'tech';
 }
 
+let activeHnView = localStorage.getItem('dailyreview-reader-hn-view') === 'front' ? 'front' : 'current';
+
 categoryLabel = function categoryLabel(category) {
   return category === 'market' ? '美股' : category === 'world' ? '国际' : category === 'youtube' ? 'YouTube' : category === 'hn' ? 'Hacker News' : '科技';
 };
 
+function ensureHnSubtabs() {
+  let nav = document.querySelector('#hnSubtabs');
+  if (!nav) {
+    nav = document.createElement('nav');
+    nav.id = 'hnSubtabs';
+    nav.className = 'category-tabs hn-subtabs';
+    nav.setAttribute('role', 'tablist');
+    nav.setAttribute('aria-label', 'Hacker News 排行类型');
+    nav.style.marginTop = '10px';
+    nav.style.marginBottom = '12px';
+    nav.style.justifyContent = 'flex-start';
+    nav.style.gap = '8px';
+
+    const current = document.createElement('button');
+    current.className = 'category-tab';
+    current.type = 'button';
+    current.dataset.hnView = 'current';
+    current.setAttribute('role', 'tab');
+    current.textContent = '当前 Top 10';
+
+    const front = document.createElement('button');
+    front.className = 'category-tab';
+    front.type = 'button';
+    front.dataset.hnView = 'front';
+    front.setAttribute('role', 'tab');
+    front.textContent = 'Front 日榜 Top 10';
+
+    nav.append(current, front);
+    const mainTabs = document.querySelector('.category-tabs');
+    mainTabs?.insertAdjacentElement('afterend', nav);
+
+    nav.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-hn-view]');
+      if (!button || button.dataset.hnView === activeHnView) return;
+      activeHnView = button.dataset.hnView === 'front' ? 'front' : 'current';
+      localStorage.setItem('dailyreview-reader-hn-view', activeHnView);
+      renderArchive(archive, archiveLoadedFromCache);
+    });
+  }
+  nav.hidden = activeCategory !== 'hn';
+  nav.querySelectorAll('[data-hn-view]').forEach((button) => {
+    const selected = button.dataset.hnView === activeHnView;
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
+}
+
 const baseItemButton = itemButton;
 itemButton = function itemButtonWithHackerNewsStats(item, rank) {
   const row = baseItemButton(item, rank);
-  if (item.category !== 'hn' || !item.engagement) return row;
+  if (!['hn', 'hn-front'].includes(item.category) || !item.engagement) return row;
   const details = row.querySelector('.news-details');
   if (!details) return row;
   const stats = document.createElement('span');
@@ -26,7 +75,8 @@ itemButton = function itemButtonWithHackerNewsStats(item, rank) {
 };
 
 selectedItems = function selectedItems(value) {
-  const items = (value.items || []).filter((item) => item.category === activeCategory);
+  const category = activeCategory === 'hn' && activeHnView === 'front' ? 'hn-front' : activeCategory;
+  const items = (value.items || []).filter((item) => item.category === category);
   if (activeCategory === 'tech') return items.sort((left, right) => Number(right.score || 0) - Number(left.score || 0)).slice(0, 10);
   if (activeCategory === 'hn') return items.sort((left, right) => Number(left.sourceOrder || 0) - Number(right.sourceOrder || 0)).slice(0, 10);
   return items.sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
@@ -38,12 +88,14 @@ renderArchive = function renderArchive(value, fromCache = false) {
   localStorage.setItem(ARCHIVE_CACHE_KEY, JSON.stringify(archive));
   refs.days.replaceChildren();
   updateCategoryTabs();
+  ensureHnSubtabs();
 
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
   const mode = activeCategory === 'tech' ? '17家优质科技来源综合热点前10'
     : activeCategory === 'youtube' ? '最近24小时热度前10'
     : activeCategory === 'world' ? '免费来源综合热点前10'
+    : activeCategory === 'hn' && activeHnView === 'front' ? 'news.ycombinator.com/front 日榜前10'
     : activeCategory === 'hn' ? '当前 Top 10 帖子'
     : '每个网站当前头条';
   refs.archiveMeta.textContent = items.length
@@ -72,5 +124,6 @@ selectCategory = function selectCategory(category) {
   if (!selectedItems(archive).length) loadArchive();
 };
 
+ensureHnSubtabs();
 updateCategoryTabs();
 if (archive?.items?.length) renderArchive(archive, archiveLoadedFromCache);
