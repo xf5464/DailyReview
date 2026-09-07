@@ -80,7 +80,9 @@ jobs:
             count="$(printf '%s' "$schedules_json" | jq -r '.result | length')"
             if [[ "$count" -gt 0 ]]; then
               found=1
-              printf '%s' "$schedules_json" | jq -r --arg script "$script" '.result[] | "WORKER=\($script) CRON=\(.cron) CREATED=\(.created_on // \"\") MODIFIED=\(.modified_on // \"\")"'
+              printf '%s' "$schedules_json" | jq -r --arg script "$script" '.result[] | [$script, .cron, (.created_on // ""), (.modified_on // "")] | @tsv' | while IFS=$'\t' read -r worker cron created modified; do
+                echo "WORKER=$worker CRON=$cron CREATED=$created MODIFIED=$modified"
+              done
             else
               echo "$script: no Cron Triggers"
             fi
