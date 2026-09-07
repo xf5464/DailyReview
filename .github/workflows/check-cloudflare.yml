@@ -39,8 +39,6 @@ jobs:
             echo "Authentication: global API key"
           else
             echo "No supported Cloudflare credential secret was found."
-            echo "Supported token secret names: CLOUDFLARE_API_TOKEN, CF_API_TOKEN, CLOUDFLARE_TOKEN"
-            echo "Supported key pair: CLOUDFLARE_API_KEY + CLOUDFLARE_EMAIL"
             exit 1
           fi
 
@@ -51,50 +49,32 @@ jobs:
           if [[ -z "$ACCOUNT_ID" ]]; then
             accounts_json="$(api "https://api.cloudflare.com/client/v4/accounts?per_page=50")"
             ACCOUNT_ID="$(printf '%s' "$accounts_json" | jq -r '.result[0].id // empty')"
-            if [[ -z "$ACCOUNT_ID" ]]; then
-              echo "Could not determine a Cloudflare account ID from the token."
-              printf '%s' "$accounts_json" | jq '{success, errors, result_count:(.result|length)}'
-              exit 1
-            fi
           fi
+          [[ -n "$ACCOUNT_ID" ]] || { echo "Could not determine Cloudflare account ID."; exit 1; }
 
           echo "Account ID: ${ACCOUNT_ID:0:6}...${ACCOUNT_ID: -4}"
           scripts_json="$(api "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts")"
           mapfile -t scripts < <(printf '%s' "$scripts_json" | jq -r '.result[]?.id')
-
-          if [[ ${#scripts[@]} -eq 0 ]]; then
-            echo "No Workers scripts were returned for this account."
-            printf '%s' "$scripts_json" | jq '{success, errors}'
-            exit 0
-          fi
-
           echo "Workers: ${#scripts[@]}"
+
           found=0
           for script in "${scripts[@]}"; do
             schedules_json="$(api "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts/$script/schedules" 2>/tmp/cf_schedule_error || true)"
             if [[ -z "$schedules_json" ]]; then
               echo "$script: unable to read schedules"
-              cat /tmp/cf_schedule_error || true
               continue
             fi
 
-            echo "--- $script schedule payload shape ---"
-            printf '%s' "$schedules_json" | jq '{success, result_type:(.result|type), result:.result}'
-
             mapfile -t cron_rows < <(
               printf '%s' "$schedules_json" | jq -r '
-                .result
-                | ..
-                | strings
+                .result | .. | strings
                 | select(test("^\\s*([*0-9/,\\-]+\\s+){4}[*0-9/,\\-]+\\s*$"))
               ' | sort -u
             )
 
             if [[ ${#cron_rows[@]} -gt 0 ]]; then
               found=1
-              for cron in "${cron_rows[@]}"; do
-                echo "WORKER=$script CRON=$cron"
-              done
+              for cron in "${cron_rows[@]}"; do echo "WORKER=$script CRON=$cron"; done
             else
               echo "$script: no Cron Triggers detected"
             fi
@@ -103,3 +83,13 @@ jobs:
           if [[ "$found" -eq 0 ]]; then
             echo "No Cron Triggers found on readable Workers."
           fi
+
+          echo "--- dailyreview-cron behavior inspection ---"
+          script_url="https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/workers/scripts/dailyreview-cron"
+          curl --fail-with-body --silent --show-error "${auth_args[@]}" "$script_url" -o /tmp/dailyreview-cron-worker.txt
+
+          # Print only behavior-relevant lines. Redact long token-like values and authorization headers.
+          tr '\r' '\n' < /tmp/dailyreview-cron-worker.txt \
+            | grep -E -i -C 3 'scheduled|controller\.cron|cron|\*/30|17 4|17 10|17 16|17 22|fetch\(|github|actions|workflow|dispatch|hot-news|refresh|reader' \
+            | sed -E 's/(Authorization: Bearer )[A-Za-z0-9._~+\/-]+/\1[REDACTED]/Ig; s/([A-Za-z0-9_=-]{32,})/[REDACTED]/g' \
+            | head -n 240 || true
