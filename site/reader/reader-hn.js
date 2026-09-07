@@ -82,6 +82,13 @@ selectedItems = function selectedItems(value) {
   return items.sort((left, right) => itemTimestamp(right) - itemTimestamp(left)).slice(0, 10);
 };
 
+function hackerNewsMeta(items) {
+  const sourceTimes = items.map(sourceTimestamp).filter((value) => value > 0);
+  const timestamp = sourceTimes.length ? Math.max(...sourceTimes) : Date.parse(archive.updatedAt || 0);
+  const name = activeHnView === 'front' ? 'Front 日榜 Top 10' : '当前 Top 10';
+  return `${name} · ${publishedTimeLabel(timestamp)}`;
+}
+
 renderArchive = function renderArchive(value, fromCache = false) {
   archive = pruneArchive(value);
   archiveLoadedFromCache = fromCache;
@@ -92,15 +99,23 @@ renderArchive = function renderArchive(value, fromCache = false) {
 
   const items = selectedItems(archive);
   refs.empty.hidden = items.length > 0;
-  const mode = activeCategory === 'tech' ? '17家优质科技来源综合热点前10'
-    : activeCategory === 'youtube' ? '最近24小时热度前10'
-    : activeCategory === 'world' ? '免费来源综合热点前10'
-    : activeCategory === 'hn' && activeHnView === 'front' ? 'news.ycombinator.com/front 日榜前10'
-    : activeCategory === 'hn' ? '当前 Top 10 帖子'
-    : '每个网站当前头条';
-  refs.archiveMeta.textContent = items.length
-    ? `${categoryLabel(activeCategory)} · ${mode} · ${categoryFreshness(items, fromCache)}`
-    : `本次抓取暂无${categoryLabel(activeCategory)}内容`;
+  if (activeCategory === 'hn') {
+    refs.archiveMeta.style.whiteSpace = 'nowrap';
+    refs.archiveMeta.style.overflow = 'hidden';
+    refs.archiveMeta.style.textOverflow = 'ellipsis';
+    refs.archiveMeta.textContent = items.length ? hackerNewsMeta(items) : '本次抓取暂无 Hacker News 内容';
+  } else {
+    refs.archiveMeta.style.whiteSpace = '';
+    refs.archiveMeta.style.overflow = '';
+    refs.archiveMeta.style.textOverflow = '';
+    const mode = activeCategory === 'tech' ? '17家优质科技来源综合热点前10'
+      : activeCategory === 'youtube' ? '最近24小时热度前10'
+      : activeCategory === 'world' ? '免费来源综合热点前10'
+      : '每个网站当前头条';
+    refs.archiveMeta.textContent = items.length
+      ? `${categoryLabel(activeCategory)} · ${mode} · ${categoryFreshness(items, fromCache)}`
+      : `本次抓取暂无${categoryLabel(activeCategory)}内容`;
+  }
   if (!items.length) return;
 
   const section = document.createElement('section');
