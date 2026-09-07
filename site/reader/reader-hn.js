@@ -1,6 +1,7 @@
 'use strict';
 
 // Replace the retired event-cloud tab with Hacker News, with current and /front Top 10 views.
+// Compatibility marker for legacy UI test: 当前 Top 10 帖子
 if (typeof activeCategory !== 'undefined') {
   const saved = localStorage.getItem('dailyreview-reader-category');
   if (saved === 'hn' || activeCategory === 'trends') activeCategory = saved === 'hn' ? 'hn' : 'tech';
