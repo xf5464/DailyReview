@@ -440,7 +440,7 @@ function addAssetVersions() {
   const appVersion = versionFor('app.js');
   const stylesVersion = versionFor('styles.css');
   const shellVersion = contentHash([
-    'index.html', 'styles.css', 'app.js', 'service-worker.js', 'manifest.webmanifest',
+    'index.html', 'styles.css', 'app.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
     'toy-icon-a1190c863e-180.png', 'toy-icon-a1190c863e-192.png', 'toy-icon-a1190c863e-512.png',
   ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
   const html = fs.readFileSync(indexPath, 'utf8')

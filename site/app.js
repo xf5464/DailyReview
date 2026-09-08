@@ -754,11 +754,55 @@
   async function responseMatchesHash(response, expectedHash) {
     if (!response || !response.ok || !window.crypto || !window.crypto.subtle) return Boolean(response && response.ok);
     var bytes = await response.clone().arrayBuffer();
+    return arrayBufferMatchesHash(bytes, expectedHash);
+  }
+
+  async function arrayBufferMatchesHash(bytes, expectedHash) {
+    if (!window.crypto || !window.crypto.subtle) return true;
     var digest = await window.crypto.subtle.digest('SHA-256', bytes);
     var actual = Array.from(new Uint8Array(digest)).map(function (value) {
       return value.toString(16).padStart(2, '0');
     }).join('').slice(0, expectedHash.length);
     return actual === expectedHash;
+  }
+
+  async function downloadOfflineBundle(manifest, files, cache, onProgress) {
+    var bundle = manifest && manifest.bundle;
+    if (!bundle || bundle.format !== 'zip' || !bundle.path || !bundle.hash) {
+      throw new Error('服务器未提供全量 ZIP');
+    }
+    if (!window.fflate || typeof window.fflate.unzipSync !== 'function') {
+      throw new Error('当前浏览器无法解压 ZIP');
+    }
+    var response = await fetch(absoluteAppUrl(bundle.path), { cache: 'no-store' });
+    if (!response.ok) throw new Error('全量 ZIP 下载失败（HTTP ' + response.status + '）');
+    var archive = await response.arrayBuffer();
+    if (!(await arrayBufferMatchesHash(archive, bundle.hash))) {
+      throw new Error('全量 ZIP 校验失败');
+    }
+    var entries;
+    try {
+      entries = window.fflate.unzipSync(new Uint8Array(archive));
+    } catch (error) {
+      throw new Error('全量 ZIP 解压失败');
+    }
+    for (var index = 0; index < files.length; index += 1) {
+      var file = files[index];
+      var entry = entries[file.path];
+      if (!entry || !(await arrayBufferMatchesHash(entry, file.hash))) {
+        throw new Error('ZIP 内文件校验失败：' + file.path);
+      }
+      await cache.put(absoluteAppUrl(file.path), new Response(entry, {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      }));
+      onProgress(index + 1, files.length);
+    }
+    if (entries['data/outlook.json']) {
+      await cache.put(absoluteAppUrl('data/outlook.json'), new Response(entries['data/outlook.json'], {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      }));
+    }
+    return { bytes: archive.byteLength, files: files.length };
   }
 
   async function downloadOfflineFiles(files, cache, onProgress) {

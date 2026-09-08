@@ -11,6 +11,7 @@ const APP_SHELL = [
   'index.html',
   'styles.css',
   'app.js',
+  'vendor/fflate.min.js',
   'manifest.webmanifest',
   'toy-icon-a1190c863e-180.png',
   'toy-icon-a1190c863e-192.png',
@@ -74,6 +75,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   if (url.pathname.includes('/data/')) {
+    if (url.pathname.endsWith('.zip')) {
+      event.respondWith(fetch(request, { cache: 'no-store' }));
+      return;
+    }
     event.respondWith(networkFirst(request, DATA_CACHE, null, true));
     return;
   }

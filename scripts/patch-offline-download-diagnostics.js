@@ -69,8 +69,28 @@ function patchApp(source) {
     '      var offlineDiagnostic = await diagnoseOfflineDownload(cache, previousState, manifest, files);',
     '      recordOfflineDownloadDiagnostic(offlineDiagnostic);',
     "      refs.offlineDataMessage.textContent = (offlineDiagnostic.mode === 'full' ? '需要全量下载。原因：' : '执行增量更新。原因：') + offlineDiagnostic.reason + '（缺失 ' + offlineDiagnostic.missingFiles + '/' + offlineDiagnostic.totalFiles + ' 个数据文件）';",
+    '      var downloadedBytes = 0;',
+    "      if (offlineDiagnostic.mode === 'full' && manifest.bundle) {",
+    '        try {',
+    "          refs.offlineDataMessage.textContent = '正在下载每日全量 ZIP：' + (Number(manifest.bundle.bytes) / 1024 / 1024).toFixed(2) + ' MB';",
+    '          var bundleResult = await downloadOfflineBundle(manifest, files, cache, function (completed, total) {',
+    '            refs.offlineDataProgress.value = total ? completed / total * 70 : 70;',
+    "            refs.offlineDataMessage.textContent = '正在解压并校验全量 ZIP：' + completed + '/' + total;",
+    '          });',
+    '          downloadedBytes += bundleResult.bytes;',
+    '        } catch (bundleError) {',
+    "          refs.offlineDataMessage.textContent = '全量 ZIP 不可用，自动改用逐文件下载：' + bundleError.message;",
+    '        }',
+    '      }',
   ].join('\n');
   source = replaceOnce(source, filesLine, filesWithDiagnosis, 'download diagnosis');
+
+  source = replaceOnce(
+    source,
+    '      var downloadedBytes = await downloadOfflineFiles(files, cache, function (completed, total) {',
+    '      downloadedBytes += await downloadOfflineFiles(files, cache, function (completed, total) {',
+    'bundle fallback download'
+  );
 
   const completion = [
     '      refs.offlineDataMessage.textContent = downloadedBytes',
