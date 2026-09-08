@@ -3586,6 +3586,9 @@
         document.querySelector('#' + button.dataset.close).close();
       });
     });
+    refs.detailDialog.addEventListener('click', function (event) {
+      if (event.target === refs.detailDialog) refs.detailDialog.close();
+    });
     refs.shareholderDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderDialog) refs.shareholderDialog.close();
     });
