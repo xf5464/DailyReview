@@ -65,7 +65,10 @@ function pruneArchive(archive) {
 
 function mergeNews(archive, news, now = Date.now(), shouldKeepItem = () => true) {
   const refreshAttemptedAt = new Date(now).toISOString();
-  const items = [...(news.tech || []), ...(news.market || []), ...(news.world || []), ...(news.youtube || [])]
+  const refreshedCategories = new Set(['tech', 'market', 'world', 'youtube']);
+  const retainedItems = (Array.isArray(archive?.items) ? archive.items : legacyItems(archive))
+    .filter((item) => !refreshedCategories.has(item?.category));
+  const items = [...retainedItems, ...(news.tech || []), ...(news.market || []), ...(news.world || []), ...(news.youtube || [])]
     .map((item, index) => normalizeItem({
       ...item,
       fetchedAt: item.fetchedAt || refreshAttemptedAt,

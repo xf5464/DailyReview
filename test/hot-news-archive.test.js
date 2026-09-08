@@ -67,3 +67,14 @@ test('stores the current non-YouTube word cloud with the snapshot', () => {
   assert.deepEqual(archive.trends.map((entry) => entry.term), ['AI']);
   assert.deepEqual(archive.trends[0].platforms, ['Hacker News', 'Bluesky']);
 });
+
+test('preserves independently refreshed Hacker News categories', () => {
+  const existing = {
+    schemaVersion: 2,
+    items: [item('hn', 'hn-1', 'hacker-news'), item('hn-front', 'hn-front-1', 'hacker-news-front')],
+  };
+  const archive = mergeNews(existing, {
+    tech: [item('tech', 'tech-a', 'new-tech')], market: [], world: [], youtube: [],
+  }, Date.parse('2026-09-04T03:00:00Z'));
+  assert.deepEqual(archive.items.map((entry) => entry.category).sort(), ['hn', 'hn-front', 'tech']);
+});

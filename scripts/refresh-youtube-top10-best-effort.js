@@ -1,8 +1,7 @@
 const fs = require('node:fs');
 const { itemId } = require('./hot-news-archive');
 const {
-  detectTitleLanguage,
-  translateTitle,
+  addChineseTranslations,
   youtubeItemsFromResponses,
 } = require('./send-hot-news-email');
 
@@ -23,20 +22,6 @@ async function fetchJson(url, timeout = 15000) {
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
   return response.json();
-}
-
-async function bestEffortTranslation(item, knownTranslations) {
-  const cached = knownTranslations.get(item.url);
-  if (cached) return cached;
-  if (containsChinese(item.title)) return item.title;
-  try {
-    const translated = await translateTitle(item.title, detectTitleLanguage(item.title, item.language));
-    if (containsChinese(translated)) return translated;
-    console.warn(`YouTube translation returned no Chinese text; keeping original title: ${item.title}`);
-  } catch (error) {
-    console.warn(`YouTube translation failed; keeping original title: ${item.title} (${error.message})`);
-  }
-  return '';
 }
 
 async function main() {
@@ -64,18 +49,31 @@ async function main() {
   const items = youtubeItemsFromResponses(searchPayload, videosPayload).slice(0, MAX_ITEMS);
   if (items.length < MAX_ITEMS) throw new Error(`YouTube returned only ${items.length}/${MAX_ITEMS} usable videos.`);
 
+  const attempted = await addChineseTranslations(items.map((item) => ({
+    ...item,
+    titleZh: knownTranslations.get(item.url) || '',
+  })), 450, { strict: false });
+  const untranslated = attempted.filter((item) => !containsChinese(item.title) && !containsChinese(item.titleZh));
   const fetchedAt = new Date(now).toISOString();
-  const freshYoutube = [];
-  for (const item of items) {
-    const titleZh = await bestEffortTranslation(item, knownTranslations);
-    freshYoutube.push({
+  let freshYoutube;
+  if (untranslated.length) {
+    const translatedPrevious = previousYoutube
+      .filter((item) => containsChinese(item.title) || containsChinese(item.titleZh))
+      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+      .slice(0, MAX_ITEMS);
+    if (translatedPrevious.length !== MAX_ITEMS) {
+      throw new Error(`Refusing to publish ${untranslated.length} untranslated YouTube title(s) without a complete translated fallback.`);
+    }
+    freshYoutube = translatedPrevious.map((item) => ({ ...item, isCached: true }));
+    console.warn(`YouTube translation failed for ${untranslated.length} item(s); reused the previous translated Top 10.`);
+  } else {
+    freshYoutube = attempted.map((item) => ({
       ...item,
       id: itemId(item.url),
-      titleZh,
       fetchedAt,
       sourceUpdatedAt: fetchedAt,
       isCached: false,
-    });
+    }));
   }
 
   const hadCachedYoutubeFallback = previousYoutube.length === MAX_ITEMS && previousYoutube.every((item) => item.isCached);
@@ -84,8 +82,7 @@ async function main() {
   archive.updatedAt = fetchedAt;
   archive.refreshAttemptedAt = fetchedAt;
   fs.writeFileSync(ARCHIVE_PATH, `${JSON.stringify(archive, null, 2)}\n`, 'utf8');
-  const untranslated = freshYoutube.filter((item) => !item.titleZh).length;
-  console.log(`Saved fresh YouTube Top 10 with best-effort translations; untranslated=${untranslated}.`);
+  console.log('Saved YouTube Top 10; all displayed titles have Chinese translations.');
 }
 
 if (require.main === module) {
