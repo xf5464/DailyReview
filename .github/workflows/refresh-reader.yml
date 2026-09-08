@@ -46,6 +46,7 @@ jobs:
           node --check scripts/resolve-world-original-urls.js
           node --check scripts/patch-reader-event-ranking.js
           node --check scripts/refresh-youtube-top10-best-effort.js
+          node --check scripts/verify-reader-refresh.js
       - name: Fetch and aggregate current headlines
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -57,6 +58,7 @@ jobs:
           node scripts/refresh-youtube-top10-best-effort.js
           node scripts/resolve-world-original-urls.js
           node scripts/add-hacker-news-top10.js
+          node scripts/verify-reader-refresh.js
 
       - name: Save the reader news archive
         run: |

@@ -480,6 +480,19 @@ async function translateBatch(titles, sourceLanguage = "en") {
 }
 
 async function translateTitleFallback(title) {
+  const params = new URLSearchParams({ client: "dict-chrome-ex", sl: "auto", tl: "zh-CN", q: title });
+  const response = await fetch(`https://clients5.google.com/translate_a/t?${params}`, {
+    signal: AbortSignal.timeout(5_000),
+    headers: { "user-agent": "Mozilla/5.0", accept: "application/json,text/plain,*/*" },
+  });
+  if (!response.ok) throw new Error(`Chrome translation endpoint returned HTTP ${response.status}.`);
+  const payload = await response.json();
+  const translated = String(payload?.[0]?.[0] || "").trim();
+  if (!translated || !containsChinese(translated)) throw new Error("Chrome translation endpoint returned no Chinese text.");
+  return translated;
+}
+
+async function translateTitleLegacyFallback(title) {
   const params = new URLSearchParams({ client: "gtx", sl: "auto", tl: "zh-CN", dt: "t", q: title });
   const payload = JSON.parse(await fetchText(`https://translate.googleapis.com/translate_a/single?${params}`, 5_000));
   const translated = (payload?.[0] || []).map((part) => part?.[0] || "").join("").trim();
@@ -496,8 +509,12 @@ async function translateTitleWithRetry(title, attempts = 1) {
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
       return await translateTitleFallback(title);
-    } catch (error) {
-      lastError = error;
+    } catch (primaryError) {
+      try {
+        return await translateTitleLegacyFallback(title);
+      } catch (legacyError) {
+        lastError = new Error(`Chrome endpoint: ${primaryError.message}; legacy endpoint: ${legacyError.message}`);
+      }
       if (attempt < attempts) await wait(350 * attempt);
     }
   }
