@@ -2,7 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const appPath = path.resolve(__dirname, '..', 'dist', 'app.js');
-let source = fs.readFileSync(appPath, 'utf8');
+// Build inputs may use CRLF on Windows.  Normalize the generated asset once so
+// this and the remaining text patches can match the same canonical line ending.
+let source = fs.readFileSync(appPath, 'utf8').replace(/\r\n/g, '\n');
 
 const target = [
   "    var number = Number(value);",

@@ -215,29 +215,31 @@
     chartsPerRow: 4,
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     chartOrder: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
-      'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-      'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
-      'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-      'initialClaims', 'unemploymentRate', 'financialConditions', 'treasuryYield'
+      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+      'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+      'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
+      'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
+      'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+      'aShareSentimentThs', 'unemploymentRate', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
-        'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-        'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
-        'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-        'initialClaims', 'unemploymentRate', 'financialConditions', 'treasuryYield'
+        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+        'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+        'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
+        'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
+        'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+        'aShareSentimentThs', 'unemploymentRate', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
       ],
       group_mt432xl1_kz1mx7: [
-        'treasuryYield30', 'federalFundsRate', 'vix', 'ndx', 'sp500', 'nasdaq100Pe',
-        'federalDebt', 'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-        'treasurySpread', 'highYieldSpread',
-        'initialClaims', 'unemploymentRate', 'broadDollar', 'financialConditions', 'treasuryYield'
+        'treasuryYield30', 'vix', 'ndx', 'sp500', 'nasdaq100Pe', 'federalDebt', 'cpi', 'pce',
+        'treasurySpread', 'highYieldSpread', 'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield',
+        'federalFundsRate', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
+        'unemploymentRate'
       ],
-      group_mt49f5yl_pctlb6: ['gold', 'silver', 'centralBankGoldPurchases', 'brentOil', 'wtiOil', 'naturalGas', 'copper'],
+      group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
       group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
-      group_primary: ['treasuryYield30', 'cpi', 'unemploymentRate', 'gold', 'sp500', 'brentOil', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_primary: ['treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
@@ -260,7 +262,7 @@
       treasuryYield30: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       federalFundsRate: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       cpi: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
-      pce: ['default', 'group_mt432xl1_kz1mx7'],
+      pce: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       gold: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       silver: ['default', 'group_mt49f5yl_pctlb6'],
       centralBankGoldPurchases: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
@@ -281,10 +283,10 @@
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
       sp500: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
-      vix: ['default', 'group_mt432xl1_kz1mx7'],
+      vix: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       treasurySpread: ['default', 'group_mt432xl1_kz1mx7'],
       highYieldSpread: ['default', 'group_mt432xl1_kz1mx7'],
-      broadDollar: ['default', 'group_mt432xl1_kz1mx7'],
+      broadDollar: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       ismManufacturingPmi: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       ismSupplierDeliveries: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       ismNewOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],

@@ -106,8 +106,10 @@ function main() {
   if (!fs.existsSync(appPath) || !fs.existsSync(indexPath)) {
     throw new Error('dist app/index missing; run normal build first');
   }
-  fs.writeFileSync(indexPath, patchIndex(fs.readFileSync(indexPath, 'utf8')), 'utf8');
-  fs.writeFileSync(appPath, patchApp(fs.readFileSync(appPath, 'utf8')), 'utf8');
+  const html = fs.readFileSync(indexPath, 'utf8').replace(/\r\n/g, '\n');
+  const source = fs.readFileSync(appPath, 'utf8').replace(/\r\n/g, '\n');
+  fs.writeFileSync(indexPath, patchIndex(html), 'utf8');
+  fs.writeFileSync(appPath, patchApp(source), 'utf8');
   process.stdout.write('Offline dialog now displays exact Cache Storage usage.\n');
 }
 

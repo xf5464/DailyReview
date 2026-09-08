@@ -10,6 +10,7 @@ function replaceOnce(source, oldText, newText, label) {
 }
 
 function patchApp(source) {
+  source = source.replace(/\r\n/g, '\n');
   source = replaceOnce(
     source,
     "  var OFFLINE_STATE_PATH = 'data/offline-state.json';",

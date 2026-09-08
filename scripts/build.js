@@ -30,6 +30,7 @@ function writeJson(filePath, value) {
 function applyChartPresentationOverrides() {
   const appPath = path.join(outputDirectory, 'app.js');
   let source = fs.readFileSync(appPath, 'utf8');
+  const appLineEnding = source.includes('\r\n') ? '\r\n' : '\n';
 
   const rangesAnchor = '  var RANGES = {';
   const rangesReplacement = [
@@ -39,7 +40,7 @@ function applyChartPresentationOverrides() {
     '  };',
     '',
     rangesAnchor,
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(rangesAnchor)) {
     throw new Error('Unable to inject overview mini chart period config: RANGES pattern changed.');
   }
@@ -66,7 +67,7 @@ function applyChartPresentationOverrides() {
     '    } else {',
     '      chart = filteredChart(source, refs.range.value);',
     '    }',
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(cardRangeSource)) {
     throw new Error('Unable to apply overview mini chart period rules: createCard pattern changed.');
   }
@@ -93,7 +94,7 @@ function applyChartPresentationOverrides() {
     '        } else {',
     '          label.textContent = formatDate(item.date, chart.frequency);',
     '        }',
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(axisLabelSource)) {
     throw new Error('Unable to apply compact overview axis labels: renderLineChart pattern changed.');
   }
@@ -105,7 +106,7 @@ function applyChartPresentationOverrides() {
     "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 2 }).format(Number(value)) + ' 亿元'",
     "      : '--';",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   const marketCapFormatterReplacement = [
     marketCapFormatterSource,
     '',
@@ -120,7 +121,7 @@ function applyChartPresentationOverrides() {
     "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 亿元'",
     "      : '--';",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(marketCapFormatterSource)) {
     throw new Error('Unable to add integer holdings formatters: formatMarketCap pattern changed.');
   }
@@ -135,7 +136,7 @@ function applyChartPresentationOverrides() {
     "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value)) + ' 户'",
     "      : '--';",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   const holderCountReplacement = [
     holderCountSource,
     '',
@@ -144,7 +145,7 @@ function applyChartPresentationOverrides() {
     "      ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(value))",
     "      : '--';",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(holderCountSource)) {
     throw new Error('Unable to add unitless cinema holder formatter: formatHolderCount pattern changed.');
   }
@@ -156,7 +157,7 @@ function applyChartPresentationOverrides() {
     '    var numericValue = Number(value);',
     "    return (numericValue > 0 ? '+' : '') + new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numericValue) + ' 户';",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   const holderChangeReplacement = [
     holderChangeSource,
     '',
@@ -165,7 +166,7 @@ function applyChartPresentationOverrides() {
     '    var numericValue = Number(value);',
     "    return (numericValue > 0 ? '+' : '') + new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numericValue);",
     '  }',
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(holderChangeSource)) {
     throw new Error('Unable to add unitless cinema change formatter: formatHolderChange pattern changed.');
   }
@@ -264,7 +265,7 @@ function applyChartPresentationOverrides() {
     '  }',
     '',
     bindEventsAnchor,
-  ].join('\n');
+  ].join(appLineEnding);
   if (!source.includes(bindEventsAnchor)) {
     throw new Error('Unable to add dialog background scroll lock: bindEvents pattern changed.');
   }
@@ -274,7 +275,7 @@ function applyChartPresentationOverrides() {
   if (!source.includes(initializeAnchor)) {
     throw new Error('Unable to initialize dialog background scroll lock: initialize pattern changed.');
   }
-  source = source.replace(initializeAnchor, initializeAnchor + '\n    observeDialogBackgroundScrollLock();');
+  source = source.replace(initializeAnchor, initializeAnchor + appLineEnding + '    observeDialogBackgroundScrollLock();');
 
   fs.writeFileSync(appPath, source, 'utf8');
 
