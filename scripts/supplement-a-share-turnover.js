@@ -7,6 +7,7 @@ const distDirectory = path.join(projectRoot, 'dist');
 const chartPath = path.join(distDirectory, 'data', 'charts', 'aShareTurnover.json');
 const outlookPath = path.join(distDirectory, 'data', 'outlook.json');
 const manifestPath = path.join(distDirectory, 'data', 'offline-manifest.json');
+const snapshotPath = path.join(projectRoot, 'scripts', 'data', 'a-share-turnover-snapshot.json');
 const REQUEST_TIMEOUT_MS = 20_000;
 const FETCH_RETRIES = 3;
 const EASTMONEY_SOURCE_URL = 'https://quote.eastmoney.com/zs000985.html';
@@ -41,6 +42,22 @@ function parseEastmoneyTurnover(text) {
       ? { date, value: amountYuan / 100000000 }
       : null;
   }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function parseSnapshot(value) {
+  const payload = typeof value === 'string' ? JSON.parse(value) : value;
+  const items = (payload?.items || []).map((item) => {
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(String(item?.date || '')) ? item.date : null;
+    const amount = Number(item?.value);
+    return date && Number.isFinite(amount) && amount >= 0 ? { date, value: amount } : null;
+  }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
+  if (!items.length) throw new Error('仓库内A股全A成交额快照无可用数据');
+  return {
+    sourceName: String(payload?.sourceName || '中证全指成交额持久化快照'),
+    sourceUrl: String(payload?.sourceUrl || EASTMONEY_SOURCE_URL),
+    updatedAt: String(payload?.updatedAt || ''),
+    items,
+  };
 }
 
 function sleep(ms) {
@@ -103,6 +120,28 @@ function rewriteOfflineChunks(chart, manifest) {
   }
 }
 
+async function loadTurnoverFallback(options = {}) {
+  try {
+    const text = options.text ?? await fetchText(buildEastmoneyUrl(), options.fetchImpl);
+    const items = parseEastmoneyTurnover(text);
+    if (!items.length) throw new Error('东方财富中证全指无可用成交额');
+    return { items, sourceName: '东方财富 / 中证全指（000985）', sourceUrl: EASTMONEY_SOURCE_URL, fromSnapshot: false };
+  } catch (sourceError) {
+    try {
+      const snapshot = parseSnapshot(options.snapshot ?? fs.readFileSync(snapshotPath, 'utf8'));
+      return {
+        items: snapshot.items,
+        sourceName: `${snapshot.sourceName}（快照截至 ${snapshot.items.at(-1)?.date || '--'}）`,
+        sourceUrl: snapshot.sourceUrl,
+        fromSnapshot: true,
+        sourceError,
+      };
+    } catch (snapshotError) {
+      throw new Error(`实时备用源：${sourceError?.message || sourceError}；持久化快照：${snapshotError?.message || snapshotError}`);
+    }
+  }
+}
+
 async function supplement(options = {}) {
   if (!fs.existsSync(chartPath)) throw new Error('built A-share turnover chart missing; run normal build first');
   const chart = JSON.parse(fs.readFileSync(chartPath, 'utf8'));
@@ -111,13 +150,13 @@ async function supplement(options = {}) {
     return false;
   }
 
-  const text = options.text ?? await fetchText(buildEastmoneyUrl(), options.fetchImpl);
-  const items = parseEastmoneyTurnover(text);
-  if (!items.length) throw new Error('东方财富中证全指无可用成交额');
+  const fallback = await loadTurnoverFallback(options);
+  const { items, sourceName, sourceUrl } = fallback;
+  if (fallback.fromSnapshot) process.stderr.write(`A-share turnover live sources unavailable; used repository snapshot: ${fallback.sourceError?.message || fallback.sourceError}\n`);
 
   chart.items = items;
-  chart.sourceName = '东方财富 / 中证全指（000985）';
-  chart.sourceUrl = EASTMONEY_SOURCE_URL;
+  chart.sourceName = sourceName;
+  chart.sourceUrl = sourceUrl;
   chart.historyStart = items[0]?.date || null;
   delete chart.error;
   fs.writeFileSync(chartPath, JSON.stringify(chart) + '\n', 'utf8');
@@ -151,4 +190,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { buildEastmoneyUrl, parseEastmoneyTurnover, supplement };
+module.exports = { buildEastmoneyUrl, loadTurnoverFallback, parseEastmoneyTurnover, parseSnapshot, supplement };

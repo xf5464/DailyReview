@@ -8,6 +8,7 @@
   "scripts": {
     "build": "node scripts/build.js && node scripts/supplement-a-share-turnover.js && node scripts/supplement-ism-new-orders-history.js && node scripts/supplement-ism-other-history.js && node scripts/patch-detail-overflow.js && node scripts/patch-ism-detail-default-range.js && node scripts/patch-large-number-format.js && node scripts/patch-table-equal-columns.js && node scripts/patch-primary-group-vix.js && node scripts/prepare-forecast-gold-ui.js && node scripts/prepare-forecast-ism-ui.js && node scripts/patch-forecast-condition-data.js && node scripts/patch-offline-download-diagnostics.js && node scripts/patch-offline-cache-size.js && node scripts/patch-visible-version.js",
     "update:national-team-etf": "node scripts/update-national-team-etf-holdings.js",
+    "update:a-share-turnover": "node scripts/refresh-a-share-turnover-snapshot.js",
     "dev": "npm run build && electron .",
     "preview": "node scripts/serve.js",
     "desktop": "npm run build && electron .",
