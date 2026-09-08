@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-09-08T01:54:06.428Z",
-  "refreshAttemptedAt": "2026-09-08T01:54:06.428Z",
-  "failureCount": 34,
+  "updatedAt": "2026-09-08T02:01:48.723Z",
+  "refreshAttemptedAt": "2026-09-08T02:01:48.723Z",
+  "failureCount": 35,
   "items": [
     {
       "id": "75c7eef49b08523b",
@@ -14,8 +14,8 @@
       "sourceKey": "tech-event-3",
       "sourceOrder": 2,
       "publishedAt": "Mon, 07 Sep 2026 15:58:00 +0000",
-      "score": 188.8,
-      "engagement": "3家科技媒体交叉确认",
+      "score": 222.8,
+      "engagement": "4家科技媒体交叉确认",
       "fetchedAt": "2026-09-07T21:30:47.440Z",
       "sourceUpdatedAt": "2026-09-07T21:30:47.440Z",
       "isCached": true
@@ -27,13 +27,13 @@
       "titleZh": "我们对即将到来的苹果产品发布的期望",
       "url": "https://techcrunch.com/2026/09/07/what-we-expect-from-the-upcoming-apple-launch/",
       "source": "TechCrunch",
-      "sourceKey": "tech-event-4",
-      "sourceOrder": 3,
+      "sourceKey": "tech-event-5",
+      "sourceOrder": 4,
       "publishedAt": "Mon, 07 Sep 2026 15:58:00 +0000",
-      "score": 149.8,
+      "score": 149.6,
       "engagement": "2家科技媒体交叉确认",
-      "fetchedAt": "2026-09-08T01:53:00.328Z",
-      "sourceUpdatedAt": "2026-09-08T01:53:00.328Z",
+      "fetchedAt": "2026-09-08T02:00:48.219Z",
+      "sourceUpdatedAt": "2026-09-08T02:00:48.219Z",
       "isCached": false
     },
     {
@@ -46,10 +46,10 @@
       "sourceKey": "tech-event-1",
       "sourceOrder": 0,
       "publishedAt": "Mon, 07 Sep 2026 12:50:29 -0400",
-      "score": 143.8,
+      "score": 143.7,
       "engagement": "2家科技媒体交叉确认",
-      "fetchedAt": "2026-09-08T01:53:00.328Z",
-      "sourceUpdatedAt": "2026-09-08T01:53:00.328Z",
+      "fetchedAt": "2026-09-08T02:00:48.219Z",
+      "sourceUpdatedAt": "2026-09-08T02:00:48.219Z",
       "isCached": false
     },
     {
@@ -75,13 +75,13 @@
       "titleZh": "不透明的复发，以及您可能应该知道的其他人工智能术语",
       "url": "https://techcrunch.com/2026/09/07/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms/",
       "source": "TechCrunch",
-      "sourceKey": "tech-event-5",
-      "sourceOrder": 4,
+      "sourceKey": "tech-event-4",
+      "sourceOrder": 3,
       "publishedAt": "2026-09-07T19:24:00.000Z",
-      "score": 115.7,
+      "score": 115.6,
       "engagement": "单一来源",
-      "fetchedAt": "2026-09-08T01:53:00.328Z",
-      "sourceUpdatedAt": "2026-09-08T01:53:00.328Z",
+      "fetchedAt": "2026-09-08T02:00:48.219Z",
+      "sourceUpdatedAt": "2026-09-08T02:00:48.219Z",
       "isCached": false
     },
     {
@@ -95,22 +95,6 @@
       "sourceOrder": 5,
       "publishedAt": "Mon, 07 Sep 2026 18:02:29 +0000",
       "score": 115.2,
-      "engagement": "单一来源",
-      "fetchedAt": "2026-09-07T21:30:47.440Z",
-      "sourceUpdatedAt": "2026-09-07T21:30:47.440Z",
-      "isCached": true
-    },
-    {
-      "id": "c4d7fdfa67542adb",
-      "category": "tech",
-      "title": "Mathspace discloses data breach affecting over 1 million people",
-      "titleZh": "Mathspace披露影响超过100万人的数据泄露事件",
-      "url": "https://www.bleepingcomputer.com/news/security/mathspace-discloses-data-breach-affecting-over-1-million-people/",
-      "source": "Engadget",
-      "sourceKey": "tech-event-8",
-      "sourceOrder": 7,
-      "publishedAt": "Mon, 07 Sep 2026 09:05:11 -0400",
-      "score": 114.5,
       "engagement": "单一来源",
       "fetchedAt": "2026-09-07T21:30:47.440Z",
       "sourceUpdatedAt": "2026-09-07T21:30:47.440Z",
@@ -138,7 +122,7 @@
       "title": "The Download: the hunt for underground hydrogen and more rogue OpenAI agents",
       "titleZh": "下载：寻找地下氢气和更多流氓OpenAI智能体",
       "url": "https://www.technologyreview.com/2026/09/07/1143592/the-download-underground-hydrogen-search-rogue-openai-agents/",
-      "source": "MIT Technology Review",
+      "source": "Android Authority",
       "sourceKey": "tech-event-7",
       "sourceOrder": 6,
       "publishedAt": "Mon, 07 Sep 2026 12:10:00 +0000",
@@ -146,6 +130,22 @@
       "engagement": "单一来源",
       "fetchedAt": "2026-09-08T01:53:00.328Z",
       "sourceUpdatedAt": "2026-09-08T01:53:00.328Z",
+      "isCached": true
+    },
+    {
+      "id": "b12a8e728183bf2c",
+      "category": "tech",
+      "title": "The Download: the hunt for underground hydrogen and more rogue OpenAI agents",
+      "titleZh": "下载：寻找地下氢气和更多流氓OpenAI智能体",
+      "url": "https://www.technologyreview.com/2026/09/07/1143592/the-download-underground-hydrogen-search-rogue-openai-agents/",
+      "source": "MIT Technology Review",
+      "sourceKey": "tech-event-8",
+      "sourceOrder": 7,
+      "publishedAt": "Mon, 07 Sep 2026 12:10:00 +0000",
+      "score": 112.3,
+      "engagement": "单一来源",
+      "fetchedAt": "2026-09-08T02:00:48.219Z",
+      "sourceUpdatedAt": "2026-09-08T02:00:48.219Z",
       "isCached": false
     },
     {
@@ -154,7 +154,7 @@
       "title": "Workshops Educate African Researchers On How to Publish With IEEE",
       "titleZh": "研讨会教育非洲研究人员如何使用IEEE进行出版",
       "url": "https://spectrum.ieee.org/ieee-workshop-xplore-africa",
-      "source": "IEEE Spectrum",
+      "source": "Engadget",
       "sourceKey": "tech-event-10",
       "sourceOrder": 9,
       "publishedAt": "Mon, 07 Sep 2026 18:00:03 +0000",
@@ -162,7 +162,7 @@
       "engagement": "单一来源",
       "fetchedAt": "2026-09-08T01:53:00.328Z",
       "sourceUpdatedAt": "2026-09-08T01:53:00.328Z",
-      "isCached": false
+      "isCached": true
     },
     {
       "id": "39b210de4ff662cd",
