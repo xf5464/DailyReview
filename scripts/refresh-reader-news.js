@@ -190,17 +190,32 @@ function polishChineseTitle(item) {
   return { ...item, title: cleanHeadlineText(item.title), titleZh };
 }
 async function translateItems(items, knownTranslations, previousBySource, baselineBySource) {
-  const output = [];
-  for (const item of items) {
-    const prepared = { ...item, title: cleanHeadlineText(item.title), titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '' };
-    try { const [translated] = await addChineseTranslations([prepared]); output.push(polishChineseTitle(translated)); }
-    catch (error) {
-      const fallback = previousBySource.get(item.sourceKey) || baselineBySource.get(item.sourceKey);
-      if (fallback && containsChinese(fallback.titleZh) && isAcceptableHeadline(item.category, fallback.title, fallback.url)) {
-        output.push(polishChineseTitle(cachedMetadata({ ...fallback, category: item.category, source: item.source, sourceKey: item.sourceKey, sourceOrder: item.sourceOrder })));
-        console.warn(`${item.source} translation failed; kept its previous translated headline as explicit cache: ${error.message}`);
-      } else console.warn(`${item.source} translation failed and no translated fallback was usable; source omitted: ${error.message}`);
+  const prepared = items.map((item) => ({
+    ...item,
+    title: cleanHeadlineText(item.title),
+    titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '',
+  }));
+  const translatedItems = await addChineseTranslations(prepared, 450, { strict: false });
+  const output = translatedItems.flatMap((translated, index) => {
+    if (containsChinese(translated.titleZh) || containsChinese(translated.title)) return [polishChineseTitle(translated)];
+    const item = items[index];
+    const fallback = previousBySource.get(item.sourceKey) || baselineBySource.get(item.sourceKey);
+    if (fallback && containsChinese(fallback.titleZh) && isAcceptableHeadline(item.category, fallback.title, fallback.url)) {
+      console.warn(`${item.source} translation failed; kept its previous translated headline as explicit cache.`);
+      return [polishChineseTitle(cachedMetadata({ ...fallback, category: item.category, source: item.source, sourceKey: item.sourceKey, sourceOrder: item.sourceOrder }))];
     }
+    console.warn(`${item.source} translation failed and no translated fallback was usable; source omitted.`);
+    return [];
+  });
+  if (output.length === 10) return output;
+  const category = items[0]?.category;
+  const previous = [...previousBySource.values()]
+    .filter((item) => item.category === category && (containsChinese(item.title) || containsChinese(item.titleZh)))
+    .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+    .slice(0, 10);
+  if (previous.length === 10) {
+    console.warn(`${category} refresh produced only ${output.length}/10 translated items; reused the previous translated Top 10.`);
+    return previous.map((item) => polishChineseTitle(cachedMetadata(item)));
   }
   return output;
 }
@@ -287,31 +302,32 @@ async function fetchSectionSource(source, category, sourceOrder, now) {
   return freshMetadata({ category, title: lead.title, url: lead.url, source: source.name, sourceKey: source.key, sourceOrder, publishedAt, feedRank: 0, score: 0, engagement: '' }, now);
 }
 async function collectSection(category, now, previousBySource, baselineBySource, knownTranslations) {
-  const results = [];
-  for (let sourceOrder = 0; sourceOrder < NEWS_SOURCES[category].length; sourceOrder += 1) {
-    const source = NEWS_SOURCES[category][sourceOrder];
+  const results = await Promise.all(NEWS_SOURCES[category].map(async (source, sourceOrder) => {
     if (source.special) {
       const baseline = baselineBySource.get(source.key) || previousBySource.get(source.key);
-      if (baseline && isAcceptableHeadline(category, baseline.title, baseline.url)) results.push(normalizeBaselineFreshness({ ...baseline, category, source: source.name, sourceKey: source.key, sourceOrder }, now));
-      continue;
+      return baseline && isAcceptableHeadline(category, baseline.title, baseline.url)
+        ? normalizeBaselineFreshness({ ...baseline, category, source: source.name, sourceKey: source.key, sourceOrder }, now)
+        : null;
     }
-    try { results.push(await fetchSectionSource(source, category, sourceOrder, now)); continue; }
+    try { return await fetchSectionSource(source, category, sourceOrder, now); }
     catch (pageError) {
       try {
         const [feedItem] = await fetchOfficialFeed(source, category, now);
         if (feedItem) {
-          results.push(freshMetadata({ ...feedItem, category, source: source.name, sourceKey: source.key, sourceOrder, engagement: '' }, now));
-          console.warn(`${source.name} section page failed; used its official feed: ${pageError.message}`); continue;
+          console.warn(`${source.name} section page failed; used its official feed: ${pageError.message}`);
+          return freshMetadata({ ...feedItem, category, source: source.name, sourceKey: source.key, sourceOrder, engagement: '' }, now);
         }
       } catch {}
       const fallback = previousBySource.get(source.key) || baselineBySource.get(source.key);
       if (fallback && isAcceptableHeadline(category, fallback.title, fallback.url)) {
-        results.push(cachedMetadata({ ...fallback, category, source: source.name, sourceKey: source.key, sourceOrder }));
         console.warn(`${source.name} failed; kept its previous cached headline: ${pageError.message}`);
-      } else console.warn(`${source.name} failed and no category-safe cached fallback was usable; source omitted: ${pageError.message}`);
+        return cachedMetadata({ ...fallback, category, source: source.name, sourceKey: source.key, sourceOrder });
+      }
+      console.warn(`${source.name} failed and no category-safe cached fallback was usable; source omitted: ${pageError.message}`);
+      return null;
     }
-  }
-  return translateItems(results, knownTranslations, previousBySource, baselineBySource);
+  }));
+  return translateItems(results.filter(Boolean), knownTranslations, previousBySource, baselineBySource);
 }
 async function main() {
   const archivePath = String(process.env.HOT_NEWS_ARCHIVE_PATH || 'site/reader/data/recent.json').trim(); const now = Date.now();

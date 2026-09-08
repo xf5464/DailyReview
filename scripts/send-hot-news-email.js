@@ -469,7 +469,7 @@ async function translateBatch(titles, sourceLanguage = "en") {
   const separator = "\n|||\n";
   const source = titles.join(separator);
   const params = new URLSearchParams({ q: source, langpair: `${sourceLanguage}|zh-CN`, mt: "1" });
-  const payload = JSON.parse(await fetchText(`https://api.mymemory.translated.net/get?${params}`, 15_000));
+  const payload = JSON.parse(await fetchText(`https://api.mymemory.translated.net/get?${params}`, 5_000));
   const translated = String(payload?.responseData?.translatedText || "").trim();
   if (!translated || Number(payload.responseStatus) !== 200) {
     throw new Error("Translation API returned no Chinese translation.");
@@ -481,7 +481,7 @@ async function translateBatch(titles, sourceLanguage = "en") {
 
 async function translateTitleFallback(title) {
   const params = new URLSearchParams({ client: "gtx", sl: "auto", tl: "zh-CN", dt: "t", q: title });
-  const payload = JSON.parse(await fetchText(`https://translate.googleapis.com/translate_a/single?${params}`, 15_000));
+  const payload = JSON.parse(await fetchText(`https://translate.googleapis.com/translate_a/single?${params}`, 5_000));
   const translated = (payload?.[0] || []).map((part) => part?.[0] || "").join("").trim();
   if (!translated || !containsChinese(translated)) throw new Error("Automatic translation returned no Chinese text.");
   return translated;
@@ -491,7 +491,7 @@ function wait(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-async function translateTitleWithRetry(title, attempts = 4) {
+async function translateTitleWithRetry(title, attempts = 1) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
@@ -512,7 +512,7 @@ function assertChineseTranslations(items) {
   return items;
 }
 
-async function addChineseTranslations(items, maxBatchBytes = 450) {
+async function addChineseTranslations(items, maxBatchBytes = 450, { strict = true } = {}) {
   const output = items.map((item) => ({
     ...item,
     titleZh: String(item.titleZh || "").trim() || (containsChinese(item.title) ? item.title : ""),
@@ -530,31 +530,29 @@ async function addChineseTranslations(items, maxBatchBytes = 450) {
       if (translations.some((translation) => !containsChinese(translation))) throw new Error("Translation was not Chinese.");
       indexes.forEach((index, offset) => { output[index].titleZh = translations[offset]; });
     } catch (error) {
-      if (indexes.length > 1) {
-        const middle = Math.ceil(indexes.length / 2);
-        await translateIndexes(indexes.slice(0, middle), language);
-        await translateIndexes(indexes.slice(middle), language);
-      } else {
-        try { output[indexes[0]].titleZh = await translateTitleWithRetry(items[indexes[0]].title); }
+      await Promise.all(indexes.map(async (index) => {
+        try { output[index].titleZh = await translateTitleWithRetry(items[index].title); }
         catch (fallbackError) {
           console.warn(`Could not translate title from ${language}: MyMemory: ${error.message}; Google fallback: ${fallbackError.message}`);
         }
-      }
+      }));
     }
   }
+  const translationJobs = [];
   for (const [language, indexes] of groups) {
     let batch = [];
     for (const index of indexes) {
       const candidate = [...batch, index];
       const bytes = Buffer.byteLength(candidate.map((itemIndex) => items[itemIndex].title).join("\n|||\n"), "utf8");
       if (batch.length && bytes > maxBatchBytes) {
-        await translateIndexes(batch, language);
+        translationJobs.push(translateIndexes(batch, language));
         batch = [index];
       } else batch = candidate;
     }
-    if (batch.length) await translateIndexes(batch, language);
+    if (batch.length) translationJobs.push(translateIndexes(batch, language));
   }
-  return assertChineseTranslations(output);
+  await Promise.all(translationJobs);
+  return strict ? assertChineseTranslations(output) : output;
 }
 
 async function fetchHackerNewsTop(now = Date.now()) {
@@ -701,10 +699,23 @@ async function collectHotNews(
     console.warn(`${job.source.name} failed; reused its previous snapshot item: ${result.reason?.message || result.reason}`);
     return { ...fallback, category: job.category, source: job.source.name, sourceKey: job.source.key, sourceOrder: job.sourceOrder };
   }).filter(Boolean);
-  const techCandidates = candidates.filter((item) => item.category === "tech");
-  const marketCandidates = candidates.filter((item) => item.category === "market");
-  if (techCandidates.length !== MAX_ITEMS || marketCandidates.length !== MAX_ITEMS) {
-    throw new Error(`Incomplete source snapshot: tech=${techCandidates.length}/${MAX_ITEMS}, market=${marketCandidates.length}/${MAX_ITEMS}`);
+  const previousCategory = (category) => [...knownSourceItems.values()]
+    .filter((item) => item.category === category)
+    .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+    .slice(0, MAX_ITEMS);
+  let techCandidates = candidates.filter((item) => item.category === "tech");
+  let marketCandidates = candidates.filter((item) => item.category === "market");
+  for (const category of ["tech", "market"]) {
+    const current = category === "tech" ? techCandidates : marketCandidates;
+    if (current.length === MAX_ITEMS) continue;
+    const previous = previousCategory(category);
+    if (previous.length !== MAX_ITEMS) {
+      throw new Error(`Incomplete source snapshot: ${category}=${current.length}/${MAX_ITEMS}`);
+    }
+    failureCount += 1;
+    console.warn(`${category} source snapshot was incomplete (${current.length}/${MAX_ITEMS}); reused the previous Top 10.`);
+    if (category === "tech") techCandidates = previous;
+    else marketCandidates = previous;
   }
   const [resolvedTech, resolvedMarket] = await Promise.all([
     resolveGoogleNewsItems(techCandidates, knownGoogleNewsUrls),
@@ -714,9 +725,22 @@ async function collectHotNews(
     ...item,
     titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || "",
   }));
+  const translateWithSnapshotFallback = async (items, category) => {
+    const attempted = await addChineseTranslations(reuseTranslations(items), 450, { strict: false });
+    const missing = attempted.filter((item) => !containsChinese(item.title) && !containsChinese(item.titleZh));
+    if (!missing.length) return attempted;
+    const previous = [...knownSourceItems.values()]
+      .filter((item) => item.category === category && (containsChinese(item.title) || containsChinese(item.titleZh)))
+      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+      .slice(0, MAX_ITEMS);
+    if (previous.length !== MAX_ITEMS) return assertChineseTranslations(attempted);
+    failureCount += 1;
+    console.warn(`${category} title translation failed for ${missing.length} item(s); reused the previous translated Top 10.`);
+    return previous;
+  };
   const [tech, market] = await Promise.all([
-    addChineseTranslations(reuseTranslations(resolvedTech.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
-    addChineseTranslations(reuseTranslations(resolvedMarket.items.sort((a, b) => a.sourceOrder - b.sourceOrder))),
+    translateWithSnapshotFallback(resolvedTech.items.sort((a, b) => a.sourceOrder - b.sourceOrder), "tech"),
+    translateWithSnapshotFallback(resolvedMarket.items.sort((a, b) => a.sourceOrder - b.sourceOrder), "market"),
   ]);
   let youtube;
   try {
