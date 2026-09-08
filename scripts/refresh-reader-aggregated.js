@@ -180,8 +180,22 @@ async function corroborationCandidates(category, now) {
   return batches.flat();
 }
 async function translateRepresentatives(items) {
-  const known = archivedTitleTranslations(ARCHIVE_PATH); const prepared = items.map((item) => ({ ...item, titleZh: known.get(item.url) || item.titleZh || '' }));
-  try { return await addChineseTranslations(prepared); } catch (error) { console.warn(`Aggregated headline translation failed: ${error.message}`); return prepared; }
+  const archive = JSON.parse(fs.readFileSync(ARCHIVE_PATH, 'utf8'));
+  const known = archivedTitleTranslations(ARCHIVE_PATH);
+  const prepared = items.map((item) => ({ ...item, titleZh: known.get(item.url) || item.titleZh || '' }));
+  const attempted = await addChineseTranslations(prepared, 450, { strict: false });
+  const missing = attempted.filter((item) => !/[\u3400-\u9fff]/.test(String(item.title || '')) && !/[\u3400-\u9fff]/.test(String(item.titleZh || '')));
+  if (!missing.length) return attempted;
+  const category = items[0]?.category;
+  const previous = (archive.items || [])
+    .filter((item) => item.category === category && (/[\u3400-\u9fff]/.test(String(item.title || '')) || /[\u3400-\u9fff]/.test(String(item.titleZh || ''))))
+    .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
+    .slice(0, 10);
+  if (previous.length === 10) {
+    console.warn(`${category} aggregation had ${missing.length} untranslated item(s); reused the previous translated Top 10.`);
+    return previous;
+  }
+  return addChineseTranslations(attempted);
 }
 function augmentTechWithPaidCorroboration(tech, paidTech) {
   return tech.map((item) => {
