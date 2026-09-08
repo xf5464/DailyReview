@@ -186,7 +186,7 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
-  var GROUP_ORDER_VERSION = 2;
+  var GROUP_ORDER_VERSION = 3;
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
@@ -556,7 +556,8 @@
       groupIds.add(group.id);
       addedDefaultGroupIds.add(group.id);
     });
-    if (Number(source.groupOrderVersion) !== GROUP_ORDER_VERSION) {
+    var groupOrderNeedsMigration = Number(source.groupOrderVersion) !== GROUP_ORDER_VERSION;
+    if (groupOrderNeedsMigration) {
       var defaultGroupIds = DEFAULT_CONFIG.groups.map(function (group) { return group.id; });
       var groupById = new Map(groups.map(function (group) { return [group.id, group]; }));
       groups = defaultGroupIds.map(function (id) { return groupById.get(id); }).filter(Boolean)
@@ -591,7 +592,8 @@
     groups.forEach(function (group) {
       var legacyGroupId = Object.keys(groupIdAliases).find(function (id) { return groupIdAliases[id] === group.id; });
       var sourceOrder = source.groupChartOrder && (source.groupChartOrder[group.id] || source.groupChartOrder[legacyGroupId]);
-      var order = uniqueKnown(addedDefaultGroupIds.has(group.id)
+      var useDefaultOrder = addedDefaultGroupIds.has(group.id) || (groupOrderNeedsMigration && group.id === 'group_primary');
+      var order = uniqueKnown(useDefaultOrder
         ? DEFAULT_CONFIG.groupChartOrder[group.id]
         : sourceOrder);
       var members = chartOrder.filter(function (id) { return chartGroups[id].includes(group.id); });
