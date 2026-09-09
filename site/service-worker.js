@@ -37,10 +37,6 @@ self.addEventListener('activate', (event) => {
     const previousDataCaches = names.filter((name) => name.startsWith('daily-review-data-') && name !== DATA_CACHE);
     await Promise.all([...previousAppCaches, ...previousDataCaches].map((name) => caches.delete(name)));
     await self.clients.claim();
-    if (previousAppCaches.length || previousDataCaches.length) {
-      const windows = await self.clients.matchAll({ type: 'window' });
-      await Promise.all(windows.map((client) => client.navigate(client.url)));
-    }
   })());
 });
 

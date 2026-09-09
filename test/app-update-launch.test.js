@@ -23,10 +23,9 @@ test('offline launch check always continues after the app update attempt', () =>
   assert.doesNotMatch(source, /if \(!updating\) checkOfflineDataUpdateOnLaunch\(\)/);
 });
 
-test('mobile app update continues offline checks when iOS does not reload', () => {
-  assert.match(source, /function reloadPageWithFallback\(timeoutMs\)/);
-  assert.match(source, /window\.addEventListener\('pagehide', handlePageHide/);
-  assert.match(source, /var reloadStarted = await reloadPageWithFallback\(2500\)/);
-  assert.match(source, /if \(reloadStarted\) return true;/);
+test('mobile app update never forces the active iOS page to reload', () => {
+  assert.doesNotMatch(source, /reloadPageWithFallback/);
+  assert.doesNotMatch(source, /window\.location\.reload\(\)/);
+  assert.match(source, /应用文件已更新，下次打开自动使用新版；正在继续检查离线数据/);
   assert.match(source, /if \(refs\.appUpdateDialog\.open\) refs\.appUpdateDialog\.close\(\);\s+return false;/);
 });

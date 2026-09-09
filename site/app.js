@@ -314,7 +314,6 @@
   var tooltip = null;
   var sharedConfigAvailable = false;
   var sharedConfigSaveQueue = Promise.resolve();
-  var appUpdateReloading = false;
 
   var refs = {
     meta: document.querySelector('#overallPageMeta'),
@@ -1035,29 +1034,6 @@
     }
   }
 
-  function reloadPageWithFallback(timeoutMs) {
-    return new Promise(function (resolve) {
-      var settled = false;
-      var timeout = window.setTimeout(function () { finish(false); }, timeoutMs);
-      function finish(navigating) {
-        if (settled) return;
-        settled = true;
-        window.clearTimeout(timeout);
-        window.removeEventListener('pagehide', handlePageHide);
-        resolve(navigating);
-      }
-      function handlePageHide() {
-        finish(true);
-      }
-      window.addEventListener('pagehide', handlePageHide, { once: true });
-      try {
-        window.location.reload();
-      } catch (error) {
-        finish(false);
-      }
-    });
-  }
-
   async function checkMobileAppUpdateOnLaunch() {
     if (!('serviceWorker' in navigator) || !isMobileDevice() || !navigator.onLine) {
       await registerServiceWorker();
@@ -1080,18 +1056,12 @@
       var registration = await registerServiceWorker();
       if (!registration) throw new Error('浏览器无法启动自动更新');
       await waitForUpdatedServiceWorker(registration);
-      refs.appUpdateMessage.textContent = '更新完成，正在重新打开...';
-      await waitForUiPaint();
-      appUpdateReloading = true;
-      var reloadStarted = await reloadPageWithFallback(2500);
-      if (reloadStarted) return true;
-      appUpdateReloading = false;
-      refs.appUpdateMessage.textContent = '未能自动重新打开，继续检查离线数据...';
+      refs.appUpdateMessage.textContent = '应用文件已更新，下次打开自动使用新版；正在继续检查离线数据...';
       await waitForUiPaint();
       if (refs.appUpdateDialog.open) refs.appUpdateDialog.close();
       return false;
     } catch (error) {
-      if (refs.appUpdateDialog.open && !appUpdateReloading) {
+      if (refs.appUpdateDialog.open) {
         refs.appUpdateMessage.textContent = '自动更新暂时失败，将继续使用当前版本；下次打开时会重试。';
         window.setTimeout(function () { refs.appUpdateDialog.close(); }, 2200);
       }
