@@ -739,6 +739,7 @@
   async function checkOfflineDataUpdateOnLaunch() {
     if (!offlineDataSupported() || !isMobileDevice() || !navigator.onLine) return;
     try {
+      await waitForPageVisible();
       var manifestResponse = await fetch('data/offline-manifest.json?v=' + Date.now(), { cache: 'no-store' });
       if (!manifestResponse.ok) return;
       var manifest = await manifestResponse.json();
@@ -746,9 +747,10 @@
       var cache = await caches.open(OFFLINE_DATA_CACHE);
       var state = await readOfflineState(cache);
       if (!offlineManifestNeedsUpdate(state, manifest)) return;
-      await showOfflineData(state
+      var dialogShown = await showOfflineData(state
         ? '检测到离线数据有更新，正在自动下载变化部分...'
         : '首次使用，正在自动下载全部离线数据...');
+      if (!dialogShown) return;
       await downloadAllOfflineData();
     } catch (error) {
       // 启动检测失败时保持安静，避免弱网或离线状态打断正常使用。
@@ -950,13 +952,39 @@
     });
   }
 
+  function waitForPageVisible() {
+    if (document.visibilityState !== 'hidden') return Promise.resolve();
+    return new Promise(function (resolve) {
+      function finish() {
+        if (document.visibilityState === 'hidden') return;
+        document.removeEventListener('visibilitychange', finish);
+        window.removeEventListener('pageshow', finish);
+        resolve();
+      }
+      document.addEventListener('visibilitychange', finish);
+      window.addEventListener('pageshow', finish);
+    });
+  }
+
   async function showOfflineData(message) {
-    if (!refs.offlineDataDialog.open) refs.offlineDataDialog.showModal();
+    var automatic = typeof message === 'string' && Boolean(message);
+    if (automatic) await waitForPageVisible();
+    if (!refs.offlineDataDialog.open) {
+      if (automatic) {
+        refs.offlineDataDialog.classList.add('is-background-update');
+        refs.offlineDataDialog.show();
+      } else {
+        refs.offlineDataDialog.classList.remove('is-background-update');
+        if (refs.appUpdateDialog.open) refs.appUpdateDialog.close();
+        refs.offlineDataDialog.showModal();
+      }
+    }
     refs.offlineDataClose.focus({ preventScroll: true });
     if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
     await waitForUiPaint();
     await refreshOfflineDataStatus({ skipCacheSize: Boolean(message) });
     if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
+    return true;
   }
 
   function isMobileDevice() {
@@ -1045,7 +1073,8 @@
         await registerServiceWorker();
         return false;
       }
-      refs.appUpdateDialog.showModal();
+      await waitForPageVisible();
+      refs.appUpdateDialog.show();
       refs.appUpdateMessage.textContent = '发现新版本，正在下载应用文件...';
       await waitForUiPaint();
       var registration = await registerServiceWorker();
@@ -3509,7 +3538,7 @@
       refs.configDialog.showModal();
     });
     refs.compareButton.addEventListener('click', showCompare);
-    refs.offlineDataButton.addEventListener('click', showOfflineData);
+    refs.offlineDataButton.addEventListener('click', function () { showOfflineData(); });
     refs.offlineDataDownloadButton.addEventListener('click', downloadAllOfflineData);
     refs.forecastButton.addEventListener('click', showForecast);
     refs.forecastNdxThreshold.addEventListener('input', renderForecast);
@@ -3697,8 +3726,8 @@
     syncView();
     loadData(false);
     syncSharedLocalConfig();
-    checkMobileAppUpdateOnLaunch().then(function (updating) {
-      if (!updating) checkOfflineDataUpdateOnLaunch();
+    checkMobileAppUpdateOnLaunch().then(function () {
+      checkOfflineDataUpdateOnLaunch();
     });
   }
 

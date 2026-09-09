@@ -996,6 +996,10 @@ tbody tr:last-child td {
 
 .app-update-dialog {
   width: min(460px, calc(100vw - 36px));
+  position: fixed;
+  inset: calc(env(safe-area-inset-top, 0px) + 16px) 18px auto auto;
+  z-index: 1000;
+  margin: 0;
 }
 
 .app-update-heading {
@@ -1042,6 +1046,13 @@ tbody tr:last-child td {
 
 .offline-data-dialog {
   width: min(620px, calc(100vw - 36px));
+}
+
+.offline-data-dialog.is-background-update {
+  position: fixed;
+  inset: calc(env(safe-area-inset-top, 0px) + 16px) 18px auto auto;
+  z-index: 1000;
+  margin: 0;
 }
 
 .offline-data-summary {

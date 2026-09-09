@@ -55,11 +55,13 @@ test('full offline downloads prefer the ZIP and retain per-file fallback', () =>
   assert.match(worker, /fetch\(request, \{ cache: 'no-store' \}\)/);
 });
 
-test('automatic offline update paints its dialog before scanning caches', () => {
+test('automatic offline update stays non-modal and paints before scanning caches', () => {
   const projectRoot = path.resolve(__dirname, '..');
   const source = fs.readFileSync(path.join(projectRoot, 'site', 'app.js'), 'utf8');
   const patched = patchApp(source);
   const showDialog = patched.slice(patched.indexOf('  async function showOfflineData(message) {'), patched.indexOf('  function isMobileDevice()'));
-  assert.ok(showDialog.indexOf('showModal()') < showDialog.indexOf('await waitForUiPaint()'));
+  assert.match(showDialog, /if \(automatic\) await waitForPageVisible\(\)/);
+  assert.match(showDialog, /refs\.offlineDataDialog\.show\(\)/);
+  assert.ok(showDialog.indexOf('refs.offlineDataDialog.show()') < showDialog.indexOf('await waitForUiPaint()'));
   assert.ok(showDialog.indexOf('await waitForUiPaint()') < showDialog.indexOf('refreshOfflineDataStatus({ skipCacheSize: Boolean(message) })'));
 });
