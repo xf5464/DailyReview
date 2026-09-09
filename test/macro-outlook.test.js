@@ -32,6 +32,7 @@ const {
   parseAShareMarginBalance,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
+  fetchTonghuashunSentimentItems,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
   parseTonghuashunNewAccountHistory,
@@ -333,6 +334,26 @@ test('Tonghuashun sentiment parser reads official 883404 daily closes and years'
     { date: '2026-08-20', value: 901.2 },
     { date: '2026-08-21', value: 905.6 },
   ]);
+});
+
+test('Tonghuashun sentiment falls back to yearly segments when last.js returns 502', async () => {
+  const requests = [];
+  const fetchImpl = async (url) => {
+    requests.push(url);
+    if (url.endsWith('/last.js')) return { ok: false, status: 502, text: async () => '' };
+    const year = /\/(\d{4})\.js$/.exec(url)?.[1];
+    return {
+      ok: true,
+      status: 200,
+      text: async () => `quotebridge_v4_line_bk_883404_00_${year}({"data":"${year}0102,1,2,1,${year === '2026' ? '925.531' : '900'},1,2,,,,0"})`,
+    };
+  };
+
+  const items = await fetchTonghuashunSentimentItems('2025-09-01', '2026-09-09', fetchImpl);
+  assert.equal(requests.filter((url) => url.endsWith('/last.js')).length, 1);
+  assert.ok(requests.some((url) => url.endsWith('/2025.js')));
+  assert.ok(requests.some((url) => url.endsWith('/2026.js')));
+  assert.deepEqual(items.at(-1), { date: '2026-01-02', value: 925.531 });
 });
 
 test('Tonghuashun new-account parser reads monthly lists, single months, and news links', () => {

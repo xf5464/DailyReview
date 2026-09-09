@@ -11,6 +11,7 @@ const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
 const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
 const TONGHUASHUN_SENTIMENT_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/883404';
 const TONGHUASHUN_SENTIMENT_LINE_BASE_URL = 'https://d.10jqka.com.cn/v4/line/bk_883404/00';
+const TONGHUASHUN_SENTIMENT_FIRST_YEAR = 2022;
 const TONGHUASHUN_NEW_ACCOUNT_SOURCE_URL = 'https://stock.10jqka.com.cn/20260804/c678670551.shtml';
 const TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS = Object.freeze([
   'https://stock.10jqka.com.cn/20251105/c672257388.shtml',
@@ -1292,6 +1293,56 @@ function parseTonghuashunSentimentYears(text) {
     : [];
 }
 
+async function fetchTonghuashunSentimentItems(startDate, endDate, fetchImpl) {
+  const headers = {
+    Accept: 'application/javascript,text/javascript,*/*',
+    Referer: TONGHUASHUN_SENTIMENT_PAGE_URL,
+  };
+  let latestText;
+  let latestItems;
+  let latestYears = [];
+  let latestError;
+  try {
+    latestText = await fetchCsv(buildTonghuashunSentimentUrl(), fetchImpl, headers, 'utf-8', 1);
+    latestItems = parseTonghuashunSentimentHistory(latestText);
+    latestYears = parseTonghuashunSentimentYears(latestText);
+  } catch (error) {
+    latestError = error;
+    latestText = null;
+  }
+
+  const startYear = Math.max(TONGHUASHUN_SENTIMENT_FIRST_YEAR, Number(startDate.slice(0, 4)));
+  const endYear = Number(endDate.slice(0, 4));
+  const years = latestText
+    ? latestYears.filter((year) => {
+      const numericYear = Number(year);
+      return numericYear >= startYear && numericYear <= endYear;
+    })
+    : Array.from({ length: Math.max(0, endYear - startYear + 1) }, (_, index) => String(startYear + index));
+  const historyResults = await Promise.allSettled(years.map((year) => (
+    fetchCsv(buildTonghuashunSentimentUrl(year), fetchImpl, headers)
+  )));
+  const historyItems = historyResults.map((result) => {
+    if (result.status !== 'fulfilled') return null;
+    try {
+      const items = parseTonghuashunSentimentHistory(result.value);
+      return items.length ? items : null;
+    } catch (error) {
+      return null;
+    }
+  });
+  if (!latestText) {
+    const currentYearIndex = years.indexOf(String(endYear));
+    if (currentYearIndex < 0 || !historyItems[currentYearIndex]) {
+      throw latestError || historyResults[currentYearIndex]?.reason || new Error('同花顺情绪指数当年数据不可用');
+    }
+  }
+
+  const allItems = latestItems ? [latestItems] : [];
+  historyItems.forEach((items) => { if (items) allItems.push(items); });
+  return [...new Map(allItems.flat().map((item) => [item.date, item])).values()];
+}
+
 function calculateTonghuashunActiveMarketValue(shanghaiItems, shenzhenItems) {
   const shenzhenByDate = new Map(shenzhenItems.map((item) => [item.date, Number(item.value)]));
   let previous;
@@ -1320,9 +1371,9 @@ function parseNasdaq100PeSnapshot(text = NASDAQ_100_PE_MONTHLY_CSV) {
   }).filter(Boolean);
 }
 
-async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8') {
+async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8', attemptLimit = 3) {
   let lastError;
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
+  for (let attempt = 1; attempt <= attemptLimit; attempt += 1) {
     const options = {
       headers: {
         Accept: 'text/csv',
@@ -1346,7 +1397,7 @@ async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8') {
       return text;
     } catch (error) {
       lastError = error;
-      if (attempt < 3) {
+      if (attempt < attemptLimit) {
         await new Promise((resolve) => setTimeout(resolve, attempt * 500));
       }
     }
@@ -1636,25 +1687,7 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(availableItems, range);
     }),
     aShareSentimentThs: () => loadChart(CHART_METADATA.aShareSentimentThs, async () => {
-      const headers = {
-        Accept: 'application/javascript,text/javascript,*/*',
-        Referer: TONGHUASHUN_SENTIMENT_PAGE_URL,
-      };
-      const latestText = await fetchCsv(buildTonghuashunSentimentUrl(), fetchImpl, headers);
-      const startYear = Number(dailyStartDate.slice(0, 4));
-      const endYear = Number(endDate.slice(0, 4));
-      const historyYears = parseTonghuashunSentimentYears(latestText).filter((year) => {
-        const numericYear = Number(year);
-        return numericYear >= startYear && numericYear <= endYear;
-      });
-      const historyResults = await Promise.allSettled(historyYears.map((year) => (
-        fetchCsv(buildTonghuashunSentimentUrl(year), fetchImpl, headers)
-      )));
-      const allItems = [parseTonghuashunSentimentHistory(latestText)];
-      historyResults.forEach((result) => {
-        if (result.status === 'fulfilled') allItems.push(parseTonghuashunSentimentHistory(result.value));
-      });
-      const uniqueItems = [...new Map(allItems.flat().map((item) => [item.date, item])).values()];
+      const uniqueItems = await fetchTonghuashunSentimentItems(dailyStartDate, endDate, fetchImpl);
       const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
@@ -1876,6 +1909,7 @@ module.exports = {
   parseAShareMarginBalance,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
+  fetchTonghuashunSentimentItems,
   parseTonghuashunSentimentHistory,
   parseTonghuashunSentimentYears,
   parseTonghuashunNewAccountHistory,
