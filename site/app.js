@@ -2,7 +2,7 @@
   'use strict';
 
   var CHART_IDS = [
-    'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
+    'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
@@ -10,6 +10,7 @@
   ];
 
   var TITLES = {
+    usEconomicCalendar: '未来12个月美国经济日历',
     treasuryYield: '美国 10 年期国债收益率',
     treasuryYield30: '美国 30 年期国债收益率',
     federalFundsRate: '美联储有效联邦基金利率',
@@ -49,6 +50,7 @@
   };
 
   var CATEGORIES = {
+    usEconomicCalendar: '经济日历',
     treasuryYield: '利率',
     treasuryYield30: '长期利率',
     federalFundsRate: '政策利率',
@@ -88,6 +90,7 @@
   };
 
   var DESCRIPTIONS = {
+    usEconomicCalendar: '按美国官方已公布日程汇总未来 12 个月的 CPI、PCE、非农就业和美联储议息会议。CPI 与非农取自美国劳工统计局，PCE 取自美国经济分析局，美联储会议取自 FOMC 官方日历；尚未正式公布的月份不推测日期。',
     treasuryYield: '美国 10 年期国债的市场收益率，是长期无风险利率和资产定价的重要基准。上升通常意味着融资成本与估值折现率提高。',
     treasuryYield30: '美国 30 年期国债的市场收益率，反映更长期的利率、通胀和期限风险预期，对长期资产的利率变化更敏感。',
     federalFundsRate: '美国存款类机构隔夜无担保联邦基金交易的成交量加权中位利率，由纽约联储计算。本图使用日度有效联邦基金利率（EFFR），用于观察美联储政策利率实际运行水平。',
@@ -127,6 +130,7 @@
   };
 
   var COLORS = {
+    usEconomicCalendar: '#1f5fd2',
     treasuryYield: '#1f5fd2',
     treasuryYield30: '#1685a9',
     federalFundsRate: '#7048a8',
@@ -186,11 +190,18 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
-  var GROUP_ORDER_VERSION = 3;
+  var GROUP_ORDER_VERSION = 4;
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
   var DEFAULT_QUARTER_POINT_SIZE = 4.5;
+  var ECONOMIC_CALENDAR_TYPES = [
+    { id: 'cpi', label: 'CPI', color: '#c23b3b' },
+    { id: 'pce', label: 'PCE', color: '#7c3aed' },
+    { id: 'payrolls', label: '非农就业', color: '#16806a' },
+    { id: 'fomc', label: '美联储议息', color: '#1f5fd2' }
+  ];
+  var DEFAULT_ECONOMIC_CALENDAR_TYPES = ECONOMIC_CALENDAR_TYPES.map(function (item) { return item.id; });
   var OFFLINE_DATA_CACHE = 'daily-review-data-v1';
   var OFFLINE_STATE_PATH = 'data/offline-state.json';
   var DEFAULT_FORECAST_CONDITIONS = {
@@ -214,8 +225,9 @@
     groupOrderVersion: GROUP_ORDER_VERSION,
     chartsPerRow: 4,
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
+    economicCalendarTypes: DEFAULT_ECONOMIC_CALENDAR_TYPES.slice(),
     chartOrder: [
-      'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+      'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
       'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
       'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
@@ -224,7 +236,7 @@
     ],
     groupChartOrder: {
       default: [
-        'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+        'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
         'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
         'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
@@ -239,11 +251,11 @@
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
       group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
-      group_primary: ['treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
+      'usEconomicCalendar', 'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -258,6 +270,7 @@
       { id: 'group_a_share', name: 'A股' }
     ],
     chartGroups: {
+      usEconomicCalendar: ['default', 'group_primary'],
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
       treasuryYield30: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
       federalFundsRate: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
@@ -411,6 +424,9 @@
     detailStockTableWrap: document.querySelector('#overallDetailStockTableWrap'),
     detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
     detailWideEtfTableWrap: document.querySelector('#overallDetailWideEtfTableWrap'),
+    detailEconomicCalendarWrap: document.querySelector('#overallDetailEconomicCalendarWrap'),
+    economicCalendarList: document.querySelector('#economicCalendarList'),
+    economicCalendarFilters: Array.from(document.querySelectorAll('[name="economicCalendarType"]')),
     wideEtfQuarter: document.querySelector('#wideEtfQuarterSelect'),
     wideEtfPreviousQuarter: document.querySelector('#wideEtfPreviousQuarterButton'),
     wideEtfNextQuarter: document.querySelector('#wideEtfNextQuarterButton'),
@@ -514,6 +530,13 @@
     });
   }
 
+  function normalizeEconomicCalendarTypes(values) {
+    var known = new Set(DEFAULT_ECONOMIC_CALENDAR_TYPES);
+    return Array.from(new Set((Array.isArray(values) ? values : []).filter(function (id) {
+      return known.has(id);
+    })));
+  }
+
   function normalizeForecastThreshold(value, fallback, maximum, minimum) {
     var parsed = Number(value);
     if (!Number.isFinite(parsed)) return fallback;
@@ -607,6 +630,9 @@
     var requestedGroupId = groupIdAliases[source.selectedGroupId] || source.selectedGroupId;
     var selectedGroupId = groupIds.has(requestedGroupId) ? requestedGroupId : 'default';
     var forecastSource = source.forecastConditions || {};
+    var economicCalendarTypes = Array.isArray(source.economicCalendarTypes)
+      ? normalizeEconomicCalendarTypes(source.economicCalendarTypes)
+      : DEFAULT_ECONOMIC_CALENDAR_TYPES.slice();
 
     return {
       groupOrderVersion: GROUP_ORDER_VERSION,
@@ -617,6 +643,7 @@
       groups: groups,
       chartGroups: chartGroups,
       selectedGroupId: selectedGroupId,
+      economicCalendarTypes: economicCalendarTypes,
       forecastConditions: {
         ndxDrawdownPercent: normalizeForecastThreshold(
           forecastSource.ndxDrawdownPercent,
@@ -1344,6 +1371,189 @@
     svg.append(label);
   }
 
+  function economicCalendarType(typeId) {
+    return ECONOMIC_CALENDAR_TYPES.find(function (item) { return item.id === typeId; }) || null;
+  }
+
+  function selectedEconomicCalendarItems(chart) {
+    return (chart && Array.isArray(chart.items) ? chart.items : []).filter(function (item) {
+      return item && item.date && config.economicCalendarTypes.includes(item.eventType);
+    }).slice().sort(function (left, right) {
+      return left.date.localeCompare(right.date) ||
+        DEFAULT_ECONOMIC_CALENDAR_TYPES.indexOf(left.eventType) - DEFAULT_ECONOMIC_CALENDAR_TYPES.indexOf(right.eventType);
+    });
+  }
+
+  function economicCalendarDateLabel(item) {
+    var end = new Date(item.date + 'T00:00:00Z');
+    var start = new Date((item.startDate || item.date) + 'T00:00:00Z');
+    if (Number.isNaN(end.getTime()) || Number.isNaN(start.getTime())) return item.date || '--';
+    var endLabel = end.getUTCFullYear() + '/' + String(end.getUTCMonth() + 1).padStart(2, '0') + '/' +
+      String(end.getUTCDate()).padStart(2, '0');
+    if (item.startDate && item.startDate !== item.date) {
+      if (start.getUTCFullYear() === end.getUTCFullYear() && start.getUTCMonth() === end.getUTCMonth()) {
+        return start.getUTCFullYear() + '/' + String(start.getUTCMonth() + 1).padStart(2, '0') + '/' +
+          String(start.getUTCDate()).padStart(2, '0') + '–' + String(end.getUTCDate()).padStart(2, '0');
+      }
+      return start.getUTCFullYear() + '/' + String(start.getUTCMonth() + 1).padStart(2, '0') + '/' +
+        String(start.getUTCDate()).padStart(2, '0') + '–' + endLabel;
+    }
+    return endLabel;
+  }
+
+  function economicCalendarWeekday(dateText) {
+    var date = new Date(dateText + 'T00:00:00Z');
+    if (Number.isNaN(date.getTime())) return '';
+    return new Intl.DateTimeFormat('zh-CN', { weekday: 'short', timeZone: 'UTC' }).format(date);
+  }
+
+  function economicCalendarDaysUntil(dateText) {
+    var target = new Date(dateText + 'T00:00:00');
+    var today = new Date();
+    target.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    var days = Math.round((target.getTime() - today.getTime()) / 86400000);
+    if (days === 0) return '今天';
+    if (days === 1) return '明天';
+    return days > 1 ? days + '天后' : '已公布';
+  }
+
+  function economicCalendarTooltipText(item) {
+    return economicCalendarDateLabel(item) + ' · ' + (item.label || item.eventType) +
+      (item.referencePeriod ? ' · ' + item.referencePeriod : '') +
+      (item.projections ? ' · 含经济预测' : '');
+  }
+
+  function renderEconomicCalendarTimeline(svg, chart) {
+    var items = selectedEconomicCalendarItems(chart);
+    var selectedTypes = ECONOMIC_CALENDAR_TYPES.filter(function (type) {
+      return config.economicCalendarTypes.includes(type.id);
+    });
+    if (!items.length || !selectedTypes.length) {
+      renderEmpty(svg, selectedTypes.length ? '暂无已公布日程' : '请在详情中勾选显示项目');
+      return;
+    }
+    svg.replaceChildren();
+    svg.setAttribute('viewBox', '0 0 520 270');
+    var width = 520;
+    var height = 270;
+    var box = { left: 82, right: 16, top: 18, bottom: 38 };
+    box.width = width - box.left - box.right;
+    box.height = height - box.top - box.bottom;
+    var startText = chart.windowStart || items[0].date;
+    var endText = chart.windowEnd || items[items.length - 1].date;
+    var startTime = Date.parse(startText + 'T00:00:00Z');
+    var endTime = Date.parse(endText + 'T00:00:00Z');
+    if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || endTime <= startTime) {
+      renderEmpty(svg, '日程时间范围无效');
+      return;
+    }
+    for (var monthOffset = 0; monthOffset <= 12; monthOffset += 2) {
+      var tickDate = shiftMonths(new Date(startTime), monthOffset);
+      var tickTime = Math.min(endTime, tickDate.getTime());
+      var tickX = box.left + (tickTime - startTime) / (endTime - startTime) * box.width;
+      var tick = createSvg('line', {
+        x1: tickX, x2: tickX, y1: box.top, y2: box.top + box.height,
+        class: 'economic-calendar-grid-line'
+      });
+      var tickLabel = createSvg('text', {
+        x: tickX, y: height - 12, class: 'economic-calendar-axis-label', 'text-anchor': monthOffset ? 'middle' : 'start'
+      });
+      tickLabel.textContent = monthOffset === 0 || tickDate.getUTCMonth() === 0
+        ? tickDate.getUTCFullYear() + '年' + (tickDate.getUTCMonth() + 1) + '月'
+        : (tickDate.getUTCMonth() + 1) + '月';
+      svg.append(tick, tickLabel);
+    }
+    selectedTypes.forEach(function (type, laneIndex) {
+      var y = box.top + box.height * (laneIndex + 0.5) / selectedTypes.length;
+      var lane = createSvg('line', {
+        x1: box.left, x2: box.left + box.width, y1: y, y2: y,
+        class: 'economic-calendar-lane'
+      });
+      var laneLabel = createSvg('text', {
+        x: box.left - 10, y: y + 4, class: 'economic-calendar-lane-label', 'text-anchor': 'end'
+      });
+      laneLabel.textContent = type.label;
+      svg.append(lane, laneLabel);
+      items.filter(function (item) { return item.eventType === type.id; }).forEach(function (item) {
+        var itemTime = Date.parse(item.date + 'T00:00:00Z');
+        var x = box.left + (itemTime - startTime) / (endTime - startTime) * box.width;
+        var marker = createSvg('circle', {
+          cx: x, cy: y, r: 6, class: 'economic-calendar-marker', tabindex: 0,
+          role: 'img', 'aria-label': economicCalendarTooltipText(item)
+        });
+        marker.style.fill = type.color;
+        var nativeTitle = createSvg('title');
+        nativeTitle.textContent = economicCalendarTooltipText(item);
+        marker.append(nativeTitle);
+        marker.addEventListener('pointermove', function (event) {
+          var tip = ensureTooltip(svg);
+          tip.textContent = economicCalendarTooltipText(item);
+          tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
+          tip.style.top = Math.max(12, event.clientY - 38) + 'px';
+          tip.hidden = false;
+        });
+        marker.addEventListener('pointerleave', function () { if (tooltip) tooltip.hidden = true; });
+        marker.addEventListener('focus', function () {
+          var rect = marker.getBoundingClientRect();
+          var tip = ensureTooltip(svg);
+          tip.textContent = economicCalendarTooltipText(item);
+          tip.style.left = Math.min(window.innerWidth - 12, rect.left + rect.width + 8) + 'px';
+          tip.style.top = Math.max(12, rect.top - 34) + 'px';
+          tip.hidden = false;
+        });
+        marker.addEventListener('blur', function () { if (tooltip) tooltip.hidden = true; });
+        svg.append(marker);
+      });
+    });
+  }
+
+  function renderEconomicCalendarDetail(chart) {
+    refs.economicCalendarFilters.forEach(function (input) {
+      input.checked = config.economicCalendarTypes.includes(input.value);
+    });
+    var items = selectedEconomicCalendarItems(chart);
+    refs.economicCalendarList.replaceChildren();
+    items.forEach(function (item) {
+      var type = economicCalendarType(item.eventType) || { label: item.label || item.eventType, color: '#52617a' };
+      var row = createElement('li', 'economic-calendar-row');
+      row.style.setProperty('--event-color', type.color);
+      var dateBlock = createElement('div', 'economic-calendar-row-date');
+      var date = createElement('time', '', economicCalendarDateLabel(item));
+      date.dateTime = item.date;
+      dateBlock.append(date, createElement('span', '', economicCalendarWeekday(item.date)));
+      var body = createElement('div', 'economic-calendar-row-body');
+      var heading = createElement('div', 'economic-calendar-row-heading');
+      heading.append(createElement('span', 'economic-calendar-type-badge', type.label));
+      heading.append(createElement('strong', '', item.eventType === 'fomc' ? '美联储利率会议' : type.label + ' 数据公布'));
+      body.append(heading);
+      var details = [];
+      if (item.referencePeriod) details.push(item.referencePeriod);
+      if (item.timeLabel) details.push(item.timeLabel);
+      if (item.projections) details.push('含经济预测');
+      body.append(createElement('p', '', details.join(' · ')));
+      var source = createElement('a', 'economic-calendar-source-link', '官方日程 ↗');
+      source.href = item.sourceUrl || '#';
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+      row.append(dateBlock, body, source);
+      refs.economicCalendarList.append(row);
+    });
+    if (!items.length) {
+      refs.economicCalendarList.append(createElement('li', 'economic-calendar-empty', config.economicCalendarTypes.length
+        ? '所选类别在未来12个月暂无官方已公布日期。'
+        : '请至少勾选一个要显示的项目。'));
+    }
+    var allCount = chart && Array.isArray(chart.items) ? chart.items.length : 0;
+    var fallbackLabels = (chart && chart.fallbackTypes || []).map(function (id) {
+      var type = economicCalendarType(id);
+      return type ? type.label : id;
+    });
+    refs.detailMessage.textContent = '未来12个月 · 当前显示 ' + items.length + '/' + allCount +
+      ' 项官方已公布日程；尚未公布的月份会在官网更新后自动补充。' +
+      (fallbackLabels.length ? ' ' + fallbackLabels.join('、') + ' 本次使用 ' + (chart.snapshotDate || '') + ' 已核验快照。' : '');
+  }
+
   function nearestItem(items, timestamp) {
     var best = items[0];
     var distance = Math.abs(Date.parse(best.date + 'T00:00:00Z') - timestamp);
@@ -1670,6 +1880,9 @@
   function createCard(chartId) {
     var source = chartById(chartId);
     var chart = filteredChart(source, refs.range.value);
+    if (source && source.chartType === 'economicCalendar') chart = Object.assign({}, source);
+    var economicCalendarChart = chart && chart.chartType === 'economicCalendar';
+    var calendarItems = economicCalendarChart ? selectedEconomicCalendarItems(chart) : [];
     var card = createElement('article', 'overall-chart-card');
     card.dataset.chartId = chartId;
     card.draggable = true;
@@ -1702,11 +1915,16 @@
     heading.append(titleRow);
 
     var actions = createElement('div', 'overall-chart-card-header-actions');
-    var latest = chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
+    var latest = economicCalendarChart ? calendarItems[0]
+      : chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
     var latestBlock = createElement('div', 'overall-chart-latest');
-    latestBlock.append(createElement('strong', '', latest ? formatValue(chart, latest.value, false) : '--'));
+    latestBlock.append(createElement('strong', '', economicCalendarChart && latest
+      ? economicCalendarDaysUntil(latest.date)
+      : latest ? formatValue(chart, latest.value, false) : '--'));
     if (latest && latest.provisional) latestBlock.append(createElement('span', 'overall-chart-provisional-badge', '临时补点'));
-    var latestDate = createElement('time', 'overall-chart-latest-date', latest ? formatDate(latest.date, chart.frequency) : '暂无日期');
+    var latestDate = createElement('time', 'overall-chart-latest-date', latest
+      ? economicCalendarChart ? formatDate(latest.date, '日度') + ' · ' + latest.label : formatDate(latest.date, chart.frequency)
+      : '暂无日期');
     if (latest) latestDate.dateTime = latest.date;
     latestBlock.append(latestDate);
     actions.append(latestBlock);
@@ -1723,7 +1941,11 @@
     var availableStockRows = stockTableChart ? (chart.rows || []).filter(function (row) {
       return hasNumericValue(row.latestValue);
     }) : [];
-    var summary = createElement('p', 'overall-chart-summary', stockTableChart
+    var summary = createElement('p', 'overall-chart-summary', economicCalendarChart
+      ? config.economicCalendarTypes.length
+        ? '未来12个月 · 显示 ' + calendarItems.length + '/' + (chart.items || []).length + ' 项已公布日程'
+        : '尚未选择要显示的日程类别'
+      : stockTableChart
       ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
       : wideEtfTableChart && latest ? formatDate(latest.date, '季度') + ' · 宽基合计 ' + formatMarketCap(latest.value)
       : rangeSummary(chart));
@@ -1737,12 +1959,23 @@
     } else if (wideEtfTableChart) {
       cardStockTable = createElement('div', 'shareholder-table-wrap wide-etf-card-wrap');
       renderWideEtfRows(cardStockTable, chart, latest && latest.date, true);
+    } else if (economicCalendarChart) {
+      renderEconomicCalendarTimeline(svg, chart);
     } else {
       renderLineChart(svg, chart);
     }
     var sourceLine = createElement('p', 'overall-chart-source');
     sourceLine.append(document.createTextNode('数据源：'));
-    if (chart && chart.sourceUrl) {
+    if (chart && Array.isArray(chart.sourceLinks) && chart.sourceLinks.length) {
+      chart.sourceLinks.forEach(function (sourceLink, index) {
+        if (index) sourceLine.append(document.createTextNode(' / '));
+        var sourceAnchor = createElement('a', '', sourceLink.name || '查看来源');
+        sourceAnchor.href = sourceLink.url;
+        sourceAnchor.target = '_blank';
+        sourceAnchor.rel = 'noopener noreferrer';
+        sourceLine.append(sourceAnchor);
+      });
+    } else if (chart && chart.sourceUrl) {
       var link = createElement('a', '', chart.sourceName || '查看来源');
       link.href = chart.sourceUrl;
       link.target = '_blank';
@@ -1803,17 +2036,23 @@
   function renderTable() {
     refs.tableBody.replaceChildren();
     activeChartIds().forEach(function (id) {
-      var chart = filteredChart(chartById(id), refs.range.value);
-      var latest = chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
+      var sourceChart = chartById(id);
+      var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
+      var chart = economicCalendarChart ? sourceChart : filteredChart(sourceChart, refs.range.value);
+      var calendarItems = economicCalendarChart ? selectedEconomicCalendarItems(chart) : [];
+      var latest = economicCalendarChart ? calendarItems[0]
+        : chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
       var row = document.createElement('tr');
       var name = createElement('th', '', TITLES[id]);
       name.scope = 'row';
       row.append(name);
-      row.append(createElement('td', chart && chart.error && !latest ? 'overall-table-error' : '', latest ? formatValue(chart, latest.value) : '--'));
-      row.append(createElement('td', '', latest ? formatDate(latest.date, chart.frequency) : '--'));
+      row.append(createElement('td', chart && chart.error && !latest ? 'overall-table-error' : '', economicCalendarChart
+        ? calendarItems.length + '项'
+        : latest ? formatValue(chart, latest.value) : '--'));
+      row.append(createElement('td', '', latest ? formatDate(latest.date, economicCalendarChart ? '日度' : chart.frequency) : '--'));
       row.append(createElement('td', '', chart && chart.frequency || '--'));
       var actionCell = document.createElement('td');
-      var button = createElement('button', 'secondary-button', '查看图表');
+      var button = createElement('button', 'secondary-button', economicCalendarChart ? '查看日历' : '查看图表');
       button.type = 'button';
       button.addEventListener('click', function (event) {
         event.stopPropagation();
@@ -1984,12 +2223,18 @@
     var sourceChart = chartById(activeDetailId);
     var stockTableChart = sourceChart && sourceChart.chartType === 'stockTable';
     var wideEtfTableChart = sourceChart && sourceChart.chartType === 'wideEtfTable';
-    var customTableChart = stockTableChart || wideEtfTableChart;
+    var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
+    var customTableChart = stockTableChart || wideEtfTableChart || economicCalendarChart;
     refs.detailRangeControl.hidden = Boolean(customTableChart);
     refs.detailExtremes.hidden = Boolean(customTableChart);
     refs.detailChart.toggleAttribute('hidden', Boolean(customTableChart));
     refs.detailStockTableWrap.hidden = !stockTableChart;
     refs.detailWideEtfTableWrap.hidden = !wideEtfTableChart;
+    refs.detailEconomicCalendarWrap.hidden = !economicCalendarChart;
+    if (economicCalendarChart) {
+      renderEconomicCalendarDetail(sourceChart);
+      return;
+    }
     if (stockTableChart) {
       var rows = sourceChart.rows || [];
       var quarterDates = Array.from(new Set(rows.flatMap(function (row) {
@@ -3593,6 +3838,17 @@
     document.querySelector('#overallCompareRunButton').addEventListener('click', renderComparison);
     refs.compareRange.addEventListener('change', renderComparison);
     refs.detailRange.addEventListener('change', renderDetail);
+    refs.economicCalendarFilters.forEach(function (input) {
+      input.addEventListener('change', function () {
+        config.economicCalendarTypes = refs.economicCalendarFilters.filter(function (option) {
+          return option.checked;
+        }).map(function (option) { return option.value; });
+        persistConfig();
+        renderCards();
+        renderTable();
+        renderDetail();
+      });
+    });
     refs.shareholderSortButton.addEventListener('click', function () { toggleShareholderSort('count'); });
     refs.shareholderChangeSortButton.addEventListener('click', function () { toggleShareholderSort('change'); });
     refs.shareholderMarketCapSortButton.addEventListener('click', function () { toggleShareholderSort('marketCap'); });

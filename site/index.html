@@ -372,6 +372,16 @@
             <tbody id="wideEtfTableBody"></tbody>
           </table>
         </div>
+        <div class="economic-calendar-detail" id="overallDetailEconomicCalendarWrap" hidden>
+          <fieldset class="economic-calendar-filters">
+            <legend>显示项目</legend>
+            <label class="economic-calendar-filter economic-calendar-filter-cpi"><input type="checkbox" name="economicCalendarType" value="cpi" checked /><span>CPI</span></label>
+            <label class="economic-calendar-filter economic-calendar-filter-pce"><input type="checkbox" name="economicCalendarType" value="pce" checked /><span>PCE</span></label>
+            <label class="economic-calendar-filter economic-calendar-filter-payrolls"><input type="checkbox" name="economicCalendarType" value="payrolls" checked /><span>非农就业</span></label>
+            <label class="economic-calendar-filter economic-calendar-filter-fomc"><input type="checkbox" name="economicCalendarType" value="fomc" checked /><span>美联储议息</span></label>
+          </fieldset>
+          <ol class="economic-calendar-list" id="economicCalendarList" aria-label="未来12个月美国重要经济日程"></ol>
+        </div>
         <svg class="overall-detail-chart overall-chart" id="overallDetailChart" role="img" aria-label="单指标详情图"></svg>
       </div>
     </dialog>

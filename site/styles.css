@@ -1972,6 +1972,206 @@ tbody tr:last-child td {
   aspect-ratio: 520 / 270;
 }
 
+.economic-calendar-grid-line {
+  stroke: #e7edf6;
+  stroke-width: 1;
+}
+
+.economic-calendar-lane {
+  stroke: #cfd9e8;
+  stroke-width: 2;
+}
+
+.economic-calendar-lane-label,
+.economic-calendar-axis-label {
+  fill: #657089;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.economic-calendar-marker {
+  stroke: #fff;
+  stroke-width: 2;
+  cursor: help;
+  transition: r 120ms ease, stroke-width 120ms ease;
+}
+
+.economic-calendar-marker:hover,
+.economic-calendar-marker:focus-visible {
+  r: 8px;
+  stroke-width: 3;
+  outline: none;
+}
+
+.economic-calendar-detail {
+  margin-top: 12px;
+}
+
+.economic-calendar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 1px solid #dfe6f1;
+  border-radius: 9px;
+  background: #f8fbff;
+}
+
+.economic-calendar-filters legend {
+  padding: 0 6px;
+  color: #52617a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.economic-calendar-filter {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border: 1px solid #d5dfed;
+  border-radius: 999px;
+  background: #fff;
+  color: #34445d;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.economic-calendar-filter input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--filter-color, #1f5fd2);
+}
+
+.economic-calendar-filter span::before {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--filter-color, #1f5fd2);
+  content: '';
+}
+
+.economic-calendar-filter-cpi { --filter-color: #c23b3b; }
+.economic-calendar-filter-pce { --filter-color: #7c3aed; }
+.economic-calendar-filter-payrolls { --filter-color: #16806a; }
+.economic-calendar-filter-fomc { --filter-color: #1f5fd2; }
+
+.economic-calendar-list {
+  display: grid;
+  gap: 8px;
+  max-height: min(58vh, 620px);
+  margin: 0;
+  padding: 0 2px 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.economic-calendar-row {
+  display: grid;
+  grid-template-columns: minmax(132px, auto) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 13px;
+  border: 1px solid #dfe6f1;
+  border-left: 4px solid var(--event-color, #1f5fd2);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.economic-calendar-row-date {
+  display: grid;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+.economic-calendar-row-date time {
+  color: #172033;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.economic-calendar-row-date span,
+.economic-calendar-row-body p {
+  color: #657089;
+  font-size: 12px;
+}
+
+.economic-calendar-row-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.economic-calendar-row-heading strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.economic-calendar-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--event-color, #1f5fd2) 12%, white);
+  color: var(--event-color, #1f5fd2);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.economic-calendar-row-body p {
+  margin: 5px 0 0;
+}
+
+.economic-calendar-source-link {
+  color: #1f5fd2;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.economic-calendar-source-link:hover,
+.economic-calendar-source-link:focus-visible {
+  text-decoration: underline;
+}
+
+.economic-calendar-empty {
+  padding: 24px 16px;
+  border: 1px dashed #c9d4e4;
+  border-radius: 8px;
+  color: #657089;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .economic-calendar-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .economic-calendar-filter {
+    justify-content: flex-start;
+  }
+
+  .economic-calendar-row {
+    grid-template-columns: minmax(112px, auto) minmax(0, 1fr);
+    align-items: start;
+    gap: 8px 12px;
+  }
+
+  .economic-calendar-source-link {
+    grid-column: 2;
+  }
+}
+
 .overall-detail-extremes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

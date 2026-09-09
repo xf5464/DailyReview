@@ -9,6 +9,12 @@ const CBOE_VIX_HISTORY_URL = 'https://cdn.cboe.com/api/global/us_indices/daily_p
 const CBOE_VIX_HISTORY_PAGE_URL = 'https://www.cboe.com/tradable-products/vix/vix-historical-data';
 const BEA_NEWS_RSS_URL = 'https://apps.bea.gov/rss/rss.xml';
 const BEA_PCE_SOURCE_URL = 'https://www.bea.gov/data/personal-consumption-expenditures-price-index';
+const BLS_CPI_SCHEDULE_URL = 'https://www.bls.gov/schedule/news_release/cpi.htm';
+const BLS_EMPLOYMENT_SCHEDULE_URL = 'https://www.bls.gov/schedule/news_release/empsit.htm';
+const BEA_RELEASE_SCHEDULE_URL = 'https://www.bea.gov/news/schedule';
+const BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL = 'https://www.bea.gov/news/schedule/next-year';
+const FOMC_CALENDAR_URL = 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm';
+const US_ECONOMIC_CALENDAR_SNAPSHOT_DATE = '2026-09-09';
 const TONGHUASHUN_SENTIMENT_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/883404';
 const TONGHUASHUN_SENTIMENT_LINE_BASE_URL = 'https://d.10jqka.com.cn/v4/line/bk_883404/00';
 const TONGHUASHUN_SENTIMENT_FIRST_YEAR = 2022;
@@ -49,6 +55,45 @@ const ENGLISH_MONTH_NUMBERS = Object.freeze({
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
   july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
 });
+const ECONOMIC_CALENDAR_TYPE_VALUES = Object.freeze({ cpi: 1, pce: 2, payrolls: 3, fomc: 4 });
+const ECONOMIC_CALENDAR_TYPE_LABELS = Object.freeze({
+  cpi: 'CPI', pce: 'PCE', payrolls: '非农就业', fomc: '美联储议息',
+});
+const US_ECONOMIC_CALENDAR_SNAPSHOT = Object.freeze([
+  ['cpi', '2026-09-11', '2026年8月', '08:30 AM ET'],
+  ['cpi', '2026-10-14', '2026年9月', '08:30 AM ET'],
+  ['cpi', '2026-11-10', '2026年10月', '08:30 AM ET'],
+  ['cpi', '2026-12-10', '2026年11月', '08:30 AM ET'],
+  ['pce', '2026-09-30', '2026年8月', '08:30 AM ET'],
+  ['pce', '2026-10-29', '2026年9月', '08:30 AM ET'],
+  ['pce', '2026-11-25', '2026年10月', '08:30 AM ET'],
+  ['pce', '2026-12-23', '2026年11月', '08:30 AM ET'],
+  ['payrolls', '2026-10-02', '2026年9月', '08:30 AM ET'],
+  ['payrolls', '2026-11-06', '2026年10月', '08:30 AM ET'],
+  ['payrolls', '2026-12-04', '2026年11月', '08:30 AM ET'],
+  ['fomc', '2026-09-16', '2026年9月议息会议', '会议第二日', '2026-09-15', true],
+  ['fomc', '2026-10-28', '2026年10月议息会议', '会议第二日', '2026-10-27', false],
+  ['fomc', '2026-12-09', '2026年12月议息会议', '会议第二日', '2026-12-08', true],
+  ['fomc', '2027-01-27', '2027年1月议息会议', '会议第二日', '2027-01-26', false],
+  ['fomc', '2027-03-17', '2027年3月议息会议', '会议第二日', '2027-03-16', true],
+  ['fomc', '2027-04-28', '2027年4月议息会议', '会议第二日', '2027-04-27', false],
+  ['fomc', '2027-06-09', '2027年6月议息会议', '会议第二日', '2027-06-08', true],
+  ['fomc', '2027-07-28', '2027年7月议息会议', '会议第二日', '2027-07-27', false],
+  ['fomc', '2027-09-15', '2027年9月议息会议', '会议第二日', '2027-09-14', true],
+].map(([eventType, date, referencePeriod, timeLabel, startDate, projections]) => Object.freeze({
+  date,
+  startDate: startDate || date,
+  value: ECONOMIC_CALENDAR_TYPE_VALUES[eventType],
+  eventType,
+  label: ECONOMIC_CALENDAR_TYPE_LABELS[eventType],
+  referencePeriod,
+  timeLabel,
+  projections: Boolean(projections),
+  sourceUrl: eventType === 'cpi' ? BLS_CPI_SCHEDULE_URL
+    : eventType === 'payrolls' ? BLS_EMPLOYMENT_SCHEDULE_URL
+    : eventType === 'pce' ? BEA_RELEASE_SCHEDULE_URL : FOMC_CALENDAR_URL,
+  snapshotDate: US_ECONOMIC_CALENDAR_SNAPSHOT_DATE,
+})));
 const ISM_PMI_SOURCE_SNAPSHOT_URL = 'https://git.nomics.world/api/v4/projects/201/repository/files/index_PMI.html/raw?ref=master';
 const ISM_OFFICIAL_REPORT_URL = 'https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/pmi/july/';
 // ISM 官方月报的 Manufacturing at a Glance 数值。DBnomics 提供长期历史，
@@ -244,6 +289,20 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: 'FRED / 纽约联储',
     sourceUrl: 'https://fred.stlouisfed.org/series/DFF',
+  },
+  usEconomicCalendar: {
+    id: 'usEconomicCalendar',
+    title: '未来12个月美国经济日历',
+    unit: '项',
+    decimals: 0,
+    frequency: '未来12个月',
+    chartType: 'economicCalendar',
+    sourceName: '美国劳工统计局 / 美国经济分析局 / 美联储',
+    sourceLinks: [
+      { name: 'BLS', url: BLS_CPI_SCHEDULE_URL },
+      { name: 'BEA', url: BEA_RELEASE_SCHEDULE_URL },
+      { name: '美联储', url: FOMC_CALENDAR_URL },
+    ],
   },
   cpi: {
     id: 'cpi',
@@ -659,6 +718,203 @@ function decodeHtmlText(value) {
     .replace(/&quot;|&#34;/gi, '"')
     .replace(/&#39;|&apos;/gi, "'")
     .trim();
+}
+
+function htmlToPlainText(value) {
+  return decodeHtmlEntities(String(value ?? ''))
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function englishMonthNumber(value) {
+  const key = String(value ?? '').toLowerCase().replace(/[^a-z]/g, '');
+  const fullName = Object.keys(ENGLISH_MONTH_NUMBERS).find((name) => name.startsWith(key.slice(0, 3)));
+  return fullName ? ENGLISH_MONTH_NUMBERS[fullName] : null;
+}
+
+function englishDate(year, monthName, day) {
+  const month = englishMonthNumber(monthName);
+  const numericYear = Number(year);
+  const numericDay = Number(day);
+  if (!month || numericYear < 2000 || numericYear > 2100 || numericDay < 1 || numericDay > 31) return null;
+  const date = new Date(Date.UTC(numericYear, Number(month) - 1, numericDay));
+  if (date.getUTCFullYear() !== numericYear || date.getUTCMonth() !== Number(month) - 1 ||
+      date.getUTCDate() !== numericDay) return null;
+  return `${numericYear}-${month}-${String(numericDay).padStart(2, '0')}`;
+}
+
+function economicCalendarItem(eventType, date, options = {}) {
+  if (!ECONOMIC_CALENDAR_TYPE_VALUES[eventType] || !normalizeObservationDate(date)) return null;
+  return {
+    date,
+    startDate: normalizeObservationDate(options.startDate) || date,
+    value: ECONOMIC_CALENDAR_TYPE_VALUES[eventType],
+    eventType,
+    label: ECONOMIC_CALENDAR_TYPE_LABELS[eventType],
+    referencePeriod: String(options.referencePeriod || ''),
+    timeLabel: String(options.timeLabel || ''),
+    projections: Boolean(options.projections),
+    sourceUrl: String(options.sourceUrl || ''),
+  };
+}
+
+function parseBlsReleaseSchedule(text, eventType) {
+  if (!['cpi', 'payrolls'].includes(eventType)) throw new Error('不支持的 BLS 日程类型');
+  const plainText = htmlToPlainText(text);
+  const sourceUrl = eventType === 'cpi' ? BLS_CPI_SCHEDULE_URL : BLS_EMPLOYMENT_SCHEDULE_URL;
+  const items = [];
+  const pattern = /([A-Za-z]{3,9})\.?\s+(20\d{2})\s+([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(20\d{2})\s+(\d{1,2}:\d{2})\s*(AM|PM)/gi;
+  for (const match of plainText.matchAll(pattern)) {
+    const date = englishDate(match[5], match[3], match[4]);
+    const referenceMonth = englishMonthNumber(match[1]);
+    if (!date || !referenceMonth) continue;
+    const item = economicCalendarItem(eventType, date, {
+      referencePeriod: `${match[2]}年${Number(referenceMonth)}月`,
+      timeLabel: `${match[6]} ${match[7].toUpperCase()} ET`,
+      sourceUrl,
+    });
+    if (item) items.push(item);
+  }
+  return uniqueEconomicCalendarItems(items);
+}
+
+function parseBeaReleaseSchedule(text) {
+  const plainText = htmlToPlainText(text);
+  const items = [];
+  const pattern = /([A-Za-z]{3,9})\.?\s+(\d{1,2})\s+(\d{1,2}:\d{2})\s*(AM|PM)\s+(?:N\s*ews\s+)?Personal Income and Outlays,\s*([A-Za-z]{3,9})\s+(20\d{2})/gi;
+  for (const match of plainText.matchAll(pattern)) {
+    const releaseMonth = englishMonthNumber(match[1]);
+    const referenceMonth = englishMonthNumber(match[5]);
+    if (!releaseMonth || !referenceMonth) continue;
+    const referenceYear = Number(match[6]);
+    const releaseYear = Number(releaseMonth) < Number(referenceMonth) ? referenceYear + 1 : referenceYear;
+    const date = englishDate(releaseYear, match[1], match[2]);
+    const item = date ? economicCalendarItem('pce', date, {
+      referencePeriod: `${referenceYear}年${Number(referenceMonth)}月`,
+      timeLabel: `${match[3]} ${match[4].toUpperCase()} ET`,
+      sourceUrl: BEA_RELEASE_SCHEDULE_URL,
+    }) : null;
+    if (item) items.push(item);
+  }
+  return uniqueEconomicCalendarItems(items);
+}
+
+function parseFomcMeetingSchedule(text) {
+  const plainText = htmlToPlainText(text);
+  const headings = [...plainText.matchAll(/(20\d{2})\s+FOMC Meetings/gi)];
+  const items = [];
+  headings.forEach((heading, index) => {
+    const year = Number(heading[1]);
+    const sectionStart = heading.index + heading[0].length;
+    const sectionEnd = headings[index + 1]?.index ?? plainText.length;
+    // The live calendar appends a prose note for the following January after
+    // the final yearly list. Stop before that note so it is not parsed as a
+    // second meeting in the heading year.
+    const section = plainText.slice(sectionStart, sectionEnd)
+      .split(/\*\s*Meeting associated|Note:\s*A two-day meeting/i)[0];
+    const meetingPattern = /(January|February|March|April|May|June|July|August|September|October|November|December|Apr(?:il)?\/May)\s+(\d{1,2})\s*[-–]\s*(\d{1,2})(\*)?/gi;
+    for (const match of section.matchAll(meetingPattern)) {
+      const monthNames = match[1].split('/');
+      const startDate = englishDate(year, monthNames[0], match[2]);
+      const endDate = englishDate(year, monthNames[1] || monthNames[0], match[3]);
+      const month = englishMonthNumber(monthNames[0]);
+      const item = startDate && endDate && month ? economicCalendarItem('fomc', endDate, {
+        startDate,
+        referencePeriod: `${year}年${Number(month)}月议息会议`,
+        timeLabel: '会议第二日',
+        projections: Boolean(match[4]),
+        sourceUrl: FOMC_CALENDAR_URL,
+      }) : null;
+      if (item) items.push(item);
+    }
+  });
+  return uniqueEconomicCalendarItems(items);
+}
+
+function uniqueEconomicCalendarItems(items) {
+  const unique = new Map();
+  items.forEach((item) => {
+    if (!item?.date || !item?.eventType) return;
+    unique.set(`${item.eventType}:${item.startDate || item.date}:${item.date}`, item);
+  });
+  return [...unique.values()].sort((left, right) => (
+    left.date.localeCompare(right.date) || left.value - right.value
+  ));
+}
+
+function filterUpcomingEconomicCalendarItems(items, now, monthCount = 12) {
+  const startDate = formatIsoDate(getUtcDate(now));
+  const endDate = formatIsoDate(shiftUtcMonths(now, monthCount));
+  return uniqueEconomicCalendarItems(items).filter((item) => item.date >= startDate && item.date <= endDate);
+}
+
+async function fetchUsEconomicCalendar(now, fetchImpl) {
+  const sources = [
+    {
+      eventTypes: ['cpi'],
+      load: async () => {
+        const text = await fetchCsv(BLS_CPI_SCHEDULE_URL, fetchImpl, { Accept: 'text/html' }, 'utf-8', 2);
+        const items = parseBlsReleaseSchedule(text, 'cpi');
+        if (!items.length) throw new Error('BLS CPI 日程格式无效');
+        return items;
+      },
+    },
+    {
+      eventTypes: ['payrolls'],
+      load: async () => {
+        const text = await fetchCsv(BLS_EMPLOYMENT_SCHEDULE_URL, fetchImpl, { Accept: 'text/html' }, 'utf-8', 2);
+        const items = parseBlsReleaseSchedule(text, 'payrolls');
+        if (!items.length) throw new Error('BLS 非农日程格式无效');
+        return items;
+      },
+    },
+    {
+      eventTypes: ['pce'],
+      load: async () => {
+        const results = await Promise.allSettled([
+          fetchCsv(BEA_RELEASE_SCHEDULE_URL, fetchImpl, { Accept: 'text/html' }, 'utf-8', 2),
+          fetchCsv(BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL, fetchImpl, { Accept: 'text/html' }, 'utf-8', 2),
+        ]);
+        const items = results.filter((result) => result.status === 'fulfilled')
+          .flatMap((result) => parseBeaReleaseSchedule(result.value));
+        if (!items.length) throw new Error('BEA PCE 日程格式无效');
+        return uniqueEconomicCalendarItems(items);
+      },
+    },
+    {
+      eventTypes: ['fomc'],
+      load: async () => {
+        const text = await fetchCsv(FOMC_CALENDAR_URL, fetchImpl, { Accept: 'text/html' }, 'utf-8', 2);
+        const items = parseFomcMeetingSchedule(text);
+        if (!items.length) throw new Error('FOMC 日程格式无效');
+        return items;
+      },
+    },
+  ];
+  const results = await Promise.all(sources.map(async (source) => {
+    try {
+      return { source, items: await source.load(), error: null };
+    } catch (error) {
+      return { source, items: [], error };
+    }
+  }));
+  const fallbackTypes = [];
+  const items = results.flatMap((result) => {
+    if (!result.error) return result.items;
+    fallbackTypes.push(...result.source.eventTypes);
+    return US_ECONOMIC_CALENDAR_SNAPSHOT.filter((item) => result.source.eventTypes.includes(item.eventType));
+  });
+  const upcomingItems = filterUpcomingEconomicCalendarItems(items, now, 12);
+  return {
+    items: upcomingItems,
+    windowStart: formatIsoDate(getUtcDate(now)),
+    windowEnd: formatIsoDate(shiftUtcMonths(now, 12)),
+    fallbackTypes: [...new Set(fallbackTypes)],
+    snapshotDate: fallbackTypes.length ? US_ECONOMIC_CALENDAR_SNAPSHOT_DATE : null,
+  };
 }
 
 function parseTonghuashunIndustryConstituents(text) {
@@ -1566,6 +1822,9 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(parseFredCsv(text, 'DFF'), dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    usEconomicCalendar: () => loadChart(CHART_METADATA.usEconomicCalendar, () => (
+      fetchUsEconomicCalendar(now, fetchImpl)
+    )),
     cpi: () => loadChart(CHART_METADATA.cpi, async () => {
       const text = await fetchCsv(buildFredUrl('CPIAUCSL', inflationStartDate, endDate), fetchImpl);
       return filterRecentItems(calculateYearOverYear(parseFredCsv(text, 'CPIAUCSL'), null), range, 'monthly');
@@ -1867,6 +2126,12 @@ module.exports = {
   CHART_METADATA,
   DEFAULT_MONTH_COUNT,
   RANGE_CONFIG,
+  BLS_CPI_SCHEDULE_URL,
+  BLS_EMPLOYMENT_SCHEDULE_URL,
+  BEA_RELEASE_SCHEDULE_URL,
+  BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL,
+  FOMC_CALENDAR_URL,
+  US_ECONOMIC_CALENDAR_SNAPSHOT,
   buildDbnomicsIsmUrl,
   buildFredUrl,
   buildImfCommodityUrl,
@@ -1898,6 +2163,11 @@ module.exports = {
   parseCsv,
   parseFredCsv,
   parseCboeVixCsv,
+  parseBlsReleaseSchedule,
+  parseBeaReleaseSchedule,
+  parseFomcMeetingSchedule,
+  filterUpcomingEconomicCalendarItems,
+  fetchUsEconomicCalendar,
   findLatestBeaPceRelease,
   parseBeaPceRelease,
   parseImfCsv,

@@ -4,7 +4,7 @@ const path = require('node:path');
 const appPath = path.resolve(__dirname, '..', 'dist', 'app.js');
 
 function patchApp(source) {
-  const currentPrimary = "      group_primary: ['treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],";
+  const currentPrimary = "      group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],";
   const currentVix = "      vix: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],";
   const migrationSource = "      var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {\n        return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId));\n      });";
   const migrationReplacement = "      var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {\n        var forcedPrimaryMigration = ['broadDollar', 'pce', 'vix'].includes(id) && groupId === 'group_primary';\n        return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId) || forcedPrimaryMigration);\n      });";

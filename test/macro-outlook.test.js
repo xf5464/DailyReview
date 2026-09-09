@@ -3,6 +3,11 @@ const assert = require('node:assert/strict');
 const {
   CHART_METADATA,
   BEA_NEWS_RSS_URL,
+  BLS_CPI_SCHEDULE_URL,
+  BLS_EMPLOYMENT_SCHEDULE_URL,
+  BEA_RELEASE_SCHEDULE_URL,
+  BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL,
+  FOMC_CALENDAR_URL,
   CBOE_VIX_HISTORY_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT,
@@ -21,6 +26,10 @@ const {
   parseCsv,
   parseFredCsv,
   parseCboeVixCsv,
+  parseBlsReleaseSchedule,
+  parseBeaReleaseSchedule,
+  parseFomcMeetingSchedule,
+  filterUpcomingEconomicCalendarItems,
   findLatestBeaPceRelease,
   parseBeaPceRelease,
   parseImfCsv,
@@ -80,6 +89,32 @@ const BEA_PCE_RELEASE_HTML = [
   '<p>From the same month one year ago, the <strong>PCE price index for July increased 3.7 percent</strong>.',
   ' Excluding food and energy, the PCE price index increased 3.3 percent.</p>',
 ].join('');
+const BLS_CPI_SCHEDULE_HTML = [
+  '<table><thead><tr><th>Reference Month</th><th>Release Date</th><th>Release Time</th></tr></thead><tbody>',
+  '<tr><td>August 2026</td><td>Sep. 11, 2026</td><td>08:30 AM</td></tr>',
+  '<tr><td>September 2026</td><td>Oct. 14, 2026</td><td>08:30 AM</td></tr>',
+  '</tbody></table>',
+].join('');
+const BLS_EMPLOYMENT_SCHEDULE_HTML = [
+  '<table><tbody>',
+  '<tr><td>August 2026</td><td>Sep. 04, 2026</td><td>08:30 AM</td></tr>',
+  '<tr><td>September 2026</td><td>Oct. 02, 2026</td><td>08:30 AM</td></tr>',
+  '</tbody></table>',
+].join('');
+const BEA_RELEASE_SCHEDULE_HTML = [
+  '<div>Year 2026</div><table><tbody>',
+  '<tr><td>September 30</td><td>8:30 AM</td><td>News</td><td>Personal Income and Outlays, August 2026</td></tr>',
+  '<tr><td>October 29</td><td>8:30 AM</td><td>News</td><td>Personal Income and Outlays, September 2026</td></tr>',
+  '</tbody></table>',
+].join('');
+const FOMC_CALENDAR_HTML = [
+  '<h4>2026 FOMC Meetings</h4>',
+  '<div><strong>September</strong><div>15-16*</div></div>',
+  '<div><strong>October</strong><div>27-28</div></div>',
+  '<h4>2027 FOMC Meetings</h4>',
+  '<div><strong>January</strong><div>26-27</div></div>',
+  '<p>Note: A two-day meeting is scheduled for January 25-26, 2028.</p>',
+].join('');
 const TONGHUASHUN_NEW_ACCOUNT_HTML = [
   '<p>从今年月度数据来看，1月至10月，A股新开户总数分别为157.00万户、283.59万户、306.55万户、192.44万户、155.56万户、164.64万户、196.36万户、265.03万户、293.72万户、230.99万户。</p>',
   '<p>2025年12月上交所A股新开户259.67万户，较11月的238.14万户环比上升9.04%。</p>',
@@ -133,7 +168,65 @@ test('macro outlook exposes every requested time range', () => {
   assert.equal(CHART_METADATA.copper.unit, '美元/吨');
   assert.equal(CHART_METADATA.naturalGas.unit, '美元/MMBtu');
   assert.equal(CHART_METADATA.federalFundsRate.sourceUrl, 'https://fred.stlouisfed.org/series/DFF');
+  assert.equal(CHART_METADATA.usEconomicCalendar.chartType, 'economicCalendar');
   assert.match(buildImfCommodityUrl('PSILVER', '2025-01', '2026-08'), /G001\.PSILVER\.USD\.M/);
+});
+
+test('official US schedule parsers normalize CPI, PCE, payroll and FOMC dates', () => {
+  assert.deepEqual(parseBlsReleaseSchedule(BLS_CPI_SCHEDULE_HTML, 'cpi').map((item) => ({
+    date: item.date, eventType: item.eventType, referencePeriod: item.referencePeriod, timeLabel: item.timeLabel,
+  })), [
+    { date: '2026-09-11', eventType: 'cpi', referencePeriod: '2026年8月', timeLabel: '08:30 AM ET' },
+    { date: '2026-10-14', eventType: 'cpi', referencePeriod: '2026年9月', timeLabel: '08:30 AM ET' },
+  ]);
+  assert.deepEqual(parseBeaReleaseSchedule(BEA_RELEASE_SCHEDULE_HTML).map((item) => ({
+    date: item.date, eventType: item.eventType, referencePeriod: item.referencePeriod,
+  })), [
+    { date: '2026-09-30', eventType: 'pce', referencePeriod: '2026年8月' },
+    { date: '2026-10-29', eventType: 'pce', referencePeriod: '2026年9月' },
+  ]);
+  assert.deepEqual(parseFomcMeetingSchedule(FOMC_CALENDAR_HTML).map((item) => ({
+    startDate: item.startDate, date: item.date, projections: item.projections,
+  })), [
+    { startDate: '2026-09-15', date: '2026-09-16', projections: true },
+    { startDate: '2026-10-27', date: '2026-10-28', projections: false },
+    { startDate: '2027-01-26', date: '2027-01-27', projections: false },
+  ]);
+});
+
+test('US economic calendar keeps only announced dates in the next twelve months', async () => {
+  const fetchImpl = async (url) => ({
+    ok: true,
+    status: 200,
+    text: async () => url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
+      : url === BLS_EMPLOYMENT_SCHEDULE_URL ? BLS_EMPLOYMENT_SCHEDULE_HTML
+      : url === BEA_RELEASE_SCHEDULE_URL ? BEA_RELEASE_SCHEDULE_HTML
+      : url === BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL ? '<html><body>No dates announced</body></html>'
+      : url === FOMC_CALENDAR_URL ? FOMC_CALENDAR_HTML : '',
+  });
+  const result = await queryMacroOutlook({
+    chartIds: ['usEconomicCalendar'],
+    fetchImpl,
+    now: new Date('2026-09-09T00:00:00Z'),
+  });
+  const chart = result.charts[0];
+  assert.equal(chart.error, null);
+  assert.equal(chart.windowStart, '2026-09-09');
+  assert.equal(chart.windowEnd, '2027-09-09');
+  assert.deepEqual(chart.items.map((item) => [item.date, item.eventType]), [
+    ['2026-09-11', 'cpi'],
+    ['2026-09-16', 'fomc'],
+    ['2026-09-30', 'pce'],
+    ['2026-10-02', 'payrolls'],
+    ['2026-10-14', 'cpi'],
+    ['2026-10-28', 'fomc'],
+    ['2026-10-29', 'pce'],
+    ['2027-01-27', 'fomc'],
+  ]);
+  assert.deepEqual(chart.fallbackTypes, []);
+  assert.deepEqual(filterUpcomingEconomicCalendarItems(parseBlsReleaseSchedule(
+    BLS_EMPLOYMENT_SCHEDULE_HTML, 'payrolls'
+  ), new Date('2026-09-09T00:00:00Z')).map((item) => item.date), ['2026-10-02']);
 });
 
 test('CSV parser keeps quoted commas and escaped quotes intact', () => {
@@ -582,7 +675,12 @@ test('macro outlook query returns all independent chart payloads', async () => {
     return {
       ok: true,
       status: 200,
-      text: async () => url.includes('api.fiscaldata.treasury.gov')
+      text: async () => url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
+        : url === BLS_EMPLOYMENT_SCHEDULE_URL ? BLS_EMPLOYMENT_SCHEDULE_HTML
+        : url === BEA_RELEASE_SCHEDULE_URL ? BEA_RELEASE_SCHEDULE_HTML
+        : url === BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL ? '<html></html>'
+        : url === FOMC_CALENDAR_URL ? FOMC_CALENDAR_HTML
+        : url.includes('api.fiscaldata.treasury.gov')
         ? JSON.stringify({ data: [{ record_date: '2026-08-20', tot_pub_debt_out_amt: '39500000000000' }] })
         : url.includes('git.nomics.world') ? ISM_PMI_SNAPSHOT_HTML
         : url === 'https://www.gold.org/goldhub/research/gold-demand-trends' ? WGC_INDEX_HTML
@@ -609,13 +707,14 @@ test('macro outlook query returns all independent chart payloads', async () => {
 
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
-    'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
+    'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'usEconomicCalendar', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
     'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(37).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(38).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
+  assert.equal(result.charts.find((chart) => chart.id === 'usEconomicCalendar').chartType, 'economicCalendar');
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').items.at(-1).value, 4520);
   assert.equal(result.charts.find((chart) => chart.id === 'silver').items.at(-1).value, 55.2);
@@ -766,6 +865,8 @@ test('one failed source does not prevent the remaining charts from loading', asy
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.equal(result.charts.find((chart) => chart.id === 'pce').items.length, 0);
   assert.match(result.charts.find((chart) => chart.id === 'pce').error, /HTTP 503/);
+  assert.equal(result.charts.find((chart) => chart.id === 'usEconomicCalendar').error, null);
+  assert.ok(result.charts.find((chart) => chart.id === 'usEconomicCalendar').fallbackTypes.length > 0);
   assert.equal(result.charts.find((chart) => chart.id === 'gold').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'silver').error, null);
