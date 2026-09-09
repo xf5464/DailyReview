@@ -46,9 +46,20 @@ test('full offline downloads prefer the ZIP and retain per-file fallback', () =>
   assert.match(patched, /offlineDiagnostic\.mode === 'full' && manifest\.bundle/);
   assert.match(patched, /await downloadOfflineBundle\(manifest, files, cache/);
   assert.match(patched, /downloadedBytes \+= await downloadOfflineFiles/);
+  assert.match(patched, /var cachedPaths = await readOfflineCachePaths\(cache\)/);
+  assert.doesNotMatch(patched, /await cache\.match\(absoluteAppUrl\(files\[index\]\.path\)\)/);
   assert.doesNotThrow(() => new Function(patched));
 
   const worker = fs.readFileSync(path.join(projectRoot, 'site', 'service-worker.js'), 'utf8');
   assert.match(worker, /url\.pathname\.endsWith\('\.zip'\)/);
   assert.match(worker, /fetch\(request, \{ cache: 'no-store' \}\)/);
+});
+
+test('automatic offline update paints its dialog before scanning caches', () => {
+  const projectRoot = path.resolve(__dirname, '..');
+  const source = fs.readFileSync(path.join(projectRoot, 'site', 'app.js'), 'utf8');
+  const patched = patchApp(source);
+  const showDialog = patched.slice(patched.indexOf('  async function showOfflineData(message) {'), patched.indexOf('  function isMobileDevice()'));
+  assert.ok(showDialog.indexOf('showModal()') < showDialog.indexOf('await waitForUiPaint()'));
+  assert.ok(showDialog.indexOf('await waitForUiPaint()') < showDialog.indexOf('refreshOfflineDataStatus({ skipCacheSize: Boolean(message) })'));
 });

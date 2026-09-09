@@ -36,7 +36,7 @@ function patchApp(source) {
     'offline cache ref'
   );
 
-  const statusAnchor = '  async function refreshOfflineDataStatus() {';
+  const statusAnchor = '  async function refreshOfflineDataStatus(options) {';
   const helpers = [
     '  function formatStorageBytes(bytes) {',
     "    if (!Number.isFinite(Number(bytes)) || Number(bytes) <= 0) return '0 MB';",
@@ -90,11 +90,15 @@ function patchApp(source) {
     "    refs.offlineDataState.textContent = state ? '全部数据可离线使用' : '尚未下载';",
     "    refs.offlineDataVersion.textContent = state ? formatOfflineVersion(state.fetchedAt) : '--';",
     "    if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = '计算中...';",
-    '    try {',
-    '      var cacheUsage = await readOfflineCacheSize(cache);',
-    "      if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = formatStorageBytes(cacheUsage.bytes) + ' · ' + cacheUsage.files + ' 个文件';",
-    '    } catch (error) {',
-    "      if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = '无法读取';",
+    '    if (options && options.skipCacheSize) {',
+    "      if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = '更新完成后计算';",
+    '    } else {',
+    '      try {',
+    '        var cacheUsage = await readOfflineCacheSize(cache);',
+    "        if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = formatStorageBytes(cacheUsage.bytes) + ' · ' + cacheUsage.files + ' 个文件';",
+    '      } catch (error) {',
+    "        if (refs.offlineDataCacheSize) refs.offlineDataCacheSize.textContent = '无法读取';",
+    '      }',
     '    }',
   ].join('\n');
   source = replaceOnce(source, cacheStatus, cacheStatusWithSize, 'refresh cache size');

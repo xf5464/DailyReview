@@ -708,7 +708,7 @@
     }).format(date);
   }
 
-  async function refreshOfflineDataStatus() {
+  async function refreshOfflineDataStatus(options) {
     if (!offlineDataSupported()) {
       refs.offlineDataState.textContent = '当前浏览器不支持';
       refs.offlineDataVersion.textContent = '--';
@@ -809,22 +809,31 @@
     return { bytes: archive.byteLength, files: files.length };
   }
 
+  async function readOfflineCachePaths(cache) {
+    var requests = await cache.keys();
+    return new Set(requests.map(function (request) {
+      return new URL(request.url).pathname;
+    }));
+  }
+
   async function downloadOfflineFiles(files, cache, onProgress) {
     var nextIndex = 0;
     var completed = 0;
     var downloadedBytes = 0;
+    var cachedPaths = await readOfflineCachePaths(cache);
     async function worker() {
       while (nextIndex < files.length) {
         var file = files[nextIndex];
         nextIndex += 1;
         var url = absoluteAppUrl(file.path);
-        var cached = await cache.match(url);
-        if (!cached) {
+        var pathname = new URL(url).pathname;
+        if (!cachedPaths.has(pathname)) {
           var response = await fetch(url, { cache: 'no-store' });
           if (!response.ok || !(await responseMatchesHash(response, file.hash))) {
             throw new Error('离线分块校验失败：' + file.path);
           }
           await cache.put(url, response.clone());
+          cachedPaths.add(pathname);
           downloadedBytes += Number(file.bytes) || 0;
         }
         completed += 1;
@@ -925,10 +934,28 @@
     }
   }
 
+  function waitForUiPaint() {
+    return new Promise(function (resolve) {
+      var settled = false;
+      var timeout = window.setTimeout(finish, 160);
+      function finish() {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        resolve();
+      }
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(finish);
+      });
+    });
+  }
+
   async function showOfflineData(message) {
     if (!refs.offlineDataDialog.open) refs.offlineDataDialog.showModal();
     refs.offlineDataClose.focus({ preventScroll: true });
-    await refreshOfflineDataStatus();
+    if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
+    await waitForUiPaint();
+    await refreshOfflineDataStatus({ skipCacheSize: Boolean(message) });
     if (typeof message === 'string' && message) refs.offlineDataMessage.textContent = message;
   }
 
