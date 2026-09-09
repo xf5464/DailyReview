@@ -29,7 +29,7 @@ function visibleVersion(html, env = process.env) {
   return 'vlocal';
 }
 
-function patch(html, env = process.env) {
+function patch(html, env = process.env, assetPaths = { app: appPath, styles: stylesPath }) {
   const version = visibleVersion(html, env);
   const sha = String(env.GITHUB_SHA || '').trim();
   const runNumber = String(env.GITHUB_RUN_NUMBER || '').trim();
@@ -43,8 +43,8 @@ function patch(html, env = process.env) {
   if (!titlePattern.test(html)) throw new Error('Unable to add visible version: main title pattern changed.');
 
   let next = html.replace(titlePattern, `<h1>全球宏观温度计 ${badge}</h1>`);
-  const appHash = contentHash(fs.readFileSync(appPath));
-  const stylesHash = contentHash(fs.readFileSync(stylesPath));
+  const appHash = contentHash(fs.readFileSync(assetPaths.app));
+  const stylesHash = contentHash(fs.readFileSync(assetPaths.styles));
   next = next.replace(/src="app\.js(?:\?v=[^"]*)?"/, `src="app.js?v=${appHash}"`);
   next = next.replace(/href="styles\.css(?:\?v=[^"]*)?"/, `href="styles.css?v=${stylesHash}"`);
 
