@@ -8,12 +8,13 @@ const {
   youtubeItemsFromResponses,
 } = require("../scripts/send-hot-news-email");
 
-test("uses ten fixed free sources for each reader tab", () => {
+test("uses the configured fixed free sources for each reader tab", () => {
   assert.equal(NEWS_SOURCES.tech.length, 10);
-  assert.equal(NEWS_SOURCES.market.length, 10);
+  assert.equal(NEWS_SOURCES.market.length, 9);
   assert.equal(NEWS_SOURCES.world.length, 10);
   assert.equal(new Set(NEWS_SOURCES.tech.map((source) => source.key)).size, 10);
-  assert.equal(new Set(NEWS_SOURCES.market.map((source) => source.key)).size, 10);
+  assert.equal(new Set(NEWS_SOURCES.market.map((source) => source.key)).size, 9);
+  assert.equal(NEWS_SOURCES.market.some((source) => source.key === "marketwatch"), false);
   assert.equal(new Set(NEWS_SOURCES.world.map((source) => source.key)).size, 10);
 });
 
@@ -207,6 +208,8 @@ test("refuses to publish a snapshot with untranslated foreign titles", () => {
 test("filters strict paid-subscription sources by publisher or domain", () => {
   assert.equal(isPaywalledItem({ source: "The Wall Street Journal", url: "https://news.google.com/story" }), true);
   assert.equal(isPaywalledItem({ source: "Unknown", url: "https://www.bloomberg.com/news/a" }), true);
+  assert.equal(isPaywalledItem({ source: "MarketWatch", url: "https://news.google.com/story" }), true);
+  assert.equal(isPaywalledItem({ source: "Unknown", url: "https://www.marketwatch.com/story/a" }), true);
   assert.equal(isPaywalledItem({ source: "Reuters", url: "https://reuters.com/world/a" }), false);
 });
 
