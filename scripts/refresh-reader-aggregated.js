@@ -20,7 +20,7 @@ const CORROBORATION_ITEMS_PER_SOURCE = 6;
 
 const MARKET_AUTHORITY = new Map([
   ['guardian-business', 27], ['yahoo-finance', 27], ['cnbc-markets', 30], ['bbc-business', 28],
-  ['cnn-business', 27], ['marketwatch', 28], ['benzinga', 22], ['the-street', 22],
+  ['cnn-business', 27], ['benzinga', 22], ['the-street', 22],
   ['motley-fool', 21], ['ap-business', 30],
   ['paid-reuters-market', 33], ['paid-bloomberg-market', 32], ['paid-ft-market', 32],
   ['paid-wsj-market', 32], ['paid-barrons-market', 29], ['paid-seeking-alpha-market', 24],
