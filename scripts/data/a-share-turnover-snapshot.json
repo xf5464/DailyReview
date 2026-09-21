@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-18T13:00:34.928Z",
+  "updatedAt": "2026-09-21T15:09:37.190Z",
   "sourceName": "中证指数官网 / 中证全指（000985）",
   "sourceUrl": "https://www.csindex.com.cn/#/indices/family/detail?indexCode=000985",
-  "historyStart": "1996-09-18",
-  "latestDate": "2026-09-18",
+  "historyStart": "1996-09-21",
+  "latestDate": "2026-09-21",
   "items": [
     {
-      "date": "1996-09-18",
+      "date": "1996-09-21",
       "value": 0
     },
     {
@@ -21117,6 +21117,10 @@
     {
       "date": "2026-09-18",
       "value": 19883.11
+    },
+    {
+      "date": "2026-09-21",
+      "value": 19500.8
     }
   ]
 }
