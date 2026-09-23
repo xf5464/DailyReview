@@ -8,6 +8,7 @@ const {
   BEA_RELEASE_SCHEDULE_URL,
   BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL,
   FOMC_CALENDAR_URL,
+  US_ECONOMIC_CALENDAR_SNAPSHOT,
   CBOE_VIX_HISTORY_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT,
@@ -176,8 +177,8 @@ test('official US schedule parsers normalize CPI, PCE, payroll and FOMC dates', 
   assert.deepEqual(parseBlsReleaseSchedule(BLS_CPI_SCHEDULE_HTML, 'cpi').map((item) => ({
     date: item.date, eventType: item.eventType, referencePeriod: item.referencePeriod, timeLabel: item.timeLabel,
   })), [
-    { date: '2026-09-11', eventType: 'cpi', referencePeriod: '2026年8月', timeLabel: '08:30 AM ET' },
-    { date: '2026-10-14', eventType: 'cpi', referencePeriod: '2026年9月', timeLabel: '08:30 AM ET' },
+    { date: '2026-09-11', eventType: 'cpi', referencePeriod: '2026年8月', timeLabel: '20:30（东八区）' },
+    { date: '2026-10-14', eventType: 'cpi', referencePeriod: '2026年9月', timeLabel: '20:30（东八区）' },
   ]);
   assert.deepEqual(parseBeaReleaseSchedule(BEA_RELEASE_SCHEDULE_HTML).map((item) => ({
     date: item.date, eventType: item.eventType, referencePeriod: item.referencePeriod,
@@ -186,12 +187,15 @@ test('official US schedule parsers normalize CPI, PCE, payroll and FOMC dates', 
     { date: '2026-10-29', eventType: 'pce', referencePeriod: '2026年9月' },
   ]);
   assert.deepEqual(parseFomcMeetingSchedule(FOMC_CALENDAR_HTML).map((item) => ({
-    startDate: item.startDate, date: item.date, projections: item.projections,
+    officialStartDate: item.officialStartDate, officialDate: item.officialDate,
+    date: item.date, timeLabel: item.timeLabel, projections: item.projections,
   })), [
-    { startDate: '2026-09-15', date: '2026-09-16', projections: true },
-    { startDate: '2026-10-27', date: '2026-10-28', projections: false },
-    { startDate: '2027-01-26', date: '2027-01-27', projections: false },
+    { officialStartDate: '2026-09-15', officialDate: '2026-09-16', date: '2026-09-17', timeLabel: '02:00（东八区）', projections: true },
+    { officialStartDate: '2026-10-27', officialDate: '2026-10-28', date: '2026-10-29', timeLabel: '02:00（东八区）', projections: false },
+    { officialStartDate: '2027-01-26', officialDate: '2027-01-27', date: '2027-01-28', timeLabel: '03:00（东八区）', projections: false },
   ]);
+  const januaryFomc = US_ECONOMIC_CALENDAR_SNAPSHOT.find((item) => item.eventType === 'fomc' && item.officialDate === '2027-01-27');
+  assert.equal(januaryFomc.timeLabel, '03:00（东八区）');
 });
 
 test('US economic calendar keeps only announced dates in the next twelve months', async () => {
@@ -215,13 +219,13 @@ test('US economic calendar keeps only announced dates in the next twelve months'
   assert.equal(chart.windowEnd, '2027-09-09');
   assert.deepEqual(chart.items.map((item) => [item.date, item.eventType]), [
     ['2026-09-11', 'cpi'],
-    ['2026-09-16', 'fomc'],
+    ['2026-09-17', 'fomc'],
     ['2026-09-30', 'pce'],
     ['2026-10-02', 'payrolls'],
     ['2026-10-14', 'cpi'],
-    ['2026-10-28', 'fomc'],
+    ['2026-10-29', 'fomc'],
     ['2026-10-29', 'pce'],
-    ['2027-01-27', 'fomc'],
+    ['2027-01-28', 'fomc'],
   ]);
   assert.deepEqual(chart.fallbackTypes, []);
   assert.deepEqual(filterUpcomingEconomicCalendarItems(parseBlsReleaseSchedule(

@@ -27,3 +27,9 @@ test('economic calendar uses its timeline and list instead of numeric detail con
   assert.match(appSource, /refs\.detailEconomicCalendarWrap\.hidden = !economicCalendarChart/);
   assert.match(appSource, /if \(economicCalendarChart\) \{\s*renderEconomicCalendarDetail\(sourceChart\);\s*return;/);
 });
+
+test('economic calendar labels release times in UTC+8 and preserves the US FOMC meeting dates', () => {
+  assert.match(appSource, /if \(item\.timeLabel\) details\.push\(item\.timeLabel\)/);
+  assert.match(appSource, /美国当地会议/);
+  assert.match(appSource, /item\.officialStartDate \|\| item\.officialDate/);
+});

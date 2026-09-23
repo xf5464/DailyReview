@@ -81,17 +81,15 @@ const US_ECONOMIC_CALENDAR_SNAPSHOT = Object.freeze([
   ['fomc', '2027-07-28', '2027年7月议息会议', '会议第二日', '2027-07-27', false],
   ['fomc', '2027-09-15', '2027年9月议息会议', '会议第二日', '2027-09-14', true],
 ].map(([eventType, date, referencePeriod, timeLabel, startDate, projections]) => Object.freeze({
-  date,
-  startDate: startDate || date,
-  value: ECONOMIC_CALENDAR_TYPE_VALUES[eventType],
-  eventType,
-  label: ECONOMIC_CALENDAR_TYPE_LABELS[eventType],
-  referencePeriod,
-  timeLabel,
-  projections: Boolean(projections),
-  sourceUrl: eventType === 'cpi' ? BLS_CPI_SCHEDULE_URL
-    : eventType === 'payrolls' ? BLS_EMPLOYMENT_SCHEDULE_URL
-    : eventType === 'pce' ? BEA_RELEASE_SCHEDULE_URL : FOMC_CALENDAR_URL,
+  ...economicCalendarItem(eventType, date, {
+    startDate: startDate || date,
+    referencePeriod,
+    timeLabel,
+    projections,
+    sourceUrl: eventType === 'cpi' ? BLS_CPI_SCHEDULE_URL
+      : eventType === 'payrolls' ? BLS_EMPLOYMENT_SCHEDULE_URL
+      : eventType === 'pce' ? BEA_RELEASE_SCHEDULE_URL : FOMC_CALENDAR_URL,
+  }),
   snapshotDate: US_ECONOMIC_CALENDAR_SNAPSHOT_DATE,
 })));
 const ISM_PMI_SOURCE_SNAPSHOT_URL = 'https://git.nomics.world/api/v4/projects/201/repository/files/index_PMI.html/raw?ref=master';
@@ -746,16 +744,68 @@ function englishDate(year, monthName, day) {
   return `${numericYear}-${month}-${String(numericDay).padStart(2, '0')}`;
 }
 
+function parseUsEasternClock(timeLabel, eventType) {
+  if (eventType === 'fomc') return '14:00';
+  const match = String(timeLabel || '').match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!match) return null;
+  let hour = Number(match[1]) % 12;
+  if (match[3].toUpperCase() === 'PM') hour += 12;
+  return `${String(hour).padStart(2, '0')}:${match[2]}`;
+}
+
+function zonedDateTimeToUtc(dateText, timeText, timeZone) {
+  const dateMatch = String(dateText || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const timeMatch = String(timeText || '').match(/^(\d{2}):(\d{2})$/);
+  if (!dateMatch || !timeMatch) return null;
+  const wanted = Date.UTC(Number(dateMatch[1]), Number(dateMatch[2]) - 1, Number(dateMatch[3]), Number(timeMatch[1]), Number(timeMatch[2]));
+  let instant = wanted;
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
+  });
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const parts = Object.fromEntries(formatter.formatToParts(new Date(instant))
+      .filter((part) => part.type !== 'literal').map((part) => [part.type, part.value]));
+    const observed = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day), Number(parts.hour), Number(parts.minute), Number(parts.second));
+    const adjustment = wanted - observed;
+    instant += adjustment;
+    if (!adjustment) break;
+  }
+  return new Date(instant);
+}
+
+function dateTimePartsInZone(date, timeZone) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+    timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).formatToParts(date).filter((part) => part.type !== 'literal').map((part) => [part.type, part.value]));
+  return {
+    date: `${parts.year}-${parts.month}-${parts.day}`,
+    time: `${parts.hour}:${parts.minute}`,
+  };
+}
+
 function economicCalendarItem(eventType, date, options = {}) {
   if (!ECONOMIC_CALENDAR_TYPE_VALUES[eventType] || !normalizeObservationDate(date)) return null;
+  const officialStartDate = normalizeObservationDate(options.startDate) || date;
+  const sourceTimeLabel = String(options.timeLabel || '');
+  const sourceClock = parseUsEasternClock(sourceTimeLabel, eventType);
+  const instant = sourceClock ? zonedDateTimeToUtc(date, sourceClock, 'America/New_York') : null;
+  const shanghai = dateTimePartsInZone(instant, 'Asia/Shanghai');
+  const displayDate = shanghai?.date || date;
   return {
-    date,
-    startDate: normalizeObservationDate(options.startDate) || date,
+    date: displayDate,
+    startDate: displayDate,
+    officialDate: date,
+    officialStartDate,
+    dateTime: instant ? instant.toISOString() : '',
     value: ECONOMIC_CALENDAR_TYPE_VALUES[eventType],
     eventType,
     label: ECONOMIC_CALENDAR_TYPE_LABELS[eventType],
     referencePeriod: String(options.referencePeriod || ''),
-    timeLabel: String(options.timeLabel || ''),
+    timeLabel: shanghai ? `${shanghai.time}（东八区）` : sourceTimeLabel,
+    sourceTimeLabel,
     projections: Boolean(options.projections),
     sourceUrl: String(options.sourceUrl || ''),
   };
@@ -841,13 +891,15 @@ function uniqueEconomicCalendarItems(items) {
     unique.set(`${item.eventType}:${item.startDate || item.date}:${item.date}`, item);
   });
   return [...unique.values()].sort((left, right) => (
-    left.date.localeCompare(right.date) || left.value - right.value
+    left.date.localeCompare(right.date) ||
+    String(left.dateTime || '').localeCompare(String(right.dateTime || '')) ||
+    left.value - right.value
   ));
 }
 
 function filterUpcomingEconomicCalendarItems(items, now, monthCount = 12) {
-  const startDate = formatIsoDate(getUtcDate(now));
-  const endDate = formatIsoDate(shiftUtcMonths(now, monthCount));
+  const startDate = dateTimePartsInZone(new Date(now), 'Asia/Shanghai').date;
+  const endDate = formatIsoDate(shiftUtcMonths(new Date(startDate + 'T00:00:00Z'), monthCount));
   return uniqueEconomicCalendarItems(items).filter((item) => item.date >= startDate && item.date <= endDate);
 }
 
@@ -908,10 +960,11 @@ async function fetchUsEconomicCalendar(now, fetchImpl) {
     return US_ECONOMIC_CALENDAR_SNAPSHOT.filter((item) => result.source.eventTypes.includes(item.eventType));
   });
   const upcomingItems = filterUpcomingEconomicCalendarItems(items, now, 12);
+  const windowStart = dateTimePartsInZone(new Date(now), 'Asia/Shanghai').date;
   return {
     items: upcomingItems,
-    windowStart: formatIsoDate(getUtcDate(now)),
-    windowEnd: formatIsoDate(shiftUtcMonths(now, 12)),
+    windowStart,
+    windowEnd: formatIsoDate(shiftUtcMonths(new Date(windowStart + 'T00:00:00Z'), 12)),
     fallbackTypes: [...new Set(fallbackTypes)],
     snapshotDate: fallbackTypes.length ? US_ECONOMIC_CALENDAR_SNAPSHOT_DATE : null,
   };
