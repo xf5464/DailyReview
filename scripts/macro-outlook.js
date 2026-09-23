@@ -804,7 +804,7 @@ function economicCalendarItem(eventType, date, options = {}) {
     eventType,
     label: ECONOMIC_CALENDAR_TYPE_LABELS[eventType],
     referencePeriod: String(options.referencePeriod || ''),
-    timeLabel: shanghai ? `${shanghai.time}（东八区）` : sourceTimeLabel,
+    timeLabel: shanghai ? shanghai.time : sourceTimeLabel,
     sourceTimeLabel,
     projections: Boolean(options.projections),
     sourceUrl: String(options.sourceUrl || ''),

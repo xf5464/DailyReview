@@ -29,7 +29,10 @@ test('economic calendar uses its timeline and list instead of numeric detail con
 });
 
 test('economic calendar labels release times in UTC+8 and preserves the US FOMC meeting dates', () => {
-  assert.match(appSource, /if \(item\.timeLabel\) details\.push\(item\.timeLabel\)/);
+  assert.match(appSource, /dateMeta\.append\(createElement\('span', '', economicCalendarWeekday\(item\.date\)\)\)/);
+  assert.match(appSource, /dateMeta\.append\(createElement\('span', 'economic-calendar-row-time', localTime\)\)/);
+  assert.match(appSource, /日期和时间均为东八区/);
+  assert.doesNotMatch(appSource, /if \(item\.timeLabel\) details\.push\(item\.timeLabel\)/);
   assert.match(appSource, /美国当地会议/);
   assert.match(appSource, /item\.officialStartDate \|\| item\.officialDate/);
 });

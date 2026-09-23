@@ -1408,6 +1408,10 @@
     return new Intl.DateTimeFormat('zh-CN', { weekday: 'short', timeZone: 'UTC' }).format(date);
   }
 
+  function economicCalendarLocalTimeLabel(item) {
+    return String(item && item.timeLabel || '').replace(/\s*（东八区）\s*$/, '');
+  }
+
   function economicCalendarDaysUntil(dateText) {
     var target = new Date(dateText + 'T00:00:00');
     var today = new Date();
@@ -1522,7 +1526,11 @@
       var dateBlock = createElement('div', 'economic-calendar-row-date');
       var date = createElement('time', '', economicCalendarDateLabel(item));
       date.dateTime = item.date;
-      dateBlock.append(date, createElement('span', '', economicCalendarWeekday(item.date)));
+      var dateMeta = createElement('div', 'economic-calendar-row-date-meta');
+      dateMeta.append(createElement('span', '', economicCalendarWeekday(item.date)));
+      var localTime = economicCalendarLocalTimeLabel(item);
+      if (localTime) dateMeta.append(createElement('span', 'economic-calendar-row-time', localTime));
+      dateBlock.append(date, dateMeta);
       var body = createElement('div', 'economic-calendar-row-body');
       var heading = createElement('div', 'economic-calendar-row-heading');
       heading.append(createElement('span', 'economic-calendar-type-badge', type.label));
@@ -1530,7 +1538,6 @@
       body.append(heading);
       var details = [];
       if (item.referencePeriod) details.push(item.referencePeriod);
-      if (item.timeLabel) details.push(item.timeLabel);
       if (item.eventType === 'fomc' && item.officialDate) {
         details.push('美国当地会议 ' + economicCalendarDateLabel({
           date: item.officialDate,
@@ -1556,7 +1563,7 @@
       var type = economicCalendarType(id);
       return type ? type.label : id;
     });
-    refs.detailMessage.textContent = '未来12个月 · 当前显示 ' + items.length + '/' + allCount +
+    refs.detailMessage.textContent = '日期和时间均为东八区 · 未来12个月 · 当前显示 ' + items.length + '/' + allCount +
       ' 项官方已公布日程；尚未公布的月份会在官网更新后自动补充。' +
       (fallbackLabels.length ? ' ' + fallbackLabels.join('、') + ' 本次使用 ' + (chart.snapshotDate || '') + ' 已核验快照。' : '');
   }

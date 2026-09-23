@@ -2103,6 +2103,17 @@ tbody tr:last-child td {
   font-size: 12px;
 }
 
+.economic-calendar-row-date-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.economic-calendar-row-time {
+  font-variant-numeric: tabular-nums;
+}
+
 .economic-calendar-row-heading {
   display: flex;
   align-items: center;
