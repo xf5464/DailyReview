@@ -2331,7 +2331,7 @@
     }
     refs.industryHistoryMessage.textContent = RANGES[refs.industryHistoryRange.value].label + ' · ' +
       formatDate(historyChart.items[0].date, '日度') + ' 至 ' +
-      formatDate(historyChart.items.at(-1).date, '日度') + ' · 蓝线为成交额，橙线为行业指数';
+      formatDate(historyChart.items.at(-1).date, '日度') + ' · 紫线为成交额，橙线为行业指数';
     renderLineChart(refs.industryHistoryChart, historyChart);
   }
 
