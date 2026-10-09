@@ -22,6 +22,7 @@ const {
   buildDbnomicsIsmUrl,
   buildTonghuashunSentimentUrl,
   buildEastmoneyHolderUrl,
+  buildEastmoneyIndustryHistoryUrl,
   buildTonghuashunWeeklyPriceUrl,
   buildImfCommodityUrl,
   parseCsv,
@@ -40,6 +41,9 @@ const {
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
+  parseEastmoneyIndustryBoards,
+  parseEastmoneyIndustryTurnoverHistory,
+  calculateAShareIndustryConcentration,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
   fetchTonghuashunSentimentItems,
@@ -163,6 +167,7 @@ test('macro outlook exposes every requested time range', () => {
   assert.equal(normalizeRange(), 'month3');
   assert.deepEqual(normalizeChartIds(['bitcoin', 'unknown']), ['bitcoin']);
   assert.equal(CHART_METADATA.aShareTurnover.decimals, 0);
+  assert.equal(CHART_METADATA.aShareIndustryConcentration.unit, '%');
   assert.equal(CHART_METADATA.centralBankGoldPurchases.decimals, 0);
   assert.equal(CHART_METADATA.centralBankGoldPurchases.unit, '吨');
   assert.equal(CHART_METADATA.silver.unit, '美元/盎司');
@@ -493,6 +498,29 @@ test('A-share margin parser reads the three-market financing balance in 100 mill
   assert.deepEqual(rows, [{ date: '2026-08-20', value: 26305.15364858 }]);
 });
 
+test('A-share industry concentration calculates C5, HHI and the top-five detail', () => {
+  const boards = parseEastmoneyIndustryBoards(JSON.stringify({ data: { diff: [
+    { f12: 'BK0001', f14: '电子' },
+    { f12: 'BK0002', f14: '银行' },
+    { f12: 'BK0003', f14: '医药' },
+    { f12: 'BK0004', f14: '汽车' },
+    { f12: 'BK0005', f14: '传媒' },
+    { f12: 'BK0006', f14: '煤炭' },
+  ] } }));
+  assert.equal(boards.length, 6);
+  assert.match(buildEastmoneyIndustryHistoryUrl('BK0001', '2026-08-01', '2026-08-22'), /secid=90\.BK0001/);
+  const series = boards.map((board, index) => parseEastmoneyIndustryTurnoverHistory(JSON.stringify({
+    data: { klines: [`2026-08-21,1,1,1,1,1,${(6 - index) * 100_000_000},1,1,1,1`] },
+  }), board));
+  const [item] = calculateAShareIndustryConcentration(series, 6);
+  assert.equal(item.date, '2026-08-21');
+  assert.equal(item.industryCount, 6);
+  assert.ok(Math.abs(item.value - 20 / 21 * 100) < 1e-9);
+  assert.ok(Math.abs(item.hhi - 91 / 441 * 10000) < 1e-9);
+  assert.deepEqual(item.topIndustries.map((row) => row.name), ['电子', '银行', '医药', '汽车', '传媒']);
+  assert.equal(item.topIndustries[0].turnover, 6);
+});
+
 test('Tonghuashun active-market-value formula combines both markets and applies SMA(10,1)', () => {
   const shanghai = parseSohuIndexAmount(JSON.stringify([{ hq: [
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
@@ -650,6 +678,14 @@ test('macro outlook query returns all independent chart payloads', async () => {
     { STATISTICS_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 26305.15364858 },
     { STATISTICS_DATE: '2026-08-21 00:00:00', FIN_BALANCE: 26400.15364858 },
   ], pages: 1 } });
+  const industryBoardListData = JSON.stringify({ data: { diff: Array.from({ length: 6 }, (_, index) => ({
+    f12: `BK000${index + 1}`,
+    f14: `行业${index + 1}`,
+  })) } });
+  const industryHistoryData = JSON.stringify({ data: { klines: [
+    '2026-08-20,1,1,1,1,1,100000000,1,1,1,1',
+    '2026-08-21,1,1,1,1,1,120000000,1,1,1,1',
+  ] } });
   const shanghaiIndexData = JSON.stringify([{ hq: [
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
     ['2026-08-21', '1', '1', '0', '0%', '1', '1', '1', '110000000'],
@@ -691,6 +727,8 @@ test('macro outlook query returns all independent chart payloads', async () => {
         : url.endsWith('/central-banks') ? WGC_REPORT_HTML
         : url.includes('fsapi.gold.org') ? WGC_CHART_SCRIPT
         : url.includes('RPTA_WEB_MARGIN_DAILYTRADE') ? aShareMarginData
+        : url.includes('push2.eastmoney.com/api/qt/clist/get') ? industryBoardListData
+        : url.includes('push2his.eastmoney.com/api/qt/stock/kline/get') && url.includes('secid=90.BK') ? industryHistoryData
         : url.includes('code=zs_000001') ? shanghaiIndexData
         : url.includes('code=zs_399106') ? shenzhenIndexData
         : url.includes('/11/last.js') ? TONGHUASHUN_WEEKLY_PRICE
@@ -712,11 +750,11 @@ test('macro outlook query returns all independent chart payloads', async () => {
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'usEconomicCalendar', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(38).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(39).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.equal(result.charts.find((chart) => chart.id === 'usEconomicCalendar').chartType, 'economicCalendar');
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
@@ -733,6 +771,7 @@ test('macro outlook query returns all independent chart payloads', async () => {
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').items.at(-1).value, 20500.25);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
+  assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').items.at(-1).value - 83.33333333333334) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').items.at(-1).value, 265.54);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').rows.length, 2);
@@ -771,7 +810,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
     if (url.includes('api.imf.org')) {
       return { ok: true, status: 200, text: async () => 'COUNTRY,INDICATOR,TIME_PERIOD,OBS_VALUE\nG001,PSILVER,2026-M06,55.2\n' };
     }
-    if (url.includes('push2his.eastmoney.com')) {
+    if (url.includes('push2his.eastmoney.com') && !url.includes('secid=90.BK')) {
       return { ok: true, status: 200, text: async () => JSON.stringify({ rc: 0, data: { klines: [
         '2016-06-30,1,1.00', '2025-12-31,1,2.00',
       ] } }) };
@@ -793,6 +832,16 @@ test('one failed source does not prevent the remaining charts from loading', asy
       return { ok: true, status: 200, text: async () => JSON.stringify({ success: true, result: { data: [
         { STATISTICS_DATE: '2026-08-20 00:00:00', FIN_BALANCE: 26305.15364858 },
       ], pages: 1 } }) };
+    }
+    if (url.includes('push2.eastmoney.com/api/qt/clist/get')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: { diff: Array.from({ length: 6 }, (_, index) => ({
+        f12: `BK000${index + 1}`, f14: `行业${index + 1}`,
+      })) } }) };
+    }
+    if (url.includes('push2his.eastmoney.com/api/qt/stock/kline/get') && url.includes('secid=90.BK')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: { klines: [
+        '2026-08-20,1,1,1,1,1,100000000,1,1,1,1',
+      ] } }) };
     }
     if (url.includes('q.stock.sohu.com')) {
       return { ok: true, status: 200, text: async () => JSON.stringify([{ hq: [
@@ -885,6 +934,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
   assert.equal(result.charts.find((chart) => chart.id === 'aShareTurnover').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').error, null);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').error, null);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').error, null);

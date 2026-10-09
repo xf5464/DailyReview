@@ -382,6 +382,19 @@
           </fieldset>
           <ol class="economic-calendar-list" id="economicCalendarList" aria-label="未来12个月美国重要经济日程"></ol>
         </div>
+        <section class="industry-concentration-detail" id="overallDetailIndustryConcentrationWrap" hidden aria-label="行业资金集中度明细">
+          <div class="industry-concentration-summary">
+            <div><span>C5</span><strong id="industryConcentrationC5">--</strong></div>
+            <div><span>HHI</span><strong id="industryConcentrationHhi">--</strong></div>
+            <div><span>行业数</span><strong id="industryConcentrationCount">--</strong></div>
+          </div>
+          <div class="shareholder-table-wrap industry-concentration-table-wrap">
+            <table class="shareholder-table">
+              <thead><tr><th>排名</th><th>行业</th><th>成交额</th><th>占比</th></tr></thead>
+              <tbody id="industryConcentrationTableBody"></tbody>
+            </table>
+          </div>
+        </section>
         <svg class="overall-detail-chart overall-chart" id="overallDetailChart" role="img" aria-label="单指标详情图"></svg>
       </div>
     </dialog>

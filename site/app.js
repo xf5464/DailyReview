@@ -3,7 +3,7 @@
 
   var CHART_IDS = [
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'financialConditions'
@@ -29,6 +29,7 @@
     aShareTurnover: 'A股全A成交额',
     aShareMarginBalance: 'A股融资余额（三市）',
     aShareActiveMarketValueThs: 'A股活跃市值（同花顺公式版）',
+    aShareIndustryConcentration: 'A股行业资金集中度',
     aShareSentimentThs: '同花顺情绪指数',
     aShareNewAccountsThs: 'A股每月新增开户数',
     filmCinemaShareholders: '影视院线成分股股东人数',
@@ -69,6 +70,7 @@
     aShareTurnover: 'A股市场',
     aShareMarginBalance: 'A股杠杆资金',
     aShareActiveMarketValueThs: 'A股市场活跃度',
+    aShareIndustryConcentration: 'A股行业资金',
     aShareSentimentThs: 'A股市场情绪',
     aShareNewAccountsThs: 'A股投资者参与',
     filmCinemaShareholders: '影视院线',
@@ -109,6 +111,7 @@
     aShareTurnover: 'A 股全市场当日成交金额，单位为亿元。它主要反映市场交易活跃度和资金参与度，不直接代表指数涨跌方向。',
     aShareMarginBalance: '沪、深、北三市融资余额合计，单位为亿元，表示投资者尚未偿还的融资买入金额。余额上升通常代表杠杆资金净流入，但不等同于市场一定上涨。',
     aShareActiveMarketValueThs: '按同花顺指标平台公开用户公式计算：上证指数与深证综指成交额之和，再取 SMA(10,1)，单位为亿元。它是可复现的成交活跃度平滑指标，并非指南针原版 0AMV，也不是同花顺官方统一指数。',
+    aShareIndustryConcentration: '以东方财富行业板块日成交额计算。主图 C5 为成交额最高的 5 个行业占全部行业成交额的比例；HHI 为各行业成交额占比平方和（0–10000）。数值升高表示资金更集中在少数行业，降低表示行业间更分散。FRED 没有匹配的日度 A 股行业成交额序列。',
     aShareSentimentThs: '同花顺官方情绪指数（883404）的日度收盘点位，用于观察 A 股市场情绪变化。该指数历史自 2022 年 8 月开始，点位高低应结合自身历史区间比较。',
     aShareNewAccountsThs: '同花顺财经转述上交所披露的月度 A 股新开户数，包含个人和机构新开账户，单位为万户。该指标统计账户数量，不等同于去重后的新增自然人人数。',
     filmCinemaShareholders: '同花顺影视院线（881274）全部成分股的季度股东人数和当前流通市值。总表支持季度翻页与排序；点击股票可查看股东人数及连续周线收盘价双轴历史。',
@@ -149,6 +152,7 @@
     aShareTurnover: '#b84f16',
     aShareMarginBalance: '#0f766e',
     aShareActiveMarketValueThs: '#c2410c',
+    aShareIndustryConcentration: '#9333ea',
     aShareSentimentThs: '#d9465f',
     aShareNewAccountsThs: '#2563eb',
     filmCinemaShareholders: '#7c3aed',
@@ -227,7 +231,7 @@
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     economicCalendarTypes: DEFAULT_ECONOMIC_CALENDAR_TYPES.slice(),
     chartOrder: [
-      'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+      'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
       'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
       'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
@@ -236,7 +240,7 @@
     ],
     groupChartOrder: {
       default: [
-        'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs',
+        'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
         'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
         'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
@@ -250,12 +254,12 @@
         'unemploymentRate'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
-      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
+      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
       group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
-      'usEconomicCalendar', 'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
+      'usEconomicCalendar', 'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -289,6 +293,7 @@
       aShareTurnover: ['default', 'group_a_share'],
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
+      aShareIndustryConcentration: ['default', 'group_a_share'],
       aShareSentimentThs: ['default', 'group_a_share'],
       aShareNewAccountsThs: ['default', 'group_a_share'],
       filmCinemaShareholders: ['default', 'group_a_share'],
@@ -425,6 +430,11 @@
     detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
     detailWideEtfTableWrap: document.querySelector('#overallDetailWideEtfTableWrap'),
     detailEconomicCalendarWrap: document.querySelector('#overallDetailEconomicCalendarWrap'),
+    detailIndustryConcentrationWrap: document.querySelector('#overallDetailIndustryConcentrationWrap'),
+    industryConcentrationC5: document.querySelector('#industryConcentrationC5'),
+    industryConcentrationHhi: document.querySelector('#industryConcentrationHhi'),
+    industryConcentrationCount: document.querySelector('#industryConcentrationCount'),
+    industryConcentrationTableBody: document.querySelector('#industryConcentrationTableBody'),
     economicCalendarList: document.querySelector('#economicCalendarList'),
     economicCalendarFilters: Array.from(document.querySelectorAll('[name="economicCalendarType"]')),
     wideEtfQuarter: document.querySelector('#wideEtfQuarterSelect'),
@@ -2233,11 +2243,38 @@
     refs.detailClose.focus({ preventScroll: true });
   }
 
+  function renderIndustryConcentrationDetail(item) {
+    var rows = item && Array.isArray(item.topIndustries) ? item.topIndustries : [];
+    refs.industryConcentrationC5.textContent = item && hasNumericValue(item.value)
+      ? Number(item.value).toFixed(2) + '%'
+      : '--';
+    refs.industryConcentrationHhi.textContent = item && hasNumericValue(item.hhi)
+      ? Number(item.hhi).toFixed(0)
+      : '--';
+    refs.industryConcentrationCount.textContent = item && hasNumericValue(item.industryCount)
+      ? String(item.industryCount)
+      : '--';
+    refs.industryConcentrationTableBody.replaceChildren();
+    rows.forEach(function (row, index) {
+      var tr = document.createElement('tr');
+      tr.append(createElement('td', 'number-cell', String(index + 1)));
+      tr.append(createElement('td', '', row.name || row.code || '--'));
+      tr.append(createElement('td', 'number-cell', hasNumericValue(row.turnover)
+        ? new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(Number(row.turnover)) + ' 亿元'
+        : '--'));
+      tr.append(createElement('td', 'number-cell', hasNumericValue(row.share)
+        ? Number(row.share).toFixed(2) + '%'
+        : '--'));
+      refs.industryConcentrationTableBody.append(tr);
+    });
+  }
+
   function renderDetail() {
     var sourceChart = chartById(activeDetailId);
     var stockTableChart = sourceChart && sourceChart.chartType === 'stockTable';
     var wideEtfTableChart = sourceChart && sourceChart.chartType === 'wideEtfTable';
     var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
+    var industryConcentrationChart = sourceChart && sourceChart.id === 'aShareIndustryConcentration';
     var customTableChart = stockTableChart || wideEtfTableChart || economicCalendarChart;
     refs.detailRangeControl.hidden = Boolean(customTableChart);
     refs.detailExtremes.hidden = Boolean(customTableChart);
@@ -2245,6 +2282,7 @@
     refs.detailStockTableWrap.hidden = !stockTableChart;
     refs.detailWideEtfTableWrap.hidden = !wideEtfTableChart;
     refs.detailEconomicCalendarWrap.hidden = !economicCalendarChart;
+    refs.detailIndustryConcentrationWrap.hidden = !industryConcentrationChart;
     if (economicCalendarChart) {
       renderEconomicCalendarDetail(sourceChart);
       return;
@@ -2323,6 +2361,7 @@
       refs.detailLowValue.textContent = '--';
       refs.detailLowDate.textContent = '--';
       renderEmpty(refs.detailChart, '暂无可绘制的数据');
+      if (industryConcentrationChart) renderIndustryConcentrationDetail(null);
       return;
     }
     var highest = chart.items.reduce(function (best, item) { return item.value > best.value ? item : best; });
@@ -2333,6 +2372,11 @@
     refs.detailLowValue.textContent = formatValue(chart, lowest.value);
     refs.detailLowDate.textContent = formatDate(lowest.date, chart.frequency);
     renderLineChart(refs.detailChart, chart);
+    if (industryConcentrationChart) {
+      var latestItem = chart.items.at(-1);
+      renderIndustryConcentrationDetail(latestItem);
+      refs.detailMessage.textContent += ' · 明细为 ' + formatDate(latestItem.date, chart.frequency) + ' 前五行业';
+    }
   }
 
   function moveWideEtfQuarter(offset) {

@@ -2008,6 +2008,49 @@ tbody tr:last-child td {
   margin-top: 12px;
 }
 
+.industry-concentration-detail {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.industry-concentration-detail[hidden] {
+  display: none;
+}
+
+.industry-concentration-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.industry-concentration-summary > div {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid #dfe5ef;
+  border-radius: 12px;
+  background: #f7f9fc;
+}
+
+.industry-concentration-summary span {
+  color: #667085;
+  font-size: 0.78rem;
+}
+
+.industry-concentration-summary strong {
+  font-size: 1.05rem;
+}
+
+.industry-concentration-table-wrap {
+  max-height: 260px;
+}
+
+.industry-concentration-table-wrap .number-cell {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .economic-calendar-filters {
   display: flex;
   flex-wrap: wrap;

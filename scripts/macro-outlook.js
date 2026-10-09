@@ -27,6 +27,9 @@ const TONGHUASHUN_NEW_ACCOUNT_HISTORY_URLS = Object.freeze([
 const TONGHUASHUN_TODAY_LIST_URL = 'https://news.10jqka.com.cn/today_list/';
 const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/code/881274/';
 const TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE = '2026-08-30';
+const EASTMONEY_INDUSTRY_SOURCE_URL = 'https://quote.eastmoney.com/center/boardlist.html#industry_board';
+const EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO = 0.95;
+const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 8;
 // 同花顺行业页会在部分云端网络中拒绝访问。此列表由 2026-08-30 成功抓取的
 // 881274 行业页核验，仅作为成分股入口回退；股东人数仍在每次构建时逐股更新。
 const TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT = Object.freeze([
@@ -440,6 +443,15 @@ const CHART_METADATA = {
     frequency: '日度',
     sourceName: '同花顺指标平台公开公式 / 搜狐证券行情',
     sourceUrl: 'https://poi.10jqka.com.cn/store/formula/detail/indexid/45424',
+  },
+  aShareIndustryConcentration: {
+    id: 'aShareIndustryConcentration',
+    title: 'A股行业资金集中度',
+    unit: '%',
+    decimals: 2,
+    frequency: '日度',
+    sourceName: '东方财富 / 行业板块成交额',
+    sourceUrl: EASTMONEY_INDUSTRY_SOURCE_URL,
   },
   aShareSentimentThs: {
     id: 'aShareSentimentThs',
@@ -1433,6 +1445,36 @@ function buildAShareMarginBalanceUrl(startDate, pageNumber = 1) {
   return `https://datacenter-web.eastmoney.com/api/data/v1/get?${params.toString()}`;
 }
 
+function buildEastmoneyIndustryListUrl() {
+  const params = new URLSearchParams({
+    pn: '1',
+    pz: '500',
+    po: '1',
+    np: '1',
+    fltt: '2',
+    invt: '2',
+    fid: 'f6',
+    fs: 'm:90+t:2',
+    fields: 'f12,f14',
+  });
+  return `https://push2.eastmoney.com/api/qt/clist/get?${params.toString()}`;
+}
+
+function buildEastmoneyIndustryHistoryUrl(code, startDate, endDate) {
+  if (!/^BK\d{4}$/.test(String(code))) throw new Error('东方财富行业板块代码无效');
+  const params = new URLSearchParams({
+    secid: `90.${code}`,
+    klt: '101',
+    fqt: '0',
+    beg: String(startDate).replaceAll('-', ''),
+    end: String(endDate).replaceAll('-', ''),
+    lmt: '1000000',
+    fields1: 'f1,f2,f3,f4,f5,f6',
+    fields2: 'f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61',
+  });
+  return `https://push2his.eastmoney.com/api/qt/stock/kline/get?${params.toString()}`;
+}
+
 function buildSohuIndexHistoryUrl(code, startDate, endDate) {
   const params = new URLSearchParams({
     code,
@@ -1559,6 +1601,90 @@ function parseAShareMarginBalance(text) {
       : Number(rawValue);
     return date && Number.isFinite(value) ? { date, value } : null;
   }).filter(Boolean);
+}
+
+function parseEastmoneyIndustryBoards(text) {
+  const payload = JSON.parse(String(text ?? ''));
+  const rows = payload?.data?.diff;
+  if (!Array.isArray(rows)) throw new Error('东方财富行业板块列表格式无效');
+  const boards = rows.map((row) => {
+    const code = String(row?.f12 ?? '').trim();
+    const name = String(row?.f14 ?? '').trim();
+    return /^BK\d{4}$/.test(code) && name && name !== '-' ? { code, name } : null;
+  }).filter(Boolean);
+  if (boards.length < 5) throw new Error('东方财富行业板块数量不足');
+  return [...new Map(boards.map((board) => [board.code, board])).values()];
+}
+
+function parseEastmoneyIndustryTurnoverHistory(text, board) {
+  const payload = JSON.parse(String(text ?? ''));
+  const rows = payload?.data?.klines;
+  if (!Array.isArray(rows)) throw new Error(`东方财富${board?.name || '行业'}历史格式无效`);
+  return rows.map((row) => {
+    const fields = String(row ?? '').split(',');
+    const date = normalizeObservationDate(fields[0]);
+    // 日 K 接口 f57 为成交额，单位为元。
+    const amount = Number(fields[6]);
+    return date && Number.isFinite(amount) && amount > 0
+      ? { date, code: board.code, name: board.name, amount }
+      : null;
+  }).filter(Boolean);
+}
+
+function calculateAShareIndustryConcentration(industrySeries, expectedIndustryCount) {
+  const byDate = new Map();
+  industrySeries.flat().forEach((entry) => {
+    if (!entry?.date || !Number.isFinite(Number(entry.amount)) || Number(entry.amount) <= 0) return;
+    if (!byDate.has(entry.date)) byDate.set(entry.date, []);
+    byDate.get(entry.date).push({
+      code: entry.code,
+      name: entry.name,
+      amount: Number(entry.amount),
+    });
+  });
+  const expected = Number(expectedIndustryCount) || industrySeries.length;
+  const minimumCoverage = Math.max(5, Math.ceil(expected * EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO));
+  return [...byDate.entries()].map(([date, rows]) => {
+    const uniqueRows = [...new Map(rows.map((row) => [row.code, row])).values()];
+    if (uniqueRows.length < minimumCoverage) return null;
+    const totalAmount = uniqueRows.reduce((sum, row) => sum + row.amount, 0);
+    if (!(totalAmount > 0)) return null;
+    const ranked = uniqueRows.sort((left, right) => right.amount - left.amount);
+    const withShares = ranked.map((row) => ({
+      code: row.code,
+      name: row.name,
+      turnover: row.amount / 100_000_000,
+      share: row.amount / totalAmount * 100,
+    }));
+    const value = withShares.slice(0, 5).reduce((sum, row) => sum + row.share, 0);
+    const hhi = withShares.reduce((sum, row) => sum + row.share ** 2, 0);
+    return {
+      date,
+      value,
+      hhi,
+      industryCount: withShares.length,
+      totalTurnover: totalAmount / 100_000_000,
+      topIndustries: withShares.slice(0, 5),
+    };
+  }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
+}
+
+async function mapSettledWithConcurrency(items, concurrency, mapper) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      try {
+        results[index] = { status: 'fulfilled', value: await mapper(items[index], index) };
+      } catch (reason) {
+        results[index] = { status: 'rejected', reason };
+      }
+    }
+  });
+  await Promise.all(workers);
+  return results;
 }
 
 function parseSohuIndexAmount(text) {
@@ -1998,6 +2124,35 @@ async function queryMacroOutlook(options = {}) {
       const availableItems = filterDateRange(calculatedItems, dailyStartDate, endDate);
       return filterRecentItems(availableItems, range);
     }),
+    aShareIndustryConcentration: () => loadChart(CHART_METADATA.aShareIndustryConcentration, async () => {
+      const headers = {
+        Accept: 'application/json',
+        Referer: EASTMONEY_INDUSTRY_SOURCE_URL,
+      };
+      const boardText = await fetchCsv(buildEastmoneyIndustryListUrl(), fetchImpl, headers);
+      const boards = parseEastmoneyIndustryBoards(boardText);
+      const historyResults = await mapSettledWithConcurrency(
+        boards,
+        EASTMONEY_INDUSTRY_FETCH_CONCURRENCY,
+        async (board) => {
+          const text = await fetchCsv(
+            buildEastmoneyIndustryHistoryUrl(board.code, dailyStartDate, endDate),
+            fetchImpl,
+            headers,
+          );
+          return parseEastmoneyIndustryTurnoverHistory(text, board);
+        },
+      );
+      const successfulSeries = historyResults
+        .filter((result) => result.status === 'fulfilled' && result.value.length)
+        .map((result) => result.value);
+      const minimumSuccessfulBoards = Math.ceil(boards.length * EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO);
+      if (successfulSeries.length < minimumSuccessfulBoards) {
+        throw new Error(`东方财富行业历史仅成功 ${successfulSeries.length}/${boards.length} 个板块`);
+      }
+      const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, successfulSeries.length);
+      return filterRecentItems(filterDateRange(calculatedItems, dailyStartDate, endDate), range);
+    }),
     aShareSentimentThs: () => loadChart(CHART_METADATA.aShareSentimentThs, async () => {
       const uniqueItems = await fetchTonghuashunSentimentItems(dailyStartDate, endDate, fetchImpl);
       const availableItems = filterDateRange(uniqueItems, dailyStartDate, endDate);
@@ -2197,6 +2352,8 @@ module.exports = {
   buildTreasuryDebtUrl,
   buildAShareTurnoverUrl,
   buildAShareMarginBalanceUrl,
+  buildEastmoneyIndustryListUrl,
+  buildEastmoneyIndustryHistoryUrl,
   buildSohuIndexHistoryUrl,
   buildTonghuashunSentimentUrl,
   buildTonghuashunHolderUrl,
@@ -2230,6 +2387,9 @@ module.exports = {
   parseTreasuryDebt,
   parseAShareTurnover,
   parseAShareMarginBalance,
+  parseEastmoneyIndustryBoards,
+  parseEastmoneyIndustryTurnoverHistory,
+  calculateAShareIndustryConcentration,
   parseSohuIndexAmount,
   calculateTonghuashunActiveMarketValue,
   fetchTonghuashunSentimentItems,
