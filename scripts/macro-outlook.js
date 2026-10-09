@@ -30,8 +30,42 @@ const TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE = '2026-08-30';
 const EASTMONEY_INDUSTRY_SOURCE_URL = 'https://quote.eastmoney.com/center/boardlist.html#industry_board';
 const EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO = 0.95;
 const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 3;
-const EASTMONEY_INDUSTRY_LIST_ATTEMPTS = 8;
+const EASTMONEY_INDUSTRY_LIST_ATTEMPTS = 4;
 const EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS = 5;
+// The board directory occasionally returns a blanket HTTP 502 while the
+// individual K-line endpoints remain healthy. Keep a verified directory
+// snapshot so one catalog request cannot erase the whole chart.
+const EASTMONEY_INDUSTRY_BOARD_SNAPSHOT = Object.freeze([
+  ['BK0734', '珠宝首饰'], ['BK1033', '电池'], ['BK1015', '能源金属'],
+  ['BK1019', '化学原料'], ['BK0471', '化纤行业'], ['BK0538', '化学制品'],
+  ['BK0731', '化肥行业'], ['BK1040', '中药'], ['BK1017', '采掘行业'],
+  ['BK0733', '包装材料'], ['BK0457', '电网设备'], ['BK0730', '农药兽药'],
+  ['BK0454', '塑料制品'], ['BK1030', '电机'], ['BK0465', '化学制药'],
+  ['BK1027', '小金属'], ['BK0459', '电子元件'], ['BK1037', '消费电子'],
+  ['BK1032', '风电设备'], ['BK0910', '专用设备'], ['BK0732', '贵金属'],
+  ['BK0470', '造纸印刷'], ['BK1034', '电源设备'], ['BK0458', '仪器仪表'],
+  ['BK0545', '通用设备'], ['BK0481', '汽车零部件'], ['BK1044', '生物制品'],
+  ['BK1020', '非金属材料'], ['BK0728', '环保行业'], ['BK0478', '有色金属'],
+  ['BK0436', '纺织服装'], ['BK0464', '石油行业'], ['BK1018', '橡胶制品'],
+  ['BK0448', '通信设备'], ['BK1039', '电子化学品'], ['BK1043', '专业服务'],
+  ['BK1031', '光伏设备'], ['BK1028', '燃气'], ['BK0428', '电力行业'],
+  ['BK0740', '教育'], ['BK0429', '交运设备'], ['BK0476', '装修建材'],
+  ['BK0433', '农牧饲渔'], ['BK0440', '家用轻工'], ['BK1029', '汽车整车'],
+  ['BK1045', '房地产服务'], ['BK0424', '水泥建材'], ['BK0735', '计算机设备'],
+  ['BK0725', '装修装饰'], ['BK1041', '医疗器械'], ['BK1046', '游戏'],
+  ['BK0736', '通信服务'], ['BK0726', '工程咨询服务'], ['BK0727', '医疗服务'],
+  ['BK0456', '家电行业'], ['BK0447', '互联网服务'], ['BK1038', '光学光电子'],
+  ['BK0427', '公用事业'], ['BK0539', '综合行业'], ['BK0546', '玻璃玻纤'],
+  ['BK0737', '软件开发'], ['BK0422', '物流行业'], ['BK0739', '工程机械'],
+  ['BK0425', '工程建设'], ['BK0479', '钢铁行业'], ['BK0738', '多元金融'],
+  ['BK1042', '医药商业'], ['BK0438', '食品饮料'], ['BK1016', '汽车服务'],
+  ['BK1036', '半导体'], ['BK0484', '贸易行业'], ['BK1035', '美容护理'],
+  ['BK0473', '证券'], ['BK0451', '房地产开发'], ['BK0474', '保险'],
+  ['BK0475', '银行'], ['BK0421', '铁路公路'], ['BK0450', '航运港口'],
+  ['BK0486', '文化传媒'], ['BK0437', '煤炭行业'], ['BK0480', '航天航空'],
+  ['BK0420', '航空机场'], ['BK0729', '船舶制造'], ['BK0482', '商业百货'],
+  ['BK0485', '旅游酒店'], ['BK0477', '酿酒行业'],
+].map(([code, name]) => Object.freeze({ code, name })));
 // 同花顺行业页会在部分云端网络中拒绝访问。此列表由 2026-08-30 成功抓取的
 // 881274 行业页核验，仅作为成分股入口回退；股东人数仍在每次构建时逐股更新。
 const TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT = Object.freeze([
@@ -2139,14 +2173,21 @@ async function queryMacroOutlook(options = {}) {
         Accept: 'application/json',
         Referer: EASTMONEY_INDUSTRY_SOURCE_URL,
       };
-      const boardText = await fetchCsv(
-        buildEastmoneyIndustryListUrl(),
-        fetchImpl,
-        headers,
-        'utf-8',
-        EASTMONEY_INDUSTRY_LIST_ATTEMPTS,
-      );
-      const boards = parseEastmoneyIndustryBoards(boardText);
+      let boards;
+      let boardListFallback = false;
+      try {
+        const boardText = await fetchCsv(
+          buildEastmoneyIndustryListUrl(),
+          fetchImpl,
+          headers,
+          'utf-8',
+          EASTMONEY_INDUSTRY_LIST_ATTEMPTS,
+        );
+        boards = parseEastmoneyIndustryBoards(boardText);
+      } catch {
+        boards = EASTMONEY_INDUSTRY_BOARD_SNAPSHOT.map((board) => ({ ...board }));
+        boardListFallback = true;
+      }
       const historyResults = await mapSettledWithConcurrency(
         boards,
         EASTMONEY_INDUSTRY_FETCH_CONCURRENCY,
@@ -2174,6 +2215,7 @@ async function queryMacroOutlook(options = {}) {
       const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, successfulSeries.length);
       return {
         items: filterRecentItems(filterDateRange(calculatedItems, dailyStartDate, endDate), range),
+        boardListFallback,
         industryHistories: successfulSeries.map((series) => ({
           code: series[0].code,
           name: series[0].name,
