@@ -1620,7 +1620,7 @@ function parseEastmoneyIndustryTurnoverHistory(text, board) {
   const payload = JSON.parse(String(text ?? ''));
   const rows = payload?.data?.klines;
   if (!Array.isArray(rows)) throw new Error(`东方财富${board?.name || '行业'}历史格式无效`);
-  return rows.map((row) => {
+  const items = rows.map((row) => {
     const fields = String(row ?? '').split(',');
     const date = normalizeObservationDate(fields[0]);
     // 日 K 接口 f53 为收盘点位，f57 为成交额（元）。
@@ -1630,6 +1630,10 @@ function parseEastmoneyIndustryTurnoverHistory(text, board) {
       ? { date, code: board.code, name: board.name, amount, price }
       : null;
   }).filter(Boolean);
+  if (!items.length && rows.length) {
+    throw new Error(`东方财富${board?.name || '行业'}历史字段无效（样例：${String(rows[0]).slice(0, 160)}）`);
+  }
+  return items;
 }
 
 function calculateAShareIndustryConcentration(industrySeries, expectedIndustryCount) {
@@ -2149,7 +2153,10 @@ async function queryMacroOutlook(options = {}) {
         .map((result) => result.value);
       const minimumSuccessfulBoards = Math.ceil(boards.length * EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO);
       if (successfulSeries.length < minimumSuccessfulBoards) {
-        throw new Error(`东方财富行业历史仅成功 ${successfulSeries.length}/${boards.length} 个板块`);
+        const firstFailure = historyResults.find((result) => result.status === 'rejected');
+        const failureMessage = firstFailure?.reason instanceof Error ? firstFailure.reason.message : '';
+        throw new Error(`东方财富行业历史仅成功 ${successfulSeries.length}/${boards.length} 个板块` +
+          (failureMessage ? `；${failureMessage}` : ''));
       }
       const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, successfulSeries.length);
       return {
