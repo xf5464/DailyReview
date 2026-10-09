@@ -2051,6 +2051,16 @@ tbody tr:last-child td {
   white-space: nowrap;
 }
 
+.industry-concentration-table-wrap tbody tr[role="button"] {
+  cursor: pointer;
+}
+
+.industry-concentration-table-wrap tbody tr[role="button"]:hover,
+.industry-concentration-table-wrap tbody tr[role="button"]:focus-visible {
+  background: #eef3ff;
+  outline: none;
+}
+
 .economic-calendar-filters {
   display: flex;
   flex-wrap: wrap;

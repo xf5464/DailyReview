@@ -322,6 +322,7 @@
   var viewMode = 'charts';
   var activeDetailId = null;
   var activeShareholderCode = null;
+  var activeIndustryCode = null;
   var activeShareholderTableQuarterDate = null;
   var activeWideEtfQuarterDate = null;
   var activeForecastBacktest = null;
@@ -435,6 +436,12 @@
     industryConcentrationHhi: document.querySelector('#industryConcentrationHhi'),
     industryConcentrationCount: document.querySelector('#industryConcentrationCount'),
     industryConcentrationTableBody: document.querySelector('#industryConcentrationTableBody'),
+    industryHistoryDialog: document.querySelector('#industryHistoryDialog'),
+    industryHistoryClose: document.querySelector('#industryHistoryCloseButton'),
+    industryHistoryTitle: document.querySelector('#industryHistoryTitle'),
+    industryHistoryRange: document.querySelector('#industryHistoryRangeSelect'),
+    industryHistoryMessage: document.querySelector('#industryHistoryMessage'),
+    industryHistoryChart: document.querySelector('#industryHistoryChart'),
     economicCalendarList: document.querySelector('#economicCalendarList'),
     economicCalendarFilters: Array.from(document.querySelectorAll('[name="economicCalendarType"]')),
     wideEtfQuarter: document.querySelector('#wideEtfQuarterSelect'),
@@ -1669,11 +1676,12 @@
       var rightUnit = createSvg('text', {
         x: box.left + box.width, y: 16, class: 'overall-chart-unit shareholder-price-axis-label', 'text-anchor': 'end'
       });
-      rightUnit.textContent = '股价（元）';
+      rightUnit.textContent = chart.rightAxisLabel || '股价（元）';
       svg.append(rightUnit);
     }
 
-    var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart || svg === refs.wideEtfCurveChart;
+    var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart ||
+      svg === refs.industryHistoryChart || svg === refs.wideEtfCurveChart;
     var longDetailRange = isDetailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
     if (longDetailRange) {
       var firstYear = new Date(domainX[0]).getUTCFullYear();
@@ -1851,8 +1859,12 @@
         rightPoint.setAttribute('opacity', '0');
       }
       var tip = ensureTooltip(svg);
-      tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) +
-        (hoveredPriceItem ? ' · ' + formatDate(hoveredPriceItem.date, '周度') + ' 股价 ¥' + Number(hoveredPriceItem.value).toFixed(2) : '') +
+      var rightAxisTip = hoveredPriceItem && chart.rightAxisName
+        ? ' · ' + formatDate(hoveredPriceItem.date, '日度') + ' ' + chart.rightAxisName + ' ' +
+          Number(hoveredPriceItem.value).toFixed(chart.rightAxisDecimals === undefined ? 2 : chart.rightAxisDecimals) +
+          (chart.rightAxisUnit ? ' ' + chart.rightAxisUnit : '')
+        : hoveredPriceItem ? ' · ' + formatDate(hoveredPriceItem.date, '周度') + ' 股价 ¥' + Number(hoveredPriceItem.value).toFixed(2) : '';
+      tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) + rightAxisTip +
         (item.provisional ? ' · 期货涨跌幅推算临时值' : '');
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
@@ -2257,6 +2269,9 @@
     refs.industryConcentrationTableBody.replaceChildren();
     rows.forEach(function (row, index) {
       var tr = document.createElement('tr');
+      tr.tabIndex = 0;
+      tr.setAttribute('role', 'button');
+      tr.title = '查看' + (row.name || row.code || '该行业') + '成交额与行业指数';
       tr.append(createElement('td', 'number-cell', String(index + 1)));
       tr.append(createElement('td', '', row.name || row.code || '--'));
       tr.append(createElement('td', 'number-cell', hasNumericValue(row.turnover)
@@ -2265,8 +2280,67 @@
       tr.append(createElement('td', 'number-cell', hasNumericValue(row.share)
         ? Number(row.share).toFixed(2) + '%'
         : '--'));
+      var open = function () { showIndustryHistory(row.code); };
+      tr.addEventListener('click', open);
+      tr.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open();
+        }
+      });
       refs.industryConcentrationTableBody.append(tr);
     });
+  }
+
+  function industryHistoryByCode(code) {
+    var chart = chartById('aShareIndustryConcentration');
+    return chart && (chart.industryHistories || []).find(function (row) { return row.code === code; });
+  }
+
+  function renderIndustryHistory() {
+    var history = industryHistoryByCode(activeIndustryCode);
+    if (!history) {
+      refs.industryHistoryTitle.textContent = '--';
+      refs.industryHistoryMessage.textContent = '未找到该行业的历史数据。';
+      renderEmpty(refs.industryHistoryChart, '暂无可绘制的数据');
+      return;
+    }
+    refs.industryHistoryTitle.textContent = history.name + '（' + history.code + '）';
+    var points = (history.points || []).map(function (point) {
+      return { date: point[0], value: Number(point[1]), priceValue: Number(point[2]) };
+    }).filter(function (point) {
+      return point.date && hasNumericValue(point.value) && hasNumericValue(point.priceValue);
+    });
+    var historyChart = filteredChart({
+      id: 'aShareIndustryConcentration',
+      title: history.name + '成交额与行业指数',
+      unit: '亿元',
+      decimals: 0,
+      frequency: '日度',
+      items: points.map(function (point) { return { date: point.date, value: point.value }; }),
+      rightAxisItems: points.map(function (point) { return { date: point.date, value: point.priceValue }; }),
+      rightAxisLabel: '行业指数（点）',
+      rightAxisName: '行业指数',
+      rightAxisUnit: '点',
+      rightAxisDecimals: 2,
+    }, refs.industryHistoryRange.value);
+    if (!historyChart.items.length) {
+      refs.industryHistoryMessage.textContent = '当前时间跨度暂无数据，请选择更长时间跨度。';
+      renderEmpty(refs.industryHistoryChart, '暂无可绘制的数据');
+      return;
+    }
+    refs.industryHistoryMessage.textContent = RANGES[refs.industryHistoryRange.value].label + ' · ' +
+      formatDate(historyChart.items[0].date, '日度') + ' 至 ' +
+      formatDate(historyChart.items.at(-1).date, '日度') + ' · 蓝线为成交额，橙线为行业指数';
+    renderLineChart(refs.industryHistoryChart, historyChart);
+  }
+
+  function showIndustryHistory(code) {
+    activeIndustryCode = code;
+    refs.industryHistoryRange.value = 'year1';
+    renderIndustryHistory();
+    refs.industryHistoryDialog.showModal();
+    refs.industryHistoryClose.focus({ preventScroll: true });
   }
 
   function renderDetail() {
@@ -3931,6 +4005,7 @@
     refs.shareholderRange.addEventListener('change', function () {
       renderShareholderHistory();
     });
+    refs.industryHistoryRange.addEventListener('change', renderIndustryHistory);
     document.querySelector('#overallAddGroupButton').addEventListener('click', addGroup);
     refs.newGroupName.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') addGroup();
@@ -3963,6 +4038,9 @@
     });
     refs.shareholderDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderDialog) refs.shareholderDialog.close();
+    });
+    refs.industryHistoryDialog.addEventListener('click', function (event) {
+      if (event.target === refs.industryHistoryDialog) refs.industryHistoryDialog.close();
     });
     refs.shareholderBarsDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderBarsDialog) refs.shareholderBarsDialog.close();
@@ -4001,6 +4079,7 @@
     populateRangeSelect(refs.detailRange, refs.range.value);
     populateRangeSelect(refs.wideEtfCurveRange, 'year5');
     populateRangeSelect(refs.forecastBacktestRange, 'year5');
+    populateRangeSelect(refs.industryHistoryRange, 'year1');
     refs.shareholderRange.replaceChildren();
     Object.keys(RANGES).filter(function (key) { return key.indexOf('year') === 0; }).forEach(function (key) {
       refs.shareholderRange.append(new Option(RANGES[key].label, key));

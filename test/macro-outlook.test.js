@@ -512,6 +512,9 @@ test('A-share industry concentration calculates C5, HHI and the top-five detail'
   const series = boards.map((board, index) => parseEastmoneyIndustryTurnoverHistory(JSON.stringify({
     data: { klines: [`2026-08-21,1,1,1,1,1,${(6 - index) * 100_000_000},1,1,1,1`] },
   }), board));
+  assert.deepEqual(series[0][0], {
+    date: '2026-08-21', code: 'BK0001', name: '电子', amount: 600_000_000, price: 1,
+  });
   const [item] = calculateAShareIndustryConcentration(series, 6);
   assert.equal(item.date, '2026-08-21');
   assert.equal(item.industryCount, 6);
@@ -772,6 +775,10 @@ test('macro outlook query returns all independent chart payloads', async () => {
   assert.equal(result.charts.find((chart) => chart.id === 'aShareMarginBalance').items.at(-1).value, 26400.15364858);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareActiveMarketValueThs').items.at(-1).value, 20200);
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').items.at(-1).value - 83.33333333333334) < 1e-9);
+  assert.equal(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').industryHistories.length, 6);
+  assert.deepEqual(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').industryHistories[0].points.at(-1), [
+    '2026-08-21', 1.2, 1,
+  ]);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').items.at(-1).value, 265.54);
   assert.equal(result.charts.find((chart) => chart.id === 'filmCinemaShareholders').rows.length, 2);

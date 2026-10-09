@@ -414,6 +414,20 @@
       </div>
     </dialog>
 
+    <dialog class="overall-config-dialog shareholder-history-dialog" id="industryHistoryDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">行业成交额与指数</p><h2 id="industryHistoryTitle">--</h2></div>
+          <button class="dialog-close-button" type="button" id="industryHistoryCloseButton" data-close="industryHistoryDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>时间跨度<select class="level-select" id="industryHistoryRangeSelect"></select></label>
+        </div>
+        <p class="overall-config-message" id="industryHistoryMessage" role="status"></p>
+        <svg class="overall-detail-chart overall-chart" id="industryHistoryChart" role="img" aria-label="行业成交额与行业指数历史图"></svg>
+      </div>
+    </dialog>
+
     <dialog class="overall-config-dialog shareholder-history-dialog" id="shareholderHistoryDialog">
       <div class="overall-config-card">
         <div class="industry-detail-header">

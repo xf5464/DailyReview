@@ -511,7 +511,7 @@ async function build() {
   const payload = {
     ...outlook,
     charts: outlook.charts.map((chart) => {
-      const { items, rows, ...metadata } = chart;
+      const { items, rows, industryHistories, ...metadata } = chart;
       return { ...metadata, itemCount: items.length };
     }),
     generatedBy: 'DailyReview GitHub Pages build',

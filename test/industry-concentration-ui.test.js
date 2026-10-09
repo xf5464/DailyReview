@@ -21,3 +21,13 @@ test('industry concentration detail shows C5, HHI and top-five rows', () => {
   assert.match(appSource, /item\.topIndustries/);
 });
 
+test('clicking an industry opens a one-year turnover and index chart', () => {
+  assert.match(htmlSource, /id="industryHistoryDialog"/);
+  assert.match(htmlSource, /id="industryHistoryRangeSelect"/);
+  assert.match(htmlSource, /id="industryHistoryChart"/);
+  assert.match(appSource, /showIndustryHistory\(row\.code\)/);
+  assert.match(appSource, /refs\.industryHistoryRange\.value = 'year1'/);
+  assert.match(appSource, /rightAxisLabel: '行业指数（点）'/);
+  assert.match(appSource, /蓝线为成交额，橙线为行业指数/);
+});
+

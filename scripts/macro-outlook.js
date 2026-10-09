@@ -1623,10 +1623,11 @@ function parseEastmoneyIndustryTurnoverHistory(text, board) {
   return rows.map((row) => {
     const fields = String(row ?? '').split(',');
     const date = normalizeObservationDate(fields[0]);
-    // 日 K 接口 f57 为成交额，单位为元。
+    // 日 K 接口 f53 为收盘点位，f57 为成交额（元）。
+    const price = Number(fields[2]);
     const amount = Number(fields[6]);
-    return date && Number.isFinite(amount) && amount > 0
-      ? { date, code: board.code, name: board.name, amount }
+    return date && Number.isFinite(price) && price > 0 && Number.isFinite(amount) && amount > 0
+      ? { date, code: board.code, name: board.name, amount, price }
       : null;
   }).filter(Boolean);
 }
@@ -2151,7 +2152,18 @@ async function queryMacroOutlook(options = {}) {
         throw new Error(`东方财富行业历史仅成功 ${successfulSeries.length}/${boards.length} 个板块`);
       }
       const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, successfulSeries.length);
-      return filterRecentItems(filterDateRange(calculatedItems, dailyStartDate, endDate), range);
+      return {
+        items: filterRecentItems(filterDateRange(calculatedItems, dailyStartDate, endDate), range),
+        industryHistories: successfulSeries.map((series) => ({
+          code: series[0].code,
+          name: series[0].name,
+          points: filterDateRange(series, dailyStartDate, endDate).map((item) => ([
+            item.date,
+            item.amount / 100_000_000,
+            item.price,
+          ])),
+        })),
+      };
     }),
     aShareSentimentThs: () => loadChart(CHART_METADATA.aShareSentimentThs, async () => {
       const uniqueItems = await fetchTonghuashunSentimentItems(dailyStartDate, endDate, fetchImpl);
