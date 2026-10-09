@@ -29,7 +29,9 @@ const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/c
 const TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE = '2026-08-30';
 const EASTMONEY_INDUSTRY_SOURCE_URL = 'https://quote.eastmoney.com/center/boardlist.html#industry_board';
 const EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO = 0.95;
-const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 8;
+const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 3;
+const EASTMONEY_INDUSTRY_LIST_ATTEMPTS = 8;
+const EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS = 5;
 // 同花顺行业页会在部分云端网络中拒绝访问。此列表由 2026-08-30 成功抓取的
 // 881274 行业页核验，仅作为成分股入口回退；股东人数仍在每次构建时逐股更新。
 const TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT = Object.freeze([
@@ -1470,7 +1472,9 @@ function buildEastmoneyIndustryHistoryUrl(code, startDate, endDate) {
     end: String(endDate).replaceAll('-', ''),
     lmt: '1000000',
     fields1: 'f1,f2,f3,f4,f5,f6',
-    fields2: 'f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61',
+    // Only request date, close and turnover. The smaller response is much less
+    // likely to be rejected by Eastmoney when all industry histories refresh.
+    fields2: 'f51,f53,f57',
   });
   return `https://push2his.eastmoney.com/api/qt/stock/kline/get?${params.toString()}`;
 }
@@ -1623,9 +1627,10 @@ function parseEastmoneyIndustryTurnoverHistory(text, board) {
   const items = rows.map((row) => {
     const fields = String(row ?? '').split(',');
     const date = normalizeObservationDate(fields[0]);
-    // 日 K 接口 f53 为收盘点位，f57 为成交额（元）。
-    const price = Number(fields[2]);
-    const amount = Number(fields[6]);
+    // 日 K 接口按 fields2 的请求顺序返回；同时兼容旧的 11 字段响应。
+    const compactResponse = fields.length <= 3;
+    const price = Number(fields[compactResponse ? 1 : 2]);
+    const amount = Number(fields[compactResponse ? 2 : 6]);
     return date && Number.isFinite(price) && price > 0 && Number.isFinite(amount) && amount > 0
       ? { date, code: board.code, name: board.name, amount, price }
       : null;
@@ -2134,7 +2139,13 @@ async function queryMacroOutlook(options = {}) {
         Accept: 'application/json',
         Referer: EASTMONEY_INDUSTRY_SOURCE_URL,
       };
-      const boardText = await fetchCsv(buildEastmoneyIndustryListUrl(), fetchImpl, headers);
+      const boardText = await fetchCsv(
+        buildEastmoneyIndustryListUrl(),
+        fetchImpl,
+        headers,
+        'utf-8',
+        EASTMONEY_INDUSTRY_LIST_ATTEMPTS,
+      );
       const boards = parseEastmoneyIndustryBoards(boardText);
       const historyResults = await mapSettledWithConcurrency(
         boards,
@@ -2144,6 +2155,8 @@ async function queryMacroOutlook(options = {}) {
             buildEastmoneyIndustryHistoryUrl(board.code, dailyStartDate, endDate),
             fetchImpl,
             headers,
+            'utf-8',
+            EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS,
           );
           return parseEastmoneyIndustryTurnoverHistory(text, board);
         },

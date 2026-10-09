@@ -508,12 +508,14 @@ test('A-share industry concentration calculates C5, HHI and the top-five detail'
     { f12: 'BK0006', f14: '煤炭' },
   ] } }));
   assert.equal(boards.length, 6);
-  assert.match(buildEastmoneyIndustryHistoryUrl('BK0001', '2026-08-01', '2026-08-22'), /secid=90\.BK0001/);
+  const historyUrl = buildEastmoneyIndustryHistoryUrl('BK0001', '2026-08-01', '2026-08-22');
+  assert.match(historyUrl, /secid=90\.BK0001/);
+  assert.match(historyUrl, /fields2=f51%2Cf53%2Cf57/);
   const series = boards.map((board, index) => parseEastmoneyIndustryTurnoverHistory(JSON.stringify({
-    data: { klines: [`2026-08-21,1,1,1,1,1,${(6 - index) * 100_000_000},1,1,1,1`] },
+    data: { klines: [`2026-08-21,100${index},${(6 - index) * 100_000_000}`] },
   }), board));
   assert.deepEqual(series[0][0], {
-    date: '2026-08-21', code: 'BK0001', name: '电子', amount: 600_000_000, price: 1,
+    date: '2026-08-21', code: 'BK0001', name: '电子', amount: 600_000_000, price: 1000,
   });
   const [item] = calculateAShareIndustryConcentration(series, 6);
   assert.equal(item.date, '2026-08-21');
@@ -686,8 +688,8 @@ test('macro outlook query returns all independent chart payloads', async () => {
     f14: `行业${index + 1}`,
   })) } });
   const industryHistoryData = JSON.stringify({ data: { klines: [
-    '2026-08-20,1,1,1,1,1,100000000,1,1,1,1',
-    '2026-08-21,1,1,1,1,1,120000000,1,1,1,1',
+    '2026-08-20,1000,100000000',
+    '2026-08-21,1010,120000000',
   ] } });
   const shanghaiIndexData = JSON.stringify([{ hq: [
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
@@ -777,7 +779,7 @@ test('macro outlook query returns all independent chart payloads', async () => {
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').items.at(-1).value - 83.33333333333334) < 1e-9);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').industryHistories.length, 6);
   assert.deepEqual(result.charts.find((chart) => chart.id === 'aShareIndustryConcentration').industryHistories[0].points.at(-1), [
-    '2026-08-21', 1.2, 1,
+    '2026-08-21', 1.2, 1010,
   ]);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareSentimentThs').items.at(-1).value, 905.6);
   assert.equal(result.charts.find((chart) => chart.id === 'aShareNewAccountsThs').items.at(-1).value, 265.54);
@@ -847,7 +849,7 @@ test('one failed source does not prevent the remaining charts from loading', asy
     }
     if (url.includes('push2his.eastmoney.com/api/qt/stock/kline/get') && url.includes('secid=90.BK')) {
       return { ok: true, status: 200, text: async () => JSON.stringify({ data: { klines: [
-        '2026-08-20,1,1,1,1,1,100000000,1,1,1,1',
+        '2026-08-20,1000,100000000',
       ] } }) };
     }
     if (url.includes('q.stock.sohu.com')) {
