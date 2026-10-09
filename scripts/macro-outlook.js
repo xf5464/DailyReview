@@ -2183,7 +2183,20 @@ async function queryMacroOutlook(options = {}) {
           'utf-8',
           EASTMONEY_INDUSTRY_LIST_ATTEMPTS,
         );
-        boards = parseEastmoneyIndustryBoards(boardText);
+        const liveBoards = parseEastmoneyIndustryBoards(boardText);
+        // Keep a stable industry universe across builds. Eastmoney currently
+        // returns additional short-lived/theme-style boards; requesting all of
+        // them in one refresh also triggers intermittent partial failures.
+        // The verified 86-board universe keeps the concentration comparable
+        // over time while still taking current names from the live directory.
+        if (liveBoards.length > EASTMONEY_INDUSTRY_BOARD_SNAPSHOT.length) {
+          const liveByCode = new Map(liveBoards.map((board) => [board.code, board]));
+          boards = EASTMONEY_INDUSTRY_BOARD_SNAPSHOT.map((board) => ({
+            ...(liveByCode.get(board.code) || board),
+          }));
+        } else {
+          boards = liveBoards;
+        }
       } catch {
         boards = EASTMONEY_INDUSTRY_BOARD_SNAPSHOT.map((board) => ({ ...board }));
         boardListFallback = true;

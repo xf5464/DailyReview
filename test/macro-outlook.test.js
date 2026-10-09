@@ -550,6 +550,35 @@ test('A-share industry concentration falls back to its verified board directory 
   assert.equal(chart.items.at(-1).industryCount, 86);
 });
 
+test('A-share industry concentration keeps the verified universe when the live directory is larger', async () => {
+  const fetchImpl = async (url) => {
+    if (url.includes('push2.eastmoney.com/api/qt/clist/get')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: { diff:
+        Array.from({ length: 100 }, (_, index) => ({
+          f12: `BK${String(index + 1).padStart(4, '0')}`,
+          f14: `临时行业${index + 1}`,
+        })),
+      } }) };
+    }
+    if (url.includes('push2his.eastmoney.com/api/qt/stock/kline/get')) {
+      return { ok: true, status: 200, text: async () => JSON.stringify({ data: {
+        klines: ['2026-08-21,1000,100000000'],
+      } }) };
+    }
+    throw new Error('unexpected URL: ' + url);
+  };
+  const result = await queryMacroOutlook({
+    chartIds: ['aShareIndustryConcentration'],
+    fetchImpl,
+    now: new Date('2026-08-22T00:00:00Z'),
+  });
+  const chart = result.charts[0];
+  assert.equal(chart.error, null);
+  assert.equal(chart.boardListFallback, false);
+  assert.equal(chart.industryHistories.length, 86);
+  assert.equal(chart.items.at(-1).industryCount, 86);
+});
+
 test('Tonghuashun active-market-value formula combines both markets and applies SMA(10,1)', () => {
   const shanghai = parseSohuIndexAmount(JSON.stringify([{ hq: [
     ['2026-08-20', '1', '1', '0', '0%', '1', '1', '1', '100000000'],
