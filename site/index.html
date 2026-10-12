@@ -33,6 +33,7 @@
           <p class="data-meta" id="overallPageMeta" aria-live="polite">正在加载宏观、资产与汇率数据...</p>
         </div>
         <div class="app-header-actions">
+          <button class="secondary-button market-overview-entry-button" type="button" id="marketOverviewButton">全球市场</button>
           <button class="secondary-button offline-data-entry-button" type="button" id="offlineDataButton">离线数据</button>
           <button class="primary-button forecast-entry-button" type="button" id="forecastButton">预测</button>
         </div>
@@ -93,6 +94,31 @@
         </div>
       </section>
     </main>
+
+    <dialog class="market-overview-dialog" id="marketOverviewDialog" aria-labelledby="marketOverviewTitle">
+      <div class="market-overview-shell">
+        <div class="market-overview-header">
+          <div>
+            <p class="market-overview-kicker">LIVE MARKET</p>
+            <h2 id="marketOverviewTitle">全球市场</h2>
+            <p id="marketOverviewStatus" role="status" aria-live="polite">打开后获取最新行情</p>
+          </div>
+          <div class="market-overview-actions">
+            <button class="market-overview-refresh" type="button" id="marketOverviewRefreshButton">刷新</button>
+            <button class="market-overview-close" type="button" id="marketOverviewCloseButton" aria-label="关闭全球市场">×</button>
+          </div>
+        </div>
+        <section class="market-session-panel" aria-labelledby="marketSessionTitle">
+          <div class="market-session-title-row">
+            <h3 id="marketSessionTitle">主要市场交易时段</h3>
+            <span>东八区</span>
+          </div>
+          <div class="market-session-timeline" id="marketSessionTimeline"></div>
+        </section>
+        <div class="market-overview-groups" id="marketOverviewGroups" aria-live="polite"></div>
+        <p class="market-overview-footnote">免费行情，仅供参考；部分海外市场可能延迟约 15 分钟。弹窗打开期间每 60 秒刷新。</p>
+      </div>
+    </dialog>
 
     <dialog class="overall-config-dialog app-update-dialog" id="appUpdateDialog" aria-labelledby="appUpdateTitle">
       <div class="overall-config-card">

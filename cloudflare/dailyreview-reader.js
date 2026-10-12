@@ -26,11 +26,155 @@ const CORS_HEADERS = {
   vary: "Origin",
 };
 
+const MARKET_CACHE_SECONDS = 60;
+const MARKET_STALE_SECONDS = 86_400;
+const MARKET_DATA_URL = "https://query2.finance.yahoo.com/v8/finance/chart/";
+const MARKET_INSTRUMENTS = Object.freeze([
+  { id: "shanghai", category: "indices", symbol: "000001.SS", flag: "🇨🇳", name: "上证指数", decimals: 2 },
+  { id: "hangSeng", category: "indices", symbol: "^HSI", flag: "🇭🇰", name: "恒生指数", decimals: 2 },
+  { id: "nikkei", category: "indices", symbol: "^N225", flag: "🇯🇵", name: "日经225", decimals: 2 },
+  { id: "kospi", category: "indices", symbol: "^KS11", flag: "🇰🇷", name: "韩国KOSPI", decimals: 2 },
+  { id: "nasdaq", category: "indices", symbol: "^IXIC", flag: "🇺🇸", name: "纳斯达克", decimals: 2 },
+  { id: "dow", category: "indices", symbol: "^DJI", flag: "🇺🇸", name: "道琼斯", decimals: 2 },
+  { id: "sp500", category: "indices", symbol: "^GSPC", flag: "🇺🇸", name: "标普500", decimals: 2 },
+  { id: "russell2000", category: "indices", symbol: "^RUT", flag: "🇺🇸", name: "罗素2000", decimals: 2 },
+  { id: "euroStoxx50", category: "indices", symbol: "^STOXX50E", flag: "🇪🇺", name: "欧洲斯托克50", decimals: 2 },
+  { id: "ftse100", category: "indices", symbol: "^FTSE", flag: "🇬🇧", name: "英国富时100", decimals: 2 },
+  { id: "cac40", category: "indices", symbol: "^FCHI", flag: "🇫🇷", name: "法国CAC40", decimals: 2 },
+  { id: "dax", category: "indices", symbol: "^GDAXI", flag: "🇩🇪", name: "德国DAX", decimals: 2 },
+  { id: "gold", category: "commodities", symbol: "GC=F", flag: "🥇", name: "黄金", decimals: 2 },
+  { id: "silver", category: "commodities", symbol: "SI=F", flag: "🥈", name: "白银", decimals: 3 },
+  { id: "copper", category: "commodities", symbol: "HG=F", flag: "🟠", name: "铜", decimals: 4 },
+  { id: "wti", category: "commodities", symbol: "CL=F", flag: "🛢️", name: "WTI原油", decimals: 2 },
+  { id: "brent", category: "commodities", symbol: "BZ=F", flag: "🛢️", name: "布伦特原油", decimals: 2 },
+  { id: "soybeans", category: "commodities", symbol: "ZS=F", flag: "🌱", name: "豆粕/大豆", decimals: 2 },
+  { id: "corn", category: "commodities", symbol: "ZC=F", flag: "🌽", name: "玉米", decimals: 2 },
+  { id: "leanHogs", category: "commodities", symbol: "HE=F", flag: "🐷", name: "瘦肉猪", decimals: 3 },
+  { id: "us30y", category: "bonds", symbol: "^TYX", flag: "🇺🇸", name: "美国30年国债", decimals: 3, unit: "%" },
+  { id: "us10y", category: "bonds", symbol: "^TNX", flag: "🇺🇸", name: "美国10年国债", decimals: 3, unit: "%" },
+  { id: "us5y", category: "bonds", symbol: "^FVX", flag: "🇺🇸", name: "美国5年国债", decimals: 3, unit: "%" },
+  { id: "us13w", category: "bonds", symbol: "^IRX", flag: "🇺🇸", name: "美国13周国债", decimals: 3, unit: "%" },
+  { id: "usdCny", category: "forex", symbol: "CNY=X", flag: "🇺🇸🇨🇳", name: "美元兑人民币", decimals: 4 },
+  { id: "usdChf", category: "forex", symbol: "CHF=X", flag: "🇺🇸🇨🇭", name: "美元兑瑞郎", decimals: 4 },
+  { id: "usdJpy", category: "forex", symbol: "JPY=X", flag: "🇺🇸🇯🇵", name: "美元兑日元", decimals: 3 },
+  { id: "dxy", category: "forex", symbol: "DX-Y.NYB", flag: "🇺🇸", name: "美元指数", decimals: 3 },
+]);
+
 function json(value, status = 200, cacheControl = "no-store") {
   return new Response(JSON.stringify(value), {
     status,
     headers: { ...CORS_HEADERS, "content-type": "application/json; charset=utf-8", "cache-control": cacheControl },
   });
+}
+
+function finiteNumber(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function compactMarketPoints(timestamps, closes) {
+  const points = [];
+  for (let index = 0; index < Math.min(timestamps.length, closes.length); index += 1) {
+    const time = finiteNumber(timestamps[index]);
+    const value = finiteNumber(closes[index]);
+    if (time !== null && value !== null) points.push([time, value]);
+  }
+  if (points.length <= 48) return points;
+  const sampled = [];
+  const lastIndex = points.length - 1;
+  for (let index = 0; index < 48; index += 1) {
+    sampled.push(points[Math.round(index * lastIndex / 47)]);
+  }
+  return sampled;
+}
+
+async function fetchMarketInstrument(instrument) {
+  const url = MARKET_DATA_URL + encodeURIComponent(instrument.symbol) + "?interval=5m&range=1d";
+  const response = await fetch(url, {
+    headers: {
+      accept: "application/json",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36",
+    },
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (!response.ok) throw new Error("HTTP " + response.status);
+  const result = (await response.json())?.chart?.result?.[0];
+  if (!result?.meta) throw new Error("行情格式无效");
+  const closes = result.indicators?.quote?.[0]?.close || [];
+  const points = compactMarketPoints(result.timestamp || [], closes);
+  const price = finiteNumber(points.at(-1)?.[1]) ?? finiteNumber(result.meta.regularMarketPrice);
+  const previousClose = finiteNumber(result.meta.chartPreviousClose) ?? finiteNumber(result.meta.previousClose);
+  if (price === null) throw new Error("行情价格缺失");
+  const changePercent = previousClose && previousClose !== 0
+    ? (price - previousClose) / previousClose * 100
+    : null;
+  const now = Math.floor(Date.now() / 1000);
+  const regular = result.meta.currentTradingPeriod?.regular;
+  return {
+    ...instrument,
+    price,
+    previousClose,
+    changePercent,
+    points,
+    marketOpen: Boolean(regular && now >= Number(regular.start) && now < Number(regular.end)),
+    exchangeTimezone: String(result.meta.exchangeTimezoneName || ""),
+    currency: String(result.meta.currency || ""),
+    quoteTime: finiteNumber(result.meta.regularMarketTime) || finiteNumber(points.at(-1)?.[0]),
+    stale: false,
+  };
+}
+
+function marketCacheResponse(payload, seconds) {
+  return new Response(JSON.stringify(payload), {
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "public, max-age=" + seconds,
+    },
+  });
+}
+
+async function marketApi(request, ctx) {
+  const requestUrl = new URL(request.url);
+  const cache = caches.default;
+  const freshKey = new Request(requestUrl.origin + "/market-api?cache=v1");
+  const staleKey = new Request(requestUrl.origin + "/market-api?cache=stale-v1");
+  const fresh = await cache.match(freshKey);
+  if (fresh) {
+    const payload = await fresh.json();
+    return json({ ...payload, cached: true }, 200, "public, max-age=" + MARKET_CACHE_SECONDS);
+  }
+
+  const staleResponse = await cache.match(staleKey);
+  const stalePayload = staleResponse ? await staleResponse.json() : null;
+  const staleById = new Map((stalePayload?.instruments || []).map((item) => [item.id, item]));
+  const settled = await Promise.allSettled(MARKET_INSTRUMENTS.map(fetchMarketInstrument));
+  const instruments = settled.map((result, index) => {
+    if (result.status === "fulfilled") return result.value;
+    const instrument = MARKET_INSTRUMENTS[index];
+    const fallback = staleById.get(instrument.id);
+    if (fallback) return { ...fallback, stale: true, error: result.reason?.message || "刷新失败" };
+    return { ...instrument, price: null, previousClose: null, changePercent: null, points: [],
+      marketOpen: false, quoteTime: null, stale: true, error: result.reason?.message || "刷新失败" };
+  });
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    refreshSeconds: MARKET_CACHE_SECONDS,
+    cached: false,
+    delayedNotice: "免费行情；部分海外市场可能延迟约15分钟。",
+    instruments,
+  };
+  const successful = instruments.filter((item) => item.price !== null && !item.stale);
+  if (!successful.length && stalePayload) {
+    return json({ ...stalePayload, cached: true, stale: true }, 200, "public, max-age=60");
+  }
+  if (!instruments.some((item) => item.price !== null)) {
+    return json({ error: "行情源暂时不可用，请稍后重试。" }, 502);
+  }
+  ctx.waitUntil(Promise.all([
+    cache.put(freshKey, marketCacheResponse(payload, MARKET_CACHE_SECONDS)),
+    cache.put(staleKey, marketCacheResponse(payload, MARKET_STALE_SECONDS)),
+  ]));
+  return json(payload, 200, "public, max-age=" + MARKET_CACHE_SECONDS);
 }
 
 function assertPublicHttpUrl(rawUrl) {
@@ -406,6 +550,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
+    if (request.method === "GET" && url.pathname === "/market-api") return marketApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/reader-api") return readerApi(request, env, ctx);
     if (request.method === "GET" && url.pathname === "/open") return openApi(request, env);
     return json({
@@ -413,7 +558,8 @@ export default {
       status: "ok",
       browserFallback: Boolean(env.BROWSER),
       googleNewsResolver: true,
-      workerVersion: "2026.09.04.11",
+      marketApi: true,
+      workerVersion: "2026.10.12.1",
     });
   },
 };

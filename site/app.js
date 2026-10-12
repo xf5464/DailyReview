@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  var MARKET_API_URL = 'https://dailyreview-reader.xf5464.workers.dev/market-api';
+  var MARKET_CACHE_KEY = 'daily-review.market-overview-cache.v1';
+  var MARKET_REFRESH_INTERVAL = 60000;
+
   var CHART_IDS = [
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
@@ -333,6 +337,8 @@
   var tooltip = null;
   var sharedConfigAvailable = false;
   var sharedConfigSaveQueue = Promise.resolve();
+  var marketRefreshTimer = null;
+  var marketRequestController = null;
 
   var refs = {
     meta: document.querySelector('#overallPageMeta'),
@@ -343,6 +349,13 @@
     refresh: document.querySelector('#overallRefreshButton'),
     viewToggle: document.querySelector('#overallViewToggleButton'),
     compareButton: document.querySelector('#overallCompareButton'),
+    marketOverviewButton: document.querySelector('#marketOverviewButton'),
+    marketOverviewDialog: document.querySelector('#marketOverviewDialog'),
+    marketOverviewStatus: document.querySelector('#marketOverviewStatus'),
+    marketOverviewRefresh: document.querySelector('#marketOverviewRefreshButton'),
+    marketOverviewClose: document.querySelector('#marketOverviewCloseButton'),
+    marketSessionTimeline: document.querySelector('#marketSessionTimeline'),
+    marketOverviewGroups: document.querySelector('#marketOverviewGroups'),
     forecastButton: document.querySelector('#forecastButton'),
     offlineDataButton: document.querySelector('#offlineDataButton'),
     offlineDataDialog: document.querySelector('#offlineDataDialog'),
@@ -3858,6 +3871,283 @@
     }
   }
 
+  var MARKET_GROUPS = [
+    { id: 'indices', label: '国际市场' },
+    { id: 'commodities', label: '大宗商品' },
+    { id: 'bonds', label: '债券市场' },
+    { id: 'forex', label: '外汇市场' }
+  ];
+
+  var MARKET_SESSIONS = [
+    { label: 'A股', zone: 'Asia/Shanghai', periods: [['09:30', '11:30'], ['13:00', '15:00']] },
+    { label: '港股', zone: 'Asia/Hong_Kong', periods: [['09:30', '12:00'], ['13:00', '16:00']] },
+    { label: '日股', zone: 'Asia/Tokyo', periods: [['09:00', '11:30'], ['12:30', '15:30']] },
+    { label: '韩股', zone: 'Asia/Seoul', periods: [['09:00', '15:30']] },
+    { label: '欧股', zone: 'Europe/Paris', periods: [['09:00', '17:30']] },
+    { label: '美股', zone: 'America/New_York', periods: [['09:30', '16:00']] },
+    { label: '加拿大', zone: 'America/Toronto', periods: [['09:30', '16:00']] }
+  ];
+
+  function marketDateParts(date, timeZone) {
+    var parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: timeZone,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+    }).formatToParts(date).reduce(function (result, part) {
+      if (part.type !== 'literal') result[part.type] = Number(part.value);
+      return result;
+    }, {});
+    return parts;
+  }
+
+  function zonedMarketTime(dateParts, timeText, timeZone) {
+    var split = timeText.split(':').map(Number);
+    var target = Date.UTC(dateParts.year, dateParts.month - 1, dateParts.day, split[0], split[1], 0);
+    var guess = target;
+    for (var pass = 0; pass < 3; pass += 1) {
+      var observed = marketDateParts(new Date(guess), timeZone);
+      var observedUtc = Date.UTC(observed.year, observed.month - 1, observed.day, observed.hour, observed.minute, observed.second);
+      guess += target - observedUtc;
+    }
+    return new Date(guess);
+  }
+
+  function shanghaiMinuteForSession(now, session, timeText) {
+    var localDate = marketDateParts(now, session.zone);
+    var shanghai = marketDateParts(zonedMarketTime(localDate, timeText, session.zone), 'Asia/Shanghai');
+    return shanghai.hour * 60 + shanghai.minute;
+  }
+
+  function appendSessionSegment(track, startMinute, endMinute) {
+    function segment(start, end) {
+      var element = document.createElement('span');
+      element.className = 'market-session-segment';
+      element.style.left = (start / 1440 * 100) + '%';
+      element.style.width = ((end - start) / 1440 * 100) + '%';
+      track.append(element);
+    }
+    if (endMinute > startMinute) segment(startMinute, endMinute);
+    else {
+      segment(startMinute, 1440);
+      segment(0, endMinute);
+    }
+  }
+
+  function renderMarketSessions() {
+    var now = new Date();
+    var shanghaiNow = marketDateParts(now, 'Asia/Shanghai');
+    var currentMinute = shanghaiNow.hour * 60 + shanghaiNow.minute;
+    refs.marketSessionTimeline.replaceChildren();
+
+    var clock = document.createElement('div');
+    clock.className = 'market-session-clock';
+    clock.style.left = (currentMinute / 1440 * 100) + '%';
+    var clockLabel = document.createElement('strong');
+    clockLabel.textContent = String(shanghaiNow.hour).padStart(2, '0') + ':' + String(shanghaiNow.minute).padStart(2, '0');
+    clock.append(clockLabel);
+    refs.marketSessionTimeline.append(clock);
+
+    MARKET_SESSIONS.forEach(function (session) {
+      var row = document.createElement('div');
+      row.className = 'market-session-row';
+      var label = document.createElement('span');
+      label.className = 'market-session-label';
+      label.textContent = session.label;
+      var track = document.createElement('div');
+      track.className = 'market-session-track';
+      session.periods.forEach(function (period) {
+        appendSessionSegment(
+          track,
+          shanghaiMinuteForSession(now, session, period[0]),
+          shanghaiMinuteForSession(now, session, period[1])
+        );
+      });
+      var marker = document.createElement('span');
+      marker.className = 'market-session-now';
+      marker.style.left = (currentMinute / 1440 * 100) + '%';
+      track.append(marker);
+      row.append(label, track);
+      refs.marketSessionTimeline.append(row);
+    });
+
+    var axis = document.createElement('div');
+    axis.className = 'market-session-axis';
+    ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'].forEach(function (labelText, index) {
+      var label = document.createElement('span');
+      label.textContent = labelText;
+      label.style.left = (index / 6 * 100) + '%';
+      axis.append(label);
+    });
+    refs.marketSessionTimeline.append(axis);
+  }
+
+  function marketNumber(item) {
+    if (!Number.isFinite(Number(item.price))) return '--';
+    return Number(item.price).toLocaleString('zh-CN', {
+      minimumFractionDigits: Number(item.decimals) || 0,
+      maximumFractionDigits: Number(item.decimals) || 0
+    }) + (item.unit || '');
+  }
+
+  function marketTimeLabel(value) {
+    if (!value) return '';
+    var date = typeof value === 'number' ? new Date(value * 1000) : new Date(value);
+    if (!Number.isFinite(date.getTime())) return '';
+    return new Intl.DateTimeFormat('zh-CN', {
+      timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).format(date).replace('/', '-');
+  }
+
+  function createMarketSparkline(item, direction) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'market-sparkline');
+    svg.setAttribute('viewBox', '0 0 120 38');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', item.name + '当日走势');
+    var points = (item.points || []).filter(function (point) {
+      return Array.isArray(point) && Number.isFinite(Number(point[1]));
+    });
+    if (points.length < 2) return svg;
+    var values = points.map(function (point) { return Number(point[1]); });
+    var low = Math.min.apply(null, values);
+    var high = Math.max.apply(null, values);
+    var spread = high - low || Math.max(Math.abs(high) * 0.01, 1);
+    var coords = values.map(function (value, index) {
+      return [index / (values.length - 1) * 120, 35 - (value - low) / spread * 31];
+    });
+    var baseline = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    baseline.setAttribute('x1', '0');
+    baseline.setAttribute('x2', '120');
+    baseline.setAttribute('y1', '35');
+    baseline.setAttribute('y2', '35');
+    baseline.setAttribute('class', 'market-sparkline-baseline');
+    var area = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    area.setAttribute('points', '0,38 ' + coords.map(function (point) { return point.join(','); }).join(' ') + ' 120,38');
+    area.setAttribute('class', 'market-sparkline-area ' + direction);
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    line.setAttribute('points', coords.map(function (point) { return point.join(','); }).join(' '));
+    line.setAttribute('class', 'market-sparkline-line ' + direction);
+    svg.append(baseline, area, line);
+    return svg;
+  }
+
+  function createMarketCard(item) {
+    var change = Number(item.changePercent);
+    var direction = Number.isFinite(change) && change > 0 ? 'up' : Number.isFinite(change) && change < 0 ? 'down' : 'flat';
+    var card = document.createElement('article');
+    card.className = 'market-card is-' + direction + (item.stale ? ' is-stale' : '');
+    var title = document.createElement('div');
+    title.className = 'market-card-title';
+    var name = document.createElement('strong');
+    name.textContent = (item.flag ? item.flag + ' ' : '') + item.name;
+    var state = document.createElement('span');
+    state.textContent = item.stale ? '缓存' : item.marketOpen ? '交易中' : '休市';
+    title.append(name, state);
+    var changeNode = document.createElement('div');
+    changeNode.className = 'market-change ' + direction;
+    changeNode.textContent = Number.isFinite(change) ? (change > 0 ? '+' : '') + change.toFixed(2) + '%' : '--';
+    var price = document.createElement('div');
+    price.className = 'market-price ' + direction;
+    price.textContent = marketNumber(item);
+    var time = document.createElement('div');
+    time.className = 'market-quote-time';
+    time.textContent = item.error && !item.price ? '暂时无法获取' : marketTimeLabel(item.quoteTime);
+    card.append(title, changeNode, createMarketSparkline(item, direction), price, time);
+    return card;
+  }
+
+  function renderMarketOverview(payload) {
+    var instruments = Array.isArray(payload && payload.instruments) ? payload.instruments : [];
+    refs.marketOverviewGroups.replaceChildren();
+    MARKET_GROUPS.forEach(function (group) {
+      var items = instruments.filter(function (item) { return item.category === group.id; });
+      if (!items.length) return;
+      var section = document.createElement('section');
+      section.className = 'market-group';
+      var heading = document.createElement('div');
+      heading.className = 'market-group-heading';
+      var title = document.createElement('h3');
+      title.textContent = group.label;
+      heading.append(title);
+      var grid = document.createElement('div');
+      grid.className = 'market-card-grid';
+      items.forEach(function (item) { grid.append(createMarketCard(item)); });
+      section.append(heading, grid);
+      refs.marketOverviewGroups.append(section);
+    });
+    var failed = instruments.filter(function (item) { return item.stale || item.price === null; }).length;
+    var status = '更新于 ' + marketTimeLabel(payload.generatedAt);
+    if (payload.cached) status += ' · 共享缓存';
+    if (failed) status += ' · ' + failed + ' 项使用缓存或暂不可用';
+    refs.marketOverviewStatus.textContent = status;
+  }
+
+  function readMarketCache() {
+    try {
+      var cached = JSON.parse(localStorage.getItem(MARKET_CACHE_KEY) || 'null');
+      return cached && Array.isArray(cached.instruments) ? cached : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function saveMarketCache(payload) {
+    try { localStorage.setItem(MARKET_CACHE_KEY, JSON.stringify(payload)); } catch (error) { /* storage may be unavailable */ }
+  }
+
+  async function fetchMarketOverview() {
+    if (marketRequestController) marketRequestController.abort();
+    marketRequestController = new AbortController();
+    var controller = marketRequestController;
+    var timeout = window.setTimeout(function () { controller.abort(); }, 22000);
+    refs.marketOverviewRefresh.disabled = true;
+    refs.marketOverviewStatus.textContent = '正在获取最新行情...';
+    try {
+      var response = await fetch(MARKET_API_URL, { cache: 'no-store', signal: controller.signal });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      var payload = await response.json();
+      if (!Array.isArray(payload.instruments)) throw new Error('行情格式无效');
+      saveMarketCache(payload);
+      renderMarketOverview(payload);
+    } catch (error) {
+      var cached = readMarketCache();
+      if (cached) {
+        renderMarketOverview(cached);
+        refs.marketOverviewStatus.textContent = '联网刷新失败，显示上次缓存 · ' + marketTimeLabel(cached.generatedAt);
+      } else {
+        refs.marketOverviewStatus.textContent = '行情暂时无法获取，请稍后刷新。';
+      }
+    } finally {
+      window.clearTimeout(timeout);
+      if (marketRequestController === controller) marketRequestController = null;
+      refs.marketOverviewRefresh.disabled = false;
+    }
+  }
+
+  function startMarketRefresh() {
+    window.clearInterval(marketRefreshTimer);
+    marketRefreshTimer = window.setInterval(function () {
+      if (refs.marketOverviewDialog.open && document.visibilityState === 'visible') fetchMarketOverview();
+    }, MARKET_REFRESH_INTERVAL);
+  }
+
+  function stopMarketRefresh() {
+    window.clearInterval(marketRefreshTimer);
+    marketRefreshTimer = null;
+    if (marketRequestController) marketRequestController.abort();
+    marketRequestController = null;
+  }
+
+  function showMarketOverview() {
+    var cached = readMarketCache();
+    renderMarketSessions();
+    if (cached) renderMarketOverview(cached);
+    refs.marketOverviewDialog.showModal();
+    fetchMarketOverview();
+    startMarketRefresh();
+  }
+
   function bindEvents() {
     refs.range.addEventListener('change', renderAll);
     refs.columns.addEventListener('change', function () {
@@ -3885,6 +4175,23 @@
       refs.configDialog.showModal();
     });
     refs.compareButton.addEventListener('click', showCompare);
+    refs.marketOverviewButton.addEventListener('click', showMarketOverview);
+    refs.marketOverviewRefresh.addEventListener('click', fetchMarketOverview);
+    refs.marketOverviewClose.addEventListener('click', function () { refs.marketOverviewDialog.close(); });
+    refs.marketOverviewDialog.addEventListener('close', stopMarketRefresh);
+    refs.marketOverviewDialog.addEventListener('click', function (event) {
+      if (event.target === refs.marketOverviewDialog) refs.marketOverviewDialog.close();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (!refs.marketOverviewDialog.open) return;
+      if (document.visibilityState === 'visible') {
+        renderMarketSessions();
+        fetchMarketOverview();
+        startMarketRefresh();
+      } else {
+        stopMarketRefresh();
+      }
+    });
     refs.offlineDataButton.addEventListener('click', function () { showOfflineData(); });
     refs.offlineDataDownloadButton.addEventListener('click', downloadAllOfflineData);
     refs.forecastButton.addEventListener('click', showForecast);
