@@ -27,8 +27,11 @@ test('market overview refreshes only while it is open and retains a local fallba
 });
 
 test('market overview is mobile responsive and uses mainland market colors', () => {
-  assert.match(cssSource, /\.market-card-grid\s*\{[\s\S]*repeat\(4,/);
-  assert.match(cssSource, /@media \(max-width: 720px\)[\s\S]*\.market-card-grid\s*\{[\s\S]*repeat\(2,/);
+  assert.match(cssSource, /\.market-card-grid\s*\{[\s\S]*repeat\(var\(--market-columns, 4\)/);
+  assert.match(htmlSource, /id="marketOverviewColumnsSelect"[\s\S]*value="4" selected/);
+  assert.match(appSource, /MARKET_COLUMNS_KEY = 'daily-review\.market-overview-columns\.v1'/);
+  assert.match(appSource, /applyMarketColumns\(localStorage\.getItem\(MARKET_COLUMNS_KEY\), false\)/);
+  assert.match(cssSource, /\.market-overview-dialog\[data-columns="4"\]\s*\{ --market-columns: 4; \}/);
   assert.match(cssSource, /\.market-change\.up[\s\S]*#ef3f46/);
   assert.match(cssSource, /\.market-change\.down[\s\S]*#25d345/);
 });

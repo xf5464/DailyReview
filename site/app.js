@@ -3,6 +3,7 @@
 
   var MARKET_API_URL = 'https://dailyreview-reader.xf5464.workers.dev/market-api';
   var MARKET_CACHE_KEY = 'daily-review.market-overview-cache.v1';
+  var MARKET_COLUMNS_KEY = 'daily-review.market-overview-columns.v1';
   var MARKET_REFRESH_INTERVAL = 60000;
 
   var CHART_IDS = [
@@ -354,6 +355,7 @@
     marketOverviewStatus: document.querySelector('#marketOverviewStatus'),
     marketOverviewRefresh: document.querySelector('#marketOverviewRefreshButton'),
     marketOverviewClose: document.querySelector('#marketOverviewCloseButton'),
+    marketOverviewColumns: document.querySelector('#marketOverviewColumnsSelect'),
     marketSessionTimeline: document.querySelector('#marketSessionTimeline'),
     marketOverviewGroups: document.querySelector('#marketOverviewGroups'),
     forecastButton: document.querySelector('#forecastButton'),
@@ -4096,6 +4098,15 @@
     try { localStorage.setItem(MARKET_CACHE_KEY, JSON.stringify(payload)); } catch (error) { /* storage may be unavailable */ }
   }
 
+  function applyMarketColumns(value, persist) {
+    var columns = ['2', '3', '4'].includes(String(value)) ? String(value) : '4';
+    refs.marketOverviewColumns.value = columns;
+    refs.marketOverviewDialog.dataset.columns = columns;
+    if (persist !== false) {
+      try { localStorage.setItem(MARKET_COLUMNS_KEY, columns); } catch (error) { /* storage may be unavailable */ }
+    }
+  }
+
   async function fetchMarketOverview() {
     if (marketRequestController) marketRequestController.abort();
     marketRequestController = new AbortController();
@@ -4176,6 +4187,9 @@
     });
     refs.compareButton.addEventListener('click', showCompare);
     refs.marketOverviewButton.addEventListener('click', showMarketOverview);
+    refs.marketOverviewColumns.addEventListener('change', function () {
+      applyMarketColumns(refs.marketOverviewColumns.value);
+    });
     refs.marketOverviewRefresh.addEventListener('click', fetchMarketOverview);
     refs.marketOverviewClose.addEventListener('click', function () { refs.marketOverviewDialog.close(); });
     refs.marketOverviewDialog.addEventListener('close', stopMarketRefresh);
@@ -4378,6 +4392,7 @@
 
   function initialize() {
     applyRuntimeCapabilities();
+    applyMarketColumns(localStorage.getItem(MARKET_COLUMNS_KEY), false);
     applyLineWidth(localStorage.getItem(LINE_WIDTH_STORAGE_KEY), false);
     applyQuarterPointSize(localStorage.getItem(QUARTER_POINT_SIZE_STORAGE_KEY), false);
     syncGroups();

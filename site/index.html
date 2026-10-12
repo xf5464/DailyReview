@@ -104,6 +104,12 @@
             <p id="marketOverviewStatus" role="status" aria-live="polite">打开后获取最新行情</p>
           </div>
           <div class="market-overview-actions">
+            <label class="market-overview-columns-label" for="marketOverviewColumnsSelect">每行</label>
+            <select class="market-overview-columns" id="marketOverviewColumnsSelect" aria-label="每行行情卡片数量">
+              <option value="2">2 个</option>
+              <option value="3">3 个</option>
+              <option value="4" selected>4 个</option>
+            </select>
             <button class="market-overview-refresh" type="button" id="marketOverviewRefreshButton">刷新</button>
             <button class="market-overview-close" type="button" id="marketOverviewCloseButton" aria-label="关闭全球市场">×</button>
           </div>
