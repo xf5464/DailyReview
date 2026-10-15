@@ -4155,6 +4155,7 @@
     renderMarketSessions();
     if (cached) renderMarketOverview(cached);
     refs.marketOverviewDialog.showModal();
+    refs.marketOverviewClose.focus({ preventScroll: true });
     fetchMarketOverview();
     startMarketRefresh();
   }

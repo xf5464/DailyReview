@@ -15,6 +15,8 @@ test('main header opens a dedicated global market overview', () => {
   assert.match(htmlSource, /id="marketSessionTimeline"/);
   assert.match(htmlSource, /id="marketOverviewGroups"/);
   assert.match(appSource, /refs\.marketOverviewButton\.addEventListener\('click', showMarketOverview\)/);
+  assert.match(htmlSource, /id="marketOverviewCloseButton"[^>]*autofocus/);
+  assert.match(appSource, /refs\.marketOverviewDialog\.showModal\(\);\s*refs\.marketOverviewClose\.focus\(\{ preventScroll: true \}\)/);
 });
 
 test('market overview refreshes only while it is open and retains a local fallback', () => {
