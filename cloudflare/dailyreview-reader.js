@@ -68,6 +68,7 @@ function json(value, status = 200, cacheControl = "no-store") {
 }
 
 function finiteNumber(value) {
+  if (value === null || value === undefined || (typeof value === "string" && value.trim() === "")) return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 }
@@ -136,8 +137,8 @@ function marketCacheResponse(payload, seconds) {
 async function marketApi(request, ctx) {
   const requestUrl = new URL(request.url);
   const cache = caches.default;
-  const freshKey = new Request(requestUrl.origin + "/market-api?cache=v1");
-  const staleKey = new Request(requestUrl.origin + "/market-api?cache=stale-v1");
+  const freshKey = new Request(requestUrl.origin + "/market-api?cache=v2");
+  const staleKey = new Request(requestUrl.origin + "/market-api?cache=stale-v2");
   const fresh = await cache.match(freshKey);
   if (fresh) {
     const payload = await fresh.json();
@@ -559,7 +560,7 @@ export default {
       browserFallback: Boolean(env.BROWSER),
       googleNewsResolver: true,
       marketApi: true,
-      workerVersion: "2026.10.12.1",
+      workerVersion: "2026.10.16.1",
     });
   },
 };

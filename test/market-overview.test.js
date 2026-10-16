@@ -47,6 +47,19 @@ test('reader worker provides cached free market data with per-item fallback', ()
   assert.doesNotMatch(workerSource, /marketwatch\.com/i);
 });
 
+test('market sparkline drops missing quote values instead of plotting them as zero', () => {
+  const helperStart = workerSource.indexOf('function finiteNumber');
+  const helperEnd = workerSource.indexOf('async function fetchMarketInstrument');
+  const compactMarketPoints = new Function(
+    `${workerSource.slice(helperStart, helperEnd)}; return compactMarketPoints;`
+  )();
+  assert.deepEqual(
+    compactMarketPoints([100, 200, 300, 400], [3712.5, null, undefined, 3716.25]),
+    [[100, 3712.5], [400, 3716.25]]
+  );
+  assert.match(workerSource, /market-api\?cache=v2/);
+});
+
 test('session timeline uses Asia Shanghai and DST-aware overseas zones', () => {
   assert.match(appSource, /Asia\/Shanghai/);
   assert.match(appSource, /Europe\/Paris/);
