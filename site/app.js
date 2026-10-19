@@ -2703,7 +2703,17 @@
       stockCell.scope = 'row';
       stockCell.append(createElement('strong', '', stock.name), createElement('span', '', stock.code));
       row.append(stockCell);
-      row.append(createElement('td', stock.error || !hasNumericValue(stock.latestValue) ? 'shareholder-value-missing' : '', formatHolderCount(stock.latestValue)));
+      var missingHolderCount = stock.error || !hasNumericValue(stock.latestValue);
+      var scheduledDate = missingHolderCount && (stock.scheduledDisclosureDate || stock.disclosureDate || stock.reportAppointmentDate);
+      var scheduledDateText = '';
+      if (scheduledDate) {
+        var dateMatch = String(scheduledDate).match(/(?:\\d{4}[-/.])?(\\d{1,2})[-/.](\\d{1,2})/);
+        if (dateMatch) scheduledDateText = dateMatch[1].padStart(2, '0') + '.' + dateMatch[2].padStart(2, '0');
+      }
+      var holderCell = createElement('td', missingHolderCount && !scheduledDateText ? 'shareholder-value-missing' : '',
+        missingHolderCount ? (scheduledDateText || '--') : formatHolderCount(stock.latestValue));
+      if (scheduledDateText) holderCell.title = '预约披露日期：' + scheduledDateText;
+      row.append(holderCell);
       if (interactive) {
         var change = shareholderQuarterChange(stock);
         var changeClass = Number.isFinite(change.value)
