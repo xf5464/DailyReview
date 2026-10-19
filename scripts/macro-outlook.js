@@ -2281,6 +2281,25 @@ async function queryMacroOutlook(options = {}) {
         constituentSource = `内置成分股快照（${TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE}）`;
         constituentSnapshotDate = TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE;
       }
+      // 东方财富个股日历公布季报预约日期；失败时不影响股东人数采集。
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+      const currentMonth = now.getUTCMonth() + 1;
+      const reportQuarter = Math.floor((currentMonth - 1) / 3);
+      const reportYear = reportQuarter === 0 ? currentYear - 1 : currentYear;
+      const reportLabel = reportQuarter === 0 ? '年度' : ['','第一季度','半年度','第三季度'][reportQuarter];
+      const appointmentPattern = new RegExp(reportYear + '年' + reportLabel + '(?:季报|报告)?预约\\s*(20\\d{2})年(\\d{1,2})月(\\d{1,2})日披露');
+      const fetchAppointment = async (code) => {
+        try {
+          const html = await fetchCsv('https://data.eastmoney.com/stockcalendar/' + code + '.html', fetchImpl, {
+            Accept: 'text/html', Referer: 'https://data.eastmoney.com/',
+          });
+          const match = html.replace(/<[^>]*>/g, '').replace(/&nbsp;|&#160;/g, ' ').match(appointmentPattern);
+          return match ? match[1] + '-' + match[2].padStart(2, '0') + '-' + match[3].padStart(2, '0') : null;
+        } catch {
+          return null;
+        }
+      };
       const rows = await mapWithConcurrency(constituents, 5, async (stock) => {
         let history = [];
         let historySource = '同花顺 F10';
@@ -2317,8 +2336,9 @@ async function queryMacroOutlook(options = {}) {
         }
         const latest = history.at(-1) || null;
         const priceItems = await pricePromise;
+        const scheduledDisclosureDate = await fetchAppointment(stock.code);
         return {
-          ...stock, latestDate: latest?.date || null, latestValue: latest?.value ?? null,
+          ...stock, scheduledDisclosureDate, latestDate: latest?.date || null, latestValue: latest?.value ?? null,
           quarterlyItems: attachQuarterlyPrices(quarterlyHolderItems(history), priceItems),
           priceItems, historySource, error,
         };
