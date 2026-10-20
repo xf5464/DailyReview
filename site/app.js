@@ -2689,6 +2689,23 @@
     refs.shareholderBarsClose.focus({ preventScroll: true });
   }
 
+  function shareholderScheduledDateText(stock, quarterDate) {
+    if (!stock || !quarterDate) return '';
+    var scheduledDate = stock.scheduledDisclosureDate || stock.disclosureDate || stock.reportAppointmentDate;
+    var match = String(scheduledDate || '').match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:$|[T\s])/);
+    if (!match) return '';
+    var year = Number(match[1]);
+    var month = Number(match[2]);
+    var day = Number(match[3]);
+    var date = new Date(Date.UTC(year, month - 1, day));
+    if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) return '';
+    // Older cached payloads have only the appointment date: infer the preceding report quarter.
+    var reportDate = stock.scheduledDisclosureReportDate ||
+      new Date(Date.UTC(year, Math.floor((month - 1) / 3) * 3, 0)).toISOString().slice(0, 10);
+    if (quarterDate !== reportDate) return '';
+    return String(month).padStart(2, '0') + '.' + String(day).padStart(2, '0');
+  }
+
   function renderShareholderTable(container, rows, interactive) {
     var body = container.tagName === 'TBODY' ? container : document.createElement('tbody');
     body.replaceChildren();
@@ -2704,12 +2721,8 @@
       stockCell.append(createElement('strong', '', stock.name), createElement('span', '', stock.code));
       row.append(stockCell);
       var missingHolderCount = stock.error || !hasNumericValue(stock.latestValue);
-      var scheduledDate = missingHolderCount && (stock.scheduledDisclosureDate || stock.disclosureDate || stock.reportAppointmentDate);
-      var scheduledDateText = '';
-      if (scheduledDate) {
-        var dateMatch = String(scheduledDate).match(/(?:\\d{4}[-/.])?(\\d{1,2})[-/.](\\d{1,2})/);
-        if (dateMatch) scheduledDateText = dateMatch[1].padStart(2, '0') + '.' + dateMatch[2].padStart(2, '0');
-      }
+      var scheduledDateText = missingHolderCount && interactive
+        ? shareholderScheduledDateText(stock, stock.latestDate) : '';
       var holderCell = createElement('td', missingHolderCount && !scheduledDateText ? 'shareholder-value-missing' : '',
         missingHolderCount ? (scheduledDateText || '--') : formatHolderCount(stock.latestValue));
       if (scheduledDateText) holderCell.title = '预约披露日期：' + scheduledDateText;

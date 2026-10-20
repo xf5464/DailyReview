@@ -2282,11 +2282,11 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate = TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE;
       }
       // 东方财富个股日历公布季报预约日期；失败时不影响股东人数采集。
-      const now = new Date();
       const currentYear = now.getUTCFullYear();
       const currentMonth = now.getUTCMonth() + 1;
       const reportQuarter = Math.floor((currentMonth - 1) / 3);
       const reportYear = reportQuarter === 0 ? currentYear - 1 : currentYear;
+      const scheduledDisclosureReportDate = formatIsoDate(new Date(Date.UTC(currentYear, reportQuarter * 3, 0)));
       const reportLabel = reportQuarter === 0 ? '年度' : ['','第一季度','半年度','第三季度'][reportQuarter];
       const appointmentPattern = new RegExp(reportYear + '年' + reportLabel + '(?:季报|报告)?预约\\s*(20\\d{2})年(\\d{1,2})月(\\d{1,2})日披露');
       const fetchAppointment = async (code) => {
@@ -2338,7 +2338,8 @@ async function queryMacroOutlook(options = {}) {
         const priceItems = await pricePromise;
         const scheduledDisclosureDate = await fetchAppointment(stock.code);
         return {
-          ...stock, scheduledDisclosureDate, latestDate: latest?.date || null, latestValue: latest?.value ?? null,
+          ...stock, scheduledDisclosureDate, scheduledDisclosureReportDate,
+          latestDate: latest?.date || null, latestValue: latest?.value ?? null,
           quarterlyItems: attachQuarterlyPrices(quarterlyHolderItems(history), priceItems),
           priceItems, historySource, error,
         };

@@ -347,7 +347,8 @@ test('film and cinema shareholders use the verified constituent snapshot when th
     if (url.includes('/thshy/detail/code/881274')) {
       return { ok: false, status: 503, text: async () => '' };
     }
-    const text = url.includes('/11/last.js') ? TONGHUASHUN_WEEKLY_PRICE
+    const text = url.includes('/stockcalendar/') ? '<p>2026年半年度报告预约2026年8月28日披露</p>'
+      : url.includes('/11/last.js') ? TONGHUASHUN_WEEKLY_PRICE
       : url.includes('RPT_HOLDERNUM_DET') ? EASTMONEY_HOLDER_JSON
       : url.includes('basic.10jqka.com.cn/mobile/') ? TONGHUASHUN_HOLDER_HTML
       : '';
@@ -364,6 +365,8 @@ test('film and cinema shareholders use the verified constituent snapshot when th
   assert.equal(chart.rows.length, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.length);
   assert.equal(chart.rows[0].code, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT[0].code);
   assert.equal(chart.rows[0].marketCap, undefined);
+  assert.equal(chart.rows[0].scheduledDisclosureDate, '2026-08-28');
+  assert.equal(chart.rows[0].scheduledDisclosureReportDate, '2026-06-30');
   assert.equal(chart.constituentSnapshotDate, '2026-08-30');
   assert.equal(chart.constituentSource, '内置成分股快照（2026-08-30）');
   assert.equal(chart.items[0].value, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.length);
