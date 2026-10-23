@@ -4384,3 +4384,15 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+.a-share-pe-table th,
+.a-share-pe-table td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding: 8px 6px;
+}
+
+.a-share-pe-table td:nth-child(2) {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

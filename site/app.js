@@ -5,8 +5,12 @@
   var MARKET_CACHE_KEY = 'daily-review.market-overview-cache.v1';
   var MARKET_COLUMNS_KEY = 'daily-review.market-overview-columns.v1';
   var MARKET_REFRESH_INTERVAL = 60000;
+  var A_SHARE_PE_API_URL = 'https://dailyreview-reader.xf5464.workers.dev/a-share-pe-api';
+  var aSharePeRefreshPromise = null;
+  var aSharePeLastAttempt = 0;
 
   var CHART_IDS = [
+    'aSharePe',
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
@@ -15,6 +19,7 @@
   ];
 
   var TITLES = {
+    aSharePe: 'A股 PE',
     usEconomicCalendar: '未来12个月美国经济日历',
     treasuryYield: '美国 10 年期国债收益率',
     treasuryYield30: '美国 30 年期国债收益率',
@@ -56,6 +61,7 @@
   };
 
   var CATEGORIES = {
+    aSharePe: 'A股估值',
     usEconomicCalendar: '经济日历',
     treasuryYield: '利率',
     treasuryYield30: '长期利率',
@@ -97,6 +103,7 @@
   };
 
   var DESCRIPTIONS = {
+    aSharePe: 'A50 按中证A50（非富时A50），全A按中证全指；创业板、科创板为全板平均PE，科创50为指数PE。打开时联网获取来源最新交易日估值，并非逐秒盘中PE；各项分别标明口径、数据日期与缓存状态。',
     usEconomicCalendar: '按美国官方已公布日程汇总未来 12 个月的 CPI、PCE、非农就业和美联储议息会议。CPI 与非农取自美国劳工统计局，PCE 取自美国经济分析局，美联储会议取自 FOMC 官方日历；尚未正式公布的月份不推测日期。',
     treasuryYield: '美国 10 年期国债的市场收益率，是长期无风险利率和资产定价的重要基准。上升通常意味着融资成本与估值折现率提高。',
     treasuryYield30: '美国 30 年期国债的市场收益率，反映更长期的利率、通胀和期限风险预期，对长期资产的利率变化更敏感。',
@@ -236,6 +243,7 @@
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     economicCalendarTypes: DEFAULT_ECONOMIC_CALENDAR_TYPES.slice(),
     chartOrder: [
+      'aSharePe',
       'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
       'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
@@ -245,6 +253,7 @@
     ],
     groupChartOrder: {
       default: [
+        'aSharePe',
         'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
         'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
@@ -259,12 +268,14 @@
         'unemploymentRate'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
-      group_a_share: ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
+      group_a_share: ['aSharePe', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
       group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
-      'usEconomicCalendar', 'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
+      'usEconomicCalendar',
+      'aSharePe',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -295,6 +306,7 @@
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
       copper: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       naturalGas: ['default', 'group_mt49f5yl_pctlb6'],
+      aSharePe: ['default', 'group_a_share'],
       aShareTurnover: ['default', 'group_a_share'],
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
@@ -443,6 +455,8 @@
     detailLowDate: document.querySelector('#overallDetailLowDate'),
     detailExtremes: document.querySelector('#overallDetailExtremes'),
     detailStockTableWrap: document.querySelector('#overallDetailStockTableWrap'),
+    detailPeWrap: document.querySelector('#overallDetailPeWrap'),
+    detailPeTable: document.querySelector('#overallDetailPeTable'),
     detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
     detailWideEtfTableWrap: document.querySelector('#overallDetailWideEtfTableWrap'),
     detailEconomicCalendarWrap: document.querySelector('#overallDetailEconomicCalendarWrap'),
@@ -1228,7 +1242,79 @@
   }
 
   function loadCharts(ids) {
-    return Promise.all(Array.from(new Set(ids || [])).map(loadChartById));
+    return Promise.all(Array.from(new Set(ids || [])).map(loadChartById)).then(function (charts) {
+      if ((ids || []).includes('aSharePe')) refreshASharePe(false);
+      return charts;
+    });
+  }
+
+  function refreshASharePe(force) {
+    if (!data) return Promise.resolve();
+    if (aSharePeRefreshPromise) return aSharePeRefreshPromise;
+    if (!force && Date.now() - aSharePeLastAttempt < 60000) return Promise.resolve();
+    aSharePeLastAttempt = Date.now();
+    var previous = chartById('aSharePe');
+    aSharePeRefreshPromise = fetch(A_SHARE_PE_API_URL, {
+      cache: 'no-store', signal: AbortSignal.timeout(20000)
+    }).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return response.json();
+    }).then(function (payload) {
+      if (payload.id !== 'aSharePe' || !Array.isArray(payload.rows) || payload.rows.length !== 8 || !Array.isArray(payload.items)) {
+        throw new Error('估值数据格式无效');
+      }
+      payload.rows = payload.rows.map(function (row) {
+        var old = previous && (previous.rows || []).find(function (item) { return item.id === row.id; });
+        return !hasNumericValue(row.pe) && old && hasNumericValue(old.pe)
+          ? Object.assign({}, old, { stale: true, error: row.error || '来源刷新失败' }) : row;
+      });
+      payload.items[0].value = payload.rows.filter(function (row) { return hasNumericValue(row.pe); }).length;
+      var chart = Object.assign({}, previous || chartCatalogById('aSharePe'), payload, { error: null });
+      storeLoadedChart(chart);
+      try { localStorage.setItem('daily-review.a-share-pe.v1', JSON.stringify(chart)); } catch (error) { /* Storage optional. */ }
+    }).catch(function () {
+      var cached = previous;
+      try { if (!cached || !(cached.rows || []).some(function (row) { return hasNumericValue(row.pe); })) cached = JSON.parse(localStorage.getItem('daily-review.a-share-pe.v1') || 'null'); } catch (error) { /* Use published data. */ }
+      if (cached && Array.isArray(cached.rows)) {
+        storeLoadedChart(Object.assign({}, cached, {
+          notice: '联网刷新失败，显示上次数据；请核对各项数据日期。',
+          rows: cached.rows.map(function (row) { return Object.assign({}, row, { stale: true }); })
+        }));
+      }
+    }).finally(function () {
+      aSharePeRefreshPromise = null;
+      renderAll();
+    });
+    return aSharePeRefreshPromise;
+  }
+
+  function renderASharePeTable(container, chart) {
+    container.replaceChildren();
+    var note = createElement('p', 'overall-chart-summary', chart && chart.notice || '正在加载最新交易日估值…');
+    container.append(note);
+    var table = createElement('table', 'shareholder-table a-share-pe-table');
+    var head = createElement('thead');
+    var headings = createElement('tr');
+    ['指数 / 板块', 'PE（倍）', '数据日期', '口径'].forEach(function (name) { headings.append(createElement('th', '', name)); });
+    head.append(headings);
+    var body = createElement('tbody');
+    (chart && chart.rows || []).forEach(function (row) {
+      var tr = createElement('tr');
+      var name = createElement('th');
+      name.scope = 'row';
+      var link = createElement('a', '', row.name);
+      link.href = row.sourceUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      name.append(link);
+      var pe = createElement('td', '', hasNumericValue(row.pe) ? Number(row.pe).toFixed(2) : '--');
+      var date = createElement('td', '', (row.date || '--') + (row.stale ? ' · 缓存' : ''));
+      pe.title = row.error || row.methodology;
+      tr.append(name, pe, date, createElement('td', '', row.methodology));
+      body.append(tr);
+    });
+    table.append(head, body);
+    container.append(table);
   }
 
   function selectedGroupOrder() {
@@ -1983,12 +2069,19 @@
     refresh.type = 'button';
     refresh.title = '刷新已发布数据';
     refresh.setAttribute('aria-label', '刷新' + TITLES[chartId]);
-    refresh.addEventListener('click', function () { loadData(true, refresh); });
+    refresh.addEventListener('click', function () {
+      if (chartId === 'aSharePe') refreshASharePe(true);
+      else loadData(true, refresh);
+    });
+    if (chartId === 'aSharePe') {
+      refresh.title = '联网刷新最新估值';
+    }
     actions.append(refresh);
     header.append(heading, actions);
 
     var stockTableChart = chart && chart.chartType === 'stockTable';
     var wideEtfTableChart = chart && chart.chartType === 'wideEtfTable';
+    var valuationTableChart = chartId === 'aSharePe';
     var availableStockRows = stockTableChart ? (chart.rows || []).filter(function (row) {
       return hasNumericValue(row.latestValue);
     }) : [];
@@ -1996,6 +2089,7 @@
       ? config.economicCalendarTypes.length
         ? '未来12个月 · 显示 ' + calendarItems.length + '/' + (chart.items || []).length + ' 项已公布日程'
         : '尚未选择要显示的日程类别'
+      : valuationTableChart ? '8 项宽基 / 板块估值 · 单位：倍 · 点击标题查看详情'
       : stockTableChart
       ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
       : wideEtfTableChart && latest ? formatDate(latest.date, '季度') + ' · 宽基合计 ' + formatMarketCap(latest.value)
@@ -2004,7 +2098,10 @@
       class: 'overall-chart', role: 'img', 'aria-label': TITLES[chartId] + '曲线'
     });
     var cardStockTable = null;
-    if (stockTableChart) {
+    if (valuationTableChart) {
+      cardStockTable = createElement('div', 'shareholder-table-wrap');
+      renderASharePeTable(cardStockTable, chart);
+    } else if (stockTableChart) {
       cardStockTable = createElement('div', 'shareholder-table-wrap shareholder-card-table-wrap');
       renderShareholderTable(cardStockTable, chart.rows || [], false);
     } else if (wideEtfTableChart) {
@@ -2043,7 +2140,7 @@
       supplementLink.rel = 'noopener noreferrer';
       sourceLine.append(supplementLink);
     }
-    card.append(header, summary, stockTableChart || wideEtfTableChart ? cardStockTable : svg, sourceLine);
+    card.append(header, summary, stockTableChart || wideEtfTableChart || valuationTableChart ? cardStockTable : svg, sourceLine);
 
     card.addEventListener('dragstart', function (event) {
       draggedChartId = chartId;
@@ -2268,6 +2365,7 @@
     renderDetail();
     refs.detailDialog.showModal();
     refs.detailClose.focus({ preventScroll: true });
+    if (id === 'aSharePe') refreshASharePe(false);
   }
 
   function renderIndustryConcentrationDetail(item) {
@@ -2365,6 +2463,9 @@
     var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
     var industryConcentrationChart = sourceChart && sourceChart.id === 'aShareIndustryConcentration';
     var customTableChart = stockTableChart || wideEtfTableChart || economicCalendarChart;
+    var valuationTableChart = activeDetailId === 'aSharePe';
+    customTableChart = customTableChart || valuationTableChart;
+    refs.detailPeWrap.hidden = !valuationTableChart;
     refs.detailRangeControl.hidden = Boolean(customTableChart);
     refs.detailExtremes.hidden = Boolean(customTableChart);
     refs.detailChart.toggleAttribute('hidden', Boolean(customTableChart));
@@ -2372,6 +2473,11 @@
     refs.detailWideEtfTableWrap.hidden = !wideEtfTableChart;
     refs.detailEconomicCalendarWrap.hidden = !economicCalendarChart;
     refs.detailIndustryConcentrationWrap.hidden = !industryConcentrationChart;
+    if (valuationTableChart) {
+      renderASharePeTable(refs.detailPeTable, sourceChart);
+      refs.detailMessage.textContent = '最新交易日估值 · 各项按来源口径显示 · 非盘中实时PE';
+      return;
+    }
     if (economicCalendarChart) {
       renderEconomicCalendarDetail(sourceChart);
       return;
@@ -2793,7 +2899,7 @@
   function showCompare() {
     var ids = activeChartIds().filter(function (id) {
       var chart = chartById(id);
-      return !(chart && chart.chartType === 'stockTable');
+      return !(chart && ['stockTable', 'valuationTable'].includes(chart.chartType));
     });
     refs.compareFirst.replaceChildren();
     refs.compareSecond.replaceChildren();
@@ -4327,6 +4433,7 @@
       });
     });
     refs.shareholderSortButton.addEventListener('click', function () { toggleShareholderSort('count'); });
+    document.querySelector('#aSharePeRefreshButton').addEventListener('click', function () { refreshASharePe(true); });
     refs.shareholderChangeSortButton.addEventListener('click', function () { toggleShareholderSort('change'); });
     refs.shareholderMarketCapSortButton.addEventListener('click', function () { toggleShareholderSort('marketCap'); });
     refs.shareholderTableQuarter.addEventListener('change', function () {
@@ -4432,6 +4539,14 @@
     });
     refs.shareholderRange.value = 'year5';
     bindEvents();
+    var refreshVisiblePe = function () {
+      if (document.visibilityState !== 'hidden' && data &&
+          (activeChartIds().includes('aSharePe') || (refs.detailDialog.open && activeDetailId === 'aSharePe'))) {
+        refreshASharePe(false);
+      }
+    };
+    setInterval(refreshVisiblePe, 60000);
+    document.addEventListener('visibilitychange', refreshVisiblePe);
     syncView();
     loadData(false);
     syncSharedLocalConfig();

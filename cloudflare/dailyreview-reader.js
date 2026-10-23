@@ -1,3 +1,5 @@
+import { queryASharePe, mergePeRows } from './a-share-pe.mjs';
+
 const ALLOWED_ORIGIN = "https://xf5464.github.io";
 const MAX_HTML_BYTES = 2_500_000;
 const MAX_ARTICLE_CHARS = 32_000;
@@ -547,11 +549,31 @@ async function readerApi(request, env, ctx) {
   }
 }
 
+async function aSharePeApi(request, ctx) {
+  const origin = new URL(request.url).origin;
+  const key = new Request(origin + '/a-share-pe-api?cache=v1');
+  const staleKey = new Request(origin + '/a-share-pe-api?cache=stale-v1');
+  const cached = await caches.default.match(key);
+  if (cached) return json({ ...await cached.json(), cached: true });
+  const previous = await caches.default.match(staleKey);
+  const payload = await queryASharePe();
+  payload.rows = mergePeRows(payload.rows, previous ? (await previous.json()).rows : []);
+  payload.items[0].value = payload.rows.filter(row => row.pe !== null).length;
+  if (payload.rows.some(row => row.pe !== null && !row.error)) {
+    ctx.waitUntil(Promise.all([
+      caches.default.put(key, marketCacheResponse(payload, 60)),
+      caches.default.put(staleKey, marketCacheResponse(payload, 7 * 86400)),
+    ]));
+  }
+  return json(payload);
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
     if (request.method === "GET" && url.pathname === "/market-api") return marketApi(request, ctx);
+    if (request.method === "GET" && url.pathname === "/a-share-pe-api") return aSharePeApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/reader-api") return readerApi(request, env, ctx);
     if (request.method === "GET" && url.pathname === "/open") return openApi(request, env);
     return json({
@@ -560,7 +582,7 @@ export default {
       browserFallback: Boolean(env.BROWSER),
       googleNewsResolver: true,
       marketApi: true,
-      workerVersion: "2026.10.16.1",
+      workerVersion: "2026.10.23.1",
     });
   },
 };

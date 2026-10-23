@@ -529,6 +529,11 @@ const CHART_METADATA = {
     supplementSourceName: '东方财富备用行情',
     supplementSourceUrl: 'https://quote.eastmoney.com/center/gridlist.html#fund_etf',
   },
+  aSharePe: {
+    id: 'aSharePe', title: 'A股 PE', unit: '项', decimals: 0,
+    frequency: '最新交易日', chartType: 'valuationTable',
+    sourceName: '中证指数 / 东方财富', sourceUrl: 'https://www.csindex.com.cn/',
+  },
   nasdaq100Pe: {
     id: 'nasdaq100Pe',
     title: '纳斯达克100市盈率（NDX）',
@@ -2030,6 +2035,10 @@ async function queryMacroOutlook(options = {}) {
   };
 
   const loaders = {
+    aSharePe: () => loadChart(CHART_METADATA.aSharePe, async () => {
+      const { queryASharePe } = await import('../cloudflare/a-share-pe.mjs');
+      return queryASharePe({ fetchImpl, now });
+    }),
     treasuryYield: () => loadChart(CHART_METADATA.treasuryYield, async () => {
       const text = await fetchCsv(buildFredUrl('DGS10', dailyStartDate, endDate), fetchImpl);
       const availableItems = filterDateRange(parseFredCsv(text, 'DGS10'), dailyStartDate, endDate);

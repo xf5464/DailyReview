@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - cloudflare/dailyreview-reader.js
+      - cloudflare/a-share-pe.mjs
       - cloudflare/wrangler.reader.toml
   workflow_dispatch:
     inputs:

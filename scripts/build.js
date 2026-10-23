@@ -50,7 +50,7 @@ function applyChartPresentationOverrides() {
   const cardRangeReplacement = [
     '    var chart = source ? Object.assign({}, source) : null;',
     "    var cardFrequency = chart && chart.frequency || '';",
-    "    var fixedPeriodCard = chart && chart.chartType !== 'stockTable' && chart.chartType !== 'wideEtfTable';",
+    "    var fixedPeriodCard = chart && !['stockTable', 'wideEtfTable', 'valuationTable'].includes(chart.chartType);",
     "    if (fixedPeriodCard && cardFrequency.includes('季')) {",
     '      chart.items = (source.items || []).slice(-OVERVIEW_MINI_CHART_PERIODS.quarterly);',
     '    } else if (fixedPeriodCard) {',
