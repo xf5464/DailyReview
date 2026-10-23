@@ -8,6 +8,11 @@
   var A_SHARE_PE_API_URL = 'https://dailyreview-reader.xf5464.workers.dev/a-share-pe-api';
   var aSharePeRefreshPromise = null;
   var aSharePeLastAttempt = 0;
+  var peHistoryData = null;
+  var peHistoryController = null;
+  var peHistoryRequestId = 0;
+  var peHistoryLoading = false;
+  var peHistoryError = '';
 
   var CHART_IDS = [
     'aSharePe',
@@ -457,6 +462,13 @@
     detailStockTableWrap: document.querySelector('#overallDetailStockTableWrap'),
     detailPeWrap: document.querySelector('#overallDetailPeWrap'),
     detailPeTable: document.querySelector('#overallDetailPeTable'),
+    peHistoryDialog: document.querySelector('#peHistoryDialog'),
+    peHistoryClose: document.querySelector('#peHistoryCloseButton'),
+    peHistoryTitle: document.querySelector('#peHistoryTitle'),
+    peHistoryRange: document.querySelector('#peHistoryRangeSelect'),
+    peHistoryMessage: document.querySelector('#peHistoryMessage'),
+    peHistorySource: document.querySelector('#peHistorySourceLink'),
+    peHistoryChart: document.querySelector('#peHistoryChart'),
     detailStockTableBody: document.querySelector('#overallDetailStockTableBody'),
     detailWideEtfTableWrap: document.querySelector('#overallDetailWideEtfTableWrap'),
     detailEconomicCalendarWrap: document.querySelector('#overallDetailEconomicCalendarWrap'),
@@ -1302,20 +1314,91 @@
       var tr = createElement('tr');
       var name = createElement('th');
       name.scope = 'row';
-      var link = createElement('a', '', row.name);
-      link.href = row.sourceUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      var link = createElement('button', 'a-share-pe-series-button', row.name);
+      link.type = 'button';
       link.title = row.methodology;
       name.append(link);
       var pe = createElement('td', '', hasNumericValue(row.pe) ? Number(row.pe).toFixed(2) : '--');
       var date = createElement('td', '', (row.date || '--') + (row.stale ? ' · 缓存' : ''));
       pe.title = row.error || row.methodology;
       tr.append(name, pe, date);
+      tr.className = 'a-share-pe-history-row';
+      tr.addEventListener('click', function () { showPeHistory(row.id); });
       body.append(tr);
     });
     table.append(head, body);
     container.append(table);
+  }
+
+  function validPeHistory(payload, seriesId) {
+    return payload && payload.seriesId === seriesId && Array.isArray(payload.items) && payload.items.length &&
+      payload.items.every(function (item) { return /^\d{4}-\d{2}-\d{2}$/.test(item.date) && hasNumericValue(item.value) && Number(item.value) > 0; });
+  }
+
+  function renderPeHistory() {
+    if (!peHistoryData || !peHistoryData.items.length) {
+      refs.peHistoryMessage.textContent = peHistoryLoading ? '正在读取历史 PE…' : peHistoryError || '暂无历史 PE 数据';
+      renderEmpty(refs.peHistoryChart, peHistoryLoading ? '加载中…' : '暂无可绘制的数据');
+      return;
+    }
+    var chart = filteredChart(peHistoryData, refs.peHistoryRange.value);
+    if (!chart.items.length) {
+      refs.peHistoryMessage.textContent = '当前时间跨度暂无数据，请选择更长时间跨度。';
+      renderEmpty(refs.peHistoryChart, '所选时间段暂无数据');
+      return;
+    }
+    refs.peHistoryMessage.textContent = RANGES[refs.peHistoryRange.value].label + ' · ' +
+      peHistoryData.methodology + ' · ' + chart.items[0].date + ' 至 ' + chart.items.at(-1).date +
+      ' · ' + chart.items.length + ' 个数据点 · ' +
+      (peHistoryLoading ? '正在联网刷新' : peHistoryData.stale ? '缓存数据' : peHistoryData.sourceName) +
+      ' · 历史起点 ' + peHistoryData.items[0].date;
+    renderLineChart(refs.peHistoryChart, chart);
+  }
+
+  async function showPeHistory(seriesId) {
+    var row = (chartById('aSharePe') && chartById('aSharePe').rows || []).find(function (item) { return item.id === seriesId; });
+    if (!row) return;
+    if (peHistoryController) peHistoryController.abort();
+    var requestId = ++peHistoryRequestId;
+    peHistoryData = null;
+    peHistoryError = '';
+    peHistoryLoading = true;
+    var cacheKey = 'daily-review.a-share-pe-history.v1.' + seriesId;
+    try {
+      var cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+      if (validPeHistory(cached, seriesId)) peHistoryData = Object.assign({}, cached, { stale: true });
+    } catch (error) { /* History cache is optional. */ }
+    refs.peHistoryTitle.textContent = row.name + '历史 PE';
+    refs.peHistorySource.href = row.sourceUrl;
+    refs.peHistoryRange.value = 'year1';
+    if (!refs.peHistoryDialog.open) refs.peHistoryDialog.showModal();
+    refs.peHistoryClose.focus({ preventScroll: true });
+    renderPeHistory();
+    peHistoryController = new AbortController();
+    var controller = peHistoryController;
+    var timeout = setTimeout(function () { controller.abort(); }, 40000);
+    try {
+      var response = await fetch('https://dailyreview-reader.xf5464.workers.dev/a-share-pe-history-api?id=' + encodeURIComponent(seriesId), {
+        cache: 'no-store', signal: controller.signal
+      });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      var payload = await response.json();
+      if (!validPeHistory(payload, seriesId)) throw new Error('历史估值数据格式无效');
+      if (requestId !== peHistoryRequestId) return;
+      peHistoryData = payload;
+      try { localStorage.setItem(cacheKey, JSON.stringify(payload)); } catch (error) { /* Storage may be full. */ }
+    } catch (error) {
+      if (requestId !== peHistoryRequestId) return;
+      peHistoryError = '历史 PE 加载失败，请稍后重新打开。';
+      if (peHistoryData) peHistoryData.stale = true;
+    } finally {
+      clearTimeout(timeout);
+      if (requestId === peHistoryRequestId) {
+        peHistoryLoading = false;
+        peHistoryController = null;
+        if (refs.peHistoryDialog.open) renderPeHistory();
+      }
+    }
   }
 
   function selectedGroupOrder() {
@@ -1783,7 +1866,7 @@
     }
 
     var isDetailChart = svg === refs.detailChart || svg === refs.shareholderChart ||
-      svg === refs.industryHistoryChart || svg === refs.wideEtfCurveChart;
+      svg === refs.industryHistoryChart || svg === refs.wideEtfCurveChart || svg === refs.peHistoryChart;
     var longDetailRange = isDetailChart && domainX[1] - domainX[0] >= 365 * 86400000 * 2.75;
     if (longDetailRange) {
       var firstYear = new Date(domainX[0]).getUTCFullYear();
@@ -4459,6 +4542,7 @@
       renderShareholderHistory();
     });
     refs.industryHistoryRange.addEventListener('change', renderIndustryHistory);
+    refs.peHistoryRange.addEventListener('change', renderPeHistory);
     document.querySelector('#overallAddGroupButton').addEventListener('click', addGroup);
     refs.newGroupName.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') addGroup();
@@ -4494,6 +4578,15 @@
     });
     refs.industryHistoryDialog.addEventListener('click', function (event) {
       if (event.target === refs.industryHistoryDialog) refs.industryHistoryDialog.close();
+    });
+    refs.peHistoryDialog.addEventListener('click', function (event) {
+      if (event.target === refs.peHistoryDialog) refs.peHistoryDialog.close();
+    });
+    refs.peHistoryDialog.addEventListener('close', function () {
+      peHistoryRequestId += 1;
+      if (peHistoryController) peHistoryController.abort();
+      peHistoryController = null;
+      peHistoryLoading = false;
     });
     refs.shareholderBarsDialog.addEventListener('click', function (event) {
       if (event.target === refs.shareholderBarsDialog) refs.shareholderBarsDialog.close();
@@ -4534,6 +4627,7 @@
     populateRangeSelect(refs.wideEtfCurveRange, 'year5');
     populateRangeSelect(refs.forecastBacktestRange, 'year5');
     populateRangeSelect(refs.industryHistoryRange, 'year1');
+    populateRangeSelect(refs.peHistoryRange, 'year1');
     refs.shareholderRange.replaceChildren();
     Object.keys(RANGES).filter(function (key) { return key.indexOf('year') === 0; }).forEach(function (key) {
       refs.shareholderRange.append(new Option(RANGES[key].label, key));

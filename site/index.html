@@ -450,6 +450,21 @@
       </div>
     </dialog>
 
+    <dialog class="overall-config-dialog shareholder-history-dialog" id="peHistoryDialog">
+      <div class="overall-config-card">
+        <div class="industry-detail-header">
+          <div><p class="industry-detail-kicker">指数 / 板块估值</p><h2 id="peHistoryTitle">历史 PE</h2></div>
+          <button class="dialog-close-button" type="button" id="peHistoryCloseButton" data-close="peHistoryDialog" aria-label="关闭">×</button>
+        </div>
+        <div class="overall-compare-controls">
+          <label>时间跨度<select class="level-select" id="peHistoryRangeSelect"></select></label>
+          <a class="secondary-button" id="peHistorySourceLink" href="https://www.csindex.com.cn/" target="_blank" rel="noopener noreferrer">查看数据源</a>
+        </div>
+        <p class="overall-config-message" id="peHistoryMessage" role="status"></p>
+        <svg class="overall-detail-chart overall-chart" id="peHistoryChart" role="img" aria-label="指数或板块历史PE曲线"></svg>
+      </div>
+    </dialog>
+
     <dialog class="overall-config-dialog shareholder-history-dialog" id="industryHistoryDialog">
       <div class="overall-config-card">
         <div class="industry-detail-header">

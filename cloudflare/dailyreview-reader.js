@@ -1,4 +1,4 @@
-import { queryASharePe, mergePeRows } from './a-share-pe.mjs';
+import { A_SHARE_PE_SERIES, queryASharePe, mergePeRows, queryASharePeHistory } from './a-share-pe.mjs';
 
 const ALLOWED_ORIGIN = "https://xf5464.github.io";
 const MAX_HTML_BYTES = 2_500_000;
@@ -568,12 +568,35 @@ async function aSharePeApi(request, ctx) {
   return json(payload);
 }
 
+async function aSharePeHistoryApi(request, ctx) {
+  const url = new URL(request.url);
+  const seriesId = url.searchParams.get('id');
+  if (!A_SHARE_PE_SERIES.some(series => series.id === seriesId)) return json({ error: '不支持的估值序列' }, 400);
+  const key = new Request(url.origin + '/a-share-pe-history-api?id=' + seriesId + '&cache=v1');
+  const staleKey = new Request(url.origin + '/a-share-pe-history-api?id=' + seriesId + '&cache=stale-v1');
+  const cached = await caches.default.match(key);
+  if (cached) return json({ ...await cached.json(), cached: true });
+  try {
+    const payload = await queryASharePeHistory(seriesId);
+    ctx.waitUntil(Promise.all([
+      caches.default.put(key, marketCacheResponse(payload, 3600)),
+      caches.default.put(staleKey, marketCacheResponse(payload, 7 * 86400)),
+    ]));
+    return json(payload);
+  } catch (error) {
+    const stale = await caches.default.match(staleKey);
+    if (stale) return json({ ...await stale.json(), stale: true, error: error.message });
+    return json({ error: error.message || '历史估值暂不可用' }, 502);
+  }
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
     if (request.method === "GET" && url.pathname === "/market-api") return marketApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/a-share-pe-api") return aSharePeApi(request, ctx);
+    if (request.method === "GET" && url.pathname === "/a-share-pe-history-api") return aSharePeHistoryApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/reader-api") return readerApi(request, env, ctx);
     if (request.method === "GET" && url.pathname === "/open") return openApi(request, env);
     return json({
@@ -582,7 +605,7 @@ export default {
       browserFallback: Boolean(env.BROWSER),
       googleNewsResolver: true,
       marketApi: true,
-      workerVersion: "2026.10.23.1",
+      workerVersion: "2026.10.23.2",
     });
   },
 };

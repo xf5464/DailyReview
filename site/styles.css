@@ -4423,3 +4423,35 @@ body {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+.a-share-pe-series-button {
+  display: inline;
+  width: auto;
+  min-height: 0;
+  line-height: inherit;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #1f5fd2;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.a-share-pe-history-row { cursor: pointer; }
+.a-share-pe-history-row:hover { background: #f5f8fc; }
+
+#peHistoryDialog {
+  max-width: calc(100vw - 16px);
+  overflow-x: hidden;
+}
+
+#peHistoryDialog .overall-config-card,
+#peHistoryChart {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}

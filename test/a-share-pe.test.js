@@ -74,12 +74,13 @@ test('PE table renders eight values, source links and unchanged cached quote dat
   const app = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
   function element(tag, className, textContent) {
     return { tag, textContent, children: [], append(...nodes) { this.children.push(...nodes); },
-      replaceChildren() { this.children = []; } };
+      replaceChildren() { this.children = []; }, addEventListener(event, listener) { this[event] = listener; } };
   }
   const start = app.indexOf('  function renderASharePeTable(');
   const end = app.indexOf('\n  function ', start + 10);
-  const render = new Function('createElement', 'hasNumericValue',
-    app.slice(start, end) + ';return renderASharePeTable;')(element, value => value != null && Number.isFinite(Number(value)));
+  const opened = [];
+  const render = new Function('createElement', 'hasNumericValue', 'showPeHistory',
+    app.slice(start, end) + ';return renderASharePeTable;')(element, value => value != null && Number.isFinite(Number(value)), id => opened.push(id));
   const container = element('div');
   render(container, { rows: series.map((row, index) => ({ ...row,
     pe: index === 0 ? null : 20.45, date: '2026-10-22', stale: index === 1 })) });
@@ -90,8 +91,60 @@ test('PE table renders eight values, source links and unchanged cached quote dat
   assert.equal(body.children[0].children[1].textContent, '--');
   assert.equal(body.children[1].children[1].textContent, '20.45');
   assert.equal(body.children[1].children[2].textContent, '2026-10-22 · 缓存');
-  assert.equal(body.children[1].children[0].children[0].href, series[1].sourceUrl);
+  assert.equal(body.children[1].children[0].children[0].tag, 'button');
+  assert.equal(typeof body.children[1].click, 'function');
+  body.children[1].click();
+  assert.deepEqual(opened, [series[1].id]);
   assert.equal(body.children[1].children[0].children[0].title, series[1].methodology);
+});
+
+test('history parsing sorts and deduplicates dates while omitting null PE and other series', async () => {
+  const { A_SHARE_PE_SERIES: series, parsePeItems } = await modulePromise;
+  assert.deepEqual(parsePeItems(series[0], { success: true, data: [
+    { indexCode: '930050', tradeDate: '20261023', peg: 15.11 },
+    { indexCode: '930050', tradeDate: '19900101', peg: null },
+    { indexCode: '930050', tradeDate: '20261022', peg: 15 },
+    { indexCode: '000300', tradeDate: '20261021', peg: 12 },
+    { indexCode: '930050', tradeDate: '20261022', peg: 15 },
+  ] }, '2026-10-23'), [{ date: '2026-10-22', value: 15 }, { date: '2026-10-23', value: 15.11 }]);
+});
+
+test('board history reads every reported page and rejects incomplete pages', async () => {
+  const { queryASharePeHistory } = await modulePromise;
+  const requested = [];
+  const read = async url => {
+    const page = Number(new URL(url).searchParams.get('pageNumber'));
+    requested.push(page);
+    return { ok: true, json: async () => ({ success: true, result: { pages: 3, count: 3, data: [
+      { TRADE_MARKET_CODE: '399006', TRADE_DATE: '2026-10-2' + page + ' 00:00:00', PE_TTM_AVG: page + 30 },
+    ] } }) };
+  };
+  const options = { fetchImpl: read, now: new Date('2026-10-23T12:00:00Z') };
+  const history = await queryASharePeHistory('eastmoney-399006', options);
+  assert.deepEqual(requested.sort(), [1, 2, 3]);
+  assert.equal(history.seriesId, 'eastmoney-399006');
+  assert.equal(history.items.length, 3);
+  assert.equal(history.items[0].date, '2026-10-21');
+  assert.equal(history.items.at(-1).value, 33);
+  await assert.rejects(queryASharePeHistory('eastmoney-399006', { ...options, fetchImpl: async () => ({ ok: true,
+    json: async () => ({ success: true, result: { pages: 1, count: 3, data: [] } }) }) }), /分页/);
+  let called = false;
+  await assert.rejects(queryASharePeHistory('https://example.com', { fetchImpl: async () => { called = true; } }), /不支持/);
+  assert.equal(called, false);
+});
+
+test('PE history uses standard time choices, one-year default, line tooltip and long-range year labels', () => {
+  const app = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
+  assert.match(app, /tr.addEventListener\('click', function \(\) \{ showPeHistory\(row.id\); \}\)/);
+  assert.match(app, /populateRangeSelect\(refs.peHistoryRange, 'year1'\)/);
+  assert.match(app, /refs.peHistoryRange.value = 'year1'/);
+  assert.match(app, /renderLineChart\(refs.peHistoryChart, chart\)/);
+  assert.match(app, /isDetailChart = [\s\S]*?svg === refs.peHistoryChart;/);
+  assert.match(app, /peHistoryRequestId \+= 1/);
+  assert.match(app, /payload.seriesId === seriesId/);
+  assert.match(html, /id="peHistoryRangeSelect"/);
+  assert.match(html, /data-close="peHistoryDialog"/);
 });
 
 test('PE compact layout overrides global table widths and keeps quote dates on one line', () => {
@@ -103,4 +156,5 @@ test('PE compact layout overrides global table widths and keeps quote dates on o
   assert.match(rules, /width: 48%/);
   assert.match(rules, /width: 18%/);
   assert.match(rules, /width: 34%/);
+  assert.match(rules, /\.a-share-pe-series-button \{\s*display: inline;\s*width: auto;\s*min-height: 0;/);
 });
