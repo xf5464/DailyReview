@@ -85,8 +85,22 @@ test('PE table renders eight values, source links and unchanged cached quote dat
     pe: index === 0 ? null : 20.45, date: '2026-10-22', stale: index === 1 })) });
   const body = container.children[1].children[1];
   assert.equal(body.children.length, 8);
+  assert.equal(container.children[1].children[0].children[0].children.length, 3);
+  assert.ok(body.children.every(row => row.children.length === 3));
   assert.equal(body.children[0].children[1].textContent, '--');
   assert.equal(body.children[1].children[1].textContent, '20.45');
   assert.equal(body.children[1].children[2].textContent, '2026-10-22 · 缓存');
   assert.equal(body.children[1].children[0].children[0].href, series[1].sourceUrl);
+  assert.equal(body.children[1].children[0].children[0].title, series[1].methodology);
+});
+
+test('PE compact layout overrides global table widths and keeps quote dates on one line', () => {
+  const css = fs.readFileSync(path.join(__dirname, '../site/styles.css'), 'utf8');
+  const rules = css.slice(css.indexOf('.shareholder-table.a-share-pe-table {'));
+  assert.match(rules, /min-width: 0;\s*table-layout: fixed;/);
+  assert.match(rules, /height: auto;\s*padding: 6px 5px;\s*line-height: 1\.3;/);
+  assert.match(rules, /white-space: nowrap;\s*overflow-wrap: normal;/);
+  assert.match(rules, /width: 48%/);
+  assert.match(rules, /width: 18%/);
+  assert.match(rules, /width: 34%/);
 });

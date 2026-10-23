@@ -1295,7 +1295,7 @@
     var table = createElement('table', 'shareholder-table a-share-pe-table');
     var head = createElement('thead');
     var headings = createElement('tr');
-    ['指数 / 板块', 'PE（倍）', '数据日期', '口径'].forEach(function (name) { headings.append(createElement('th', '', name)); });
+    ['指数 / 板块', 'PE（倍）', '数据日期'].forEach(function (name) { headings.append(createElement('th', '', name)); });
     head.append(headings);
     var body = createElement('tbody');
     (chart && chart.rows || []).forEach(function (row) {
@@ -1306,11 +1306,12 @@
       link.href = row.sourceUrl;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
+      link.title = row.methodology;
       name.append(link);
       var pe = createElement('td', '', hasNumericValue(row.pe) ? Number(row.pe).toFixed(2) : '--');
       var date = createElement('td', '', (row.date || '--') + (row.stale ? ' · 缓存' : ''));
       pe.title = row.error || row.methodology;
-      tr.append(name, pe, date, createElement('td', '', row.methodology));
+      tr.append(name, pe, date);
       body.append(tr);
     });
     table.append(head, body);
