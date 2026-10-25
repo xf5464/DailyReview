@@ -5,6 +5,17 @@ const source = fs.readFileSync(require('node:path').join(__dirname, '../site/app
 const extract = name => { const start = source.indexOf('  function ' + name + '('); return source.slice(start, source.indexOf('\n  function ', start + 10)); };
 const rank = new Function('hasNumericValue', extract('shiftMonths') + extract('pePercentile') + ';return pePercentile;')(
   value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value)));
+test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
+  const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);
+  const items = [{date:'2020-01-01',value:1},{date:'2023-01-01',value:10},
+    {date:'2024-01-01',value:20},{date:'2025-01-01',value:30},{date:'2026-01-01',value:100}];
+  assert.equal(tip(items,items[2],3),' · 过去3年百分位 75.0%');
+  assert.equal(tip(items,items[2],5),' · 过去5年百分位 83.3%（历史不足，按实际覆盖）');
+  assert.match(tip(items,items[0],3),/50.0%.*历史不足/);
+  assert.equal(tip([],items[2],3),' · 百分位暂无数据');
+  assert.match(source,/chart\.pointTooltip = function \(item\)/);
+  assert.match(source,/chart\.pointTooltip \? chart\.pointTooltip\(item\)/);
+});
 test('PE percentile uses a trailing calendar-year window and midrank ties', () => {
   const items = [{date:'2020-10-23',value:1},{date:'2023-10-23',value:10},{date:'2024-10-23',value:20},
     {date:'2025-10-23',value:20},{date:'2026-10-23',value:30},{date:'2026-10-24',value:100}];

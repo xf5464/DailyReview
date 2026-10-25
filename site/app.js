@@ -1316,6 +1316,12 @@
       start: samples[0].date, end: samples.at(-1).date, short: items[0].date > start };
   }
 
+  function pePercentileTip(items, item, years) {
+    var percentile = pePercentile(items, item.value, item.date, years);
+    return percentile ? ' · 过去' + years + '年百分位 ' + percentile.value.toFixed(1) + '%' +
+      (percentile.short ? '（历史不足，按实际覆盖）' : '') : ' · 百分位暂无数据';
+  }
+
   function loadPePercentiles() {
     var chart = chartById('aSharePe');
     (chart && chart.rows || []).forEach(function (row) {
@@ -1392,6 +1398,11 @@
     var latest = peHistoryData.items.at(-1);
     var row = (chartById('aSharePe') && chartById('aSharePe').rows || []).find(function (entry) { return entry.id === peHistoryData.seriesId; });
     var years = Number(refs.pePercentileYears.value) || 3;
+    var pointTips = new Map();
+    chart.pointTooltip = function (item) {
+      if (!pointTips.has(item.date)) pointTips.set(item.date, pePercentileTip(peHistoryData.items, item, years));
+      return pointTips.get(item.date);
+    };
     var percentile = pePercentile(peHistoryData.items, row && hasNumericValue(row.pe) ? row.pe : latest.value,
       row && row.date || latest.date, years);
     if (percentile) refs.pePercentileValue.textContent = percentile.value.toFixed(1) + '% · ' + percentile.count +
@@ -2107,6 +2118,7 @@
           (chart.rightAxisUnit ? ' ' + chart.rightAxisUnit : '')
         : hoveredPriceItem ? ' · ' + formatDate(hoveredPriceItem.date, '周度') + ' 股价 ¥' + Number(hoveredPriceItem.value).toFixed(2) : '';
       tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) + rightAxisTip +
+        (chart.pointTooltip ? chart.pointTooltip(item) : '') +
         (item.provisional ? ' · 期货涨跌幅推算临时值' : '');
       tip.style.left = Math.min(window.innerWidth - 12, event.clientX + 12) + 'px';
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
