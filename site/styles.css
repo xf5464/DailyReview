@@ -4442,6 +4442,7 @@ body {
 }
 
 .a-share-pe-history-row { cursor: pointer; }
+.pe-percentile-label { display: block; font-size: 10px; font-weight: 400; color: #63728b; line-height: 1.2; }
 .a-share-pe-history-row:hover { background: #f5f8fc; }
 
 #peHistoryDialog {

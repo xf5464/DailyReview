@@ -13,6 +13,8 @@
   var peHistoryRequestId = 0;
   var peHistoryLoading = false;
   var peHistoryError = '';
+  var pePercentileHistories = new Map();
+  var pePercentileLoads = new Map();
 
   var CHART_IDS = [
     'aSharePe',
@@ -466,6 +468,8 @@
     peHistoryClose: document.querySelector('#peHistoryCloseButton'),
     peHistoryTitle: document.querySelector('#peHistoryTitle'),
     peHistoryRange: document.querySelector('#peHistoryRangeSelect'),
+    pePercentileYears: document.querySelector('#pePercentileYearsSelect'),
+    pePercentileValue: document.querySelector('#pePercentileValue'),
     peHistoryMessage: document.querySelector('#peHistoryMessage'),
     peHistorySource: document.querySelector('#peHistorySourceLink'),
     peHistoryChart: document.querySelector('#peHistoryChart'),
@@ -1255,7 +1259,7 @@
 
   function loadCharts(ids) {
     return Promise.all(Array.from(new Set(ids || [])).map(loadChartById)).then(function (charts) {
-      if ((ids || []).includes('aSharePe')) refreshASharePe(false);
+      if ((ids || []).includes('aSharePe')) { refreshASharePe(false); loadPePercentiles(); }
       return charts;
     });
   }
@@ -1295,14 +1299,49 @@
       }
     }).finally(function () {
       aSharePeRefreshPromise = null;
+      loadPePercentiles();
       renderAll();
     });
     return aSharePeRefreshPromise;
   }
 
+  function pePercentile(items, value, endDate, years) {
+    if (!hasNumericValue(value) || !endDate || !items || !items.length) return null;
+    var start = shiftMonths(new Date(endDate + 'T00:00:00Z'), -12 * Number(years)).toISOString().slice(0, 10);
+    var samples = items.filter(function (item) { return item.date >= start && item.date <= endDate && hasNumericValue(item.value) && Number(item.value) > 0; });
+    if (!samples.length) return null;
+    var below = samples.filter(function (item) { return Number(item.value) < Number(value); }).length;
+    var equal = samples.filter(function (item) { return Number(item.value) === Number(value); }).length;
+    return { value: (below + equal / 2) / samples.length * 100, count: samples.length,
+      start: samples[0].date, end: samples.at(-1).date, short: items[0].date > start };
+  }
+
+  function loadPePercentiles() {
+    var chart = chartById('aSharePe');
+    (chart && chart.rows || []).forEach(function (row) {
+      if (pePercentileLoads.has(row.id)) return;
+      var key = 'daily-review.a-share-pe-history.v1.' + row.id;
+      try {
+        var cached = JSON.parse(localStorage.getItem(key) || 'null');
+        if (validPeHistory(cached, row.id)) pePercentileHistories.set(row.id, cached);
+      } catch (error) { /* Cache optional. */ }
+      var history = pePercentileHistories.get(row.id);
+      if (history && Date.now() - Date.parse(history.generatedAt) < 3600000) return;
+      pePercentileLoads.set(row.id, fetch('https://dailyreview-reader.xf5464.workers.dev/a-share-pe-history-api?id=' + encodeURIComponent(row.id), {
+        signal: AbortSignal.timeout(40000), cache: 'no-store'
+      }).then(function (response) { if (!response.ok) throw new Error('历史加载失败'); return response.json(); })
+        .then(function (payload) {
+          if (!validPeHistory(payload, row.id)) throw new Error('历史格式无效');
+          pePercentileHistories.set(row.id, payload);
+          try { localStorage.setItem(key, JSON.stringify(payload)); } catch (error) { /* Storage optional. */ }
+        }).catch(function () { /* Keep cached history; unavailable percentiles stay blank. */ })
+        .finally(function () { pePercentileLoads.delete(row.id); renderAll(); }));
+    });
+  }
+
   function renderASharePeTable(container, chart) {
     container.replaceChildren();
-    var note = createElement('p', 'overall-chart-summary', chart && chart.notice || '正在加载最新交易日估值…');
+    var note = createElement('p', 'overall-chart-summary', (chart && chart.notice || '正在加载最新交易日估值…') + ' · 百分位默认近三年，* 表示历史不足三年。');
     container.append(note);
     var table = createElement('table', 'shareholder-table a-share-pe-table');
     var head = createElement('thead');
@@ -1319,6 +1358,13 @@
       link.title = row.methodology;
       name.append(link);
       var pe = createElement('td', '', hasNumericValue(row.pe) ? Number(row.pe).toFixed(2) : '--');
+      var history = pePercentileHistories.get(row.id);
+      var percentile = history && pePercentile(history.items, row.pe, row.date, 3);
+      var rank = createElement('small', 'pe-percentile-label', percentile ? '三年 ' + percentile.value.toFixed(1) + '%' + (percentile.short ? '*' : '') : '三年 --');
+      rank.title = percentile ? '中秩百分位：(低于当前PE的交易日 + 相同PE交易日的一半) / 有效交易日；' +
+        percentile.start + ' 至 ' + percentile.end + '，' + percentile.count + ' 个样本' + (percentile.short ? '；历史不足三年' : '') +
+        (history.stale ? '；缓存历史' : '') : '历史数据尚未获取，无法计算百分位';
+      pe.append(rank);
       var date = createElement('td', '', (row.date || '--') + (row.stale ? ' · 缓存' : ''));
       pe.title = row.error || row.methodology;
       tr.append(name, pe, date);
@@ -1336,12 +1382,21 @@
   }
 
   function renderPeHistory() {
+    refs.pePercentileValue.textContent = '--';
     if (!peHistoryData || !peHistoryData.items.length) {
       refs.peHistoryMessage.textContent = peHistoryLoading ? '正在读取历史 PE…' : peHistoryError || '暂无历史 PE 数据';
       renderEmpty(refs.peHistoryChart, peHistoryLoading ? '加载中…' : '暂无可绘制的数据');
       return;
     }
     var chart = filteredChart(peHistoryData, refs.peHistoryRange.value);
+    var latest = peHistoryData.items.at(-1);
+    var row = (chartById('aSharePe') && chartById('aSharePe').rows || []).find(function (entry) { return entry.id === peHistoryData.seriesId; });
+    var years = Number(refs.pePercentileYears.value) || 3;
+    var percentile = pePercentile(peHistoryData.items, row && hasNumericValue(row.pe) ? row.pe : latest.value,
+      row && row.date || latest.date, years);
+    if (percentile) refs.pePercentileValue.textContent = percentile.value.toFixed(1) + '% · ' + percentile.count +
+      ' 个交易日 · ' + percentile.start + ' 至 ' + percentile.end + (percentile.short ? '（历史不足' + years + '年，按实际覆盖）' : '') +
+      (peHistoryData.stale ? ' · 缓存历史' : '');
     if (!chart.items.length) {
       refs.peHistoryMessage.textContent = '当前时间跨度暂无数据，请选择更长时间跨度。';
       renderEmpty(refs.peHistoryChart, '所选时间段暂无数据');
@@ -1371,6 +1426,7 @@
     refs.peHistoryTitle.textContent = row.name + '历史 PE';
     refs.peHistorySource.href = row.sourceUrl;
     refs.peHistoryRange.value = 'year1';
+    refs.pePercentileYears.value = '3';
     if (!refs.peHistoryDialog.open) refs.peHistoryDialog.showModal();
     refs.peHistoryClose.focus({ preventScroll: true });
     renderPeHistory();
@@ -1386,6 +1442,7 @@
       if (!validPeHistory(payload, seriesId)) throw new Error('历史估值数据格式无效');
       if (requestId !== peHistoryRequestId) return;
       peHistoryData = payload;
+      pePercentileHistories.set(seriesId, payload);
       try { localStorage.setItem(cacheKey, JSON.stringify(payload)); } catch (error) { /* Storage may be full. */ }
     } catch (error) {
       if (requestId !== peHistoryRequestId) return;
@@ -4543,6 +4600,7 @@
     });
     refs.industryHistoryRange.addEventListener('change', renderIndustryHistory);
     refs.peHistoryRange.addEventListener('change', renderPeHistory);
+    refs.pePercentileYears.addEventListener('change', renderPeHistory);
     document.querySelector('#overallAddGroupButton').addEventListener('click', addGroup);
     refs.newGroupName.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') addGroup();

@@ -79,8 +79,8 @@ test('PE table renders eight values, source links and unchanged cached quote dat
   const start = app.indexOf('  function renderASharePeTable(');
   const end = app.indexOf('\n  function ', start + 10);
   const opened = [];
-  const render = new Function('createElement', 'hasNumericValue', 'showPeHistory',
-    app.slice(start, end) + ';return renderASharePeTable;')(element, value => value != null && Number.isFinite(Number(value)), id => opened.push(id));
+  const render = new Function('createElement', 'hasNumericValue', 'showPeHistory', 'pePercentileHistories', 'pePercentile',
+    app.slice(start, end) + ';return renderASharePeTable;')(element, value => value != null && Number.isFinite(Number(value)), id => opened.push(id), new Map(), () => null);
   const container = element('div');
   render(container, { rows: series.map((row, index) => ({ ...row,
     pe: index === 0 ? null : 20.45, date: '2026-10-22', stale: index === 1 })) });
