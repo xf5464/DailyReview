@@ -6,11 +6,11 @@ const extract = name => { const start = source.indexOf('  function ' + name + '(
 const rank = new Function('hasNumericValue', extract('shiftMonths') + extract('pePercentile') + ';return pePercentile;')(
   value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value)));
 test('overview table percentiles include zero and negative macro values, and skip aggregate counts', () => {
-  const label = new Function('pePercentile', extract('overviewPercentileLabel') + ';return overviewPercentileLabel;')(rank);
+  const label = new Function('pePercentile', extract('overviewPercentilePair') + extract('overviewPercentileLabel') + ';return overviewPercentileLabel;')(rank);
   const chart = {items:[{date:'2020-01-01',value:99},{date:'2024-01-01',value:-2},
     {date:'2025-01-01',value:1},{date:'2026-01-01',value:0}]};
-  assert.equal(label(chart),'50.0%');
-  assert.equal(label({items:chart.items.slice(1)}),'50.0%*');
+  assert.equal(label(chart),'50.0% | 25.0%');
+  assert.equal(label({items:chart.items.slice(1)}),'50.0%* | 25.0%');
   assert.equal(label({chartType:'valuationTable',items:[{date:'2026-01-01',value:8}]}),'');
   assert.equal(label({chartType:'stockTable',items:[{date:'2026-01-01',value:20}]}),'');
   assert.equal(label({items:[]}),'');
