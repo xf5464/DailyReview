@@ -1313,10 +1313,10 @@
     return aSharePeRefreshPromise;
   }
 
-  function pePercentile(items, value, endDate, years) {
+  function pePercentile(items, value, endDate, years, includeNonPositive) {
     if (!hasNumericValue(value) || !endDate || !items || !items.length) return null;
     var start = shiftMonths(new Date(endDate + 'T00:00:00Z'), -12 * Number(years)).toISOString().slice(0, 10);
-    var samples = items.filter(function (item) { return item.date >= start && item.date <= endDate && hasNumericValue(item.value) && Number(item.value) > 0; });
+    var samples = items.filter(function (item) { return item.date >= start && item.date <= endDate && hasNumericValue(item.value) && (includeNonPositive || Number(item.value) > 0); });
     if (!samples.length) return null;
     var below = samples.filter(function (item) { return Number(item.value) < Number(value); }).length;
     var equal = samples.filter(function (item) { return Number(item.value) === Number(value); }).length;
@@ -2348,12 +2348,22 @@
     ids.forEach(function (id) { refs.grid.append(createCard(id)); });
   }
 
+  function overviewPercentileLabel(chart) {
+    if (chart && chart.chartType === 'valuationTable') return '百分位见明细';
+    if (chart && ['stockTable', 'economicCalendar'].includes(chart.chartType)) return '百分位不适用';
+    var items = chart && chart.items || [];
+    var latest = items.at(-1);
+    var rank = latest && pePercentile(items, latest.value, latest.date, 3, true);
+    return rank && rank.count > 1 ? '近三年 ' + rank.value.toFixed(1) + '%' +
+      (rank.short ? '（历史不足三年）' : '') : '近三年 --';
+  }
+
   function renderTable() {
     refs.tableBody.replaceChildren();
     activeChartIds().forEach(function (id) {
       var sourceChart = chartById(id);
       var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
-      var chart = economicCalendarChart ? sourceChart : filteredChart(sourceChart, refs.range.value);
+      var chart = sourceChart;
       var calendarItems = economicCalendarChart ? selectedEconomicCalendarItems(chart) : [];
       var latest = economicCalendarChart ? calendarItems[0]
         : chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
@@ -2361,9 +2371,13 @@
       var name = createElement('th', '', TITLES[id]);
       name.scope = 'row';
       row.append(name);
-      row.append(createElement('td', chart && chart.error && !latest ? 'overall-table-error' : '', economicCalendarChart
+      var valueCell = createElement('td', chart && chart.error && !latest ? 'overall-table-error' : '', economicCalendarChart
         ? calendarItems.length + '项'
-        : latest ? formatValue(chart, latest.value) : '--'));
+        : latest ? formatValue(chart, latest.value) : '--');
+      var percentileLabel = createElement('small', 'overall-table-percentile', overviewPercentileLabel(sourceChart));
+      percentileLabel.title = '过去三年百分位：以最新数据日期为截止日，使用完整历史计算中秩百分位，不受顶部时间选择影响；非交易日不补值。';
+      valueCell.append(document.createTextNode(' '), percentileLabel);
+      row.append(valueCell);
       row.append(createElement('td', '', latest ? formatDate(latest.date, economicCalendarChart ? '日度' : chart.frequency) : '--'));
       row.append(createElement('td', '', chart && chart.frequency || '--'));
       var actionCell = document.createElement('td');

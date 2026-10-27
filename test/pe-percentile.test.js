@@ -5,6 +5,17 @@ const source = fs.readFileSync(require('node:path').join(__dirname, '../site/app
 const extract = name => { const start = source.indexOf('  function ' + name + '('); return source.slice(start, source.indexOf('\n  function ', start + 10)); };
 const rank = new Function('hasNumericValue', extract('shiftMonths') + extract('pePercentile') + ';return pePercentile;')(
   value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value)));
+test('overview table percentiles include zero and negative macro values, and skip aggregate counts', () => {
+  const label = new Function('pePercentile', extract('overviewPercentileLabel') + ';return overviewPercentileLabel;')(rank);
+  const chart = {items:[{date:'2020-01-01',value:99},{date:'2024-01-01',value:-2},
+    {date:'2025-01-01',value:1},{date:'2026-01-01',value:0}]};
+  assert.equal(label(chart),'近三年 50.0%');
+  assert.equal(label({items:chart.items.slice(1)}),'近三年 50.0%（历史不足三年）');
+  assert.equal(label({chartType:'valuationTable',items:[{date:'2026-01-01',value:8}]}),'百分位见明细');
+  assert.equal(label({chartType:'stockTable',items:[{date:'2026-01-01',value:20}]}),'百分位不适用');
+  assert.equal(label({items:[]}),'近三年 --');
+  assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'近三年 --');
+});
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);
   const items = [{date:'2020-01-01',value:1},{date:'2023-01-01',value:10},

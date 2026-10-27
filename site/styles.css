@@ -4456,3 +4456,9 @@ body {
   width: 100%;
   max-width: 100%;
 }
+.overall-table-percentile {
+  display: inline-block;
+  margin-left: 0.35em;
+  font-size: 0.82em;
+  color: #64748b;
+}
