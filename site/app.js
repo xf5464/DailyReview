@@ -17,7 +17,7 @@
   var pePercentileLoads = new Map();
 
   var CHART_IDS = [
-    'aSharePe',
+    'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
@@ -26,6 +26,8 @@
   ];
 
   var TITLES = {
+    shTurnoverRate: '沪市A股换手率',
+    szTurnoverRate: '深市A股换手率',
     aSharePe: 'A股 PE',
     usEconomicCalendar: '未来12个月美国经济日历',
     treasuryYield: '美国 10 年期国债收益率',
@@ -68,6 +70,8 @@
   };
 
   var CATEGORIES = {
+    shTurnoverRate: '市场交易热度',
+    szTurnoverRate: '市场交易热度',
     aSharePe: 'A股估值',
     usEconomicCalendar: '经济日历',
     treasuryYield: '利率',
@@ -110,6 +114,8 @@
   };
 
   var DESCRIPTIONS = {
+    shTurnoverRate: '沪市主板A股与科创板成交额合计除以总市值合计，乘100%；不含B股，不是自由流通换手率。默认近三年中秩百分位，详情可改年数。',
+    szTurnoverRate: '深市主板A股与创业板A股成交额合计除以总市值合计，乘100%；不含B股，不是自由流通换手率。默认近三年中秩百分位，详情可改年数。',
     aSharePe: 'A50 按中证A50（非富时A50），全A按中证全指；创业板、科创板为全板平均PE，科创50为指数PE。打开时联网获取来源最新交易日估值，并非逐秒盘中PE；各项分别标明口径、数据日期与缓存状态。',
     usEconomicCalendar: '按美国官方已公布日程汇总未来 12 个月的 CPI、PCE、非农就业和美联储议息会议。CPI 与非农取自美国劳工统计局，PCE 取自美国经济分析局，美联储会议取自 FOMC 官方日历；尚未正式公布的月份不推测日期。',
     treasuryYield: '美国 10 年期国债的市场收益率，是长期无风险利率和资产定价的重要基准。上升通常意味着融资成本与估值折现率提高。',
@@ -250,7 +256,7 @@
     forecastConditions: clone(DEFAULT_FORECAST_CONDITIONS),
     economicCalendarTypes: DEFAULT_ECONOMIC_CALENDAR_TYPES.slice(),
     chartOrder: [
-      'aSharePe',
+      'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
       'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
       'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
@@ -260,7 +266,7 @@
     ],
     groupChartOrder: {
       default: [
-        'aSharePe',
+        'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
         'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
         'federalDebt', 'cpi', 'pce', 'bitcoin', 'brentOil', 'wtiOil', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
@@ -275,13 +281,13 @@
         'unemploymentRate'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
-      group_a_share: ['aSharePe', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
+      group_a_share: ['aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
       group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
       'usEconomicCalendar',
-      'aSharePe',
+      'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
@@ -313,7 +319,9 @@
       wtiOil: ['default', 'group_mt49f5yl_pctlb6'],
       copper: ['default', 'group_mt49f5yl_pctlb6', 'group_primary'],
       naturalGas: ['default', 'group_mt49f5yl_pctlb6'],
-      aSharePe: ['default', 'group_a_share'],
+      shTurnoverRate: ['group_a_share'],
+    szTurnoverRate: ['group_a_share'],
+    aSharePe: ['default', 'group_a_share'],
       aShareTurnover: ['default', 'group_a_share'],
       aShareMarginBalance: ['default', 'group_a_share'],
       aShareActiveMarketValueThs: ['default', 'group_a_share'],
@@ -1435,6 +1443,7 @@
       if (validPeHistory(cached, seriesId)) peHistoryData = Object.assign({}, cached, { stale: true });
     } catch (error) { /* History cache is optional. */ }
     refs.peHistoryTitle.textContent = row.name + '历史 PE';
+    refs.peHistoryChart.setAttribute('aria-label', row.name + '历史PE曲线');
     refs.peHistorySource.href = row.sourceUrl;
     refs.peHistoryRange.value = 'year1';
     refs.pePercentileYears.value = '3';
@@ -2247,6 +2256,11 @@
       ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
       : wideEtfTableChart && latest ? formatDate(latest.date, '季度') + ' · 宽基合计 ' + formatMarketCap(latest.value)
       : rangeSummary(chart));
+    if ((chartId === 'shTurnoverRate' || chartId === 'szTurnoverRate') && latest) {
+      var fullHistory = chartById(chartId);
+      var rank = pePercentile(fullHistory.items, latest.value, latest.date, 3);
+      summary.textContent = (rank ? '近三年百分位 ' + rank.value.toFixed(1) + '%' + (rank.short ? '（历史不足三年）' : '') : '百分位暂无数据') + ' · 总市值口径' + (fullHistory.stale ? ' · 缓存' : '');
+    }
     var svg = createSvg('svg', {
       class: 'overall-chart', role: 'img', 'aria-label': TITLES[chartId] + '曲线'
     });
@@ -2504,6 +2518,22 @@
   }
 
   function showDetail(id) {
+    if (id === 'shTurnoverRate' || id === 'szTurnoverRate') {
+      if (peHistoryController) peHistoryController.abort();
+      ++peHistoryRequestId;
+      peHistoryData = Object.assign({items:[]}, chartById(id), {seriesId:id});
+      peHistoryLoading = false;
+      peHistoryError = '';
+      refs.peHistoryTitle.textContent = TITLES[id] + '历史';
+      refs.peHistoryChart.setAttribute('aria-label', TITLES[id] + '历史曲线');
+      refs.peHistorySource.href = peHistoryData.sourceUrl;
+      refs.peHistoryRange.value = 'year1';
+      refs.pePercentileYears.value = '3';
+      renderPeHistory();
+      refs.peHistoryDialog.showModal();
+      refs.peHistoryClose.focus({preventScroll:true});
+      return;
+    }
     activeDetailId = id;
     activeShareholderTableQuarterDate = null;
     activeWideEtfQuarterDate = null;

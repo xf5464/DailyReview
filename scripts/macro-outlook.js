@@ -529,6 +529,8 @@ const CHART_METADATA = {
     supplementSourceName: '东方财富备用行情',
     supplementSourceUrl: 'https://quote.eastmoney.com/center/gridlist.html#fund_etf',
   },
+  shTurnoverRate: {id:'shTurnoverRate',title:'沪市A股换手率',unit:'%',decimals:2,frequency:'日度',sourceName:'上海证券交易所',sourceUrl:'https://www.sse.com.cn/market/stockdata/overview/day/'},
+  szTurnoverRate: {id:'szTurnoverRate',title:'深市A股换手率',unit:'%',decimals:2,frequency:'日度',sourceName:'深圳证券交易所',sourceUrl:'https://www.szse.cn/market/overview/index.html'},
   aSharePe: {
     id: 'aSharePe', title: 'A股 PE', unit: '项', decimals: 0,
     frequency: '最新交易日', chartType: 'valuationTable',
@@ -2035,6 +2037,8 @@ async function queryMacroOutlook(options = {}) {
   };
 
   const loaders = {
+    shTurnoverRate: () => loadChart(CHART_METADATA.shTurnoverRate, () => require('./exchange-turnover').queryExchangeTurnover('sh',{fetchImpl,now})),
+    szTurnoverRate: () => loadChart(CHART_METADATA.szTurnoverRate, () => require('./exchange-turnover').queryExchangeTurnover('sz',{fetchImpl,now})),
     aSharePe: () => loadChart(CHART_METADATA.aSharePe, async () => {
       const { queryASharePe } = await import('../cloudflare/a-share-pe.mjs');
       return queryASharePe({ fetchImpl, now });
