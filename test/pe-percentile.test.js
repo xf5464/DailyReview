@@ -9,12 +9,12 @@ test('overview table percentiles include zero and negative macro values, and ski
   const label = new Function('pePercentile', extract('overviewPercentileLabel') + ';return overviewPercentileLabel;')(rank);
   const chart = {items:[{date:'2020-01-01',value:99},{date:'2024-01-01',value:-2},
     {date:'2025-01-01',value:1},{date:'2026-01-01',value:0}]};
-  assert.equal(label(chart),'近三年 50.0%');
-  assert.equal(label({items:chart.items.slice(1)}),'近三年 50.0%（历史不足三年）');
-  assert.equal(label({chartType:'valuationTable',items:[{date:'2026-01-01',value:8}]}),'百分位见明细');
-  assert.equal(label({chartType:'stockTable',items:[{date:'2026-01-01',value:20}]}),'百分位不适用');
-  assert.equal(label({items:[]}),'近三年 --');
-  assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'近三年 --');
+  assert.equal(label(chart),'50.0%');
+  assert.equal(label({items:chart.items.slice(1)}),'50.0%*');
+  assert.equal(label({chartType:'valuationTable',items:[{date:'2026-01-01',value:8}]}),'');
+  assert.equal(label({chartType:'stockTable',items:[{date:'2026-01-01',value:20}]}),'');
+  assert.equal(label({items:[]}),'');
+  assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'');
 });
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);

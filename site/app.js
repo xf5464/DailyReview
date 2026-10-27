@@ -2349,13 +2349,12 @@
   }
 
   function overviewPercentileLabel(chart) {
-    if (chart && chart.chartType === 'valuationTable') return '百分位见明细';
-    if (chart && ['stockTable', 'economicCalendar'].includes(chart.chartType)) return '百分位不适用';
+    if (chart && ['valuationTable', 'stockTable', 'economicCalendar'].includes(chart.chartType)) return '';
     var items = chart && chart.items || [];
     var latest = items.at(-1);
     var rank = latest && pePercentile(items, latest.value, latest.date, 3, true);
-    return rank && rank.count > 1 ? '近三年 ' + rank.value.toFixed(1) + '%' +
-      (rank.short ? '（历史不足三年）' : '') : '近三年 --';
+    return rank && rank.count > 1 ? rank.value.toFixed(1) + '%' +
+      (rank.short ? '*' : '') : '';
   }
 
   function renderTable() {
@@ -2375,8 +2374,24 @@
         ? calendarItems.length + '项'
         : latest ? formatValue(chart, latest.value) : '--');
       var percentileLabel = createElement('small', 'overall-table-percentile', overviewPercentileLabel(sourceChart));
-      percentileLabel.title = '过去三年百分位：以最新数据日期为截止日，使用完整历史计算中秩百分位，不受顶部时间选择影响；非交易日不补值。';
+      percentileLabel.title = '过去三年百分位：以最新数据日期为截止日，使用完整历史计算中秩百分位，不受顶部时间选择影响；非交易日不补值；* 表示历史不足三年，按实际覆盖计算。';
       valueCell.append(document.createTextNode(' '), percentileLabel);
+      if (id === 'aSharePe') {
+        valueCell.replaceChildren();
+        ['csi-000985', 'csi-000688'].forEach(function (seriesId) {
+          var entry = (sourceChart && sourceChart.rows || []).find(function (item) { return item.id === seriesId; });
+          var line = createElement('div', 'overall-table-pe-entry',
+            (seriesId === 'csi-000985' ? '全A ' : '科创50 ') + (entry && hasNumericValue(entry.pe) ? Number(entry.pe).toFixed(2) + '倍' : '--'));
+          var history = pePercentileHistories.get(seriesId);
+          var rank = entry && history && pePercentile(history.items, entry.pe, entry.date, 3);
+          if (rank) {
+            var label = createElement('small', 'overall-table-percentile', rank.value.toFixed(1) + '%' + (rank.short ? '*' : ''));
+            label.title = '过去三年百分位' + (rank.short ? '；历史不足三年，按实际覆盖计算' : '');
+            line.append(document.createTextNode(' '), label);
+          }
+          valueCell.append(line);
+        });
+      }
       row.append(valueCell);
       row.append(createElement('td', '', latest ? formatDate(latest.date, economicCalendarChart ? '日度' : chart.frequency) : '--'));
       row.append(createElement('td', '', chart && chart.frequency || '--'));
