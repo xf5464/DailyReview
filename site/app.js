@@ -286,7 +286,7 @@
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
       group_a_share: ['aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
-      group_primary: ['consumerConfidence', 'usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_primary: ['usEconomicCalendar', 'treasuryYield30', 'consumerConfidence', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
