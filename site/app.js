@@ -22,7 +22,7 @@
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-    'initialClaims', 'unemploymentRate', 'financialConditions'
+    'initialClaims', 'unemploymentRate', 'consumerConfidence', 'financialConditions'
   ];
 
   var TITLES = {
@@ -66,6 +66,7 @@
     ismBacklogOrders: '美国 ISM 订单积压指数',
     initialClaims: '美国初次申请失业金人数',
     unemploymentRate: '美国失业率',
+    consumerConfidence: '美国消费者信心指数（密歇根大学）',
     financialConditions: '美国金融状况指数'
   };
 
@@ -110,6 +111,7 @@
     ismBacklogOrders: '制造业订单',
     initialClaims: '就业',
     unemploymentRate: '就业',
+    consumerConfidence: '消费者信心',
     financialConditions: '金融压力'
   };
 
@@ -154,6 +156,7 @@
     ismBacklogOrders: '美国 ISM 制造业订单积压扩散指数，衡量尚未完成订单相对上月的变化。高于 50 表示积压增加，低于 50 表示积压减少。',
     initialClaims: '美国每周首次申请失业保险的人数，是观察裁员和劳动力市场转弱的高频领先指标。',
     unemploymentRate: '美国劳工统计局按月公布的季节调整失业率，表示失业人口占劳动力人口的比例。上升通常意味着劳动力市场走弱。',
+    consumerConfidence: '密歇根大学消费者调查指数，FRED 序列 UMCSENT，月度发布；与谘商会 CCI 不同。',
     financialConditions: '芝加哥联储金融状况指数（NFCI）。零值附近代表历史平均，正值偏紧，负值偏松。'
   };
 
@@ -195,6 +198,7 @@
     ismBacklogOrders: '#c2410c',
     initialClaims: '#7e57a6',
     unemploymentRate: '#b45309',
+    consumerConfidence: '#0e7490',
     financialConditions: '#246b5e'
   };
 
@@ -262,7 +266,7 @@
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
       'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
       'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-      'aShareSentimentThs', 'unemploymentRate', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
+      'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
     ],
     groupChartOrder: {
       default: [
@@ -272,17 +276,17 @@
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
         'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
         'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-        'aShareSentimentThs', 'unemploymentRate', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
+        'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
       ],
       group_mt432xl1_kz1mx7: [
         'treasuryYield30', 'vix', 'ndx', 'sp500', 'nasdaq100Pe', 'federalDebt', 'cpi', 'pce',
         'treasurySpread', 'highYieldSpread', 'initialClaims', 'broadDollar', 'financialConditions', 'treasuryYield',
         'federalFundsRate', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-        'unemploymentRate'
+        'unemploymentRate', 'consumerConfidence'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
       group_a_share: ['aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
-      group_primary: ['usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
+      group_primary: ['consumerConfidence', 'usEconomicCalendar', 'treasuryYield30', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
@@ -292,7 +296,7 @@
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
-      'initialClaims', 'unemploymentRate', 'financialConditions'
+      'initialClaims', 'unemploymentRate', 'consumerConfidence', 'financialConditions'
     ],
     groups: [
       { id: 'group_primary', name: '主要' },
@@ -343,6 +347,7 @@
       ismBacklogOrders: ['default', 'group_mt432xl1_kz1mx7', 'group_us_manufacturing'],
       initialClaims: ['default', 'group_mt432xl1_kz1mx7'],
       unemploymentRate: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
+      consumerConfidence: ['group_primary', 'group_mt432xl1_kz1mx7'],
       financialConditions: ['default', 'group_mt432xl1_kz1mx7']
     },
     selectedGroupId: 'group_mt432xl1_kz1mx7'
