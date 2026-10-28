@@ -16,16 +16,29 @@ test('overview table percentiles include zero and negative macro values, and ski
   assert.equal(label({items:[]}),'');
   assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'');
 });
-test('percentile backgrounds require both periods to meet the same threshold', () => {
+test('percentile backgrounds prioritize dual extremes, otherwise use the three-year value', () => {
   const band = new Function(extract('percentileBand') + ';return percentileBand;')();
-  assert.equal(band('9.9%* | 10.0%'),'percentile-low');
-  assert.equal(band('0.0% | 0.2%'),'percentile-low');
-  assert.equal(band('90.0% | 100.0%'),'percentile-high');
-  assert.equal(band('90.1% | 99.0%'),'percentile-high');
-  for (const label of ['9.9% | 50.0%','50.0% | 9.9%','95.0% | 50.0%','50.0% | 95.0%',
-    '1.0% | 99.0%','10.0% | 10.1%','89.9% | 90.0%','-- | 1.0%','99.0% | --','9.9%','']) {
+  assert.equal(band('9.9%* | 10.0%'),'percentile-both-low');
+  assert.equal(band('90.0% | 100.0%'),'percentile-both-high');
+  assert.equal(band('50.0% | 9.9%'),'percentile-low');
+  assert.equal(band('50.0% | 95.0%'),'percentile-high');
+  assert.equal(band('1.0% | 99.0%'),'percentile-high');
+  assert.equal(band('99.0% | 1.0%'),'percentile-low');
+  assert.equal(band('-- | 1.0%'),'percentile-low');
+  for (const label of ['9.9% | 50.0%','95.0% | 50.0%','10.0% | 10.1%','99.0% | --','9.9%','']) {
     assert.equal(band(label),'',label);
   }
+});
+test('three-year extremes deepen monotonically while dual extremes retain their special colors', () => {
+  const background = new Function(extract('percentileBand') + extract('percentileBackground') + ';return percentileBackground;')();
+  assert.equal(background('50% | 90%'),'rgb(254, 226, 226)');
+  assert.equal(background('50% | 95%'),'rgb(247, 147, 147)');
+  assert.equal(background('50% | 100%'),'rgb(239, 68, 68)');
+  assert.equal(background('50% | 10%'),'rgb(220, 252, 231)');
+  assert.equal(background('50% | 5%'),'rgb(127, 225, 163)');
+  assert.equal(background('50% | 0%'),'rgb(34, 197, 94)');
+  assert.equal(background('99% | 99%'),'');
+  assert.equal(background('1% | 1%'),'');
 });
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);

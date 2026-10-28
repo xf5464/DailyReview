@@ -2358,10 +2358,25 @@
 
   function percentileBand(label) {
     var values = String(label).split(' | ').map(function (part) { return parseFloat(part); });
-    if (values.length !== 2 || !values.every(Number.isFinite)) return '';
-    if (values.every(function (value) { return value <= 10; })) return 'percentile-low';
-    if (values.every(function (value) { return value >= 90; })) return 'percentile-high';
+    if (values.length !== 2 || !Number.isFinite(values[1])) return '';
+    if (values.every(function (value) { return value <= 10; })) return 'percentile-both-low';
+    if (values.every(function (value) { return value >= 90; })) return 'percentile-both-high';
+    if (values[1] <= 10) return 'percentile-low';
+    if (values[1] >= 90) return 'percentile-high';
     return '';
+  }
+
+  function percentileBackground(text) {
+    var band = percentileBand(text);
+    var value = parseFloat(String(text).split(' | ')[1]);
+    var low = band === 'percentile-low';
+    if (!low && band !== 'percentile-high') return '';
+    var strength = Math.max(0, Math.min(1, low ? (10 - value) / 10 : (value - 90) / 10));
+    var light = low ? [220, 252, 231] : [254, 226, 226];
+    var dark = low ? [34, 197, 94] : [239, 68, 68];
+    return 'rgb(' + light.map(function (channel, index) {
+      return Math.round(channel + (dark[index] - channel) * strength);
+    }).join(', ') + ')';
   }
 
   function createPercentileLabel(text) {
@@ -2369,7 +2384,9 @@
     var band = percentileBand(text);
     if (text) text.split(' | ').forEach(function (part, index) {
       if (index) label.append(document.createTextNode(' | '));
-      label.append(createElement('span', 'percentile-value ' + band, part));
+      var chip = createElement('span', 'percentile-value ' + band, part);
+      chip.style.backgroundColor = percentileBackground(text);
+      label.append(chip);
     });
     return label;
   }
