@@ -719,6 +719,7 @@ test('macro outlook query returns all independent chart payloads', async () => {
     T10Y2Y: 'observation_date,T10Y2Y\n2026-08-20,0.46\n2026-08-21,0.48\n',
     BAMLH0A0HYM2: 'observation_date,BAMLH0A0HYM2\n2026-08-20,2.90\n2026-08-21,2.88\n',
     ICSA: 'observation_date,ICSA\n2026-08-15,245000\n',
+    UMCSENT: 'observation_date,UMCSENT\n2026-06-01,58.2\n2026-07-01,60.1\n',
     UNRATE: 'observation_date,UNRATE\n2026-06-01,4.1\n2026-07-01,4.2\n',
     SAHMCURRENT: 'observation_date,SAHMCURRENT\n2026-06-01,0.23\n2026-07-01,0.27\n',
     NFCI: 'observation_date,NFCI\n2026-08-14,-0.50\n2026-08-21,-0.48\n',
@@ -813,9 +814,9 @@ test('macro outlook query returns all independent chart payloads', async () => {
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'usEconomicCalendar', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
     'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'shTurnoverRate', 'szTurnoverRate', 'aSharePe', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-    'initialClaims', 'unemploymentRate', 'sahmRule', 'financialConditions',
+    'initialClaims', 'consumerConfidence', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(42).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(43).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.equal(result.charts.find((chart) => chart.id === 'usEconomicCalendar').chartType, 'economicCalendar');
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
