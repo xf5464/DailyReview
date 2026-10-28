@@ -351,7 +351,7 @@
   var data = null;
   var chartLoadPromises = new Map();
   var config = loadConfig();
-  var viewMode = 'charts';
+  var viewMode = 'table';
   var activeDetailId = null;
   var activeShareholderCode = null;
   var activeIndustryCode = null;
@@ -2349,7 +2349,7 @@
   }
 
   function overviewPercentilePair(items, value, date, includeNonPositive) {
-    var labels = [3, 1].map(function (years) {
+    var labels = [1, 3].map(function (years) {
       var rank = pePercentile(items, value, date, years, includeNonPositive);
       return rank && rank.count > 1 ? rank.value.toFixed(1) + '%' + (rank.short ? '*' : '') : '--';
     });
@@ -2380,7 +2380,7 @@
         ? calendarItems.length + '项'
         : latest ? formatValue(chart, latest.value) : '--');
       var percentileLabel = createElement('small', 'overall-table-percentile', overviewPercentileLabel(sourceChart));
-      percentileLabel.title = '百分位顺序：过去三年 | 过去一年。以最新数据日期为截止日，不受顶部时间选择影响；* 表示历史不足对应年限，按实际覆盖计算。';
+      percentileLabel.title = '百分位顺序：过去一年 | 过去三年。以最新数据日期为截止日，不受顶部时间选择影响；* 表示历史不足对应年限，按实际覆盖计算。';
       valueCell.append(document.createTextNode(' '), percentileLabel);
       if (id === 'aSharePe') {
         valueCell.replaceChildren();
