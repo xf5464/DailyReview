@@ -2387,7 +2387,7 @@
         ['csi-000985', 'csi-000688'].forEach(function (seriesId) {
           var entry = (sourceChart && sourceChart.rows || []).find(function (item) { return item.id === seriesId; });
           var line = createElement('div', 'overall-table-pe-entry',
-            (seriesId === 'csi-000985' ? '全A ' : '科创50 ') + (entry && hasNumericValue(entry.pe) ? Number(entry.pe).toFixed(2) + '倍' : '--'));
+            (seriesId === 'csi-000985' ? '全A ' : '科创50 ') + (entry && hasNumericValue(entry.pe) ? Math.trunc(Number(entry.pe)) + '倍' : '--'));
           var history = pePercentileHistories.get(seriesId);
           var pair = entry && history && overviewPercentilePair(history.items, entry.pe, entry.date, false);
           if (pair) {
