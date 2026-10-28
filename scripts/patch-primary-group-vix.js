@@ -9,7 +9,8 @@ function patchApp(source) {
   const migrationSource = "      var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {\n        return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId));\n      });";
   const migrationReplacement = "      var migratedMemberships = (DEFAULT_CONFIG.chartGroups[id] || []).filter(function (groupId) {\n        var forcedPrimaryMigration = ['broadDollar', 'pce', 'vix'].includes(id) && groupId === 'group_primary';\n        return groupIds.has(groupId) && (newlyAddedChartIds.includes(id) || addedDefaultGroupIds.has(groupId) || forcedPrimaryMigration);\n      });";
 
-  if (!source.includes(currentPrimary)) throw new Error('primary group list pattern changed');
+  const primaryPattern = /      group_primary: \['usEconomicCalendar', 'treasuryYield30',(?: '[^']+',)* 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix'/;
+  if (!source.includes(currentPrimary) && !primaryPattern.test(source)) throw new Error('primary group list pattern changed');
   if (!source.includes(currentVix)) throw new Error('VIX chart group pattern changed');
   if (!source.includes(migrationReplacement)) {
     if (!source.includes(migrationSource)) throw new Error('chart group migration pattern changed');
