@@ -2357,15 +2357,19 @@
   }
 
   function percentileBand(label) {
-    var value = parseFloat(label);
-    return Number.isFinite(value) ? value <= 10 ? 'percentile-low' : value >= 90 ? 'percentile-high' : '' : '';
+    var values = String(label).split(' | ').map(function (part) { return parseFloat(part); });
+    if (values.length !== 2 || !values.every(Number.isFinite)) return '';
+    if (values.every(function (value) { return value <= 10; })) return 'percentile-low';
+    if (values.every(function (value) { return value >= 90; })) return 'percentile-high';
+    return '';
   }
 
   function createPercentileLabel(text) {
     var label = createElement('small', 'overall-table-percentile');
+    var band = percentileBand(text);
     if (text) text.split(' | ').forEach(function (part, index) {
       if (index) label.append(document.createTextNode(' | '));
-      label.append(createElement('span', 'percentile-value ' + percentileBand(part), part));
+      label.append(createElement('span', 'percentile-value ' + band, part));
     });
     return label;
   }

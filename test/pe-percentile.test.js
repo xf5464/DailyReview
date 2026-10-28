@@ -16,18 +16,16 @@ test('overview table percentiles include zero and negative macro values, and ski
   assert.equal(label({items:[]}),'');
   assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'');
 });
-test('percentile backgrounds include threshold boundaries independently for each period', () => {
+test('percentile backgrounds require both periods to meet the same threshold', () => {
   const band = new Function(extract('percentileBand') + ';return percentileBand;')();
-  assert.equal(band('9.9%*'),'percentile-low');
-  assert.equal(band('0.0%'),'percentile-low');
-  assert.equal(band('10.0%'),'percentile-low');
-  assert.equal(band('10.1%'),'');
-  assert.equal(band('89.9%'),'');
-  assert.equal(band('90.0%'),'percentile-high');
-  assert.equal(band('90.1%'),'percentile-high');
-  assert.equal(band('100.0%'),'percentile-high');
-  assert.equal(band('--'),'');
-  assert.equal(band(''),'');
+  assert.equal(band('9.9%* | 10.0%'),'percentile-low');
+  assert.equal(band('0.0% | 0.2%'),'percentile-low');
+  assert.equal(band('90.0% | 100.0%'),'percentile-high');
+  assert.equal(band('90.1% | 99.0%'),'percentile-high');
+  for (const label of ['9.9% | 50.0%','50.0% | 9.9%','95.0% | 50.0%','50.0% | 95.0%',
+    '1.0% | 99.0%','10.0% | 10.1%','89.9% | 90.0%','-- | 1.0%','99.0% | --','9.9%','']) {
+    assert.equal(band(label),'',label);
+  }
 });
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);
