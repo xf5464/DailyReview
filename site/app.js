@@ -2384,19 +2384,20 @@
       valueCell.append(document.createTextNode(' '), percentileLabel);
       if (id === 'aSharePe') {
         valueCell.replaceChildren();
+        var peList = createElement('div', 'overall-table-pe-list');
         ['csi-000985', 'csi-000688'].forEach(function (seriesId) {
           var entry = (sourceChart && sourceChart.rows || []).find(function (item) { return item.id === seriesId; });
-          var line = createElement('div', 'overall-table-pe-entry',
-            (seriesId === 'csi-000985' ? '全A ' : '科创50 ') + (entry && hasNumericValue(entry.pe) ? Math.trunc(Number(entry.pe)) + '倍' : '--'));
+          var line = createElement('div', 'overall-table-pe-entry');
+          line.append(createElement('span', 'overall-table-pe-name', seriesId === 'csi-000985' ? '全A' : '科创50'),
+            createElement('span', 'overall-table-pe-value', entry && hasNumericValue(entry.pe) ? Math.trunc(Number(entry.pe)) + '倍' : '--'));
           var history = pePercentileHistories.get(seriesId);
           var pair = entry && history && overviewPercentilePair(history.items, entry.pe, entry.date, false);
-          if (pair) {
-            var label = createElement('small', 'overall-table-percentile', pair);
-            label.title = percentileLabel.title;
-            line.append(document.createTextNode(' '), label);
-          }
-          valueCell.append(line);
+          var label = createElement('small', 'overall-table-percentile', pair || '');
+          label.title = percentileLabel.title;
+          line.append(label);
+          peList.append(line);
         });
+        valueCell.append(peList);
       }
       row.append(valueCell);
       row.append(createElement('td', '', latest ? formatDate(latest.date, economicCalendarChart ? '日度' : chart.frequency) : '--'));

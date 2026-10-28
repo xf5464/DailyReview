@@ -4462,3 +4462,21 @@ body {
   font-size: 0.82em;
   color: #64748b;
 }
+
+.overall-table-pe-list {
+  display: inline-grid;
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+  column-gap: 0.4em;
+  max-width: 100%;
+  align-items: baseline;
+}
+
+.overall-table-pe-entry { display: contents; }
+.overall-table-pe-name { text-align: left; white-space: nowrap; }
+.overall-table-pe-value { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.overall-table-pe-list .overall-table-percentile {
+  margin-left: 0;
+  text-align: left;
+  justify-self: start;
+  white-space: nowrap;
+}
