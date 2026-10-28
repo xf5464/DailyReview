@@ -2368,6 +2368,8 @@
 
   function percentileBackground(text) {
     var band = percentileBand(text);
+    if (band === 'percentile-both-high') return 'rgb(233, 213, 255)';
+    if (band === 'percentile-both-low') return 'rgb(254, 240, 138)';
     var value = parseFloat(String(text).split(' | ')[1]);
     var low = band === 'percentile-low';
     if (!low && band !== 'percentile-high') return '';
@@ -2381,11 +2383,9 @@
 
   function createPercentileLabel(text) {
     var label = createElement('small', 'overall-table-percentile');
-    var band = percentileBand(text);
     if (text) text.split(' | ').forEach(function (part, index) {
       if (index) label.append(document.createTextNode(' | '));
-      var chip = createElement('span', 'percentile-value ' + band, part);
-      chip.style.backgroundColor = percentileBackground(text);
+      var chip = createElement('span', 'percentile-value', part);
       label.append(chip);
     });
     return label;
@@ -2408,6 +2408,7 @@
       var latest = economicCalendarChart ? calendarItems[0]
         : chart && chart.items.length ? chart.items[chart.items.length - 1] : null;
       var row = document.createElement('tr');
+      var rowColors = [percentileBackground(overviewPercentileLabel(sourceChart))];
       var name = createElement('th', '', TITLES[id]);
       name.scope = 'row';
       row.append(name);
@@ -2418,6 +2419,7 @@
       percentileLabel.title = '百分位顺序：过去一年 | 过去三年。以最新数据日期为截止日，不受顶部时间选择影响；* 表示历史不足对应年限，按实际覆盖计算。';
       valueCell.append(document.createTextNode(' '), percentileLabel);
       if (id === 'aSharePe') {
+        rowColors = [];
         valueCell.replaceChildren();
         var peList = createElement('div', 'overall-table-pe-list');
         ['csi-000985', 'csi-000688'].forEach(function (seriesId) {
@@ -2427,6 +2429,7 @@
             createElement('span', 'overall-table-pe-value', entry && hasNumericValue(entry.pe) ? Math.trunc(Number(entry.pe)) + '倍' : '--'));
           var history = pePercentileHistories.get(seriesId);
           var pair = entry && history && overviewPercentilePair(history.items, entry.pe, entry.date, false);
+          rowColors.push(percentileBackground(pair || ''));
           var label = createPercentileLabel(pair || '');
           label.title = percentileLabel.title;
           line.append(label);
@@ -2446,6 +2449,12 @@
       });
       actionCell.append(button);
       row.append(actionCell);
+      if (rowColors.some(Boolean)) {
+        row.classList.add('has-percentile-background');
+        row.style.setProperty('--percentile-row-background', rowColors.length === 1 ? rowColors[0] :
+          'linear-gradient(to bottom, ' + (rowColors[0] || 'transparent') + ' 0%, ' + (rowColors[0] || 'transparent') +
+          ' 50%, ' + (rowColors[1] || 'transparent') + ' 50%, ' + (rowColors[1] || 'transparent') + ' 100%)');
+      }
       row.addEventListener('click', function () { showDetail(id); });
       refs.tableBody.append(row);
     });

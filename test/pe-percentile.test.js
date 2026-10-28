@@ -37,8 +37,8 @@ test('three-year extremes deepen monotonically while dual extremes retain their 
   assert.equal(background('50% | 10%'),'rgb(220, 252, 231)');
   assert.equal(background('50% | 5%'),'rgb(127, 225, 163)');
   assert.equal(background('50% | 0%'),'rgb(34, 197, 94)');
-  assert.equal(background('99% | 99%'),'');
-  assert.equal(background('1% | 1%'),'');
+  assert.equal(background('99% | 99%'),'rgb(233, 213, 255)');
+  assert.equal(background('1% | 1%'),'rgb(254, 240, 138)');
 });
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);
