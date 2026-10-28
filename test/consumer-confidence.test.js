@@ -12,6 +12,6 @@ test('Michigan consumer sentiment uses FRED UMCSENT monthly history', () => {
 });
 test('consumer sentiment appears in primary and US groups', () => {
   assert.match(app, /consumerConfidence: \['group_primary', 'group_mt432xl1_kz1mx7'\]/);
-  assert.match(app, /consumerConfidence: '美国消费者信心指数（密歇根大学）'/);
+  assert.match(app, /consumerConfidence: '美国消费者信心指数'/);
   assert.match(app, /'unemploymentRate', 'consumerConfidence'/);
 });
