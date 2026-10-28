@@ -16,6 +16,19 @@ test('overview table percentiles include zero and negative macro values, and ski
   assert.equal(label({items:[]}),'');
   assert.equal(label({items:[{date:'2026-01-01',value:1}]}),'');
 });
+test('percentile backgrounds include threshold boundaries independently for each period', () => {
+  const band = new Function(extract('percentileBand') + ';return percentileBand;')();
+  assert.equal(band('9.9%*'),'percentile-low');
+  assert.equal(band('0.0%'),'percentile-low');
+  assert.equal(band('10.0%'),'percentile-low');
+  assert.equal(band('10.1%'),'');
+  assert.equal(band('89.9%'),'');
+  assert.equal(band('90.0%'),'percentile-high');
+  assert.equal(band('90.1%'),'percentile-high');
+  assert.equal(band('100.0%'),'percentile-high');
+  assert.equal(band('--'),'');
+  assert.equal(band(''),'');
+});
 test('PE point tooltip uses trailing history at the hovered date and selectable years', () => {
   const tip = new Function('pePercentile', extract('pePercentileTip') + ';return pePercentileTip;')(rank);
   const items = [{date:'2020-01-01',value:1},{date:'2023-01-01',value:10},

@@ -4472,6 +4472,10 @@ body {
 }
 
 .overall-table-pe-entry { display: contents; }
+.percentile-value.percentile-low,
+.percentile-value.percentile-high { border-radius: 3px; padding: 0 2px; }
+.percentile-value.percentile-low { background: #dcfce7; color: #166534; }
+.percentile-value.percentile-high { background: #fee2e2; color: #991b1b; }
 .overall-table-pe-name { text-align: left; white-space: nowrap; }
 .overall-table-pe-value { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .overall-table-pe-list .overall-table-percentile {

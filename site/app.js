@@ -2356,6 +2356,20 @@
     return labels.every(function (label) { return label === '--'; }) ? '' : labels.join(' | ');
   }
 
+  function percentileBand(label) {
+    var value = parseFloat(label);
+    return Number.isFinite(value) ? value <= 10 ? 'percentile-low' : value >= 90 ? 'percentile-high' : '' : '';
+  }
+
+  function createPercentileLabel(text) {
+    var label = createElement('small', 'overall-table-percentile');
+    if (text) text.split(' | ').forEach(function (part, index) {
+      if (index) label.append(document.createTextNode(' | '));
+      label.append(createElement('span', 'percentile-value ' + percentileBand(part), part));
+    });
+    return label;
+  }
+
   function overviewPercentileLabel(chart) {
     if (chart && ['valuationTable', 'stockTable', 'economicCalendar'].includes(chart.chartType)) return '';
     var items = chart && chart.items || [];
@@ -2379,7 +2393,7 @@
       var valueCell = createElement('td', chart && chart.error && !latest ? 'overall-table-error' : '', economicCalendarChart
         ? calendarItems.length + '项'
         : latest ? formatValue(chart, latest.value) : '--');
-      var percentileLabel = createElement('small', 'overall-table-percentile', overviewPercentileLabel(sourceChart));
+      var percentileLabel = createPercentileLabel(overviewPercentileLabel(sourceChart));
       percentileLabel.title = '百分位顺序：过去一年 | 过去三年。以最新数据日期为截止日，不受顶部时间选择影响；* 表示历史不足对应年限，按实际覆盖计算。';
       valueCell.append(document.createTextNode(' '), percentileLabel);
       if (id === 'aSharePe') {
@@ -2392,7 +2406,7 @@
             createElement('span', 'overall-table-pe-value', entry && hasNumericValue(entry.pe) ? Math.trunc(Number(entry.pe)) + '倍' : '--'));
           var history = pePercentileHistories.get(seriesId);
           var pair = entry && history && overviewPercentilePair(history.items, entry.pe, entry.date, false);
-          var label = createElement('small', 'overall-table-percentile', pair || '');
+          var label = createPercentileLabel(pair || '');
           label.title = percentileLabel.title;
           line.append(label);
           peList.append(line);
