@@ -66,7 +66,7 @@
     ismBacklogOrders: '美国 ISM 订单积压指数',
     initialClaims: '美国初次申请失业金人数',
     unemploymentRate: '美国失业率',
-    consumerConfidence: '美国消费者信心指数（密歇根大学）',
+    consumerConfidence: '美国消费者信心指数',
     financialConditions: '美国金融状况指数'
   };
 
