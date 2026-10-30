@@ -2481,10 +2481,57 @@
       (failed ? ' · ' + failed + ' 个已加载指标暂不可用' : ' · 已按需加载 ' + data.charts.length + '/' + catalog.length + ' 个指标');
   }
 
+  var activeFundCrowdingLoaded = false;
+  var activeFundCrowdingSnapshot = null;
+  function renderActiveFundCrowding() {
+    var panel = document.getElementById('activeFundCrowdingPanel');
+    if (!panel) return;
+    panel.hidden = config.selectedGroupId !== 'group_a_share';
+    if (panel.hidden) return;
+    var status = document.getElementById('activeFundCrowdingStatus');
+    var body = document.getElementById('activeFundCrowdingBody');
+    var history = document.getElementById('activeFundCrowdingHistory');
+    if (!activeFundCrowdingLoaded) {
+      activeFundCrowdingLoaded = true;
+      fetch('data/active-fund-industry-crowding.json').then(function (response) {
+        if (!response.ok) throw new Error('no snapshot');
+        return response.json();
+      }).then(function (snapshot) {
+        if (snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.rows) || !snapshot.latestQuarter || !snapshot.source) throw new Error('invalid snapshot');
+        activeFundCrowdingSnapshot = snapshot;
+        renderActiveFundCrowding();
+      }).catch(function () { status.textContent = '尚无通过验证的主动公募行业持仓快照；需手动采集后发布。'; });
+    }
+    if (!activeFundCrowdingSnapshot) return;
+    var snapshot = activeFundCrowdingSnapshot;
+    status.textContent = '报告期 ' + snapshot.latestQuarter + ' · 数据覆盖率 ' + (snapshot.coverage * 100).toFixed(1) + '% · 手动更新';
+    body.replaceChildren();
+    history.replaceChildren();
+    var percent = function (value) { return Number.isFinite(value) ? value.toFixed(1) + '%' : '—'; };
+    snapshot.rows.forEach(function (item) {
+      var tr = document.createElement('tr');
+      var values = [item.industry, percent(item.share), Number.isFinite(item.quarterChange) ? (item.quarterChange > 0 ? '+' : '') + item.quarterChange.toFixed(2) + 'pp' : '—'];
+      [4, 12, 20, 40].forEach(function (period) { values.push(percent(item.percentiles && item.percentiles[period])); });
+      values.forEach(function (value) { var td = document.createElement('td'); td.textContent = value; tr.append(td); });
+      tr.tabIndex = 0;
+      var showHistory = function () {
+        history.replaceChildren();
+        var title = document.createElement('h4'); title.textContent = item.industry + ' · 季度持仓占比';
+        var pre = document.createElement('p');
+        pre.textContent = (item.history || []).map(function (point) { return point.quarter + ': ' + percent(point.share); }).join('　');
+        history.append(title, pre);
+      };
+      tr.addEventListener('click', showHistory);
+      tr.addEventListener('keydown', function (event) { if (event.key === 'Enter') showHistory(); });
+      body.append(tr);
+    });
+  }
+
   function renderAll() {
     renderMeta();
     renderCards();
     renderTable();
+    renderActiveFundCrowding();
     if (activeDetailId && refs.detailDialog.open) renderDetail();
   }
 
