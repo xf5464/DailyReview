@@ -25,7 +25,7 @@ test('quarterly changes and 1 year percentile need continuous historical span',(
   ]}));
   const result=calculateIndustryCrowding(quarters);
   const semi=result.rows.find(x=>x.industry==='半导体');
-  assert.equal(semi.quarterChange,1);
+  assert.ok(Math.abs(semi.quarterChange - 1) < 1e-9);
   assert.equal(semi.percentiles[4],100);
   assert.equal(semi.percentiles[12],null);
 });
