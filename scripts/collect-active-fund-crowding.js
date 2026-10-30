@@ -13,6 +13,7 @@ function activeFund(fund) {
   return /主动|股票型|偏股混合|灵活配置混合|普通股票|混合型/.test(type);
 }
 async function collect({ funds, industries, years, eligibleFundCounts = {}, fetchImpl, onProgress = () => {} }) {
+  if (!Array.isArray(funds) || !industries || typeof industries !== 'object' || !Array.isArray(years)) throw new TypeError('Invalid collection inputs');
   const selected = deduplicateFundShares(funds.filter(activeFund));
   if (!selected.length) throw new Error('No verified active equity funds');
   const quarters = new Map();
@@ -25,6 +26,10 @@ async function collect({ funds, industries, years, eligibleFundCounts = {}, fetc
       for (const quarter of portfolio.quarters) {
         const row=quarters.get(quarter.key);
         if (!row || !quarter.rows?.length) continue;
+        if (!quarter.rows.every(h => Number.isFinite(Number(h.marketValue10kCny)) && Number(h.marketValue10kCny)>0 && /^\d{6}$/.test(String(h.stockCode || '')))) {
+          onProgress({fund:fund.fundCode,quarter:quarter.key,error:'Invalid holding values'});
+          continue;
+        }
         row.successful++;
         for (const holding of quarter.rows) {
           row.stockCount++;
