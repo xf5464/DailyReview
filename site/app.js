@@ -2497,7 +2497,7 @@
         if (!response.ok) throw new Error('no snapshot');
         return response.json();
       }).then(function (snapshot) {
-        if (snapshot.schemaVersion !== 1 || snapshot.calculationVersion !== 2 || snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' || !Array.isArray(snapshot.rows) || !snapshot.rows.length || !snapshot.latestQuarter || !snapshot.source || !Number.isFinite(snapshot.coverage) || snapshot.coverage < 0.9 || snapshot.coverage > 1) throw new Error('invalid snapshot');
+        if (snapshot.schemaVersion !== 2 || !Array.isArray(snapshot.industries) || !Array.isArray(snapshot.quarters) || snapshot.quarters.some(function (q) { return !Array.isArray(q.shares) || q.shares.length !== snapshot.industries.length; }) || snapshot.calculationVersion !== 2 || snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' || !Array.isArray(snapshot.rows) || !snapshot.rows.length || !snapshot.latestQuarter || !snapshot.source || !Number.isFinite(snapshot.coverage) || snapshot.coverage < 0.9 || snapshot.coverage > 1) throw new Error('invalid snapshot');
         activeFundCrowdingSnapshot = snapshot;
         renderActiveFundCrowding();
       }).catch(function () { status.textContent = '尚无通过验证的主动公募行业持仓快照；需手动采集后发布。'; });
@@ -2518,7 +2518,8 @@
         history.replaceChildren();
         var title = document.createElement('h4'); title.textContent = item.industry + ' · 季度持仓占比';
         var pre = document.createElement('p');
-        pre.textContent = (item.history || []).map(function (point) { return point.quarter + ': ' + percent(point.share); }).join('　');
+        var industryIndex = snapshot.industries.indexOf(item.industry);
+        pre.textContent = snapshot.quarters.map(function (point) { return point.quarter + ': ' + percent(point.shares[industryIndex]); }).join('　');
         history.append(title, pre);
       };
       tr.addEventListener('click', showHistory);

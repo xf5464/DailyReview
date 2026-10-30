@@ -473,7 +473,7 @@ async function build() {
   const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
   if (fs.existsSync(crowdingSnapshot)) {
     const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
-    require('./fund-crowding-snapshot').validateCrowdingSnapshot(snapshot);
+    require('./fund-crowding-snapshot').validatePublicCrowdingSnapshot(snapshot);
     writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
   }
 

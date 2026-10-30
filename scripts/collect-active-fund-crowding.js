@@ -123,12 +123,12 @@ function createSnapshot(collection, {universe, industries, now = new Date().toIS
       quarters:snapshots.map(({holdings, ...q}) => q)}};
 }
 function saveSnapshot(output, snapshot) {
-  const {validateCrowdingSnapshot} = require('./fund-crowding-snapshot');
-  validateCrowdingSnapshot(snapshot);
+  const {validateSavedCrowdingSnapshot} = require('./fund-crowding-snapshot');
+  validateSavedCrowdingSnapshot(snapshot);
   fs.mkdirSync(path.dirname(output), {recursive:true});
   if (fs.existsSync(output)) {
     const previous = JSON.parse(fs.readFileSync(output, 'utf8'));
-    validateCrowdingSnapshot(previous);
+    validateSavedCrowdingSnapshot(previous);
     if (quarterIndex(snapshot.latestQuarter) < quarterIndex(previous.latestQuarter)) throw new Error('Refusing to replace a newer snapshot');
     const replacementKeys = new Set(snapshot.quarters.map(q => q.quarter));
     if (previous.quarters.some(q => !replacementKeys.has(q.quarter))) throw new Error('Refusing to discard existing quarterly history; include all previous quarters');
@@ -188,7 +188,15 @@ async function main(args = process.argv.slice(2)) {
   if (diagnostic) { console.log('Diagnostic collection saved; no production snapshot written.'); return; }
   const snapshot = createSnapshot(collection,{universe,industries});
   const output = path.resolve(get('--output') || path.join(__dirname,'data/active-fund-industry-crowding.json'));
-  saveSnapshot(output,snapshot);
+  const {createPublicSnapshot} = require('./fund-crowding-snapshot');
+  const compact = createPublicSnapshot(snapshot);
+  const auditDirectory = path.join(cacheDirectory,'audits');
+  fs.mkdirSync(auditDirectory,{recursive:true});
+  const auditFile = path.join(auditDirectory,compact.auditDigest + '.json');
+  if (fs.existsSync(auditFile)) {
+    if (hash(fs.readFileSync(auditFile)) !== compact.auditDigest) throw new Error('Private audit checksum mismatch');
+  } else fs.writeFileSync(auditFile,JSON.stringify(snapshot.audit),{flag:'wx'});
+  saveSnapshot(output,compact);
   console.log('Saved validated snapshot: ' + output);
 }
 if (require.main === module) main().catch(e=>{console.error(e.message);process.exitCode=1;});

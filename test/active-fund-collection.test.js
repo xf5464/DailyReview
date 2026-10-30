@@ -161,3 +161,21 @@ test('tampered raw caches are rejected before reuse',async t=>{
   const record=JSON.parse(fs.readFileSync(file,'utf8'));record.body+='tampered';fs.writeFileSync(file,JSON.stringify(record));
   await assert.rejects(cached(url),/Corrupt cached report/);
 });
+
+test('manual CLI keeps report-level audit local and writes only compact quarterly aggregates',async t=>{
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'crowding-cli-'));
+  const originalFetch=global.fetch;
+  t.after(()=>{global.fetch=originalFetch;fs.rmSync(dir,{recursive:true,force:true});});
+  const options=inputs();global.fetch=options.fetchImpl;
+  const universe=path.join(dir,'universe.json'),industries=path.join(dir,'industries.json');
+  fs.writeFileSync(universe,JSON.stringify(options.universe));fs.writeFileSync(industries,JSON.stringify(options.industries));
+  const output=path.join(dir,'public.json'),cache=path.join(dir,'cache');
+  await main(['--universe',universe,'--industries',industries,'--years','2026','--cache',cache,'--output',output,'--diagnostics',path.join(dir,'diagnostics.json')]);
+  const publicText=fs.readFileSync(output,'utf8'),published=JSON.parse(publicText);
+  assert.equal(published.schemaVersion,2);assert.ok(!publicText.includes('fundCode'));
+  assert.ok(!publicText.includes('sourceReports'));assert.equal(published.quarters.length,1);
+  const auditFile=path.join(cache,'audits',published.auditDigest+'.json');
+  assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(auditFile)).digest('hex'),published.auditDigest);
+  const audit=JSON.parse(fs.readFileSync(auditFile));
+  assert.equal(audit.quarters.find(q=>q.quarter==='2026-Q3').sourceReports[0].fundCode,'000001');
+});
