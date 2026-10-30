@@ -317,3 +317,11 @@ FRED 的中国换手率 DDEM01CNA156NWDB 为年度且停留于2020年，无法�
 - **后续仅在用户明确要求更新时**重新采集或计算；禁止季度定时任务、GitHub Actions 部署时自动计算、网页打开时自动采集或后台定期刷新该指标。
 - 网站和普通部署仅加载已保存的静态快照；其他指标的自动刷新不受影响。
 - 手动更新须保留历史季度快照、数据来源、披露覆盖率及计算版本，不能用缺失数据覆盖已有有效结果。
+
+
+#### StockValueEstimate 现有采集能力复用
+
+- 参考仓库 `xf5464/StockValueEstimate` 的 `src/fund-portfolio.js`：其 `queryFundPortfolio(fundCode, year)` 从天天基金 `FundArchivesDatas.aspx?type=jjcc` 获取指定基金、年份的季度前十大股票持仓，返回 `quarter.rows[].stockCode` 和 `marketValue10kCny`。可复用其解析和份额去重方式，但不能复用其最终股票 Top100 截断汇总作为行业总量。
+- 同仓库 `scripts/collect_fund_stock_summary_db.py` 和 `data/db/fund_reports.sqlite` 是巨潮资讯的**全公募**股票汇总，无法识别主动权益基金，因此仅作交叉校验，禁止直接当作主动公募拥挤度输入。
+- 实施采集时先从基金名单及基金类型识别主动权益产品，剔除指数/指数增强和重复份额，按基金逐年逐季度获取前十大持仓，按报告期汇总后映射东方财富二级行业。必须验证各季度的样本覆盖率、持仓价值单位、行业历史映射和幸存者偏差，才允许生成生产快照。
+- 当前不建立定时采集任务；仅用户明确请求时运行一次采集/计算。正常部署只复制已审核快照。
