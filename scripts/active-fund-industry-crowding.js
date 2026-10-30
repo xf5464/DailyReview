@@ -5,7 +5,7 @@
 function calculateIndustryCrowding(quarters, options = {}) {
   const minimumCoverage = options.minimumCoverage ?? 0.9;
   const periods = [4, 12, 20, 40];
-  const normalized = quarters.filter(q => q && /^\\d{4}-Q[1-4]$/.test(q.quarter || '') && Array.isArray(q.holdings))
+  const normalized = quarters.filter(q => q && /^\d{4}-Q[1-4]$/.test(q.quarter || '') && Array.isArray(q.holdings))
     .map(q => {
       const coverage = Number(q.coverage);
       if (!Number.isFinite(coverage) || coverage < minimumCoverage || coverage > 1) return null;
