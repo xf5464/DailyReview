@@ -21,6 +21,13 @@ function calculateIndustryCrowding(quarters, options = {}) {
       if (!total) return null;
       return { quarter: q.quarter, coverage, shares: Object.fromEntries([...byIndustry].map(([name, value]) => [name, value / total * 100])) };
     }).filter(Boolean).sort((a,b) => a.quarter.localeCompare(b.quarter));
+  // Do not rank on a quarter if its reported fund universe is not comparable.
+  // Duplicate quarterly snapshots must be resolved by the ingestion stage.
+  const seen = new Set();
+  for (const item of normalized) {
+    if (seen.has(item.quarter)) throw new Error('Duplicate quarterly holdings snapshot: ' + item.quarter);
+    seen.add(item.quarter);
+  }
   const latest = normalized.at(-1);
   if (!latest) return { latestQuarter: null, rows: [], quarters: [] };
   const previous = normalized.at(-2);
