@@ -38,6 +38,6 @@ test('duplicate quarterly snapshots are rejected',()=>{
 test('regular build only copies approved static snapshots',()=>{
   const fs=require('node:fs');const path=require('node:path');
   const build=fs.readFileSync(path.join(__dirname,'../scripts/build.js'),'utf8');
-  assert.match(build,/active-fund-industry-crowding\\.json/);
-  assert.doesNotMatch(build,/calculateIndustryCrowding\\(/);
+  assert.match(build,/active-fund-industry-crowding\.json/);
+  assert.doesNotMatch(build,/calculateIndustryCrowding\(/);
 });
