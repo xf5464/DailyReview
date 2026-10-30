@@ -813,9 +813,9 @@ test('macro outlook query returns all independent chart payloads', async () => {
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'usEconomicCalendar', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'shTurnoverRate', 'szTurnoverRate', 'aSharePe', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'etfPremium159941', 'nationalTeamWideEtf', 'shTurnoverRate', 'szTurnoverRate', 'aSharePe', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-    'initialClaims', 'consumerConfidence', 'unemploymentRate', 'sahmRule', 'financialConditions', 'etfPremium159941',
+    'initialClaims', 'consumerConfidence', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
   assert.deepEqual(result.charts.map((chart) => chart.error), Array(44).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
