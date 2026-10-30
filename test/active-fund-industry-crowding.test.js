@@ -41,3 +41,13 @@ test('regular build only copies approved static snapshots',()=>{
   assert.match(build,/active-fund-industry-crowding\.json/);
   assert.doesNotMatch(build,/calculateIndustryCrowding\(/);
 });
+
+test('A-share group has a snapshot-only industry ranking panel',()=>{
+ const fs=require('node:fs');const path=require('node:path');
+ const html=fs.readFileSync(path.join(__dirname,'../site/index.html'),'utf8');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.match(html,/id="activeFundCrowdingPanel"/);
+ assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
+ assert.match(app,/fetch\\('data\\/active-fund-industry-crowding\\.json'\\)/);
+ assert.doesNotMatch(app,/queryFundPortfolio\\(/);
+});
