@@ -1,4 +1,5 @@
 const DEFAULT_MONTH_COUNT = 12;
+const { queryEtfPremium159941 } = require('./etf-premium-159941');
 const { queryNationalTeamWideEtf } = require('./national-team-wide-etf');
 const REQUEST_TIMEOUT_MS = 20_000;
 const MAX_OIL_SUPPLEMENT_DAYS = 14;
@@ -516,6 +517,10 @@ const CHART_METADATA = {
     chartType: 'stockTable',
     sourceName: '同花顺影视院线（881274）/ 同花顺 F10',
     sourceUrl: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
+  },
+  etfPremium159941: {
+    id: 'etfPremium159941', title: '159941 溢价率', unit: '%', decimals: 2, frequency: '日度',
+    sourceName: 'QDII Lens / 腾讯财经同一收盘快照 IOPV', sourceUrl: 'https://qdiilens.com/fund/159941',
   },
   nationalTeamWideEtf: {
     id: 'nationalTeamWideEtf',
@@ -2371,6 +2376,7 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate,
       };
     }),
+    etfPremium159941: () => loadChart(CHART_METADATA.etfPremium159941, () => queryEtfPremium159941({fetchImpl})),
     nationalTeamWideEtf: () => loadChart(CHART_METADATA.nationalTeamWideEtf, () => (
       queryNationalTeamWideEtf({ fetchImpl })
     )),
