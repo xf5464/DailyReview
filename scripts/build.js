@@ -473,9 +473,7 @@ async function build() {
   const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
   if (fs.existsSync(crowdingSnapshot)) {
     const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
-    if (snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.rows) || !snapshot.latestQuarter || !snapshot.source) {
-      throw new Error('Invalid approved active fund crowding snapshot; refusing to publish it.');
-    }
+    require('./fund-crowding-snapshot').validateCrowdingSnapshot(snapshot);
     writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
   }
 

@@ -2497,14 +2497,14 @@
         if (!response.ok) throw new Error('no snapshot');
         return response.json();
       }).then(function (snapshot) {
-        if (snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.rows) || !snapshot.latestQuarter || !snapshot.source) throw new Error('invalid snapshot');
+        if (snapshot.schemaVersion !== 1 || snapshot.calculationVersion !== 2 || snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' || !Array.isArray(snapshot.rows) || !snapshot.rows.length || !snapshot.latestQuarter || !snapshot.source || !Number.isFinite(snapshot.coverage) || snapshot.coverage < 0.9 || snapshot.coverage > 1) throw new Error('invalid snapshot');
         activeFundCrowdingSnapshot = snapshot;
         renderActiveFundCrowding();
       }).catch(function () { status.textContent = '尚无通过验证的主动公募行业持仓快照；需手动采集后发布。'; });
     }
     if (!activeFundCrowdingSnapshot) return;
     var snapshot = activeFundCrowdingSnapshot;
-    status.textContent = '报告期 ' + snapshot.latestQuarter + ' · 数据覆盖率 ' + (snapshot.coverage * 100).toFixed(1) + '% · 手动更新';
+    status.textContent = '主动权益基金 · 季报前十大股票持仓口径 · 东方财富二级行业 · 报告期 ' + snapshot.latestQuarter + ' · 数据覆盖率 ' + (snapshot.coverage * 100).toFixed(1) + '% · 手动更新 ' + String(snapshot.updatedAt || '').slice(0, 10) + '。历史不足或存在缺季时百分位留空。';
     body.replaceChildren();
     history.replaceChildren();
     var percent = function (value) { return Number.isFinite(value) ? value.toFixed(1) + '%' : '—'; };

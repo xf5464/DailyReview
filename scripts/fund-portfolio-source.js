@@ -119,10 +119,13 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
       throw new Error(`基金持仓请求失败（HTTP ${response.status}）`);
     }
 
+    const rawText = await response.text();
+    const sourceUrl = new URL(url); sourceUrl.searchParams.delete('rt');
     return {
-      fundCode: String(fundCode),
-      year: Number(year),
-      ...parseFundPortfolioText(await response.text()),
+      fundCode: String(fundCode), year: Number(year),
+      source: response.fundCrowdingSource || {url: sourceUrl.href, fetchedAt: new Date().toISOString(),
+        hash: require('node:crypto').createHash('sha256').update(rawText).digest('hex')},
+      ...parseFundPortfolioText(rawText),
     };
   } catch (error) {
     if (error.name === 'AbortError') {
@@ -137,6 +140,7 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
 
 function normalizeFundProductName(name) {
   return String(name ?? '')
+    .replace(/[（(](?:前端|后端)[）)]$/u, '')
     .replace(/(?:份额)?[A-Z](?:类)?$/u, '')
     .replace(/(?:份额)?[A-Z]\d?(?:类)?$/u, '')
     .trim();
@@ -157,6 +161,7 @@ function deduplicateFundShares(funds) {
     const existing = products.get(productName);
     if (!existing || shareClassPriority(fund.fundName) < shareClassPriority(existing.fundName)) {
       products.set(productName, {
+        ...fund,
         fundCode: String(fund.fundCode),
         fundName: fund.fundName,
         productName,
