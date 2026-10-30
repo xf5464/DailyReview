@@ -4,6 +4,7 @@
 // Never treat a missing quarter or incomplete universe as zero exposure.
 function calculateIndustryCrowding(quarters, options = {}) {
   const minimumCoverage = options.minimumCoverage ?? 0.9;
+  if (!Array.isArray(quarters)) throw new TypeError('quarters must be an array');
   const periods = [4, 12, 20, 40];
   const normalized = quarters.filter(q => q && /^\d{4}-Q[1-4]$/.test(q.quarter || '') && Array.isArray(q.holdings))
     .map(q => {
