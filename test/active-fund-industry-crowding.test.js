@@ -48,6 +48,6 @@ test('A-share group has a snapshot-only industry ranking panel',()=>{
  const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
  assert.match(html,/id="activeFundCrowdingPanel"/);
  assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
- assert.match(app,/fetch\\('data\\/active-fund-industry-crowding\\.json'\\)/);
+ assert.ok(app.includes("fetch('data/active-fund-industry-crowding.json')"));
  assert.doesNotMatch(app,/queryFundPortfolio\\(/);
 });
