@@ -468,6 +468,17 @@ async function build() {
   fs.mkdirSync(chartDataDirectory, { recursive: true });
   fs.mkdirSync(offlineDataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
+  // Active fund crowding is deliberately manual-only. The normal deployment
+  // copies a previously approved static snapshot without fetching or recalculating it.
+  const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
+  if (fs.existsSync(crowdingSnapshot)) {
+    const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
+    if (snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.rows) || !snapshot.latestQuarter || !snapshot.source) {
+      throw new Error('Invalid approved active fund crowding snapshot; refusing to publish it.');
+    }
+    writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
+  }
+
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');
   const outlook = await queryMacroOutlook({ range: 'year30' });
