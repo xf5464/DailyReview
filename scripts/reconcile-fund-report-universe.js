@@ -3,6 +3,15 @@ const crypto=require('node:crypto');
 const {quarterIndex}=require('./active-fund-industry-crowding');
 const {classifyReportTitle}=require('./fund-report-evidence');
 const hash=value=>crypto.createHash('sha256').update(value).digest('hex');
+function preferReportDetail(previous,claim){
+  if(!claim.detail)return false;
+  if(!previous.detail)return true;
+  const oldExcluded=previous.classification.status==='excluded',newExcluded=claim.classification.status==='excluded';
+  if(oldExcluded!==newExcluded)return newExcluded;
+  const oldNav=Number.isFinite(previous.detail.navTotal10kCny),newNav=Number.isFinite(claim.detail.navTotal10kCny);
+  if(oldNav!==newNav)return newNav;
+  return claim.detail.extractionMethod==='complete-PDF-layout';
+}
 function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
   if(source?.schemaVersion!==1 || !Array.isArray(source.quarters) || !Array.isArray(evidenceSets))throw new Error('Invalid reconciliation inputs');
   const requested=new Set(quarters || source.quarters.map(q=>q.quarter));
@@ -25,7 +34,7 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
         const key=dated.quarter+':'+code, previous=claims.get(key);
         const claim={fundCode:code,quarter:dated.quarter,id:report.id,productName:dated.productName,
           publishedAt:report.publishedAt,classification,detail,announcementSource:set.source || null};
-        if(!previous || claim.publishedAt>previous.publishedAt || (claim.id===previous.id && detail && (!previous.detail || detail.extractionMethod==='complete-PDF-layout' || (!Number.isFinite(previous.detail.navTotal10kCny)&&Number.isFinite(detail.navTotal10kCny)))))claims.set(key,claim);
+        if(!previous || (claim.id===previous.id?preferReportDetail(previous,claim):claim.publishedAt>previous.publishedAt))claims.set(key,claim);
         else if(claim.publishedAt===previous.publishedAt && claim.id!==previous.id &&
           !(claim.classification.status==='excluded' && previous.classification.status==='excluded') &&
           (claim.classification.status!==previous.classification.status || claim.productName!==previous.productName))throw new Error('Conflicting dated product classification: '+key+' '+previous.id+' '+claim.id+' '+previous.productName+' / '+claim.productName);

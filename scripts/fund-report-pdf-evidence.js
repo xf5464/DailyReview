@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {parallel}=require('./collect-fund-crowding-sources');
 const {readDisclosurePdf}=require('./fund-contract-evidence');
-const {parseReportPage,pacedContentFetch}=require('./fund-report-evidence');
+const {parseReportPage,reportOverview,pacedContentFetch}=require('./fund-report-evidence');
 const {sourceFetch}=require('./collect-fund-crowding-sources');
 const {readDisclosureText,validateDisclosureTextSource,createDisclosureTextFetch}=require('./fund-disclosure-text');
 const crypto=require('node:crypto');
@@ -33,8 +33,7 @@ function parseCompleteReportPdf(document,request) {
     }
   }
   const compact=text.normalize('NFKC').replace(/\s+/g,'');
-  const overviewStart=compact.indexOf('基金简称'),overviewEnd=compact.indexOf('主要财务指标',overviewStart);
-  const overview=overviewStart>=0&&overviewEnd>overviewStart?compact.slice(overviewStart,overviewEnd):'';
+  const overview=reportOverview(text,request.quarter);
   const codeChanges=[...overview.matchAll(/本基金的(?:基金|交易)?代码由(\d{6})(?:变更|修改|调整)为(\d{6})/g)].filter(m=>m[2]===result.mainFundCode).map(m=>({from:m[1],to:m[2],quote:m[0]}));
   const reportedFundCodes=[...new Set([...overview.matchAll(/(?:基金主代码|交易代码|基金代码)((?:\d{6})+)/g)].flatMap(m=>m[1].match(/\d{6}/g)).concat(codeChanges.flatMap(c=>[c.from,c.to])))].sort();
   const tradingLines=[...text.matchAll(/(?:^|\n)\s*交易代码[ \t|：:]+(\d{6})(?=[ \t]*(?:\n|$))/g)].map(m=>m[1]);

@@ -100,8 +100,10 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, rep
   await Promise.all(Array.from({length:Math.min(concurrency, jobs.length)}, async () => {
     while (cursor < jobs.length) {
       const {fund, year} = jobs[cursor++];
-      let portfolio;
-      try { portfolio = await queryFundPortfolio(fund.fundCode, year, {fetchImpl, timeoutMs:20000}); }
+      const required=universe?[...memberIndex].filter(([key,members])=>key.startsWith(year+'-Q')&&members.has(fund.fundCode)).map(([key])=>key):[];
+      const originalReportsComplete=required.length>0&&required.every(key=>reportIndex.has(key+':'+fund.fundCode));
+      let portfolio={quarters:[],source:null};
+      try { if(!originalReportsComplete)portfolio = await queryFundPortfolio(fund.fundCode, year, {fetchImpl, timeoutMs:20000}); }
       catch (error) { onProgress({fund:fund.fundCode,year,error:error.message}); portfolio={quarters:[],source:null}; }
       for(let q=1;q<=4;q++){
         const key=year+'-Q'+q,evidence=reportIndex.get(key+':'+fund.fundCode);

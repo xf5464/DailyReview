@@ -29,7 +29,7 @@ function ownProductPages(pages) {
     const compact=line.normalize('NFKC').replace(/\s+/g,'');
     const heading=compact.match(/^(第[一二三四五六七八九十百0-9]+(?:部分|章)|[一二三四五六七八九十百]+[、.]|§\d+(?:\.\d+)*)(.{1,55})$/);
     if(heading) {
-      if(/^(?:基金管理人|基金托管人|相关服务机构)/.test(heading[2]))management=true;
+      if(/^(?:基金管理人|基金经理|基金托管人|相关服务机构)/.test(heading[2]))management=true;
       else if(heading[1].startsWith('第')||/^(?:基金|投资|风险|释义|招募|绪言|重要提示|托管协议|费用|收益|其他)/.test(heading[2]))management=false;
     }
     return !management;
@@ -181,8 +181,15 @@ async function readDisclosurePdf(row,{directory,python='python',fetchImpl=fetch,
     if(!response.ok)throw new Error('Disclosure PDF HTTP '+response.status);
     const data=Buffer.from(await response.arrayBuffer());
     if(data.length>20*1024*1024 || !data.subarray(0,5).equals(Buffer.from('%PDF-')))throw new Error('Invalid or oversized disclosure PDF');
-    const tmp=pdfFile+'.tmp';fs.writeFileSync(tmp,data);fs.renameSync(tmp,pdfFile);
-    fs.writeFileSync(metaFile,JSON.stringify({url,hash:hash(data),downloadedAt:new Date().toISOString()}));
+    // Original attachments are immutable: publish once, even when independent workers finish together.
+    const publishOnce=(file,bytes)=>{
+      const tmp=file+'.'+process.pid+'.'+crypto.randomUUID()+'.tmp';fs.writeFileSync(tmp,bytes);
+      try{try{fs.linkSync(tmp,file);}catch(error){if(error.code!=='EEXIST')throw error;}}
+      finally{fs.unlinkSync(tmp);}
+    };
+    publishOnce(pdfFile,data);
+    if(hash(fs.readFileSync(pdfFile))!==hash(data))throw new Error('Conflicting concurrent disclosure PDF');
+    publishOnce(metaFile,JSON.stringify({url,hash:hash(data),downloadedAt:new Date().toISOString()}));
   }
   const meta=JSON.parse(fs.readFileSync(metaFile,'utf8'));
   if(!attachmentPattern.test(meta.url) || hash(fs.readFileSync(pdfFile))!==meta.hash)throw new Error('Disclosure PDF cache checksum mismatch');

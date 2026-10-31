@@ -99,6 +99,35 @@ function inputs(){
  const archive={schemaVersion:1,quarter,cutoffReached:true,preparedAt:'2026-10-31',sources:[{url:'https://api.fund.eastmoney.com/f10/JJGG?fundcode=',hash:'a'.repeat(64)}],histories:funds.map(f=>({fundCode:f.fundCode,reports:[report(f.fundCode,f.fundCode==='000003'?name:activeName)]}))};
  return {census,archive};
 }
+test('a second extraction of the same report cannot erase recovered NAV or a verified scope exclusion',()=>{
+ const r=report('000001','测试灵活配置混合型证券投资基金'),identity=reportIdentity(r.title),base={fundCode:'000001',quarter,id:r.id,productName:identity.productName,mainFundCode:'000001',classification:r.classification};
+ const census={schemaVersion:1,quarters:[{quarter,recordCount:1,funds:[{fundCode:'000001',fundName:identity.productName,netAsset10kCny:null}]}]};
+ const text={...r,evidence:{...base,extractionMethod:'complete-official-disclosure-text',navTotal10kCny:300}},pdf={...r,publishedAt:r.publishedAt+'T00:00:00',evidence:{...base,extractionMethod:'complete-PDF-layout',navTotal10kCny:null}};
+ const run=reports=>reconcileFundUniverse(census,reports.map(row=>({schemaVersion:1,histories:[{fundCode:'000001',reports:[row]}]})));
+ for(const rows of [[text,pdf],[pdf,text]])assert.equal(run(rows).universe.quarters[quarter].funds[0].netAsset10kCny,300);
+ const excluded={...pdf,evidence:{...pdf.evidence,classification:{...r.classification,status:'excluded',type:null}}};
+ for(const rows of [[text,excluded],[excluded,text]]){const result=run(rows);assert.equal(result.universe.quarters[quarter].funds.length,0);assert.equal(result.summaries[0].excludedShareCount,1);}
+});
+test('only a terminated contract in liquidation throughout the quarter excludes an otherwise active fund with unavailable NAV',()=>{
+ const request={fundCode:'004064',quarter:'2018-Q2',id:'AN201807171167312788',title:'测试灵活配置混合型证券投资基金2018年第2季度报告',publishedAt:'2018-07-18'};
+ const text=request.title+'\n本基金自2018年3月28日起进入清算程序,截止本报告期末尚处于清算程序之中。由于触发基金合同终止的情形。\n基金产品概况 基金简称测试混合 基金主代码004064 基金运作方式契约型开放式\n主要财务指标';
+ const parse=t=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:t}]},request).classification;
+ assert.equal(parse(text).status,'excluded');assert.equal(parse(text.replace('3月28日','4月28日')).status,'active');assert.equal(parse(text.replace('触发基金合同终止','发生净值波动')).status,'active');assert.equal(parse(text.replace('尚处于清算程序','已恢复正常运作')).status,'active');
+});
+test('explicit post-transformation overview excludes prior protected mandates and prior-section codes from current binding',()=>{
+ const request={fundCode:'002453',fundCodes:['002453','002454'],quarter:'2018-Q2',id:'AN201807171167395965',title:'测试灵活配置混合型证券投资基金2018年第2季度报告',publishedAt:'2018-07-18'};
+ const text=request.title+'\n基金产品概况\n转型后：\n基金简称测试混合 基金主代码002453 交易代码002453 基金运作方式契约型开放式\n下属分级基金的交易代码002453 002454\n转型前：\n基金简称测试保本混合 基金主代码002450 交易代码002453 基金运作方式契约型开放式 本基金为保本型基金。\n主要财务指标';
+ const result=parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text}]},request);assert.equal(result.classification.status,'active');assert.equal(result.mainFundCode,'002453');assert.deepEqual(result.reportedFundCodes,['002453','002454']);assert.equal(result.reportCodeBindingComplete,true);
+ const future=text.replace('基金运作方式契约型开放式','基金运作方式契约型开放式基金合同生效日2018年7月3日');assert.throws(()=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:future}]},request),/not effective at report quarter end/);
+});
+test('a source-added flexible-allocation term requires printed code identity and cannot establish legal eligibility',()=>{
+ const request={fundCode:'001851',quarter:'2017-Q2',id:'AN201707210734343307',title:'测试制造灵活配置混合型证券投资基金2017年第2季度报告',publishedAt:'2017-07-21'};
+ const text='测试制造混合型证券投资基金2017年第2季度报告\n基金产品概况 基金简称测试制造混合 基金主代码001851 基金运作方式契约型开放式\n主要财务指标 单位：人民币元\n4.期末基金资产净值 10000.00\n5.期末基金份额净值 1.00';
+ const parse=t=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:t}]},request);
+ assert.equal(parse(text).navTotal10kCny,1);assert.equal(parse(text).classification.status,'unresolved');assert.match(parse(text).bodyIdentityBasis,/printed-fund-code/);
+ assert.throws(()=>parse(text.replaceAll('001851','001852')),/different product or quarter/);assert.throws(()=>parse(text.replaceAll('测试制造','其他制造')),/different product or quarter/);
+ assert.equal(parse(text.replace('主要财务指标','本基金为灵活配置混合型基金。主要财务指标')).classification.status,'active');
+});
 test('published cohort merges legal-product share classes and counts all uncertain NAV conservatively',()=>{
  const {census,archive}=inputs();const out=buildPublishedUniverse(census,[archive]);const q=out.universe.quarters[quarter];
  assert.equal(q.funds.length,1);assert.equal(q.funds[0].netAsset10kCny,30000);assert.equal(q.funds[0].netAssetLowerBound10kCny,29900);assert.equal(q.funds[0].netAssetUpperBound10kCny,30100);
@@ -203,6 +232,7 @@ test('fund-of-funds wording does not require a duplicated final fund noun',()=>{
 
 test('section-sign chapters resume own-product evidence after manager biographies',()=>{
  assert.equal(classify('§1 基金管理人\n本基金为货币市场基金。\n§4 基金名称\n§5 基金的投资\n股票资产占基金资产的比例为60%-95%。').status,'active');
+ assert.equal(classify('§1 基金管理人\n§1.2 基金经理\n本基金为货币市场基金。\n§5 基金的投资\n股票资产占基金资产的比例为60%-95%。').status,'active');
  assert.equal(classify('§1 基金管理人\n本基金为股票型基金。\n§5 基金的类型\n本基金为货币市场基金。').status,'excluded');
  assert.equal(classify('本基金投资范围为固定收益类金融工具，具体包括国债、金融债。').status,'excluded');
  assert.equal(classify('本基金投资范围主要为固定收益类金融工具。').status,'unresolved');

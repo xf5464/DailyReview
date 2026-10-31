@@ -49,6 +49,20 @@ function selectQuarterReports(rows) {
   }
   return [...selected.values()].sort((a,b)=>quarterIndex(a.classification.quarter)-quarterIndex(b.classification.quarter));
 }
+function reportOverview(contents,quarter){
+  const compact=String(contents).normalize('NFKC').replace(/\s+/g,''),section=compact.search(/基金产品概况|基金基本情况/),first=compact.indexOf('基金简称',Math.max(0,section));
+  const end=first>=0?compact.indexOf('主要财务指标',first):-1,start=section>=0?section:0;
+  const block=compact.slice(start,end>start?end:start+7000),post=block.indexOf('转型后:');
+  if(post>=0){
+    const remaining=block.slice(post+'转型后:'.length),before=remaining.indexOf('转型前:'),current=before>=0?remaining.slice(0,before):remaining;
+    if(/基金简称/.test(current)&&/基金主代码/.test(current)&&/基金运作方式/.test(current)){
+      const effective=current.match(/基金合同生效日[:：]?(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      if(quarter&&effective){const date=Date.UTC(Number(effective[1]),Number(effective[2])-1,Number(effective[3])),d=new Date(date);if(d.getUTCFullYear()!==Number(effective[1])||d.getUTCMonth()+1!==Number(effective[2])||d.getUTCDate()!==Number(effective[3])||date>Date.UTC(Number(quarter.slice(0,4)),Number(quarter.slice(-1))*3,0))throw new Error('Post-transformation contract not effective at report quarter end');}
+      return current;
+    }
+  }
+  return block;
+}
 function parseReportPage(body,{fundCode,id,quarter,page=1}) {
   const response=typeof body==='string'?JSON.parse(body):body;
   const data=response?.data,identity=reportIdentity(data?.notice_title);
@@ -72,18 +86,29 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
       periodConfirmed=valid(start,m[1],m[2],m[3])&&valid(end,m[4]||m[1],m[5],m[6])&&end===quarterEnd&&start<=end&&start>=quarterStart-62*86400000;
     }
   }
-  const sectionStart=contents.search(/基金产品概况|基金基本情况/);
-  const overview=sectionStart>=0?contents.slice(sectionStart,sectionStart+7000):contents.slice(0,7000);
+  const overview=reportOverview(contents,quarter);
   const mainMatch=overview.replace(/\s+/g,'').match(/基金主代码[|：:]*([0-9]{6})(?!\d)/);
   const codeSet=new Set([...(overview.matchAll(/(?<!\d)\d{6}(?!\d)/g))].map(m=>m[0]));
   const overviewCompact=overview.normalize('NFKC').replace(/\s+/g,'');
   const printedAliases=[...overviewCompact.matchAll(/(?:基金简称|扩位证券简称)[|：:]*([^。；,，]{1,100}?)(?=场内简称|基金主代码|交易代码|基金运作方式|基金合同生效日|下属|$)/g)].map(m=>m[1]);
   const sourceName=identity.productName.normalize('NFKC').replace(/[：:]$/,'');
   const aliasIdentity=codeSet.has(fundCode)&&printedAliases.includes(sourceName);
-  if(page===1&&(!periodConfirmed||(!header.replace(/[()]/g,'').includes(identity.productName.normalize('NFKC').replace(/[()]/g,''))&&!aliasIdentity)))throw new Error('Report body has different product or quarter');
+  const fullNameIdentity=header.replace(/[()]/g,'').includes(identity.productName.normalize('NFKC').replace(/[()]/g,''));
+  const flexibleNameVariant=!fullNameIdentity&&codeSet.has(fundCode)&&sourceName.includes('灵活配置混合型证券投资基金')&&header.replace(/[()]/g,'').includes(sourceName.replace('灵活配置混合型证券投资基金','混合型证券投资基金').replace(/[()]/g,''));
+  if(page===1&&(!periodConfirmed||(!fullNameIdentity&&!aliasIdentity&&!flexibleNameVariant)))throw new Error('Report body has different product or quarter');
   const associated=Array.isArray(data.security)&&data.security.some(s=>s.stock===fundCode);
   if(!associated && !codeSet.has(fundCode))throw new Error('Report does not identify requested fund');
   const classification=classifyReportTitle(data.notice_title);
+  if(flexibleNameVariant&&classification.status!=='excluded'){
+    classification.status='unresolved';classification.type=null;classification.reason='Reported legal name omits flexible-allocation term; explicit subtype or allocation evidence required';
+  }
+  const liquidationText=compact.slice(0,16000),liquidation=liquidationText.match(/本基金自(\d{4})年(\d{1,2})月(\d{1,2})日起(?:进入|开始)清算程序/);
+  if(liquidation&&/触发基金合同终止|基金合同(?:已)?终止/.test(liquidationText)&&/截[止至](?:本)?报告期末[^。；]{0,15}(?:尚|仍)处于清算程序/.test(liquidationText)){
+    const date=Date.UTC(Number(liquidation[1]),Number(liquidation[2])-1,Number(liquidation[3])),d=new Date(date);
+    if(d.getUTCFullYear()===Number(liquidation[1])&&d.getUTCMonth()+1===Number(liquidation[2])&&d.getUTCDate()===Number(liquidation[3])&&date<=Date.UTC(Number(quarter.slice(0,4)),(qNumber-1)*3,1)){
+      classification.status='excluded';classification.type=null;classification.reason='Dated report confirms contract termination and liquidation throughout the quarter';
+    }
+  }
   const legalName=overviewCompact.match(/基金(?:名称|全称)[|：:]*([^。；]{1,120}?证券投资基金)(?=基金简称)/)?.[1];
   if(legalName&&classifyReportTitle(legalName+quarter.slice(0,4)+'年第'+qNumber+'季度报告').status==='excluded'){
     classification.status='excluded';classification.type=null;classification.reason='Explicit legal product name in dated report overview';
@@ -110,7 +135,7 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
     ? navValues.reduce((a,b)=>a+b,0)/10000:null;
   return {fundCode,quarter,id,productName:identity.productName,
     mainFundCode:mainMatch?.[1] || null,productId:mainMatch?'main-code:'+mainMatch[1]:null,
-    classification,navTotal10kCny,navClassValuesCny:navValues,currencyConfirmed,
+    classification,bodyIdentityBasis:flexibleNameVariant?'printed-fund-code-and-name-without-flexible-type-term':aliasIdentity?'printed-report-alias-and-fund-code':'reported-legal-name',navTotal10kCny,navClassValuesCny:navValues,currencyConfirmed,
     contentPages:Number(data.page_size),page,sourceTitle:data.notice_title,
     sourceDate:data.notice_date,associatedFundCodes:Array.isArray(data.security)?data.security.map(s=>s.stock):[]};
 }
@@ -214,6 +239,6 @@ function pacedContentFetch({fetchImpl=fetch,intervalMs=1200,retries=2,sleep=ms=>
     const result=queue.then(run,run);queue=result.then(()=>{},()=>{});return result;
   };
 }
-module.exports={reportIdentity,classifyReportTitle,parseReportList,selectQuarterReports,parseReportPage,collectReportHistory,collectGlobalQuarterReports,pacedContentFetch,main};
+module.exports={reportIdentity,classifyReportTitle,parseReportList,selectQuarterReports,reportOverview,parseReportPage,collectReportHistory,collectGlobalQuarterReports,pacedContentFetch,main};
 
 
