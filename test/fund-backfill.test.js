@@ -55,6 +55,10 @@ test('current QDII flags only locate dated reports and never backfill a historic
  assert.equal(scopeReportRequests(preview,archive,candidates,reviewed).length,0);
  archive.histories[0].reports[0].id='AN20161001002';
  assert.equal(scopeReportRequests(preview,archive,candidates,reviewed).length,1);
+ const failed=JSON.parse(JSON.stringify(preview));
+ assert.equal(scopeReportRequests(preview,archive,candidates,reviewed,new Set(['AN20161001002'])).length,0);
+ assert.deepEqual(preview,failed); // An attempted review does not change membership or count it as successful.
+ assert.equal(scopeReportRequests(preview,archive,candidates,reviewed,new Set()).length,1);
  const merged=mergeReportEvidence(reviewed,{histories:[{reports:[{id:'AN20161001002'}]}],holdingsEvidence:[]});
  assert.equal(merged.histories.length,2);
 });

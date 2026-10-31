@@ -15,10 +15,14 @@ function parseCompleteReportPdf(document,request) {
     security:(request.fundCodes || [request.fundCode]).map(stock=>({stock}))}},
     {fundCode:request.fundCode,id:request.id,quarter:request.quarter});
   const row4=text.match(/4[.、．]\s*期末基金资产(?:\s*净值)?/);
-  const start=row4?row4.index:text.indexOf('期末基金资产净值');
+  let start=row4?row4.index:text.indexOf('期末基金资产净值');
   const row5=start>=0?text.slice(start).match(/5[.、．]\s*期末基金份额(?:\s*净值)?/):null;
   const end=row5?start+row5.index:start>=0?text.indexOf('期末基金份额净值',start):-1;
-  const section=start>=0&&end>start?text.slice(start+(row4?row4[0].length:'期末基金资产净值'.length),end):null;
+  let section=start>=0&&end>start?text.slice(start+(row4?row4[0].length:'期末基金资产净值'.length),end):null;
+  if(!section){
+    const wrapped=text.match(/4[.、．]\s*期末基金资([\s\S]{1,2000}?)5[.、．]\s*期末基金份/);
+    if(wrapped&&wrapped[1].replace(/[\d,]+\.\d{2}/g,'').replace(/[\s\-—–]/g,'')==='产净值'){start=wrapped.index;section=wrapped[1];}
+  }
   if(section && section.length<2000) {
     const values=[...section.matchAll(/(?<![\d.])[\d,]+\.\d{2}(?!\d)/g)].map(m=>Number(m[0].replaceAll(',','')));
     const currency=/单\s*位[\s：:]*人\s*民\s*币\s*元/.test(text.slice(Math.max(0,start-4500),start));

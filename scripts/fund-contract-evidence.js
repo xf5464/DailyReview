@@ -27,7 +27,7 @@ function ownProductPages(pages) {
   let management=false;
   return pages.map(page=>({...page,text:page.text.split(/\r?\n/).filter(line=>{
     const compact=line.normalize('NFKC').replace(/\s+/g,'');
-    const heading=compact.match(/^(第[一二三四五六七八九十百0-9]+(?:部分|章)|[一二三四五六七八九十百]+[、.])(.{1,55})$/);
+    const heading=compact.match(/^(第[一二三四五六七八九十百0-9]+(?:部分|章)|[一二三四五六七八九十百]+[、.]|§\d+(?:\.\d+)*)(.{1,55})$/);
     if(heading) {
       if(/^(?:基金管理人|基金托管人|相关服务机构)/.test(heading[2]))management=true;
       else if(heading[1].startsWith('第')||/^(?:基金|投资|风险|释义|招募|绪言|重要提示|托管协议|费用|收益|其他)/.test(heading[2]))management=false;
@@ -61,6 +61,8 @@ function classifyContractText(document,{productName,quarter,disclosureTitle=''})
   if(fundOfFunds)return proof('excluded',null,'Dated own-product statement identifies a fund of funds',null,fundOfFunds[0]);
   const cashMandate=compact.match(/本货币市场基金/) || compact.match(/风险收益特征(?:本)?基金(?:为|是|属于)货币市场基金/) || compact.match(/本基金可投资的大类资产主要为短期金融市场工具/);
   if(cashMandate)return proof('excluded',null,'Dated own-product mandate identifies money-market strategy',null,cashMandate[0]);
+  const fixedIncomeOnly=compact.match(/本基金(?:的)?投资范围为固定收益类金融工具/);
+  if(fixedIncomeOnly)return proof('excluded',null,'Dated own-product investment universe is fixed-income instruments',null,fixedIncomeOnly[0]);
   const passiveMandate=compact.match(/本基金(?:将|主要|将主要)?(?:采用|采取)(?:完全复制法|完全复制策略|抽样复制法|指数化投资方式|指数增强投资策略)/) || compact.match(/本基金是(?:一只)?(?:采用)?完全复制方式被动跟踪标的指数的基金/);
   if(passiveMandate)return proof('excluded',null,'Dated own-product mandate explicitly tracks an index',null,passiveMandate[0]);
   const overseasQuota=compact.match(/本基金[^。；]{0,45}(?:中国证监会|国家外汇管理局|外管局)[^。；]{0,30}(?:核准|批准)[^。；]{0,12}境外(?:证券)?投资额度/);

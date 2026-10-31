@@ -15,7 +15,7 @@ function catalogueScopeCandidates(text){
  if(!Array.isArray(rows)||rows.some(r=>!Array.isArray(r)||!/^\d{6}$/.test(r[0])||typeof r[3]!=='string'))throw new Error('Invalid discovery catalogue rows');
  return new Set(rows.filter(r=>/QDII|FOF/i.test(r[3])).map(r=>r[0]));
 }
-function scopeReportRequests(preview,archive,candidates,pdfs){
+function scopeReportRequests(preview,archive,candidates,pdfs,attemptedIds=new Set()){
  const q=preview.universe.quarters[archive.quarter];
  const possible=new Set([...q.funds,...q.unclassifiedFunds].map(f=>canonical(f.fundName)));
  const families=new Map();
@@ -28,7 +28,7 @@ function scopeReportRequests(preview,archive,candidates,pdfs){
  const reviewed=new Set((pdfs?.histories||[]).flatMap(h=>h.reports.filter(r=>r.evidence?.reportParserVersion===2).map(r=>r.id)));
  return [...families.values()].filter(f=>[...f.codes].some(c=>candidates.has(c))||/全球|环球|海外|境外|国际|亚太|亚洲|大中华|成熟市场|新兴市场|中国价值发现|中国互联网|油气能源|美国|欧洲|日本|印度|越南|韩国|台湾|德国|巴西|俄罗斯|东南亚|美元/.test(f.name)).flatMap(f=>{
   const report=f.reports.sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)||a.fundCode.localeCompare(b.fundCode))[0];
-  if(reviewed.has(report.id))return [];
+  if(reviewed.has(report.id)||attemptedIds.has(report.id))return [];
   return [{...report,quarter:archive.quarter,productName:f.name,fundCodes:[...f.codes].sort()}];
  });
 }
@@ -170,15 +170,16 @@ async function main(args=process.argv.slice(2)) {
     const contractArgs=['--cache',path.resolve(get('--disclosures')||path.join(cache,'disclosures')),'--python',get('--python')||'python','--fallback','--text-fallback','--concurrency',get('--concurrency')||'3'];
     await run('fund-contract-evidence.js',['--requests',cacheRequests,'--output',cachedResult,'--cache-only','--defer-classic',...contractArgs],path.join(dir,'contracts.log'));
     contracts=mergeContractEvidence(contracts,{...read(cachedResult),evidence:read(cachedResult).evidence.filter(e=>e.status!=='unresolved')});write(contractFile,contracts);preview=rebuild();
-    const attempted=new Set(),reportAttempted=new Set();let validated=false,classicPass=false;
+    const attempted=new Set(),reportAttempted=new Set(),scopeAttempted=new Set();let validated=false,classicPass=false;
     for(let batch=0;batch<100;batch++){
      if(preview.productionReady){
       for(let reportPass=0;reportPass<4&&preview.productionReady;reportPass++){
        const universe=preview.universe;
        const collection=await collect({universe,industries,reportHoldings:pdfs?.holdingsEvidence||[],reportScopeEvidence:(pdfs?.histories||[]).flatMap(h=>h.reports.map(r=>r.evidence).filter(Boolean)),years:[Number(quarter.slice(0,4))],fetchImpl:cachedFetch(cache),concurrency:3,onProgress:e=>{if(e.error)log({quarter,stage:'holdings-source',...e});}});
        write(path.join(dir,'holdings-diagnostics.json'),{...collection,snapshots:collection.snapshots.map(({holdings,...q})=>q)});
-       const scopeRequests=scopeReportRequests(preview,archive,new Set(collection.snapshots.find(q=>q.quarter===quarter)?.scopeReviewFundCodes||[]),pdfs);
+       const scopeRequests=scopeReportRequests(preview,archive,new Set(collection.snapshots.find(q=>q.quarter===quarter)?.scopeReviewFundCodes||[]),pdfs,scopeAttempted);
        if(scopeRequests.length){
+        scopeRequests.forEach(r=>scopeAttempted.add(r.id));
         const file=path.join(dir,'holdings-scope-requests.json'),output=path.join(dir,'holdings-scope-evidence.json');write(file,scopeRequests);
         log({quarter,stage:'scope-from-holdings',requests:scopeRequests.length});
         await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));

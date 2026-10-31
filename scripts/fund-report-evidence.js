@@ -72,14 +72,22 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
       periodConfirmed=valid(start,m[1],m[2],m[3])&&valid(end,m[4]||m[1],m[5],m[6])&&end===quarterEnd&&start<=end&&start>=quarterStart-62*86400000;
     }
   }
-  if(page===1 && (!periodConfirmed || !header.replace(/[()]/g,'').includes(identity.productName.normalize('NFKC').replace(/[()]/g,''))))throw new Error('Report body has different product or quarter');
   const sectionStart=contents.search(/基金产品概况|基金基本情况/);
   const overview=sectionStart>=0?contents.slice(sectionStart,sectionStart+7000):contents.slice(0,7000);
   const mainMatch=overview.replace(/\s+/g,'').match(/基金主代码[|：:]*([0-9]{6})(?!\d)/);
   const codeSet=new Set([...(overview.matchAll(/(?<!\d)\d{6}(?!\d)/g))].map(m=>m[0]));
+  const overviewCompact=overview.normalize('NFKC').replace(/\s+/g,'');
+  const printedAliases=[...overviewCompact.matchAll(/(?:基金简称|扩位证券简称)[|：:]*([^。；,，]{1,100}?)(?=场内简称|基金主代码|交易代码|基金运作方式|基金合同生效日|下属|$)/g)].map(m=>m[1]);
+  const sourceName=identity.productName.normalize('NFKC').replace(/[：:]$/,'');
+  const aliasIdentity=codeSet.has(fundCode)&&printedAliases.includes(sourceName);
+  if(page===1&&(!periodConfirmed||(!header.replace(/[()]/g,'').includes(identity.productName.normalize('NFKC').replace(/[()]/g,''))&&!aliasIdentity)))throw new Error('Report body has different product or quarter');
   const associated=Array.isArray(data.security)&&data.security.some(s=>s.stock===fundCode);
   if(!associated && !codeSet.has(fundCode))throw new Error('Report does not identify requested fund');
   const classification=classifyReportTitle(data.notice_title);
+  const legalName=overviewCompact.match(/基金(?:名称|全称)[|：:]*([^。；]{1,120}?证券投资基金)(?=基金简称)/)?.[1];
+  if(legalName&&classifyReportTitle(legalName+quarter.slice(0,4)+'年第'+qNumber+'季度报告').status==='excluded'){
+    classification.status='excluded';classification.type=null;classification.reason='Explicit legal product name in dated report overview';
+  }
   const riskText=overview.replace(/\s+/g,'');
   const abbreviation=riskText.match(/基金简称[|：:]*([^。；]{1,100}?)(?:场内简称|基金主代码|交易代码|基金运作方式|基金合同生效日)/)?.[1]||'';
   const overseasCustody=/境外资产托管人/.test(riskText)&&/境外(?:证券|股票|资本)?市场|全球[^。；]{0,80}(?:证券|股票|基金)|合格境内机构投资者|外汇额度/.test(riskText);

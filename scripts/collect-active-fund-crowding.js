@@ -248,7 +248,18 @@ function cachedFetch(directory, {refresh = false, fetchImpl = fetch, intervalMs 
     const record = {url:stable.href, fetchedAt:new Date().toISOString(), hash:hash(body), body};
     const temporary = file + '.' + process.pid + '.tmp';
     fs.writeFileSync(temporary, JSON.stringify(record) + '\n');
-    fs.renameSync(temporary, file);
+    try {
+      for(let attempt=0;;attempt++) {
+        try { fs.renameSync(temporary,file); break; }
+        catch(error) {
+          if(!['EPERM','EACCES','EEXIST'].includes(error.code))throw error;
+          // Windows can briefly lock the destination while another collector publishes it.
+          try { const winner=JSON.parse(fs.readFileSync(file,'utf8')); if(winner.url===record.url&&winner.hash===record.hash&&hash(winner.body)===record.hash)break; } catch {}
+          if(attempt===9)throw error;
+          await new Promise(resolve=>setTimeout(resolve,50));
+        }
+      }
+    } finally { if(fs.existsSync(temporary))fs.unlinkSync(temporary); }
     return {ok:true, fundCrowdingSource:{url:record.url,fetchedAt:record.fetchedAt,hash:record.hash}, text:async () => body};
   };
 }

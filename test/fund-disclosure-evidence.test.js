@@ -201,6 +201,13 @@ test('fund-of-funds wording does not require a duplicated final fund noun',()=>{
  assert.equal(classify('本基金属基金中基金。').status,'excluded');
 });
 
+test('section-sign chapters resume own-product evidence after manager biographies',()=>{
+ assert.equal(classify('§1 基金管理人\n本基金为货币市场基金。\n§4 基金名称\n§5 基金的投资\n股票资产占基金资产的比例为60%-95%。').status,'active');
+ assert.equal(classify('§1 基金管理人\n本基金为股票型基金。\n§5 基金的类型\n本基金为货币市场基金。').status,'excluded');
+ assert.equal(classify('本基金投资范围为固定收益类金融工具，具体包括国债、金融债。').status,'excluded');
+ assert.equal(classify('本基金投资范围主要为固定收益类金融工具。').status,'unresolved');
+});
+
 test('the phrase investment ratios as follows is not mistaken for a hypothetical example',()=>{
  assert.equal(classify('本基金的具体投资比例如下：股票投资比例浮动范围：60%-95%；其他资产5%-40%。').status,'active');
  assert.equal(classify('例如，股票资产占基金资产的比例为60%-95%。').status,'unresolved');
@@ -241,6 +248,18 @@ test('official report text independently binds source announcement identity befo
  const request={fundCode:'000001',quarter:'2018-Q1',id:'AN201804201126891338',title:'测试股票型证券投资基金2018年第1季度报告',publishedAt:'2018-04-20'},text=request.title+'\n基金简称测试股票 基金主代码000001 基金运作方式契约型\n主要财务指标';
  const {parseOfficialReportText}=require('../scripts/fund-report-pdf-evidence');
  for(const changed of [{...request,id:'AN201804201126891339'},{...request,publishedAt:'2018-04-21'},{...request,title:'另一基金2018年第1季度报告'}])assert.throws(()=>parseOfficialReportText(officialQuarterFixture(text,changed),request),/announcement identity mismatch/);
+});
+
+test('a wrapped NAV row label can surround class amounts without confusing total assets with net assets',()=>{
+ const request={fundCode:'519066',quarter:'2021-Q4',id:'AN202201241542297152',title:'测试灵活配置混合型证券投资基金2021年第4季度报告',publishedAt:'2022-01-24'},text=request.title+'\n基金简称测试混合 基金主代码519066 基金运作方式契约型\n主要财务指标 单位：人民币元\n4.期末基金资 7,845,038,276.87 - 1,021,949.96\n产净值\n5.期末基金份 3.627 - 3.624\n额净值';
+ const parse=t=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:t}]},request);
+ assert.equal(parse(text).navTotal10kCny,(7845038276.87+1021949.96)/10000);assert.deepEqual(parse(text).navClassValuesCny,[7845038276.87,1021949.96]);assert.equal(parse(text.replace('产净值','产总值')).navTotal10kCny,null);
+});
+
+test('a short announcement name requires its exact printed report alias and matching fund code',()=>{
+ const request={fundCode:'180101',quarter:'2021-Q3',id:'AN202110271525291495',title:'测试产园REIT:2021年第3季度报告',publishedAt:'2021-10-27'},text='测试产业园封闭式基础设施证券投资基金2021年第3季度报告\n基金产品概况 基金名称测试产业园封闭式基础设施证券投资基金 基金简称测试产业园REIT 场内简称证券简称:测试产园,扩位证券简称:测试产园REIT 基金主代码180101 交易代码180101 基金运作方式契约型封闭式\n主要财务指标';
+ const parse=t=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:t}]},request);
+ assert.equal(parse(text).classification.status,'excluded');assert.throws(()=>parse(text.replaceAll('180101','180102')),/different product or quarter/);assert.throws(()=>parse(text.replace('扩位证券简称:测试产园REIT','扩位证券简称:另一产园REIT')),/different product or quarter/);assert.throws(()=>parse(text.replaceAll('2021年第3','2021年第2')),/different product or quarter/);
 });
 
 test('official text transport retries a network reset on the same verified HTTPS URL and respects cancellation',async()=>{
