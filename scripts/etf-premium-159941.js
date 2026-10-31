@@ -10,10 +10,27 @@ function parsePremiumPage(html) {
   if (!Number.isFinite(value) || Math.abs(value)>100) throw new Error('Invalid ETF premium');
   return {date:date[1],value};
 }
+function parsePremiumHistory(html) {
+  const rows = [];
+  const pattern = /<tr\\b[^>]*>([\\s\\S]*?)<\\/tr>/gi;
+  let match;
+  while ((match = pattern.exec(String(html))) !== null) {
+    const cells = [...match[1].matchAll(/<t[dh]\\b[^>]*>([\\s\\S]*?)<\\/t[dh]>/gi)].map(m => m[1].replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').trim());
+    if (cells.length < 3 || !/^\\d{4}-\\d{2}-\\d{2}$/.test(cells[0])) continue;
+    const value = cells[2].match(/^([+−-]?\\d+(?:\\.\\d+)?)%$/);
+    if (!value) continue; // historical NAV premium is NOT the IOPV reference premium
+    const number = Number(value[1].replace('−', '-'));
+    if (Number.isFinite(number) && Math.abs(number) <= 100) rows.push({date:cells[0], value:number});
+  }
+  return [...new Map(rows.map(item => [item.date,item])).values()].sort((a,b) => a.date.localeCompare(b.date));
+}
 async function queryEtfPremium159941({fetchImpl=fetch}={}) {
   const response=await fetchImpl(SOURCE_URL,{headers:{'User-Agent':'Mozilla/5.0'},signal:AbortSignal.timeout(15000)});
   if (!response.ok) throw new Error('ETF premium source HTTP '+response.status);
-  const item=parsePremiumPage(await response.text());
-  return {items:[item]};
+  const html=await response.text();
+  const item=parsePremiumPage(html);
+  const history = parsePremiumHistory(html);
+  const items = [...new Map([...history, item].map(point => [point.date, point])).values()].sort((a,b) => a.date.localeCompare(b.date));
+  return {items};
 }
-module.exports={parsePremiumPage,queryEtfPremium159941,SOURCE_URL};
+module.exports={parsePremiumPage,parsePremiumHistory,queryEtfPremium159941,SOURCE_URL};
