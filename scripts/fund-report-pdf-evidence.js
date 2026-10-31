@@ -11,12 +11,14 @@ function parseCompleteReportPdf(document,request) {
     notice_content:text,notice_date:request.publishedAt,page_size:1,
     security:(request.fundCodes || [request.fundCode]).map(stock=>({stock}))}},
     {fundCode:request.fundCode,id:request.id,quarter:request.quarter});
-  const start=text.indexOf('期末基金资产净值');
-  const end=start>=0?text.indexOf('期末基金份额净值',start):-1;
-  const section=start>=0&&end>start?text.slice(start+'期末基金资产净值'.length,end):null;
+  const row4=text.match(/4[.、．]\s*期末基金资产(?:\s*净值)?/);
+  const start=row4?row4.index:text.indexOf('期末基金资产净值');
+  const row5=start>=0?text.slice(start).match(/5[.、．]\s*期末基金份额(?:\s*净值)?/):null;
+  const end=row5?start+row5.index:start>=0?text.indexOf('期末基金份额净值',start):-1;
+  const section=start>=0&&end>start?text.slice(start+(row4?row4[0].length:'期末基金资产净值'.length),end):null;
   if(section && section.length<2000) {
     const values=[...section.matchAll(/(?<![\d.])[\d,]+\.\d{2}(?!\d)/g)].map(m=>Number(m[0].replaceAll(',','')));
-    const currency=/单位[\s：:]*人民币元/.test(text.slice(Math.max(0,start-1500),start));
+    const currency=/单位[\s：:]*人民币元/.test(text.slice(Math.max(0,start-4500),start));
     if(currency && values.length && values.every(n=>Number.isFinite(n)&&n>=0)){
       result.navTotal10kCny=values.reduce((a,b)=>a+b,0)/10000;
       result.navClassValuesCny=values;result.currencyConfirmed=true;
@@ -38,7 +40,8 @@ async function main(args=process.argv.slice(2)) {
         {directory:path.resolve(get('--cache') || 'work/quarter-report-pdfs'),python:get('--python')||'python',extractionMode:'layout'});
       const evidence=parseCompleteReportPdf(result.document,request);
       console.error(JSON.stringify({fundCode:request.fundCode,quarter:request.quarter,nav:evidence.navTotal10kCny}));
-      return {...request,evidence:{...evidence,source:result.source}};
+      const holdings=require('./fund-report-holdings').parseReportHoldings(result.document,request,result.source);
+      return {...request,evidence:{...evidence,source:result.source},holdings};
     }catch(error){return {...request,error:error.message};}
   });
   const byCode=new Map();
@@ -48,7 +51,7 @@ async function main(args=process.argv.slice(2)) {
     byCode.get(row.fundCode).reports.push({fundCode:row.fundCode,id:row.id,title:row.title,
       publishedAt:row.publishedAt,classification:identity,...(row.evidence?{evidence:row.evidence}:{contentError:row.error})});
   }
-  const output={schemaVersion:1,source:'Complete original quarterly report PDFs',preparedAt:new Date().toISOString(),histories:[...byCode.values()]};
+  const output={schemaVersion:1,source:'Complete original quarterly report PDFs',preparedAt:new Date().toISOString(),histories:[...byCode.values()],holdingsEvidence:rows.map(r=>r.holdings).filter(Boolean)};
   const file=path.resolve(get('--output'));fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(output)+'\n');
   console.log(JSON.stringify({requests:rows.length,navConfirmed:rows.filter(r=>Number.isFinite(r.evidence?.navTotal10kCny)).length,errors:rows.filter(r=>r.error).length}));
 }

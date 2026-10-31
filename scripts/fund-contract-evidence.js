@@ -198,12 +198,13 @@ async function main(args=process.argv.slice(2)) {
   const directory=path.resolve(get('--cache') || 'work/fund-disclosure-cache');
   const cacheOnly=args.includes('--cache-only');
   const denyNetwork=async()=>{throw new Error('Source not in local cache');};
-  const load=sourceFetch(path.join(directory,'lists'),{refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:cacheOnly?denyNetwork:fetch}),histories=new Map();
-  const textLoad=sourceFetch(path.join(directory,'text','raw'),{refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:pacedContentFetch({fetchImpl:cacheOnly?denyNetwork:fetch})});
+  const load=sourceFetch(path.join(directory,'lists'),{cacheOnly,refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:cacheOnly?denyNetwork:fetch}),histories=new Map();
+  const textLoad=sourceFetch(path.join(directory,'text','raw'),{cacheOnly,refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:pacedContentFetch({fetchImpl:cacheOnly?denyNetwork:fetch})});
   const readRow=async row=>{
     try{return await readDisclosurePdf(row,{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly});}
     catch(error){
       if(!args.includes('--text-fallback'))throw error;
+      if(cacheOnly)return readDisclosureText(row,{directory:path.join(directory,'text'),load:textLoad,cacheOnly:true});
       const metadata=await textLoad(textUrl(row.id,1),body=>parseDisclosureMetadata(body,row),'https://fund.eastmoney.com/');
       if(metadata.value.attachmentUrl && metadata.value.attachmentUrl!=='https://pdf.dfcfw.com/pdf/H2_'+row.id+'_1.pdf') {
         try{return await readDisclosurePdf({...row,attachmentUrl:metadata.value.attachmentUrl},{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly});}catch{}

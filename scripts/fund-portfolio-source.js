@@ -73,7 +73,7 @@ function parseFundPortfolioText(text) {
 
       rows.push({
         market,
-        rank: Number(cells[indexes.rank]),
+        rank: /^\d+\*?$/.test(cells[indexes.rank])?Number(cells[indexes.rank].replace(/\*$/,'')):NaN,
         stockCode: cells[indexes.stockCode],
         stockName: cells[indexes.stockName],
         netValueRatio: toNumber(cells[indexes.netValueRatio]),

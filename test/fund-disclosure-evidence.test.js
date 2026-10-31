@@ -59,6 +59,14 @@ test('complete report layout sums A/C NAV in CNY and never adds adjacent financi
  assert.equal(parseCompleteReportPdf({pages:[{page:1,text:text.replace('人民币元','人民币万元')}],pdfSha256:'a'.repeat(64)},request).navTotal10kCny,null);
 });
 
+test('numbered financial rows recover NAV when a wrapped label surrounds its numeric cells',()=>{
+ const request={fundCode:'000001',fundCodes:['000001','000002'],quarter,id:'AN20261001001',title:name+'2026年第3季度报告',publishedAt:'2026-10-15'};
+ const text=request.title+'\n基金产品概况 基金主代码000001\n3.1主要财务指标 单位：人民币元\n4.期末基金资产\n48,635,033.24 62,786.08 -\n净值\n5.期末基金份额\n1.7509 1.7400 -\n净值';
+ const result=parseCompleteReportPdf({pages:[{page:1,text}],pdfSha256:'a'.repeat(64)},request);
+ assert.equal(result.navTotal10kCny,(48635033.24+62786.08)/10000);
+ assert.deepEqual(result.navClassValuesCny,[48635033.24,62786.08]);
+});
+
 test('dated report excludes insured capital-protection mandate without inferring from a generic loss warning',()=>{
  const request={fundCode:'000001',quarter,id:'AN20261001001',title:name+'2026年第3季度报告',publishedAt:'2026-10-15'};
  const parse=body=>parseCompleteReportPdf({pages:[{page:1,text:request.title+'\n基金产品概况 基金主代码 000001\n'+body}],pdfSha256:'a'.repeat(64)},request).classification;
@@ -115,6 +123,16 @@ test('official fixed taxonomy reads the direct second segment including retired 
  assert.equal(out.fixedMap['000671'],'房地产开发');assert.equal(out.historicalMappingVerified,false);assert.equal(out.classificationBasis,'fixed-taxonomy-restatement');
  assert.throws(()=>buildFixedIndustryInputs([{...parsed,source:{...source,url:source.url.replace('000671','000001')}}],{asOf:'2026-10-31'}),/Unverified/);
  assert.throws(()=>parseEM2016Industry({jbzl:[{SECURITY_CODE:'000672',EM2016:'房地产-房地产开发-房地产开发'}]},'000671'),/identify/);
+});
+
+test('direct company identities require matching exchange, A-share type, and official security names',()=>{
+ const source={url:'https://emweb.securities.eastmoney.com/PC_HSF10/CompanySurvey/PageAjax?code=SZ000004',hash:'c'.repeat(64)};
+ const row={SECURITY_CODE:'000004',SECUCODE:'000004.SZ',SECURITY_TYPE:'深交所风险警示板A股',TRADE_MARKET:'深圳证券交易所',SECURITY_NAME_ABBR:'国华退',FORMERNAME:'国农科技→国华网安',EM2016:'信息技术-计算机软件-其他软件服务'};
+ const parsed=parseEM2016Industry({jbzl:[row]},'000004');
+ const fixed=buildFixedIndustryInputs([{...parsed,source}],{asOf:'2026-10-31'});
+ assert.deepEqual(fixed.securityIdentities['000004'].names,['国华退','国农科技','国华网安']);
+ assert.equal(parseEM2016Industry({jbzl:[{...row,SECURITY_TYPE:'境外股票'}]},'000004').securityIdentity,undefined);
+ assert.throws(()=>buildFixedIndustryInputs([{...parsed,source:{...source,url:source.url.replace('SZ','SH')}}],{asOf:'2026-10-31'}),/identity/);
 });
 
 test('combined equity/convertible ceilings exclude bond-oriented products without treating their floor as a stock floor',()=>{

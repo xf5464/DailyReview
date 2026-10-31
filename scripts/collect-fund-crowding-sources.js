@@ -60,7 +60,7 @@ function parseFundProfile(body, requestedCode) {
     trackingTarget:values['跟踪标的'] || null,
     historicalTypeVerified:false};
 }
-function sourceFetch(cacheDirectory,{fetchImpl=fetch,refresh=false}={}) {
+function sourceFetch(cacheDirectory,{fetchImpl=fetch,refresh=false,cacheOnly=false}={}) {
   fs.mkdirSync(cacheDirectory,{recursive:true});
   return async (url,parse,referer) => {
     const file=path.join(cacheDirectory,sha256(url)+'.json');
@@ -69,6 +69,7 @@ function sourceFetch(cacheDirectory,{fetchImpl=fetch,refresh=false}={}) {
       if (record.url!==url || record.hash!==sha256(record.body)) throw new Error('Source cache checksum mismatch');
       return {value:parse(record.body),source:{url,hash:record.hash,fetchedAt:record.fetchedAt}};
     }
+    if(cacheOnly)throw new Error('Source not in local cache');
     let response;
     for(let attempt=0;attempt<3;attempt++) {
       try {

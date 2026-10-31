@@ -32,7 +32,8 @@ function validateCrowdingSnapshot(snapshot) {
         !Array.isArray(audit.sourceReports) || audit.sourceReports.length !== audit.successful ||
         audit.sourceReports.some(r => !audit.successfulFunds.includes(r.fundCode) ||
           !/^[a-f0-9]{64}$/.test(r.hash || '') || !Number.isFinite(Date.parse(r.fetchedAt)) ||
-          !String(r.url || '').startsWith('https://fundf10.eastmoney.com/FundArchivesDatas.aspx?')) ||
+          !(String(r.url || '').startsWith('https://fundf10.eastmoney.com/FundArchivesDatas.aspx?')||
+            r.scheme==='complete-quarter-report-holdings-v1'&&/^AN\d+$/.test(r.id||'')&&new RegExp('^https://pdf[.]dfcfw[.]com/pdf/H[0-9]{1,2}_'+r.id+'_1[.]pdf$').test(r.url||'')&&r.completeness?.documentSha256===r.hash&&/^[a-f0-9]{64}$/.test(r.completeness?.quoteSha256||'')&&Number.isInteger(r.completeness?.rowCount)&&r.completeness.rowCount>=0&&r.completeness.rowCount<=10)) ||
         !Array.isArray(audit.errors) || audit.errors.length) invalid('quarterly coverage');
     previous = index;
   }

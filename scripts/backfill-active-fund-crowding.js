@@ -72,6 +72,14 @@ async function main(args=process.argv.slice(2)) {
    saveSnapshot(path.resolve(get('--output')),compact);write(path.join(directory,'verified-universe.json'),result.universe);
    log({stage:'published',quarters:compact.quarterCount,bytes:fs.statSync(get('--output')).size});
   };
+  for(const name of fs.readdirSync(directory).filter(n=>/^\d{4}-Q[1-4]$/.test(n))){
+   const saved=path.join(directory,name,'validated.json'),uf=path.join(directory,name,'universe.json');
+   if(!fs.existsSync(saved)||!fs.existsSync(uf)||entries.some(e=>e.snapshot.quarters.some(q=>q.quarter===name)))continue;
+   const snapshot=read(saved),universe=read(uf);
+   validateCrowdingSnapshot(snapshot);
+   if(snapshot.audit.industryMapHash===hash(industries))entries.push({snapshot,universe});
+  }
+  if(entries.length)publish();
   const requested=get('--quarters')?.split(',')||census.quarters.map(q=>q.quarter);
   requested.forEach(quarterIndex);requested.sort((a,b)=>quarterIndex(b)-quarterIndex(a));
   for(const quarter of requested){
@@ -89,6 +97,7 @@ async function main(args=process.argv.slice(2)) {
     let contracts=fs.existsSync(contractFile)?read(contractFile):{schemaVersion:1,classifierVersion:'contract-equity-scope-v1',evidence:[]};
     let pdfs=fs.existsSync(pdfFile)?read(pdfFile):null;
     const rebuild=()=>{
+     if(fs.existsSync(pdfFile))pdfs=read(pdfFile);
      const reused=selectReusable(reuseSets,archive),merged=mergeContractEvidence(reused,contracts);
      const preview=buildPublishedUniverse(census,[archive],[merged,...(pdfs?[pdfs]:[])]);
      write(path.join(dir,'preview.json'),preview);write(universeFile,preview.universe);return preview;
@@ -96,7 +105,7 @@ async function main(args=process.argv.slice(2)) {
     let preview=rebuild();log({quarter,stage:'cohort',...preview.summaries[0]});
     if(preview.needsReportPdfs.length){
      const requests=path.join(dir,'missing-report-requests.json');write(requests,preview.needsReportPdfs);
-     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',pdfFile,'--cache',path.join(cache,'quarter-report-pdfs'),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',pdfFile,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
      pdfs=read(pdfFile);preview=rebuild();
     }
     // Reclassify available complete local documents first, without network access.
@@ -105,14 +114,29 @@ async function main(args=process.argv.slice(2)) {
     const contractArgs=['--cache',path.resolve(get('--disclosures')||path.join(cache,'disclosures')),'--python',get('--python')||'python','--fallback','--text-fallback','--concurrency',get('--concurrency')||'3'];
     await run('fund-contract-evidence.js',['--requests',cacheRequests,'--output',cachedResult,'--cache-only',...contractArgs],path.join(dir,'contracts.log'));
     contracts=mergeContractEvidence(contracts,{...read(cachedResult),evidence:read(cachedResult).evidence.filter(e=>e.status!=='unresolved')});write(contractFile,contracts);preview=rebuild();
-    const attempted=new Set();let validated=false;
+    const attempted=new Set(),reportAttempted=new Set();let validated=false;
     for(let batch=0;batch<100;batch++){
      if(preview.productionReady){
-      const universe=preview.universe;
-      const collection=await collect({universe,industries,years:[Number(quarter.slice(0,4))],fetchImpl:cachedFetch(cache),concurrency:3,onProgress:e=>{if(e.error)log({quarter,stage:'holdings-source',...e});}});
-      write(path.join(dir,'holdings-diagnostics.json'),{...collection,snapshots:collection.snapshots.map(({holdings,...q})=>q)});
-      try{const snapshot=createSnapshot(collection,{universe,industries});write(saved,snapshot);entries.push({snapshot,universe});publish();validated=true;break;}
-      catch(error){log({quarter,stage:'holdings-coverage',error:error.message,coverage:collection.snapshots.find(q=>q.quarter===quarter)?.coverage});}
+      for(let reportPass=0;reportPass<2&&preview.productionReady;reportPass++){
+       const universe=preview.universe;
+       const collection=await collect({universe,industries,reportHoldings:pdfs?.holdingsEvidence||[],years:[Number(quarter.slice(0,4))],fetchImpl:cachedFetch(cache),concurrency:3,onProgress:e=>{if(e.error)log({quarter,stage:'holdings-source',...e});}});
+       write(path.join(dir,'holdings-diagnostics.json'),{...collection,snapshots:collection.snapshots.map(({holdings,...q})=>q)});
+       try{const snapshot=createSnapshot(collection,{universe,industries});write(saved,snapshot);entries.push({snapshot,universe});publish();validated=true;break;}
+       catch(error){log({quarter,stage:'holdings-coverage',error:error.message,coverage:collection.snapshots.find(q=>q.quarter===quarter)?.coverage});}
+       const successful=new Set(collection.snapshots.find(q=>q.quarter===quarter)?.successfulFunds||[]);
+       const requests=universe.quarters[quarter].funds.filter(f=>!successful.has(f.fundCode)&&!reportAttempted.has(f.fundCode)).flatMap(f=>{
+        const history=archive.histories.find(h=>h.fundCode===f.fundCode);
+        const report=[...(history?.reports||[])].sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt))[0];
+        return report?[{...report,fundCode:f.fundCode,quarter,fundCodes:f.memberFundCodes}]:[];
+       });
+       if(!requests.length)break;requests.forEach(r=>reportAttempted.add(r.fundCode));
+       const file=path.join(dir,'holdings-report-requests.json'),output=path.join(dir,'holdings-report-evidence.json');write(file,requests);
+       log({quarter,stage:'complete-report-holdings',requests:requests.length});
+       await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+       const extra=read(output),holdings=new Map([...(pdfs?.holdingsEvidence||[]),...(extra.holdingsEvidence||[])].map(e=>[e.quarter+':'+e.fundCode,e]));
+       pdfs={...extra,histories:[...(pdfs?.histories||[]),...extra.histories],holdingsEvidence:[...holdings.values()]};write(pdfFile,pdfs);preview=rebuild();
+      }
+      if(validated)break;
      }
      const nav=new Map(preview.universe.quarters[quarter].unclassifiedFunds.map(f=>[canonical(f.fundName),f.netAssetUpperBound10kCny??Infinity]));
      const requests=preview.needsContracts.filter(r=>!attempted.has(canonical(r.productName))).sort((a,b)=>(nav.get(canonical(b.productName))||0)-(nav.get(canonical(a.productName))||0)).slice(0,200);

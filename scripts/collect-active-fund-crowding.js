@@ -43,7 +43,7 @@ function validateInputs(universe, industries) {
     }
   }
 }
-async function collect({ funds = [], industries, years, universe, fetchImpl, concurrency = 4, onProgress = () => {} }) {
+async function collect({ funds = [], industries, years, universe, fetchImpl, reportHoldings = [], concurrency = 4, onProgress = () => {} }) {
   if (!Array.isArray(funds) || !industries || !Array.isArray(years) ||
       !years.length || years.some(y => !Number.isInteger(y) || y < 1990 || y > 2100) ||
       new Set(years).size !== years.length) throw new TypeError('Invalid collection inputs');
@@ -59,6 +59,14 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
     : deduplicateFundShares(funds.filter(activeFund));
   if (!selected.length) throw new Error('No verified active equity funds');
   const equityScope=universe?.equityScope || 'all-equities';
+  const reportIndex=new Map();
+  for(const evidence of reportHoldings){
+    require('./fund-report-holdings').validateReportHoldings(evidence);
+    const member=memberIndex.get(evidence.quarter)?.get(evidence.fundCode);
+    if(!member||member.fundName.normalize('NFKC').replace(/\s+/g,'')!==evidence.productName.normalize('NFKC').replace(/\s+/g,''))throw new Error('Report holdings do not match target-quarter product');
+    const key=evidence.quarter+':'+evidence.fundCode;
+    if(reportIndex.has(key))throw new Error('Duplicate verified report holdings');reportIndex.set(key,evidence);
+  }
   if (!['all-equities','mainland-A'].includes(equityScope)) throw new Error('Unsupported equity scope');
   const quarters = new Map();
   for (const year of years) for (let q = 1; q <= 4; q++) {
@@ -73,7 +81,14 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
       const {fund, year} = jobs[cursor++];
       let portfolio;
       try { portfolio = await queryFundPortfolio(fund.fundCode, year, {fetchImpl, timeoutMs:20000}); }
-      catch (error) { onProgress({fund:fund.fundCode,year,error:error.message}); continue; }
+      catch (error) { onProgress({fund:fund.fundCode,year,error:error.message}); portfolio={quarters:[],source:null}; }
+      for(let q=1;q<=4;q++){
+        const key=year+'-Q'+q,evidence=reportIndex.get(key+':'+fund.fundCode);
+        if(!evidence||portfolio.quarters.filter(q=>q.key===key).length>1)continue;
+        portfolio.quarters=portfolio.quarters.filter(q=>q.key!==key);
+        portfolio.quarters.push({key,year,quarter:q,reportDate:evidence.reportDate,rows:evidence.rows,completeReport:true,
+          source:{...evidence.source,fetchedAt:evidence.source.downloadedAt,completeness:{quoteSha256:evidence.quoteSha256,stockValueCny:evidence.stockValueCny,rowCount:evidence.rows.length,documentSha256:evidence.documentSha256}}});
+      }
       const responseQuarters = new Set();
       for (const quarter of portfolio.quarters) {
         const row = quarters.get(quarter.key);
@@ -83,12 +98,12 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
           row.errors.push(fund.fundCode + ': duplicate quarterly report');continue;
         }
         responseQuarters.add(quarter.key);
-        if(!validRows(quarter,year)) {
+        if(!quarter.completeReport&&!validRows(quarter,year)) {
           row.rejectedReports.push(fund.fundCode + ': incomplete or invalid quarterly holdings');continue;
         }
         row.successful++;
         row.successfulFunds.push(fund.fundCode);
-        row.sourceReports.push({fundCode:fund.fundCode, year, ...portfolio.source});
+        row.sourceReports.push({fundCode:fund.fundCode, year, ...(quarter.source||portfolio.source)});
         row.successfulNetAssets += member?.netAssetLowerBound10kCny ?? member?.netAsset10kCny ?? 0;
         const mapping = universe ? (industries.fixedMap || industries.quarters[quarter.key]) : industries;
         for (const h of quarter.rows) {
@@ -96,7 +111,9 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
           if (equityScope==='mainland-A' && (h.market==='non-A'||!/^(?:[03468]\d{5}|92\d{4})$/.test(h.stockCode))) {row.nonAMarketValue+=h.marketValue10kCny;row.nonAStockCount++;continue;}
           row.stockCount++;
           row.totalMarketValue += h.marketValue10kCny;
-          const industry = equityScope==='mainland-A' && h.market!=='mainland-A'?null:mapping[h.stockCode];
+          const identity=industries.securityIdentities?.[h.stockCode];
+          const identityMatches=h.market==null&&identity?.names.includes(String(h.stockName||'').normalize('NFKC').replace(/\s+/g,''));
+          const industry = equityScope==='mainland-A' && h.market!=='mainland-A'&&!identityMatches?null:mapping[h.stockCode];
           if (typeof industry !== 'string' || !industry.trim()) { row.unmapped++;row.unmappedStockCodes.push(h.stockCode);continue; }
           row.mappedMarketValue += h.marketValue10kCny;
           row.holdings.push({industry, marketValue:h.marketValue10kCny, activeEquity:true, indexFund:false});
@@ -209,6 +226,7 @@ async function main(args = process.argv.slice(2)) {
     : Array.from({length:11},(_,i) => currentYear - 10 + i);
   const cacheDirectory = path.resolve(get('--cache') || 'work/active-fund-crowding-cache');
   const collection = await collect({funds, industries, years, universe,
+    reportHoldings:get('--report-holdings')?get('--report-holdings').split(',').flatMap(file=>JSON.parse(fs.readFileSync(file,'utf8')).holdingsEvidence||[]):[],
     concurrency:Number(get('--concurrency') || 4),
     fetchImpl:cachedFetch(cacheDirectory,{refresh:args.includes('--refresh')}),
     onProgress:event => console.error(JSON.stringify(event))});

@@ -31,6 +31,14 @@ function q(quarter,value=10) {return {quarter,coverage:1,holdings:[
   {industry:'半导体',marketValue:value,activeEquity:true},{industry:'银行',marketValue:100-value,activeEquity:true}
 ]};}
 
+test('the source restricted-share asterisk does not invalidate a disclosed numeric rank',()=>{
+ const {parseFundPortfolioText}=require('../scripts/fund-portfolio-source');
+ const {validRows}=require('../scripts/collect-active-fund-crowding');
+ const result=parseFundPortfolioText(holdingsText().replace('<td>1</td>','<td>1*</td>'));
+ assert.equal(result.quarters[0].rows[0].rank,1);
+ assert.equal(validRows(result.quarters[0],2026),true);
+});
+
 test('quarter changes never bridge a missing quarter or taxonomy change',()=>{
   assert.equal(calculateIndustryCrowding([q('2025-Q4'),q('2026-Q2')]).rows[0].quarterChange,null);
   assert.equal(calculateIndustryCrowding([{...q('2026-Q1'),taxonomyVersion:'v1'},{...q('2026-Q2'),taxonomyVersion:'v2'}]).rows[0].quarterChange,null);
@@ -198,4 +206,10 @@ test('A-share scope uses source market links and never maps a same-code overseas
  assert.equal(row.totalMarketValue,9);assert.equal(row.nonAMarketValue,91);assert.equal(row.mappingCoverage,1);assert.equal(out.result.rows.some(r=>r.industry==='不应使用的同码A股行业'),false);
  const unknown=source.replace("<a href='//quote.eastmoney.com/unify/r/105.000660'>000660</a>","<span data-texch=''>000660</span>");options.fetchImpl=async()=>({ok:true,text:async()=>unknown});
  const missing=await collect(options);assert.equal(missing.snapshots.find(q=>q.quarter==='2026-Q3').mappingCoverage,0.09);assert.equal(missing.result.latestQuarter,null);
+ options.industries.securityIdentities={'000660':{exchange:'SZ',names:['另一家公司的名称']}};
+ assert.equal((await collect(options)).snapshots.find(q=>q.quarter==='2026-Q3').mappingCoverage,0.09);
+ options.industries.securityIdentities['000660'].names=['股票'];
+ assert.equal((await collect(options)).snapshots.find(q=>q.quarter==='2026-Q3').mappingCoverage,1);
+ options.fetchImpl=async()=>({ok:true,text:async()=>source});
+ assert.equal((await collect(options)).snapshots.find(q=>q.quarter==='2026-Q3').nonAMarketValue,91);
 });

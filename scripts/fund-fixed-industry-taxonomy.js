@@ -6,13 +6,17 @@ function parseEM2016Industry(profile,stockCode) {
   if(!row || typeof row.EM2016!=='string')throw new Error('Company archive does not identify the requested stock and taxonomy');
   const parts=row.EM2016.split('-').map(p=>p.trim());
   if(parts.length!==3 || parts.some(p=>!p))throw new Error('Incomplete official three-level industry path');
+  const exchange=/\.SH$/.test(row.SECUCODE||'')?'SH':/\.SZ$/.test(row.SECUCODE||'')?'SZ':/\.BJ$/.test(row.SECUCODE||'')?'BJ':null;
+  const securityIdentity=exchange&&/A股/.test(row.SECURITY_TYPE||'')&&({SH:'上海证券交易所',SZ:'深圳证券交易所',BJ:'北京证券交易所'})[exchange]===row.TRADE_MARKET?
+    {exchange,names:[...new Set([row.SECURITY_NAME_ABBR,row.STR_NAMEA,...String(row.FORMERNAME||'').split('→')].filter(n=>typeof n==='string'&&n.trim()).map(n=>n.normalize('NFKC').replace(/\s+/g,'')))]}:null;
   return {stockCode,industry:parts[1],industryPath:row.EM2016,
+    ...(securityIdentity?{securityIdentity}:{}),
     taxonomy:'eastmoney-level2',taxonomyVersion:'EM2016-level2',
     classificationBasis:'fixed-taxonomy-restatement'};
 }
 function buildFixedIndustryInputs(records,{asOf}={}) {
   if(!Array.isArray(records)||!records.length||!/^\d{4}-\d{2}-\d{2}$/.test(asOf || ''))throw new Error('Missing taxonomy records or compilation date');
-  const fixedMap={},sources=[],catalogue=new Map();
+  const fixedMap={},securityIdentities={},sources=[],catalogue=new Map();
   for(const record of records) {
     const code=record.stockCode,path=record.industryPath || record.oldPath,source=record.source || record.profileSource;
     if(!/^\d{6}$/.test(code) || typeof path!=='string' || !/^[a-f0-9]{64}$/.test(source?.hash || '') ||
@@ -21,7 +25,12 @@ function buildFixedIndustryInputs(records,{asOf}={}) {
     const parts=path.split('-').map(p=>p.trim());
     if(parts.length!==3 || parts.some(p=>!p))throw new Error('Incomplete industry path');
     if(fixedMap[code] && fixedMap[code]!==parts[1])throw new Error('Conflicting direct company industries');
-    fixedMap[code]=parts[1];sources.push({stockCode:code,path,source});
+    const identity=record.securityIdentity;
+    if(identity){
+      if(!['SH','SZ','BJ'].includes(identity.exchange)||new URL(source.url).searchParams.get('code')!==identity.exchange+code||!Array.isArray(identity.names)||!identity.names.length||identity.names.some(n=>typeof n!=='string'||!n.trim()))throw new Error('Unverified A-share security identity');
+      securityIdentities[code]=identity;
+    }
+    fixedMap[code]=parts[1];sources.push({stockCode:code,path,source,...(identity?{securityIdentity:identity}:{})});
     if(catalogue.has(parts[1]) && catalogue.get(parts[1])!==parts[0])throw new Error('Ambiguous second-level industry across first-level parents');
     catalogue.set(parts[1],parts[0]);
   }
@@ -30,7 +39,7 @@ function buildFixedIndustryInputs(records,{asOf}={}) {
     historicalMappingVerified:false,reviewedAt:asOf,
     source:'Eastmoney company archives; second segment of the official EM2016 three-level path; fixed-taxonomy restatement',
     sourceDigest:crypto.createHash('sha256').update(JSON.stringify(sources)).digest('hex'),
-    fixedMap,industryUniverse:[...catalogue.keys()].sort()};
+    fixedMap,...(Object.keys(securityIdentities).length?{securityIdentities}:{}),industryUniverse:[...catalogue.keys()].sort()};
 }
 async function collectFixedIndustries(codes,load,{concurrency=4,onProgress=()=>{}}={}) {
   if(!Array.isArray(codes)||!codes.length||new Set(codes).size!==codes.length||codes.some(c=>!/^\d{6}$/.test(c)))throw new Error('Expected unique mainland stock codes');
