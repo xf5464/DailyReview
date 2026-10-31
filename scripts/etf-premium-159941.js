@@ -12,13 +12,13 @@ function parsePremiumPage(html) {
 }
 function parsePremiumHistory(html) {
   const rows = [];
-  const tr = new RegExp('<tr[^>]*>([\\s\\S]*?)</tr>', 'gi');
-  const td = new RegExp('<t[dh][^>]*>([\\s\\S]*?)</t[dh]>', 'gi');
+  const tr = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  const td = /<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi;
   let match;
   while ((match = tr.exec(String(html))) !== null) {
     const cells = Array.from(match[1].matchAll(td), item => item[1].replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').trim());
-    if (cells.length < 3 || !/^\\d{4}-\\d{2}-\\d{2}$/.test(cells[0])) continue;
-    const value = cells[2].match(/^([+−-]?\\d+(?:\\.\\d+)?)%$/);
+    if (cells.length < 3 || !/^\d{4}-\d{2}-\d{2}$/.test(cells[0])) continue;
+    const value = cells[2].match(/^([+−-]?\d+(?:\.\d+)?)%$/);
     if (!value) continue;
     const number = Number(value[1].replace('−','-'));
     if (Number.isFinite(number) && Math.abs(number) <= 100) rows.push({date:cells[0],value:number});
