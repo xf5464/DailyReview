@@ -9,6 +9,33 @@ const {quarterIndex,rankIndustryQuarters}=require('./active-fund-industry-crowdi
 const read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
 const hash=o=>crypto.createHash('sha256').update(JSON.stringify(o)).digest('hex');
 const canonical=s=>String(s).normalize('NFKC').replace(/\s+/g,'');
+function catalogueScopeCandidates(text){
+ const match=String(text).match(/^\s*var\s+r\s*=\s*(\[[\s\S]*\])\s*;?\s*$/);
+ if(!match)throw new Error('Invalid discovery catalogue');const rows=JSON.parse(match[1]);
+ if(!Array.isArray(rows)||rows.some(r=>!Array.isArray(r)||!/^\d{6}$/.test(r[0])||typeof r[3]!=='string'))throw new Error('Invalid discovery catalogue rows');
+ return new Set(rows.filter(r=>/QDII|FOF/i.test(r[3])).map(r=>r[0]));
+}
+function scopeReportRequests(preview,archive,candidates,pdfs){
+ const q=preview.universe.quarters[archive.quarter];
+ const possible=new Set([...q.funds,...q.unclassifiedFunds].map(f=>canonical(f.fundName)));
+ const families=new Map();
+ for(const h of archive.histories)for(const r of h.reports){
+  const id=require('./fund-report-evidence').reportIdentity(r.title);
+  if(!id||id.summary||id.quarter!==archive.quarter||!possible.has(canonical(id.productName)))continue;
+  const key=canonical(id.productName);if(!families.has(key))families.set(key,{name:id.productName,codes:new Set(),reports:[]});
+  const f=families.get(key);f.codes.add(h.fundCode);f.reports.push({...r,fundCode:h.fundCode});
+ }
+ const reviewed=new Set((pdfs?.histories||[]).flatMap(h=>h.reports.filter(r=>r.evidence?.reportParserVersion===2).map(r=>r.id)));
+ return [...families.values()].filter(f=>[...f.codes].some(c=>candidates.has(c))||/全球|环球|海外|境外|国际|亚太|亚洲|大中华|成熟市场|新兴市场|中国价值发现|中国互联网|油气能源|美国|欧洲|日本|印度|越南|韩国|台湾|德国|巴西|俄罗斯|东南亚|美元/.test(f.name)).flatMap(f=>{
+  const report=f.reports.sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)||a.fundCode.localeCompare(b.fundCode))[0];
+  if(reviewed.has(report.id))return [];
+  return [{...report,quarter:archive.quarter,productName:f.name,fundCodes:[...f.codes].sort()}];
+ });
+}
+function mergeReportEvidence(base,extra){
+ const holdings=new Map([...(base?.holdingsEvidence||[]),...(extra.holdingsEvidence||[])].map(e=>[e.quarter+':'+e.fundCode,e]));
+ return {...extra,histories:[...(base?.histories||[]),...extra.histories],holdingsEvidence:[...holdings.values()]};
+}
 function write(file,value){fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.'+process.pid+'.tmp';fs.writeFileSync(tmp,JSON.stringify(value)+'\n');fs.renameSync(tmp,file);}
 function selectReusable(sets,archive) {
  const rows=sets.flatMap(set=>reuseDatedContracts(set,archive).evidence),byName=new Map();
@@ -59,12 +86,20 @@ async function main(args=process.argv.slice(2)) {
  };
  try {
   const reusableFiles=get('--reuse-contracts')?.split(',')||[],reuseSets=reusableFiles.map(read);
+  const scopeCandidates=get('--catalogue')?catalogueScopeCandidates(fs.readFileSync(get('--catalogue'),'utf8')):new Set();
   for(const name of fs.readdirSync(directory).filter(n=>/^\d{4}-Q[1-4]$/.test(n))){const f=path.join(directory,name,'contracts.json');if(fs.existsSync(f))reuseSets.push(read(f));}
   const entries=[];
   if(get('--seed-universe')){
    const universe=read(get('--seed-universe'));
-   const collection=await collect({universe,industries,years:[...new Set(Object.keys(universe.quarters).map(q=>Number(q.slice(0,4))))],fetchImpl:cachedFetch(cache),onProgress:()=>{}});
-   entries.push({snapshot:createSnapshot(collection,{universe,industries}),universe});
+   if(get('--seed-snapshot')){
+    const snapshot=validateCrowdingSnapshot(read(get('--seed-snapshot')));
+    if(snapshot.audit.universeHash!==hash(universe)||snapshot.audit.industryMapHash!==hash(industries))throw new Error('Seed checkpoint input checksum mismatch');
+    entries.push({snapshot,universe});
+   }else{
+    const reports=get('--seed-reports')?get('--seed-reports').split(',').map(read):[];
+    const collection=await collect({universe,industries,reportHoldings:reports.flatMap(r=>r.holdingsEvidence||[]),reportScopeEvidence:reports.flatMap(r=>(r.histories||[]).flatMap(h=>h.reports.map(r=>r.evidence).filter(Boolean))),years:[...new Set(Object.keys(universe.quarters).map(q=>Number(q.slice(0,4))))],fetchImpl:cachedFetch(cache),onProgress:()=>{}});
+    entries.push({snapshot:createSnapshot(collection,{universe,industries}),universe});
+   }
   }
   const publish=()=>{
    const result=combineSnapshots(entries,industries),compact=createPublicSnapshot(result.snapshot);
@@ -103,10 +138,18 @@ async function main(args=process.argv.slice(2)) {
      write(path.join(dir,'preview.json'),preview);write(universeFile,preview.universe);return preview;
     };
     let preview=rebuild();log({quarter,stage:'cohort',...preview.summaries[0]});
+    const scopeRequests=scopeReportRequests(preview,archive,scopeCandidates,pdfs);
+    if(scopeRequests.length){
+     const file=path.join(dir,'dated-scope-requests.json'),output=path.join(dir,'dated-scope-evidence.json');write(file,scopeRequests);
+     log({quarter,stage:'dated-scope-review',requests:scopeRequests.length});
+     await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+     pdfs=mergeReportEvidence(pdfs,read(output));write(pdfFile,pdfs);preview=rebuild();
+    }
     if(preview.needsReportPdfs.length){
      const requests=path.join(dir,'missing-report-requests.json');write(requests,preview.needsReportPdfs);
-     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',pdfFile,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
-     pdfs=read(pdfFile);preview=rebuild();
+     const output=path.join(dir,'missing-report-evidence.json');
+     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+     pdfs=mergeReportEvidence(pdfs,read(output));write(pdfFile,pdfs);preview=rebuild();
     }
     // Reclassify available complete local documents first, without network access.
     const cacheRequests=path.join(dir,'cached-contract-requests.json'),cachedResult=path.join(dir,'cached-contracts.json');
@@ -117,10 +160,17 @@ async function main(args=process.argv.slice(2)) {
     const attempted=new Set(),reportAttempted=new Set();let validated=false;
     for(let batch=0;batch<100;batch++){
      if(preview.productionReady){
-      for(let reportPass=0;reportPass<2&&preview.productionReady;reportPass++){
+      for(let reportPass=0;reportPass<4&&preview.productionReady;reportPass++){
        const universe=preview.universe;
-       const collection=await collect({universe,industries,reportHoldings:pdfs?.holdingsEvidence||[],years:[Number(quarter.slice(0,4))],fetchImpl:cachedFetch(cache),concurrency:3,onProgress:e=>{if(e.error)log({quarter,stage:'holdings-source',...e});}});
+       const collection=await collect({universe,industries,reportHoldings:pdfs?.holdingsEvidence||[],reportScopeEvidence:(pdfs?.histories||[]).flatMap(h=>h.reports.map(r=>r.evidence).filter(Boolean)),years:[Number(quarter.slice(0,4))],fetchImpl:cachedFetch(cache),concurrency:3,onProgress:e=>{if(e.error)log({quarter,stage:'holdings-source',...e});}});
        write(path.join(dir,'holdings-diagnostics.json'),{...collection,snapshots:collection.snapshots.map(({holdings,...q})=>q)});
+       const scopeRequests=scopeReportRequests(preview,archive,new Set(collection.snapshots.find(q=>q.quarter===quarter)?.scopeReviewFundCodes||[]),pdfs);
+       if(scopeRequests.length){
+        const file=path.join(dir,'holdings-scope-requests.json'),output=path.join(dir,'holdings-scope-evidence.json');write(file,scopeRequests);
+        log({quarter,stage:'scope-from-holdings',requests:scopeRequests.length});
+        await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+        pdfs=mergeReportEvidence(pdfs,read(output));write(pdfFile,pdfs);preview=rebuild();continue;
+       }
        try{const snapshot=createSnapshot(collection,{universe,industries});write(saved,snapshot);entries.push({snapshot,universe});publish();validated=true;break;}
        catch(error){log({quarter,stage:'holdings-coverage',error:error.message,coverage:collection.snapshots.find(q=>q.quarter===quarter)?.coverage});}
        const successful=new Set(collection.snapshots.find(q=>q.quarter===quarter)?.successfulFunds||[]);
@@ -157,4 +207,4 @@ async function main(args=process.argv.slice(2)) {
  }finally{fs.closeSync(lockFd);fs.unlinkSync(lock);}
 }
 if(require.main===module)main().catch(e=>{console.error(e.stack||e.message);process.exitCode=1;});
-module.exports={selectReusable,mergeContractEvidence,combineSnapshots,main};
+module.exports={selectReusable,mergeContractEvidence,combineSnapshots,catalogueScopeCandidates,scopeReportRequests,mergeReportEvidence,main};

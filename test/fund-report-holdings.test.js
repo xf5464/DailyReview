@@ -20,11 +20,24 @@ test('short stock table needs the complete original report and a matching whole-
  assert.equal(parseReportHoldings(document('2 600001 测试公司 10 100.00 1.00'),request,source),null);
  result.rows[0].marketValue10kCny=0.02;assert.throws(()=>validateReportHoldings(result),/Unverified/);
 });
+
+test('concatenated quantity and value need an explicit sole-stock statement and exact independent amount',()=>{
+ const text='1 300437 清水源 3,525,64183,064,101.96 5.12\n本基金本报告期末仅持有上述股票。';
+ const proof=parseReportHoldings(document(text,83064101.96),request,source);
+ assert.equal(proof.rows[0].shares10k,352.5641);assert.ok(Math.abs(proof.rows[0].marketValue10kCny-8306.410196)<1e-8);
+ assert.equal(parseReportHoldings(document(text.replace('仅持有上述股票','持有股票'),83064101.96),request,source),null);
+ assert.equal(parseReportHoldings(document(text,93064101.96),request,source),null);
+});
 test('zero-stock holdings require an explicit quarter-end statement and zero composition amount',()=>{
  const proof=parseReportHoldings(document('本基金本报告期末未持有股票。',0),request,source);
  assert.equal(proof.rows.length,0);
  assert.equal(parseReportHoldings(document('本基金本报告期末未持有港股通股票。',0),request,source),null);
  assert.equal(parseReportHoldings(document('本基金本报告期末未持有股票。',100),request,source),null);
+ assert.equal(parseReportHoldings(document('本报告期末本基金未持有股票。',0),request,source).rows.length,0);
+ assert.equal(parseReportHoldings(document('注：无。',0),request,source).rows.length,0);
+ assert.equal(parseReportHoldings(document('注：无。',100),request,source),null);
+ const paged=document('注：无。\n第11页 共15页\n示例基金报告',0);paged.pages[0].text=paged.pages[0].text.replace('5.3 报告','5.3.1 报告');
+ assert.equal(parseReportHoldings(paged,request,source).rows.length,0);
 });
 test('verified short and zero holdings enter coverage and keep PDF provenance through compact export',async()=>{
  const proof=parseReportHoldings(document('1 600001 测试公司 10 100.00 1.00'),request,source);
@@ -39,6 +52,15 @@ test('verified short and zero holdings enter coverage and keep PDF provenance th
  const empty=await collect({...options,reportHoldings:[zero]});
  assert.equal(empty.snapshots.find(q=>q.quarter==='2016-Q3').fundCoverage,1);
  assert.equal(empty.snapshots.find(q=>q.quarter==='2016-Q3').totalMarketValue,0);
+ universe.quarters['2016-Q3'].funds[0].memberFundCodes=['000001','000002'];
+ const alias={...proof,fundCode:'000002'};
+ const merged=await collect({...options,reportHoldings:[proof,alias]});
+ assert.equal(merged.snapshots.find(q=>q.quarter==='2016-Q3').successful,1);
+ const onlyAlias=await collect({...options,reportHoldings:[alias]});
+ assert.equal(onlyAlias.snapshots.find(q=>q.quarter==='2016-Q3').fundCoverage,1);
+ const excluded={...proof,fundCode:'999999'};
+ assert.equal((await collect({...options,reportHoldings:[alias,excluded]})).snapshots.find(q=>q.quarter==='2016-Q3').successful,1);
+ await assert.rejects(collect({...options,reportHoldings:[{...alias,productName:'另一产品'}]}),/Unverified|do not match/);
 });
 test('cache-only source misses fail immediately without attempting network or retry delays',async t=>{
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'fund-source-cache-'));t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));let calls=0;

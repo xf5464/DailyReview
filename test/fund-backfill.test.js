@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto');
-const {combineSnapshots,selectReusable}=require('../scripts/backfill-active-fund-crowding');
+const {combineSnapshots,selectReusable,catalogueScopeCandidates,scopeReportRequests,mergeReportEvidence}=require('../scripts/backfill-active-fund-crowding');
 const {calculateIndustryCrowding}=require('../scripts/active-fund-industry-crowding');
 const {createPublicSnapshot}=require('../scripts/fund-crowding-snapshot');
 const hash=o=>crypto.createHash('sha256').update(JSON.stringify(o)).digest('hex');
@@ -42,4 +42,19 @@ test('batch reuse selects latest applicable dated proof and rejects contradictor
  const result=selectReusable([set([row,{...row,source:{publishedAt:'2026-02-01'}},{...row,source:{publishedAt:'2026-04-01'}}])],archive);
  assert.equal(result.evidence.length,1);assert.equal(result.evidence[0].source.publishedAt,'2026-02-01');assert.equal(result.evidence[0].fundCode,'000001');
  assert.throws(()=>selectReusable([set([row,{...row,status:'excluded'}])],archive),/Conflicting/);
+});
+
+test('current QDII flags only locate dated reports and never backfill a historical product type',()=>{
+ const name='示例股票型证券投资基金',title=name+'2016年第3季度报告';
+ const candidates=catalogueScopeCandidates('var r = '+JSON.stringify([['000001','',name,'QDII-股票型'],['000002','','另一基金','股票型']])+';');
+ const preview={universe:{quarters:{'2016-Q3':{funds:[{fundCode:'000001',fundName:name}],unclassifiedFunds:[]}}}};
+ const archive={quarter:'2016-Q3',histories:[{fundCode:'000001',reports:[{id:'AN20161001001',title,publishedAt:'2016-10-20',classification:{status:'active'}}]}]};
+ const before=JSON.stringify(preview),requests=scopeReportRequests(preview,archive,candidates,null);
+ assert.equal(requests.length,1);assert.equal(requests[0].quarter,'2016-Q3');assert.equal(requests[0].classification.status,'active');assert.equal(JSON.stringify(preview),before);
+ const reviewed={histories:[{reports:[{id:'AN20161001001',evidence:{reportParserVersion:2}}]}]};
+ assert.equal(scopeReportRequests(preview,archive,candidates,reviewed).length,0);
+ archive.histories[0].reports[0].id='AN20161001002';
+ assert.equal(scopeReportRequests(preview,archive,candidates,reviewed).length,1);
+ const merged=mergeReportEvidence(reviewed,{histories:[{reports:[{id:'AN20161001002'}]}],holdingsEvidence:[]});
+ assert.equal(merged.histories.length,2);
 });

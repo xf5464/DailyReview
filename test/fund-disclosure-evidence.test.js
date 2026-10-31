@@ -89,6 +89,7 @@ test('dated report excludes insured capital-protection mandate without inferring
  assert.equal(parse('本基金为保本型基金').status,'excluded');
  assert.equal(parse('本基金在三年避险周期到期时控制本金损失。恒定比例投资组合保险机制。基金保证人 中投信用担保有限公司').status,'excluded');
  assert.equal(parse('投资有本金损失风险；基金管理人不保证基金一定盈利。').status,'unresolved');
+ assert.equal(parse('基金简称 测试油气（QDII-FOF-LOF） 基金主代码000001').status,'excluded');
 });
 function report(code,product=name){return {fundCode:code,id:'AN20261001001',title:product+'2026年第3季度报告',publishedAt:'2026-10-15',classification:classifyReportTitle(product+'2026年第3季度报告')};}
 function inputs(){

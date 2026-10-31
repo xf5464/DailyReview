@@ -57,6 +57,17 @@ test('candidate fund filter excludes bond, QDII, FOF, index and enhanced product
   assert.equal(activeFund({fundCode:'000001',type:'股票型'}),true);
   assert.equal(activeFund({fundCode:'000001',type:'股票型',fundName:'指数增强'}),false);
 });
+
+test('a dated merged product can recover holdings from its verified fee-class alias',async()=>{
+ const options=inputs();options.universe.quarters['2026-Q3'].funds[0].memberFundCodes=['000001','000002'];
+ const calls=[];
+ options.fetchImpl=async url=>{const code=url.searchParams.get('code');calls.push(code);return {ok:true,text:async()=>code==='000001'?'var apidata={content:"",arryear:[],curyear:2026};':holdingsText()};};
+ const result=await collect(options),q=result.snapshots.find(q=>q.quarter==='2026-Q3');
+ assert.deepEqual(calls,['000001','000002']);assert.equal(q.successful,1);assert.equal(q.fundCoverage,1);
+ assert.equal(q.sourceReports[0].holdingFundCode,'000002');
+ assert.equal(q.successfulFunds[0],'000001');
+ assert.equal(validateCrowdingSnapshot(createSnapshot(result,options)).coverage,1);
+});
 test('catalogue is parsed without execution; backend and C shares are candidates of one product',()=>{
   const raw='var r = '+JSON.stringify([
     ['000002','','基金A(后端)','混合型-偏股'],['000003','','基金C','混合型-偏股'],['000001','','基金A','混合型-偏股'],
@@ -212,4 +223,17 @@ test('A-share scope uses source market links and never maps a same-code overseas
  assert.equal((await collect(options)).snapshots.find(q=>q.quarter==='2026-Q3').mappingCoverage,1);
  options.fetchImpl=async()=>({ok:true,text:async()=>source});
  assert.equal((await collect(options)).snapshots.find(q=>q.quarter==='2026-Q3').nonAMarketValue,91);
+});
+
+test('a portfolio without confirmed A-shares requires dated report scope before entering successful coverage',async()=>{
+ const options=inputs();options.universe.equityScope='mainland-A';
+ options.fetchImpl=async()=>({ok:true,text:async()=>holdingsText().replace(/60000([0-9])/g,'0000$1')});
+ const pending=await collect(options),q=pending.snapshots.find(q=>q.quarter==='2026-Q3');
+ assert.equal(q.successful,0);assert.deepEqual(q.scopeReviewFundCodes,['000001']);
+ const productName=options.universe.quarters['2026-Q3'].funds[0].fundName,id='AN20261015001';
+ const proof={fundCode:'000001',quarter:'2026-Q3',productName,id,documentSha256:'a'.repeat(64),reportParserVersion:2,extractionMethod:'complete-PDF-layout',classification:{status:'active'},
+  source:{id,title:productName+'2026年第3季度报告',hash:'a'.repeat(64),url:'https://pdf.dfcfw.com/pdf/H2_'+id+'_1.pdf',downloadedAt:'2026-10-31T00:00:00Z'}};
+ const reviewed=await collect({...options,reportScopeEvidence:[proof]});
+ assert.equal(reviewed.snapshots.find(q=>q.quarter==='2026-Q3').successful,1);
+ await assert.rejects(collect({...options,reportScopeEvidence:[{...proof,classification:{status:'excluded'}}]}),/scope excludes/);
 });

@@ -68,6 +68,11 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
   if(!associated && !codeSet.has(fundCode))throw new Error('Report does not identify requested fund');
   const classification=classifyReportTitle(data.notice_title);
   const riskText=overview.replace(/\s+/g,'');
+  const abbreviation=riskText.match(/基金简称[|：:]*([^。；]{1,100}?)(?:场内简称|基金主代码|交易代码|基金运作方式|基金合同生效日)/)?.[1]||'';
+  const overseasCustody=/境外资产托管人/.test(riskText)&&/境外(?:证券|股票|资本)?市场|全球[^。；]{0,80}(?:证券|股票|基金)|合格境内机构投资者|外汇额度/.test(riskText);
+  if(classification.status!=='excluded'&&(/QDII|FOF/i.test(abbreviation)||overseasCustody)) {
+    classification.status='excluded';classification.type=null;classification.reason='Dated report fund abbreviation explicitly identifies QDII or FOF';
+  }
   const protectedType=/本基金(?:属于|为|是)(?:一只|一支)?(?:保本型|保本混合型|保本|避险型)(?:证券投资)?基金/.test(riskText);
   const insuredMandate=/基金保证人[|：:]?[^|\d]{2,60}(?:公司|中心)/.test(riskText)&&/恒定比例投资组合保险/.test(riskText)&&/本金损失/.test(riskText)&&/避险周期/.test(riskText);
   if(classification.status!=='excluded'&&(protectedType||insuredMandate)) {

@@ -17,7 +17,7 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
       const detail=report.evidence;
       if(detail && (detail.id!==report.id || detail.fundCode!==history.fundCode || detail.quarter!==dated.quarter ||
           detail.productName!==dated.productName))throw new Error('Report detail does not match announcement');
-      const classification=dated.status==='excluded'||dated.reason==='Dated overseas-market scope requires legal-document verification'?dated:(detail?.classification || dated);
+      const classification=dated.status==='excluded'||dated.reason==='Dated overseas-market scope requires legal-document verification'&&detail?.classification?.status!=='excluded'?dated:(detail?.classification || dated);
       if(classification.quarter!==dated.quarter || classification.productName!==dated.productName)throw new Error('Classification does not match report period');
       const codes=new Set([history.fundCode,...(detail?.associatedFundCodes || [])]);
       for(const code of codes) {

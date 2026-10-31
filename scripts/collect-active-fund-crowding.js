@@ -43,7 +43,7 @@ function validateInputs(universe, industries) {
     }
   }
 }
-async function collect({ funds = [], industries, years, universe, fetchImpl, reportHoldings = [], concurrency = 4, onProgress = () => {} }) {
+async function collect({ funds = [], industries, years, universe, fetchImpl, reportHoldings = [], reportScopeEvidence = [], concurrency = 4, onProgress = () => {} }) {
   if (!Array.isArray(funds) || !industries || !Array.isArray(years) ||
       !years.length || years.some(y => !Number.isInteger(y) || y < 1990 || y > 2100) ||
       new Set(years).size !== years.length) throw new TypeError('Invalid collection inputs');
@@ -59,20 +59,34 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, rep
     : deduplicateFundShares(funds.filter(activeFund));
   if (!selected.length) throw new Error('No verified active equity funds');
   const equityScope=universe?.equityScope || 'all-equities';
-  const reportIndex=new Map();
+  const reportIndex=new Map(),scopeReviewed=new Set();
   for(const evidence of reportHoldings){
     require('./fund-report-holdings').validateReportHoldings(evidence);
-    const member=memberIndex.get(evidence.quarter)?.get(evidence.fundCode);
-    if(!member||member.fundName.normalize('NFKC').replace(/\s+/g,'')!==evidence.productName.normalize('NFKC').replace(/\s+/g,''))throw new Error('Report holdings do not match target-quarter product');
-    const key=evidence.quarter+':'+evidence.fundCode;
-    if(reportIndex.has(key))throw new Error('Duplicate verified report holdings');reportIndex.set(key,evidence);
+    const member=memberIndex.get(evidence.quarter)?.get(evidence.fundCode)||universe?.quarters[evidence.quarter]?.funds.find(f=>f.memberFundCodes?.includes(evidence.fundCode));
+    if(!member)continue;
+    if(member.fundName.normalize('NFKC').replace(/\s+/g,'')!==evidence.productName.normalize('NFKC').replace(/\s+/g,''))throw new Error('Report holdings do not match target-quarter product');
+    if(evidence.reportClassification?.status==='excluded')throw new Error('Report scope excludes a product still present in the input universe');
+    const key=evidence.quarter+':'+member.fundCode,previous=reportIndex.get(key);
+    if(previous){if(previous.id===evidence.id&&previous.stockValueCny===evidence.stockValueCny&&hash(JSON.stringify(previous.rows))===hash(JSON.stringify(evidence.rows)))continue;throw new Error('Conflicting verified report holdings');}
+    reportIndex.set(key,evidence);
+    if(evidence.reportParserVersion===2&&['active','unresolved'].includes(evidence.reportClassification?.status))scopeReviewed.add(key);
+  }
+  for(const e of reportScopeEvidence){
+    const member=memberIndex.get(e.quarter)?.get(e.fundCode)||universe?.quarters[e.quarter]?.funds.find(f=>f.memberFundCodes?.includes(e.fundCode));
+    if(!member||e.reportParserVersion!==2)continue;
+    const identity=require('./fund-report-evidence').reportIdentity(e.source?.title);
+    if(!identity||identity.quarter!==e.quarter||identity.productName!==e.productName||!['active','unresolved','excluded'].includes(e.classification?.status)||!Number.isFinite(Date.parse(e.source?.downloadedAt))||e.productName.normalize('NFKC').replace(/\s+/g,'')!==member.fundName.normalize('NFKC').replace(/\s+/g,'')||e.extractionMethod!=='complete-PDF-layout'||e.source?.id!==e.id||
+      !/^AN\d+$/.test(e.id||'')||e.documentSha256!==e.source.hash||!/^[a-f0-9]{64}$/.test(e.source.hash)||!new RegExp('^https://pdf[.]dfcfw[.]com/pdf/H[0-9]{1,2}_'+e.id+'_1[.]pdf$').test(e.source.url)||
+      member.evidence?.reportIds&&!member.evidence.reportIds.includes(e.id))throw new Error('Unverified dated report scope');
+    if(e.classification?.status==='excluded')throw new Error('Report scope excludes a product still present in the input universe');
+    scopeReviewed.add(e.quarter+':'+member.fundCode);
   }
   if (!['all-equities','mainland-A'].includes(equityScope)) throw new Error('Unsupported equity scope');
   const quarters = new Map();
   for (const year of years) for (let q = 1; q <= 4; q++) {
     const key = year + '-Q' + q;
     quarters.set(key, {quarter:key, holdings:[], successful:0, stockCount:0, unmapped:0,
-      totalMarketValue:0, grossMarketValue:0,nonAMarketValue:0,nonAStockCount:0,mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], unmappedStockCodes:[], rejectedReports:[], errors:[]});
+      totalMarketValue:0, grossMarketValue:0,nonAMarketValue:0,nonAStockCount:0,mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], unmappedStockCodes:[], scopeReviewFundCodes:[], rejectedReports:[], errors:[]});
   }
   const jobs=selected.flatMap(fund=>years.filter(year=>!universe || eligibleYears.get(fund.fundCode)?.has(year)).map(year=>({fund,year})));
   let cursor = 0;
@@ -89,6 +103,22 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, rep
         portfolio.quarters.push({key,year,quarter:q,reportDate:evidence.reportDate,rows:evidence.rows,completeReport:true,
           source:{...evidence.source,fetchedAt:evidence.source.downloadedAt,completeness:{quoteSha256:evidence.quoteSha256,stockValueCny:evidence.stockValueCny,rowCount:evidence.rows.length,documentSha256:evidence.documentSha256}}});
       }
+      // A historic main code can stop serving holdings while a verified fee-class alias still serves the same product.
+      for(let q=1;q<=4;q++){
+        const key=year+'-Q'+q,member=memberIndex.get(key)?.get(fund.fundCode);
+        const present=portfolio.quarters.filter(q=>q.key===key);
+        if(!member||present.length>1||present.length===1&&(present[0].completeReport||validRows(present[0],year)))continue;
+        for(const alias of member.memberFundCodes||[]){
+          if(alias===fund.fundCode)continue;
+          try{
+            const alternate=await queryFundPortfolio(alias,year,{fetchImpl,timeoutMs:20000});
+            const matches=alternate.quarters.filter(q=>q.key===key);
+            if(matches.length!==1||!validRows(matches[0],year))continue;
+            portfolio.quarters=portfolio.quarters.filter(q=>q.key!==key);
+            portfolio.quarters.push({...matches[0],source:{...alternate.source,holdingFundCode:alias}});break;
+          }catch(error){onProgress({fund:fund.fundCode,alias,year,error:error.message});}
+        }
+      }
       const responseQuarters = new Set();
       for (const quarter of portfolio.quarters) {
         const row = quarters.get(quarter.key);
@@ -100,6 +130,10 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, rep
         responseQuarters.add(quarter.key);
         if(!quarter.completeReport&&!validRows(quarter,year)) {
           row.rejectedReports.push(fund.fundCode + ': incomplete or invalid quarterly holdings');continue;
+        }
+        const hasConfirmedA=quarter.rows.some(h=>/^(?:[03468]\d{5}|92\d{4})$/.test(h.stockCode)&&h.market!=='non-A'&&(h.market==='mainland-A'||industries.securityIdentities?.[h.stockCode]?.names.includes(String(h.stockName||'').normalize('NFKC').replace(/\s+/g,''))));
+        if(equityScope==='mainland-A'&&!hasConfirmedA&&!scopeReviewed.has(quarter.key+':'+fund.fundCode)){
+          row.scopeReviewFundCodes.push(fund.fundCode);row.rejectedReports.push(fund.fundCode+': dated scope review required for a portfolio without confirmed A-shares');continue;
         }
         row.successful++;
         row.successfulFunds.push(fund.fundCode);
@@ -227,6 +261,7 @@ async function main(args = process.argv.slice(2)) {
   const cacheDirectory = path.resolve(get('--cache') || 'work/active-fund-crowding-cache');
   const collection = await collect({funds, industries, years, universe,
     reportHoldings:get('--report-holdings')?get('--report-holdings').split(',').flatMap(file=>JSON.parse(fs.readFileSync(file,'utf8')).holdingsEvidence||[]):[],
+    reportScopeEvidence:get('--report-holdings')?get('--report-holdings').split(',').flatMap(file=>(JSON.parse(fs.readFileSync(file,'utf8')).histories||[]).flatMap(h=>h.reports.map(r=>r.evidence).filter(Boolean))):[],
     concurrency:Number(get('--concurrency') || 4),
     fetchImpl:cachedFetch(cacheDirectory,{refresh:args.includes('--refresh')}),
     onProgress:event => console.error(JSON.stringify(event))});

@@ -12,7 +12,7 @@ function parseReportHoldings(document,request,source) {
  const stock=composition.match(/其中[:：]?\s*股票\s+([\d,]+\.\d{2}|-)\s+([\d.]+|-)/);
  if(!stock)return null;
  const total=stock[1]==='-'?0:Number(stock[1].replaceAll(',',''));
- const heading=/\d+\.\d+\s*报告期末按公允价值占基金资产净值比例大小排序的前十名股票投资明细/g;
+ const heading=/\d+\.\d+(?:\.\d+)?\s*报告期末按公允价值占基金资产净值比例大小排序的前十名股票投资明细/g;
  for(const match of text.matchAll(heading)){
   const after=text.slice(match.index+match[0].length);
   const end=after.search(/\d+\.\d+\s*报告期末按债券品种分类的债券投资组合/);
@@ -26,13 +26,28 @@ function parseReportHoldings(document,request,source) {
     marketValue10kCny:Number(m[5].replaceAll(',',''))/10000,netValueRatio:Number(m[6]),
     market:/^(?:[03468]\d{5}|92\d{4})$/.test(m[2])?'mainland-A':'non-A'});
   }
-  const zero=rows.length===0&&total===0&&/本基金(?:本报告期末|报告期末|期末)未持有股票/.test(section.replace(/\s+/g,''));
+  // Some layouts concatenate the share quantity and value. An explicit sole-stock statement
+  // and the independently printed whole-stock amount make this split unambiguous.
+  if(!rows.length&&total>0&&/本基金(?:本报告期末|报告期末|期末)仅持有(?:上述|以上)股票/.test(section.replace(/\s+/g,''))){
+   const single=section.match(/^\s*1\s+(\d{5,6})\s+(.+?)\s+([\d,]+\.\d{2})\s+(\d+(?:\.\d+)?)\s*$/m);
+   const codeRows=[...section.matchAll(/^\s*\d{1,2}\s+(\d{5,6})\s+/gm)];
+   const amount=stock[1].replaceAll(',',''),combined=single?.[3].replaceAll(',','');
+   const quantity=combined?.endsWith(amount)?combined.slice(0,-amount.length):'';
+   if(single&&codeRows.length===1&&/^\d+$/.test(quantity)&&Number(quantity)>0){
+    rows.push({rank:1,stockCode:single[1],stockName:single[2].replace(/\s+/g,''),shares10k:Number(quantity)/10000,
+     marketValue10kCny:total/10000,netValueRatio:Number(single[4]),market:/^(?:[03468]\d{5}|92\d{4})$/.test(single[1])?'mainland-A':'non-A'});
+   }
+  }
+  const compactSection=section.replace(/\s+/g,'');
+  const explicitEmpty=/本基金(?:本报告期末|报告期末|期末)未持有股票|本报告期末本基金未持有股票/.test(compactSection)||/^\s*(?:注[:：])?无[。.]?\s*$/m.test(section);
+  const zero=rows.length===0&&total===0&&explicitEmpty;
   if(!zero&&(!rows.length||rows.length>10||rows.some((r,i)=>r.rank!==i+1||r.marketValue10kCny<=0)||new Set(rows.map(r=>r.stockCode)).size!==rows.length))continue;
   const sum=rows.reduce((n,r)=>n+r.marketValue10kCny*10000,0);
   // A short table is complete only when it accounts for the report's entire stock portfolio.
   if(rows.length<10&&Math.abs(sum-total)>0.05||rows.length===10&&sum>total+0.05)continue;
   const quote=stock[0]+'\n'+match[0]+'\n'+section;
   const proof={fundCode:request.fundCode,quarter:request.quarter,productName:identity.productName,id:request.id,
+   reportParserVersion:identity.reportParserVersion,reportClassification:identity.classification,
    reportDate:require('./fund-contract-evidence').quarterEnd(request.quarter),rows,stockValueCny:total,
    quote,quoteSha256:hash(quote),documentSha256:document.pdfSha256,
    source:{...source,scheme:'complete-quarter-report-holdings-v1'}};
