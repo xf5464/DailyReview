@@ -2504,6 +2504,7 @@
       row.addEventListener('click', function () { showDetail(id); });
       refs.tableBody.append(row);
     });
+    appendActiveFundTopFiveRow();
   }
 
   function renderMeta() {
@@ -2525,59 +2526,43 @@
   var activeFundCrowdingLoaded = false;
   var activeFundCrowdingSnapshot = null;
   function renderActiveFundCrowding() {
-    var panel = document.getElementById('activeFundCrowdingPanel');
-    if (!panel) return;
-    panel.hidden = config.selectedGroupId !== 'group_a_share';
-    if (panel.hidden) return;
-    var status = document.getElementById('activeFundCrowdingStatus');
-    var body = document.getElementById('activeFundCrowdingBody');
-    var history = document.getElementById('activeFundCrowdingHistory');
-    if (!activeFundCrowdingLoaded) {
-      activeFundCrowdingLoaded = true;
-      fetch('data/active-fund-industry-crowding.json').then(function (response) {
-        if (!response.ok) throw new Error('no snapshot');
-        return response.json();
-      }).then(function (snapshot) {
-        if (snapshot.schemaVersion !== 2 || !Array.isArray(snapshot.industries) || !Array.isArray(snapshot.quarters) || snapshot.quarters.some(function (q) { return !Array.isArray(q.shares) || q.shares.length !== snapshot.industries.length; }) || ![2,3].includes(snapshot.calculationVersion) || snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' || !Array.isArray(snapshot.rows) || !snapshot.rows.length || !snapshot.latestQuarter || !snapshot.source || !Number.isFinite(snapshot.coverage) || snapshot.coverage < 0.9 || snapshot.coverage > 1) throw new Error('invalid snapshot');
-        activeFundCrowdingSnapshot = snapshot;
-        renderActiveFundCrowding();
-      }).catch(function () { status.textContent = '尚无通过验证的主动公募行业持仓快照；需手动采集后发布。'; });
-    }
-    if (!activeFundCrowdingSnapshot) return;
-    var snapshot = activeFundCrowdingSnapshot;
-    var quarterSelect=document.getElementById('activeFundCrowdingQuarter');
-    if(quarterSelect && quarterSelect.dataset.snapshot!==snapshot.updatedAt){
-      quarterSelect.replaceChildren();snapshot.quarters.slice().reverse().forEach(function(q){var option=document.createElement('option');option.value=q.quarter;option.textContent=q.quarter;quarterSelect.append(option);});
-      quarterSelect.value=snapshot.latestQuarter;quarterSelect.dataset.snapshot=snapshot.updatedAt;quarterSelect.disabled=false;
-      quarterSelect.onchange=function(){renderActiveFundCrowding();};
-    }
-    var selectedQuarter=quarterSelect?quarterSelect.value:snapshot.latestQuarter;
-    var quarterView=window.DailyReviewFundCrowding.quarterView(snapshot,selectedQuarter);
-    var displayedQuarter=quarterView.quarter;
-    status.textContent = (snapshot.equityScope==='mainland-A'?'公开季报主动权益样本 · 前十大 A 股重仓 · 统一东财二级分类重述 · 报告期 ':'主动权益基金 · 季报前十大股票持仓口径 · 东方财富二级行业 · 报告期 ') + selectedQuarter + ' · 样本覆盖率 ≥' + (Math.floor(displayedQuarter.coverage * 1000) / 10).toFixed(1) + '% · 手动更新 ' + String(snapshot.updatedAt || '').slice(0, 10) + '。历史不足或存在缺季时百分位留空。';
-    var notes=document.getElementById('activeFundCrowdingScope');
-    if(notes){var latestQuarter=displayedQuarter;notes.textContent=snapshot.equityScope==='mainland-A'?'统计当期公开季报样本的前十大 A 股重仓，不代表完整股票仓位。港股及其他非 A 股不计入行业占比，其占已取得全部重仓市值的 '+(Number.isFinite(latestQuarter.nonAWeight)?(latestQuarter.nonAWeight*100).toFixed(1)+'%':'—')+'。A 股未归类市值占比 '+((1-latestQuarter.mappingCoverage)*100).toFixed(1)+'%。基金类型尚未确定的记录以保守上界计入覆盖率分母。行业按源站统一 EM2016 二级分类重述，不能解释为逐期原始行业分类。':'按已核验的季度基金范围和行业归属统计。';}
-    body.replaceChildren();
-    history.replaceChildren();
-    var percent = function (value) { return Number.isFinite(value) ? value.toFixed(1) + '%' : '—'; };
-    quarterView.rows.forEach(function (item) {
-      var tr = document.createElement('tr');
-      var values = [item.industry, percent(item.share), Number.isFinite(item.quarterChange) ? (item.quarterChange > 0 ? '+' : '') + item.quarterChange.toFixed(2) + 'pp' : '—'];
-      [4, 12, 20, 40].forEach(function (period) { values.push(percent(item.percentiles && item.percentiles[period])); });
-      values.forEach(function (value) { var td = document.createElement('td'); td.textContent = value; tr.append(td); });
-      tr.tabIndex = 0;
-      var showHistory = function () {
-        history.replaceChildren();
-        var title = document.createElement('h4'); title.textContent = item.industry + ' · 季度持仓占比';
-        var pre = document.createElement('p');
-        var industryIndex = snapshot.industries.indexOf(item.industry);
-        pre.textContent = snapshot.quarters.map(function (point) { return point.quarter + ': ' + percent(point.shares[industryIndex]); }).join('　');
-        history.append(title, pre);
-      };
-      tr.addEventListener('click', showHistory);
-      tr.addEventListener('keydown', function (event) { if (event.key === 'Enter') showHistory(); });
-      body.append(tr);
+    if (activeFundCrowdingLoaded) return;
+    activeFundCrowdingLoaded = true;
+    fetch('data/active-fund-industry-crowding.json').then(function (response) {
+      if (!response.ok) throw new Error('no snapshot');
+      return response.json();
+    }).then(function (snapshot) {
+      if (snapshot.schemaVersion !== 2 || !Array.isArray(snapshot.rows) || !snapshot.rows.length ||
+          !snapshot.latestQuarter || !snapshot.source || !Number.isFinite(snapshot.coverage) ||
+          snapshot.coverage < 0.9 || snapshot.coverage > 1 || snapshot.disclosureBasis !== 'quarterly-top10' ||
+          snapshot.taxonomy !== 'eastmoney-level2') throw new Error('invalid snapshot');
+      activeFundCrowdingSnapshot = snapshot;
+      if (config.selectedGroupId === 'group_a_share' && viewMode === 'table') renderTable();
+    }).catch(function () {
+      activeFundCrowdingSnapshot = null;
+      if (config.selectedGroupId === 'group_a_share' && viewMode === 'table') renderTable();
     });
+  }
+
+  function appendActiveFundTopFiveRow() {
+    if (config.selectedGroupId !== 'group_a_share') return;
+    var snapshot = activeFundCrowdingSnapshot;
+    var topFive = snapshot ? snapshot.rows.filter(function (item) { return Number.isFinite(item.share) && item.share >= 0; })
+      .slice().sort(function (a, b) { return b.share - a.share; }).slice(0, 5) : [];
+    var valid = topFive.length === 5;
+    var total = valid ? topFive.reduce(function (sum, item) { return sum + item.share; }, 0) : null;
+    var row = document.createElement('tr');
+    row.append(createElement('th', '', '主动公募行业前五集中度'));
+    row.firstChild.scope = 'row';
+    row.append(createElement('td', '', valid ? total.toFixed(2) + '%' : '--'));
+    row.append(createElement('td', '', snapshot ? snapshot.latestQuarter : '--'));
+    row.append(createElement('td', '', '季度'));
+    var action = document.createElement('td');
+    var note = createElement('span', '', valid ? '前五行业合计' : '暂无有效数据');
+    if (valid) note.title = topFive.map(function (item) { return item.industry + ' ' + item.share.toFixed(2) + '%'; }).join('；') + '；基于主动权益公募季报前十大持仓，非全部持仓。';
+    action.append(note);
+    row.append(action);
+    refs.tableBody.append(row);
   }
 
   function renderAll() {
