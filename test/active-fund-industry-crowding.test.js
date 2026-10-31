@@ -50,7 +50,7 @@ test('A-share group shows only a snapshot-backed top-five summary row',()=>{
  assert.match(html,/id="overallTableBody"/);
  assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
  assert.match(app,/appendActiveFundTopFiveRow/);
- assert.match(app,/slice\(0, 5\)/);
+ assert.ok(app.includes('shares.slice(0,5)'));
  assert.match(app,/sum\+value/);
  assert.ok(app.includes("fetch('data/active-fund-industry-crowding.json')"));
  assert.equal(app.includes('queryFundPortfolio('), false);
