@@ -36,7 +36,7 @@ function mergeReportEvidence(base,extra){
  const holdings=new Map([...(base?.holdingsEvidence||[]),...(extra.holdingsEvidence||[])].map(e=>[e.quarter+':'+e.fundCode,e]));
  return {...extra,histories:[...(base?.histories||[]),...extra.histories],holdingsEvidence:[...holdings.values()]};
 }
-function write(file,value){fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.'+process.pid+'.tmp';fs.writeFileSync(tmp,JSON.stringify(value)+'\n');fs.renameSync(tmp,file);}
+function write(file,value,trailingNewline=true){fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.'+process.pid+'.tmp';fs.writeFileSync(tmp,JSON.stringify(value)+(trailingNewline?'\n':''));fs.renameSync(tmp,file);}
 function selectReusable(sets,archive) {
  const rows=sets.flatMap(set=>reuseDatedContracts(set,archive).evidence),byName=new Map();
  for(const row of rows){const key=canonical(row.productName),old=byName.get(key);if(!old||row.source.publishedAt>old.source.publishedAt)byName.set(key,row);else if(row.source.publishedAt===old.source.publishedAt&&row.status!==old.status)throw new Error('Conflicting dated contract evidence: '+row.productName);}
@@ -103,7 +103,7 @@ async function main(args=process.argv.slice(2)) {
   }
   const publish=()=>{
    const result=combineSnapshots(entries,industries),compact=createPublicSnapshot(result.snapshot);
-   write(path.join(cache,'audits',compact.auditDigest+'.json'),result.snapshot.audit);
+   write(path.join(cache,'audits',compact.auditDigest+'.json'),result.snapshot.audit,false);
    saveSnapshot(path.resolve(get('--output')),compact);write(path.join(directory,'verified-universe.json'),result.universe);
    log({stage:'published',quarters:compact.quarterCount,bytes:fs.statSync(get('--output')).size});
   };
