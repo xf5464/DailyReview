@@ -2741,7 +2741,7 @@
     refs.detailHelp.textContent = id === 'activeFundTopFive' ? '每个季度按主动权益公募披露的前十大A股重仓行业占比排序，取当期前五行业占比之和。历史按季度显示，非全部基金股票仓位。' : DESCRIPTIONS[id] || '暂无说明。';
     refs.detailSource.href = chart && chart.sourceUrl || '#';
     refs.detailSource.hidden = !(chart && chart.sourceUrl);
-    refs.detailRange.value = refs.range.value;
+    refs.detailRange.value = id === 'activeFundTopFive' ? 'year10' : refs.range.value;
     renderDetail();
     refs.detailDialog.showModal();
     refs.detailClose.focus({ preventScroll: true });
