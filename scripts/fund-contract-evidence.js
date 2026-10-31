@@ -85,7 +85,7 @@ function classifyContractText(document,{productName,quarter,disclosureTitle=''})
     if(passive)return proof('excluded',null,'Explicit passive or enhanced-index strategy',page.page,passive[0]);
   }
   const allocations=[];
-  const pattern=/股票(?:(?:资产|投资|类资产)?(?:[（(](?:含|包括)(?:(?!债券|可转债)[^%()（）]){1,90}[）)])?(?:资产|投资)?(?:(?:及|和|、)存托凭证(?:资产|投资)?)?|等权益类资产)(?:(?:的配置)?占(?:本)?基金(?:总|净)?资产(?:净值|总值)?(?:的比例|的比重|的|比例)?|的投资比例(?:占(?:本)?基金资产的)?|的投资比重|的投资|投资比例|的配置比例|配置(?:比例|区间)|(?:的|资产)?比例(?:占(?:本)?基金资产(?:净值|总值)?的)?(?:范围)?)(?:的)?(?:变动|浮动)?(?:范围)?(?:为|是|应为|不低于|不得低于|不少于|不超过|不得超过|不高于|：|:)?(?:本?基金(?:(?:总|净)?资产(?:净值)?|财产)的)?(\d{1,3}(?:\.\d+)?)%?(?:[-至](\d{1,3}(?:\.\d+)?)%)?/g;
+  const pattern=/股票(?:(?:资产|投资|类资产)?(?:[（(](?:含|包括)(?:(?!债券|可转债)[^%()（）]){1,90}[）)])?(?:资产|投资)?(?:(?:及|和|、)存托凭证(?:资产)?(?:投资)?)?|等权益类资产)(?:(?:的配置)?占(?:本)?基金(?:总|净)?资产(?:净值|总值)?(?:的比例|的比重|的|比例)?|的投资比例(?:占(?:本)?基金资产的)?|的投资比重|的投资|投资比例|的(?:资产)?配置比例|配置(?:比例|区间)|(?:的|资产)?比例(?:占(?:本)?基金资产(?:净值|总值)?的)?(?:范围)?)(?:的)?(?:变动|浮动)?(?:范围)?(?:为|是|应为|不低于|不得低于|不少于|不超过|不得超过|不高于|：|:)?(?:本?基金(?:(?:总|净)?资产(?:净值|总值)?|财产)的)?(\d{1,3}(?:\.\d+)?)%?(?:[-至](\d{1,3}(?:\.\d+)?)%)?/g;
   for(const page of pages) {
     const t=page.text.replace(/(^|\n)\s*\d{1,3}\s*\/\s*\d{1,3}\s*(?=\n|$)/g,'$1').normalize('NFKC').replace(/\s+/g,'').replaceAll('％','%').replace(/[－—–~～]/g,'-');
     for(const match of t.matchAll(pattern)) {
@@ -166,9 +166,9 @@ async function collectDocumentList(fundCode,load) {
   if(new Set(rows.map(r=>r.id)).size!==first.value.total)throw new Error('Incomplete disclosure history');
   return {rows,sources:results.map(r=>r.source)};
 }
-async function readDisclosurePdf(row,{directory,python='python',fetchImpl=fetch,extractionMode='plain',cacheOnly=false}) {
+async function readDisclosurePdf(row,{directory,python='python',fetchImpl=fetch,extractionMode='plain',extractionEngine='auto',cacheOnly=false}) {
   fs.mkdirSync(directory,{recursive:true});
-  const pdfFile=path.join(directory,row.id+'.pdf'),textFile=path.join(directory,row.id+(extractionMode==='layout'?'.text-layout.json':'.text.json')),metaFile=path.join(directory,row.id+'.source.json');
+  const pdfFile=path.join(directory,row.id+'.pdf'),textFile=path.join(directory,row.id+(extractionMode==='layout'?'.text-layout.json':extractionEngine==='pypdf'?'.text-pypdf.json':'.text.json')),metaFile=path.join(directory,row.id+'.source.json');
   if(!/^AN\d+$/.test(row.id||''))throw new Error('Invalid disclosure document ID');
   const attachmentPattern=new RegExp('^https://pdf[.]dfcfw[.]com/pdf/H[0-9]{1,2}_'+row.id+'_1[.]pdf$');
   const url=row.attachmentUrl || 'https://pdf.dfcfw.com/pdf/H2_'+row.id+'_1.pdf';
@@ -184,10 +184,24 @@ async function readDisclosurePdf(row,{directory,python='python',fetchImpl=fetch,
   }
   const meta=JSON.parse(fs.readFileSync(metaFile,'utf8'));
   if(!attachmentPattern.test(meta.url) || hash(fs.readFileSync(pdfFile))!==meta.hash)throw new Error('Disclosure PDF cache checksum mismatch');
-  if(!fs.existsSync(textFile))await runFile(python,[path.join(__dirname,'extract-fund-disclosure.py'),pdfFile,textFile,extractionMode],{timeout:120000,windowsHide:true,maxBuffer:2*1024*1024});
+  if(!fs.existsSync(textFile)){
+    const extract=engine=>runFile(python,[path.join(__dirname,'extract-fund-disclosure.py'),pdfFile,textFile,extractionMode,engine],{timeout:120000,windowsHide:true,maxBuffer:2*1024*1024});
+    try{await extract(extractionEngine);}catch(error){if(extractionEngine!=='auto'||extractionMode!=='plain')throw error;await extract('pypdf');}
+  }
   const extracted=JSON.parse(fs.readFileSync(textFile,'utf8'));
   if(extracted.pdfSha256!==meta.hash || (extracted.extractionMode || 'plain')!==extractionMode)throw new Error('Extracted PDF text checksum mismatch');
-  return {document:extracted,source:{...meta,id:row.id,publishedAt:row.publishedAt,title:row.title}};
+  return {document:extracted,source:{...meta,id:row.id,publishedAt:row.publishedAt,title:row.title,extractionEngine:extracted.extractionEngine||'pypdf'}};
+}
+async function classifyDisclosureDocument(row,request,{readRow,readClassic}) {
+  let result=await readRow(row),classification=classifyContractText(result.document,{...request,disclosureTitle:result.source.title});
+  if(classification.status==='unresolved'&&result.document.extractionEngine?.startsWith('pymupdf-')){
+    try{
+      const classic=await readClassic(row);
+      const alternate=classifyContractText(classic.document,{...request,disclosureTitle:classic.source.title});
+      if(alternate.status!=='unresolved'){result=classic;classification=alternate;}
+    }catch(error){classification.extractionFallbackError=error.message;}
+  }
+  return {result,classification};
 }
 async function main(args=process.argv.slice(2)) {
   const get=flag=>{const i=args.indexOf(flag);return i<0?null:args[i+1];};
@@ -214,6 +228,8 @@ async function main(args=process.argv.slice(2)) {
   };
   const file=path.resolve(get('--output'));fs.mkdirSync(path.dirname(file),{recursive:true});
   const journal=file+'.progress.jsonl';fs.writeFileSync(journal,'');
+  const readClassified=(row,request)=>classifyDisclosureDocument(row,request,{readRow,
+    readClassic:row=>readDisclosurePdf(row,{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly,extractionEngine:'pypdf'})});
   const work=async request=>{
     try {
       if(!histories.has(request.fundCode))histories.set(request.fundCode,collectDocumentList(request.fundCode,load));
@@ -221,8 +237,7 @@ async function main(args=process.argv.slice(2)) {
       if(!selected)return {...request,status:'unresolved',reason:'No applicable disclosure published by quarter end'};
       let result,classification;
       try {
-        result=await readRow(selected);
-        classification=classifyContractText(result.document,{...request,disclosureTitle:result.source.title});
+        ({result,classification}=await readClassified(selected,request));
       }catch(error){classification={status:'unresolved',reason:error.message};}
       if(args.includes('--fallback') && classification.status==='unresolved') {
         const alternatives=[selectEffectiveDocument(list.rows.filter(r=>/基金合同|基金契约/.test(r.title)&&!/摘要/.test(r.title)),request),selectEffectiveDocument(list.rows.filter(r=>/招募说明书/.test(r.title)&&!/摘要/.test(r.title)),request)].filter(Boolean);
@@ -230,8 +245,7 @@ async function main(args=process.argv.slice(2)) {
           if(alternative.id===result?.source.id)continue;
           if(cacheOnly&&!fs.existsSync(path.join(directory,'pdfs',alternative.id+'.text.json'))&&!(args.includes('--text-fallback')&&fs.existsSync(path.join(directory,'text',alternative.id+'.complete.json'))))continue;
           try {
-          const next=await readRow(alternative);
-          const nextClass=classifyContractText(next.document,{...request,disclosureTitle:next.source.title});
+          const {result:next,classification:nextClass}=await readClassified(alternative,request);
           if(nextClass.status!=='unresolved'){result=next;classification=nextClass;break;}
           }catch(error){classification.alternativeErrors=[...(classification.alternativeErrors||[]),{id:alternative.id,reason:error.message}];}
         }
@@ -248,4 +262,4 @@ async function main(args=process.argv.slice(2)) {
   console.log(JSON.stringify(rows.reduce((a,r)=>(a[r.status]=(a[r.status]||0)+1,a),{})));
 }
 if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1;});
-module.exports={ownProductPages,quarterEnd,selectEffectiveDocument,classifyContractText,collectDocumentList,readDisclosurePdf,main};
+module.exports={ownProductPages,quarterEnd,selectEffectiveDocument,classifyContractText,classifyDisclosureDocument,collectDocumentList,readDisclosurePdf,main};

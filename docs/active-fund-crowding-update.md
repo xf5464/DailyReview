@@ -71,3 +71,5 @@ npm run update:active-fund-crowding -- --universe work/reconciliation.json.unive
 `node scripts/backfill-active-fund-crowding.js --census work/census.json --archives work/historical-report-archives --industries work/fixed-industries.json --state work/backfill --cache work/holdings-cache --disclosures work/disclosure-cache --report-cache work/report-pdfs --output scripts/data/active-fund-industry-crowding.json`
 
 这是手动准备任务，不由构建或部署调用。可用 `--seed-universe` 保留已验证季度，`--reuse-contracts` 传入已核验合同证据，`--quarters` 限定本轮季度。先快速复核本地缓存，再按未定净资产上界分批查找当时有效披露；缺失持仓转读完整季报。每季度独立保存分类证据、覆盖率诊断和检查点，全部门槛通过后才合并公开矩阵，环比和分位数按实际连续季度重新计算。进程锁防止重复运行，崩溃后须核对进程已退出再清理锁并重跑。原始文件及检查点留在本地，失败不会删除已有季度结果。
+
+完整 PDF 提取需要 Python 和 pypdf。可选安装 [PyMuPDF 1.26.7](https://pypi.org/project/pymupdf/1.26.7/) 至本地工作目录，并通过该进程的 `PYTHONPATH` 加载，加速合同纯文本提取；排版表格仍使用原布局提取方式。新引擎无法分类时，自动用 pypdf 对同一 PDF 再次提取并复核。提取引擎写入本地来源记录，原 PDF 指纹保持一致。[官方文本提取说明](https://pymupdf.readthedocs.io/en/latest/recipes-text.html)介绍了保留阅读顺序的方式。已用 100 份真实披露对照：99 份分类一致，1 份新引擎无法判定，由原方式回退确认。

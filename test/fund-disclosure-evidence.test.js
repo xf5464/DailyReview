@@ -10,6 +10,22 @@ const {parseEM2016Industry,buildFixedIndustryInputs}=require('../scripts/fund-fi
 const name='测试成长混合型证券投资基金',quarter='2026-Q3';
 const classify=(text,pages=[])=>classifyContractText({pages:[{page:1,text:name+'\n'+text},...pages]},{productName:name,quarter});
 const sha=t=>crypto.createHash('sha256').update(t).digest('hex');
+
+test('native text extraction falls back to original extraction when a column layout hides a stock mandate',async()=>{
+ const {classifyDisclosureDocument}=require('../scripts/fund-contract-evidence');
+ const document=(text,engine)=>({document:{extractionEngine:engine,pages:[{page:1,text:name+text}]},source:{title:name+'基金合同'}});
+ let classicCalls=0;
+ const result=await classifyDisclosureDocument({}, {productName:name,quarter},{
+  readRow:async()=>document('投资范围详见基金合同','pymupdf-text-1.26.7'),
+  readClassic:async()=>{classicCalls++;return document('股票资产占基金资产的60%-95%','pypdf');}
+ });
+ assert.equal(result.classification.status,'active');assert.equal(result.result.document.extractionEngine,'pypdf');assert.equal(classicCalls,1);
+ const direct=await classifyDisclosureDocument({}, {productName:name,quarter},{
+  readRow:async()=>document('股票资产占基金资产的60%-95%','pymupdf-text-1.26.7'),
+  readClassic:async()=>{throw Error('Unexpected second extraction');}
+ });
+ assert.equal(direct.classification.status,'active');assert.equal(direct.classification.extractionFallbackError,undefined);
+});
 test('dated legal document selection rejects future documents, unrelated products and draft changes',()=>{
  const row=(id,title,date)=>({id,title,publishedAt:date});
  const rows=[row('future',name+'产品资料概要','2026-10-01'),row('valid',name+'基金合同','2026-09-01'),row('draft',name+'基金合同草案','2026-09-25'),row('wrong','另一基金产品资料概要','2026-09-26')];
@@ -195,6 +211,9 @@ test('legacy configuration and baseline bands preserve whole-fund allocation req
  assert.equal(classify('对权益类资产的投资不高于基金资产净值的30%').status,'excluded');
  assert.equal(classify('股票资产30%-75%').status,'unresolved');
  assert.equal(classify('股票资产的基准比例为非现金基金资产净值的90%，浮动范围为85-95%。').status,'unresolved');
+ assert.equal(classify('本基金投资于股票的比例为基金资产总值的30%-95%').status,'active');
+ assert.equal(classify('本基金股票、存托凭证资产投资占基金资产的比例为60%-95%').status,'active');
+ assert.equal(classify('股票的资产配置比例为基金资产的60%-95%').status,'active');
 });
 
 test('a repeated own-product QDII disclosure heading identifies old overseas funds without classifying manager biographies',()=>{
