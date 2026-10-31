@@ -23,7 +23,7 @@ function createOfflineBundle(outputDirectory = defaultOutputDirectory) {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   if (!Array.isArray(manifest.charts)) throw new Error('Offline manifest charts are invalid.');
 
-  const dataFiles = manifest.charts.flatMap((chart) => [chart.extras, ...(chart.chunks || [])]);
+  const dataFiles = manifest.charts.flatMap((chart) => [chart.extras, ...(chart.chunks || [])]).concat(manifest.datasets || []);
   const paths = [...new Set(dataFiles.map((file) => normalizeBundlePath(file.path)))];
   const outlookPath = 'data/outlook.json';
   if (fs.existsSync(path.join(outputDirectory, outlookPath))) paths.push(outlookPath);

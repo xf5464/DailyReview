@@ -471,11 +471,19 @@ async function build() {
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
   // Active fund crowding is deliberately manual-only. The normal deployment
   // copies a previously approved static snapshot without fetching or recalculating it.
+  const offlineDatasets = [];
   const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
   if (fs.existsSync(crowdingSnapshot)) {
     const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
     require('./fund-crowding-snapshot').validatePublicCrowdingSnapshot(snapshot);
     writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
+    const content = fs.readFileSync(path.join(dataDirectory, 'active-fund-industry-crowding.json'));
+    const hash = contentHash(content);
+    const relativePath = 'offline/datasets/active-fund-industry-crowding.' + hash + '.json';
+    fs.mkdirSync(path.dirname(path.join(dataDirectory, relativePath)), { recursive: true });
+    fs.writeFileSync(path.join(dataDirectory, relativePath), content);
+    offlineDatasets.push({ id: 'activeFundIndustryCrowding', path: 'data/' + relativePath,
+      canonicalPath: 'data/active-fund-industry-crowding.json', hash, bytes: content.byteLength });
   }
 
 
@@ -535,6 +543,7 @@ async function build() {
     schemaVersion: 1,
     fetchedAt: outlook.fetchedAt,
     charts: offlineCharts,
+    datasets: offlineDatasets,
   });
 
   const failedCharts = outlook.charts.filter((chart) => chart.error && chart.items.length === 0);

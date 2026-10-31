@@ -71,6 +71,17 @@ function combineSnapshots(entries,industries) {
   audit:{universeHash:hash(universe),industryMapHash:hash(industries),universeReviewedAt:universe.reviewedAt,industriesReviewedAt:industries.reviewedAt,quarters:audits.sort((a,b)=>quarterIndex(a.quarter)-quarterIndex(b.quarter))}};
  return {snapshot:validateCrowdingSnapshot(full),universe};
 }
+function refreshPreparedEntries(directory,entries,industries) {
+ for(const name of fs.readdirSync(directory).filter(n=>/^\d{4}-Q[1-4]$/.test(n))){
+  const saved=path.join(directory,name,'validated.json'),uf=path.join(directory,name,'universe.json');
+  if(!fs.existsSync(saved)||!fs.existsSync(uf)||entries.some(e=>e.snapshot.quarters.some(q=>q.quarter===name)))continue;
+  const snapshot=read(saved),universe=read(uf);validateCrowdingSnapshot(snapshot);
+  if(snapshot.audit.industryMapHash!==hash(industries))continue;
+  if(snapshot.audit.universeHash!==hash(universe))throw new Error('Imported quarter universe checksum mismatch');
+  entries.push({snapshot,universe});
+ }
+ return entries;
+}
 async function main(args=process.argv.slice(2)) {
  const get=f=>{const i=args.indexOf(f);return i<0?null:args[i+1];};
  for(const flag of ['--census','--archives','--industries','--state','--cache','--output'])if(!get(flag))throw new Error('Missing '+flag);
@@ -102,18 +113,13 @@ async function main(args=process.argv.slice(2)) {
    }
   }
   const publish=()=>{
+   refreshPreparedEntries(directory,entries,industries);
    const result=combineSnapshots(entries,industries),compact=createPublicSnapshot(result.snapshot);
    write(path.join(cache,'audits',compact.auditDigest+'.json'),result.snapshot.audit,false);
    saveSnapshot(path.resolve(get('--output')),compact);write(path.join(directory,'verified-universe.json'),result.universe);
    log({stage:'published',quarters:compact.quarterCount,bytes:fs.statSync(get('--output')).size});
   };
-  for(const name of fs.readdirSync(directory).filter(n=>/^\d{4}-Q[1-4]$/.test(n))){
-   const saved=path.join(directory,name,'validated.json'),uf=path.join(directory,name,'universe.json');
-   if(!fs.existsSync(saved)||!fs.existsSync(uf)||entries.some(e=>e.snapshot.quarters.some(q=>q.quarter===name)))continue;
-   const snapshot=read(saved),universe=read(uf);
-   validateCrowdingSnapshot(snapshot);
-   if(snapshot.audit.industryMapHash===hash(industries))entries.push({snapshot,universe});
-  }
+  refreshPreparedEntries(directory,entries,industries);
   if(entries.length)publish();
   const requested=get('--quarters')?.split(',')||census.quarters.map(q=>q.quarter);
   requested.forEach(quarterIndex);requested.sort((a,b)=>quarterIndex(b)-quarterIndex(a));
@@ -215,4 +221,4 @@ async function main(args=process.argv.slice(2)) {
  }finally{fs.closeSync(lockFd);fs.unlinkSync(lock);}
 }
 if(require.main===module)main().catch(e=>{console.error(e.stack||e.message);process.exitCode=1;});
-module.exports={selectReusable,mergeContractEvidence,combineSnapshots,catalogueScopeCandidates,scopeReportRequests,mergeReportEvidence,main};
+module.exports={selectReusable,mergeContractEvidence,combineSnapshots,catalogueScopeCandidates,scopeReportRequests,mergeReportEvidence,refreshPreparedEntries,main};

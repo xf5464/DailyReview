@@ -837,6 +837,11 @@
     var localSignatures = new Map(localCharts.map(function (chart) {
       return [chart.id, chart.signature];
     }));
+    var datasets = manifest.datasets || [], localDatasets = state.datasets || [];
+    if (datasets.length !== localDatasets.length) return true;
+    if (datasets.some(function (file) { return !localDatasets.some(function (local) {
+      return local.path === file.path && local.hash === file.hash;
+    }); })) return true;
     return manifest.charts.some(function (chart) {
       return localSignatures.get(chart.id) !== chart.signature;
     });
@@ -935,6 +940,10 @@
         nextIndex += 1;
         var url = absoluteAppUrl(file.path);
         var pathname = new URL(url).pathname;
+        if (file.canonicalPath && cachedPaths.has(pathname)) {
+          var datasetResponse = await cache.match(url);
+          if (!(await responseMatchesHash(datasetResponse, file.hash))) cachedPaths.delete(pathname);
+        }
         if (!cachedPaths.has(pathname)) {
           var response = await fetch(url, { cache: 'no-store' });
           if (!response.ok || !(await responseMatchesHash(response, file.hash))) {
@@ -968,6 +977,16 @@
     }));
   }
 
+  async function assembleOfflineDatasets(manifest, cache) {
+    for (var file of manifest.datasets || []) {
+      var response = await cache.match(absoluteAppUrl(file.path));
+      if (!response || !(await responseMatchesHash(response, file.hash))) {
+        throw new Error('离线季度数据校验失败：' + file.path);
+      }
+      await cache.put(absoluteAppUrl(file.canonicalPath), response.clone());
+    }
+  }
+
   async function downloadAllOfflineData() {
     if (!offlineDataSupported()) return;
     refs.offlineDataDownloadButton.disabled = true;
@@ -987,7 +1006,7 @@
       var previousSignatures = new Map((previousState && previousState.charts || []).map(function (chart) {
         return [chart.id, chart.signature];
       }));
-      var files = manifest.charts.flatMap(function (chart) { return [chart.extras].concat(chart.chunks); });
+      var files = manifest.charts.flatMap(function (chart) { return [chart.extras].concat(chart.chunks); }).concat(manifest.datasets || []);
       var downloadedBytes = await downloadOfflineFiles(files, cache, function (completed, total) {
         refs.offlineDataProgress.value = total ? completed / total * 75 : 75;
         refs.offlineDataMessage.textContent = '正在下载或校验数据分块：' + completed + '/' + total;
@@ -1009,6 +1028,12 @@
         refs.offlineDataProgress.value = 75 + (index + 1) / manifest.charts.length * 24;
         refs.offlineDataMessage.textContent = '正在生成本地图表：' + (index + 1) + '/' + manifest.charts.length;
       }
+      await assembleOfflineDatasets(manifest, cache);
+      changedCharts += (manifest.datasets || []).filter(function (file) {
+        return !(previousState && previousState.datasets || []).some(function (local) {
+          return local.path === file.path && local.hash === file.hash;
+        });
+      }).length;
       await cache.put(absoluteAppUrl('data/offline-manifest.json'), new Response(JSON.stringify(manifest) + '\n', {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       }));
@@ -1018,7 +1043,8 @@
         schemaVersion: 1,
         fetchedAt: manifest.fetchedAt,
         updatedAt: new Date().toISOString(),
-        charts: manifest.charts.map(function (chart) { return { id: chart.id, signature: chart.signature }; })
+        charts: manifest.charts.map(function (chart) { return { id: chart.id, signature: chart.signature }; }),
+        datasets: (manifest.datasets || []).map(function (file) { return { path: file.path, hash: file.hash }; })
       };
       await cache.put(absoluteAppUrl(OFFLINE_STATE_PATH), new Response(JSON.stringify(state), {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
