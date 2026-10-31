@@ -239,7 +239,7 @@ function cachedFetch(directory, {refresh = false, fetchImpl = fetch, intervalMs 
     const {parseFundPortfolioText} = require('./fund-portfolio-source');
     if (!parseFundPortfolioText(body).quarters.length) throw new Error('No disclosed quarterly holdings');
     const record = {url:stable.href, fetchedAt:new Date().toISOString(), hash:hash(body), body};
-    const temporary = file + '.tmp';
+    const temporary = file + '.' + process.pid + '.tmp';
     fs.writeFileSync(temporary, JSON.stringify(record) + '\n');
     fs.renameSync(temporary, file);
     return {ok:true, fundCrowdingSource:{url:record.url,fetchedAt:record.fetchedAt,hash:record.hash}, text:async () => body};
