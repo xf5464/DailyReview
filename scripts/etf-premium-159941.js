@@ -12,15 +12,16 @@ function parsePremiumPage(html) {
 }
 function parsePremiumHistory(html) {
   const rows = [];
-  const pattern = /<tr\\b[^>]*>([\\s\\S]*?)<\\/tr>/gi;
+  const tr = new RegExp('<tr[^>]*>([\\s\\S]*?)</tr>', 'gi');
+  const td = new RegExp('<t[dh][^>]*>([\\s\\S]*?)</t[dh]>', 'gi');
   let match;
-  while ((match = pattern.exec(String(html))) !== null) {
-    const cells = [...match[1].matchAll(/<t[dh]\\b[^>]*>([\\s\\S]*?)<\\/t[dh]>/gi)].map(m => m[1].replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').trim());
+  while ((match = tr.exec(String(html))) !== null) {
+    const cells = Array.from(match[1].matchAll(td), item => item[1].replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').trim());
     if (cells.length < 3 || !/^\\d{4}-\\d{2}-\\d{2}$/.test(cells[0])) continue;
     const value = cells[2].match(/^([+−-]?\\d+(?:\\.\\d+)?)%$/);
-    if (!value) continue; // historical NAV premium is NOT the IOPV reference premium
-    const number = Number(value[1].replace('−', '-'));
-    if (Number.isFinite(number) && Math.abs(number) <= 100) rows.push({date:cells[0], value:number});
+    if (!value) continue;
+    const number = Number(value[1].replace('−','-'));
+    if (Number.isFinite(number) && Math.abs(number) <= 100) rows.push({date:cells[0],value:number});
   }
   return [...new Map(rows.map(item => [item.date,item])).values()].sort((a,b) => a.date.localeCompare(b.date));
 }
