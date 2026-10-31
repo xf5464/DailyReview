@@ -161,7 +161,7 @@ async function main(args=process.argv.slice(2)) {
     if(preview.needsReportPdfs.length){
      const requests=path.join(dir,'missing-report-requests.json');write(requests,preview.needsReportPdfs);
      const output=path.join(dir,'missing-report-evidence.json');
-     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+     await run('fund-report-pdf-evidence.js',['--requests',requests,'--output',output,'--require-nav','--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
      pdfs=mergeReportEvidence(pdfs,read(output));write(pdfFile,pdfs);preview=rebuild();
     }
     // Reclassify available complete local documents first, without network access.

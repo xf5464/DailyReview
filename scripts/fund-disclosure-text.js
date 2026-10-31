@@ -39,6 +39,27 @@ async function collectDisclosureText(row,load) {
    url:textUrl(row.id,1),hash:hash(JSON.stringify(chunks)),pageBasis:'source-text-chunk',attachmentUrl:first.value.attachmentUrl,chunks});
  return {document:{pages:values.map(v=>({page:v.value.page,text:v.value.text})),textSourceHash:source.hash},source};
 }
+function createDisclosureTextFetch({fetchImpl=fetch,httpsGet=require('node:https').get}={}){
+ return async(url,options={})=>{
+  try{return await fetchImpl(url,options);}catch(original){
+   if(options.signal?.aborted)throw original;
+   return new Promise((resolve,reject)=>{
+    const request=httpsGet(url,{agent:false,family:4,headers:options.headers,signal:options.signal},response=>{
+     const chunks=[];let length=0;
+     response.on('data',chunk=>{length+=chunk.length;if(length>20*1024*1024){request.destroy();reject(new Error('Oversized official disclosure text'));}else chunks.push(chunk);});
+     response.on('error',reject);response.on('end',()=>{
+      try{let body=Buffer.concat(chunks);const encoding=response.headers['content-encoding'];
+       if(encoding==='gzip')body=require('node:zlib').gunzipSync(body);else if(encoding==='deflate')body=require('node:zlib').inflateSync(body);else if(encoding==='br')body=require('node:zlib').brotliDecompressSync(body);
+       const headers={...response.headers};delete headers['content-encoding'];delete headers['content-length'];
+       resolve(new Response(body,{status:response.statusCode,headers}));
+      }catch(error){reject(error);}
+     });
+    });
+    request.setTimeout(30000,()=>request.destroy(new Error('Official disclosure HTTPS timeout')));request.on('error',reject);
+   });
+  }
+ };
+}
 async function readDisclosureText(row,{directory,load,cacheOnly=false,refresh=false}) {
  fs.mkdirSync(directory,{recursive:true});const file=path.join(directory,row.id+'.complete.json');
  if(!refresh&&fs.existsSync(file)){
@@ -50,4 +71,4 @@ async function readDisclosureText(row,{directory,load,cacheOnly=false,refresh=fa
  if(cacheOnly)throw new Error('Complete disclosure text not in local cache');
  const result=await collectDisclosureText(row,load);const tmp=file+'.'+process.pid+'.tmp';fs.writeFileSync(tmp,JSON.stringify(result));fs.renameSync(tmp,file);return result;
 }
-module.exports={textUrl,parseDisclosureMetadata,parseDisclosureChunk,validateDisclosureTextSource,collectDisclosureText,readDisclosureText};
+module.exports={textUrl,parseDisclosureMetadata,parseDisclosureChunk,validateDisclosureTextSource,collectDisclosureText,readDisclosureText,createDisclosureTextFetch};

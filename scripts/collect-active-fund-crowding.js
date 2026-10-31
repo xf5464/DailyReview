@@ -43,6 +43,13 @@ function validateInputs(universe, industries) {
     }
   }
 }
+function verifiedReportScopeSource(e,member){
+ const source=e.source;if(!source||!/^[a-f0-9]{64}$/.test(source.hash||''))return false;
+ if(e.extractionMethod==='complete-PDF-layout')return e.documentSha256===source.hash&&new RegExp('^https://pdf[.]dfcfw[.]com/pdf/H[0-9]{1,2}_'+e.id+'_1[.]pdf$').test(source.url);
+ if(e.extractionMethod!=='complete-official-disclosure-text')return false;
+ require('./fund-disclosure-text').validateDisclosureTextSource(source);
+ return e.textSourceHash===source.hash&&e.textChunks===source.chunks.length&&Array.isArray(e.reportedFundCodes)&&e.reportedFundCodes.some(c=>c===member.fundCode||member.memberFundCodes?.includes(c));
+}
 async function collect({ funds = [], industries, years, universe, fetchImpl, reportHoldings = [], reportScopeEvidence = [], concurrency = 4, onProgress = () => {} }) {
   if (!Array.isArray(funds) || !industries || !Array.isArray(years) ||
       !years.length || years.some(y => !Number.isInteger(y) || y < 1990 || y > 2100) ||
@@ -75,8 +82,8 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, rep
     const member=memberIndex.get(e.quarter)?.get(e.fundCode)||universe?.quarters[e.quarter]?.funds.find(f=>f.memberFundCodes?.includes(e.fundCode));
     if(!member||e.reportParserVersion!==2)continue;
     const identity=require('./fund-report-evidence').reportIdentity(e.source?.title);
-    if(!identity||identity.quarter!==e.quarter||identity.productName!==e.productName||!['active','unresolved','excluded'].includes(e.classification?.status)||!Number.isFinite(Date.parse(e.source?.downloadedAt))||e.productName.normalize('NFKC').replace(/\s+/g,'')!==member.fundName.normalize('NFKC').replace(/\s+/g,'')||e.extractionMethod!=='complete-PDF-layout'||e.source?.id!==e.id||
-      !/^AN\d+$/.test(e.id||'')||e.documentSha256!==e.source.hash||!/^[a-f0-9]{64}$/.test(e.source.hash)||!new RegExp('^https://pdf[.]dfcfw[.]com/pdf/H[0-9]{1,2}_'+e.id+'_1[.]pdf$').test(e.source.url)||
+    if(!identity||identity.quarter!==e.quarter||identity.productName!==e.productName||!['active','unresolved','excluded'].includes(e.classification?.status)||!Number.isFinite(Date.parse(e.source?.downloadedAt))||e.productName.normalize('NFKC').replace(/\s+/g,'')!==member.fundName.normalize('NFKC').replace(/\s+/g,'')||!verifiedReportScopeSource(e,member)||e.source?.id!==e.id||
+      !/^AN\d+$/.test(e.id||'')||
       member.evidence?.reportIds&&!member.evidence.reportIds.includes(e.id))throw new Error('Unverified dated report scope');
     if(e.classification?.status==='excluded')throw new Error('Report scope excludes a product still present in the input universe');
     scopeReviewed.add(e.quarter+':'+member.fundCode);

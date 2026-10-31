@@ -213,7 +213,7 @@ async function main(args=process.argv.slice(2)) {
   const cacheOnly=args.includes('--cache-only');
   const denyNetwork=async()=>{throw new Error('Source not in local cache');};
   const load=sourceFetch(path.join(directory,'lists'),{cacheOnly,refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:cacheOnly?denyNetwork:fetch}),histories=new Map();
-  const textLoad=sourceFetch(path.join(directory,'text','raw'),{cacheOnly,refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:pacedContentFetch({fetchImpl:cacheOnly?denyNetwork:fetch})});
+  const textLoad=sourceFetch(path.join(directory,'text','raw'),{cacheOnly,refresh:args.includes('--refresh')&&!cacheOnly,fetchImpl:pacedContentFetch({fetchImpl:cacheOnly?denyNetwork:require('./fund-disclosure-text').createDisclosureTextFetch()})});
   const readRow=async row=>{
     try{return await readDisclosurePdf(row,{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly});}
     catch(error){

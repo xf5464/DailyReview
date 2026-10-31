@@ -223,3 +223,32 @@ test('a repeated own-product QDII disclosure heading identifies old overseas fun
  const unrelated=classify('第三部分基金管理人\n测试成长（QDII）更新招募说明书摘要\n第四部分基金的投资\n股票资产占基金资产的比例为60%-95%。');
  assert.equal(unrelated.status,'active');
 });
+
+test('report body identity permits parenthesis punctuation while preserving the fund-name words and quarter',()=>{const product='测试亚洲除日本机会股票型证券投资基金',request={fundCode:'457001',id:'AN202404221630947526',quarter:'2024-Q1',title:product+'2024年第1季度报告',publishedAt:'2024-04-22'},text='测试亚洲（除日本）机会股票型证券投资基金2024年第1季度报告\n基金产品概况 基金简称 测试机会股票(QDII) 基金主代码457001 基金运作方式契约型';const parse=body=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:body}]},request);assert.equal(parse(text).classification.status,'excluded');assert.throws(()=>parse(text.replace('除日本','包括日本')),/different product/);assert.throws(()=>parse(text.replace('2024年第1','2024年第2')),/different product or quarter/);});
+
+test('legacy Chinese-digit report years are exact and a table of contents does not truncate the fund overview',()=>{const request={fundCode:'001371',id:'AN201704220525030416',quarter:'2017-Q1',title:'测试沪港深灵活配置混合型证券投资基金2017年第1季度报告',publishedAt:'2017-04-22'},name=request.title.replace('2017年第1季度报告',''),make=year=>name+year+'年第1季度报告\n目录 基金产品概况 主要财务指标\n基金基本情况 基金简称 测试沪港深混合 基金主代码001371 基金运作方式契约型\n主要财务指标';for(const zero of ['0','〇','零','○','O']){const text=make('二'+zero+'一七'),out=parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text}]},request);assert.equal(out.mainFundCode,'001371');assert.deepEqual(out.reportedFundCodes,['001371']);assert.equal(out.reportCodeBindingComplete,true);}assert.throws(()=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:make('二〇一八')}]},request),/different product or quarter/);});
+
+function officialQuarterFixture(text,request){const {textUrl}=require('../scripts/fund-disclosure-text');const chunks=[{url:textUrl(request.id,1),hash:'b'.repeat(64),textSha256:sha(text),fetchedAt:'2026-10-31T00:00:00Z'}],source={scheme:'official-disclosure-text-v1',id:request.id,title:request.title,publishedAt:request.publishedAt,url:textUrl(request.id,1),hash:sha(JSON.stringify(chunks)),pageBasis:'source-text-chunk',chunks};return {source,document:{textSourceHash:source.hash,pages:[{page:1,text}]}};}
+
+test('a line break inside the currency label preserves explicit CNY NAV evidence',()=>{
+ const request={fundCode:'519035',quarter:'2019-Q1',id:'AN201904211321087366',title:'测试股票型证券投资基金2019年第1季度报告',publishedAt:'2019-04-22'};
+ const text=request.title+'\n基金简称测试股票 基金主代码519035 基金运作方式契约型\n主要财务指标\n单\n位： 人民币元\n4.期末基金资产净值 1,873,857,932.83\n5.期末基金份额净值 1.5512';
+ const parse=t=>parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text:t}]},request);
+ assert.equal(parse(text).navTotal10kCny,187385.793283);assert.equal(parse(text.replace('人民币元','美元')).navTotal10kCny,null);
+});
+
+test('official report text independently binds source announcement identity before parsing its body',()=>{
+ const request={fundCode:'000001',quarter:'2018-Q1',id:'AN201804201126891338',title:'测试股票型证券投资基金2018年第1季度报告',publishedAt:'2018-04-20'},text=request.title+'\n基金简称测试股票 基金主代码000001 基金运作方式契约型\n主要财务指标';
+ const {parseOfficialReportText}=require('../scripts/fund-report-pdf-evidence');
+ for(const changed of [{...request,id:'AN201804201126891339'},{...request,publishedAt:'2018-04-21'},{...request,title:'另一基金2018年第1季度报告'}])assert.throws(()=>parseOfficialReportText(officialQuarterFixture(text,changed),request),/announcement identity mismatch/);
+});
+
+test('official text transport retries a network reset on the same verified HTTPS URL and respects cancellation',async()=>{
+ const {createDisclosureTextFetch}=require('../scripts/fund-disclosure-text'),{EventEmitter}=require('node:events');
+ const url='https://np-cnotice-stock.eastmoney.com/api/content/ann?art_code=AN201910221369418507&client_source=web&page_index=1';let calls=0;
+ const httpsGet=(target,options,callback)=>{calls++;assert.equal(target,url);assert.equal(options.agent,false);assert.equal(options.family,4);const request=new EventEmitter();request.setTimeout=()=>request;queueMicrotask(()=>{const response=new EventEmitter();response.statusCode=200;response.headers={'content-encoding':'gzip'};callback(response);response.emit('data',require('node:zlib').gzipSync(Buffer.from('verified text')));response.emit('end');});return request;};
+ const result=await createDisclosureTextFetch({fetchImpl:async()=>{throw new Error('ECONNRESET');},httpsGet})(url);assert.equal(await result.text(),'verified text');assert.equal(calls,1);
+ const direct=await createDisclosureTextFetch({fetchImpl:async()=>new Response('direct'),httpsGet})(url);assert.equal(await direct.text(),'direct');assert.equal(calls,1);
+ const controller=new AbortController();controller.abort();await assert.rejects(createDisclosureTextFetch({fetchImpl:async()=>{throw new Error('aborted');},httpsGet})(url,{signal:controller.signal}),/aborted/);assert.equal(calls,1);
+});
+test('complete official text recovers an unreadable heading using exact formal report dates and matching fund codes',()=>{const request={fundCode:'000001',quarter:'2018-Q1',id:'AN201804201126891338',title:'测试灵活配置混合型证券投资基金2018年第1季度报告',publishedAt:'2018-04-20'},name=request.title.replace('2018年第1季度报告',''),text=name+'二一八年第季度报告\n本报告期自2018年1月1日起至2018年3月31日止。\n基金产品概况 基金简称测试混合 基金主代码000001 基金运作方式契约型\n主要财务指标';const {parseOfficialReportText}=require('../scripts/fund-report-pdf-evidence'),out=parseOfficialReportText(officialQuarterFixture(text,request),request);assert.equal(out.extractionMethod,'complete-official-disclosure-text');assert.equal(out.textChunks,1);assert.equal(out.documentSha256,undefined);assert.equal(out.source.scheme,'official-disclosure-text-v1');assert.throws(()=>parseOfficialReportText(officialQuarterFixture(text.replace('基金主代码000001','基金主代码002690'),request),request),/different fund code/);const bad=officialQuarterFixture(text,request);bad.document.pages[0].text+='changed';assert.throws(()=>parseOfficialReportText(bad,request),/checksum mismatch/);assert.doesNotThrow(()=>parseOfficialReportText(officialQuarterFixture(text.replace('2018年1月1日','2017年12月11日'),request),request));assert.throws(()=>parseOfficialReportText(officialQuarterFixture(text.replace('二一八年第季度','2018年第2季度'),request),request),/different product or quarter/);const half={...request,quarter:'2018-Q2',title:name+'2018年第2季度报告'};assert.throws(()=>parseOfficialReportText(officialQuarterFixture(text.replace('2018年3月31日','2018年6月30日'),half),half),/different product or quarter/);});

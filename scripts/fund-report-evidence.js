@@ -58,8 +58,21 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
   const contents=data.notice_content;
   const compact=contents.normalize('NFKC').replace(/\s+/g,'');
   const qNumber=Number(quarter.slice(-1));
-  const bodyPeriod=new RegExp(quarter.slice(0,4)+'年第?['+qNumber+'一二三四'[qNumber-1]+']季度报告');
-  if(page===1 && (!bodyPeriod.test(compact.slice(0,2000)) || !compact.slice(0,2000).includes(identity.productName.normalize('NFKC'))))throw new Error('Report body has different product or quarter');
+  const yearDigits=['0〇零○O','1一','2二','3三','4四','5五','6六','7七','8八','9九'];
+  const yearPattern=[...quarter.slice(0,4)].map(d=>'['+yearDigits[Number(d)]+']').join('');
+  const bodyPeriod=new RegExp(yearPattern+'年第?['+qNumber+'一二三四'[qNumber-1]+']季度报告');
+  const header=compact.slice(0,2000);
+  let periodConfirmed=bodyPeriod.test(header);
+  if(!periodConfirmed&&!/[0-9〇零○O一二三四五六七八九]{4}年第?[1-4一二三四]季度报告/.test(header)){
+    const m=compact.slice(0,16000).match(/本报告期自(\d{4})年(\d{1,2})月(\d{1,2})日(?:起)?至(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日止/);
+    if(m){
+      const start=Date.UTC(Number(m[1]),Number(m[2])-1,Number(m[3])),end=Date.UTC(Number(m[4]||m[1]),Number(m[5])-1,Number(m[6]));
+      const year=Number(quarter.slice(0,4)),quarterStart=Date.UTC(year,(qNumber-1)*3,1),quarterEnd=Date.UTC(year,qNumber*3,0);
+      const valid=(time,y,mo,d)=>new Date(time).getUTCFullYear()===Number(y)&&new Date(time).getUTCMonth()+1===Number(mo)&&new Date(time).getUTCDate()===Number(d);
+      periodConfirmed=valid(start,m[1],m[2],m[3])&&valid(end,m[4]||m[1],m[5],m[6])&&end===quarterEnd&&start<=end&&start>=quarterStart-62*86400000;
+    }
+  }
+  if(page===1 && (!periodConfirmed || !header.replace(/[()]/g,'').includes(identity.productName.normalize('NFKC').replace(/[()]/g,''))))throw new Error('Report body has different product or quarter');
   const sectionStart=contents.search(/基金产品概况|基金基本情况/);
   const overview=sectionStart>=0?contents.slice(sectionStart,sectionStart+7000):contents.slice(0,7000);
   const mainMatch=overview.replace(/\s+/g,'').match(/基金主代码[|：:]*([0-9]{6})(?!\d)/);
