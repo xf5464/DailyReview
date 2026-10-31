@@ -51,7 +51,7 @@ test('A-share group shows only a snapshot-backed top-five summary row',()=>{
  assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
  assert.match(app,/appendActiveFundTopFiveRow/);
  assert.ok(app.includes('shares.slice(0,5)'));
- assert.match(app,/sum\+value/);
+ assert.ok(app.includes('sum+item.share'));
  assert.ok(app.includes("fetch('data/active-fund-industry-crowding.json')"));
  assert.equal(app.includes('queryFundPortfolio('), false);
 });
@@ -63,4 +63,13 @@ test('top-five historical chart uses each quarter ranking and displays 1y/3y per
  assert.ok(app.includes("showDetail('activeFundTopFive')"));
  assert.ok(app.includes('overviewPercentilePair(chart.items, latest.value, latest.date, true)'));
  assert.ok(app.includes("if (id === 'activeFundTopFive') return activeFundTopFiveChart()"));
+});
+
+test('top-five tooltip shows each quarter actual industry names and shares',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.ok(app.includes('topFive:topFive'));
+ assert.ok(app.includes('entry.industry'));
+ assert.ok(app.includes('entry.share.toFixed(2)'));
+ assert.ok(app.includes("chart.id === 'activeFundTopFive' ? 'pre-line'"));
 });
