@@ -1,5 +1,6 @@
 'use strict';
 const {quarterIndex}=require('./active-fund-industry-crowding');
+const {classificationProductName}=require('./fund-portfolio-source');
 const {sourceFetch,parallel}=require('./collect-fund-crowding-sources');
 function reportIdentity(title) {
   const normalized=String(title || '').replace(/\s+/g,'');
@@ -11,13 +12,14 @@ function reportIdentity(title) {
 function classifyReportTitle(title) {
   const identity=reportIdentity(title);
   if(!identity)return {status:'unresolved',reason:'No explicit quarterly report period'};
-  const name=identity.productName;
-  if(/指数|ETF|增强|联接|被动|QDII|FOF|基金中基金|债券|货币|偏债|不动产投资信托|基础设施证券投资基金|商业不动产证券投资基金|集合资产管理计划/i.test(name))return {...identity,status:'excluded',reason:'Dated product title identifies excluded strategy'};
+  const name=classificationProductName(identity.productName);
+  if(/指数|ETF|增强|联接|被动|QDII|FOF|基金中基金|债券|货币|偏债|保本|不动产投资信托|基础设施证券投资基金|商业不动产证券投资基金|集合资产管理计划/i.test(name))return {...identity,status:'excluded',reason:'Dated product title identifies excluded strategy'};
   let type=null;
   if(/灵活配置.*混合|混合.*灵活配置/.test(name))type='灵活配置混合型';
   else if(/偏股.*混合|混合.*偏股/.test(name))type='偏股混合型';
   else if(/平衡.*混合|混合.*平衡/.test(name))type='混合型-平衡';
   else if(/股票型|股票证券投资基金/.test(name))type='股票型';
+  if(type && /全球|环球|海外|亚太|亚洲|香港|美国|欧洲|大中华|中国概念|东南亚|日本/.test(name))return {...identity,status:'unresolved',type:null,reason:'Dated overseas-market scope requires legal-document verification'};
   return {...identity,status:type?'active':'unresolved',type,reason:type?'Explicit dated legal product title':'Mixed subtype not established by title'};
 }
 function parseReportList(body,{fundCode,page=1,pageSize=100}) {
@@ -66,6 +68,11 @@ function parseReportPage(body,{fundCode,id,quarter,page=1}) {
   if(!associated && !codeSet.has(fundCode))throw new Error('Report does not identify requested fund');
   const classification=classifyReportTitle(data.notice_title);
   const riskText=overview.replace(/\s+/g,'');
+  const protectedType=/本基金(?:属于|为|是)(?:一只|一支)?(?:保本型|保本混合型|保本|避险型)(?:证券投资)?基金/.test(riskText);
+  const insuredMandate=/基金保证人[|：:]?[^|\d]{2,60}(?:公司|中心)/.test(riskText)&&/恒定比例投资组合保险/.test(riskText)&&/本金损失/.test(riskText)&&/避险周期/.test(riskText);
+  if(classification.status!=='excluded'&&(protectedType||insuredMandate)) {
+    classification.status='excluded';classification.type=null;classification.reason='Dated report overview establishes capital-protection mandate';
+  }
   if(classification.status==='unresolved') {
     const type=riskText.match(/本基金(?:属于|为|是)(?:一只|一支)?(偏股混合型|灵活配置混合型|平衡混合型|股票型)(?:证券投资)?基金/);
     if(type) {classification.status='active';classification.type=type[1]==='平衡混合型'?'混合型-平衡':type[1];classification.reason='Explicit fund type in dated report overview';}

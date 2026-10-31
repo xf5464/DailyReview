@@ -2,13 +2,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { queryFundPortfolio, deduplicateFundShares } = require('./fund-portfolio-source');
+const { queryFundPortfolio, deduplicateFundShares, classificationProductName } = require('./fund-portfolio-source');
 const { CALCULATION_VERSION, quarterIndex, calculateIndustryCrowding } = require('./active-fund-industry-crowding');
 
 function activeFund(fund) {
   const type = String(fund.type || '');
   if (!/^\d{6}$/.test(String(fund.fundCode || ''))) return false;
-  if (/指数|ETF|增强|联接|被动|QDII|FOF|债券|偏债/i.test(type + ' ' + String(fund.fundName || ''))) return false;
+  if (/指数|ETF|增强|联接|被动|QDII|FOF|债券|偏债|保本/i.test(type + ' ' + classificationProductName(fund.fundName))) return false;
   return /^(主动权益|股票型|普通股票型|偏股混合型|灵活配置混合型|混合型-(偏股|灵活|平衡))$/.test(type);
 }
 function hash(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
@@ -49,6 +49,11 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
       new Set(years).size !== years.length) throw new TypeError('Invalid collection inputs');
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 8) throw new Error('concurrency must be between 1 and 8');
   if (universe) validateInputs(universe, industries);
+  const memberIndex=new Map(),eligibleYears=new Map();
+  if(universe)for(const [key,q] of Object.entries(universe.quarters)) {
+    memberIndex.set(key,new Map(q.funds.map(f=>[f.fundCode,f])));
+    for(const fund of q.funds){if(!eligibleYears.has(fund.fundCode))eligibleYears.set(fund.fundCode,new Set());eligibleYears.get(fund.fundCode).add(Number(key.slice(0,4)));}
+  }
   const selected = universe
     ? [...new Map(Object.values(universe.quarters).flatMap(q => q.funds).map(f => [f.fundCode, f])).values()]
     : deduplicateFundShares(funds.filter(activeFund));
@@ -59,10 +64,9 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
   for (const year of years) for (let q = 1; q <= 4; q++) {
     const key = year + '-Q' + q;
     quarters.set(key, {quarter:key, holdings:[], successful:0, stockCount:0, unmapped:0,
-      totalMarketValue:0, grossMarketValue:0,nonAMarketValue:0,nonAStockCount:0,mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], rejectedReports:[], errors:[]});
+      totalMarketValue:0, grossMarketValue:0,nonAMarketValue:0,nonAStockCount:0,mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], unmappedStockCodes:[], rejectedReports:[], errors:[]});
   }
-  const jobs = selected.flatMap(fund => years.map(year => ({fund, year}))).filter(({fund, year}) =>
-    !universe || Object.entries(universe.quarters).some(([key, q]) => key.startsWith(year + '-') && q.funds.some(f => f.fundCode === fund.fundCode)));
+  const jobs=selected.flatMap(fund=>years.filter(year=>!universe || eligibleYears.get(fund.fundCode)?.has(year)).map(year=>({fund,year})));
   let cursor = 0;
   await Promise.all(Array.from({length:Math.min(concurrency, jobs.length)}, async () => {
     while (cursor < jobs.length) {
@@ -73,7 +77,7 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
       const responseQuarters = new Set();
       for (const quarter of portfolio.quarters) {
         const row = quarters.get(quarter.key);
-        const member = universe?.quarters[quarter.key]?.funds.find(f => f.fundCode === fund.fundCode);
+        const member = memberIndex.get(quarter.key)?.get(fund.fundCode);
         if (!row || (universe && !member)) continue;
         if (responseQuarters.has(quarter.key)) {
           row.errors.push(fund.fundCode + ': duplicate quarterly report');continue;
@@ -89,11 +93,11 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
         const mapping = universe ? (industries.fixedMap || industries.quarters[quarter.key]) : industries;
         for (const h of quarter.rows) {
           row.grossMarketValue += h.marketValue10kCny;
-          if (equityScope==='mainland-A' && !/^(?:[03468]\d{5}|92\d{4})$/.test(h.stockCode)) {row.nonAMarketValue+=h.marketValue10kCny;row.nonAStockCount++;continue;}
+          if (equityScope==='mainland-A' && (h.market==='non-A'||!/^(?:[03468]\d{5}|92\d{4})$/.test(h.stockCode))) {row.nonAMarketValue+=h.marketValue10kCny;row.nonAStockCount++;continue;}
           row.stockCount++;
           row.totalMarketValue += h.marketValue10kCny;
-          const industry = mapping[h.stockCode];
-          if (typeof industry !== 'string' || !industry.trim()) { row.unmapped++; continue; }
+          const industry = equityScope==='mainland-A' && h.market!=='mainland-A'?null:mapping[h.stockCode];
+          if (typeof industry !== 'string' || !industry.trim()) { row.unmapped++;row.unmappedStockCodes.push(h.stockCode);continue; }
           row.mappedMarketValue += h.marketValue10kCny;
           row.holdings.push({industry, marketValue:h.marketValue10kCny, activeEquity:true, indexFund:false});
         }
@@ -112,7 +116,7 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
     const mappingCoverage = q.totalMarketValue ? q.mappedMarketValue / q.totalMarketValue : 0;
     // Counts alone cannot establish coverage; protect against small-fund or mapping bias.
     const coverage = universe && !q.errors.length ? Math.min(fundCoverage, assetCoverage, mappingCoverage) : 0;
-    return {...q,eligibleFundCount:eligibleCount || null,eligibleNetAssets,unclassifiedCountUpperBound:pendingCount,
+    return {...q,unmappedStockCodes:[...new Set(q.unmappedStockCodes)].sort(),eligibleFundCount:eligibleCount || null,eligibleNetAssets,unclassifiedCountUpperBound:pendingCount,
       fundCoverage, assetCoverage, mappingCoverage, coverage,
       taxonomyVersion:universe ? industries.taxonomyVersion : null};
   });

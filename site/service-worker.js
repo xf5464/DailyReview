@@ -11,6 +11,7 @@ const APP_SHELL = [
   'index.html',
   'styles.css',
   'app.js',
+  'fund-crowding-view.js',
   'vendor/fflate.min.js',
   'manifest.webmanifest',
   'toy-icon-a1190c863e-180.png',

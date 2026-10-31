@@ -2504,13 +2504,22 @@
     }
     if (!activeFundCrowdingSnapshot) return;
     var snapshot = activeFundCrowdingSnapshot;
-    status.textContent = (snapshot.equityScope==='mainland-A'?'公开季报主动权益样本 · 前十大 A 股重仓 · 统一东财二级分类重述 · 报告期 ':'主动权益基金 · 季报前十大股票持仓口径 · 东方财富二级行业 · 报告期 ') + snapshot.latestQuarter + ' · 样本覆盖率 ≥' + (Math.floor(snapshot.coverage * 1000) / 10).toFixed(1) + '% · 手动更新 ' + String(snapshot.updatedAt || '').slice(0, 10) + '。历史不足或存在缺季时百分位留空。';
+    var quarterSelect=document.getElementById('activeFundCrowdingQuarter');
+    if(quarterSelect && quarterSelect.dataset.snapshot!==snapshot.updatedAt){
+      quarterSelect.replaceChildren();snapshot.quarters.slice().reverse().forEach(function(q){var option=document.createElement('option');option.value=q.quarter;option.textContent=q.quarter;quarterSelect.append(option);});
+      quarterSelect.value=snapshot.latestQuarter;quarterSelect.dataset.snapshot=snapshot.updatedAt;quarterSelect.disabled=false;
+      quarterSelect.onchange=function(){renderActiveFundCrowding();};
+    }
+    var selectedQuarter=quarterSelect?quarterSelect.value:snapshot.latestQuarter;
+    var quarterView=window.DailyReviewFundCrowding.quarterView(snapshot,selectedQuarter);
+    var displayedQuarter=quarterView.quarter;
+    status.textContent = (snapshot.equityScope==='mainland-A'?'公开季报主动权益样本 · 前十大 A 股重仓 · 统一东财二级分类重述 · 报告期 ':'主动权益基金 · 季报前十大股票持仓口径 · 东方财富二级行业 · 报告期 ') + selectedQuarter + ' · 样本覆盖率 ≥' + (Math.floor(displayedQuarter.coverage * 1000) / 10).toFixed(1) + '% · 手动更新 ' + String(snapshot.updatedAt || '').slice(0, 10) + '。历史不足或存在缺季时百分位留空。';
     var notes=document.getElementById('activeFundCrowdingScope');
-    if(notes){var latestQuarter=snapshot.quarters[snapshot.quarters.length-1];notes.textContent=snapshot.equityScope==='mainland-A'?'统计当期公开季报样本的前十大 A 股重仓，不代表完整股票仓位。港股及其他非 A 股不计入行业占比，其占已取得全部重仓市值的 '+(Number.isFinite(latestQuarter.nonAWeight)?(latestQuarter.nonAWeight*100).toFixed(1)+'%':'—')+'。A 股未归类市值占比 '+((1-latestQuarter.mappingCoverage)*100).toFixed(1)+'%。基金类型尚未确定的记录以保守上界计入覆盖率分母。行业按源站统一 EM2016 二级分类重述，不能解释为逐期原始行业分类。':'按已核验的季度基金范围和行业归属统计。';}
+    if(notes){var latestQuarter=displayedQuarter;notes.textContent=snapshot.equityScope==='mainland-A'?'统计当期公开季报样本的前十大 A 股重仓，不代表完整股票仓位。港股及其他非 A 股不计入行业占比，其占已取得全部重仓市值的 '+(Number.isFinite(latestQuarter.nonAWeight)?(latestQuarter.nonAWeight*100).toFixed(1)+'%':'—')+'。A 股未归类市值占比 '+((1-latestQuarter.mappingCoverage)*100).toFixed(1)+'%。基金类型尚未确定的记录以保守上界计入覆盖率分母。行业按源站统一 EM2016 二级分类重述，不能解释为逐期原始行业分类。':'按已核验的季度基金范围和行业归属统计。';}
     body.replaceChildren();
     history.replaceChildren();
     var percent = function (value) { return Number.isFinite(value) ? value.toFixed(1) + '%' : '—'; };
-    snapshot.rows.forEach(function (item) {
+    quarterView.rows.forEach(function (item) {
       var tr = document.createElement('tr');
       var values = [item.industry, percent(item.share), Number.isFinite(item.quarterChange) ? (item.quarterChange > 0 ? '+' : '') + item.quarterChange.toFixed(2) + 'pp' : '—'];
       [4, 12, 20, 40].forEach(function (period) { values.push(percent(item.percentiles && item.percentiles[period])); });

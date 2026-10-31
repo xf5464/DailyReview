@@ -96,12 +96,41 @@ function buildPublishedUniverse(census,archives,extraEvidence=[]) {
       source:'Complete dated public quarterly-report cohort; confirmed active-equity products plus conservative uncertain-product count and NAV bounds',
       reviewedAt:new Date().toISOString(),evidenceHashes:evidence.map(digest),quarters}};
 }
+function reuseDatedContracts(set,archive) {
+  if(set?.schemaVersion!==1||set.classifierVersion!=='contract-equity-scope-v1'||!Array.isArray(set.evidence))throw new Error('Invalid reusable disclosure evidence');
+  const cutoff=quarterEnd(archive.quarter),families=new Map();
+  for(const history of archive.histories||[])for(const report of history.reports||[]) {
+    const identity=require('./fund-report-evidence').reportIdentity(report.title);
+    if(identity?.quarter!==archive.quarter||identity.summary)continue;
+    const key=canonical(identity.productName);if(!families.has(key))families.set(key,{productName:identity.productName,codes:[]});
+    families.get(key).codes.push(history.fundCode);
+  }
+  const evidence=[];
+  for(const row of set.evidence) {
+    const family=families.get(canonical(row.productName));
+    if(!family||!['active','excluded'].includes(row.status)||!row.source?.publishedAt||row.source.publishedAt.slice(0,10)>cutoff||require('./active-fund-industry-crowding').quarterIndex(row.quarter)<require('./active-fund-industry-crowding').quarterIndex(archive.quarter))continue;
+    // Reuse the dated document only. Membership and share aliases come from the target report window.
+    evidence.push({...row,quarter:archive.quarter,productName:family.productName,fundCode:[...new Set(family.codes)].sort()[0],reusedFromQuarter:row.quarter});
+  }
+  return {schemaVersion:1,classifierVersion:set.classifierVersion,source:'Dated legal documents matched to target-quarter report identities',preparedAt:new Date().toISOString(),evidence};
+}
 function main(args=process.argv.slice(2)){
   const fs=require('node:fs'),path=require('node:path');
   const get=flag=>{const i=args.indexOf(flag);return i<0?null:args[i+1];};
   if(!get('--census')||!get('--archives')||!get('--output'))throw new Error('Usage: --census census.json --archives archive.json[,archive2.json] --evidence evidence.json[,another.json] --output work/published-universe.json');
   const read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
-  const result=buildPublishedUniverse(read(get('--census')),get('--archives').split(',').map(read),get('--evidence')?get('--evidence').split(',').map(read):[]);
+  const archives=get('--archives').split(',').map(read);
+  const evidence=get('--evidence')?get('--evidence').split(',').map(read):[];
+  if(get('--reuse-contracts')) {
+    const rows=get('--reuse-contracts').split(',').flatMap(file=>read(file).evidence||[]);
+    const set={schemaVersion:1,classifierVersion:'contract-equity-scope-v1',evidence:rows};
+    for(const archive of archives) {
+      const reused=reuseDatedContracts(set,archive),byName=new Map();
+      for(const row of reused.evidence){const key=canonical(row.productName),old=byName.get(key);if(!old||row.source.publishedAt>old.source.publishedAt)byName.set(key,row);else if(row.source.publishedAt===old.source.publishedAt&&row.status!==old.status)throw new Error('Conflicting reusable dated classification');}
+      evidence.push({...reused,evidence:[...byName.values()]});
+    }
+  }
+  const result=buildPublishedUniverse(read(get('--census')),archives,evidence);
   const file=path.resolve(get('--output'));fs.mkdirSync(path.dirname(file),{recursive:true});
   fs.writeFileSync(file,JSON.stringify(result)+'\n');
   fs.writeFileSync(file+'.universe.json',JSON.stringify(result.universe)+'\n');
@@ -110,4 +139,4 @@ function main(args=process.argv.slice(2)){
   console.log(JSON.stringify({productionReady:result.productionReady,summaries:result.summaries,neededReportPdfs:result.needsReportPdfs.length}));
 }
 if(require.main===module){try{main();}catch(e){console.error(e.message);process.exitCode=1;}}
-module.exports={buildPublishedUniverse,main};
+module.exports={buildPublishedUniverse,reuseDatedContracts,main};

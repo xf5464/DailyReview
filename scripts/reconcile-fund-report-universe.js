@@ -17,7 +17,7 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
       const detail=report.evidence;
       if(detail && (detail.id!==report.id || detail.fundCode!==history.fundCode || detail.quarter!==dated.quarter ||
           detail.productName!==dated.productName))throw new Error('Report detail does not match announcement');
-      const classification=dated.status==='excluded'?dated:(detail?.classification || dated);
+      const classification=dated.status==='excluded'||dated.reason==='Dated overseas-market scope requires legal-document verification'?dated:(detail?.classification || dated);
       if(classification.quarter!==dated.quarter || classification.productName!==dated.productName)throw new Error('Classification does not match report period');
       const codes=new Set([history.fundCode,...(detail?.associatedFundCodes || [])]);
       for(const code of codes) {
@@ -39,9 +39,11 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
     if(set.schemaVersion!==1 || set.classifierVersion!=='contract-equity-scope-v1')throw new Error('Unknown contract evidence classifier');
     for(const evidence of set.evidence) {
       if(!requested.has(evidence.quarter) || evidence.status==='unresolved')continue;
+      const textSource=evidence.source?.scheme==='official-disclosure-text-v1';
+      if(textSource)require('./fund-disclosure-text').validateDisclosureTextSource(evidence.source);
       if(!['active','excluded'].includes(evidence.status) || !evidence.rule || !evidence.quote ||
           evidence.quoteSha256!==hash(evidence.quote) || !/^[a-f0-9]{64}$/.test(evidence.source?.hash || '') ||
-          !/^https:\/\/pdf\.dfcfw\.com\/pdf\/H2_AN\d+_1\.pdf$/.test(evidence.source?.url || '') ||
+          (!textSource&&!/^https:\/\/pdf\.dfcfw\.com\/pdf\/H[0-9]{1,2}_AN\d+_1\.pdf$/.test(evidence.source?.url || '')) ||
           !evidence.source.publishedAt || evidence.source.publishedAt.slice(0,10)>quarterEnd(evidence.quarter))
         throw new Error('Unverified or future-dated contract evidence');
       const seed=claims.get(evidence.quarter+':'+evidence.fundCode);
@@ -51,7 +53,7 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
         if(claim.classification.status==='excluded')continue; // Scope exclusions cannot be overridden by equity-allocation evidence.
         claim.classification={...claim.classification,status:evidence.status,type:evidence.type,
           reason:evidence.rule,eligibilityBasis:'dated-contract-equity-scope'};
-        claim.contractEvidence={source:evidence.source,quoteSha256:evidence.quoteSha256,rule:evidence.rule,page:evidence.page};
+        claim.contractEvidence={source:evidence.source,quoteSha256:evidence.quoteSha256,rule:evidence.rule,page:evidence.page,quoteBasis:evidence.quoteBasis || (textSource?'official-announcement-text-chunk':'PDF-text')};
       }
     }
   }
@@ -86,7 +88,12 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
       const exactNav=reportedNavs[0] || null;
       // The bulk source rounds each share-class NAV to 0.01 billion CNY = 100 ten-thousand CNY.
       const roundingTolerance=50*group.members.length+0.01;
-      if(exactNav && bulkNav && Math.abs(exactNav-bulkNav)>roundingTolerance) {
+      const hierarchy=details.find(d=>d.structuredShareHierarchyVerified===true&&d.extractionMethod==='complete-PDF-layout'&&/分级/.test(group.productName)&&d.navClassValuesCny?.length===1&&group.members.every(m=>d.hierarchyCodes?.includes(m.fundCode)));
+      const parent=hierarchy&&group.members.find(m=>m.fundCode===hierarchy.mainFundCode);
+      const children=parent?group.members.filter(m=>m!==parent):[];
+      const near=(a,b,tolerance)=>Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<=tolerance;
+      const structuredOverlap=!!(exactNav&&parent&&children.length&&near(parent.netAsset10kCny,exactNav,50.01)&&(group.members.every(m=>near(m.netAsset10kCny,exactNav,50.01))||near(children.reduce((n,m)=>n+m.netAsset10kCny,0),exactNav,50*children.length+0.01)));
+      if(exactNav && bulkNav && Math.abs(exactNav-bulkNav)>roundingTolerance && !structuredOverlap) {
         errors.push({productName:group.productName,reason:'Share NAV sum conflicts with dated report',bulkNav,reportedNav:exactNav});continue;
       }
       const nav=exactNav || bulkNav;
@@ -99,7 +106,8 @@ function reconcileFundUniverse(source,evidenceSets,{quarters}={}) {
         memberFundCodes:group.members.map(m=>m.fundCode).sort(),
         evidence:{reportIds:[...new Set(group.claims.map(c=>c.id))].sort(),
           contractProofs:[...new Map(group.claims.filter(c=>c.contractEvidence).map(c=>[c.contractEvidence.source.id,c.contractEvidence])).values()],
-          mainFundCode:main || null,navBasis:exactNav?'dated-report':'quarterly-census-share-sum',
+          mainFundCode:main || null,navBasis:structuredOverlap?'whole-structured-fund-report':exactNav?'dated-report':'quarterly-census-share-sum',
+          structuredCensusOverlap:structuredOverlap,
           censusNetAsset10kCny:bulkNav,reportedNetAsset10kCny:exactNav}});
     }
     resultQuarters[input.quarter]={funds};

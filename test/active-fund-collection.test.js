@@ -187,3 +187,15 @@ test('a rejected partial disclosure reduces both coverage measures without disca
  assert.equal(q.successful,9);assert.equal(q.fundCoverage,0.9);assert.equal(q.assetCoverage,0.9);assert.equal(q.errors.length,0);assert.equal(q.rejectedReports.length,1);
  assert.equal(validateCrowdingSnapshot(createSnapshot(out,options)).coverage,0.9);
 });
+
+test('A-share scope uses source market links and never maps a same-code overseas stock to a mainland company',async()=>{
+ const options=inputs();options.universe={...options.universe,schemaVersion:2,verificationBasis:'complete-published-quarterly-reports',quarterlyReportWindowVerified:true,equityScope:'mainland-A'};
+ const q=options.universe.quarters['2026-Q3'];q.funds[0]={...q.funds[0],netAssetLowerBound10kCny:100,netAssetUpperBound10kCny:100};q.unclassifiedFunds=[];q.reportWindow={complete:true};
+ options.industries={schemaVersion:2,taxonomy:'eastmoney-level2',taxonomyVersion:'EM2016-level2',classificationBasis:'fixed-taxonomy-restatement',mappingVerified:true,sourceDigest:'a'.repeat(64),source:'Direct company archives',reviewedAt:'2026-10-31',fixedMap:{...options.industries.quarters['2026-Q3'],'000660':'不应使用的同码A股行业'}};
+ const source=holdingsText().replaceAll('<td>600000</td>',"<td><a href='//quote.eastmoney.com/unify/r/105.000660'>000660</a></td>").replace(/<td>(60000[1-9])<\/td>/g,"<td><a href='//quote.eastmoney.com/unify/r/1.$1'>$1</a></td>");
+ options.fetchImpl=async()=>({ok:true,text:async()=>source});
+ const out=await collect(options);const row=out.snapshots.find(q=>q.quarter==='2026-Q3');
+ assert.equal(row.totalMarketValue,9);assert.equal(row.nonAMarketValue,91);assert.equal(row.mappingCoverage,1);assert.equal(out.result.rows.some(r=>r.industry==='不应使用的同码A股行业'),false);
+ const unknown=source.replace("<a href='//quote.eastmoney.com/unify/r/105.000660'>000660</a>","<span data-texch=''>000660</span>");options.fetchImpl=async()=>({ok:true,text:async()=>unknown});
+ const missing=await collect(options);assert.equal(missing.snapshots.find(q=>q.quarter==='2026-Q3').mappingCoverage,0.09);assert.equal(missing.result.latestQuarter,null);
+});

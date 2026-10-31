@@ -23,7 +23,10 @@ function parseCompleteReportPdf(document,request) {
       result.navEvidence={text:section,fromLabel:'期末基金资产净值',toLabel:'期末基金份额净值'};
     }
   }
-  return {...result,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
+  const compact=text.normalize('NFKC').replace(/\s+/g,'');
+  const hierarchyCodes=(request.fundCodes||[request.fundCode]).filter(code=>compact.includes(code));
+  const structuredShareHierarchyVerified=/分级/.test(result.productName)&&/下属分级基金/.test(compact)&&!!result.mainFundCode&&hierarchyCodes.includes(result.mainFundCode)&&hierarchyCodes.length>1&&result.navClassValuesCny?.length===1&&Number.isFinite(result.navTotal10kCny);
+  return {...result,structuredShareHierarchyVerified,hierarchyCodes,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
 }
 async function main(args=process.argv.slice(2)) {
   const get=flag=>{const i=args.indexOf(flag);return i<0?null:args[i+1];};

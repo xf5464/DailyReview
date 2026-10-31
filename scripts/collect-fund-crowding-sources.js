@@ -69,7 +69,19 @@ function sourceFetch(cacheDirectory,{fetchImpl=fetch,refresh=false}={}) {
       if (record.url!==url || record.hash!==sha256(record.body)) throw new Error('Source cache checksum mismatch');
       return {value:parse(record.body),source:{url,hash:record.hash,fetchedAt:record.fetchedAt}};
     }
-    const response=await fetchImpl(url,{headers:{'User-Agent':'Mozilla/5.0',Referer:referer || 'https://fund.eastmoney.com/'},signal:AbortSignal.timeout(20000)});
+    let response;
+    for(let attempt=0;attempt<3;attempt++) {
+      try {
+        response=await fetchImpl(url,{headers:{'User-Agent':'Mozilla/5.0',Referer:referer || 'https://fund.eastmoney.com/'},signal:AbortSignal.timeout(20000)});
+      }catch(error){if(attempt===2)throw error;await new Promise(r=>setTimeout(r,1000*(attempt+1)));continue;}
+      if(response.ok||![429,503,514,567].includes(response.status)||attempt===2)break;
+      const header=response.headers?.get('retry-after');
+      let wait=header?(/^[0-9.]+$/.test(header)?Number(header)*1000:Date.parse(header)-Date.now()):1000*(attempt+1);
+      if(!Number.isFinite(wait))wait=1000*(attempt+1);
+      await response.body?.cancel();
+      if(wait>30000)throw new Error('Source HTTP '+response.status+'; retry after '+header);
+      await new Promise(r=>setTimeout(r,Math.max(1000,wait)));
+    }
     if (!response.ok) throw new Error('Source HTTP '+response.status);
     const body=await response.text(), value=parse(body);
     const record={url,hash:sha256(body),fetchedAt:new Date().toISOString(),body};

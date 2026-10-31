@@ -32,7 +32,10 @@ function calculateIndustryCrowding(quarters, options = {}) {
       shares: Object.fromEntries([...byIndustry].map(([industry, value]) => [industry, value / total * 100])),
     });
   }
-  normalized.sort((a, b) => quarterIndex(a.quarter) - quarterIndex(b.quarter));
+  return rankIndustryQuarters(normalized,options);
+}
+function rankIndustryQuarters(quarters,options={}) {
+  const normalized=[...quarters].sort((a,b)=>quarterIndex(a.quarter)-quarterIndex(b.quarter));
   const latest = normalized.at(-1);
   if (!latest) return { latestQuarter: null, rows: [], quarters: [] };
   const previous = normalized.find(q => quarterIndex(q.quarter) === quarterIndex(latest.quarter) - 1 && q.taxonomyVersion === latest.taxonomyVersion);
@@ -54,4 +57,4 @@ function calculateIndustryCrowding(quarters, options = {}) {
   }).sort((a, b) => (b.percentiles[40] ?? -1) - (a.percentiles[40] ?? -1) || b.share - a.share);
   return { latestQuarter: latest.quarter, coverage: latest.coverage, rows, quarters: normalized };
 }
-module.exports = { CALCULATION_VERSION, quarterIndex, calculateIndustryCrowding };
+module.exports = { CALCULATION_VERSION, quarterIndex, calculateIndustryCrowding, rankIndustryQuarters };

@@ -2,6 +2,10 @@
 // Source is intentionally invoked only by an explicit manual collector.
 const FUND_HOLDING_STOCK_LIMIT = 100;
 
+function classificationProductName(value) {
+  return String(value || '').normalize('NFKC').replace(/\s+/g,'').replace(/\(原[^()]*\)$/, '');
+}
+
 function decodeHtml(text) {
   return text
     .replace(/<[^>]*>/g, '')
@@ -52,13 +56,23 @@ function parseFundPortfolioText(text) {
     let rowMatch;
 
     while ((rowMatch = rowPattern.exec(sectionMatch[5])) !== null && rows.length < 10) {
-      const cells = [...rowMatch[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((match) => decodeHtml(match[1]));
+      const rawCells=[...rowMatch[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(match=>match[1]);
+      const cells=rawCells.map(decodeHtml);
 
       if (requiredIndexes.some((index) => index < 0 || index >= cells.length)) {
         continue;
       }
 
+      const codeCell=rawCells[indexes.stockCode];
+      const quote=codeCell.match(/quote\.eastmoney\.com\/unify\/r\/(\d+)\.([^'"<>/]+)/);
+      const legacy=codeCell.match(/quote\.eastmoney\.com\/(?:sh|sz)(\d{6})/i);
+      let market=null;
+      if(quote && quote[2]===cells[indexes.stockCode])market=['0','1'].includes(quote[1])&&/^(?:[03468]\d{5}|92\d{4})$/.test(quote[2])?'mainland-A':'non-A';
+      else if(legacy && legacy[1]===cells[indexes.stockCode])market='mainland-A';
+      // A blank market field is unknown; it is not proof of an overseas listing.
+
       rows.push({
+        market,
         rank: Number(cells[indexes.rank]),
         stockCode: cells[indexes.stockCode],
         stockName: cells[indexes.stockName],
@@ -212,6 +226,7 @@ function aggregateFundStockHoldings(portfolios) {
 }
 
 module.exports = {
+  classificationProductName,
   aggregateFundStockHoldings,
   deduplicateFundShares,
   normalizeFundProductName,

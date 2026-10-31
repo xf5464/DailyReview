@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="toy-icon-a1190c863e-180.png" />
     <link rel="stylesheet" href="styles.css" />
     <script src="vendor/fflate.min.js" defer></script>
+    <script src="fund-crowding-view.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -87,6 +88,7 @@
 
         <section id="activeFundCrowdingPanel" class="active-fund-crowding" hidden aria-labelledby="activeFundCrowdingTitle">
           <h3 id="activeFundCrowdingTitle">公募基金 A 股行业集中度</h3>
+          <label>报告季度 <select id="activeFundCrowdingQuarter" disabled aria-label="公募行业集中度报告季度"></select></label>
           <p id="activeFundCrowdingStatus">仅在手动更新后显示已验证的季度持仓数据。</p>
           <div class="active-fund-crowding-scroll"><table><thead><tr><th>行业</th><th>持仓占比</th><th>季度变化</th><th title="连续一年历史中的持仓占比百分位">1年</th><th title="连续三年历史中的持仓占比百分位">3年</th><th title="连续五年历史中的持仓占比百分位">5年</th><th title="连续十年历史中的持仓占比百分位，默认按此列降序">10年</th></tr></thead><tbody id="activeFundCrowdingBody"></tbody></table></div>
           <details><summary>统计口径与数据覆盖</summary><p id="activeFundCrowdingScope">仅在手动更新后读取已核验的季度汇总。</p></details>

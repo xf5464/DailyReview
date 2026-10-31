@@ -58,6 +58,14 @@ test('complete report layout sums A/C NAV in CNY and never adds adjacent financi
  assert.equal(result.navTotal10kCny,300);assert.equal(result.mainFundCode,'000001');
  assert.equal(parseCompleteReportPdf({pages:[{page:1,text:text.replace('人民币元','人民币万元')}],pdfSha256:'a'.repeat(64)},request).navTotal10kCny,null);
 });
+
+test('dated report excludes insured capital-protection mandate without inferring from a generic loss warning',()=>{
+ const request={fundCode:'000001',quarter,id:'AN20261001001',title:name+'2026年第3季度报告',publishedAt:'2026-10-15'};
+ const parse=body=>parseCompleteReportPdf({pages:[{page:1,text:request.title+'\n基金产品概况 基金主代码 000001\n'+body}],pdfSha256:'a'.repeat(64)},request).classification;
+ assert.equal(parse('本基金为保本型基金').status,'excluded');
+ assert.equal(parse('本基金在三年避险周期到期时控制本金损失。恒定比例投资组合保险机制。基金保证人 中投信用担保有限公司').status,'excluded');
+ assert.equal(parse('投资有本金损失风险；基金管理人不保证基金一定盈利。').status,'unresolved');
+});
 function report(code,product=name){return {fundCode:code,id:'AN20261001001',title:product+'2026年第3季度报告',publishedAt:'2026-10-15',classification:classifyReportTitle(product+'2026年第3季度报告')};}
 function inputs(){
  const activeName='测试灵活配置混合型证券投资基金';
@@ -85,6 +93,21 @@ test('contract evidence cannot override dated scope exclusions or use future pub
  assert.equal(reconcileFundUniverse(census,[archive,set]).eligibilityLedger.find(r=>r.fundCode==='000003').status,'excluded');
  proof.source.publishedAt='2026-10-01';assert.throws(()=>reconcileFundUniverse(census,[archive,set]),/future-dated/);
 });
+
+test('complete official text is accepted as dated contract proof with its own provenance scheme',async()=>{
+ const {collectDisclosureText}=require('../scripts/fund-disclosure-text');
+ const {census,archive}=inputs(),quote='股票资产占基金资产的比例为60%-95%';
+ const row={id:'AN20260901001',title:name+'基金合同',publishedAt:'2026-09-01'};
+ const result=await collectDisclosureText(row,async(url,parse)=>{
+  const body=JSON.stringify({success:1,data:{art_code:row.id,notice_title:row.title,notice_date:row.publishedAt,page_size:1,notice_content:name+quote}});
+  return {value:parse(body),source:{url,hash:sha(body),fetchedAt:'2026-10-31T00:00:00Z'}};
+ });
+ const proof={fundCode:'000003',quarter,productName:name,status:'active',type:'主动权益',rule:'Contract ratio',quote,quoteSha256:sha(quote),source:result.source};
+ const set={schemaVersion:1,classifierVersion:'contract-equity-scope-v1',evidence:[proof]};
+ assert.equal(reconcileFundUniverse(census,[archive,set]).eligibilityLedger.find(r=>r.fundCode==='000003').status,'active');
+ proof.source.chunks[0].hash='tampered';
+ assert.throws(()=>reconcileFundUniverse(census,[archive,set]),/Unverified|Incomplete/);
+});
 test('official fixed taxonomy reads the direct second segment including retired stocks',()=>{
  const source={url:'https://emweb.securities.eastmoney.com/PC_HSF10/CompanySurvey/PageAjax?code=SZ000671',hash:'c'.repeat(64)};
  const parsed=parseEM2016Industry({jbzl:[{SECURITY_CODE:'000671',EM2016:'房地产-房地产开发-房地产开发'}]},'000671');
@@ -103,4 +126,62 @@ test('a share rounded to zero does not invalidate a positive-NAV legal product',
  const {census,archive}=inputs();census.quarters[0].funds[1].netAsset10kCny=0;
  const out=buildPublishedUniverse(census,[archive]);const f=out.universe.quarters[quarter].funds[0];
  assert.equal(f.netAsset10kCny,10000);assert.equal(f.memberFundCodes.length,2);assert.equal(f.netAssetLowerBound10kCny,9900);assert.equal(f.netAssetUpperBound10kCny,10100);
+});
+
+test('reusing a legal document never reuses future membership or a document published after the target quarter',()=>{
+ const {reuseDatedContracts}=require('../scripts/fund-published-universe');
+ const archive={quarter:'2026-Q2',histories:[{fundCode:'000001',reports:[{title:name+'2026年第2季度报告'}]}]};
+ const base={productName:name,quarter:'2026-Q3',fundCode:'999999',status:'active',source:{publishedAt:'2026-06-01'}};
+ const set={schemaVersion:1,classifierVersion:'contract-equity-scope-v1',evidence:[base,{...base,source:{publishedAt:'2026-08-01'}},{...base,productName:'新改名基金'},{...base,quarter:'2026-Q1',source:{publishedAt:'2026-03-01'}}]};
+ const out=reuseDatedContracts(set,archive);assert.equal(out.evidence.length,1);assert.equal(out.evidence[0].quarter,'2026-Q2');assert.equal(out.evidence[0].fundCode,'000001');assert.equal(out.evidence[0].reusedFromQuarter,'2026-Q3');
+});
+
+test('overseas-market titles require legal scope proof and approved overseas-quota clauses identify excluded QDII funds',()=>{
+ assert.equal(classifyReportTitle('测试全球精选股票型证券投资基金2026年第3季度报告').status,'unresolved');
+ const out=classify('基金类型混合型。',[{page:39,text:'本基金的资产规模达到中国证监会、外管局核准的境外证券投资额度。股票占基金资产的比例不低于60%。'}]);
+ assert.equal(out.status,'excluded');assert.equal(out.page,39);
+ assert.equal(classify('本基金是股票型基金。').status,'active');
+});
+
+test('legacy allocation lists and reverse stock mandates identify whole-fund allocation without using theme ratios',()=>{
+ for(const text of ['四类资产配置的比例范围：股票60-95%，债券0-35%','本基金投资组合的资产配置范围为：股票资产60%～95%，债券0～40%','股票投资比例浮动范围：60%-95%','本基金将资产的60%-95%投资于股票','本基金将60%以上的资产投资于股票市场'])assert.equal(classify(text).status,'active',text);
+ assert.equal(classify('本基金将80%的股票资产投资于科技主题股票').status,'unresolved');
+});
+test('manager biographies about other products do not establish the target fund type or allocation',()=>{
+ const result=classify('第三部分 基金管理人\n本基金为债券型基金。\n第四部分 基金托管人\n本基金为货币市场基金。\n第五部分 基金的投资\n股票资产占基金资产的比例为60%-95%。');
+ assert.equal(result.status,'active');
+});
+test('old own-product money-market and passive-index mandate statements exclude products with ambiguous names',()=>{
+ for(const text of ['本货币市场基金债券正回购的资金余额未超过20%。','本基金可投资的大类资产主要为短期金融市场工具','本基金采取指数化投资方式','本基金采用完全复制法进行投资'])assert.equal(classify(text).status,'excluded',text);
+});
+
+test('a former protected-product name does not override the transformed fund current legal type',()=>{
+ const title='测试灵活配置混合型证券投资基金(原测试保本混合型证券投资基金)2026年第3季度报告';
+ assert.equal(classifyReportTitle(title).status,'active');
+ const {activeFund}=require('../scripts/collect-active-fund-crowding');
+ assert.equal(activeFund({fundCode:'000001',fundName:reportIdentity(title).productName,type:'灵活配置混合型'}),true);
+ assert.equal(classifyReportTitle('测试保本混合型证券投资基金2016年第3季度报告').status,'excluded');
+});
+test('fund-of-funds wording does not require a duplicated final fund noun',()=>{
+ assert.equal(classify('本基金属基金中基金。').status,'excluded');
+});
+
+test('the phrase investment ratios as follows is not mistaken for a hypothetical example',()=>{
+ assert.equal(classify('本基金的具体投资比例如下：股票投资比例浮动范围：60%-95%；其他资产5%-40%。').status,'active');
+ assert.equal(classify('例如，股票资产占基金资产的比例为60%-95%。').status,'unresolved');
+});
+
+test('legacy configuration and baseline bands preserve whole-fund allocation requirements',()=>{
+ assert.equal(classify('本基金股票资产的配置占基金资产的30%-95%，债券资产占0%-65%。').status,'active');
+ assert.equal(classify('股票资产的基准比例为基金资产净值的90％，浮动范围为85－95％。').status,'active');
+ assert.equal(classify('对权益类资产的投资不高于基金资产净值的30%').status,'excluded');
+ assert.equal(classify('股票资产30%-75%').status,'unresolved');
+ assert.equal(classify('股票资产的基准比例为非现金基金资产净值的90%，浮动范围为85-95%。').status,'unresolved');
+});
+
+test('a repeated own-product QDII disclosure heading identifies old overseas funds without classifying manager biographies',()=>{
+ const own=classify('测试成长（QDII）更新招募说明书摘要\n股票资产占基金资产的比例为60%-95%。');
+ assert.equal(own.status,'excluded');
+ const unrelated=classify('第三部分基金管理人\n测试成长（QDII）更新招募说明书摘要\n第四部分基金的投资\n股票资产占基金资产的比例为60%-95%。');
+ assert.equal(unrelated.status,'active');
 });
