@@ -2163,6 +2163,7 @@
           Number(hoveredPriceItem.value).toFixed(chart.rightAxisDecimals === undefined ? 2 : chart.rightAxisDecimals) +
           (chart.rightAxisUnit ? ' ' + chart.rightAxisUnit : '')
         : hoveredPriceItem ? ' · ' + formatDate(hoveredPriceItem.date, '周度') + ' 股价 ¥' + Number(hoveredPriceItem.value).toFixed(2) : '';
+      tip.style.whiteSpace = chart.id === 'activeFundTopFive' ? 'pre-line' : 'normal';
       tip.textContent = formatDate(item.date, chart.frequency) + ' · ' + formatValue(chart, item.value) + rightAxisTip +
         (chart.pointTooltip ? chart.pointTooltip(item) : '') +
         (item.provisional ? ' · 期货涨跌幅推算临时值' : '');
@@ -2570,9 +2571,9 @@
       items:activeFundTopFiveItems(snapshot), error:snapshot ? null : '尚无经过验证的静态快照',
       pointTooltip:function (item) {
         return item.topFive && item.topFive.length === 5
-          ? '\\n' + item.topFive.map(function (entry, index) {
+          ? '\n' + item.topFive.map(function (entry, index) {
               return (index+1) + '. ' + entry.industry + '：' + entry.share.toFixed(2) + '%';
-            }).join('\\n') : '';
+            }).join('\n') : '';
       }};
   }
 
