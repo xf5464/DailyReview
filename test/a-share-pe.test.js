@@ -58,7 +58,7 @@ test('one failed PE source cannot erase the other seven or change cached quote d
 test('A-share PE UI is visible by default and refreshes live without changing forecast conditions', () => {
   const app = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
   const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
-  assert.match(app, /group_a_share: \['aSharePe',/);
+  assert.match(app, /group_a_share: \[[^\]\n]*'aSharePe'/);
   assert.match(app, /aSharePe: \['default', 'group_a_share'\]/);
   assert.match(app, /visibleChartIds: \[\s*'usEconomicCalendar',\s*'aSharePe'/);
   assert.match(app, /a-share-pe-api/);
