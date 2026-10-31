@@ -18,7 +18,14 @@
     "test": "node --test && node --check site/app.js && node --check site/service-worker.js && node --check site/forecast-gold-trend.js && node --check site/forecast-ism-new-orders.js && node --check scripts/build.js && node --check scripts/create-offline-bundle.js && node --check scripts/supplement-a-share-turnover.js && node --check scripts/supplement-ism-new-orders-history.js && node --check scripts/supplement-ism-other-history.js && node --check scripts/patch-detail-overflow.js && node --check scripts/patch-ism-detail-default-range.js && node --check scripts/patch-large-number-format.js && node --check scripts/patch-table-equal-columns.js && node --check scripts/patch-primary-group-vix.js && node --check scripts/prepare-forecast-gold-ui.js && node --check scripts/prepare-forecast-ism-ui.js && node --check scripts/patch-forecast-condition-data.js && node --check scripts/patch-offline-download-diagnostics.js && node --check scripts/patch-offline-cache-size.js && node --check scripts/patch-visible-version.js && node --check desktop/main.js",
     "prepare:active-fund-universe": "node scripts/prepare-active-fund-universe.js",
     "update:active-fund-crowding": "node scripts/collect-active-fund-crowding.js",
-    "prepare:fund-crowding-sources": "node scripts/collect-fund-crowding-sources.js"
+    "prepare:fund-crowding-sources": "node scripts/collect-fund-crowding-sources.js",
+    "prepare:fund-report-evidence": "node scripts/fund-report-evidence.js",
+    "prepare:fund-contract-evidence": "node scripts/fund-contract-evidence.js",
+    "reconcile:fund-universe": "node scripts/reconcile-fund-report-universe.js",
+    "prepare:fund-quarter-archive": "node scripts/fund-historical-report-archive.js",
+    "prepare:published-fund-universe": "node scripts/fund-published-universe.js",
+    "prepare:fund-fixed-industries": "node scripts/fund-fixed-industry-taxonomy.js",
+    "prepare:fund-report-pdfs": "node scripts/fund-report-pdf-evidence.js"
   },
   "engines": {
     "node": ">=20"

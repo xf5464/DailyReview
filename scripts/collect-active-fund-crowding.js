@@ -22,11 +22,10 @@ function validRows(quarter, year) {
       typeof h.marketValue10kCny === 'number' && Number.isFinite(h.marketValue10kCny) && h.marketValue10kCny > 0);
 }
 function validateInputs(universe, industries) {
-  if (universe?.schemaVersion !== 1 || !universe.source || !universe.reviewedAt ||
-      universe.historicalMembershipVerified !== true || !universe.quarters) throw new Error('Verified quarterly fund universe required');
-  if (industries?.schemaVersion !== 1 || industries.taxonomy !== 'eastmoney-level2' ||
-      !industries.taxonomyVersion || !industries.source || !industries.reviewedAt ||
-      industries.historicalMappingVerified !== true || !industries.quarters) throw new Error('Verified quarterly Eastmoney level-2 industry mapping required');
+  const publicCohort=universe?.schemaVersion===2 && universe.verificationBasis==='complete-published-quarterly-reports' && universe.quarterlyReportWindowVerified===true;
+  if ((!publicCohort && (universe?.schemaVersion!==1 || universe.historicalMembershipVerified!==true)) || !universe.source || !universe.reviewedAt || !universe.quarters) throw new Error('Verified quarterly fund universe required');
+  const fixedTaxonomy=industries?.schemaVersion===2 && industries.classificationBasis==='fixed-taxonomy-restatement' && industries.mappingVerified===true && industries.taxonomyVersion==='EM2016-level2' && /^[a-f0-9]{64}$/.test(industries.sourceDigest || '') && industries.fixedMap;
+  if ((!fixedTaxonomy && (industries?.schemaVersion!==1 || industries.historicalMappingVerified!==true || !industries.quarters)) || industries.taxonomy!=='eastmoney-level2' || !industries.taxonomyVersion || !industries.source || !industries.reviewedAt) throw new Error('Verified quarterly Eastmoney level-2 industry mapping required');
   for (const [key, quarter] of Object.entries(universe.quarters)) {
     quarterIndex(key);
     if (!Array.isArray(quarter.funds) || !quarter.funds.length) throw new Error('Missing quarterly fund members: ' + key);
@@ -36,7 +35,12 @@ function validateInputs(universe, industries) {
           !Number.isFinite(f.netAsset10kCny) || f.netAsset10kCny <= 0) throw new Error('Invalid/duplicate quarterly active fund member: ' + key);
       codes.add(f.fundCode); products.add(f.productId);
     }
-    if (!industries.quarters[key] || typeof industries.quarters[key] !== 'object') throw new Error('Missing quarterly industry map: ' + key);
+    if (!fixedTaxonomy && (!industries.quarters[key] || typeof industries.quarters[key] !== 'object')) throw new Error('Missing quarterly industry map: ' + key);
+    if (publicCohort) {
+      for (const member of quarter.funds) if (!Number.isFinite(member.netAssetLowerBound10kCny) || !Number.isFinite(member.netAssetUpperBound10kCny) || member.netAssetLowerBound10kCny<0 || member.netAssetLowerBound10kCny>member.netAsset10kCny || member.netAssetUpperBound10kCny<member.netAsset10kCny) throw new Error('Unverified active product NAV bounds');
+      if (!Array.isArray(quarter.unclassifiedFunds) || quarter.reportWindow?.complete!==true) throw new Error('Unverified public report cohort bounds');
+      for (const pending of quarter.unclassifiedFunds) if (!pending.productId || !Number.isInteger(pending.countUpperBound) || pending.countUpperBound<1 || !Number.isFinite(pending.netAssetUpperBound10kCny) || pending.netAssetUpperBound10kCny<0) throw new Error('Unbounded unclassified product exposure');
+    }
   }
 }
 async function collect({ funds = [], industries, years, universe, fetchImpl, concurrency = 4, onProgress = () => {} }) {
@@ -49,11 +53,13 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
     ? [...new Map(Object.values(universe.quarters).flatMap(q => q.funds).map(f => [f.fundCode, f])).values()]
     : deduplicateFundShares(funds.filter(activeFund));
   if (!selected.length) throw new Error('No verified active equity funds');
+  const equityScope=universe?.equityScope || 'all-equities';
+  if (!['all-equities','mainland-A'].includes(equityScope)) throw new Error('Unsupported equity scope');
   const quarters = new Map();
   for (const year of years) for (let q = 1; q <= 4; q++) {
     const key = year + '-Q' + q;
     quarters.set(key, {quarter:key, holdings:[], successful:0, stockCount:0, unmapped:0,
-      totalMarketValue:0, mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], errors:[]});
+      totalMarketValue:0, grossMarketValue:0,nonAMarketValue:0,nonAStockCount:0,mappedMarketValue:0, successfulNetAssets:0, successfulFunds:[], sourceReports:[], rejectedReports:[], errors:[]});
   }
   const jobs = selected.flatMap(fund => years.map(year => ({fund, year}))).filter(({fund, year}) =>
     !universe || Object.entries(universe.quarters).some(([key, q]) => key.startsWith(year + '-') && q.funds.some(f => f.fundCode === fund.fundCode)));
@@ -69,17 +75,21 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
         const row = quarters.get(quarter.key);
         const member = universe?.quarters[quarter.key]?.funds.find(f => f.fundCode === fund.fundCode);
         if (!row || (universe && !member)) continue;
-        if (responseQuarters.has(quarter.key) || !validRows(quarter, year)) {
-          row.errors.push(fund.fundCode + ': invalid or duplicate quarterly report');
-          continue;
+        if (responseQuarters.has(quarter.key)) {
+          row.errors.push(fund.fundCode + ': duplicate quarterly report');continue;
         }
         responseQuarters.add(quarter.key);
+        if(!validRows(quarter,year)) {
+          row.rejectedReports.push(fund.fundCode + ': incomplete or invalid quarterly holdings');continue;
+        }
         row.successful++;
         row.successfulFunds.push(fund.fundCode);
         row.sourceReports.push({fundCode:fund.fundCode, year, ...portfolio.source});
-        row.successfulNetAssets += member?.netAsset10kCny || 0;
-        const mapping = universe ? industries.quarters[quarter.key] : industries;
+        row.successfulNetAssets += member?.netAssetLowerBound10kCny ?? member?.netAsset10kCny ?? 0;
+        const mapping = universe ? (industries.fixedMap || industries.quarters[quarter.key]) : industries;
         for (const h of quarter.rows) {
+          row.grossMarketValue += h.marketValue10kCny;
+          if (equityScope==='mainland-A' && !/^(?:[03468]\d{5}|92\d{4})$/.test(h.stockCode)) {row.nonAMarketValue+=h.marketValue10kCny;row.nonAStockCount++;continue;}
           row.stockCount++;
           row.totalMarketValue += h.marketValue10kCny;
           const industry = mapping[h.stockCode];
@@ -93,17 +103,20 @@ async function collect({ funds = [], industries, years, universe, fetchImpl, con
   }));
   const snapshots = [...quarters.values()].map(q => {
     const members = universe?.quarters[q.quarter]?.funds || [];
-    const eligibleNetAssets = members.reduce((sum, f) => sum + f.netAsset10kCny, 0);
-    const fundCoverage = members.length ? q.successful / members.length : 0;
+    const pending=universe?.quarters[q.quarter]?.unclassifiedFunds || [];
+    const pendingCount=pending.reduce((n,p)=>n+p.countUpperBound,0);
+    const eligibleCount=members.length+pendingCount;
+    const eligibleNetAssets = members.reduce((sum, f) => sum + (f.netAssetUpperBound10kCny ?? f.netAsset10kCny), 0)+pending.reduce((n,p)=>n+p.netAssetUpperBound10kCny,0);
+    const fundCoverage = eligibleCount ? q.successful / eligibleCount : 0;
     const assetCoverage = eligibleNetAssets ? q.successfulNetAssets / eligibleNetAssets : 0;
     const mappingCoverage = q.totalMarketValue ? q.mappedMarketValue / q.totalMarketValue : 0;
     // Counts alone cannot establish coverage; protect against small-fund or mapping bias.
     const coverage = universe && !q.errors.length ? Math.min(fundCoverage, assetCoverage, mappingCoverage) : 0;
-    return {...q, eligibleFundCount:members.length || null, eligibleNetAssets,
+    return {...q,eligibleFundCount:eligibleCount || null,eligibleNetAssets,unclassifiedCountUpperBound:pendingCount,
       fundCoverage, assetCoverage, mappingCoverage, coverage,
       taxonomyVersion:universe ? industries.taxonomyVersion : null};
   });
-  return {fundCount:selected.length, snapshots, result:calculateIndustryCrowding(snapshots)};
+  return {fundCount:selected.length, snapshots, result:calculateIndustryCrowding(snapshots,{industryUniverse:industries.industryUniverse,requireVariableHistory:universe?.schemaVersion===2})};
 }
 function createSnapshot(collection, {universe, industries, now = new Date().toISOString()}) {
   validateInputs(universe, industries);
@@ -112,7 +125,8 @@ function createSnapshot(collection, {universe, industries, now = new Date().toIS
   // Do not quietly publish an old quarter when the requested latest quarter failed.
   const requestedLatest = Object.keys(universe.quarters).sort((a,b) => quarterIndex(a) - quarterIndex(b)).at(-1);
   if (requestedLatest !== result.latestQuarter) throw new Error('Latest requested quarter has insufficient coverage; existing snapshot retained');
-  return {schemaVersion:1, calculationVersion:CALCULATION_VERSION, updatedAt:now,
+  return {schemaVersion:1, calculationVersion:universe.schemaVersion===2?3:CALCULATION_VERSION, updatedAt:now,
+    equityScope:universe.equityScope || 'all-equities',universeBasis:universe.schemaVersion===2?'published-quarterly-reports':'verified-quarterly-universe',classificationBasis:industries.classificationBasis || 'point-in-time',
     source:universe.source + '; ' + industries.source, disclosureBasis:'quarterly-top10',
     taxonomy:industries.taxonomy, taxonomyVersion:industries.taxonomyVersion,
     fundCount, latestQuarter:result.latestQuarter, coverage:result.coverage,
@@ -140,7 +154,9 @@ function saveSnapshot(output, snapshot) {
   try { fs.writeFileSync(temporary, JSON.stringify(snapshot) + '\n'); fs.renameSync(temporary, output); }
   finally { if (fs.existsSync(temporary)) fs.unlinkSync(temporary); }
 }
-function cachedFetch(directory, {refresh = false, fetchImpl = fetch} = {}) {
+function cachedFetch(directory, {refresh = false, fetchImpl = fetch, intervalMs = 350} = {}) {
+  let queue=Promise.resolve();
+  const pace=()=>{const next=queue.then(()=>new Promise(resolve=>setTimeout(resolve,intervalMs)));queue=next;return next;};
   fs.mkdirSync(directory, {recursive:true});
   return async (url, options) => {
     const stable = new URL(url); stable.searchParams.delete('rt');
@@ -150,7 +166,18 @@ function cachedFetch(directory, {refresh = false, fetchImpl = fetch} = {}) {
       if (record.url !== stable.href || record.hash !== hash(record.body)) throw new Error('Corrupt cached report: ' + file);
       return {ok:true, fundCrowdingSource:{url:record.url,fetchedAt:record.fetchedAt,hash:record.hash}, text:async () => record.body};
     }
-    const response = await fetchImpl(url, options);
+    let response;
+    for(let attempt=0;attempt<3;attempt++) {
+      await pace();
+      response=await fetchImpl(url,options);
+      if(response.ok || ![429,503,514].includes(response.status) || attempt===2)break;
+      const retryAfter=response.headers?.get('retry-after');
+      const seconds=retryAfter===null||retryAfter===undefined?NaN:Number(retryAfter);
+      const wait=Number.isFinite(seconds)?seconds*1000:retryAfter?Math.max(0,Date.parse(retryAfter)-Date.now()):1000*(attempt+1);
+      await response.body?.cancel();
+      if(wait>10000)return response;
+      await new Promise(resolve=>setTimeout(resolve,Math.max(1000,wait)));
+    }
     if (!response.ok) return response;
     const body = await response.text();
     // Never cache an HTML error page or an empty report as a successful disclosure.

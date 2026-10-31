@@ -16,7 +16,7 @@ function calculateIndustryCrowding(quarters, options = {}) {
     if (seen.has(q.quarter)) throw new Error('Duplicate quarterly holdings snapshot: ' + q.quarter);
     seen.add(q.quarter);
     if (typeof q.coverage !== 'number' || !Number.isFinite(q.coverage) || q.coverage < minimumCoverage || q.coverage > 1) continue;
-    const byIndustry = new Map();
+    const byIndustry = new Map((options.industryUniverse || []).map(name=>[name,0]));
     let mappedTotal = 0;
     for (const h of q.holdings) {
       if (!h || !h.industry || !h.activeEquity || h.indexFund) continue;
@@ -44,6 +44,7 @@ function calculateIndustryCrowding(quarters, options = {}) {
       const window = history.filter(q => quarterIndex(q.quarter) >= quarterIndex(latest.quarter) - n);
       percentiles[n] = window.length === n + 1 &&
         window.every((q, i) => quarterIndex(q.quarter) === quarterIndex(latest.quarter) - n + i)
+        && (!options.requireVariableHistory || window.some(q=>Math.abs(q.shares[industry]-share)>1e-12))
         ? 100 * window.filter(q => q.shares[industry] <= share).length / window.length : null;
     }
     return { industry, share,

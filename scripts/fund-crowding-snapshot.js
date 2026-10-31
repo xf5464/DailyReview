@@ -3,7 +3,7 @@ const {quarterIndex} = require('./active-fund-industry-crowding');
 function validateCrowdingSnapshot(snapshot) {
   const invalid = message => {throw new Error('Invalid approved active fund crowding snapshot: ' + message);};
   const number = (n, lo, hi) => typeof n === 'number' && Number.isFinite(n) && n >= lo && n <= hi;
-  if (snapshot?.schemaVersion !== 1 || snapshot.calculationVersion !== 2 ||
+  if (snapshot?.schemaVersion !== 1 || ![2,3].includes(snapshot.calculationVersion) ||
       snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' ||
       !snapshot.taxonomyVersion || !snapshot.source || !Number.isFinite(Date.parse(snapshot.updatedAt)) ||
       !number(snapshot.coverage,0.9,1)) invalid('metadata');
@@ -63,10 +63,13 @@ function createPublicSnapshot(snapshot) {
     return {quarter:q.quarter, coverage:q.coverage, fundCount:summary.successful,
       eligibleFundCount:summary.eligibleFundCount,
       fundCoverage:summary.fundCoverage, assetCoverage:summary.assetCoverage, mappingCoverage:summary.mappingCoverage,
+      unclassifiedCountUpperBound:summary.unclassifiedCountUpperBound || 0,
+      nonAWeight:summary.grossMarketValue?summary.nonAMarketValue/summary.grossMarketValue:null,
       shares:industries.map(industry => round(q.shares[industry]))};
   });
   const result = {
     schemaVersion:2, calculationVersion:snapshot.calculationVersion,
+    equityScope:snapshot.equityScope || 'all-equities',classificationBasis:snapshot.classificationBasis || 'point-in-time',universeBasis:snapshot.universeBasis || 'verified-quarterly-universe',
     source:snapshot.source, updatedAt:snapshot.updatedAt, disclosureBasis:snapshot.disclosureBasis,
     taxonomy:snapshot.taxonomy, taxonomyVersion:snapshot.taxonomyVersion,
     fundCount:snapshot.fundCount, latestQuarter:snapshot.latestQuarter,
@@ -82,11 +85,13 @@ function createPublicSnapshot(snapshot) {
 function validatePublicCrowdingSnapshot(snapshot) {
   const invalid = message => {throw new Error('Invalid compact active fund crowding snapshot: ' + message);};
   const finite = (n, lo, hi) => typeof n === 'number' && Number.isFinite(n) && n >= lo && n <= hi;
-  if (snapshot?.schemaVersion !== 2 || snapshot.calculationVersion !== 2 ||
+  if (snapshot?.schemaVersion !== 2 || ![2,3].includes(snapshot.calculationVersion) ||
       snapshot.disclosureBasis !== 'quarterly-top10' || snapshot.taxonomy !== 'eastmoney-level2' ||
       !snapshot.taxonomyVersion || !snapshot.source || !Number.isFinite(Date.parse(snapshot.updatedAt)) ||
       !Number.isInteger(snapshot.fundCount) || snapshot.fundCount < 1 ||
-      !finite(snapshot.coverage,0.9,1) || !/^[a-f0-9]{64}$/.test(snapshot.auditDigest || '') ||
+      !finite(snapshot.coverage,0.9,1) ||
+      !['all-equities','mainland-A'].includes(snapshot.equityScope || 'all-equities') ||
+      !['point-in-time','fixed-taxonomy-restatement'].includes(snapshot.classificationBasis || 'point-in-time') || !/^[a-f0-9]{64}$/.test(snapshot.auditDigest || '') ||
       !/^[a-f0-9]{64}$/.test(snapshot.inputHashes?.universe || '') ||
       !/^[a-f0-9]{64}$/.test(snapshot.inputHashes?.industries || '')) invalid('metadata');
   if (!Array.isArray(snapshot.industries) || !snapshot.industries.length ||
@@ -95,7 +100,7 @@ function validatePublicCrowdingSnapshot(snapshot) {
       !Array.isArray(snapshot.quarters) || !snapshot.quarters.length ||
       snapshot.quarterCount !== snapshot.quarters.length || !Array.isArray(snapshot.rows) || !snapshot.rows.length) invalid('dimensions');
   // Permit only aggregate fields; raw fund identities and report details stay local.
-  const topKeys = new Set(['schemaVersion','calculationVersion','source','updatedAt','disclosureBasis','taxonomy','taxonomyVersion','fundCount','latestQuarter','coverage','quarterCount','industries','quarters','rows','auditDigest','inputHashes']);
+  const topKeys = new Set(['schemaVersion','calculationVersion','equityScope','classificationBasis','universeBasis','source','updatedAt','disclosureBasis','taxonomy','taxonomyVersion','fundCount','latestQuarter','coverage','quarterCount','industries','quarters','rows','auditDigest','inputHashes']);
   if (Object.keys(snapshot).some(k => !topKeys.has(k)) ||
       Object.keys(snapshot.inputHashes).some(k => !['universe','industries'].includes(k))) invalid('non-aggregate fields');
   let previous = -1;
@@ -107,10 +112,12 @@ function validatePublicCrowdingSnapshot(snapshot) {
         q.fundCoverage !== q.fundCount/q.eligibleFundCount ||
         !finite(q.assetCoverage,0.9,1) || !finite(q.mappingCoverage,0.9,1) ||
         q.coverage !== Math.min(q.fundCoverage,q.assetCoverage,q.mappingCoverage) ||
+        !Number.isInteger(q.unclassifiedCountUpperBound || 0) || (q.unclassifiedCountUpperBound || 0)<0 ||
+        !(q.nonAWeight===null || q.nonAWeight===undefined || finite(q.nonAWeight,0,1)) ||
         !Array.isArray(q.shares) || q.shares.length !== snapshot.industries.length ||
         q.shares.every(n => n === null) || q.shares.some(n => n !== null && !finite(n,0,100)) ||
         q.shares.reduce((sum,n)=>sum+(n || 0),0) > 100.000001 ||
-        Object.keys(q).some(k => !['quarter','coverage','fundCount','eligibleFundCount','fundCoverage','assetCoverage','mappingCoverage','shares'].includes(k))) invalid('quarterly aggregates');
+        Object.keys(q).some(k => !['quarter','coverage','fundCount','eligibleFundCount','fundCoverage','assetCoverage','mappingCoverage','unclassifiedCountUpperBound','nonAWeight','shares'].includes(k))) invalid('quarterly aggregates');
     previous = index;
   }
   const latest = snapshot.quarters.at(-1);

@@ -179,3 +179,11 @@ test('manual CLI keeps report-level audit local and writes only compact quarterl
   const audit=JSON.parse(fs.readFileSync(auditFile));
   assert.equal(audit.quarters.find(q=>q.quarter==='2026-Q3').sourceReports[0].fundCode,'000001');
 });
+
+test('a rejected partial disclosure reduces both coverage measures without discarding valid fund reports',async()=>{
+ const options=inputs();options.universe.quarters['2026-Q3'].funds=Array.from({length:10},(_,i)=>({...options.funds[0],fundCode:String(i+1).padStart(6,'0'),productId:'p'+i}));
+ options.fetchImpl=async url=>({ok:true,text:async()=>url.searchParams.get('code')==='000010'?holdingsText().replace(/<tr><td>10<\/td>[\s\S]*?<\/tr>/,''):holdingsText()});
+ const out=await collect(options);const q=out.snapshots.find(q=>q.quarter==='2026-Q3');
+ assert.equal(q.successful,9);assert.equal(q.fundCoverage,0.9);assert.equal(q.assetCoverage,0.9);assert.equal(q.errors.length,0);assert.equal(q.rejectedReports.length,1);
+ assert.equal(validateCrowdingSnapshot(createSnapshot(out,options)).coverage,0.9);
+});

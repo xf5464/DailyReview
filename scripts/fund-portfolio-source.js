@@ -99,7 +99,6 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
     topline: '10',
     year: String(year),
     month: '',
-    rt: String(Math.random()),
   };
   Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
 
@@ -109,8 +108,8 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
   try {
     const response = await (options.fetchImpl ?? fetch)(url, {
       headers: {
-        Referer: `https://fundf10.eastmoney.com/ccmx_${fundCode}.html`,
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        Referer: 'https://fundf10.eastmoney.com/',
+        'User-Agent': 'Mozilla/5.0',
       },
       signal: controller.signal,
     });

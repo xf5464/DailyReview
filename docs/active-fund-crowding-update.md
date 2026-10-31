@@ -1,121 +1,67 @@
-# 公募基金行业集中度：手动更新
+# 公募基金 A 股行业集中度：手动更新
 
-界面位于 A 股分组，展示主动权益公募季报前十大股票持仓按东方财富二级行业汇总的占比、环比百分点变化和 1/3/5/10 年历史百分位，默认按十年百分位降序。该口径不能解释为基金完整股票仓位或全公募持仓。
+网站只读取紧凑季度快照。基金、股票及原始披露明细保留在本地采集缓存，普通构建和部署不会采集或计算。
 
-## 一、准备候选名单
+## 统计口径
 
-从天天基金原始目录保存响应后执行：
+- 样本是各季度公开发布定期报告的产品，不宣称覆盖所有已登记公募资产。历史窗口逐日完整采集季末后 45 个自然日，最新季度截至实际采集日。包括已经清盘、改名及转型产品在当期实际发布的报告，不能拿今天存续产品名单回填历史。
+- 使用报告中的当期法律全名，并以季末之前发布的合同、招募说明书或产品资料概要核验主动权益范围。指数、增强、ETF、联接、QDII、FOF、货币、债券、偏债、黄金和基础设施等产品剔除。明确股票型、偏股、灵活配置及平衡混合类型可以纳入；普通混合须有全基金股票配置约束证明。分类属于可复核的分析口径，不伪称源站提供了历史细分类别。
+- 普通混合明确股票下限至少 60%，或完整区间下限不超过 50%、上限至少 80%，可确认其主动权益配置能力。明确股票上限不超过 40% 则剔除。权益资产与可转债等合计上限不超过 40%，也能证明股票上限不超过 40%；合计下限不能当作股票下限。其余无法确认的产品保留在覆盖率分母，禁止直接删除。
+- 同一法律产品的收费份额合并，基金净资产相加，持仓只取一次。已用两组真实 A/C 份额核对源站持仓完全一致。规模列表每份额以 0.01 亿元取整，故保留每份额正负 50 万元的上下界；显示为零的小份额不会误判为缺失。完整季报可以提供人民币元精确净资产，统一换算为万元。
+- 使用各基金季报前十大股票；行业表只统计其中的 A 股。港股及其他非 A 股重仓的市值占比单独展示，不悄悄混入行业分母。实际不足十只或字段不完整的响应暂不计入成功披露，仍占覆盖率分母。
+- 统一使用东方财富公司档案直接提供的三层路径 EM2016 的第二段。当前按统一分类回溯重述，**不是股票当年的实际行业归属**。行业映射包含退市股票，不通过其他股票或新旧分类名称猜测归属。
+- 基金数量覆盖率、净资产覆盖率下界、A 股重仓市值映射率均须至少 90%。数量和净资产分母包含所有尚不能排除的产品及其保守上界。未映射 A 股市值保留在行业占比分母。
+- 环比只比较相邻季度。1/3/5/10 年百分位需要连续 5/13/21/41 个季度，不能跨缺季或分类版本。恒为零的行业不显示有误导性的高百分位。
 
-```powershell
-npm run prepare:active-fund-universe -- --input work/fundcode_search.js --output work/candidate-funds.json
-```
+## 数据准备
 
-来源为 https://fund.eastmoney.com/js/fundcode_search.js。命令不执行源站 JavaScript；仅解析 JSON 数组，排除指数、增强、债券、偏债、QDII、FOF 等类型。输出旁的 provenance 文件保存原始目录哈希和来源。
+FRED 不提供基金产品及持仓层面的中国公募行业集中度输入，因此使用天天基金与东方财富原始披露。具体依据见系统设计文档。所有命令均须手动调用。
 
-候选名单没有历史完整性保证，不能用来填充一个相同的十年覆盖率分母。须核验每个季度当时存在、属于主动权益范围并应披露持仓的产品，纳入已经清盘的产品和类型变化，核验不同收费份额属于同一产品。名称去重不能替代产品身份核验。
+1. 保存基金目录后，采集完整季度规模列表；目录仅作候选参考，当前类型不证明历史类型。
 
-## 二、生产输入
+~~~powershell
+npm run prepare:fund-crowding-sources -- --quarters 2016-Q3,2026-Q3 --catalogue work/fundcode_search.js --output work/census.json --cache work/source-cache
+~~~
 
-基金范围文件的结构如下。示意值不能作为真实数据使用：
+2. 采集定期报告公告。近期可使用全局 JSON 归档；较早季度使用完整逐日 HTML 归档，校验日期、每页行数、总页数、当前页及跨页重复。旧站翻页必须包含其提供的 allpages 参数。
 
-```json
-{
-  "schemaVersion": 1,
-  "source": "基金类型、成立/终止日期、报告及季度净资产的可追溯来源",
-  "reviewedAt": "2026-10-30",
-  "historicalMembershipVerified": true,
-  "quarters": {
-    "2026-Q3": {
-      "funds": [
-        {
-          "fundCode": "六位基金代码",
-          "fundName": "基金全名",
-          "type": "混合型-偏股",
-          "productId": "已核验的唯一产品身份",
-          "netAsset10kCny": 100
-        }
-      ]
-    }
-  }
-}
-```
+~~~powershell
+npm run prepare:fund-report-evidence -- --global-quarter 2026-Q3 --output work/2026-Q3-reports.json --cache work/report-cache
+npm run prepare:fund-quarter-archive -- --quarters 2016-Q3 --output-directory work/archives --cache work/archive-cache
+~~~
 
-`netAsset10kCny` 是该季度产品净资产（万元），不是把 A/C 份额各当一只产品重复统计。允许的类型为主动权益、股票型、普通股票型、偏股混合型、灵活配置混合型、混合型-偏股/灵活/平衡；名称含指数、增强、ETF、联接等仍剔除。
+3. 对账报告与当季规模列表。输出会同时生成 .universe.json、.contract-requests.json 和 .needs-reports.json；缺少证明时 productionReady 为 false。需要时补读当期合同及完整季度报告 PDF，再对账一次。
 
-行业映射文件：
+~~~powershell
+npm run prepare:published-fund-universe -- --census work/census.json --archives work/2026-Q3-reports.json --output work/reconciliation.json
+npm run prepare:fund-contract-evidence -- --requests work/reconciliation.json.contract-requests.json --output work/contracts.json --cache work/disclosures --python python --fallback --concurrency 4
+npm run prepare:fund-report-pdfs -- --requests work/reconciliation.json.needs-reports.json --output work/report-pdfs.json --cache work/quarter-pdfs --python python
+npm run prepare:published-fund-universe -- --census work/census.json --archives work/2026-Q3-reports.json --evidence work/contracts.json,work/report-pdfs.json --output work/reconciliation.json
+~~~
 
-```json
-{
-  "schemaVersion": 1,
-  "taxonomy": "eastmoney-level2",
-  "taxonomyVersion": "已核验的统一二级分类版本",
-  "source": "行业层级与历史归属的可追溯来源",
-  "reviewedAt": "2026-10-30",
-  "historicalMappingVerified": true,
-  "quarters": {
-    "2026-Q3": {
-      "六位A股或五位港股代码": "该分类版本中的二级行业名称"
-    }
-  }
-}
-```
+Python 需要 pypdf。PDF 的原始字节、来源 URL、日期及 SHA-256 随本地缓存保留；提取结果校验原文件哈希并原子写入。没有足够文字的扫描件、错名文件及损坏文件保持未确认。简版资料缺少比例时，--fallback 读取有效完整合同或招募说明书。--cache-only 可以禁止 PDF 联网下载，复核已有缓存。
 
-同一代码不同季度的归属可不同，但必须在统一可比分类版本下提供依据。不能将当前行业归属无说明地应用于十年历史；港股持仓也需要可比的映射，不可静默丢弃。源站目录混合返回多个层级，不能直接把所有板块当作二级分类。
+4. 从直接公司档案建立固定行业表。股票代码 JSON 为去重的六位 A 股代码数组，须包含持仓中已退市代码。
 
-## 三、试采集和正式更新
+~~~powershell
+npm run prepare:fund-fixed-industries -- --stocks work/held-a-stock-codes.json --output work/industries.json --cache work/company-cache
+~~~
 
-缺少核验输入时可以运行诊断。平面行业映射允许为空；诊断模式永远不生成生产快照：
+旧的 schemaVersion 1 人工核验输入仍可使用，但不得随意设置 historicalMembershipVerified 或 historicalMappingVerified。新的公开报告样本与固定分类文件均使用 schemaVersion 2，明确区分样本范围及分类重述。
 
-```powershell
-npm run update:active-fund-crowding -- --diagnostic --funds work/candidate-funds.json --industries work/unverified-industry-map.json --years 2025,2026 --cache work/fund-cache --diagnostics work/fund-diagnostics.json
-```
+## 持仓采集与发布
 
-正式更新必须同时提供两个核验文件：
+~~~powershell
+npm run update:active-fund-crowding -- --universe work/reconciliation.json.universe.json --industries work/industries.json --cache work/fund-cache --diagnostics work/diagnostics.json
+~~~
 
-```powershell
-npm run update:active-fund-crowding -- --universe work/verified-quarterly-universe.json --industries work/verified-quarterly-industries.json --cache work/fund-cache --diagnostics work/fund-diagnostics.json
-```
+- 年度原始响应按稳定 URL 缓存，一次响应包含该年已披露的季度。默认限制请求间隔并对临时错误有限重试，--refresh 显式重新请求。失败响应不写入成功缓存。
+- 默认生产文件是 scripts/data/active-fund-industry-crowding.json：行业名称只存一次，季度只存占比数组及覆盖汇总，最新排名不重复保存历史。完整核验记录保留在缓存 audits/ 下，并以 SHA-256 与公开文件关联。
+- 不达标、最新季度失败、日期或版本冲突都会阻止覆盖。更新已有文件须保留所有已发布季度；旧快照归档，禁止因补齐失败删掉历史。
+- 普通构建仅验证并复制静态快照。网页提供行业占比、季度变化及连续历史百分位，详情展开说明统计范围和覆盖率。
 
-- 年份默认从核验范围读取；诊断模式默认包含当前年及前十年，以支持完整十年观察跨度。
-- 并发默认 4，`--concurrency` 允许 1–8。
-- 默认复用已保存的原始年度响应，更新当年披露或修订历史时显式加 `--refresh`。无效响应不写入成功缓存。
-- 正式输出默认为 `scripts/data/active-fund-industry-crowding.json`，只包含紧凑季度行业汇总。完整核验记录保留在采集缓存的 `audits/<SHA-256>.json`；旧版汇总归档到同目录 `active-fund-crowding-history/`，诊断、原始缓存及输入保留在 work 中。
-- 缺少来源和核验标记、重复产品、覆盖率不达标、最新季度失败、历史丢失等错误都会阻止覆盖已有生产快照。
-- 数据发布沿用普通网站部署流程，但部署不能执行这两个手动采集命令。网页仅请求静态快照。
+## 实测状态
 
-## 四、当前实际验证状态
+截至 2026-10-31，已取得 41 个季度的完整规模原始列表（1,178 页、579,489 条份额季度记录），5,592 只 A 股的直接 EM2016 路径（含 16 只退市股票），以及最新季度 25,905 个份额代码的报告公告。2016Q3 的逐日窗口已完整采齐 276 页、4,352 个份额代码。更早报告、合同及持仓仍在继续核验，不能将采集完成度当成最终统计覆盖率。
 
-2026-10-30 对 12 个候选代码查询 2016、2025、2026 三年，共发起 36 个年度查询，29 个年度返回有效持仓；取得 106 份季度披露及 1,060 条股票持仓。每份有效季度通过日期、十条排名、唯一股票与正市值校验。已测试后端收费代码返回空数据的情况。
-
-后续已经采集 2016Q3—2026Q3 的完整全公募季度份额与净资产原始列表，共 41 季度、1,178 页、579,489 条记录。它们还需要完成主动权益类型历史、产品份额合并与历史行业映射核验，因此当前没有可发布的全市场行业集中度排名或十年百分位。持仓试采集只证明持仓接口可批量读取，不能证明全市场覆盖率。
-
-FRED 的中国市场系列不包含中国主动权益基金逐只季度重仓和二级行业归属；保持系统设计中已记录的选源结论。基金目录、季度持仓及分类均使用相应原始来源，不使用研究报道中的汇总比例替代逐只持仓数据。
-
-
-## 五、自动准备原始核验输入（仅手动调用）
-
-```powershell
-npm run prepare:fund-crowding-sources -- --quarters 2016-Q3,2026-Q3 --catalogue work/fundcode_search.js --stocks work/stock-codes.json --profile-codes work/fund-codes.json --cache work/fund-source-cache --output work/source-inputs.json
-```
-
-- `--quarters` 接受逗号分隔季度；每个季度取得全公募份额明细，默认每页 500 条，并发 4。分页总数、页号、行数、跨页唯一基金代码全部匹配才保存结果，避免漏页导致分母缩小。
-- 净资产来源是天天基金规模变动明细原始接口：`https://fund.eastmoney.com/data/FundDataPortfolio_Interface.aspx`，dt=8、t=年份_季度。第六列为亿元，换算为万元；`--` 保留为空值，不能当成零资产。当前基金目录的类型仅保存在 currentType 字段，historicalTypeVerified 始终为 false。
-- 二级行业目录使用东方财富行情中心 `https://quote.eastmoney.com/center/api/sidemenu_new.json`，严格筛选 type=2 且 flag=2。股票行业通过官方 F10 `https://emweb.securities.eastmoney.com/PC_HSF10/CoreConception/PageAjax?code=SZ300308` 读取 BOARD_RANK=2，并与目录代码和名称双重校验，不再使用混合层级的板块列表。
-- `--stocks` 是六位境内股票代码数组；当前分类保存在 currentStockIndustries，不能自动当作历史分类。缺失、重复或名称不一致会记录错误，不猜测补值。
-- `--profile-codes` 是指定的六位基金代码数组；`--profiles` 可改为读取全部当前主动权益候选份额的概况，两者互斥。概况页提取基金全称、成立日期、当前类型、前后端代码与跟踪标的，并为产品全称生成身份指纹；当前概况不是历史基金类型证明。
-- 原始响应按 URL 缓存并保存 SHA-256 和采集时间。原始输入输出 productionReady=false，必须经过历史类型和行业核验才能作为正式计算输入。
-- 真实采集中，华夏成长 000001/000002 与华夏大盘精选 000011/000012 分别被确认是同一产品；12 个试查代码中 9 个概况请求成功，3 个返回源站 HTTP 514，均保留错误而未填造结果。
-- 411 只已取得历史持仓的境内股票中，395 只当前二级行业明确；其余 16 只缺少可确认分类。2016Q3 有 1,077 个代码在当前目录中缺失，2026Q3 有 4 个，因此不能只从当前目录推定历史完整性。
-
-## 六、最终数据大小与发布边界
-
-网站使用 schemaVersion 2，结构只包含：
-
-- `industries`：去重后的行业名称列表。
-- `quarters`：季度、行业占比数组、基金数量与覆盖率汇总；数组与 industries 按列对应。缺值是 null，真实零值保留 0。
-- `rows`：最新季度排名、季度变化及历史百分位，不重复保存每个行业的历史数组。
-- 来源、更新日期、计算版本、输入哈希及本地核验记录的摘要指纹。
-
-网站不接收基金代码、股票代码、持仓明细或逐份报告信息。生产格式校验器会拒绝这些明细字段；本地完整核验记录不会写入 dist。普通部署只复制已保存的生产汇总，不执行采集或重算。
-
-128 行业 × 41 季度的测试规模约 82 KB，gzip 后约 28 KB。这是合成测试用例的文件体积，用于约束格式，不是已生成的真实行业集中度结果。真实数据体积会随行业和季度数量略有变化。
+最新一轮对账的分类数量覆盖下界为 89.3%、净资产覆盖下界为 94.1%；尚未达到全部发布条件，不据此输出生产排名。新增核验及历史归档测试已通过。此段状态须在真实快照生成后用实际结果更新。
