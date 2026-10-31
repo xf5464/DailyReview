@@ -51,7 +51,16 @@ test('A-share group shows only a snapshot-backed top-five summary row',()=>{
  assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
  assert.match(app,/appendActiveFundTopFiveRow/);
  assert.match(app,/slice\(0, 5\)/);
- assert.match(app,/sum \+ item.share/);
+ assert.match(app,/sum\+value/);
  assert.ok(app.includes("fetch('data/active-fund-industry-crowding.json')"));
  assert.equal(app.includes('queryFundPortfolio('), false);
+});
+
+test('top-five historical chart uses each quarter ranking and displays 1y/3y percentiles',()=>{
+ const fs=require('node:fs');const path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.ok(app.includes('function activeFundTopFiveItems(snapshot)'));
+ assert.ok(app.includes("showDetail('activeFundTopFive')"));
+ assert.ok(app.includes('overviewPercentilePair(chart.items, latest.value, latest.date, true)'));
+ assert.ok(app.includes("if (id === 'activeFundTopFive') return activeFundTopFiveChart()"));
 });
