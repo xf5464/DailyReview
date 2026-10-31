@@ -1,0 +1,12 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {bindingRequests,bindArchive}=require('../scripts/fund-report-bindings');
+const {parseCompleteReportPdf}=require('../scripts/fund-report-pdf-evidence');
+const quarter='2020-Q3';
+function report(id,name){return {id,title:name+'2020年第3季度报告',publishedAt:'2020-10-28'};}
+const bond=report('AN1','测试债券证券投资基金'),equity=report('AN2','测试收益证券投资基金');
+const archive={quarter,histories:['160602','160603','160608'].map(fundCode=>({fundCode,reports:[bond,equity]}))};
+function proof(r,codes){return {...r,evidence:{id:r.id,quarter,productName:r.title.replace('2020年第3季度报告',''),fundCode:codes[0],mainFundCode:codes[0],reportedFundCodes:codes,reportCodeBindingComplete:true,extractionMethod:'complete-PDF-layout',documentSha256:'a'.repeat(64),source:{id:r.id,hash:'a'.repeat(64),url:'https://pdf.dfcfw.com/pdf/H2_'+r.id+'_1.pdf'}}};}
+test('mixed series announcements are assigned only to codes printed in each complete original report',()=>{assert.equal(bindingRequests(archive).length,2);const set={histories:[{fundCode:'160602',reports:[proof(bond,['160602','160608']),proof(equity,['160603'])]}]};const out=bindArchive(archive,set);assert.deepEqual(out.histories.map(h=>[h.fundCode,h.reports.map(r=>r.id)]),[['160602',['AN1']],['160603',['AN2']],['160608',['AN1']]]);assert.equal(out.codeBindingCorrections.length,2);assert.equal(archive.histories[0].reports.length,2);const details=bindArchive({...set,quarter},set);for(const h of details.histories)assert.equal(h.reports[0].evidence.fundCode,h.fundCode);});
+test('unverified code hints cannot remove published report associations',()=>{assert.equal(bindArchive(archive,{histories:[{reports:[{...bond,evidence:{reportedFundCodes:['160602']}}]}]}),archive);const r=proof(bond,['160602']);r.evidence.source.hash='b'.repeat(64);assert.throws(()=>bindArchive(archive,{histories:[{reports:[r]}]}),/Unverified/);});
+test('complete PDF overview binding reads actual main and share codes instead of requested aliases',()=>{const request={...bond,fundCode:'160603',fundCodes:['160602','160603','160608'],quarter};const text=bond.title+'\n基金产品概况\n基金简称 测试债券\n基金主代码 160602\n下属分级基金的交易代码 160602 160608\n主要财务指标 单位：人民币元\n4.期末基金资产净值 123.00\n5.期末基金份额净值 1.00';const out=parseCompleteReportPdf({pdfSha256:'a'.repeat(64),pages:[{page:1,text}]},request);assert.equal(out.reportCodeBindingComplete,true);assert.deepEqual(out.reportedFundCodes,['160602','160608']);});

@@ -128,9 +128,16 @@ async function main(args=process.argv.slice(2)) {
      const snapshot=read(saved),universe=read(universeFile);validateCrowdingSnapshot(snapshot);
      if(snapshot.audit.industryMapHash===hash(industries)){entries.push({snapshot,universe});publish();continue;}
     }
-    const archive=read(archiveFile),contractFile=path.join(dir,'contracts.json'),pdfFile=path.join(dir,'report-evidence.json');
+    let archive=read(archiveFile);const contractFile=path.join(dir,'contracts.json'),pdfFile=path.join(dir,'report-evidence.json');
     let contracts=fs.existsSync(contractFile)?read(contractFile):{schemaVersion:1,classifierVersion:'contract-equity-scope-v1',evidence:[]};
     let pdfs=fs.existsSync(pdfFile)?read(pdfFile):null;
+    const {bindingRequests,bindArchive}=require('./fund-report-bindings');
+    const binding=bindingRequests(archive);
+    if(binding.length){
+     const file=path.join(dir,'binding-requests.json'),output=path.join(dir,'binding-evidence.json');write(file,binding);log({quarter,stage:'report-code-binding',requests:binding.length});
+     await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
+     pdfs=mergeReportEvidence(pdfs,read(output));archive=bindArchive(archive,pdfs);pdfs=bindArchive({...pdfs,quarter},pdfs);write(pdfFile,pdfs);
+    }
     const rebuild=()=>{
      if(fs.existsSync(pdfFile))pdfs=read(pdfFile);
      const reused=selectReusable(reuseSets,archive),merged=mergeContractEvidence(reused,contracts);

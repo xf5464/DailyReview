@@ -26,9 +26,12 @@ function parseCompleteReportPdf(document,request) {
     }
   }
   const compact=text.normalize('NFKC').replace(/\s+/g,'');
+  const overview=compact.slice(compact.indexOf('基金简称'),compact.indexOf('主要财务指标'));
+  const reportedFundCodes=[...new Set([...overview.matchAll(/(?:基金主代码|交易代码|基金代码)((?:\d{6})+)/g)].flatMap(m=>m[1].match(/\d{6}/g)))].sort();
+  const reportCodeBindingComplete=!!result.mainFundCode&&reportedFundCodes.includes(result.mainFundCode)&&(!/下属/.test(overview)||/交易代码(?:\d{6})+/.test(overview));
   const hierarchyCodes=(request.fundCodes||[request.fundCode]).filter(code=>compact.includes(code));
   const structuredShareHierarchyVerified=/分级/.test(result.productName)&&/下属分级基金/.test(compact)&&!!result.mainFundCode&&hierarchyCodes.includes(result.mainFundCode)&&hierarchyCodes.length>1&&result.navClassValuesCny?.length===1&&Number.isFinite(result.navTotal10kCny);
-  return {...result,reportParserVersion:2,structuredShareHierarchyVerified,hierarchyCodes,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
+  return {...result,reportedFundCodes,reportCodeBindingComplete,reportParserVersion:2,structuredShareHierarchyVerified,hierarchyCodes,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
 }
 async function main(args=process.argv.slice(2)) {
   const get=flag=>{const i=args.indexOf(flag);return i<0?null:args[i+1];};
@@ -38,7 +41,8 @@ async function main(args=process.argv.slice(2)) {
     try{
       const result=await readDisclosurePdf({id:request.id,title:request.title,publishedAt:request.publishedAt},
         {directory:path.resolve(get('--cache') || 'work/quarter-report-pdfs'),python:get('--python')||'python',extractionMode:'layout'});
-      const evidence=parseCompleteReportPdf(result.document,request);
+      let evidence=parseCompleteReportPdf(result.document,request);
+      if(evidence.reportCodeBindingComplete){request={...request,fundCode:evidence.reportedFundCodes.includes(request.fundCode)?request.fundCode:evidence.mainFundCode,fundCodes:evidence.reportedFundCodes};evidence=parseCompleteReportPdf(result.document,request);}
       console.error(JSON.stringify({fundCode:request.fundCode,quarter:request.quarter,nav:evidence.navTotal10kCny}));
       const holdings=require('./fund-report-holdings').parseReportHoldings(result.document,request,result.source);
       return {...request,evidence:{...evidence,source:result.source},holdings};
