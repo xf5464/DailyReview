@@ -22,6 +22,10 @@ function patchApp(source) {
   ];
   const newLine = "    refs.detailRange.value = ({\"ismManufacturingPmi\":\"year3\",\"ismSupplierDeliveries\":\"year3\",\"ismNewOrders\":\"year3\",\"ismBacklogOrders\":\"year3\"}[id] || 'year1');";
 
+  const fundRangeLine = "    refs.detailRange.value = id === 'activeFundTopFive' ? 'year10' : refs.range.value;";
+  const fundPatchedLine = "    refs.detailRange.value = id === 'activeFundTopFive' ? 'year10' : ({\"ismManufacturingPmi\":\"year3\",\"ismSupplierDeliveries\":\"year3\",\"ismNewOrders\":\"year3\",\"ismBacklogOrders\":\"year3\"}[id] || 'year1');";
+  if (source.includes(fundPatchedLine)) return source;
+  if (source.includes(fundRangeLine)) return source.replace(fundRangeLine, fundPatchedLine);
   if (source.includes(newLine)) return source;
   for (const oldLine of oldLines) {
     if (source.includes(oldLine)) return source.replace(oldLine, newLine);
