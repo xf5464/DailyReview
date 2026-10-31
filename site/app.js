@@ -1253,6 +1253,7 @@
   }
 
   function chartById(id) {
+    if (id === 'activeFundTopFive') return activeFundTopFiveChart();
     return data && Array.isArray(data.charts)
       ? data.charts.find(function (chart) { return chart.id === id; })
       : null;
@@ -2544,24 +2545,50 @@
     });
   }
 
+  function activeFundTopFiveItems(snapshot) {
+    if (!snapshot || !Array.isArray(snapshot.quarters) || !Array.isArray(snapshot.industries)) return [];
+    return snapshot.quarters.map(function (quarter) {
+      if (!Array.isArray(quarter.shares) || quarter.shares.length !== snapshot.industries.length ||
+          !Number.isFinite(quarter.coverage) || quarter.coverage < 0.9) return null;
+      var shares = quarter.shares.filter(function (value) { return Number.isFinite(value) && value >= 0; })
+        .slice().sort(function (a,b) { return b-a; });
+      if (shares.length < 5) return null;
+      var quarterEnd = {'1':'03-31','2':'06-30','3':'09-30','4':'12-31'}[quarter.quarter.slice(-1)];
+      if (!quarterEnd) return null;
+      return {date:quarter.quarter.slice(0,4)+'-'+quarterEnd,
+        value:shares.slice(0,5).reduce(function (sum,value) { return sum+value; },0)};
+    }).filter(Boolean).sort(function (a,b) { return a.date.localeCompare(b.date); });
+  }
+
+  function activeFundTopFiveChart() {
+    var snapshot = activeFundCrowdingSnapshot;
+    return {id:'activeFundTopFive', title:'主动公募行业前五集中度', frequency:'季度', unit:'%', decimals:2,
+      sourceName:snapshot && snapshot.source || '主动公募季度持仓快照',
+      items:activeFundTopFiveItems(snapshot), error:snapshot ? null : '尚无经过验证的静态快照'};
+  }
+
   function appendActiveFundTopFiveRow() {
     if (config.selectedGroupId !== 'group_a_share') return;
     var snapshot = activeFundCrowdingSnapshot;
-    var topFive = snapshot ? snapshot.rows.filter(function (item) { return Number.isFinite(item.share) && item.share >= 0; })
-      .slice().sort(function (a, b) { return b.share - a.share; }).slice(0, 5) : [];
-    var valid = topFive.length === 5;
-    var total = valid ? topFive.reduce(function (sum, item) { return sum + item.share; }, 0) : null;
+    var chart = activeFundTopFiveChart();
+    var latest = chart.items.at(-1);
     var row = document.createElement('tr');
-    row.append(createElement('th', '', '主动公募行业前五集中度'));
-    row.firstChild.scope = 'row';
-    row.append(createElement('td', '', valid ? total.toFixed(2) + '%' : '--'));
+    var name = createElement('th', '', '主动公募行业前五集中度');
+    name.scope = 'row'; row.append(name);
+    var cell = createElement('td', '', latest ? latest.value.toFixed(2) + '%' : '--');
+    var pair = latest ? overviewPercentilePair(chart.items, latest.value, latest.date, true) : '';
+    cell.append(document.createTextNode(' '), createPercentileLabel(pair));
+    row.append(cell);
     row.append(createElement('td', '', snapshot ? snapshot.latestQuarter : '--'));
     row.append(createElement('td', '', '季度'));
     var action = document.createElement('td');
-    var note = createElement('span', '', valid ? '前五行业合计' : '暂无有效数据');
-    if (valid) note.title = topFive.map(function (item) { return item.industry + ' ' + item.share.toFixed(2) + '%'; }).join('；') + '；基于主动权益公募季报前十大持仓，非全部持仓。';
-    action.append(note);
-    row.append(action);
+    var button = createElement('button', 'secondary-button', '查看图表');
+    button.type = 'button';
+    button.addEventListener('click', function (event) { event.stopPropagation(); showDetail('activeFundTopFive'); });
+    action.append(button); row.append(action);
+    var color = percentileBackground(pair);
+    if (color) {row.classList.add('has-percentile-background');row.style.setProperty('--percentile-row-background',color);}
+    row.addEventListener('click', function () { showDetail('activeFundTopFive'); });
     refs.tableBody.append(row);
   }
 
@@ -2711,7 +2738,7 @@
     shareholderSortKey = chart && chart.chartType === 'stockTable' ? 'count' : null;
     shareholderSortDirection = shareholderSortKey ? 'descending' : null;
     refs.detailTitle.textContent = chart && chart.title || TITLES[id];
-    refs.detailHelp.textContent = DESCRIPTIONS[id] || '暂无说明。';
+    refs.detailHelp.textContent = id === 'activeFundTopFive' ? '每个季度按主动权益公募披露的前十大A股重仓行业占比排序，取当期前五行业占比之和。历史按季度显示，非全部基金股票仓位。' : DESCRIPTIONS[id] || '暂无说明。';
     refs.detailSource.href = chart && chart.sourceUrl || '#';
     refs.detailSource.hidden = !(chart && chart.sourceUrl);
     refs.detailRange.value = refs.range.value;
