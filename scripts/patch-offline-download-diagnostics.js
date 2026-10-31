@@ -64,7 +64,7 @@ function patchApp(source) {
   ].join('\n');
   source = replaceOnce(source, manifestAnchor, helpers, 'diagnostic helpers');
 
-  const filesLine = "      var files = manifest.charts.flatMap(function (chart) { return [chart.extras].concat(chart.chunks); });";
+  const filesLine = "      var files = manifest.charts.flatMap(function (chart) { return [chart.extras].concat(chart.chunks); }).concat(manifest.datasets || []);";
   const filesWithDiagnosis = [
     filesLine,
     '      var offlineDiagnostic = await diagnoseOfflineDownload(cache, previousState, manifest, files);',

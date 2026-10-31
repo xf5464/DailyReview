@@ -4492,10 +4492,17 @@ body {
 /* Manual active-fund industry crowding ranking */
 .active-fund-crowding { margin: 1rem 0; padding: 1rem; border: 1px solid var(--border-color, #d1d5db); border-radius: 10px; }
 .active-fund-crowding[hidden] { display: none; }
-.active-fund-crowding-scroll { overflow-x: auto; }
-.active-fund-crowding table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.active-fund-crowding-scroll { overflow: auto; max-height: 32rem; }
+.active-fund-crowding table { width: 100%; min-width: 660px; table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .active-fund-crowding th, .active-fund-crowding td { padding: .65rem .5rem; text-align: right; border-bottom: 1px solid #d1d5db55; white-space: nowrap; }
 .active-fund-crowding th:first-child, .active-fund-crowding td:first-child { text-align: left; }
 .active-fund-crowding tbody tr { cursor: pointer; }
 .active-fund-crowding tbody tr:hover, .active-fund-crowding tbody tr:focus { background: #80808020; }
 #activeFundCrowdingHistory { line-height: 1.7; }
+
+.active-fund-crowding > label { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; }
+.active-fund-crowding > label select { padding: .45rem .7rem; border: 1px solid #d1d5db; border-radius: 6px; background: var(--card, #fff); color: inherit; font: inherit; }
+.active-fund-crowding thead th { position: sticky; top: 0; z-index: 1; background: var(--panel, #f1f4fa); }
+.active-fund-crowding th:first-child, .active-fund-crowding td:first-child { width: 26%; white-space: normal; }
+.active-fund-crowding th:nth-child(2), .active-fund-crowding td:nth-child(2), .active-fund-crowding th:nth-child(3), .active-fund-crowding td:nth-child(3) { width: 16%; }
+.active-fund-crowding th:nth-child(n+4), .active-fund-crowding td:nth-child(n+4) { width: 10.5%; }

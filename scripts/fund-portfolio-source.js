@@ -2,6 +2,10 @@
 // Source is intentionally invoked only by an explicit manual collector.
 const FUND_HOLDING_STOCK_LIMIT = 100;
 
+function classificationProductName(value) {
+  return String(value || '').normalize('NFKC').replace(/\s+/g,'').replace(/\(原[^()]*\)$/, '');
+}
+
 function decodeHtml(text) {
   return text
     .replace(/<[^>]*>/g, '')
@@ -52,14 +56,24 @@ function parseFundPortfolioText(text) {
     let rowMatch;
 
     while ((rowMatch = rowPattern.exec(sectionMatch[5])) !== null && rows.length < 10) {
-      const cells = [...rowMatch[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((match) => decodeHtml(match[1]));
+      const rawCells=[...rowMatch[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(match=>match[1]);
+      const cells=rawCells.map(decodeHtml);
 
       if (requiredIndexes.some((index) => index < 0 || index >= cells.length)) {
         continue;
       }
 
+      const codeCell=rawCells[indexes.stockCode];
+      const quote=codeCell.match(/quote\.eastmoney\.com\/unify\/r\/(\d+)\.([^'"<>/]+)/);
+      const legacy=codeCell.match(/quote\.eastmoney\.com\/(?:sh|sz)(\d{6})/i);
+      let market=null;
+      if(quote && quote[2]===cells[indexes.stockCode])market=['0','1'].includes(quote[1])&&/^(?:[03468]\d{5}|92\d{4})$/.test(quote[2])?'mainland-A':'non-A';
+      else if(legacy && legacy[1]===cells[indexes.stockCode])market='mainland-A';
+      // A blank market field is unknown; it is not proof of an overseas listing.
+
       rows.push({
-        rank: Number(cells[indexes.rank]),
+        market,
+        rank: /^\d+\*?$/.test(cells[indexes.rank])?Number(cells[indexes.rank].replace(/\*$/,'')):NaN,
         stockCode: cells[indexes.stockCode],
         stockName: cells[indexes.stockName],
         netValueRatio: toNumber(cells[indexes.netValueRatio]),
@@ -99,7 +113,6 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
     topline: '10',
     year: String(year),
     month: '',
-    rt: String(Math.random()),
   };
   Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
 
@@ -109,8 +122,8 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
   try {
     const response = await (options.fetchImpl ?? fetch)(url, {
       headers: {
-        Referer: `https://fundf10.eastmoney.com/ccmx_${fundCode}.html`,
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        Referer: 'https://fundf10.eastmoney.com/',
+        'User-Agent': 'Mozilla/5.0',
       },
       signal: controller.signal,
     });
@@ -119,10 +132,13 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
       throw new Error(`基金持仓请求失败（HTTP ${response.status}）`);
     }
 
+    const rawText = await response.text();
+    const sourceUrl = new URL(url); sourceUrl.searchParams.delete('rt');
     return {
-      fundCode: String(fundCode),
-      year: Number(year),
-      ...parseFundPortfolioText(await response.text()),
+      fundCode: String(fundCode), year: Number(year),
+      source: response.fundCrowdingSource || {url: sourceUrl.href, fetchedAt: new Date().toISOString(),
+        hash: require('node:crypto').createHash('sha256').update(rawText).digest('hex')},
+      ...parseFundPortfolioText(rawText),
     };
   } catch (error) {
     if (error.name === 'AbortError') {
@@ -137,6 +153,7 @@ async function queryFundPortfolio(fundCode, year, options = {}) {
 
 function normalizeFundProductName(name) {
   return String(name ?? '')
+    .replace(/[（(](?:前端|后端)[）)]$/u, '')
     .replace(/(?:份额)?[A-Z](?:类)?$/u, '')
     .replace(/(?:份额)?[A-Z]\d?(?:类)?$/u, '')
     .trim();
@@ -157,6 +174,7 @@ function deduplicateFundShares(funds) {
     const existing = products.get(productName);
     if (!existing || shareClassPriority(fund.fundName) < shareClassPriority(existing.fundName)) {
       products.set(productName, {
+        ...fund,
         fundCode: String(fund.fundCode),
         fundName: fund.fundName,
         productName,
@@ -208,6 +226,7 @@ function aggregateFundStockHoldings(portfolios) {
 }
 
 module.exports = {
+  classificationProductName,
   aggregateFundStockHoldings,
   deduplicateFundShares,
   normalizeFundProductName,
