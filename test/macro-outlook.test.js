@@ -778,7 +778,8 @@ test('macro outlook query returns all independent chart payloads', async () => {
     return {
       ok: true,
       status: 200,
-      text: async () => url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
+      text: async () => url.includes('qdiilens.com/fund/159941') ? '<p>行情截至 2026-08-21 收盘</p><p>参考溢价 +13.30%</p>'
+        : url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
         : url === BLS_EMPLOYMENT_SCHEDULE_URL ? BLS_EMPLOYMENT_SCHEDULE_HTML
         : url === BEA_RELEASE_SCHEDULE_URL ? BEA_RELEASE_SCHEDULE_HTML
         : url === BEA_NEXT_YEAR_RELEASE_SCHEDULE_URL ? '<html></html>'

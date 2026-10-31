@@ -49,5 +49,5 @@ test('A-share group has a snapshot-only industry ranking panel',()=>{
  assert.match(html,/id="activeFundCrowdingPanel"/);
  assert.match(app,/config.selectedGroupId !== 'group_a_share'/);
  assert.ok(app.includes("fetch('data/active-fund-industry-crowding.json')"));
- assert.doesNotMatch(app,/queryFundPortfolio\\(/);
+ assert.equal(app.includes('queryFundPortfolio('), false);
 });

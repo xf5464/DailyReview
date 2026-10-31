@@ -441,11 +441,12 @@ function addAssetVersions() {
   const appVersion = versionFor('app.js');
   const stylesVersion = versionFor('styles.css');
   const shellVersion = contentHash([
-    'index.html', 'styles.css', 'app.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
+    'index.html', 'styles.css', 'app.js', 'fund-crowding-view.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
     'toy-icon-a1190c863e-180.png', 'toy-icon-a1190c863e-192.png', 'toy-icon-a1190c863e-512.png',
   ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
   const html = fs.readFileSync(indexPath, 'utf8')
     .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
+    .replace('src="fund-crowding-view.js"', `src="fund-crowding-view.js?v=${versionFor('fund-crowding-view.js')}"`)
     .replace('src="app.js"', `src="app.js?v=${appVersion}"`)
     .replace('__APP_VERSION__', shellVersion);
   fs.writeFileSync(indexPath, html, 'utf8');
@@ -470,13 +471,19 @@ async function build() {
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
   // Active fund crowding is deliberately manual-only. The normal deployment
   // copies a previously approved static snapshot without fetching or recalculating it.
+  const offlineDatasets = [];
   const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
   if (fs.existsSync(crowdingSnapshot)) {
     const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
-    if (snapshot.schemaVersion !== 1 || !Array.isArray(snapshot.rows) || !snapshot.latestQuarter || !snapshot.source) {
-      throw new Error('Invalid approved active fund crowding snapshot; refusing to publish it.');
-    }
+    require('./fund-crowding-snapshot').validatePublicCrowdingSnapshot(snapshot);
     writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
+    const content = fs.readFileSync(path.join(dataDirectory, 'active-fund-industry-crowding.json'));
+    const hash = contentHash(content);
+    const relativePath = 'offline/datasets/active-fund-industry-crowding.' + hash + '.json';
+    fs.mkdirSync(path.dirname(path.join(dataDirectory, relativePath)), { recursive: true });
+    fs.writeFileSync(path.join(dataDirectory, relativePath), content);
+    offlineDatasets.push({ id: 'activeFundIndustryCrowding', path: 'data/' + relativePath,
+      canonicalPath: 'data/active-fund-industry-crowding.json', hash, bytes: content.byteLength });
   }
 
 
@@ -536,6 +543,7 @@ async function build() {
     schemaVersion: 1,
     fetchedAt: outlook.fetchedAt,
     charts: offlineCharts,
+    datasets: offlineDatasets,
   });
 
   const failedCharts = outlook.charts.filter((chart) => chart.error && chart.items.length === 0);
