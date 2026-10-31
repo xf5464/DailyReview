@@ -136,7 +136,7 @@ async function main(args=process.argv.slice(2)) {
     if(binding.length){
      const file=path.join(dir,'binding-requests.json'),output=path.join(dir,'binding-evidence.json');write(file,binding);log({quarter,stage:'report-code-binding',requests:binding.length});
      await run('fund-report-pdf-evidence.js',['--requests',file,'--output',output,'--cache',path.resolve(get('--report-cache')||path.join(cache,'quarter-report-pdfs')),'--python',get('--python')||'python'],path.join(dir,'reports.log'));
-     pdfs=mergeReportEvidence(pdfs,read(output));archive=bindArchive(archive,pdfs);pdfs=bindArchive({...pdfs,quarter},pdfs);write(pdfFile,pdfs);
+     const bindingEvidence=read(output);pdfs=mergeReportEvidence(pdfs,bindingEvidence);archive=bindArchive(archive,bindingEvidence);pdfs=bindArchive({...pdfs,quarter},bindingEvidence);write(pdfFile,pdfs);
     }
     const rebuild=()=>{
      if(fs.existsSync(pdfFile))pdfs=read(pdfFile);
@@ -162,9 +162,9 @@ async function main(args=process.argv.slice(2)) {
     const cacheRequests=path.join(dir,'cached-contract-requests.json'),cachedResult=path.join(dir,'cached-contracts.json');
     write(cacheRequests,preview.needsContracts);
     const contractArgs=['--cache',path.resolve(get('--disclosures')||path.join(cache,'disclosures')),'--python',get('--python')||'python','--fallback','--text-fallback','--concurrency',get('--concurrency')||'3'];
-    await run('fund-contract-evidence.js',['--requests',cacheRequests,'--output',cachedResult,'--cache-only',...contractArgs],path.join(dir,'contracts.log'));
+    await run('fund-contract-evidence.js',['--requests',cacheRequests,'--output',cachedResult,'--cache-only','--defer-classic',...contractArgs],path.join(dir,'contracts.log'));
     contracts=mergeContractEvidence(contracts,{...read(cachedResult),evidence:read(cachedResult).evidence.filter(e=>e.status!=='unresolved')});write(contractFile,contracts);preview=rebuild();
-    const attempted=new Set(),reportAttempted=new Set();let validated=false;
+    const attempted=new Set(),reportAttempted=new Set();let validated=false,classicPass=false;
     for(let batch=0;batch<100;batch++){
      if(preview.productionReady){
       for(let reportPass=0;reportPass<4&&preview.productionReady;reportPass++){
@@ -197,11 +197,12 @@ async function main(args=process.argv.slice(2)) {
      }
      const nav=new Map(preview.universe.quarters[quarter].unclassifiedFunds.map(f=>[canonical(f.fundName),f.netAssetUpperBound10kCny??Infinity]));
      const requests=preview.needsContracts.filter(r=>!attempted.has(canonical(r.productName))).sort((a,b)=>(nav.get(canonical(b.productName))||0)-(nav.get(canonical(a.productName))||0)).slice(0,200);
+     if(!requests.length&&!classicPass){classicPass=true;attempted.clear();log({quarter,stage:'classic-extraction-pass'});continue;}
      if(!requests.length)break;
      requests.forEach(r=>attempted.add(canonical(r.productName)));
      const file=path.join(dir,'batch-requests.json'),output=path.join(dir,'batch-evidence.json');write(file,requests);
      log({quarter,stage:'disclosures',batch,requests:requests.length});
-     await run('fund-contract-evidence.js',['--requests',file,'--output',output,...contractArgs],path.join(dir,'contracts.log'));
+     await run('fund-contract-evidence.js',['--requests',file,'--output',output,...contractArgs,...(!classicPass?['--defer-classic']:[])],path.join(dir,'contracts.log'));
      contracts=mergeContractEvidence(contracts,read(output));write(contractFile,contracts);preview=rebuild();
      log({quarter,stage:'cohort',...preview.summaries[0]});
     }

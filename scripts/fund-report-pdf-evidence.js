@@ -27,11 +27,12 @@ function parseCompleteReportPdf(document,request) {
   }
   const compact=text.normalize('NFKC').replace(/\s+/g,'');
   const overview=compact.slice(compact.indexOf('基金简称'),compact.indexOf('主要财务指标'));
-  const reportedFundCodes=[...new Set([...overview.matchAll(/(?:基金主代码|交易代码|基金代码)((?:\d{6})+)/g)].flatMap(m=>m[1].match(/\d{6}/g)))].sort();
+  const codeChanges=[...overview.matchAll(/本基金的(?:基金|交易)?代码由(\d{6})(?:变更|修改|调整)为(\d{6})/g)].filter(m=>m[2]===result.mainFundCode).map(m=>({from:m[1],to:m[2],quote:m[0]}));
+  const reportedFundCodes=[...new Set([...overview.matchAll(/(?:基金主代码|交易代码|基金代码)((?:\d{6})+)/g)].flatMap(m=>m[1].match(/\d{6}/g)).concat(codeChanges.flatMap(c=>[c.from,c.to])))].sort();
   const reportCodeBindingComplete=!!result.mainFundCode&&reportedFundCodes.includes(result.mainFundCode)&&(!/下属/.test(overview)||/交易代码(?:\d{6})+/.test(overview));
   const hierarchyCodes=(request.fundCodes||[request.fundCode]).filter(code=>compact.includes(code));
   const structuredShareHierarchyVerified=/分级/.test(result.productName)&&/下属分级基金/.test(compact)&&!!result.mainFundCode&&hierarchyCodes.includes(result.mainFundCode)&&hierarchyCodes.length>1&&result.navClassValuesCny?.length===1&&Number.isFinite(result.navTotal10kCny);
-  return {...result,reportedFundCodes,reportCodeBindingComplete,reportParserVersion:2,structuredShareHierarchyVerified,hierarchyCodes,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
+  return {...result,codeChanges,reportedFundCodes,reportCodeBindingComplete,reportParserVersion:2,structuredShareHierarchyVerified,hierarchyCodes,pdfPages:document.pages.length,documentSha256:document.pdfSha256,extractionMethod:'complete-PDF-layout'};
 }
 async function main(args=process.argv.slice(2)) {
   const get=flag=>{const i=args.indexOf(flag);return i<0?null:args[i+1];};

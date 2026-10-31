@@ -229,7 +229,7 @@ async function main(args=process.argv.slice(2)) {
   const file=path.resolve(get('--output'));fs.mkdirSync(path.dirname(file),{recursive:true});
   const journal=file+'.progress.jsonl';fs.writeFileSync(journal,'');
   const readClassified=(row,request)=>classifyDisclosureDocument(row,request,{readRow,
-    readClassic:row=>readDisclosurePdf(row,{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly,extractionEngine:'pypdf'})});
+    readClassic:row=>readDisclosurePdf(row,{directory:path.join(directory,'pdfs'),python:get('--python')||'python',cacheOnly:cacheOnly||args.includes('--defer-classic'),extractionEngine:'pypdf'})});
   const work=async request=>{
     try {
       if(!histories.has(request.fundCode))histories.set(request.fundCode,collectDocumentList(request.fundCode,load));
