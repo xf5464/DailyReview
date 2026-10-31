@@ -2550,13 +2550,16 @@
     return snapshot.quarters.map(function (quarter) {
       if (!Array.isArray(quarter.shares) || quarter.shares.length !== snapshot.industries.length ||
           !Number.isFinite(quarter.coverage) || quarter.coverage < 0.9) return null;
-      var shares = quarter.shares.filter(function (value) { return Number.isFinite(value) && value >= 0; })
-        .slice().sort(function (a,b) { return b-a; });
+      var shares = quarter.shares.map(function (value, index) {
+        return { industry: snapshot.industries[index], share: value };
+      }).filter(function (item) { return Number.isFinite(item.share) && item.share >= 0 && item.industry; })
+        .sort(function (a,b) { return b.share-a.share; });
       if (shares.length < 5) return null;
+      var topFive = shares.slice(0,5);
       var quarterEnd = {'1':'03-31','2':'06-30','3':'09-30','4':'12-31'}[quarter.quarter.slice(-1)];
       if (!quarterEnd) return null;
       return {date:quarter.quarter.slice(0,4)+'-'+quarterEnd,
-        value:shares.slice(0,5).reduce(function (sum,value) { return sum+value; },0)};
+        value:topFive.reduce(function (sum,item) { return sum+item.share; },0), topFive:topFive};
     }).filter(Boolean).sort(function (a,b) { return a.date.localeCompare(b.date); });
   }
 
@@ -2564,7 +2567,13 @@
     var snapshot = activeFundCrowdingSnapshot;
     return {id:'activeFundTopFive', title:'主动公募行业前五集中度', frequency:'季度', unit:'%', decimals:2,
       sourceName:snapshot && snapshot.source || '主动公募季度持仓快照',
-      items:activeFundTopFiveItems(snapshot), error:snapshot ? null : '尚无经过验证的静态快照'};
+      items:activeFundTopFiveItems(snapshot), error:snapshot ? null : '尚无经过验证的静态快照',
+      pointTooltip:function (item) {
+        return item.topFive && item.topFive.length === 5
+          ? '\\n' + item.topFive.map(function (entry, index) {
+              return (index+1) + '. ' + entry.industry + '：' + entry.share.toFixed(2) + '%';
+            }).join('\\n') : '';
+      }};
   }
 
   function appendActiveFundTopFiveRow() {
