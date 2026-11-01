@@ -35,18 +35,30 @@ async function queryOfficialPremium159941({fetchImpl=fetch}={}) {
     if (!response.ok) throw new Error('159941 source HTTP '+response.status);
     return response.json();
   }
-  const [navResult,prices]=await Promise.allSettled([json(NAV_URL),json(PRICE_URL)]);
-  if (prices.status!=='fulfilled') throw prices.reason;
-  let nav;
-  if (navResult.status==='fulfilled') {
-    try { nav=parseNav(navResult.value); } catch (_) { /* Try alternative NAV history source. */ }
+  // The Eastmoney hosts may intermittently fail independently. Retry each
+  // source without making the other successful response expire.
+  async function retry(task, attempts=4) {
+    let lastError;
+    for (let attempt=0; attempt<attempts; attempt++) {
+      try { return await task(); } catch(error) {
+        lastError=error;
+        if (attempt+1<attempts) await new Promise(resolve=>setTimeout(resolve,400*(attempt+1)));
+      }
+    }
+    throw lastError;
   }
+  const prices=await retry(()=>json(PRICE_URL));
+  let nav;
+  try { nav=parseNav(await retry(()=>json(NAV_URL),2)); } catch (_) { /* fallback */ }
   if (!nav || nav.size<2) {
-    const response=await fetchImpl(NAV_FALLBACK_URL,{headers,signal:AbortSignal.timeout(30000)});
-    if (!response.ok) throw new Error('Fallback NAV source HTTP '+response.status);
+    const response=await retry(async()=>{
+      const result=await fetchImpl(NAV_FALLBACK_URL,{headers,signal:AbortSignal.timeout(30000)});
+      if (!result.ok) throw new Error('Fallback NAV source HTTP '+result.status);
+      return result;
+    });
     nav=parseFallbackNav(await response.text());
   }
-  const items=mergeOfficialPremium(parsePrices(prices.value),nav);
+  const items=mergeOfficialPremium(parsePrices(prices),nav);
   if (items.length<2) throw new Error('Insufficient date-matched official NAV premium history');
   return {items, sourceName:'东方财富 ETF 未复权收盘价 / 天天基金官方单位净值'};
 }
