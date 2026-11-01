@@ -488,10 +488,25 @@ async function build() {
 
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');
-  const outlook = await queryMacroOutlook({ range: 'year30' });
+  const industryCachePath = path.join(projectRoot, '.cache', 'a-share-industry-concentration.json');
+  let industryHistoryCache = null;
+  try {
+    const cached = JSON.parse(fs.readFileSync(industryCachePath, 'utf8'));
+    if (cached.id === 'aShareIndustryConcentration' && Array.isArray(cached.industryHistories) &&
+        cached.industryHistories.length >= 80 && Array.isArray(cached.items) && cached.items.length) {
+      industryHistoryCache = cached;
+    }
+  } catch { /* First run: collect full history. */ }
+  const outlook = await queryMacroOutlook({ range: 'year30', industryHistoryCache });
   outlook.charts.forEach((chart) => {
     if (chart.id === 'nationalTeamWideEtf') chart.decimals = 0;
   });
+  const industryChart = outlook.charts.find((chart) => chart.id === 'aShareIndustryConcentration');
+  if (industryChart && !industryChart.error && !industryChart.dataFallback &&
+      Array.isArray(industryChart.industryHistories) && industryChart.industryHistories.length >= 80 &&
+      industryChart.items.length) {
+    writeJson(industryCachePath, industryChart);
+  }
   const usableCharts = outlook.charts.filter((chart) => chart.items.length > 0);
   if (usableCharts.length === 0) {
     throw new Error('No macro chart returned usable data; refusing to publish an empty site.');
