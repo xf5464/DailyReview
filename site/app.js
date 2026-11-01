@@ -1923,10 +1923,14 @@
     panel.hidden = false;
     var selectedIndex = items.indexOf(item);
     var controls = createElement('div', 'active-fund-quarter-controls');
-    var previous = createElement('button', 'secondary-button', '← 上一季度');
+    var previous = createElement('button', 'secondary-button active-fund-quarter-arrow', '‹');
+    previous.setAttribute('aria-label', '上一季度');
+    previous.title = '上一季度';
     previous.type = 'button';
     previous.disabled = selectedIndex <= 0;
-    var next = createElement('button', 'secondary-button', '下一季度 →');
+    var next = createElement('button', 'secondary-button active-fund-quarter-arrow', '›');
+    next.setAttribute('aria-label', '下一季度');
+    next.title = '下一季度';
     next.type = 'button';
     next.disabled = selectedIndex >= items.length - 1;
     var yearSelect = document.createElement('select');
@@ -1957,7 +1961,7 @@
     controls.append(previous, yearSelect, quarterSelect, next);
     panel.append(controls);
     panel.append(createElement('strong', '', formatDate(item.date, '季度') + ' · 前五行业合计 ' + item.value.toFixed(2) + '%'));
-    var list = createElement('ol');
+    var list = createElement('ol', 'active-fund-quarter-list');
     (item.topFive || []).forEach(function (entry) {
       list.append(createElement('li', '', entry.industry + '：' + entry.share.toFixed(2) + '%'));
     });
