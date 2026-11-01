@@ -497,7 +497,25 @@ async function build() {
       industryHistoryCache = cached;
     }
   } catch { /* First run: collect full history. */ }
-  const outlook = await queryMacroOutlook({ range: 'year30', industryHistoryCache });
+  const historyCachePath = path.join(projectRoot, '.cache', 'macro-chart-history.json');
+  let historicalChartCache = {};
+  try {
+    const previous = JSON.parse(fs.readFileSync(historyCachePath, 'utf8'));
+    if (previous.schemaVersion === 1 && previous.charts && typeof previous.charts === 'object') {
+      historicalChartCache = previous.charts;
+    }
+  } catch { /* First deployment downloads the historical baseline. */ }
+  const hasBaseline = Object.keys(historicalChartCache).length >= 30;
+  const outlook = await queryMacroOutlook({
+    range: 'year30', industryHistoryCache, historicalChartCache, incrementalMode: hasBaseline,
+  });
+  const nextChartCache = { ...historicalChartCache };
+  outlook.charts.forEach(chart => {
+    if (Array.isArray(chart.items) && chart.items.length && !chart.error && !chart.dataFallback) {
+      nextChartCache[chart.id] = chart;
+    }
+  });
+  writeJson(historyCachePath, { schemaVersion: 1, charts: nextChartCache });
   outlook.charts.forEach((chart) => {
     if (chart.id === 'nationalTeamWideEtf') chart.decimals = 0;
   });
