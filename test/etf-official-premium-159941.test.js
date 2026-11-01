@@ -7,7 +7,7 @@ test('match official NAV to unadjusted same-day ETF closing prices',()=>{
  assert.deepEqual(mergeOfficialPremium(prices,nav),[{date:'2026-10-28',value:5},{date:'2026-10-29',value:10}]);
 });
 test('official premium requires at least two matching dates',async()=>{
- const fetchImpl=async url=>({ok:true,json:async()=>url.includes('/f10/lsjz')?{Data:{LSJZList:[{FSRQ:'2026-10-29',DWJZ:'1.10'}]}}:{data:{klines:['2026-10-29,1,1.21,1,1,1']}}});
+ const fetchImpl=async url=>({ok:true,json:async()=>url.includes('/f10/lsjz')?{Data:{LSJZList:[{FSRQ:'2026-10-29',DWJZ:'1.10'}]}}:{data:{klines:['2026-10-29,1,1.21,1,1,1']}},text:async()=> 'var Data_netWorthTrend = [{"x":1793232000000,"y":1.10}];'});
  await assert.rejects(queryOfficialPremium159941({fetchImpl}),/Insufficient/);
 });
 test('A-share official NAV premium has 1y and 3y percentile labels',()=>{
