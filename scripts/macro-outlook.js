@@ -2419,7 +2419,7 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate,
       };
     }),
-    etfOfficialPremium159941: () => loadChart(CHART_METADATA.etfOfficialPremium159941, () => queryOfficialPremium159941({fetchImpl})),
+    etfOfficialPremium159941: () => loadChart(CHART_METADATA.etfOfficialPremium159941, () => queryOfficialPremium159941({fetchImpl, incremental: incrementalMode && Boolean(historicalChartCache.etfOfficialPremium159941?.items?.length)})),
     etfPremium159941: () => loadChart(CHART_METADATA.etfPremium159941, () => queryEtfPremium159941({fetchImpl})),
     nationalTeamWideEtf: () => loadChart(CHART_METADATA.nationalTeamWideEtf, () => (
       queryNationalTeamWideEtf({ fetchImpl })
