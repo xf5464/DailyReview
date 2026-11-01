@@ -13,7 +13,7 @@ test('official premium requires at least two matching dates',async()=>{
 test('A-share official NAV premium has 1y and 3y percentile labels',()=>{
  const fs=require('node:fs');
  const app=fs.readFileSync(require('node:path').join(__dirname,'../site/app.js'),'utf8');
- assert.ok(app.includes("group_a_share: ['etfOfficialPremium159941', 'etfPremium159941'"));
+ assert.ok(app.includes("group_a_share: ['etfOfficialPremium159941',"));
  assert.ok(app.includes("etfOfficialPremium159941: ['group_a_share']"));
  assert.ok(app.includes("if (id !== 'etfPremium159941') valueCell.append"));
 });
@@ -23,4 +23,11 @@ test('fallback official net worth trend preserves NAV dates',()=>{
  const nav=parseFallbackNav(text);
  assert.equal(nav.size,2);
  assert.ok([...nav.values()].includes(1.2));
+});
+
+test('IOPV premium is hidden even in previously saved group order',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.ok(app.includes("if (chartId === 'etfPremium159941') return false;"));
+ assert.ok(app.includes("etfPremium159941: []"));
 });
