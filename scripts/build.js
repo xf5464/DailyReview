@@ -505,9 +505,12 @@ async function build() {
       historicalChartCache = previous.charts;
     }
   } catch { /* First deployment downloads the historical baseline. */ }
-  const hasBaseline = Object.keys(historicalChartCache).length >= 30;
+  const hasBaseline = Object.keys(historicalChartCache).length > 0;
   const outlook = await queryMacroOutlook({
     range: 'year30', industryHistoryCache, historicalChartCache, incrementalMode: hasBaseline,
+  });
+  writeJson(path.join(projectRoot, '.cache', 'data-update-report.json'), {
+    updatedAt: new Date().toISOString(), charts: require('./data-update-policies').updateReport(outlook.charts, historicalChartCache)
   });
   const nextChartCache = { ...historicalChartCache };
   outlook.charts.forEach(chart => {

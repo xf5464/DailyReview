@@ -1896,6 +1896,7 @@ async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8', a
       if (!text.trim()) throw new Error('数据源返回空内容');
       return text;
     } catch (error) {
+      if (error?.retryable === false || error?.name === 'AbortError') throw error;
       lastError = error;
       if (attempt < attemptLimit) {
         await new Promise((resolve) => setTimeout(resolve, attempt * 500));
@@ -1987,23 +1988,41 @@ async function loadChartUncached(metadata, loader) {
 }
 
 async function queryMacroOutlook(options = {}) {
-  const fetchImpl = options.fetchImpl ?? globalThis.fetch;
-  if (typeof fetchImpl !== 'function') throw new Error('当前运行环境不支持网络请求');
+  const upstreamFetch = options.fetchImpl ?? globalThis.fetch;
+  if (typeof upstreamFetch !== 'function') throw new Error('当前运行环境不支持网络请求');
 
   const historicalChartCache = options.historicalChartCache && typeof options.historicalChartCache === 'object'
     ? options.historicalChartCache : {};
-  const incrementalMode = options.incrementalMode === true;
+  const ids = normalizeChartIds(options.chartIds);
+  if (options.incrementalMode === true && ids.length > 1) {
+    const results = await Promise.all(ids.map(id => queryMacroOutlook({ ...options, chartIds: [id],
+      incrementalMode: Boolean(historicalChartCache[id]?.items?.length) })));
+    return { ...results[0], charts: results.flatMap(result => result.charts) };
+  }
+  const cachedItems = historicalChartCache[ids[0]]?.items || [];
+  const incrementalMode = options.incrementalMode === true && cachedItems.length > 0;
+  const controller = new AbortController();
+  let chartTimer;
+  let deadline;
+  const refreshDeadline = () => deadline ||= new Promise((_,reject) => {
+    chartTimer = setTimeout(() => { const error = new Error('Chart refresh deadline exceeded'); error.name='AbortError'; error.retryable=false; controller.abort(error); reject(error); }, options.chartTimeoutMs ?? (incrementalMode ? 90000 : 600000));
+  });
+  const fetchImpl = (input, init={}) => {
+    if (controller.signal.aborted) return Promise.reject(controller.signal.reason);
+    return upstreamFetch(input,{...init,signal:AbortSignal.any([controller.signal,...(init.signal?[init.signal]:[])])});
+  };
   const originalLoadChart = loadChartUncached;
   async function cachedLoadChart(metadata, loader) {
-    const fresh = await originalLoadChart(metadata, loader);
+    const fresh = await originalLoadChart(metadata, () => Promise.race([loader(), refreshDeadline()]));
     const cached = historicalChartCache[metadata.id];
     if (!cached || !Array.isArray(cached.items) || !cached.items.length) return fresh;
     if (fresh.error || !fresh.items.length) {
       return { ...cached, ...metadata, dataFallback: true, error: null, sourceError: fresh.error };
     }
+    if (metadata.chartType === 'economicCalendar') return fresh;
     // Merge by trading/report date; newly fetched revisions override prior observations.
-    const combined = new Map(cached.items.filter(item => item && item.date).map(item => [item.date, item]));
-    fresh.items.forEach(item => { if (item && item.date) combined.set(item.date, item); });
+    const combined = new Map(cached.items.filter(item => item && item.date && item.date <= endDate).map(item => [item.date, item]));
+    fresh.items.forEach(item => { if (item && item.date && item.date <= endDate) combined.set(item.date, item); });
     return { ...fresh, items: [...combined.values()].sort((a,b) => a.date.localeCompare(b.date)) };
   }
   const loadChart = cachedLoadChart;
@@ -2012,16 +2031,18 @@ async function queryMacroOutlook(options = {}) {
   const rangeConfig = RANGE_CONFIG[range];
   const endDate = formatIsoDate(now);
   const requestedStartDate = getRangeStart(now, range);
-  const dailyStartDate = incrementalMode ? formatIsoDate(shiftUtcDays(now, -14))
+  const lastCachedDate = cachedItems.map(item => item.date).filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date)).sort().at(-1);
+  const anchor = lastCachedDate && lastCachedDate < endDate ? getUtcDate(lastCachedDate) : now;
+  const dailyStartDate = incrementalMode ? formatIsoDate(shiftUtcDays(anchor, -14))
     : formatIsoDate(shiftUtcDays(requestedStartDate, -14));
-  const inflationStartDate = incrementalMode ? formatIsoDate(shiftUtcMonths(now, -4))
+  const inflationStartDate = incrementalMode ? formatIsoDate(shiftUtcMonths(anchor, -15))
     : formatIsoDate(shiftUtcMonths(requestedStartDate, -15));
   const bitcoinStartDate = dailyStartDate < '2014-12-01' ? '2014-12-01' : dailyStartDate;
 
   const industryHistoryCache = options.industryHistoryCache && Array.isArray(options.industryHistoryCache.industryHistories)
     ? options.industryHistoryCache : null;
   const industryIncrementalStart = industryHistoryCache && industryHistoryCache.industryHistories.length >= 80
-    ? formatIsoDate(shiftUtcDays(now, -12)) : dailyStartDate;
+    ? formatIsoDate(shiftUtcDays(anchor, -12)) : dailyStartDate;
 
   const loadSupplementedOil = async (metadata, fredSeriesId, futuresSymbol) => {
     const spotText = await fetchCsv(buildFredUrl(fredSeriesId, dailyStartDate, endDate), fetchImpl);
@@ -2206,7 +2227,7 @@ async function queryMacroOutlook(options = {}) {
       return filterRecentItems(availableItems, range);
     }),
     aShareActiveMarketValueThs: () => loadChart(CHART_METADATA.aShareActiveMarketValueThs, async () => {
-      const warmupStartDate = formatIsoDate(shiftUtcDays(requestedStartDate, -180));
+      const warmupStartDate = formatIsoDate(shiftUtcDays(incrementalMode ? anchor : requestedStartDate, -180));
       const headers = { Accept: 'application/json', Referer: 'https://q.stock.sohu.com/' };
       const [shanghaiText, shenzhenText] = await Promise.all([
         fetchCsv(buildSohuIndexHistoryUrl('zs_000001', warmupStartDate, endDate), fetchImpl, headers),
@@ -2419,7 +2440,7 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate,
       };
     }),
-    etfOfficialPremium159941: () => loadChart(CHART_METADATA.etfOfficialPremium159941, () => queryOfficialPremium159941({fetchImpl, incremental: incrementalMode && Boolean(historicalChartCache.etfOfficialPremium159941?.items?.length)})),
+    etfOfficialPremium159941: () => loadChart(CHART_METADATA.etfOfficialPremium159941, () => queryOfficialPremium159941({fetchImpl, lookbackDays: Math.max(20, Math.ceil((now-anchor)/86400000)+20), incremental: incrementalMode && Boolean(historicalChartCache.etfOfficialPremium159941?.items?.length)})),
     etfPremium159941: () => loadChart(CHART_METADATA.etfPremium159941, () => queryEtfPremium159941({fetchImpl})),
     nationalTeamWideEtf: () => loadChart(CHART_METADATA.nationalTeamWideEtf, () => (
       queryNationalTeamWideEtf({ fetchImpl })
@@ -2499,7 +2520,9 @@ async function queryMacroOutlook(options = {}) {
     }),
   };
   const selectedChartIds = normalizeChartIds(options.chartIds);
-  const charts = await Promise.all(selectedChartIds.map((chartId) => loaders[chartId]()));
+  let charts;
+  try { charts = await Promise.all(selectedChartIds.map((chartId) => loaders[chartId]())); }
+  finally { clearTimeout(chartTimer); }
 
   return {
     charts,

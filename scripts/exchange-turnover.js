@@ -27,7 +27,11 @@ async function queryExchangeTurnover(market, {fetchImpl = fetch, now = new Date(
   const map = new Map(Object.entries(saved).map(([date,value]) => [date,{date,value}]));
   const end = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
   let refreshed = false;
-  await Promise.all(Array.from({length:7},async (_,i) => {
+  const lastSaved = Object.keys(saved).filter(date => date <= end).sort().at(-1);
+  const days = Math.max(7, lastSaved ? Math.ceil((Date.parse(end)-Date.parse(lastSaved))/86400000)+7 : 7);
+  for (let start=0;start<days;start+=3) {
+  await Promise.all(Array.from({length:Math.min(3,days-start)},async (_,offset) => {
+    const i=start+offset;
     const date = new Date(Date.parse(end+'T00:00:00Z')-i*86400000).toISOString().slice(0,10);
     if ([0,6].includes(new Date(date+'T00:00:00Z').getUTCDay())) return;
     const url = market === 'sh'
@@ -40,6 +44,7 @@ async function queryExchangeTurnover(market, {fetchImpl = fetch, now = new Date(
       map.set(date,item); refreshed = true;
     } catch { /* Preserve verified history; never invent holiday observations. */ }
   }));
+  }
   const items = [...map.values()].filter(x => x.date <= end).sort((a,b)=>a.date.localeCompare(b.date));
   if (!items.length) throw new Error('暂无交易所换手率历史');
   if (persist) {

@@ -61,8 +61,15 @@ jobs:
         run: npm test
 
       - name: Apply reader event-ranking UI
-        run: node scripts/patch-reader-event-ranking.js
+        run: node --require ./scripts/register-source-cache.js scripts/patch-reader-event-ranking.js
 
+      - name: Restore conditional source responses
+        uses: actions/cache@v4
+        with:
+          path: .cache/source-responses
+          key: source-responses-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            source-responses-${{ github.workflow }}-
       - name: Restore industry history cache
         uses: actions/cache/restore@v4
         with:
@@ -108,7 +115,7 @@ jobs:
       - name: Fingerprint reader assets
         run: |
           node --check scripts/fingerprint-reader-assets.js
-          node scripts/fingerprint-reader-assets.js
+          node --require ./scripts/register-source-cache.js scripts/fingerprint-reader-assets.js
 
       - name: Check forecast alert conditions
         if: github.event_name == 'workflow_dispatch' && (inputs.run_alert_check || inputs.test_notifications)
@@ -122,7 +129,7 @@ jobs:
           CENTRAL_BANK_GOLD_RISE_THRESHOLD: ${{ vars.CENTRAL_BANK_GOLD_RISE_THRESHOLD }}
           CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
           ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
-        run: node scripts/check-forecast-alert.js --output .forecast-alert.json
+        run: node --require ./scripts/register-source-cache.js scripts/check-forecast-alert.js --output .forecast-alert.json
 
       - name: Send forecast alert email
         if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
@@ -131,21 +138,21 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ inputs.trigger_source }}
-        run: node scripts/send-forecast-email.js
+        run: node --require ./scripts/register-source-cache.js scripts/send-forecast-email.js
 
       - name: Send WeCom forecast alert
         if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
         env:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
           FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
-        run: node scripts/send-wechat-alert.js
+        run: node --require ./scripts/register-source-cache.js scripts/send-wechat-alert.js
 
       - name: Send Bark forecast alert
         if: github.event_name == 'workflow_dispatch' && ((inputs.run_alert_check && steps.forecast.outputs.should_notify == 'true') || inputs.test_notifications)
         env:
           BARK_KEY: ${{ secrets.BARK_KEY }}
           FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
-        run: node scripts/send-bark-alert.js
+        run: node --require ./scripts/register-source-cache.js scripts/send-bark-alert.js
 
       - name: Send Gmail test email
         if: (github.event_name == 'workflow_dispatch' && inputs.test_email) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[test-email]'))
@@ -154,7 +161,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ github.event_name == 'workflow_dispatch' && inputs.trigger_source || '' }}
-        run: node scripts/send-forecast-email.js --test
+        run: node --require ./scripts/register-source-cache.js scripts/send-forecast-email.js --test
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

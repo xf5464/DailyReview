@@ -28,7 +28,7 @@ function mergeOfficialPremium(prices, nav) {
     date:x.date, value: Math.round((x.close/nav.get(x.date)-1)*1000000)/10000
   })).filter(x => Number.isFinite(x.value) && x.value>-100 && x.value<200);
 }
-async function queryOfficialPremium159941({fetchImpl=fetch,incremental=false}={}) {
+async function queryOfficialPremium159941({fetchImpl=fetch,incremental=false,lookbackDays=20}={}) {
   const headers = {'User-Agent':'Mozilla/5.0','Referer':'https://fund.eastmoney.com/'};
   async function json(url) {
     const response = await fetchImpl(url,{headers,signal:AbortSignal.timeout(30000)});
@@ -47,8 +47,9 @@ async function queryOfficialPremium159941({fetchImpl=fetch,incremental=false}={}
     }
     throw lastError;
   }
-  const priceUrl = incremental ? PRICE_URL.replace('lmt=10000','lmt=40') : PRICE_URL;
-  const navUrl = incremental ? NAV_URL.replace('pageSize=10000','pageSize=40') : NAV_URL;
+  const count=Math.min(10000,Math.max(40,Math.ceil(lookbackDays)*2));
+  const priceUrl = incremental ? PRICE_URL.replace('lmt=10000','lmt='+count) : PRICE_URL;
+  const navUrl = incremental ? NAV_URL.replace('pageSize=10000','pageSize='+count) : NAV_URL;
   const prices=await retry(()=>json(priceUrl));
   let nav;
   try { nav=parseNav(await retry(()=>json(navUrl),2)); } catch (_) { /* fallback */ }

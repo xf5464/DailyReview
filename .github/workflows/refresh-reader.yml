@@ -34,6 +34,13 @@ jobs:
           node-version: "22"
           cache: npm
 
+      - name: Restore conditional source responses
+        uses: actions/cache@v4
+        with:
+          path: .cache/source-responses
+          key: source-responses-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            source-responses-${{ github.workflow }}-
       - name: Install dependencies
         run: npm ci
 
@@ -54,11 +61,11 @@ jobs:
           HOT_NEWS_REFRESH_ONLY: "true"
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
         run: |
-          node scripts/refresh-reader-aggregated.js
-          node scripts/refresh-youtube-top10-best-effort.js
-          node scripts/resolve-world-original-urls.js
-          node scripts/add-hacker-news-top10.js
-          node scripts/verify-reader-refresh.js
+          node --require ./scripts/register-source-cache.js scripts/refresh-reader-aggregated.js
+          node --require ./scripts/register-source-cache.js scripts/refresh-youtube-top10-best-effort.js
+          node --require ./scripts/register-source-cache.js scripts/resolve-world-original-urls.js
+          node --require ./scripts/register-source-cache.js scripts/add-hacker-news-top10.js
+          node --require ./scripts/register-source-cache.js scripts/verify-reader-refresh.js
 
       - name: Save the reader news archive
         run: |

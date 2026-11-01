@@ -25,10 +25,17 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Restore conditional source responses
+        uses: actions/cache@v4
+        with:
+          path: .cache/source-responses
+          key: source-responses-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            source-responses-${{ github.workflow }}-
       - name: Refresh persisted snapshot
         run: |
-          node scripts/refresh-a-share-turnover-snapshot.js
-          node scripts/refresh-exchange-turnover.js
+          node --require ./scripts/register-source-cache.js scripts/refresh-a-share-turnover-snapshot.js
+          node --require ./scripts/register-source-cache.js scripts/refresh-exchange-turnover.js
 
       - name: Verify snapshot fallback
         run: |
