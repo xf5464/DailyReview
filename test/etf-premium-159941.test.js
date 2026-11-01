@@ -12,7 +12,7 @@ test('reject unavailable same-session premium',()=>{
 });
 test('A-share premium colors use inclusive 3 and 10 percent thresholds',()=>{
  const source=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
- assert.ok(source.includes("id === 'etfPremium159941' ? etfPremiumRowBackground"));
+ assert.ok(source.includes("id === 'etfOfficialPremium159941') ? etfPremiumRowBackground"));
  assert.ok(source.includes('var low = value <= 3;'));
  assert.ok(source.includes('if (!low && value < 10) return'));
 });
