@@ -1907,6 +1907,29 @@
     return tooltip;
   }
 
+  function showPinnedFundQuarter(chart, date) {
+    if (!chart || chart.id !== 'activeFundTopFive') return;
+    var svg = refs.detailChart;
+    var panel = document.getElementById('activeFundPinnedQuarter');
+    if (!panel) {
+      panel = createElement('section', 'active-fund-pinned-quarter');
+      panel.id = 'activeFundPinnedQuarter';
+      svg.parentNode.insertBefore(panel, svg);
+    }
+    var item = chart.items.find(function (point) { return point.date === date; }) || chart.items.at(-1);
+    panel.replaceChildren();
+    if (!item) { panel.hidden = true; return; }
+    panel.hidden = false;
+    var heading = createElement('strong', '', formatDate(item.date, '季度') + ' · 前五行业合计 ' + item.value.toFixed(2) + '%');
+    panel.append(heading);
+    var list = createElement('ol');
+    (item.topFive || []).forEach(function (entry) {
+      list.append(createElement('li', '', entry.industry + '：' + entry.share.toFixed(2) + '%'));
+    });
+    panel.append(list);
+    try { localStorage.setItem('daily-review.active-fund-top-five-selected-quarter', item.date); } catch (error) { /* Optional persistence */ }
+  }
+
   function renderLineChart(svg, chart) {
     if (!chart || !chart.items || !chart.items.length) {
       renderEmpty(svg, chart && chart.error ? '数据源暂不可用' : '暂无可绘制的数据');
@@ -2171,6 +2194,16 @@
       tip.style.top = Math.max(12, event.clientY - 38) + 'px';
       tip.hidden = false;
     });
+    if (chart.id === 'activeFundTopFive' && svg === refs.detailChart) {
+      overlay.addEventListener('click', function (event) {
+        var rect = svg.getBoundingClientRect();
+        var localX = (event.clientX - rect.left) / rect.width * width;
+        var ratio = Math.max(0, Math.min(1, (localX - box.left) / box.width));
+        var target = domainX[0] + ratio * (domainX[1] - domainX[0]);
+        showPinnedFundQuarter(chart, nearestItem(items, target).date);
+        if (tooltip) tooltip.hidden = true;
+      });
+    }
     overlay.addEventListener('pointerleave', function () {
       guide.setAttribute('opacity', '0');
       point.setAttribute('opacity', '0');
@@ -2957,6 +2990,12 @@
     refs.detailLowValue.textContent = formatValue(chart, lowest.value);
     refs.detailLowDate.textContent = formatDate(lowest.date, chart.frequency);
     renderLineChart(refs.detailChart, chart);
+    var pinnedPanel = document.getElementById('activeFundPinnedQuarter');
+    if (activeDetailId === 'activeFundTopFive') {
+      var selectedDate = '';
+      try { selectedDate = localStorage.getItem('daily-review.active-fund-top-five-selected-quarter') || ''; } catch (error) { /* Optional persistence */ }
+      showPinnedFundQuarter(chart, selectedDate);
+    } else if (pinnedPanel) pinnedPanel.hidden = true;
     if (industryConcentrationChart) {
       var latestItem = chart.items.at(-1);
       renderIndustryConcentrationDetail(latestItem);
