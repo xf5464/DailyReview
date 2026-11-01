@@ -79,8 +79,13 @@ jobs:
           ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: npm run build
 
+      - name: Check industry history cache
+        id: industry_cache
+        run: |
+          if test -s .cache/a-share-industry-concentration.json; then echo 'exists=true' >> "$GITHUB_OUTPUT"; fi
+
       - name: Save refreshed industry history cache
-        if: success()
+        if: steps.industry_cache.outputs.exists == 'true'
         uses: actions/cache/save@v4
         with:
           path: .cache/a-share-industry-concentration.json
