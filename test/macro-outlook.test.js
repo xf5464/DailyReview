@@ -207,6 +207,8 @@ test('US economic calendar keeps only announced dates in the next twelve months'
   const fetchImpl = async (url) => ({
     ok: true,
     status: 200,
+    json: async () => url.includes('/f10/lsjz') ? {Data:{LSJZList:[{FSRQ:'2026-08-20',DWJZ:'1.0'},{FSRQ:'2026-08-21',DWJZ:'1.01'}]}}
+      : {data:{klines:['2026-08-20,1,1.1,1.1,1,1','2026-08-21,1,1.12,1.12,1,1']}},
     text: async () => url.includes('qdiilens.com/fund/159941') ? '<div>行情截至 2026-08-21 收盘 参考溢价 +12.52%</div>'
         : url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
       : url === BLS_EMPLOYMENT_SCHEDULE_URL ? BLS_EMPLOYMENT_SCHEDULE_HTML
@@ -814,11 +816,11 @@ test('macro outlook query returns all independent chart payloads', async () => {
   const result = await queryMacroOutlook({ fetchImpl, now: new Date('2026-08-22T00:00:00Z') });
   assert.deepEqual(result.charts.map((chart) => chart.id), [
     'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'usEconomicCalendar', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin', 'federalDebt', 'jpyUsd',
-    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'etfPremium159941', 'nationalTeamWideEtf', 'shTurnoverRate', 'szTurnoverRate', 'aSharePe', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
+    'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'etfOfficialPremium159941', 'etfPremium159941', 'nationalTeamWideEtf', 'shTurnoverRate', 'szTurnoverRate', 'aSharePe', 'nasdaq100Pe', 'ndx', 'sp500', 'vix',
     'treasurySpread', 'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'consumerConfidence', 'unemploymentRate', 'sahmRule', 'financialConditions',
   ]);
-  assert.deepEqual(result.charts.map((chart) => chart.error), Array(44).fill(null));
+  assert.deepEqual(result.charts.map((chart) => chart.error), Array(45).fill(null));
   assert.equal(result.charts.find((chart) => chart.id === 'federalFundsRate').items.at(-1).value, 3.64);
   assert.equal(result.charts.find((chart) => chart.id === 'usEconomicCalendar').chartType, 'economicCalendar');
   assert.ok(Math.abs(result.charts.find((chart) => chart.id === 'cpi').items[0].value - 3) < 1e-9);
