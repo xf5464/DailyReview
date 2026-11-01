@@ -4511,3 +4511,8 @@ body {
 .active-fund-pinned-quarter { padding: 12px 14px; margin: 8px 0 12px; border: 1px solid var(--border-color, #d1d5db); border-radius: 10px; line-height: 1.55; }
 .active-fund-pinned-quarter[hidden] { display: none; }
 .active-fund-pinned-quarter ol { margin: 8px 0 0; padding-left: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 4px 18px; }
+
+.active-fund-quarter-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.active-fund-quarter-controls select { min-height: 36px; padding: 6px 9px; border: 1px solid var(--border-color, #d1d5db); border-radius: 7px; background: var(--card-background, #fff); color: inherit; }
+.active-fund-quarter-controls button { min-height: 36px; }
+@media (max-width: 480px) { .active-fund-quarter-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } .active-fund-quarter-controls button, .active-fund-quarter-controls select { width: 100%; min-width: 0; } }
