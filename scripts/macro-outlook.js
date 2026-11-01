@@ -1971,7 +1971,7 @@ function filterRecentItems(items, range, frequency = 'daily') {
   return sortedItems.filter((item) => item.date >= startDateText);
 }
 
-async function loadChart(metadata, loader) {
+async function loadChartUncached(metadata, loader) {
   try {
     const loaded = await loader();
     const items = Array.isArray(loaded) ? loaded : loaded.items;
@@ -1993,7 +1993,7 @@ async function queryMacroOutlook(options = {}) {
   const historicalChartCache = options.historicalChartCache && typeof options.historicalChartCache === 'object'
     ? options.historicalChartCache : {};
   const incrementalMode = options.incrementalMode === true;
-  const originalLoadChart = loadChart;
+  const originalLoadChart = loadChartUncached;
   async function cachedLoadChart(metadata, loader) {
     const fresh = await originalLoadChart(metadata, loader);
     const cached = historicalChartCache[metadata.id];
