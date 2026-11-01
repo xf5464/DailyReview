@@ -70,6 +70,14 @@ jobs:
           key: source-responses-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             source-responses-${{ github.workflow }}-
+      - name: Restore completed industry boards
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/industry-boards
+          key: industry-boards-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            industry-boards-
+
       - name: Restore industry history cache
         uses: actions/cache/restore@v4
         with:
@@ -93,6 +101,13 @@ jobs:
           CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
           ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: npm run build
+
+      - name: Save completed industry boards even after failure
+        if: always() && hashFiles('.cache/industry-boards/*.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/industry-boards
+          key: industry-boards-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Check industry history cache
         id: industry_cache

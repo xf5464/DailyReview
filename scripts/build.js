@@ -497,6 +497,13 @@ async function build() {
       industryHistoryCache = cached;
     }
   } catch { /* First run: collect full history. */ }
+  const industryBoardStore = require('./industry-board-store').createIndustryStore();
+  const industrySeedSeries = industryBoardStore.baseline.map(row=>({code:row.code,name:row.name,points:row.points}));
+  const macroModule = require('./macro-outlook');
+  const industrySeedChart = { ...macroModule.CHART_METADATA.aShareIndustryConcentration,
+    items: macroModule.calculateAShareIndustryConcentration(industrySeedSeries.map(row=>row.points.map(p=>({date:p[0],amount:p[1]*1e8,price:p[2],code:row.code,name:row.name}))),86),
+    industryHistories: industrySeedSeries, error:null };
+  if (!industryHistoryCache) industryHistoryCache = industrySeedChart;
   const historyCachePath = path.join(projectRoot, '.cache', 'macro-chart-history.json');
   let historicalChartCache = {};
   try {
@@ -505,9 +512,10 @@ async function build() {
       historicalChartCache = previous.charts;
     }
   } catch { /* First deployment downloads the historical baseline. */ }
+  if (!historicalChartCache.aShareIndustryConcentration?.items?.length) historicalChartCache.aShareIndustryConcentration = industrySeedChart;
   const hasBaseline = Object.keys(historicalChartCache).length > 0;
   const outlook = await queryMacroOutlook({
-    range: 'year30', industryHistoryCache, historicalChartCache, incrementalMode: hasBaseline,
+    range: 'year30', industryHistoryCache, industryBoardStore, historicalChartCache, incrementalMode: hasBaseline,
   });
   writeJson(path.join(projectRoot, '.cache', 'data-update-report.json'), {
     updatedAt: new Date().toISOString(), charts: require('./data-update-policies').updateReport(outlook.charts, historicalChartCache)
@@ -523,6 +531,7 @@ async function build() {
     if (chart.id === 'nationalTeamWideEtf') chart.decimals = 0;
   });
   const industryChart = outlook.charts.find((chart) => chart.id === 'aShareIndustryConcentration');
+  if(industryChart)process.stdout.write('Industry concentration: '+(industryChart.sourceBoardCount??0)+'/'+(industryChart.expectedBoardCount??86)+' boards; latest='+(industryChart.items.at(-1)?.date||'missing')+'; fallback='+Boolean(industryChart.dataFallback)+'\n');
   if (industryChart && !industryChart.error && !industryChart.dataFallback &&
       Array.isArray(industryChart.industryHistories) && industryChart.industryHistories.length >= 80 &&
       industryChart.items.length) {

@@ -1677,6 +1677,7 @@ function parseEastmoneyIndustryBoards(text) {
 
 function parseEastmoneyIndustryTurnoverHistory(text, board) {
   const payload = JSON.parse(String(text ?? ''));
+  if(payload?.data?.code&&payload.data.code!==board.code)throw Error('Industry response code mismatch');
   const rows = payload?.data?.klines;
   if (!Array.isArray(rows)) throw new Error(`东方财富${board?.name || '行业'}历史格式无效`);
   const items = rows.map((row) => {
@@ -2245,9 +2246,9 @@ async function queryMacroOutlook(options = {}) {
         Accept: 'application/json',
         Referer: EASTMONEY_INDUSTRY_SOURCE_URL,
       };
-      let boards;
+      let boards = options.industryBoardStore?.boards;
       let boardListFallback = false;
-      try {
+      if (!boards) { try {
         const boardText = await fetchCsv(
           buildEastmoneyIndustryListUrl(),
           fetchImpl,
@@ -2272,13 +2273,16 @@ async function queryMacroOutlook(options = {}) {
       } catch {
         boards = EASTMONEY_INDUSTRY_BOARD_SNAPSHOT.map((board) => ({ ...board }));
         boardListFallback = true;
-      }
+      } }
       const historyResults = await mapSettledWithConcurrency(
         boards,
         EASTMONEY_INDUSTRY_FETCH_CONCURRENCY,
         async (board) => {
+          const completed=options.industryBoardStore?.read(board.code,endDate);
+          if(completed)return completed.points.map(point=>({date:point[0],amount:point[1]*1e8,price:point[2],code:board.code,name:board.name}));
+          const sourceUrl=buildEastmoneyIndustryHistoryUrl(board.code, industryIncrementalStart, endDate);
           const text = await fetchCsv(
-            buildEastmoneyIndustryHistoryUrl(board.code, industryIncrementalStart, endDate),
+            sourceUrl,
             fetchImpl,
             headers,
             'utf-8',
@@ -2287,13 +2291,14 @@ async function queryMacroOutlook(options = {}) {
           const recent = parseEastmoneyIndustryTurnoverHistory(text, board);
           const cached = industryHistoryCache && industryHistoryCache.industryHistories.find(
             (series) => series.code === board.code);
-          if (!cached || !Array.isArray(cached.points)) return recent;
-          const oldPoints = cached.points.map((point) => ({
+          const oldPoints = (cached?.points||[]).map((point) => ({
             date: point[0], amount: Number(point[1]) * 100_000_000,
             price: Number(point[2]), code: board.code, name: board.name
           })).filter((point) => point.date && Number.isFinite(point.amount) && point.amount > 0);
-          return [...new Map([...oldPoints, ...recent].map((point) => [point.date, point])).values()]
+          const merged=[...new Map([...oldPoints, ...recent].map((point) => [point.date, point])).values()]
             .sort((a, b) => a.date.localeCompare(b.date));
+          if(recent.length)options.industryBoardStore?.save(board,merged.map(p=>[p.date,p.amount/1e8,p.price]),endDate,{url:sourceUrl,text});
+          return merged;
         },
       );
       const successfulSeries = historyResults
@@ -2311,14 +2316,16 @@ async function queryMacroOutlook(options = {}) {
         throw new Error(`东方财富行业历史仅成功 ${successfulSeries.length}/${boards.length} 个板块` +
           (failureMessage ? `；${failureMessage}` : ''));
       }
-      const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, successfulSeries.length);
+      const calculatedItems = calculateAShareIndustryConcentration(successfulSeries, boards.length);
       return {
+        sourceBoardCount:successfulSeries.length,
+        expectedBoardCount:boards.length,
         items: filterRecentItems(filterDateRange(calculatedItems, dailyStartDate, endDate), range),
         boardListFallback,
         industryHistories: successfulSeries.map((series) => ({
           code: series[0].code,
           name: series[0].name,
-          points: filterDateRange(series, dailyStartDate, endDate).map((item) => ([
+          points: filterDateRange(series, formatIsoDate(requestedStartDate), endDate).map((item) => ([
             item.date,
             item.amount / 100_000_000,
             item.price,
