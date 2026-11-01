@@ -4506,3 +4506,8 @@ body {
 .active-fund-crowding th:first-child, .active-fund-crowding td:first-child { width: 26%; white-space: normal; }
 .active-fund-crowding th:nth-child(2), .active-fund-crowding td:nth-child(2), .active-fund-crowding th:nth-child(3), .active-fund-crowding td:nth-child(3) { width: 16%; }
 .active-fund-crowding th:nth-child(n+4), .active-fund-crowding td:nth-child(n+4) { width: 10.5%; }
+
+/* Selected fund concentration quarter stays visible above the detail chart. */
+.active-fund-pinned-quarter { padding: 12px 14px; margin: 8px 0 12px; border: 1px solid var(--border-color, #d1d5db); border-radius: 10px; line-height: 1.55; }
+.active-fund-pinned-quarter[hidden] { display: none; }
+.active-fund-pinned-quarter ol { margin: 8px 0 0; padding-left: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 4px 18px; }
