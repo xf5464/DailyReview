@@ -63,6 +63,14 @@ jobs:
       - name: Apply reader event-ranking UI
         run: node scripts/patch-reader-event-ranking.js
 
+      - name: Restore industry history cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/a-share-industry-concentration.json
+          key: a-share-industry-history-${{ github.run_id }}
+          restore-keys: |
+            a-share-industry-history-
+
       - name: Build static site and refresh data
         env:
           CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
@@ -70,6 +78,13 @@ jobs:
           CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_CONSECUTIVE_QUARTERS }}
           ISM_NEW_ORDERS_DROP_THRESHOLD: ${{ vars.ISM_NEW_ORDERS_DROP_THRESHOLD }}
         run: npm run build
+
+      - name: Save refreshed industry history cache
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/a-share-industry-concentration.json
+          key: a-share-industry-history-${{ github.run_id }}
 
       - name: Fingerprint reader assets
         run: |
