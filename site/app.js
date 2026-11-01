@@ -293,7 +293,7 @@
         'unemploymentRate', 'consumerConfidence'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
-      group_a_share: ['etfOfficialPremium159941', 'etfPremium159941', 'aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
+      group_a_share: ['etfOfficialPremium159941', 'aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
       group_primary: ['usEconomicCalendar', 'treasuryYield30', 'consumerConfidence', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
@@ -358,7 +358,7 @@
       consumerConfidence: ['group_primary', 'group_mt432xl1_kz1mx7'],
       financialConditions: ['default', 'group_mt432xl1_kz1mx7'],
       etfOfficialPremium159941: ['group_a_share'],
-      etfPremium159941: ['group_a_share']
+      etfPremium159941: []
     },
     selectedGroupId: 'group_mt432xl1_kz1mx7'
   };
@@ -1523,6 +1523,7 @@
   function selectedGroupOrder() {
     var id = config.selectedGroupId;
     return (config.groupChartOrder[id] || []).filter(function (chartId) {
+      if (chartId === 'etfPremium159941') return false;
       return config.chartGroups[chartId] && config.chartGroups[chartId].includes(id);
     });
   }
