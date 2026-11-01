@@ -1047,3 +1047,17 @@ test('macro outlook only requests selected visible charts', async () => {
   assert.equal(urls.length, 1);
   assert.match(urls[0], /id=CBBTCUSD/);
 });
+
+test('incremental build preserves historical observations and retries a failed source from cache', async()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const macro=fs.readFileSync(path.join(__dirname,'../scripts/macro-outlook.js'),'utf8');
+ const build=fs.readFileSync(path.join(__dirname,'../scripts/build.js'),'utf8');
+ const workflow=fs.readFileSync(path.join(__dirname,'../.github/workflows/deploy-pages.yml'),'utf8');
+ assert.ok(macro.includes('historicalChartCache'));
+ assert.ok(macro.includes('incrementalMode'));
+ assert.ok(macro.includes('dataFallback: true'));
+ assert.ok(macro.includes('new Map(cached.items.filter'));
+ assert.ok(build.includes('macro-chart-history.json'));
+ assert.ok(workflow.includes('Restore historical chart cache'));
+ assert.ok(workflow.includes('Save historical chart cache'));
+});
