@@ -97,3 +97,14 @@ test('pinned fund details support year-quarter selection and adjacent-quarter na
  assert.ok(app.includes("showPinnedFundQuarter(chart, items[selectedIndex - 1].date)"));
  assert.ok(app.includes("showPinnedFundQuarter(chart, items[selectedIndex + 1].date)"));
 });
+
+test('quarter controls are icon-only, one row and details keep a stable height',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ const css=fs.readFileSync(path.join(__dirname,'../site/styles.css'),'utf8');
+ assert.ok(app.includes("previous.setAttribute('aria-label', '上一季度')"));
+ assert.ok(app.includes("next.setAttribute('aria-label', '下一季度')"));
+ assert.ok(app.includes("'active-fund-quarter-list'"));
+ assert.ok(css.includes('grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1.35fr) 34px'));
+ assert.ok(css.includes('min-height: 145px'));
+});
