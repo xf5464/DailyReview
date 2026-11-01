@@ -73,3 +73,14 @@ test('top-five tooltip shows each quarter actual industry names and shares',()=>
  assert.ok(app.includes('entry.share.toFixed(2)'));
  assert.ok(app.includes("chart.id === 'activeFundTopFive' ? 'pre-line'"));
 });
+
+test('selected quarterly fund breakdown stays pinned above chart and persists',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.ok(app.includes('function showPinnedFundQuarter(chart, date)'));
+ assert.ok(app.includes("panel.id = 'activeFundPinnedQuarter'"));
+ assert.ok(app.includes('svg.parentNode.insertBefore(panel, svg)'));
+ assert.ok(app.includes("overlay.addEventListener('click'"));
+ assert.ok(app.includes("localStorage.setItem('daily-review.active-fund-top-five-selected-quarter'"));
+ assert.ok(app.includes("localStorage.getItem('daily-review.active-fund-top-five-selected-quarter'"));
+});
