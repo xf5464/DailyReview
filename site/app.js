@@ -1916,12 +1916,47 @@
       panel.id = 'activeFundPinnedQuarter';
       svg.parentNode.insertBefore(panel, svg);
     }
-    var item = chart.items.find(function (point) { return point.date === date; }) || chart.items.at(-1);
+    var items = chart.items || [];
+    var item = items.find(function (point) { return point.date === date; }) || items.at(-1);
     panel.replaceChildren();
     if (!item) { panel.hidden = true; return; }
     panel.hidden = false;
-    var heading = createElement('strong', '', formatDate(item.date, '季度') + ' · 前五行业合计 ' + item.value.toFixed(2) + '%');
-    panel.append(heading);
+    var selectedIndex = items.indexOf(item);
+    var controls = createElement('div', 'active-fund-quarter-controls');
+    var previous = createElement('button', 'secondary-button', '← 上一季度');
+    previous.type = 'button';
+    previous.disabled = selectedIndex <= 0;
+    var next = createElement('button', 'secondary-button', '下一季度 →');
+    next.type = 'button';
+    next.disabled = selectedIndex >= items.length - 1;
+    var yearSelect = document.createElement('select');
+    yearSelect.setAttribute('aria-label', '选择年份');
+    var quarterSelect = document.createElement('select');
+    quarterSelect.setAttribute('aria-label', '选择季度');
+    var years = Array.from(new Set(items.map(function (point) { return point.date.slice(0, 4); })));
+    years.forEach(function (year) { yearSelect.append(new Option(year + '年', year)); });
+    function populateQuarters(year, preferredDate) {
+      quarterSelect.replaceChildren();
+      items.filter(function (point) { return point.date.slice(0, 4) === year; }).forEach(function (point) {
+        var quarter = Math.floor((Number(point.date.slice(5, 7)) - 1) / 3) + 1;
+        quarterSelect.append(new Option('第' + quarter + '季度', point.date));
+      });
+      if (preferredDate && items.some(function (point) { return point.date === preferredDate && point.date.slice(0,4) === year; })) {
+        quarterSelect.value = preferredDate;
+      }
+    }
+    yearSelect.value = item.date.slice(0, 4);
+    populateQuarters(yearSelect.value, item.date);
+    yearSelect.addEventListener('change', function () {
+      populateQuarters(yearSelect.value, '');
+      if (quarterSelect.value) showPinnedFundQuarter(chart, quarterSelect.value);
+    });
+    quarterSelect.addEventListener('change', function () { showPinnedFundQuarter(chart, quarterSelect.value); });
+    previous.addEventListener('click', function () { showPinnedFundQuarter(chart, items[selectedIndex - 1].date); });
+    next.addEventListener('click', function () { showPinnedFundQuarter(chart, items[selectedIndex + 1].date); });
+    controls.append(previous, yearSelect, quarterSelect, next);
+    panel.append(controls);
+    panel.append(createElement('strong', '', formatDate(item.date, '季度') + ' · 前五行业合计 ' + item.value.toFixed(2) + '%'));
     var list = createElement('ol');
     (item.topFive || []).forEach(function (entry) {
       list.append(createElement('li', '', entry.industry + '：' + entry.share.toFixed(2) + '%'));
