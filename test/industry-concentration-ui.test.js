@@ -31,3 +31,16 @@ test('clicking an industry opens a one-year turnover and index chart', () => {
   assert.match(appSource, /紫线为成交额，橙线为行业指数/);
 });
 
+
+test('industry concentration uses persistent history and a recent incremental window',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const macro=fs.readFileSync(path.join(__dirname,'../scripts/macro-outlook.js'),'utf8');
+ const build=fs.readFileSync(path.join(__dirname,'../scripts/build.js'),'utf8');
+ const workflow=fs.readFileSync(path.join(__dirname,'../.github/workflows/deploy-pages.yml'),'utf8');
+ assert.ok(macro.includes('industryIncrementalStart'));
+ assert.ok(macro.includes('industryHistoryCache.industryHistories.find'));
+ assert.ok(macro.includes('dataFallback: true'));
+ assert.ok(build.includes("'.cache', 'a-share-industry-concentration.json'"));
+ assert.ok(workflow.includes('actions/cache/restore@v4'));
+ assert.ok(workflow.includes('actions/cache/save@v4'));
+});
