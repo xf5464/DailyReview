@@ -84,3 +84,16 @@ test('selected quarterly fund breakdown stays pinned above chart and persists',(
  assert.ok(app.includes("localStorage.setItem('daily-review.active-fund-top-five-selected-quarter'"));
  assert.ok(app.includes("localStorage.getItem('daily-review.active-fund-top-five-selected-quarter'"));
 });
+
+test('pinned fund details support year-quarter selection and adjacent-quarter navigation',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ assert.ok(app.includes("yearSelect.setAttribute('aria-label', '选择年份')"));
+ assert.ok(app.includes("quarterSelect.setAttribute('aria-label', '选择季度')"));
+ assert.ok(app.includes("previous.disabled = selectedIndex <= 0"));
+ assert.ok(app.includes("next.disabled = selectedIndex >= items.length - 1"));
+ assert.ok(app.includes("yearSelect.addEventListener('change'"));
+ assert.ok(app.includes("quarterSelect.addEventListener('change'"));
+ assert.ok(app.includes("showPinnedFundQuarter(chart, items[selectedIndex - 1].date)"));
+ assert.ok(app.includes("showPinnedFundQuarter(chart, items[selectedIndex + 1].date)"));
+});
