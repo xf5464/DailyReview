@@ -1999,6 +1999,11 @@ async function queryMacroOutlook(options = {}) {
   const inflationStartDate = formatIsoDate(shiftUtcMonths(requestedStartDate, -15));
   const bitcoinStartDate = dailyStartDate < '2014-12-01' ? '2014-12-01' : dailyStartDate;
 
+  const industryHistoryCache = options.industryHistoryCache && Array.isArray(options.industryHistoryCache.industryHistories)
+    ? options.industryHistoryCache : null;
+  const industryIncrementalStart = industryHistoryCache && industryHistoryCache.industryHistories.length >= 80
+    ? formatIsoDate(shiftUtcDays(now, -12)) : dailyStartDate;
+
   const loadSupplementedOil = async (metadata, fredSeriesId, futuresSymbol) => {
     const spotText = await fetchCsv(buildFredUrl(fredSeriesId, dailyStartDate, endDate), fetchImpl);
     const spotItems = filterDateRange(parseFredCsv(spotText, fredSeriesId), dailyStartDate, endDate);
@@ -2233,19 +2238,33 @@ async function queryMacroOutlook(options = {}) {
         EASTMONEY_INDUSTRY_FETCH_CONCURRENCY,
         async (board) => {
           const text = await fetchCsv(
-            buildEastmoneyIndustryHistoryUrl(board.code, dailyStartDate, endDate),
+            buildEastmoneyIndustryHistoryUrl(board.code, industryIncrementalStart, endDate),
             fetchImpl,
             headers,
             'utf-8',
             EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS,
           );
-          return parseEastmoneyIndustryTurnoverHistory(text, board);
+          const recent = parseEastmoneyIndustryTurnoverHistory(text, board);
+          const cached = industryHistoryCache && industryHistoryCache.industryHistories.find(
+            (series) => series.code === board.code);
+          if (!cached || !Array.isArray(cached.points)) return recent;
+          const oldPoints = cached.points.map((point) => ({
+            date: point[0], amount: Number(point[1]) * 100_000_000,
+            price: Number(point[2]), code: board.code, name: board.name
+          })).filter((point) => point.date && Number.isFinite(point.amount) && point.amount > 0);
+          return [...new Map([...oldPoints, ...recent].map((point) => [point.date, point])).values()]
+            .sort((a, b) => a.date.localeCompare(b.date));
         },
       );
       const successfulSeries = historyResults
         .filter((result) => result.status === 'fulfilled' && result.value.length)
         .map((result) => result.value);
       const minimumSuccessfulBoards = Math.ceil(boards.length * EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO);
+      if (successfulSeries.length < minimumSuccessfulBoards && industryHistoryCache &&
+          Array.isArray(industryHistoryCache.items) && industryHistoryCache.items.length) {
+        return { items: industryHistoryCache.items, industryHistories: industryHistoryCache.industryHistories,
+          dataFallback: true, boardListFallback: true };
+      }
       if (successfulSeries.length < minimumSuccessfulBoards) {
         const firstFailure = historyResults.find((result) => result.status === 'rejected');
         const failureMessage = firstFailure?.reason instanceof Error ? firstFailure.reason.message : '';
