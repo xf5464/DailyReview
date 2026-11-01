@@ -780,6 +780,9 @@ test('macro outlook query returns all independent chart payloads', async () => {
     return {
       ok: true,
       status: 200,
+      json: async () => url.includes('/f10/lsjz')
+        ? {Data:{LSJZList:[{FSRQ:'2026-08-20',DWJZ:'1.0'},{FSRQ:'2026-08-21',DWJZ:'1.01'}]}}
+        : {data:{klines:['2026-08-20,1,1.1,1.1,1,1','2026-08-21,1,1.12,1.12,1,1']}},
       text: async () => url.includes('qdiilens.com/fund/159941') ? '<p>行情截至 2026-08-21 收盘</p><p>参考溢价 +13.30%</p>'
         : url === BLS_CPI_SCHEDULE_URL ? BLS_CPI_SCHEDULE_HTML
         : url === BLS_EMPLOYMENT_SCHEDULE_URL ? BLS_EMPLOYMENT_SCHEDULE_HTML
