@@ -1990,13 +1990,32 @@ async function queryMacroOutlook(options = {}) {
   const fetchImpl = options.fetchImpl ?? globalThis.fetch;
   if (typeof fetchImpl !== 'function') throw new Error('当前运行环境不支持网络请求');
 
+  const historicalChartCache = options.historicalChartCache && typeof options.historicalChartCache === 'object'
+    ? options.historicalChartCache : {};
+  const incrementalMode = options.incrementalMode === true;
+  const originalLoadChart = loadChart;
+  async function cachedLoadChart(metadata, loader) {
+    const fresh = await originalLoadChart(metadata, loader);
+    const cached = historicalChartCache[metadata.id];
+    if (!cached || !Array.isArray(cached.items) || !cached.items.length) return fresh;
+    if (fresh.error || !fresh.items.length) {
+      return { ...cached, ...metadata, dataFallback: true, error: null, sourceError: fresh.error };
+    }
+    // Merge by trading/report date; newly fetched revisions override prior observations.
+    const combined = new Map(cached.items.filter(item => item && item.date).map(item => [item.date, item]));
+    fresh.items.forEach(item => { if (item && item.date) combined.set(item.date, item); });
+    return { ...fresh, items: [...combined.values()].sort((a,b) => a.date.localeCompare(b.date)) };
+  }
+  const loadChart = cachedLoadChart;
   const now = getUtcDate(options.now ?? new Date());
   const range = normalizeRange(options.range);
   const rangeConfig = RANGE_CONFIG[range];
   const endDate = formatIsoDate(now);
   const requestedStartDate = getRangeStart(now, range);
-  const dailyStartDate = formatIsoDate(shiftUtcDays(requestedStartDate, -14));
-  const inflationStartDate = formatIsoDate(shiftUtcMonths(requestedStartDate, -15));
+  const dailyStartDate = incrementalMode ? formatIsoDate(shiftUtcDays(now, -14))
+    : formatIsoDate(shiftUtcDays(requestedStartDate, -14));
+  const inflationStartDate = incrementalMode ? formatIsoDate(shiftUtcMonths(now, -4))
+    : formatIsoDate(shiftUtcMonths(requestedStartDate, -15));
   const bitcoinStartDate = dailyStartDate < '2014-12-01' ? '2014-12-01' : dailyStartDate;
 
   const industryHistoryCache = options.industryHistoryCache && Array.isArray(options.industryHistoryCache.industryHistories)
