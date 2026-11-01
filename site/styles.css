@@ -4516,3 +4516,11 @@ body {
 .active-fund-quarter-controls select { min-height: 36px; padding: 6px 9px; border: 1px solid var(--border-color, #d1d5db); border-radius: 7px; background: var(--card-background, #fff); color: inherit; }
 .active-fund-quarter-controls button { min-height: 36px; }
 @media (max-width: 480px) { .active-fund-quarter-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } .active-fund-quarter-controls button, .active-fund-quarter-controls select { width: 100%; min-width: 0; } }
+
+/* Keep the fund quarter controls on one row on narrow iPhone screens. */
+.active-fund-quarter-controls { display: grid; grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1.35fr) 34px; gap: 6px; align-items: center; width: 100%; }
+.active-fund-quarter-controls select { width: 100%; min-width: 0; box-sizing: border-box; padding: 6px 3px; font-size: 13px; }
+.active-fund-quarter-controls .active-fund-quarter-arrow { display: flex; align-items: center; justify-content: center; width: 34px; min-width: 34px; height: 36px; min-height: 36px; padding: 0; font-size: 25px; line-height: 1; }
+.active-fund-quarter-list { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-auto-rows: minmax(26px, auto); gap: 3px !important; min-height: 145px; align-content: start; }
+.active-fund-quarter-list li { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .active-fund-quarter-controls { display: grid; grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1.35fr) 34px; } .active-fund-quarter-controls button, .active-fund-quarter-controls select { width: 100%; min-width: 0; } .active-fund-quarter-controls .active-fund-quarter-arrow { width: 34px; min-width: 34px; } }
