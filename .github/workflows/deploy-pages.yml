@@ -71,6 +71,14 @@ jobs:
           restore-keys: |
             a-share-industry-history-
 
+      - name: Restore historical chart cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/macro-chart-history.json
+          key: macro-chart-history-${{ github.run_id }}
+          restore-keys: |
+            macro-chart-history-
+
       - name: Build static site and refresh data
         env:
           CENTRAL_BANK_GOLD_BASE_QUARTERS: ${{ vars.CENTRAL_BANK_GOLD_BASE_QUARTERS }}
@@ -90,6 +98,12 @@ jobs:
         with:
           path: .cache/a-share-industry-concentration.json
           key: a-share-industry-history-${{ github.run_id }}
+
+      - name: Save historical chart cache
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/macro-chart-history.json
+          key: macro-chart-history-${{ github.run_id }}
 
       - name: Fingerprint reader assets
         run: |
