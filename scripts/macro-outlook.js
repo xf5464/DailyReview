@@ -1,5 +1,6 @@
 const DEFAULT_MONTH_COUNT = 12;
 const { queryEtfPremium159941 } = require('./etf-premium-159941');
+const { queryOfficialPremium159941 } = require('./etf-official-premium-159941');
 const { queryNationalTeamWideEtf } = require('./national-team-wide-etf');
 const REQUEST_TIMEOUT_MS = 20_000;
 const MAX_OIL_SUPPLEMENT_DAYS = 14;
@@ -517,6 +518,10 @@ const CHART_METADATA = {
     chartType: 'stockTable',
     sourceName: '同花顺影视院线（881274）/ 同花顺 F10',
     sourceUrl: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
+  },
+  etfOfficialPremium159941: {
+    id: 'etfOfficialPremium159941', title: '159941 官方净值溢价率', unit: '%', decimals: 2, frequency: '日度',
+    sourceName: '东方财富未复权收盘价 / 天天基金官方单位净值', sourceUrl: 'https://fundf10.eastmoney.com/jjjz_159941.html',
   },
   etfPremium159941: {
     id: 'etfPremium159941', title: '159941 溢价率', unit: '%', decimals: 2, frequency: '日度',
@@ -2376,6 +2381,7 @@ async function queryMacroOutlook(options = {}) {
         constituentSnapshotDate,
       };
     }),
+    etfOfficialPremium159941: () => loadChart(CHART_METADATA.etfOfficialPremium159941, () => queryOfficialPremium159941({fetchImpl})),
     etfPremium159941: () => loadChart(CHART_METADATA.etfPremium159941, () => queryEtfPremium159941({fetchImpl})),
     nationalTeamWideEtf: () => loadChart(CHART_METADATA.nationalTeamWideEtf, () => (
       queryNationalTeamWideEtf({ fetchImpl })
