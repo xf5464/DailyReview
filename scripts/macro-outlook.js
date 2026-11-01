@@ -31,9 +31,9 @@ const TONGHUASHUN_FILM_CINEMA_PAGE_URL = 'https://q.10jqka.com.cn/thshy/detail/c
 const TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE = '2026-08-30';
 const EASTMONEY_INDUSTRY_SOURCE_URL = 'https://quote.eastmoney.com/center/boardlist.html#industry_board';
 const EASTMONEY_INDUSTRY_MIN_SUCCESS_RATIO = 0.95;
-const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 3;
+const EASTMONEY_INDUSTRY_FETCH_CONCURRENCY = 1;
 const EASTMONEY_INDUSTRY_LIST_ATTEMPTS = 4;
-const EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS = 5;
+const EASTMONEY_INDUSTRY_HISTORY_ATTEMPTS = 7;
 // The board directory occasionally returns a blanket HTTP 502 while the
 // individual K-line endpoints remain healthy. Keep a verified directory
 // snapshot so one catalog request cannot erase the whole chart.
