@@ -447,18 +447,17 @@ FRED 的中国换手率 DDEM01CNA156NWDB 为年度且停留于2020年，无法�
 ### 影视院线成分股融资余额曲线
 
 - 在影视院线成分股股票详情弹窗中增加「融资余额」按钮，可与原股东人数/股价双轴图切换；保持时间跨度选择。
-- 点击后按需从 Reader Worker `/stock-margin-balance-api?code=XXXXXX` 获取个股融资余额，单位亿元，使用东方财富 `RPTA_WEB_RZRQ_GGMX` 的 `RZYE` 字段（元），不使用 `RZRQYE` 融资融券合计。
-- Worker 验证六位股票代码，按交易日升序返回最多500条，缓存6小时；不在每次 Pages 构建时为所有影视股票全量抓取。没有融资余额记录或数据源不可用时显示明确提示，不补零。
+- FRED 未找到匹配的 A 股个股日度融资余额序列。沿用东方财富 `RPTA_WEB_RZRQ_GGMX` 的 `RZYE` 字段，采集时将元换算成亿元。缺失观测不补零。
 
 
 ### 影视股票融资余额持久化增量（2026-11）
 
-- Reader Worker 新增可选 `STOCK_MARGIN_HISTORY` Cloudflare KV binding。启用后首次按页采集全部可获取的个股 `RZYE` 历史；后续从上次记录日期回溯12自然日（约5个交易日）采集，按日期覆盖合并、持久保存。每天至多主动检查一次，数据源失败时返回旧快照并标记 stale。
-- KV 是跨部署持久化所必需的，`caches.default` 不是持久化存储。当前 wrangler 配置尚未绑定 KV 命名空间；在管理员创建并绑定命名空间前，保留原6小时边缘缓存方式，返回 `incremental:false`，不可宣称已经真正启用增量更新。
-- KV 配置方式：在 Cloudflare 创建 KV namespace，将其 ID 配置到 `cloudflare/wrangler.reader.toml` 的 `[[kv_namespaces]]`，设置 `binding = "STOCK_MARGIN_HISTORY"` 和 `id = "<实际命名空间ID>"`，随后重新部署 Reader Worker。
+- GitHub Actions 在北京时间周二至周六 05:10 刷新 `scripts/data/film-stock-margin.json`，有变化才提交。也可手动运行 `npm run update:film-stock-margin`。后续定时 Pages 构建读取当时仓库里的快照。
+- 采集复用影视院线成分股入口。同花顺不可用时回退到内置名单和仓库已跟踪股票。首次按页建立历史，后续以该股最近观测日期为基准回溯 12 个自然日，按交易日覆盖修订、追加新值。个股请求失败时保留其上次有效记录，未完成的首次分页留待下次重试。
+- Pages 构建发布静态 `data/film-stock-margin.json`，并将带内容指纹的副本纳入离线包。打开融资余额曲线时加载静态快照。
 
 
 ### 影视股票融资余额与股价双轴图
 
 - 股票详情选择「融资余额」后，左轴绘制日度融资余额（亿元），右轴叠加已有的股票收盘价历史（元），与「股东人数与股价」模式一致；悬停提示同时显示融资余额和股价。
-- 保留两种模式切换，融资余额仍按需加载并使用已有持久化/缓存逻辑，不增加全量历史行情请求。
+- 两种模式共享已有股价历史和时间跨度选择。

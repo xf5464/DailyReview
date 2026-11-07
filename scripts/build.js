@@ -469,22 +469,26 @@ async function build() {
   fs.mkdirSync(chartDataDirectory, { recursive: true });
   fs.mkdirSync(offlineDataDirectory, { recursive: true });
   fs.writeFileSync(path.join(outputDirectory, '.nojekyll'), '');
+  const offlineDatasets = [];
+  function publishDataset(id, filename, content) {
+    fs.writeFileSync(path.join(dataDirectory, filename), content);
+    const hash = contentHash(content);
+    const relativePath = `offline/datasets/${path.basename(filename, '.json')}.${hash}.json`;
+    fs.mkdirSync(path.dirname(path.join(dataDirectory, relativePath)), { recursive: true });
+    fs.writeFileSync(path.join(dataDirectory, relativePath), content);
+    offlineDatasets.push({ id, path: 'data/' + relativePath,
+      canonicalPath: 'data/' + filename, hash, bytes: Buffer.byteLength(content) });
+  }
   // Active fund crowding is deliberately manual-only. The normal deployment
   // copies a previously approved static snapshot without fetching or recalculating it.
-  const offlineDatasets = [];
-  const crowdingSnapshot = path.join(projectRoot, 'scripts', 'data', 'active-fund-industry-crowding.json');
+  const crowdingSnapshot = path.join(__dirname, 'data', 'active-fund-industry-crowding.json');
   if (fs.existsSync(crowdingSnapshot)) {
     const snapshot = JSON.parse(fs.readFileSync(crowdingSnapshot, 'utf8'));
     require('./fund-crowding-snapshot').validatePublicCrowdingSnapshot(snapshot);
-    writeJson(path.join(dataDirectory, 'active-fund-industry-crowding.json'), snapshot);
-    const content = fs.readFileSync(path.join(dataDirectory, 'active-fund-industry-crowding.json'));
-    const hash = contentHash(content);
-    const relativePath = 'offline/datasets/active-fund-industry-crowding.' + hash + '.json';
-    fs.mkdirSync(path.dirname(path.join(dataDirectory, relativePath)), { recursive: true });
-    fs.writeFileSync(path.join(dataDirectory, relativePath), content);
-    offlineDatasets.push({ id: 'activeFundIndustryCrowding', path: 'data/' + relativePath,
-      canonicalPath: 'data/active-fund-industry-crowding.json', hash, bytes: content.byteLength });
+    publishDataset('activeFundIndustryCrowding', 'active-fund-industry-crowding.json', JSON.stringify(snapshot) + '\n');
   }
+  publishDataset('filmStockMargin', 'film-stock-margin.json',
+    fs.readFileSync(path.join(__dirname, 'data', 'film-stock-margin.json')));
 
 
   process.stdout.write('Fetching the 30-year macro dataset...\n');

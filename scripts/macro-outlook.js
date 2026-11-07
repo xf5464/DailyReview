@@ -1907,6 +1907,15 @@ async function fetchCsv(url, fetchImpl, extraHeaders = {}, encoding = 'utf-8', a
   throw lastError;
 }
 
+async function fetchFilmCinemaConstituents(fetchImpl) {
+  const html = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
+    Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
+  }, 'gb18030');
+  const constituents = parseTonghuashunIndustryConstituents(html);
+  if (!constituents.length) throw new Error('同花顺影视院线页面未返回成分股');
+  return constituents;
+}
+
 function filterDateRange(items, startDate, endDate) {
   return items
     .filter((item) => item.date >= startDate && item.date <= endDate)
@@ -2364,11 +2373,7 @@ async function queryMacroOutlook(options = {}) {
       let constituentSource = '同花顺影视院线（881274）实时成分股';
       let constituentSnapshotDate = null;
       try {
-        const industryText = await fetchCsv(TONGHUASHUN_FILM_CINEMA_PAGE_URL, fetchImpl, {
-          Accept: 'text/html', Referer: 'https://q.10jqka.com.cn/',
-        }, 'gb18030');
-        constituents = parseTonghuashunIndustryConstituents(industryText);
-        if (!constituents.length) throw new Error('同花顺影视院线页面未返回成分股');
+        constituents = await fetchFilmCinemaConstituents(fetchImpl);
       } catch {
         constituents = TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.map((stock) => ({ ...stock }));
         constituentSource = `内置成分股快照（${TONGHUASHUN_FILM_CINEMA_SNAPSHOT_DATE}）`;
@@ -2573,6 +2578,7 @@ module.exports = {
   BEA_NEWS_RSS_URL,
   ISM_OFFICIAL_MANUFACTURING_SNAPSHOT,
   TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT,
+  fetchFilmCinemaConstituents,
   calculateYearOverYear,
   filterRecentItems,
   mergeSpotWithFuturesSupplement,

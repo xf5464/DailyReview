@@ -1,0 +1,48 @@
+name: Refresh Film Stock Margin Snapshot
+
+on:
+  schedule:
+    - cron: '10 21 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-film-stock-margin-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Restore conditional source responses
+        uses: actions/cache@v4
+        with:
+          path: .cache/source-responses
+          key: source-responses-${{ github.workflow }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            source-responses-${{ github.workflow }}-
+
+      - name: Verify and refresh snapshot
+        run: |
+          node --test test/film-stock-margin.test.js
+          npm run update:film-stock-margin
+
+      - name: Save snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/data/film-stock-margin.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: refresh film stock margin snapshot'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          fi

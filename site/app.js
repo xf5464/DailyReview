@@ -3342,11 +3342,11 @@
   }
 
   var shareholderHistoryMode = 'holders';
-  var stockMarginCache = new Map();
-  var stockMarginRequestId = 0;
+  var stockMarginState = null;
   function showShareholderHistory(code) {
     activeShareholderCode = code;
     shareholderHistoryMode = 'holders';
+    if (stockMarginState && stockMarginState.error) stockMarginState = null;
     refs.shareholderRange.value = 'year5';
     renderShareholderHistory();
     refs.shareholderDialog.showModal();
@@ -3366,40 +3366,38 @@
     }
     refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
     if (shareholderHistoryMode === 'margin') {
-      var state = stockMarginCache.get(stock.code);
-      if (!state) {
-        var requestId = ++stockMarginRequestId;
-        stockMarginCache.set(stock.code, {loading:true});
+      if (!stockMarginState) {
+        stockMarginState = {loading: true};
+        fetch('data/film-stock-margin.json')
+          .then(function (response) {
+            if (!response.ok) throw new Error('融资余额快照加载失败');
+            return response.json();
+          })
+          .then(function (body) {
+            if (body.schemaVersion !== 1 || !body.stocks || typeof body.stocks !== 'object') {
+              throw new Error('融资余额数据格式无效');
+            }
+            stockMarginState = {stocks: body.stocks};
+          })
+          .catch(function () { stockMarginState = {error: '融资余额快照加载失败'}; })
+          .finally(function () {
+            if (shareholderHistoryMode === 'margin') renderShareholderHistory();
+          });
+      }
+      if (stockMarginState.loading) {
         refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
         renderEmpty(refs.shareholderChart, '正在加载融资余额');
-        fetch('https://dailyreview-reader.xf5464.workers.dev/stock-margin-balance-api?code=' + encodeURIComponent(stock.code))
-          .then(function (response) { return response.json().then(function (body) {
-            if (!response.ok) throw new Error(body.error || '融资余额请求失败');
-            return body;
-          }); })
-          .then(function (body) {
-            if (!Array.isArray(body.items)) throw new Error('融资余额数据格式无效');
-            stockMarginCache.set(stock.code, {items:body.items});
-          })
-          .catch(function (error) { stockMarginCache.set(stock.code, {error:error.message}); })
-          .finally(function () {
-            if (requestId === stockMarginRequestId && activeShareholderCode === stock.code &&
-                shareholderHistoryMode === 'margin') renderShareholderHistory();
-          });
         return;
       }
-      if (state.loading) {
-        refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
-        return;
-      }
-      if (state.error || !state.items || !state.items.length) {
-        refs.shareholderMessage.textContent = state.error || '该股票暂无可用融资余额数据（可能不是融资融券标的）。';
+      var marginItems = stockMarginState.stocks && stockMarginState.stocks[stock.code];
+      if (!Array.isArray(marginItems) || !marginItems.length) {
+        refs.shareholderMessage.textContent = stockMarginState.error || '该股票暂无可用融资余额数据。';
         renderEmpty(refs.shareholderChart, '暂无融资余额数据');
         return;
       }
       var marginChart = filteredChart({
         id:'stockMarginBalance', title:stock.name + '融资余额', frequency:'日度',
-        unit:'亿元', decimals:2, items:state.items,
+        unit:'亿元', decimals:2, items:marginItems,
         rightAxisItems: stock.priceItems || [],
         rightAxisName: '股价', rightAxisUnit: '元', rightAxisDecimals: 2
       }, refs.shareholderRange.value);

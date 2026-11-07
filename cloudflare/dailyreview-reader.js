@@ -590,103 +590,10 @@ async function aSharePeHistoryApi(request, ctx) {
   }
 }
 
-function normalizeStockMarginRows(rows) {
-  return [...new Map((rows || []).map(row => {
-    const date = String(row.DATE || row.date || '').slice(0, 10);
-    const value = row.RZYE === undefined ? Number(row.value) : Number(row.RZYE) / 100000000;
-    return {date, value};
-  }).filter(row => /^\d{4}-\d{2}-\d{2}$/.test(row.date) &&
-    Number.isFinite(row.value) && row.value >= 0).map(row => [row.date, row])).values()]
-    .sort((a,b) => a.date.localeCompare(b.date));
-}
-function mergeStockMarginRows(oldItems, newItems) {
-  return normalizeStockMarginRows([...oldItems, ...newItems]);
-}
-function stockMarginDateBefore(date, days) {
-  const value = new Date(date + 'T00:00:00Z');
-  value.setUTCDate(value.getUTCDate() - days);
-  return value.toISOString().slice(0, 10);
-}
-async function fetchStockMarginRows(code, startDate) {
-  const items = [];
-  for (let page = 1; page <= 100; page++) {
-    const query = new URL('https://datacenter-web.eastmoney.com/api/data/v1/get');
-    const params = {
-      reportName:'RPTA_WEB_RZRQ_GGMX', columns:'ALL',
-      filter:'(SCODE="'+code+'")' + (startDate ? '(DATE>="'+startDate+'")' : ''),
-      sortColumns:'DATE', sortTypes:'-1', pageNumber:String(page), pageSize:'500',
-      source:'WEB', client:'WEB'
-    };
-    Object.entries(params).forEach(([name,value])=>query.searchParams.set(name,value));
-    const response = await fetch(query.toString(),{
-      headers:{Accept:'application/json',Referer:'https://data.eastmoney.com/'}
-    });
-    if (!response.ok) throw new Error('融资余额数据源 HTTP '+response.status);
-    const payload = await response.json();
-    if (payload.success === false || !Array.isArray(payload.result?.data))
-      throw new Error('融资余额数据暂不可用');
-    const pageItems = normalizeStockMarginRows(payload.result.data);
-    items.push(...pageItems);
-    const totalPages = Number(payload.result.pages || 1);
-    if (page >= totalPages || payload.result.data.length < 500) break;
-    if (page === 100) throw new Error('融资余额历史超过安全分页上限');
-  }
-  return normalizeStockMarginRows(items);
-}
-async function stockMarginBalanceApi(request, env, ctx) {
-  const url = new URL(request.url);
-  const code = url.searchParams.get('code') || '';
-  if (!/^\d{6}$/.test(code)) return json({error:'股票代码无效'},400);
-  const key = 'stock-margin-balance:v2:' + code;
-  // KV is durable across worker instances and deployments; the edge cache is not.
-  const store = env.STOCK_MARGIN_HISTORY;
-  if (!store || typeof store.get !== 'function' || typeof store.put !== 'function') {
-    // Until a durable KV binding is provisioned, retain the previous behavior
-    // rather than breaking the already deployed film-stock chart.
-    const edgeKey = new Request(url.origin + '/stock-margin-balance-api?code=' + code + '&legacy=1');
-    const edge = await caches.default.match(edgeKey);
-    if (edge) return json(await edge.json());
-    try {
-      const items = (await fetchStockMarginRows(code, null)).slice(-500);
-      const result = {code,items,unit:'亿元',source:'东方财富个股融资融券明细 RZYE',
-        incremental:false,storageWarning:'持久化 KV 未配置；暂用旧缓存方式'};
-      ctx.waitUntil(caches.default.put(edgeKey,new Response(JSON.stringify(result),{
-        headers:{'content-type':'application/json','cache-control':'public, max-age=21600'}
-      })));
-      return json(result);
-    } catch(error) {
-      return json({error:error.message || '融资余额暂不可用'},502);
-    }
-  }
-  let cached = null;
-  try {
-    const value = await store.get(key, 'json');
-    if (value && Array.isArray(value.items) && value.items.length) cached = value;
-  } catch (_) { /* Attempt fetch; never overwrite an unreadable historical snapshot. */ }
-  const today = new Date().toISOString().slice(0,10);
-  if (cached && cached.checkedAt === today) return json({...cached,code,cached:true});
-  const lastDate = cached && cached.items.at(-1)?.date;
-  // Overlap 12 calendar days to cover five trading days plus weekends/holidays.
-  const startDate = lastDate ? stockMarginDateBefore(lastDate, 12) : null;
-  try {
-    const fresh = await fetchStockMarginRows(code, startDate);
-    if (!fresh.length && !cached) return json({code,items:[],message:'该股票暂无可用融资余额记录'});
-    const items = mergeStockMarginRows(cached?.items || [], fresh);
-    const result = {code,items,unit:'亿元',source:'东方财富个股融资融券明细 RZYE',
-      checkedAt:today, latestDate:items.at(-1)?.date || null};
-    await store.put(key,JSON.stringify(result));
-    return json(result);
-  } catch(error) {
-    if (cached) return json({...cached,code,stale:true,sourceError:String(error.message || error)});
-    return json({error:error.message || '融资余额暂不可用'},502);
-  }
-}
-
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
-    if (request.method === "GET" && url.pathname === "/stock-margin-balance-api") return stockMarginBalanceApi(request, env, ctx);
     if (request.method === "GET" && url.pathname === "/market-api") return marketApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/a-share-pe-api") return aSharePeApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/a-share-pe-history-api") return aSharePeHistoryApi(request, ctx);
