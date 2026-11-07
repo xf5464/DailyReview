@@ -3399,9 +3399,11 @@
       }
       var marginChart = filteredChart({
         id:'stockMarginBalance', title:stock.name + '融资余额', frequency:'日度',
-        unit:'亿元', decimals:2, items:state.items
+        unit:'亿元', decimals:2, items:state.items,
+        rightAxisItems: stock.priceItems || [],
+        rightAxisName: '股价', rightAxisUnit: '元', rightAxisDecimals: 2
       }, refs.shareholderRange.value);
-      refs.shareholderMessage.textContent = '融资余额（亿元） · 东方财富个股融资融券明细 · ' +
+      refs.shareholderMessage.textContent = '融资余额（亿元） + 股价（元）双轴曲线 · 东方财富个股融资融券明细 · ' +
         RANGES[refs.shareholderRange.value].label;
       if (marginChart.items.length) renderLineChart(refs.shareholderChart, marginChart);
       else renderEmpty(refs.shareholderChart, '当前时间跨度暂无融资余额数据');
