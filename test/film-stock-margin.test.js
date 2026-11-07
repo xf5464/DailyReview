@@ -29,3 +29,11 @@ test('stock margin uses durable KV, merges by date, and preserves stale data',()
  assert.ok(worker.includes('stale:true'));
  assert.ok(worker.includes('storageWarning'));
 });
+
+test('financing balance chart overlays stock price on independent right axis',()=>{
+ const app=read('site/app.js');
+ assert.ok(app.includes("id:'stockMarginBalance'"));
+ assert.ok(app.includes('rightAxisItems: stock.priceItems || []'));
+ assert.ok(app.includes("rightAxisName: '股价', rightAxisUnit: '元'"));
+ assert.ok(app.includes('融资余额（亿元） + 股价（元）双轴曲线'));
+});
