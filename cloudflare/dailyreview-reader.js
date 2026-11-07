@@ -590,10 +590,44 @@ async function aSharePeHistoryApi(request, ctx) {
   }
 }
 
+async function stockMarginBalanceApi(request, ctx) {
+  const url = new URL(request.url);
+  const code = url.searchParams.get('code') || '';
+  if (!/^\d{6}$/.test(code)) return json({error:'股票代码无效'},400);
+  const key = new Request(url.origin + '/stock-margin-balance-api?code=' + code + '&v=1');
+  const cached = await caches.default.match(key);
+  if (cached) return json(await cached.json());
+  const query = new URL('https://datacenter-web.eastmoney.com/api/data/v1/get');
+  Object.entries({
+    reportName:'RPTA_WEB_RZRQ_GGMX', columns:'ALL', filter:'(SCODE="'+code+'")',
+    sortColumns:'DATE', sortTypes:'-1', pageNumber:'1', pageSize:'500',
+    source:'WEB', client:'WEB'
+  }).forEach(([name,value])=>query.searchParams.set(name,value));
+  try {
+    const response = await fetch(query.toString(),{headers:{Accept:'application/json',Referer:'https://data.eastmoney.com/'}});
+    if (!response.ok) throw new Error('融资余额数据源 HTTP '+response.status);
+    const payload = await response.json();
+    if (payload.success === false || !Array.isArray(payload.result?.data)) throw new Error('融资余额数据暂不可用');
+    const items = payload.result.data.map(row=>({
+      date:String(row.DATE||'').slice(0,10), value:Number(row.RZYE)/100000000
+    })).filter(row=>/^\d{4}-\d{2}-\d{2}$/.test(row.date)&&Number.isFinite(row.value)&&row.value>=0)
+      .sort((a,b)=>a.date.localeCompare(b.date));
+    if (!items.length) return json({code,items:[],message:'该股票没有可用的融资余额记录'},200);
+    const result={code,items,unit:'亿元',source:'东方财富个股融资融券明细 RZYE'};
+    ctx.waitUntil(caches.default.put(key,new Response(JSON.stringify(result),{
+      headers:{'content-type':'application/json','cache-control':'public, max-age=21600'}
+    })));
+    return json(result);
+  } catch(error) {
+    return json({error:error.message||'融资余额暂不可用'},502);
+  }
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS_HEADERS });
+    if (request.method === "GET" && url.pathname === "/stock-margin-balance-api") return stockMarginBalanceApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/market-api") return marketApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/a-share-pe-api") return aSharePeApi(request, ctx);
     if (request.method === "GET" && url.pathname === "/a-share-pe-history-api") return aSharePeHistoryApi(request, ctx);
