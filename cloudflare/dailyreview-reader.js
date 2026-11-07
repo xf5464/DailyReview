@@ -641,7 +641,22 @@ async function stockMarginBalanceApi(request, env, ctx) {
   // KV is durable across worker instances and deployments; the edge cache is not.
   const store = env.STOCK_MARGIN_HISTORY;
   if (!store || typeof store.get !== 'function' || typeof store.put !== 'function') {
-    return json({error:'融资余额持久化存储未配置，已禁用全量重复抓取'},503);
+    // Until a durable KV binding is provisioned, retain the previous behavior
+    // rather than breaking the already deployed film-stock chart.
+    const edgeKey = new Request(url.origin + '/stock-margin-balance-api?code=' + code + '&legacy=1');
+    const edge = await caches.default.match(edgeKey);
+    if (edge) return json(await edge.json());
+    try {
+      const items = (await fetchStockMarginRows(code, null)).slice(-500);
+      const result = {code,items,unit:'亿元',source:'东方财富个股融资融券明细 RZYE',
+        incremental:false,storageWarning:'持久化 KV 未配置；暂用旧缓存方式'};
+      ctx.waitUntil(caches.default.put(edgeKey,new Response(JSON.stringify(result),{
+        headers:{'content-type':'application/json','cache-control':'public, max-age=21600'}
+      })));
+      return json(result);
+    } catch(error) {
+      return json({error:error.message || '融资余额暂不可用'},502);
+    }
   }
   let cached = null;
   try {
