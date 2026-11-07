@@ -541,6 +541,8 @@
     shareholderClose: document.querySelector('#shareholderHistoryCloseButton'),
     shareholderTitle: document.querySelector('#shareholderHistoryTitle'),
     shareholderRange: document.querySelector('#shareholderHistoryRangeSelect'),
+    shareholderHoldersButton: document.querySelector('#shareholderHistoryHoldersButton'),
+    shareholderMarginButton: document.querySelector('#shareholderHistoryMarginButton'),
     shareholderMessage: document.querySelector('#shareholderHistoryMessage'),
     shareholderChart: document.querySelector('#shareholderHistoryChart'),
     shareholderBarsDialog: document.querySelector('#shareholderBarChartsDialog'),
@@ -3339,8 +3341,12 @@
     }
   }
 
+  var shareholderHistoryMode = 'holders';
+  var stockMarginCache = new Map();
+  var stockMarginRequestId = 0;
   function showShareholderHistory(code) {
     activeShareholderCode = code;
+    shareholderHistoryMode = 'holders';
     refs.shareholderRange.value = 'year5';
     renderShareholderHistory();
     refs.shareholderDialog.showModal();
@@ -3350,6 +3356,8 @@
   function renderShareholderHistory() {
     var chart = chartById('filmCinemaShareholders');
     var stock = chart && (chart.rows || []).find(function (row) { return row.code === activeShareholderCode; });
+    refs.shareholderHoldersButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'holders'));
+    refs.shareholderMarginButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'margin'));
     if (!stock) {
       refs.shareholderTitle.textContent = '--';
       refs.shareholderMessage.textContent = '未找到该股票。';
@@ -3357,6 +3365,48 @@
       return;
     }
     refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
+    if (shareholderHistoryMode === 'margin') {
+      var state = stockMarginCache.get(stock.code);
+      if (!state) {
+        var requestId = ++stockMarginRequestId;
+        stockMarginCache.set(stock.code, {loading:true});
+        refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
+        renderEmpty(refs.shareholderChart, '正在加载融资余额');
+        fetch('https://dailyreview-reader.xf5464.workers.dev/stock-margin-balance-api?code=' + encodeURIComponent(stock.code))
+          .then(function (response) { return response.json().then(function (body) {
+            if (!response.ok) throw new Error(body.error || '融资余额请求失败');
+            return body;
+          }); })
+          .then(function (body) {
+            if (!Array.isArray(body.items)) throw new Error('融资余额数据格式无效');
+            stockMarginCache.set(stock.code, {items:body.items});
+          })
+          .catch(function (error) { stockMarginCache.set(stock.code, {error:error.message}); })
+          .finally(function () {
+            if (requestId === stockMarginRequestId && activeShareholderCode === stock.code &&
+                shareholderHistoryMode === 'margin') renderShareholderHistory();
+          });
+        return;
+      }
+      if (state.loading) {
+        refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
+        return;
+      }
+      if (state.error || !state.items || !state.items.length) {
+        refs.shareholderMessage.textContent = state.error || '该股票暂无可用融资余额数据（可能不是融资融券标的）。';
+        renderEmpty(refs.shareholderChart, '暂无融资余额数据');
+        return;
+      }
+      var marginChart = filteredChart({
+        id:'stockMarginBalance', title:stock.name + '融资余额', frequency:'日度',
+        unit:'亿元', decimals:2, items:state.items
+      }, refs.shareholderRange.value);
+      refs.shareholderMessage.textContent = '融资余额（亿元） · 东方财富个股融资融券明细 · ' +
+        RANGES[refs.shareholderRange.value].label;
+      if (marginChart.items.length) renderLineChart(refs.shareholderChart, marginChart);
+      else renderEmpty(refs.shareholderChart, '当前时间跨度暂无融资余额数据');
+      return;
+    }
     var historyChart = filteredChart({
       id: 'filmCinemaShareholders', title: stock.name + '股东人数', unit: '户', decimals: 0, frequency: '季度',
       items: stock.quarterlyItems || [], rightAxisItems: stock.priceItems || [],
@@ -4928,6 +4978,12 @@
     refs.shareholderBarChartsButton.addEventListener('click', showShareholderBarCharts);
     refs.shareholderBarsSort.addEventListener('change', renderShareholderBarCharts);
     refs.shareholderBarsColumns.addEventListener('change', renderShareholderBarCharts);
+    refs.shareholderHoldersButton.addEventListener('click', function () {
+      shareholderHistoryMode = 'holders'; renderShareholderHistory();
+    });
+    refs.shareholderMarginButton.addEventListener('click', function () {
+      shareholderHistoryMode = 'margin'; renderShareholderHistory();
+    });
     refs.shareholderRange.addEventListener('change', function () {
       renderShareholderHistory();
     });
