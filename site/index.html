@@ -495,6 +495,10 @@
         <div class="overall-compare-controls">
           <label>时间跨度<select class="level-select" id="shareholderHistoryRangeSelect"></select></label>
         </div>
+        <div class="shareholder-history-mode" role="group" aria-label="股票历史指标">
+          <button type="button" id="shareholderHistoryHoldersButton" class="secondary-button" aria-pressed="true">股东人数与股价</button>
+          <button type="button" id="shareholderHistoryMarginButton" class="secondary-button" aria-pressed="false">融资余额</button>
+        </div>
         <p class="overall-config-message" id="shareholderHistoryMessage" role="status"></p>
         <svg class="overall-detail-chart overall-chart" id="shareholderHistoryChart" role="img" aria-label="股票季度股东人数图"></svg>
       </div>
