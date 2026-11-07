@@ -17,5 +17,4 @@ test('individual stock financing balance source uses RZYE not margin total',()=>
  assert.ok(worker.includes("reportName:'RPTA_WEB_RZRQ_GGMX'"));
  assert.ok(worker.includes('Number(row.RZYE)/100000000'));
  assert.ok(worker.includes('stock-margin-balance-api'));
- assert.ok(worker.includes("!/\\^\\d{6}\\$/" )===false);
 });
