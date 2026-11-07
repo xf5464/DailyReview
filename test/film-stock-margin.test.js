@@ -15,6 +15,17 @@ test('film stock detail provides financing balance toggle without replacing shar
 test('individual stock financing balance source uses RZYE not margin total',()=>{
  const worker=read('cloudflare/dailyreview-reader.js');
  assert.ok(worker.includes("reportName:'RPTA_WEB_RZRQ_GGMX'"));
- assert.ok(worker.includes('Number(row.RZYE)/100000000'));
+ assert.ok(worker.includes('Number(row.RZYE) / 100000000'));
  assert.ok(worker.includes('stock-margin-balance-api'));
+});
+
+test('stock margin uses durable KV, merges by date, and preserves stale data',()=>{
+ const worker=read('cloudflare/dailyreview-reader.js');
+ assert.ok(worker.includes('env.STOCK_MARGIN_HISTORY'));
+ assert.ok(worker.includes("await store.get(key, 'json')"));
+ assert.ok(worker.includes('await store.put(key,JSON.stringify(result))'));
+ assert.ok(worker.includes('mergeStockMarginRows(cached?.items || [], fresh)'));
+ assert.ok(worker.includes('stockMarginDateBefore(lastDate, 12)'));
+ assert.ok(worker.includes('stale:true'));
+ assert.ok(worker.includes('融资余额持久化存储未配置'));
 });
