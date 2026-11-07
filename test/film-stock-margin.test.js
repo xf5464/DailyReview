@@ -27,5 +27,5 @@ test('stock margin uses durable KV, merges by date, and preserves stale data',()
  assert.ok(worker.includes('mergeStockMarginRows(cached?.items || [], fresh)'));
  assert.ok(worker.includes('stockMarginDateBefore(lastDate, 12)'));
  assert.ok(worker.includes('stale:true'));
- assert.ok(worker.includes('融资余额持久化存储未配置'));
+ assert.ok(worker.includes('storageWarning'));
 });
