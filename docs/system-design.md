@@ -456,3 +456,9 @@ FRED 的中国换手率 DDEM01CNA156NWDB 为年度且停留于2020年，无法�
 - Reader Worker 新增可选 `STOCK_MARGIN_HISTORY` Cloudflare KV binding。启用后首次按页采集全部可获取的个股 `RZYE` 历史；后续从上次记录日期回溯12自然日（约5个交易日）采集，按日期覆盖合并、持久保存。每天至多主动检查一次，数据源失败时返回旧快照并标记 stale。
 - KV 是跨部署持久化所必需的，`caches.default` 不是持久化存储。当前 wrangler 配置尚未绑定 KV 命名空间；在管理员创建并绑定命名空间前，保留原6小时边缘缓存方式，返回 `incremental:false`，不可宣称已经真正启用增量更新。
 - KV 配置方式：在 Cloudflare 创建 KV namespace，将其 ID 配置到 `cloudflare/wrangler.reader.toml` 的 `[[kv_namespaces]]`，设置 `binding = "STOCK_MARGIN_HISTORY"` 和 `id = "<实际命名空间ID>"`，随后重新部署 Reader Worker。
+
+
+### 影视股票融资余额与股价双轴图
+
+- 股票详情选择「融资余额」后，左轴绘制日度融资余额（亿元），右轴叠加已有的股票收盘价历史（元），与「股东人数与股价」模式一致；悬停提示同时显示融资余额和股价。
+- 保留两种模式切换，融资余额仍按需加载并使用已有持久化/缓存逻辑，不增加全量历史行情请求。
