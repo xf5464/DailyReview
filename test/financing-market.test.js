@@ -39,3 +39,25 @@ test('list extracts only dated xlsx links',()=>{
  const files=listFiles('<a href="/a.xlsx">融资融券市场每日数据统计20261111</a>');
  assert.equal(files[0].date,'2026-11-11');
 });
+
+test('official merged-cell workbook layout preserves six daily fields and ratio units',()=>{
+ const rows=Array.from({length:20},()=>[]);
+ rows[0][0]=' 融资融券市场每日数据统计';
+ rows[2][0]='融资融券余额情况';
+ rows[6][0]='融资融券交易情况';
+ rows[10][0]='证券公司开展业务情况';
+ rows[16][0]='担保品情况';
+ rows[4][2]='23022.96648909';
+ rows[5][2]='0.024518';
+ rows[9][2]='0.090092';
+ rows[14][2]='368788';
+ rows[15][2]='1984312';
+ rows[19][2]='2.638731';
+ const result=parseMetricRows(rows,'2026-11-11');
+ assert.equal(result.marginTotalBalance,23022.96648909);
+ assert.equal(result.marginTradeInvestors,368788);
+ assert.equal(result.marginDebtInvestors,1984312);
+ assert.equal(result.marginMarketCapRatio,2.4518);
+ assert.equal(result.marginTradeRatio,9.0092);
+ assert.ok(Math.abs(result.marginAverageGuarantee-263.8731)<1e-8);
+});
