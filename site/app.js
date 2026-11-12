@@ -3401,8 +3401,17 @@
         rightAxisItems: stock.priceItems || [],
         rightAxisName: '股价', rightAxisUnit: '元', rightAxisDecimals: 2
       }, refs.shareholderRange.value);
-      refs.shareholderMessage.textContent = '融资余额（亿元） + 股价（元）双轴曲线 · 东方财富个股融资融券明细 · ' +
-        RANGES[refs.shareholderRange.value].label;
+      var latestMargin = marginItems.slice().sort(function (a, b) {
+        return String(b.date).localeCompare(String(a.date));
+      })[0];
+      var sameDayPrice = (stock.priceItems || []).find(function (item) {
+        return item.date === latestMargin.date && Number.isFinite(Number(item.value));
+      });
+      var latestSummary = '最新 ' + latestMargin.date +
+        ' · 融资余额 ' + Number(latestMargin.value).toFixed(2) + ' 亿元' +
+        ' · 股价 ' + (sameDayPrice ? '¥' + Number(sameDayPrice.value).toFixed(2) : '暂无同日数据');
+      refs.shareholderMessage.textContent = latestSummary + ' · ' +
+        RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';
       if (marginChart.items.length) renderLineChart(refs.shareholderChart, marginChart);
       else renderEmpty(refs.shareholderChart, '当前时间跨度暂无融资余额数据');
       return;
