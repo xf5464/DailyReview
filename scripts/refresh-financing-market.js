@@ -121,7 +121,12 @@ async function refresh(previous, fetchImpl=globalThis.fetch, listUrl=LIST_URL) {
     try{
       const res=await fetchImpl(file.url);
       if(!res.ok)throw new Error('XLSX HTTP '+res.status);
-      const values=parseMetricRows(readXlsxRows(await res.arrayBuffer()),file.date);
+      const rows=readXlsxRows(await res.arrayBuffer());
+      const values=parseMetricRows(rows,file.date);
+      if(!Object.keys(values).length) {
+        console.warn('官方 XLSX 未匹配字段：'+file.date+'；表格前20行：'+
+          JSON.stringify(rows.slice(0,20).map(row=>row.slice(0,12))));
+      }
       for(const metric of METRICS){
         if(!Number.isFinite(values[metric.id]))continue;
         const byDate=new Map(series[metric.id].map(item=>[item.date,item]));
