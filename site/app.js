@@ -17,6 +17,7 @@
   var pePercentileLoads = new Map();
 
   var CHART_IDS = [
+    'marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors',
     'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
     'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
@@ -26,6 +27,12 @@
   ];
 
   var TITLES = {
+    marginTradeInvestors: '参与交易的投资者数量',
+    marginAverageGuarantee: '融资融券平均维持担保比例',
+    marginMarketCapRatio: '两融余额占A股流通市值比重',
+    marginTotalBalance: '融资融券余额',
+    marginTradeRatio: '两融交易额占A股交易额比重',
+    marginDebtInvestors: '有融资融券负债的投资者数量',
     shTurnoverRate: '沪市A股换手率',
     szTurnoverRate: '深市A股换手率',
     aSharePe: 'A股 PE',
@@ -231,7 +238,7 @@
   };
 
   var STORAGE_KEY = 'daily-review.overall-situation-config.v2';
-  var GROUP_ORDER_VERSION = 4;
+  var GROUP_ORDER_VERSION = 5;
   var LINE_WIDTH_STORAGE_KEY = 'daily-review.chart-line-width.v1';
   var QUARTER_POINT_SIZE_STORAGE_KEY = 'daily-review.quarter-point-size.v1';
   var DEFAULT_LINE_WIDTH = 1;
@@ -277,6 +284,7 @@
       'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
     ],
     groupChartOrder: {
+      group_financing: ['marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors'],
       default: [
         'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
         'usEconomicCalendar', 'treasuryYield30', 'jpyUsd', 'gold', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration',
@@ -298,6 +306,7 @@
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
     visibleChartIds: [
+      'marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors',
       'usEconomicCalendar',
       'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
       'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
@@ -312,9 +321,16 @@
       { id: 'default', name: '默认' },
       { id: 'group_mt432xl1_kz1mx7', name: '美国' },
       { id: 'group_mt49f5yl_pctlb6', name: '资源' },
-      { id: 'group_a_share', name: 'A股' }
+      { id: 'group_a_share', name: 'A股' },
+      { id: 'group_financing', name: '融资' }
     ],
     chartGroups: {
+      marginTradeInvestors: ['group_financing'],
+      marginAverageGuarantee: ['group_financing'],
+      marginMarketCapRatio: ['group_financing'],
+      marginTotalBalance: ['group_financing'],
+      marginTradeRatio: ['group_financing'],
+      marginDebtInvestors: ['group_financing'],
       usEconomicCalendar: ['default', 'group_primary'],
       treasuryYield: ['default', 'group_mt432xl1_kz1mx7'],
       treasuryYield30: ['default', 'group_mt432xl1_kz1mx7', 'group_primary'],
