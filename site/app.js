@@ -3409,15 +3409,14 @@
       var latestMargin = marginItems.slice().sort(function (a, b) {
         return String(b.date).localeCompare(String(a.date));
       })[0];
-      // Price history is weekly, while financing balances are daily. Use the
-      // latest actual price observation on or before the financing date.
+      // Financing balances and weekly stock prices have independent release dates.
+      // Show the newest available weekly close even when it is newer than margin data.
       var latestPrice = (stock.priceItems || []).filter(function (item) {
-        return item.date && item.date <= latestMargin.date &&
-          Number.isFinite(Number(item.value)) && Number(item.value) > 0;
+        return item.date && Number.isFinite(Number(item.value)) && Number(item.value) > 0;
       }).sort(function (a, b) { return b.date.localeCompare(a.date); })[0];
       var priceLabel = latestPrice
         ? '¥' + Number(latestPrice.value).toFixed(2) +
-          (latestPrice.date === latestMargin.date ? '' : '（' + latestPrice.date + '）')
+          '（' + latestPrice.date + '）'
         : '暂无可用股价';
       var latestSummary = '最新 ' + latestMargin.date +
         ' · 融资余额 ' + Number(latestMargin.value).toFixed(2) + ' 亿元' +
