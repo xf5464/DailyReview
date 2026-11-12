@@ -81,8 +81,9 @@ test('financing summary remains visible above chart without hover',()=>{
 
 test('latest financing summary uses most recent available weekly quote and labels its actual date',()=>{
  const app=read('site/app.js');
- assert.ok(app.includes('item.date <= latestMargin.date'));
+ assert.ok(app.includes('Financing balances and weekly stock prices have independent release dates.'));
+ assert.ok(!app.includes('item.date <= latestMargin.date'));
  assert.ok(app.includes("b.date.localeCompare(a.date)"));
- assert.ok(app.includes("latestPrice.date === latestMargin.date"));
+ assert.ok(app.includes("'（' + latestPrice.date + '）'"));
  assert.ok(app.includes("refs.shareholderMarginLatestPrice.textContent = priceLabel"));
 });
