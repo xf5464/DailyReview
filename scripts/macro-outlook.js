@@ -1118,6 +1118,27 @@ function parseTonghuashunWeeklyPriceHistory(text) {
   }).filter(Boolean).sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function buildEastmoneyStockWeeklyPriceUrl(code) {
+  const market = /^[569]/.test(String(code)) ? '1' : '0';
+  const params = new URLSearchParams({
+    secid: market + '.' + code, klt: '102', fqt: '0',
+    beg: '20000101', end: '20500101', lmt: '1500',
+    fields1: 'f1,f2,f3,f4,f5,f6', fields2: 'f51,f52,f53,f54,f55,f56'
+  });
+  return 'https://push2his.eastmoney.com/api/qt/stock/kline/get?' + params;
+}
+
+function parseEastmoneyStockWeeklyPrices(text) {
+  const payload = JSON.parse(String(text || 'null'));
+  if (!Array.isArray(payload?.data?.klines)) throw new Error('东方财富个股周线不可用');
+  return payload.data.klines.map((line) => {
+    const fields = String(line).split(',');
+    const value = Number(fields[2]);
+    return /^\\d{4}-\\d{2}-\\d{2}$/.test(fields[0]) && Number.isFinite(value) && value > 0
+      ? { date: fields[0], value } : null;
+  }).filter(Boolean).sort((a,b) => a.date.localeCompare(b.date));
+}
+
 function attachQuarterlyPrices(holderItems, priceItems) {
   return holderItems.map((holderItem) => {
     const priceItem = priceItems.filter((item) => item.date <= holderItem.date).at(-1);
@@ -2406,7 +2427,17 @@ async function queryMacroOutlook(options = {}) {
         const pricePromise = fetchCsv(buildTonghuashunWeeklyPriceUrl(stock.code), fetchImpl, {
           Accept: 'application/javascript,text/javascript,*/*',
           Referer: `https://stockpage.10jqka.com.cn/${stock.code}/`,
-        }).then(parseTonghuashunWeeklyPriceHistory).catch(() => []);
+        }).then(parseTonghuashunWeeklyPriceHistory).catch(() => [])
+          .then(async (prices) => {
+            if (prices.length >= 10) return prices;
+            try {
+              const text = await fetchCsv(buildEastmoneyStockWeeklyPriceUrl(stock.code), fetchImpl, {
+                Accept: 'application/json', Referer: 'https://quote.eastmoney.com/'
+              });
+              const backup = parseEastmoneyStockWeeklyPrices(text);
+              return backup.length ? backup : prices;
+            } catch { return prices; }
+          });
         try {
           const holderText = await fetchCsv(buildTonghuashunHolderUrl(stock.code), fetchImpl, {
             Accept: 'text/html', Referer: TONGHUASHUN_FILM_CINEMA_PAGE_URL,
