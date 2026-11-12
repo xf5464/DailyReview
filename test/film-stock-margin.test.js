@@ -67,3 +67,13 @@ test('financing balance chart overlays stock price on independent right axis',()
  assert.ok(app.includes("rightAxisName: '股价', rightAxisUnit: '元'"));
  assert.ok(app.includes('融资余额（亿元） + 股价（元）双轴曲线'));
 });
+
+test('financing summary remains visible above chart without hover',()=>{
+ const html=read('site/index.html'), app=read('site/app.js'), css=read('site/styles.css');
+ for(const id of ['shareholderMarginLatest','shareholderMarginLatestDate','shareholderMarginLatestBalance','shareholderMarginLatestPrice']) assert.ok(html.includes('id="'+id+'"'));
+ assert.ok(app.includes("refs.shareholderMarginLatest.hidden = shareholderHistoryMode !== 'margin'"));
+ assert.ok(app.includes('refs.shareholderMarginLatestDate.textContent = latestMargin.date'));
+ assert.ok(app.includes('refs.shareholderMarginLatestBalance.textContent'));
+ assert.ok(app.includes('refs.shareholderMarginLatestPrice.textContent'));
+ assert.ok(css.includes('.shareholder-margin-latest:not([hidden])'));
+});
