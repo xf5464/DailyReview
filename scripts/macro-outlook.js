@@ -2429,7 +2429,7 @@ async function queryMacroOutlook(options = {}) {
           Referer: `https://stockpage.10jqka.com.cn/${stock.code}/`,
         }).then(parseTonghuashunWeeklyPriceHistory).catch(() => [])
           .then(async (prices) => {
-            if (prices.length >= 10) return prices;
+            if (prices.length >= 10 && prices.at(-1).date >= formatIsoDate(shiftUtcDays(now, -30))) return prices;
             try {
               const text = await fetchCsv(buildEastmoneyStockWeeklyPriceUrl(stock.code), fetchImpl, {
                 Accept: 'application/json', Referer: 'https://quote.eastmoney.com/'
