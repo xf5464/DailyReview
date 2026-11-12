@@ -543,6 +543,10 @@
     shareholderRange: document.querySelector('#shareholderHistoryRangeSelect'),
     shareholderHoldersButton: document.querySelector('#shareholderHistoryHoldersButton'),
     shareholderMarginButton: document.querySelector('#shareholderHistoryMarginButton'),
+    shareholderMarginLatest: document.querySelector('#shareholderMarginLatest'),
+    shareholderMarginLatestDate: document.querySelector('#shareholderMarginLatestDate'),
+    shareholderMarginLatestBalance: document.querySelector('#shareholderMarginLatestBalance'),
+    shareholderMarginLatestPrice: document.querySelector('#shareholderMarginLatestPrice'),
     shareholderMessage: document.querySelector('#shareholderHistoryMessage'),
     shareholderChart: document.querySelector('#shareholderHistoryChart'),
     shareholderBarsDialog: document.querySelector('#shareholderBarChartsDialog'),
@@ -3356,6 +3360,7 @@
   function renderShareholderHistory() {
     var chart = chartById('filmCinemaShareholders');
     var stock = chart && (chart.rows || []).find(function (row) { return row.code === activeShareholderCode; });
+    refs.shareholderMarginLatest.hidden = shareholderHistoryMode !== 'margin';
     refs.shareholderHoldersButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'holders'));
     refs.shareholderMarginButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'margin'));
     if (!stock) {
@@ -3410,6 +3415,10 @@
       var latestSummary = '最新 ' + latestMargin.date +
         ' · 融资余额 ' + Number(latestMargin.value).toFixed(2) + ' 亿元' +
         ' · 股价 ' + (sameDayPrice ? '¥' + Number(sameDayPrice.value).toFixed(2) : '暂无同日数据');
+      refs.shareholderMarginLatestDate.textContent = latestMargin.date;
+      refs.shareholderMarginLatestBalance.textContent = Number(latestMargin.value).toFixed(2) + ' 亿元';
+      refs.shareholderMarginLatestPrice.textContent = sameDayPrice
+        ? '¥' + Number(sameDayPrice.value).toFixed(2) : '暂无同日数据';
       refs.shareholderMessage.textContent = latestSummary + ' · ' +
         RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';
       if (marginChart.items.length) renderLineChart(refs.shareholderChart, marginChart);
