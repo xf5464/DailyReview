@@ -68,6 +68,30 @@ function numeric(value) {
   return amount;
 }
 function parseMetricRows(rows, date) {
+  // Official daily workbook stores the descriptions in merged cells. In its
+  // exported XML the following rows can contain numeric string indices rather
+  // than their displayed labels. Validate the section anchors before using
+  // their stable positions; fail closed if the official layout changes.
+  if(rows.length>=20 &&
+    normalizeLabel(rows[0]?.[0]).includes('融资融券市场每日数据统计') &&
+    normalizeLabel(rows[2]?.[0]).includes('融资融券余额情况') &&
+    normalizeLabel(rows[6]?.[0]).includes('融资融券交易情况') &&
+    normalizeLabel(rows[10]?.[0]).includes('证券公司开展业务情况') &&
+    normalizeLabel(rows[16]?.[0]).includes('担保品情况')) {
+    const read=(index)=>Number(rows[index]?.[2]);
+    const total=read(4), marketRatio=read(5), tradeRatio=read(9),
+      active=read(14), debt=read(15), guarantee=read(19);
+    if([total,marketRatio,tradeRatio,active,debt,guarantee].every(Number.isFinite) &&
+      total>0 && total<100000 && marketRatio>0 && marketRatio<1 &&
+      tradeRatio>=0 && tradeRatio<1 && active>=0 && debt>=0 &&
+      guarantee>1 && guarantee<10) {
+      return {
+        marginTradeInvestors:active, marginAverageGuarantee:guarantee*100,
+        marginMarketCapRatio:marketRatio*100, marginTotalBalance:total,
+        marginTradeRatio:tradeRatio*100, marginDebtInvestors:debt
+      };
+    }
+  }
   const values={};
   for(let rowIndex=0;rowIndex<rows.length;rowIndex++){
     const row=rows[rowIndex];
