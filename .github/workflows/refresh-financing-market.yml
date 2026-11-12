@@ -1,6 +1,11 @@
 name: Refresh Financing Market Snapshot
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/refresh-financing-market.js
+      - .github/workflows/refresh-financing-market.yml
   schedule:
     - cron: '30 22 * * 1-5'
   workflow_dispatch:
