@@ -531,6 +531,26 @@ async function build() {
     }
   });
   writeJson(historyCachePath, { schemaVersion: 1, charts: nextChartCache });
+  // Financing-market charts are loaded from a separately refreshed official snapshot.
+  // Missing observations remain empty instead of being fabricated or copied from
+  // unrelated financing-balance statistics.
+  const { METRICS: financingMetrics } = require('./refresh-financing-market');
+  let financingSeries = {};
+  try {
+    const snapshot = JSON.parse(fs.readFileSync(path.join(projectRoot, 'scripts/data/financing-market.json'),'utf8'));
+    if (snapshot.schemaVersion === 1 && snapshot.series) financingSeries = snapshot.series;
+  } catch { /* Snapshot bootstrap pending; publish unavailable charts explicitly. */ }
+  financingMetrics.forEach(metric => {
+    outlook.charts.push({
+      id: metric.id, title: metric.title, unit: metric.unit,
+      decimals: metric.decimals, frequency: '日度',
+      sourceName: '中证数据 / 融资融券市场每日数据统计',
+      sourceUrl: 'https://www.csdata.cn/cmsmc/cgfb/rzrqsj/rzrqscmrsjtj/index.html',
+      items: Array.isArray(financingSeries[metric.id]) ? financingSeries[metric.id] : [],
+      error: Array.isArray(financingSeries[metric.id]) && financingSeries[metric.id].length
+        ? null : '官方历史数据尚未完成采集',
+    });
+  });
   outlook.charts.forEach((chart) => {
     if (chart.id === 'nationalTeamWideEtf') chart.decimals = 0;
   });
