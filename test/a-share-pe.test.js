@@ -60,7 +60,9 @@ test('A-share PE UI is visible by default and refreshes live without changing fo
   const html = fs.readFileSync(path.join(__dirname, '../site/index.html'), 'utf8');
   assert.match(app, /group_a_share: \[[^\]\n]*'aSharePe'/);
   assert.match(app, /aSharePe: \['default', 'group_a_share'\]/);
-  assert.match(app, /visibleChartIds: \[\s*'usEconomicCalendar',\s*'aSharePe'/);
+  const visibleIds = app.match(/visibleChartIds: \[([^\]]*)\]/)[1];
+  assert.match(visibleIds, /'aSharePe'/);
+  assert.ok(visibleIds.indexOf("'usEconomicCalendar'") < visibleIds.indexOf("'aSharePe'"));
   assert.match(app, /a-share-pe-api/);
   assert.match(app, /setInterval\(refreshVisiblePe, 60000\)/);
   assert.match(app, /refreshASharePe\(false\)/);

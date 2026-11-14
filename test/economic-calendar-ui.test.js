@@ -10,7 +10,8 @@ const htmlSource = fs.readFileSync(path.join(projectRoot, 'site', 'index.html'),
 test('US economic calendar is visible and placed first in the primary group', () => {
   assert.match(appSource, /group_primary: \['usEconomicCalendar', 'treasuryYield30'/);
   assert.match(appSource, /usEconomicCalendar: \['default', 'group_primary'\]/);
-  assert.match(appSource, /visibleChartIds: \[\s*'usEconomicCalendar'/);
+  const visibleIds = appSource.match(/visibleChartIds: \[([^\]]*)\]/)[1];
+  assert.match(visibleIds, /'usEconomicCalendar'/);
 });
 
 test('economic calendar detail exposes four persistent display filters', () => {

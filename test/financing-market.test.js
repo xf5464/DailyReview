@@ -61,3 +61,20 @@ test('official merged-cell workbook layout preserves six daily fields and ratio 
  assert.equal(result.marginTradeRatio,9.0092);
  assert.ok(Math.abs(result.marginAverageGuarantee-263.8731)<1e-8);
 });
+
+
+test('six financing charts stay visible in their own group without changing existing group order',()=>{
+ const fs=require('node:fs');
+ const path=require('node:path');
+ const app=fs.readFileSync(path.join(__dirname,'../site/app.js'),'utf8');
+ const ids=source=>[...source.matchAll(/'([^']+)'/g)].map(match=>match[1]);
+ const visible=ids(app.match(/visibleChartIds: \[([^\]]*)\]/)[1]);
+ const financing=ids(app.match(/group_financing: \[([^\]]*)\]/)[1]);
+ assert.deepEqual(financing,METRICS.map(metric=>metric.id));
+ for(const metric of METRICS){
+  assert.ok(visible.includes(metric.id),metric.id+' must remain visible');
+  assert.match(app,new RegExp(metric.id+": \\[\\'group_financing\\'\\]"));
+ }
+ assert.match(app,/group_primary: \['usEconomicCalendar', 'treasuryYield30'/);
+ assert.match(app,/group_a_share: \['etfOfficialPremium159941', 'aSharePe'/);
+});
