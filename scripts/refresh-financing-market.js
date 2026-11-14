@@ -160,7 +160,7 @@ async function refresh(previous, fetchImpl=globalThis.fetch, listUrl=LIST_URL) {
       }
     }catch(error){failures.push({date:file.date,error:error.message});}
   }
-  return {snapshot:{schemaVersion:1,series},accepted,failures};
+  return {snapshot:{...previous,schemaVersion:1,series},accepted,failures};
 }
 async function main(){
   const previous=fs.existsSync(OUTPUT)?JSON.parse(fs.readFileSync(OUTPUT,'utf8')):{schemaVersion:1,series:{}};

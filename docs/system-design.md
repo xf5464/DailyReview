@@ -472,3 +472,13 @@ FRED 的中国换手率 DDEM01CNA156NWDB 为年度且停留于2020年，无法�
 
 
 - 2026-11-12 首次自动采集已从中证数据真实 XLSX 获取六项指标，最新交易日为 2026-11-11；首批快照覆盖公开列表的最近10个交易日。后续历史回填应单独实施，不得将短期样本伪称三年历史。
+
+### 融资市场历史回填（2026-11-14）
+
+- FRED 检索未发现与中国全市场这六项日度统计口径匹配的序列。官方历史目录本次遇到安全拦截，未绕过；采用独立东方财富 Choice `RPTA_WEB_MARGIN_DAILYTRADE` 历史数值，不把它冒称官方直采。
+- 来源：https://data.eastmoney.com/rzrq/zhtjday.html 。API：https://datacenter-web.eastmoney.com/api/data/v1/get 。六字段映射见 `scripts/backfill-financing-market.js`：人数为名、余额为亿元、比例已经是百分数，不再乘100；余额使用 `MARGIN_BALANCE`（两融），不是 `FIN_BALANCE`（仅融资）。
+- 回填范围2023-11-01至2026-11-12，共735个不同日期/每项；原有2026-10-29至2026-11-12的11个官方观测全部保留。66个重叠数值与官方吻合（比例浮点误差小于1e-8）；只填缺失日期，不取代已有官方值。未将该接口更早、部分字段为空的记录混入。
+- 独立离线导入脚本要求日期合法、无重复、六字段非空、人数为整数，并校验每项至少11天官方重叠。来源、字段、覆盖及输入SHA256记录于快照 `historyBackfill`，构建页面显示混合来源。原官方12自然日重叠增量流程不变，保留历史及回填元数据；不自动请求第三方，也不增加规避官方访问限制的重试方式。
+- 总览仍显示最近12个月，详情可查看三年；一年/三年百分位按实际历史分别重算。回填不插值、不补零，也不从两融合计推算缺失指标。
+
+- 交易日核验：按交易所2023–2026休市表扣除周末及节假日，区间应有735日，实有735日，缺失0、额外0；各年43/242/243/207日。日历依据：[2023上交所](https://www.sse.com.cn/disclosure/dealinstruc/closed/c/c_20221227_5714459.shtml)、[2024上交所](https://www.sse.com.cn/disclosure/dealinstruc/closed/c/c_20231226_5733941.shtml)、[2025上交所](https://www.sse.com.cn/disclosure/dealinstruc/closed/c/c_20241223_10767110.shtml)、[2026深交所](https://www.szse.cn/disclosure/notice/t20251222_618087.html)。

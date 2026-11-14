@@ -536,15 +536,20 @@ async function build() {
   // unrelated financing-balance statistics.
   const { METRICS: financingMetrics } = require('./refresh-financing-market');
   let financingSeries = {};
+  let financingBackfill = null;
   try {
     const snapshot = JSON.parse(fs.readFileSync(path.join(projectRoot, 'scripts/data/financing-market.json'),'utf8'));
-    if (snapshot.schemaVersion === 1 && snapshot.series) financingSeries = snapshot.series;
+    if (snapshot.schemaVersion === 1 && snapshot.series) {
+      financingSeries = snapshot.series;
+      financingBackfill = snapshot.historyBackfill || null;
+    }
   } catch { /* Snapshot bootstrap pending; publish unavailable charts explicitly. */ }
   financingMetrics.forEach(metric => {
     outlook.charts.push({
       id: metric.id, title: metric.title, unit: metric.unit,
       decimals: metric.decimals, frequency: '日度',
-      sourceName: '中证数据 / 融资融券市场每日数据统计',
+      sourceName: financingBackfill ? '中证数据（日更）；东方财富 Choice（历史回填，2023-11-01起）' : '中证数据 / 融资融券市场每日数据统计',
+      historyBackfill: financingBackfill,
       sourceUrl: 'https://www.csdata.cn/cmsmc/cgfb/rzrqsj/rzrqscmrsjtj/index.html',
       items: Array.isArray(financingSeries[metric.id]) ? financingSeries[metric.id] : [],
       error: Array.isArray(financingSeries[metric.id]) && financingSeries[metric.id].length
