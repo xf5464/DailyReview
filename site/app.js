@@ -559,6 +559,9 @@
     shareholderRange: document.querySelector('#shareholderHistoryRangeSelect'),
     shareholderHoldersButton: document.querySelector('#shareholderHistoryHoldersButton'),
     shareholderMarginButton: document.querySelector('#shareholderHistoryMarginButton'),
+    shareholderMarginDailySection: document.querySelector('#shareholderMarginDailySection'),
+    shareholderMarginDailyRows: document.querySelector('#shareholderMarginDailyRows'),
+    shareholderMarginDailyMore: document.querySelector('#shareholderMarginDailyMore'),
     shareholderMarginLatest: document.querySelector('#shareholderMarginLatest'),
     shareholderMarginLatestDate: document.querySelector('#shareholderMarginLatestDate'),
     shareholderMarginLatestBalance: document.querySelector('#shareholderMarginLatestBalance'),
@@ -3363,7 +3366,38 @@
 
   var shareholderHistoryMode = 'holders';
   var stockMarginState = null;
+  var shareholderMarginVisibleRows = 30;
+  function renderShareholderMarginDaily(items, rangeKey) {
+    var section = refs.shareholderMarginDailySection;
+    section.hidden = false;
+    var rows = refs.shareholderMarginDailyRows;
+    rows.replaceChildren();
+    var chronological = (items || []).filter(function (item) {
+      return item && item.date && Number.isFinite(Number(item.value));
+    }).slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
+    var selected = filterItems({ items: chronological, frequency: '日度' }, rangeKey);
+    var previousByDate = new Map();
+    chronological.forEach(function (item, index) {
+      previousByDate.set(item.date, index > 0 ? chronological[index - 1] : null);
+    });
+    var descending = selected.slice().reverse();
+    descending.slice(0, shareholderMarginVisibleRows).forEach(function (item) {
+      var previous = previousByDate.get(item.date);
+      var difference = previous ? Number(item.value) - Number(previous.value) : null;
+      var row = document.createElement('tr');
+      [item.date, Number(item.value).toFixed(2), difference === null ? '--' :
+        (difference > 0 ? '+' : '') + difference.toFixed(2)].forEach(function (value) {
+        var cell = document.createElement('td');
+        cell.textContent = value;
+        row.append(cell);
+      });
+      rows.append(row);
+    });
+    refs.shareholderMarginDailyMore.hidden = descending.length <= shareholderMarginVisibleRows;
+  }
+
   function showShareholderHistory(code) {
+    shareholderMarginVisibleRows = 30;
     activeShareholderCode = code;
     shareholderHistoryMode = 'holders';
     if (stockMarginState && stockMarginState.error) stockMarginState = null;
@@ -3377,6 +3411,7 @@
     var chart = chartById('filmCinemaShareholders');
     var stock = chart && (chart.rows || []).find(function (row) { return row.code === activeShareholderCode; });
     refs.shareholderMarginLatest.hidden = shareholderHistoryMode !== 'margin';
+    refs.shareholderMarginDailySection.hidden = shareholderHistoryMode !== 'margin';
     refs.shareholderHoldersButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'holders'));
     refs.shareholderMarginButton.setAttribute('aria-pressed', String(shareholderHistoryMode === 'margin'));
     if (!stock) {
@@ -3386,6 +3421,7 @@
       return;
     }
     refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
+    if (shareholderHistoryMode === 'margin') refs.shareholderMarginDailySection.hidden = true;
     if (shareholderHistoryMode === 'margin') {
       if (!stockMarginState) {
         stockMarginState = {loading: true};
@@ -3442,6 +3478,7 @@
       refs.shareholderMarginLatestPrice.textContent = priceLabel;
       refs.shareholderMessage.textContent = latestSummary + ' · ' +
         RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';
+      renderShareholderMarginDaily(marginItems, refs.shareholderRange.value);
       if (marginChart.items.length) renderLineChart(refs.shareholderChart, marginChart);
       else renderEmpty(refs.shareholderChart, '当前时间跨度暂无融资余额数据');
       return;
@@ -5022,6 +5059,10 @@
     });
     refs.shareholderMarginButton.addEventListener('click', function () {
       shareholderHistoryMode = 'margin'; renderShareholderHistory();
+    });
+    refs.shareholderMarginDailyMore.addEventListener('click', function () {
+      shareholderMarginVisibleRows += 30;
+      renderShareholderHistory();
     });
     refs.shareholderRange.addEventListener('change', function () {
       renderShareholderHistory();
