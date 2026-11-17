@@ -4538,9 +4538,16 @@ body {
 .shareholder-margin-daily { margin:18px 0 4px; }
 .shareholder-margin-daily h3 { margin:0 0 10px; font-size:15px; font-weight:650; }
 .shareholder-margin-daily-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--border-color,#d1d5db); border-radius:10px; }
-.shareholder-margin-daily-table { width:100%; min-width:340px; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:13px; }
-.shareholder-margin-daily-table th,.shareholder-margin-daily-table td { padding:12px 8px; white-space:nowrap; text-align:right; border-bottom:1px solid var(--border-color,#e5e7eb); }
-.shareholder-margin-daily-table th:first-child,.shareholder-margin-daily-table td:first-child { text-align:left; }
+.shareholder-margin-daily-table { width:100%; min-width:0; table-layout:fixed; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:13px; }
+.shareholder-margin-daily-table th,.shareholder-margin-daily-table td { padding:12px 6px; text-align:right; border-bottom:1px solid var(--border-color,#e5e7eb); }
+.shareholder-margin-daily-table th:first-child,.shareholder-margin-daily-table td:first-child { width:36%; text-align:left; }
+.shareholder-margin-daily-table th:nth-child(2),.shareholder-margin-daily-table td:nth-child(2) { width:30%; }
+.shareholder-margin-daily-table th:nth-child(3),.shareholder-margin-daily-table td:nth-child(3) { width:34%; }
+.shareholder-margin-daily-table td { white-space:nowrap; }
 .shareholder-margin-daily-table thead { background:rgba(125,135,150,.09); }
 .shareholder-margin-daily-table tbody tr:last-child td { border-bottom:0; }
 #shareholderMarginDailyMore:not([hidden]) { display:block; width:100%; margin-top:12px; }
+
+@media (max-width: 480px) {
+  .shareholder-margin-daily-table th span { display:block; }
+}

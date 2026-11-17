@@ -92,7 +92,7 @@ test('film stock financing detail lists daily balance observations beneath chart
  const html=read('site/index.html'), app=read('site/app.js'), css=read('site/styles.css');
  for(const id of ['shareholderMarginDailySection','shareholderMarginDailyRows','shareholderMarginDailyMore'])
    assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('较前日变化（亿元）'));
+ assert.ok(html.includes('较前日变化<span>（亿元）</span>'));
  assert.ok(app.includes('renderShareholderMarginDaily(marginItems, refs.shareholderRange.value)'));
  assert.ok(app.includes('var shareholderMarginVisibleRows = 30'));
  assert.ok(app.includes('previousByDate.get(item.date)'));
