@@ -1,6 +1,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const filmMargin = require("../site/film-margin-condition");
 
 const CONDITION_DEFINITIONS = [
   { id: "ndx", label: "NDX 距离最高点下降", thresholdEnv: "NDX_DRAWDOWN_THRESHOLD", defaultThreshold: 30, unit: "%" },
@@ -21,7 +22,7 @@ const ISM_NEW_ORDERS_DEFAULTS = {
 };
 
 function readNumber(value, fallback) {
-  const parsed = Number(value);
+  const parsed = String(value ?? "").trim() ? Number(value) : NaN;
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
@@ -162,6 +163,19 @@ function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOS
   const ismNewOrdersDeterioration = ismNewOrdersDeteriorationCondition(seriesById.ismNewOrders, env);
   if (ismNewOrdersDeterioration) conditions.push(ismNewOrdersDeterioration);
 
+  const marginChange = filmMargin.changes(seriesById.chinaFilmMargin).at(-1);
+  const marginThreshold = filmMargin.threshold(env.CHINA_FILM_MARGIN_CHANGE_THRESHOLD);
+  if (marginChange && marginChange.value >= marginThreshold) {
+    conditions.push({
+      id: "chinaFilmMargin",
+      ...marginChange,
+      label: `中国电影（600977）融资余额${marginChange.signedChange < 0 ? "减少" : "增加"}（较 ${marginChange.previousDate}）`,
+      threshold: marginThreshold,
+      unit: " 万元",
+      episodeStart: marginChange.date,
+    });
+  }
+
   const identity = conditions
     .map((condition) => `${condition.id}:${condition.threshold}:${condition.episodeStart}`)
     .sort()
@@ -194,6 +208,11 @@ function loadOfflineSeries(distDirectory) {
       const chunkPath = path.join(distDirectory, ...String(chunk.path).split("/"));
       return JSON.parse(fs.readFileSync(chunkPath, "utf8"));
     });
+  }
+  const marginPath = path.join(distDirectory, "data", "film-stock-margin.json");
+  if (fs.existsSync(marginPath)) {
+    const margin = JSON.parse(fs.readFileSync(marginPath, "utf8"));
+    if (margin.schemaVersion === 1) seriesById.chinaFilmMargin = margin.stocks?.["600977"];
   }
   return { seriesById, fetchedAt: manifest.fetchedAt };
 }

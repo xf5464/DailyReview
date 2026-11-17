@@ -262,6 +262,7 @@
     { kind: 'ndx', chartId: 'ndx', label: 'NDX 距历史最高点回撤', decimals: 2, unit: '%' },
     { kind: 'vix', chartId: 'vix', label: 'VIX 恐慌指数', decimals: 2, unit: ' 点' },
     { kind: 'unemployment', chartId: 'unemploymentRate', label: '美国失业率', decimals: 1, unit: '%' },
+    { kind: 'chinaFilmMargin', label: '中国电影融资余额变动绝对值', decimals: 2, unit: ' 万元' },
     { kind: 'sahm', chartId: 'sahmRule', label: '萨姆规则衰退指标', decimals: 2, unit: ' 个百分点' }
   ];
   var FORECAST_DATA_PAGE_SIZE = 200;
@@ -3366,6 +3367,30 @@
 
   var shareholderHistoryMode = 'holders';
   var stockMarginState = null;
+  var stockMarginRequest = null;
+
+  function loadStockMargin() {
+    if (stockMarginState && stockMarginState.stocks) return Promise.resolve();
+    if (stockMarginRequest) return stockMarginRequest;
+    stockMarginState = {loading: true};
+    stockMarginRequest = fetch('data/film-stock-margin.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('融资余额快照加载失败');
+        return response.json();
+      })
+      .then(function (body) {
+        if (body.schemaVersion !== 1 || !body.stocks || typeof body.stocks !== 'object') {
+          throw new Error('融资余额数据格式无效');
+        }
+        stockMarginState = {stocks: body.stocks};
+      })
+      .catch(function () { stockMarginState = {error: '融资余额快照加载失败'}; })
+      .finally(function () {
+        stockMarginRequest = null;
+        if (shareholderHistoryMode === 'margin' && refs.shareholderDialog.open) renderShareholderHistory();
+      });
+    return stockMarginRequest;
+  }
   var shareholderMarginVisibleRows = 30;
   function renderShareholderMarginDaily(items, rangeKey) {
     var section = refs.shareholderMarginDailySection;
@@ -3423,24 +3448,7 @@
     refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
     if (shareholderHistoryMode === 'margin') refs.shareholderMarginDailySection.hidden = true;
     if (shareholderHistoryMode === 'margin') {
-      if (!stockMarginState) {
-        stockMarginState = {loading: true};
-        fetch('data/film-stock-margin.json')
-          .then(function (response) {
-            if (!response.ok) throw new Error('融资余额快照加载失败');
-            return response.json();
-          })
-          .then(function (body) {
-            if (body.schemaVersion !== 1 || !body.stocks || typeof body.stocks !== 'object') {
-              throw new Error('融资余额数据格式无效');
-            }
-            stockMarginState = {stocks: body.stocks};
-          })
-          .catch(function () { stockMarginState = {error: '融资余额快照加载失败'}; })
-          .finally(function () {
-            if (shareholderHistoryMode === 'margin') renderShareholderHistory();
-          });
-      }
+      if (!stockMarginState) loadStockMargin();
       if (stockMarginState.loading) {
         refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
         renderEmpty(refs.shareholderChart, '正在加载融资余额');
@@ -3881,6 +3889,14 @@
     status.textContent = available ? (reached ? '已达到' : '未达到') : '暂无数据';
   }
 
+  function chinaFilmMarginThreshold() {
+    return window.filmMarginCondition.threshold(document.querySelector('meta[name="china-film-margin-threshold"]').content);
+  }
+
+  function chinaFilmMarginChanges() {
+    return window.filmMarginCondition.changes(stockMarginState && stockMarginState.stocks && stockMarginState.stocks['600977']);
+  }
+
   function renderForecast() {
     var thresholds = forecastThresholdsFromInputs();
     var ndx = chartById('ndx');
@@ -3942,8 +3958,19 @@
     setForecastCondition(refs.forecastSahmCondition, refs.forecastSahmStatus,
       sahmReached, sahmValue !== null);
 
-    var available = ndxDrawdown !== null || vixValue !== null || unemploymentValue !== null || sahmValue !== null;
-    var reached = ndxReached || vixReached || unemploymentReached || sahmReached;
+    var marginChange = chinaFilmMarginChanges().at(-1);
+    var marginThreshold = chinaFilmMarginThreshold();
+    var marginReached = Boolean(marginChange && marginChange.value >= marginThreshold);
+    document.querySelector('#forecastChinaFilmMarginThreshold').textContent = marginThreshold.toLocaleString('zh-CN');
+    document.querySelector('#forecastChinaFilmMarginDetail').textContent = marginChange
+      ? marginChange.date + ' 较 ' + marginChange.previousDate + (marginChange.signedChange < 0 ? ' 减少 ' : ' 增加 ') +
+        marginChange.value.toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 万元。'
+      : (stockMarginState && !stockMarginState.loading ? '融资余额数据暂不可用。' : '正在读取融资余额...');
+    setForecastCondition(document.querySelector('#forecastChinaFilmMarginCondition'),
+      document.querySelector('#forecastChinaFilmMarginStatus'), marginReached, Boolean(marginChange));
+
+    var available = Boolean(marginChange) || ndxDrawdown !== null || vixValue !== null || unemploymentValue !== null || sahmValue !== null;
+    var reached = marginReached || ndxReached || vixReached || unemploymentReached || sahmReached;
     refs.forecastSummary.classList.toggle('is-reached', reached);
     refs.forecastSummary.querySelector('strong').textContent = available
       ? (reached ? '已有条件达到' : '尚无条件达到')
@@ -3967,7 +3994,7 @@
     renderForecast();
     refs.forecastDialog.showModal();
     refs.forecastDialog.querySelector('.dialog-close-button').focus({ preventScroll: true });
-    await loadCharts(['ndx', 'vix', 'unemploymentRate', 'sahmRule']);
+    await Promise.all([loadCharts(['ndx', 'vix', 'unemploymentRate', 'sahmRule']), loadStockMargin()]);
     if (refs.forecastDialog.open) {
       renderForecast();
       renderMeta();
@@ -4012,6 +4039,7 @@
   }
 
   function forecastSourceSeries(kind) {
+    if (kind === 'chinaFilmMargin') return chinaFilmMarginChanges();
     var chartId = kind === 'ndx'
       ? 'ndx'
       : (kind === 'vix' ? 'vix' : (kind === 'unemployment' ? 'unemploymentRate' : 'sahmRule'));
@@ -4056,6 +4084,7 @@
     return {
       ndx: thresholds.ndxDrawdownPercent,
       vix: thresholds.vixLevel,
+      chinaFilmMargin: chinaFilmMarginThreshold(),
       unemployment: thresholds.unemploymentRatePercent,
       sahm: thresholds.sahmRulePoints
     };
@@ -4127,7 +4156,8 @@
       return {
         date: date,
         values: kinds.reduce(function (values, kind) {
-          values[kind] = latest[kind] ? latest[kind].value : null;
+          var latestItem = latest[kind];
+          values[kind] = latestItem && (kind !== 'chinaFilmMargin' || latestItem.date === date) ? latestItem.value : null;
           return values;
         }, {})
       };
@@ -4197,7 +4227,7 @@
       return !input || !input.checkValidity() || !Number.isFinite(Number(input.value));
     });
     if (invalidThreshold) {
-      refs.forecastDataMessage.textContent = '请输入有效阈值：NDX 1–100%，VIX 1–200 点，失业率 1–30%，萨姆规则 0.1–10 个百分点。';
+      refs.forecastDataMessage.textContent = '请为每个已选条件输入有效阈值。';
       refs.forecastDataResults.replaceChildren();
       refs.forecastDataMore.hidden = true;
       return;
@@ -4208,7 +4238,8 @@
     refs.forecastDataResults.replaceChildren();
     refs.forecastDataMore.hidden = true;
     try {
-      await loadCharts(kinds.map(function (kind) { return forecastDataOption(kind).chartId; }));
+      var chartIds = kinds.map(function (kind) { return forecastDataOption(kind).chartId; }).filter(Boolean);
+      await Promise.all([loadCharts(chartIds), kinds.includes('chinaFilmMargin') ? loadStockMargin() : Promise.resolve()]);
       if (refs.forecastDataDialog.open) renderForecastDataResults(kinds);
     } finally {
       refs.forecastDataRun.disabled = false;

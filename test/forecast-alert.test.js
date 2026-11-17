@@ -116,3 +116,27 @@ test("comma-separated recipients are trimmed and empty entries ignored", () => {
     "c@example.com",
   ]);
 });
+
+test("China Film margin alert compares adjacent published trading sessions in absolute ten-thousand yuan", () => {
+  const friday = { date: "2026-11-13", value: 4.97 };
+  const monday = { date: "2026-11-16", value: 4.77 };
+  const series = { chinaFilmMargin: [monday, friday] };
+  const alert = buildAlert(series, { CHINA_FILM_MARGIN_CHANGE_THRESHOLD: "" });
+  assert.equal(alert.shouldNotify, true);
+  assert.equal(alert.conditions[0].value, 2000);
+  assert.equal(alert.conditions[0].signedChange, -2000);
+  assert.equal(alert.conditions[0].previousDate, friday.date);
+  assert.equal(alert.conditions[0].episodeStart, monday.date);
+  assert.equal(buildAlert(series, { CHINA_FILM_MARGIN_CHANGE_THRESHOLD: "2001" }).shouldNotify, false);
+  assert.equal(buildAlert({ chinaFilmMargin: [friday] }, {}).shouldNotify, false);
+
+  const rising = buildAlert({ chinaFilmMargin: [friday, { ...monday, value: 5.2 }] }, {});
+  assert.equal(rising.conditions[0].signedChange, 2300);
+  assert.notEqual(buildAlert({ chinaFilmMargin: [monday, { date: "2026-11-17", value: 5.2 }] }, {}).fingerprint,
+    alert.fingerprint);
+});
+
+test("blank Actions variables leave the original forecast thresholds at their defaults", () => {
+  const alert = buildAlert({ vix: [{ date: "2026-11-16", value: 20 }] }, { VIX_THRESHOLD: "" });
+  assert.equal(alert.shouldNotify, false);
+});

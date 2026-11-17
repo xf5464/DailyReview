@@ -89,4 +89,4 @@ jobs:
       - name: Deploy the refreshed snapshot
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run deploy-pages.yml --ref main
+        run: gh workflow run deploy-pages.yml --ref main -f run_alert_check=true -f trigger_source=reader-refresh

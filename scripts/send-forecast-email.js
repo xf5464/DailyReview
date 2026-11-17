@@ -29,6 +29,8 @@ function triggerType() {
 
   if (eventName === "schedule") return "GitHub 定时";
   if (eventName === "workflow_dispatch" && source === "cloudflare") return "Cloudflare 外部定时";
+  if (eventName === "workflow_dispatch" && source === "film-margin") return "电影融资数据更新";
+  if (eventName === "workflow_dispatch" && source === "reader-refresh") return "新闻数据更新";
   if (eventName === "workflow_dispatch") return "手动触发";
   if (eventName === "push") return "代码提交";
   return source || eventName;

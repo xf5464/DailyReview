@@ -11,6 +11,7 @@ const APP_SHELL = [
   'index.html',
   'styles.css',
   'app.js',
+  'film-margin-condition.js',
   'fund-crowding-view.js',
   'vendor/fflate.min.js',
   'manifest.webmanifest',

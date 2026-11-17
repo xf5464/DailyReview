@@ -440,13 +440,16 @@ function addAssetVersions() {
     .slice(0, 12);
   const appVersion = versionFor('app.js');
   const stylesVersion = versionFor('styles.css');
+  const marginThreshold = require('../site/film-margin-condition').threshold(process.env.CHINA_FILM_MARGIN_CHANGE_THRESHOLD);
   const shellVersion = contentHash([
-    'index.html', 'styles.css', 'app.js', 'fund-crowding-view.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
+    'index.html', 'styles.css', 'app.js', 'film-margin-condition.js', 'fund-crowding-view.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
     'toy-icon-a1190c863e-180.png', 'toy-icon-a1190c863e-192.png', 'toy-icon-a1190c863e-512.png',
-  ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n'));
+  ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n') + ':' + marginThreshold);
   const html = fs.readFileSync(indexPath, 'utf8')
     .replace('href="styles.css"', `href="styles.css?v=${stylesVersion}"`)
     .replace('src="fund-crowding-view.js"', `src="fund-crowding-view.js?v=${versionFor('fund-crowding-view.js')}"`)
+    .replace('name="china-film-margin-threshold" content="2000"', `name="china-film-margin-threshold" content="${marginThreshold}"`)
+    .replace('src="film-margin-condition.js"', `src="film-margin-condition.js?v=${versionFor('film-margin-condition.js')}"`)
     .replace('src="app.js"', `src="app.js?v=${appVersion}"`)
     .replace('__APP_VERSION__', shellVersion);
   fs.writeFileSync(indexPath, html, 'utf8');
