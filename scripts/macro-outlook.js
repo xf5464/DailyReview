@@ -1123,7 +1123,7 @@ function buildEastmoneyStockWeeklyPriceUrl(code) {
   const params = new URLSearchParams({
     secid: market + '.' + code, klt: '102', fqt: '0',
     beg: '20000101', end: '20500101', lmt: '1500',
-    fields1: 'f1,f2,f3,f4,f5,f6', fields2: 'f51,f52,f53,f54,f55,f56'
+    fields1: 'f1,f2,f3,f4,f5,f6', fields2: 'f51,f52,f53,f54,f55,f56', _: String(Date.now())
   });
   return 'https://push2his.eastmoney.com/api/qt/stock/kline/get?' + params;
 }
@@ -2432,13 +2432,12 @@ async function queryMacroOutlook(options = {}) {
           Referer: `https://stockpage.10jqka.com.cn/${stock.code}/`,
         }).then(parseTonghuashunWeeklyPriceHistory).catch(() => [])
           .then(async (prices) => {
-            if (prices.length >= 10 && prices.at(-1).date >= formatIsoDate(shiftUtcDays(now, -30))) return prices;
             try {
               const text = await fetchCsv(buildEastmoneyStockWeeklyPriceUrl(stock.code), fetchImpl, {
-                Accept: 'application/json', Referer: 'https://quote.eastmoney.com/'
+                Accept: 'application/json', Referer: 'https://quote.eastmoney.com/', 'Cache-Control': 'no-cache'
               });
               const backup = parseEastmoneyStockWeeklyPrices(text);
-              return backup.length ? backup : prices;
+              return backup.length && (!prices.length || backup.at(-1).date >= prices.at(-1).date) ? backup : prices;
             } catch { return prices; }
           });
         try {

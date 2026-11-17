@@ -16,10 +16,11 @@ async function fetchStockMarginRows(code, startDate, fetchImpl) {
       reportName: 'RPTA_WEB_RZRQ_GGMX', columns: 'DATE,RZYE',
       filter: `(SCODE="${code}")` + (startDate ? `(DATE>='${startDate}')` : ''),
       sortColumns: 'DATE', sortTypes: '-1', pageNumber: String(page), pageSize: String(pageSize),
-      source: 'WEB', client: 'WEB',
+      source: 'WEB', client: 'WEB', _: String(Date.now()),
     });
     const response = await fetchImpl('https://datacenter-web.eastmoney.com/api/data/v1/get?' + params, {
-      headers: { Accept: 'application/json', Referer: 'https://data.eastmoney.com/' },
+      cache: 'no-store',
+      headers: { Accept: 'application/json', Referer: 'https://data.eastmoney.com/', 'Cache-Control': 'no-cache' },
       signal: AbortSignal.timeout(15000),
     });
     if (!response.ok) throw new Error('东方财富 HTTP ' + response.status);
