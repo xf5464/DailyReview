@@ -1,4 +1,4 @@
-name: Test China Film margin notification
+name: Test China Film WeCom mention
 on:
   push:
     branches: [codex/test-film-margin-20261116]
@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
       - name: Evaluate the November 13 and 16 financing balances
         id: prepare
         run: |
@@ -36,20 +35,8 @@ jobs:
           fs.writeFileSync('.forecast-alert.json', JSON.stringify(alert));
           console.log(JSON.stringify({items, condition: alert.conditions[0]}));
           NODE
-      - name: Send forecast alert email
-        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
-        env:
-          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
-        run: node scripts/send-forecast-email.js
-      - name: Send WeCom forecast alert
+      - name: Send WeCom alert with @all
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         env:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
         run: node scripts/send-wechat-alert.js
-      - name: Send Bark forecast alert
-        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
-        env:
-          BARK_KEY: ${{ secrets.BARK_KEY }}
-        run: node scripts/send-bark-alert.js

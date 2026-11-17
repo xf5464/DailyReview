@@ -26,10 +26,10 @@ async function main() {
 
   const lines = hasConditions
     ? [
-        `**[DailyReview] ${alert.conditions.length} 项预测条件已达到要求**`,
+        `[DailyReview] ${alert.conditions.length} 项预测条件已达到要求`,
         "",
         ...alert.conditions.flatMap((condition) => [
-          `> ${condition.label}：${formatValue(condition)}`,
+          `${condition.label}：${formatValue(condition)}`,
           "",
         ]),
         `数据构建时间：${alert.fetchedAt || "未知"}`,
@@ -48,8 +48,8 @@ async function main() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      msgtype: "markdown",
-      markdown: { content: lines.join("\n") },
+      msgtype: "text",
+      text: { content: lines.join("\n"), mentioned_list: ["@all"] },
     }),
   });
 
