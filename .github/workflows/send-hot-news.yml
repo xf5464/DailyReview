@@ -46,3 +46,25 @@ jobs:
             --repo "${{ github.repository }}" \
             --ref main \
             -f window_hours="$WINDOW_HOURS"
+
+  forward-film-margin:
+    if: github.ref == 'refs/heads/main' && inputs.trigger_source == 'cloudflare' && inputs.refresh_only == 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Forward the 06:17 and 18:17 Beijing slots to film stock margin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Read the dispatch time so a queued runner or rerun uses the original slot.
+          created_at="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --jq '.created_at')"
+          case "${created_at#*T}" in
+            10:*|22:*)
+              echo "Dispatching film stock margin refresh for $created_at (UTC)"
+              gh workflow run refresh-film-stock-margin.yml --repo "$GITHUB_REPOSITORY" --ref main
+              ;;
+            *)
+              echo "Cloudflare dispatch at $created_at (UTC) has no film stock margin refresh"
+              ;;
+          esac
