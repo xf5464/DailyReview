@@ -1,0 +1,55 @@
+name: Test China Film margin notification
+on:
+  push:
+    branches: [codex/test-film-margin-20261116]
+    paths: [.github/workflows/test-film-margin-notification.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Evaluate the November 13 and 16 financing balances
+        id: prepare
+        run: |
+          node <<'NODE'
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const { buildAlert } = require('./scripts/check-forecast-alert');
+          const dates = ['2026-11-13', '2026-11-16'];
+          const items = require('./scripts/data/film-stock-margin.json').stocks['600977']
+            .filter(item => dates.includes(item.date)).sort((a,b) => a.date.localeCompare(b.date));
+          assert.deepEqual(items.map(item => item.date), dates);
+          const alert = buildAlert({ chinaFilmMargin: items }, {});
+          assert.equal(alert.conditions[0]?.value, 7451.1718);
+          assert.equal(alert.conditions[0]?.threshold, 2000);
+          alert.conditions[0].label = '[测试] ' + alert.conditions[0].label;
+          fs.writeFileSync('.forecast-alert.json', JSON.stringify(alert));
+          console.log(JSON.stringify({items, condition: alert.conditions[0]}));
+          NODE
+      - name: Send forecast alert email
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: node scripts/send-forecast-email.js
+      - name: Send WeCom forecast alert
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        env:
+          WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
+        run: node scripts/send-wechat-alert.js
+      - name: Send Bark forecast alert
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        env:
+          BARK_KEY: ${{ secrets.BARK_KEY }}
+        run: node scripts/send-bark-alert.js
