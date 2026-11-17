@@ -7,7 +7,7 @@ const {
   ismNewOrdersDeteriorationCondition,
   ndxDrawdownSeries,
 } = require("../scripts/check-forecast-alert");
-const { recipients } = require("../scripts/send-forecast-email");
+const { conditionLine, recipients } = require("../scripts/send-forecast-email");
 
 test("NDX alert uses drawdown from the running high", () => {
   const points = ndxDrawdownSeries([
@@ -126,6 +126,9 @@ test("China Film margin alert compares adjacent published trading sessions in ab
   assert.equal(alert.conditions[0].value, 2000);
   assert.equal(alert.conditions[0].signedChange, -2000);
   assert.equal(alert.conditions[0].previousDate, friday.date);
+  assert.equal(alert.conditions[0].previousBalance, 4.97);
+  assert.equal(alert.conditions[0].currentBalance, 4.77);
+  assert.match(conditionLine(alert.conditions[0]), /2026-11-13 融资余额 4.9700 亿元 → 2026-11-16 融资余额 4.7700 亿元/);
   assert.equal(alert.conditions[0].episodeStart, monday.date);
   assert.equal(buildAlert(series, { CHINA_FILM_MARGIN_CHANGE_THRESHOLD: "2001" }).shouldNotify, false);
   assert.equal(buildAlert({ chinaFilmMargin: [friday] }, {}).shouldNotify, false);

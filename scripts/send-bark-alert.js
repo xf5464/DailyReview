@@ -29,7 +29,10 @@ async function main() {
     : "[DailyReview] Bark 推送测试成功";
   const body = hasConditions
     ? [
-        ...alert.conditions.map((condition) => `${condition.label}：${formatValue(condition)}`),
+        ...alert.conditions.flatMap((condition) => [
+          `${condition.label}：${formatValue(condition)}`,
+          ...(condition.balanceSummary ? [condition.balanceSummary] : []),
+        ]),
         `数据构建时间：${alert.fetchedAt || "未知"}`,
       ].join("\n")
     : [

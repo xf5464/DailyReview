@@ -30,6 +30,7 @@ async function main() {
         "",
         ...alert.conditions.flatMap((condition) => [
           `> ${condition.label}：${formatValue(condition)}`,
+          ...(condition.balanceSummary ? [`> ${condition.balanceSummary}`] : []),
           "",
         ]),
         `数据构建时间：${alert.fetchedAt || "未知"}`,

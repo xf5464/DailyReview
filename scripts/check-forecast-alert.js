@@ -170,6 +170,7 @@ function buildAlert(seriesById, env = process.env, fetchedAt = new Date().toISOS
       id: "chinaFilmMargin",
       ...marginChange,
       label: `中国电影（600977）融资余额${marginChange.signedChange < 0 ? "减少" : "增加"}（较 ${marginChange.previousDate}）`,
+      balanceSummary: `${marginChange.previousDate} 融资余额 ${marginChange.previousBalance.toFixed(4)} 亿元 → ${marginChange.date} 融资余额 ${marginChange.currentBalance.toFixed(4)} 亿元`,
       threshold: marginThreshold,
       unit: " 万元",
       episodeStart: marginChange.date,

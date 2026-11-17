@@ -17,8 +17,11 @@
     var dates = Array.from(byDate.keys()).sort();
     return dates.slice(1).map(function (date, index) {
       var previousDate = dates[index];
-      var signedChange = (byDate.get(date) - byDate.get(previousDate)) / 10000;
-      return { date: date, previousDate: previousDate, value: Math.abs(signedChange), signedChange: signedChange };
+      var currentYuan = byDate.get(date);
+      var previousYuan = byDate.get(previousDate);
+      var signedChange = (currentYuan - previousYuan) / 10000;
+      return { date: date, previousDate: previousDate, value: Math.abs(signedChange), signedChange: signedChange,
+        currentBalance: currentYuan / 100000000, previousBalance: previousYuan / 100000000 };
     });
   }
 
