@@ -19,6 +19,7 @@ function formatNumber(value, digits = 2) {
 
 function conditionLine(condition) {
   const base = `${condition.label}：${formatNumber(condition.value)}${condition.unit}（要求 ≥ ${formatNumber(condition.threshold)}${condition.unit}，数据日期 ${condition.date}）`;
+  if (condition.balanceSummary) return `${base}\n  ${condition.balanceSummary}`;
   if (condition.id !== "ndx") return base;
   return `${base}；最高点 ${formatNumber(condition.highValue)}（${condition.highDate}），当前 NDX ${formatNumber(condition.indexValue)}`;
 }
