@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const { createHash } = require('node:crypto');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
@@ -28,6 +29,7 @@ if (!fs.existsSync(indexPath)) throw new Error('dist/index.html not found; run t
 if (!fs.existsSync(featureSource)) throw new Error('site/forecast-gold-trend.js not found.');
 
 fs.copyFileSync(featureSource, featureTarget);
+const assetVersion = createHash("sha256").update(fs.readFileSync(featureSource)).digest("hex").slice(0, 12);
 fs.writeFileSync(
   configPath,
   `window.__CENTRAL_BANK_GOLD_TREND_CONFIG__ = ${JSON.stringify(config)};\n`,
@@ -38,7 +40,7 @@ let html = fs.readFileSync(indexPath, 'utf8');
 const marker = '</body>';
 const scripts = [
   '    <script src="forecast-gold-trend-config.js"></script>',
-  '    <script src="forecast-gold-trend.js" defer></script>',
+  `    <script src="forecast-gold-trend.js?v=${assetVersion}" defer></script>`,
 ].join('\n');
 if (!html.includes('forecast-gold-trend.js')) {
   if (!html.includes(marker)) throw new Error('Unable to inject forecast gold UI scripts: </body> not found.');

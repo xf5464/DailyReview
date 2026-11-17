@@ -442,7 +442,7 @@ function addAssetVersions() {
   const stylesVersion = versionFor('styles.css');
   const marginThreshold = require('../site/film-margin-condition').threshold(process.env.CHINA_FILM_MARGIN_CHANGE_THRESHOLD);
   const shellVersion = contentHash([
-    'index.html', 'styles.css', 'app.js', 'film-margin-condition.js', 'fund-crowding-view.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
+    'index.html', 'styles.css', 'app.js', 'film-margin-condition.js', 'forecast-gold-trend.js', 'forecast-ism-new-orders.js', 'fund-crowding-view.js', 'vendor/fflate.min.js', 'service-worker.js', 'manifest.webmanifest',
     'toy-icon-a1190c863e-180.png', 'toy-icon-a1190c863e-192.png', 'toy-icon-a1190c863e-512.png',
   ].map((fileName) => fs.readFileSync(path.join(outputDirectory, fileName))).join('\n') + ':' + marginThreshold);
   const html = fs.readFileSync(indexPath, 'utf8')

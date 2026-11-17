@@ -93,7 +93,7 @@
     var summary = document.querySelector('#forecastSummary');
     if (!summary || !latestState || !latestState.reached) return;
     var strong = summary.querySelector('strong');
-    summary.classList.add('is-reached');
+    if (!summary.classList.contains('is-reached')) summary.classList.add('is-reached');
     if (strong && strong.textContent !== '已有条件达到') strong.textContent = '已有条件达到';
   }
 

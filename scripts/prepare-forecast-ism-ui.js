@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const { createHash } = require('node:crypto');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
@@ -21,6 +22,7 @@ if (!fs.existsSync(indexPath)) throw new Error('dist/index.html not found; run t
 if (!fs.existsSync(featureSource)) throw new Error('site/forecast-ism-new-orders.js not found.');
 
 fs.copyFileSync(featureSource, featureTarget);
+const assetVersion = createHash("sha256").update(fs.readFileSync(featureSource)).digest("hex").slice(0, 12);
 fs.writeFileSync(
   configPath,
   `window.__ISM_NEW_ORDERS_FORECAST_CONFIG__ = ${JSON.stringify(config)};\n`,
@@ -31,7 +33,7 @@ let html = fs.readFileSync(indexPath, 'utf8');
 const marker = '</body>';
 const scripts = [
   '    <script src="forecast-ism-new-orders-config.js"></script>',
-  '    <script src="forecast-ism-new-orders.js" defer></script>',
+  `    <script src="forecast-ism-new-orders.js?v=${assetVersion}" defer></script>`,
 ].join('\n');
 if (!html.includes('forecast-ism-new-orders.js')) {
   if (!html.includes(marker)) throw new Error('Unable to inject ISM forecast UI scripts: </body> not found.');
