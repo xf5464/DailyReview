@@ -375,6 +375,39 @@ test('film and cinema shareholders use the verified constituent snapshot when th
   assert.equal(chart.items[0].value, TONGHUASHUN_FILM_CINEMA_CONSTITUENT_SNAPSHOT.length);
 });
 
+test('film stock weekly prices fall back to Eastmoney and survive a later source outage', async () => {
+  const options = {
+    chartIds: ['filmCinemaShareholders'],
+    now: new Date('2026-11-17T00:00:00Z'),
+  };
+  const fetchWithWeeklyPrice = (hasEastmoneyPrices) => async (input) => {
+    const url = String(input);
+    const text = url.includes('/thshy/detail/code/881274') ? FILM_CINEMA_HTML
+      : url.includes('basic.10jqka.com.cn/mobile/') ? TONGHUASHUN_HOLDER_HTML
+      : url.includes('RPT_HOLDERNUM_DET') ? EASTMONEY_HOLDER_JSON
+      : url.includes('secid=1.600977') && hasEastmoneyPrices
+        ? JSON.stringify({ data: { klines: [
+          '2026-06-26,12.40,12.60,12.80,12.30,10000',
+          '2026-11-13,15.95,17.05,17.05,14.97,3469125',
+        ] } }) : '';
+    return { ok: true, status: 200, text: async () => text };
+  };
+  const latest = await queryMacroOutlook({ ...options, fetchImpl: fetchWithWeeklyPrice(true) });
+  const chart = latest.charts[0];
+  const stock = chart.rows.find((row) => row.code === '600977');
+  assert.deepEqual(stock.priceItems.at(-1), { date: '2026-11-13', value: 17.05 });
+  assert.equal(stock.quarterlyItems.at(-1).priceValue, 12.6);
+  assert.equal(chart.rows.find((row) => row.code === '600088').priceItems.length, 0);
+
+  const duringOutage = await queryMacroOutlook({
+    ...options,
+    fetchImpl: fetchWithWeeklyPrice(false),
+    historicalChartCache: { filmCinemaShareholders: chart },
+    incrementalMode: true,
+  });
+  assert.deepEqual(duringOutage.charts[0].rows.find((row) => row.code === '600977').priceItems, stock.priceItems);
+});
+
 test('official ISM snapshot covers the four manufacturing indexes through July 2026', () => {
   assert.deepEqual(ISM_OFFICIAL_MANUFACTURING_SNAPSHOT.at(-1), {
     date: '2026-07-01',

@@ -1134,7 +1134,7 @@ function parseEastmoneyStockWeeklyPrices(text) {
   return payload.data.klines.map((line) => {
     const fields = String(line).split(',');
     const value = Number(fields[2]);
-    return /^\\d{4}-\\d{2}-\\d{2}$/.test(fields[0]) && Number.isFinite(value) && value > 0
+    return /^\d{4}-\d{2}-\d{2}$/.test(fields[0]) && Number.isFinite(value) && value > 0
       ? { date: fields[0], value } : null;
   }).filter(Boolean).sort((a,b) => a.date.localeCompare(b.date));
 }
@@ -2419,6 +2419,9 @@ async function queryMacroOutlook(options = {}) {
           return null;
         }
       };
+      const previousPricesByCode = new Map(
+        (historicalChartCache.filmCinemaShareholders?.rows || []).map((row) => [row.code, row.priceItems || []])
+      );
       const rows = await mapWithConcurrency(constituents, 5, async (stock) => {
         let history = [];
         let historySource = '同花顺 F10';
@@ -2464,7 +2467,10 @@ async function queryMacroOutlook(options = {}) {
           }
         }
         const latest = history.at(-1) || null;
-        const priceItems = await pricePromise;
+        const freshPrices = await pricePromise;
+        const previousPrices = previousPricesByCode.get(stock.code) || [];
+        const priceItems = (previousPrices.at(-1)?.date || '') > (freshPrices.at(-1)?.date || '')
+          ? previousPrices : freshPrices;
         const scheduledDisclosureDate = await fetchAppointment(stock.code);
         return {
           ...stock, scheduledDisclosureDate, scheduledDisclosureReportDate,
