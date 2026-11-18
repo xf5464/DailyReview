@@ -4553,10 +4553,14 @@ body {
 }
 
 .film-financing-card { padding: 12px 0; }
-.film-financing-table-wrap { overflow-x: auto; max-width: 100%; }
-.film-financing-table { width: 100%; min-width: 740px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.film-financing-table-wrap { width: 100%; min-width: 0; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+#overallDetailDialog .film-financing-table { width: 100%; min-width: 740px; max-width: none; table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.film-financing-table th, .film-financing-table td { width: 85px; }
+.film-financing-table th:first-child, .film-financing-table td:first-child { width: 120px; }
+.film-financing-table th:nth-child(2), .film-financing-table td:nth-child(2) { width: 110px; }
 .film-financing-table th, .film-financing-table td { padding: 12px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border-color, #dce2e8); }
 .film-financing-table th:first-child, .film-financing-table td:first-child { text-align: left; position: sticky; left: 0; background: var(--card-bg, #fff); z-index: 1; }
+.film-financing-table th button { display: block; text-align: inherit; }
 .film-financing-table th button, .film-financing-stock { border: 0; padding: 4px 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .film-financing-table small { display: block; color: #64748b; font-size: 11px; }
 .film-financing-table .is-positive { color: #d73535; }
