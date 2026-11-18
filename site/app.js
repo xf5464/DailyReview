@@ -2863,6 +2863,7 @@
       return;
     }
     activeDetailId = id;
+    refs.detailDialog.classList.toggle('film-financing-landscape', id === 'filmFinancing');
     activeShareholderTableQuarterDate = null;
     activeWideEtfQuarterDate = null;
     var chart = chartById(id);
@@ -2976,6 +2977,11 @@
     var filmFinancing = activeDetailId === 'filmFinancing';
     var financingWrap = document.getElementById('filmFinancingTableWrap');
     financingWrap.hidden = !filmFinancing;
+    var orientationButton = document.getElementById('filmFinancingOrientationButton');
+    var landscape = refs.detailDialog.classList.contains('film-financing-landscape');
+    orientationButton.hidden = !filmFinancing;
+    orientationButton.textContent = landscape ? '切换竖屏' : '切换横屏';
+    orientationButton.setAttribute('aria-pressed', String(landscape));
     var customTableChart = filmFinancing || stockTableChart || wideEtfTableChart || economicCalendarChart;
     var valuationTableChart = activeDetailId === 'aSharePe';
     customTableChart = customTableChart || valuationTableChart;
@@ -5258,6 +5264,13 @@
       button.addEventListener('click', function () {
         document.querySelector('#' + button.dataset.close).close();
       });
+    });
+    document.getElementById('filmFinancingOrientationButton').addEventListener('click', function () {
+      refs.detailDialog.classList.toggle('film-financing-landscape');
+      renderDetail();
+    });
+    refs.detailDialog.addEventListener('close', function () {
+      refs.detailDialog.classList.remove('film-financing-landscape');
     });
     refs.detailDialog.addEventListener('click', function (event) {
       if (event.target === refs.detailDialog) refs.detailDialog.close();
