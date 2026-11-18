@@ -20,7 +20,7 @@
     'marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors',
     'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
     'usEconomicCalendar', 'treasuryYield', 'treasuryYield30', 'federalFundsRate', 'cpi', 'pce', 'gold', 'silver', 'centralBankGoldPurchases', 'bitcoin',
-    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf',
+    'federalDebt', 'jpyUsd', 'brentOil', 'wtiOil', 'copper', 'naturalGas', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'filmFinancing', 'nationalTeamWideEtf',
     'nasdaq100Pe', 'ndx', 'sp500', 'vix', 'treasurySpread',
     'highYieldSpread', 'broadDollar', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
     'initialClaims', 'unemploymentRate', 'consumerConfidence', 'financialConditions', 'etfOfficialPremium159941', 'etfPremium159941'
@@ -59,6 +59,7 @@
     aShareSentimentThs: '同花顺情绪指数',
     aShareNewAccountsThs: 'A股每月新增开户数',
     filmCinemaShareholders: '影视院线成分股股东人数',
+    filmFinancing: '电影融资',
     nationalTeamWideEtf: '国家队宽基 ETF 持仓市值',
     nasdaq100Pe: '纳斯达克100市盈率（NDX）',
     ndx: 'NDX（纳斯达克100指数）',
@@ -106,6 +107,7 @@
     aShareSentimentThs: 'A股市场情绪',
     aShareNewAccountsThs: 'A股投资者参与',
     filmCinemaShareholders: '影视院线',
+    filmFinancing: '影视院线',
     nationalTeamWideEtf: 'A股机构持仓',
     nasdaq100Pe: '美股估值',
     ndx: '美股指数',
@@ -152,6 +154,7 @@
     aShareIndustryConcentration: '以东方财富行业板块日成交额计算。主图 C5 为成交额最高的 5 个行业占全部行业成交额的比例；HHI 为各行业成交额占比平方和（0–10000）。数值升高表示资金更集中在少数行业，降低表示行业间更分散。FRED 没有匹配的日度 A 股行业成交额序列。',
     aShareSentimentThs: '同花顺官方情绪指数（883404）的日度收盘点位，用于观察 A 股市场情绪变化。该指数历史自 2022 年 8 月开始，点位高低应结合自身历史区间比较。',
     aShareNewAccountsThs: '同花顺财经转述上交所披露的月度 A 股新开户数，包含个人和机构新开账户，单位为万户。该指标统计账户数量，不等同于去重后的新增自然人人数。',
+    filmFinancing: '电影列表中有融资余额记录的股票。N日变化为截至该股票数据日期的融资余额减去N个交易日前余额，单位亿。缺少对比日数据时显示--，点击列标题切换升降序。',
     filmCinemaShareholders: '同花顺影视院线（881274）全部成分股的季度股东人数和当前流通市值。总表支持季度翻页与排序；点击股票可查看股东人数及连续周线收盘价双轴历史。',
     nationalTeamWideEtf: '合并中央汇金与中央证金公开披露的宽基 ETF 持仓，按报告期最近可用 ETF 价格估算总持仓市值。详情可逐报告季度翻页，并按总额或宽基指数查看可选时间段曲线。',
     nasdaq100Pe: '纳斯达克 100 指数的滚动市盈率（TTM），即指数市值相对过去 12 个月盈利的倍数，用于观察估值高低。',
@@ -197,6 +200,7 @@
     aShareSentimentThs: '#d9465f',
     aShareNewAccountsThs: '#2563eb',
     filmCinemaShareholders: '#7c3aed',
+    filmFinancing: '#0f766e',
     nationalTeamWideEtf: '#b45309',
     nasdaq100Pe: '#6a42c2',
     ndx: '#335cc7',
@@ -282,7 +286,7 @@
       'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
       'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
       'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-      'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
+      'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'filmFinancing', 'nationalTeamWideEtf'
     ],
     groupChartOrder: {
       group_financing: ['marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors'],
@@ -293,7 +297,7 @@
         'treasurySpread', 'highYieldSpread', 'broadDollar', 'initialClaims', 'financialConditions', 'treasuryYield',
         'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas', 'federalFundsRate',
         'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
-        'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'
+        'aShareSentimentThs', 'unemploymentRate', 'consumerConfidence', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'filmFinancing', 'nationalTeamWideEtf'
       ],
       group_mt432xl1_kz1mx7: [
         'treasuryYield30', 'vix', 'ndx', 'sp500', 'nasdaq100Pe', 'federalDebt', 'cpi', 'pce',
@@ -302,7 +306,7 @@
         'unemploymentRate', 'consumerConfidence'
       ],
       group_mt49f5yl_pctlb6: ['gold', 'brentOil', 'wtiOil', 'centralBankGoldPurchases', 'silver', 'copper', 'naturalGas'],
-      group_a_share: ['etfOfficialPremium159941', 'aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf'],
+      group_a_share: ['etfOfficialPremium159941', 'aSharePe', 'shTurnoverRate', 'szTurnoverRate', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'filmFinancing', 'nationalTeamWideEtf'],
       group_primary: ['usEconomicCalendar', 'treasuryYield30', 'consumerConfidence', 'broadDollar', 'cpi', 'pce', 'unemploymentRate', 'vix', 'brentOil', 'gold', 'sp500', 'federalFundsRate', 'copper', 'centralBankGoldPurchases'],
       group_us_manufacturing: ['ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders']
     },
@@ -310,7 +314,7 @@
       'marginTradeInvestors', 'marginAverageGuarantee', 'marginMarketCapRatio', 'marginTotalBalance', 'marginTradeRatio', 'marginDebtInvestors',
       'usEconomicCalendar',
       'aSharePe', 'shTurnoverRate', 'szTurnoverRate',
-      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'nationalTeamWideEtf', 'federalDebt',
+      'treasuryYield30', 'federalFundsRate', 'jpyUsd', 'gold', 'silver', 'centralBankGoldPurchases', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareIndustryConcentration', 'aShareSentimentThs', 'aShareNewAccountsThs', 'filmCinemaShareholders', 'filmFinancing', 'nationalTeamWideEtf', 'federalDebt',
       'cpi', 'pce', 'ismManufacturingPmi', 'ismSupplierDeliveries', 'ismNewOrders', 'ismBacklogOrders',
       'bitcoin', 'brentOil', 'wtiOil', 'naturalGas', 'copper', 'nasdaq100Pe', 'ndx',
       'sp500', 'vix', 'treasurySpread', 'highYieldSpread', 'broadDollar',
@@ -358,6 +362,7 @@
       aShareSentimentThs: ['default', 'group_a_share'],
       aShareNewAccountsThs: ['default', 'group_a_share'],
       filmCinemaShareholders: ['default', 'group_a_share'],
+      filmFinancing: ['group_a_share'],
       nationalTeamWideEtf: ['default', 'group_a_share'],
       nasdaq100Pe: ['default', 'group_mt432xl1_kz1mx7'],
       ndx: ['default', 'group_mt432xl1_kz1mx7'],
@@ -1284,6 +1289,7 @@
   }
 
   function chartById(id) {
+    if (id === 'filmFinancing') return filmFinancingChart();
     if (id === 'activeFundTopFive') return activeFundTopFiveChart();
     return data && Array.isArray(data.charts)
       ? data.charts.find(function (chart) { return chart.id === id; })
@@ -1303,6 +1309,9 @@
   }
 
   function loadChartById(id) {
+    if (id === 'filmFinancing') {
+      return Promise.all([loadChartById('filmCinemaShareholders'), loadStockMargin()]).then(filmFinancingChart);
+    }
     var loaded = chartById(id);
     if (loaded) return Promise.resolve(loaded);
     if (!data || !Array.isArray(data.chartCatalog)) return Promise.resolve(null);
@@ -2383,6 +2392,7 @@
     actions.append(refresh);
     header.append(heading, actions);
 
+    var filmFinancing = chartId === 'filmFinancing';
     var stockTableChart = chart && chart.chartType === 'stockTable';
     var wideEtfTableChart = chart && chart.chartType === 'wideEtfTable';
     var valuationTableChart = chartId === 'aSharePe';
@@ -2393,6 +2403,7 @@
       ? config.economicCalendarTypes.length
         ? '未来12个月 · 显示 ' + calendarItems.length + '/' + (chart.items || []).length + ' 项已公布日程'
         : '尚未选择要显示的日程类别'
+      : filmFinancing ? '1、3、5、10、20、30日融资余额变化 · 单位亿'
       : valuationTableChart ? '8 项宽基 / 板块估值 · 单位：倍 · 点击标题查看详情'
       : stockTableChart
       ? availableStockRows.length + '/' + (chart.rows || []).length + ' 只成分股已有最新披露'
@@ -2407,7 +2418,13 @@
       class: 'overall-chart', role: 'img', 'aria-label': TITLES[chartId] + '曲线'
     });
     var cardStockTable = null;
-    if (valuationTableChart) {
+    if (filmFinancing) {
+      cardStockTable = createElement('div', 'film-financing-card');
+      var openFinancing = createElement('button', 'secondary-button', '查看电影融资');
+      openFinancing.type = 'button';
+      openFinancing.addEventListener('click', function () { showDetail('filmFinancing'); });
+      cardStockTable.append(openFinancing);
+    } else if (valuationTableChart) {
       cardStockTable = createElement('div', 'shareholder-table-wrap');
       renderASharePeTable(cardStockTable, chart);
     } else if (stockTableChart) {
@@ -2449,7 +2466,7 @@
       supplementLink.rel = 'noopener noreferrer';
       sourceLine.append(supplementLink);
     }
-    card.append(header, summary, stockTableChart || wideEtfTableChart || valuationTableChart ? cardStockTable : svg, sourceLine);
+    card.append(header, summary, filmFinancing || stockTableChart || wideEtfTableChart || valuationTableChart ? cardStockTable : svg, sourceLine);
 
     card.addEventListener('dragstart', function (event) {
       draggedChartId = chartId;
@@ -2956,7 +2973,10 @@
     var wideEtfTableChart = sourceChart && sourceChart.chartType === 'wideEtfTable';
     var economicCalendarChart = sourceChart && sourceChart.chartType === 'economicCalendar';
     var industryConcentrationChart = sourceChart && sourceChart.id === 'aShareIndustryConcentration';
-    var customTableChart = stockTableChart || wideEtfTableChart || economicCalendarChart;
+    var filmFinancing = activeDetailId === 'filmFinancing';
+    var financingWrap = document.getElementById('filmFinancingTableWrap');
+    financingWrap.hidden = !filmFinancing;
+    var customTableChart = filmFinancing || stockTableChart || wideEtfTableChart || economicCalendarChart;
     var valuationTableChart = activeDetailId === 'aSharePe';
     customTableChart = customTableChart || valuationTableChart;
     refs.detailPeWrap.hidden = !valuationTableChart;
@@ -2967,6 +2987,12 @@
     refs.detailWideEtfTableWrap.hidden = !wideEtfTableChart;
     refs.detailEconomicCalendarWrap.hidden = !economicCalendarChart;
     refs.detailIndustryConcentrationWrap.hidden = !industryConcentrationChart;
+    if (filmFinancing) {
+      renderFilmFinancingTable(financingWrap, sourceChart.rows);
+      refs.detailMessage.textContent = stockMarginState && stockMarginState.error ||
+        sourceChart.rows.length + '只股票 · N日变化＝数据日期余额－N个交易日前余额 · 单位亿 · 点击列标题排序';
+      return;
+    }
     if (valuationTableChart) {
       renderASharePeTable(refs.detailPeTable, sourceChart);
       refs.detailMessage.textContent = '最新交易日估值 · 各项按来源口径显示 · 非盘中实时PE';
@@ -3363,6 +3389,110 @@
       table.append(head, body);
       container.replaceChildren(table);
     }
+  }
+
+  var filmFinancingPeriods = [1, 3, 5, 10, 20, 30];
+  var filmFinancingSortKey = 'change1';
+  var filmFinancingSortDirection = 'descending';
+
+  function filmFinancingRows(movieRows, stocks) {
+    var dates = Array.from(new Set(Object.values(stocks).flatMap(function (items) {
+      return items.filter(function (item) { return item && item.date && hasNumericValue(item.value); })
+        .map(function (item) { return item.date; });
+    }))).sort();
+    return movieRows.flatMap(function (stock) {
+      var items = (stocks[stock.code] || []).filter(function (item) {
+        return item && item.date && hasNumericValue(item.value);
+      }).slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
+      if (!items.length) return [];
+      var latest = items.at(-1);
+      var byDate = new Map(items.map(function (item) { return [item.date, Number(item.value)]; }));
+      var latestIndex = dates.indexOf(latest.date);
+      var row = {code: stock.code, name: stock.name, date: latest.date, balance: Number(latest.value)};
+      filmFinancingPeriods.forEach(function (days) {
+        var previous = byDate.get(dates[latestIndex - days]);
+        row['change' + days] = previous === undefined ? null : row.balance - previous;
+      });
+      return [row];
+    });
+  }
+
+  function filmFinancingChart() {
+    var movies = data && data.charts && data.charts.find(function (chart) { return chart.id === 'filmCinemaShareholders'; });
+    var rows = filmFinancingRows(movies && movies.rows || [], stockMarginState && stockMarginState.stocks || {});
+    var latestDate = rows.map(function (row) { return row.date; }).sort().at(-1);
+    return {
+      id: 'filmFinancing', title: '电影融资', chartType: 'filmFinancingTable',
+      unit: '只', decimals: 0, frequency: '日度', rows: rows,
+      items: latestDate ? [{date: latestDate, value: rows.length}] : [],
+      sourceName: '东方财富个股融资余额 / 现有电影列表',
+      sourceUrl: 'https://data.eastmoney.com/rzrq/',
+      error: stockMarginState && stockMarginState.error
+    };
+  }
+
+  function renderFilmFinancingTable(container, rows) {
+    var columns = [{key: 'name', label: '股票'}, {key: 'date', label: '数据日期'}]
+      .concat(filmFinancingPeriods.map(function (days) { return {key: 'change' + days, label: days + '日'}; }));
+    var table = createElement('table', 'film-financing-table');
+    var head = document.createElement('thead');
+    var headers = document.createElement('tr');
+    columns.forEach(function (column) {
+      var th = document.createElement('th');
+      th.scope = 'col';
+      var active = filmFinancingSortKey === column.key;
+      th.setAttribute('aria-sort', active ? filmFinancingSortDirection : 'none');
+      var button = createElement('button', '', column.label + (active
+        ? filmFinancingSortDirection === 'ascending' ? ' ↑' : ' ↓' : ' ↕'));
+      button.type = 'button';
+      button.addEventListener('click', function () {
+        filmFinancingSortDirection = active && filmFinancingSortDirection === 'descending' ? 'ascending' : 'descending';
+        filmFinancingSortKey = column.key;
+        renderDetail();
+      });
+      th.append(button);
+      headers.append(th);
+    });
+    head.append(headers);
+    var body = document.createElement('tbody');
+    var sorted = rows.slice().sort(function (left, right) {
+      var a = left[filmFinancingSortKey], b = right[filmFinancingSortKey];
+      if (a === null || b === null) return a === b ? left.code.localeCompare(right.code) : a === null ? 1 : -1;
+      var difference = typeof a === 'number' ? a - b : String(a).localeCompare(String(b), 'zh-CN');
+      return (filmFinancingSortDirection === 'ascending' ? difference : -difference) || left.code.localeCompare(right.code);
+    });
+    sorted.forEach(function (stock) {
+      var row = document.createElement('tr');
+      var name = document.createElement('td');
+      var button = createElement('button', 'film-financing-stock', stock.name);
+      button.type = 'button';
+      button.addEventListener('click', function () {
+        showShareholderHistory(stock.code);
+        shareholderHistoryMode = 'margin';
+        renderShareholderHistory();
+      });
+      name.append(button, createElement('small', '', stock.code));
+      row.append(name, createElement('td', '', stock.date));
+      filmFinancingPeriods.forEach(function (days) {
+        var value = stock['change' + days];
+        var rounded = value === null ? null : Number(value.toFixed(2));
+        var cell = createElement('td', 'number-cell', rounded === null ? '--' :
+          (rounded > 0 ? '+' : '') + rounded.toFixed(2));
+        if (rounded) cell.classList.add(rounded > 0 ? 'is-positive' : 'is-negative');
+        row.append(cell);
+      });
+      body.append(row);
+    });
+    if (!rows.length) {
+      var empty = document.createElement('td');
+      empty.colSpan = columns.length;
+      empty.textContent = stockMarginState && stockMarginState.error || '电影列表暂无融资余额记录';
+      var emptyRow = document.createElement('tr');
+      emptyRow.append(empty);
+      body.append(emptyRow);
+    }
+    table.append(head, body);
+    container.replaceChildren(table);
   }
 
   var shareholderHistoryMode = 'holders';
@@ -4528,6 +4658,7 @@
       var payload = await response.json();
       if (!payload || !Array.isArray(payload.charts)) throw new Error('数据格式无效');
       chartLoadPromises.clear();
+      if (fresh && !stockMarginRequest) stockMarginState = null;
       var splitPayload = payload.charts.some(function (chart) { return !Array.isArray(chart.items); });
       data = splitPayload
         ? Object.assign({}, payload, { chartCatalog: payload.charts, charts: [] })
