@@ -1,13 +1,12 @@
 name: Refresh Financing Market Snapshot
 
 on:
+  workflow_call:
   push:
     branches: [main]
     paths:
       - scripts/refresh-financing-market.js
       - .github/workflows/refresh-financing-market.yml
-  schedule:
-    - cron: '30 22 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -23,6 +22,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

@@ -1,0 +1,45 @@
+name: Collect DailyReview Data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/collect-dailyreview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: dailyreview-collection
+  cancel-in-progress: false
+
+jobs:
+  film:
+    uses: ./.github/workflows/refresh-film-stock-margin.yml
+    secrets: inherit
+  financing:
+    needs: film
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/refresh-financing-market.yml
+    secrets: inherit
+  turnover:
+    needs: financing
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/refresh-a-share-turnover.yml
+    secrets: inherit
+  reader:
+    needs: turnover
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/refresh-reader.yml
+    secrets: inherit
+  publish:
+    needs: [film, financing, turnover, reader]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish collected data and check alerts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f run_alert_check=true -f trigger_source=cloudflare

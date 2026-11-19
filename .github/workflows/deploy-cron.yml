@@ -1,0 +1,24 @@
+name: Configure Cloudflare Collection Schedule
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - cloudflare/dailyreview-cron-hot-news.js
+      - .github/workflows/deploy-cron.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update existing Worker and its schedule
+        run: python scripts/configure-cloudflare-cron.py

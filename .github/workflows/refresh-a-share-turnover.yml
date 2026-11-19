@@ -1,8 +1,7 @@
 name: Refresh A-share Turnover Snapshot
 
 on:
-  schedule:
-    - cron: "20 8 * * 1-5"
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -19,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
