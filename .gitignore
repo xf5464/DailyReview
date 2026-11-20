@@ -224,3 +224,6 @@ __marimo__/
 # Manual fund research inputs, raw caches and superseded aggregate snapshots
 /work/
 /scripts/data/active-fund-crowding-history/
+
+.forecast-delivery/
+.forecast-alert.json

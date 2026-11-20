@@ -167,45 +167,43 @@ jobs:
           CHINA_FILM_MARGIN_CHANGE_THRESHOLD: ${{ vars.CHINA_FILM_MARGIN_CHANGE_THRESHOLD }}
         run: node --require ./scripts/register-source-cache.js scripts/check-forecast-alert.js --output .forecast-alert.json
 
-      - name: Check if these conditions were already sent
+      - name: Restore per-condition delivery records
         if: steps.forecast.outputs.should_notify == 'true' && !inputs.test_notifications
         id: sent
         uses: actions/cache/restore@v4
         with:
-          path: .forecast-notified
-          key: forecast-notified-v1-${{ steps.forecast.outputs.fingerprint }}
-          lookup-only: true
+          path: .forecast-delivery
+          key: forecast-delivery-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            forecast-delivery-v2-
 
       - name: Send forecast alert email
-        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success' && steps.sent.outputs.cache-hit != 'true')) }}
+        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success')) }}
         env:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
           TRIGGER_SOURCE: ${{ inputs.trigger_source }}
-        run: node --require ./scripts/register-source-cache.js scripts/send-forecast-email.js
+          FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
+        run: node --require ./scripts/register-source-cache.js scripts/send-deduplicated-forecast-alert.js email
 
       - name: Send WeCom forecast alert
-        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success' && steps.sent.outputs.cache-hit != 'true')) }}
+        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success')) }}
         env:
           WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
           FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
-        run: node --require ./scripts/register-source-cache.js scripts/send-wechat-alert.js
+        run: node --require ./scripts/register-source-cache.js scripts/send-deduplicated-forecast-alert.js wecom
 
       - name: Send Bark forecast alert
-        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success' && steps.sent.outputs.cache-hit != 'true')) }}
+        if: ${{ !cancelled() && (inputs.test_notifications || (steps.forecast.outputs.should_notify == 'true' && steps.sent.conclusion == 'success')) }}
         env:
           BARK_KEY: ${{ secrets.BARK_KEY }}
           FORCE_NOTIFICATION_TEST: ${{ inputs.test_notifications }}
-        run: node --require ./scripts/register-source-cache.js scripts/send-bark-alert.js
+        run: node --require ./scripts/register-source-cache.js scripts/send-deduplicated-forecast-alert.js bark
 
-      - name: Record delivered forecast alert
-        if: success() && steps.forecast.outputs.should_notify == 'true' && steps.sent.outputs.cache-hit != 'true' && !inputs.test_notifications
-        run: touch .forecast-notified
-
-      - name: Save delivery record
-        if: success() && steps.forecast.outputs.should_notify == 'true' && steps.sent.outputs.cache-hit != 'true' && !inputs.test_notifications
+      - name: Save per-condition delivery records
+        if: always() && !inputs.test_notifications && hashFiles('.forecast-delivery/state.json') != ''
         uses: actions/cache/save@v4
         with:
-          path: .forecast-notified
-          key: forecast-notified-v1-${{ steps.forecast.outputs.fingerprint }}
+          path: .forecast-delivery
+          key: forecast-delivery-v2-${{ github.run_id }}-${{ github.run_attempt }}
