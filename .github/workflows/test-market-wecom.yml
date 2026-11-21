@@ -1,11 +1,10 @@
-name: Send market report to existing WeCom group
+name: Send market report to dedicated WeCom group
 
 on:
   push:
     branches: [codex/market-report-wecom]
     paths:
       - reports/market-daily.txt
-      - .github/workflows/test-market-wecom.yml
   workflow_dispatch:
 
 permissions:
@@ -23,13 +22,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Send market report
         env:
-          WECHAT_WEBHOOK: ${{ secrets.WECHAT_WEBHOOK }}
+          WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
         run: |
           node <<'NODE'
           const fs = require("node:fs");
           (async () => {
             const hook = process.env.WECHAT_WEBHOOK;
-            if (!hook) throw new Error("WECHAT_WEBHOOK is not configured");
+            if (!hook) throw new Error("MARKET_WECHAT_WEBHOOK is not configured; add the dedicated market group webhook in repository Actions secrets");
             const content = fs.readFileSync("reports/market-daily.txt", "utf8").trim();
             if (!content) throw new Error("Empty market report");
             const chunks = [];
