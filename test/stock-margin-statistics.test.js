@@ -5,7 +5,7 @@ const path = require('node:path');
 const { parseStockMarketCap, fetchStockMarketCap } = require('../scripts/stock-market-cap');
 const source = fs.readFileSync(path.join(__dirname, '../site/app.js'), 'utf8');
 const extract = name => { const start = source.indexOf('  function ' + name + '('); return source.slice(start, source.indexOf('\n  function ', start + 10)); };
-const stats = new Function('hasNumericValue', extract('shiftMonths') + extract('pePercentile') + extract('stockMarginStatistics') + ';return stockMarginStatistics;')(
+const stats = new Function('hasNumericValue', extract('shiftMonths') + extract('pePercentile') + extract('stockMarginPercentile') + extract('stockMarginStatistics') + ';return stockMarginStatistics;')(
   value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value)));
 function quote(total = '287.70') {
   const fields = Array(50).fill('');
@@ -40,9 +40,9 @@ test('calendar windows rank latest balance with ties, zero and short-history dis
     {date:'2026-08-01', value:-1}, {date:'2026-01-01', value:2},
   ], {});
   assert.equal(result.rank1.count, 3);
-  assert.ok(Math.abs(result.rank1.value - 200 / 3) < 1e-10);
+  assert.ok(Math.abs(result.rank1.value - 100) < 1e-10);
   assert.equal(result.rank3.count, 4);
-  assert.equal(result.rank3.value, 75);
+  assert.equal(result.rank3.value, 100);
   assert.equal(result.rank3.short, false);
   const short = stats([{date:'2026-11-20', value:2}], {});
   assert.equal(short.rank1.value, 50);
@@ -61,10 +61,10 @@ test('3, 6, 12 and 36 month windows rank the balance itself, including exact cal
   assert.equal(result.rankHalf.count, 5);
   assert.equal(result.rank1.count, 7);
   assert.equal(result.rank3.count, 8);
-  assert.ok(Math.abs(result.rankQuarter.value - 250 / 3) < 1e-10);
+  assert.ok(Math.abs(result.rankQuarter.value - 100) < 1e-10);
   assert.equal(result.rankHalf.value, 50);
-  assert.ok(Math.abs(result.rank1.value - 250 / 7) < 1e-10);
-  assert.equal(result.rank3.value, 31.25);
+  assert.ok(Math.abs(result.rank1.value - 100 / 3) < 1e-10);
+  assert.ok(Math.abs(result.rank3.value - 200 / 7) < 1e-10);
   assert.equal(result.rankQuarter.short, false);
   const short = stats([{date:'2026-11-20', value:3}], {});
   for (const key of ['rankQuarter','rankHalf','rank1','rank3']) assert.equal(short[key].short, true);
@@ -79,14 +79,26 @@ test('week and month balance percentiles use calendar cutoffs and preserve empty
   ], {});
   assert.equal(result.rankWeek.count, 3);
   assert.equal(result.rankWeek.start, '2026-11-13');
-  assert.ok(Math.abs(result.rankWeek.value - 250 / 3) < 1e-10);
+  assert.ok(Math.abs(result.rankWeek.value - 100) < 1e-10);
   assert.equal(result.rankMonth.count, 5);
   assert.equal(result.rankMonth.start, '2026-10-20');
-  assert.equal(result.rankMonth.value, 70);
+  assert.equal(result.rankMonth.value, 75);
   assert.equal(result.rankWeek.short, false);
   assert.equal(stats([], {}).rankWeek, null);
   assert.equal(stats([], {}).rankMonth, null);
   const short = stats([{date:'2026-11-20', value:3}], {});
   assert.equal(short.rankWeek.short, true);
   assert.equal(short.rankMonth.short, true);
+});
+
+
+test('balance percentile reaches 0 and 100 at extrema, handles ties and flat windows', () => {
+  const rank = values => stats(values.map((value, i) => ({date: '2026-11-' + String(14 + i).padStart(2, '0'), value})), {}).rankWeek.value;
+  assert.equal(rank([5, 4, 3, 2, 1, 0]), 0);
+  assert.equal(rank([0, 1, 2, 3, 4, 5]), 100);
+  assert.equal(rank([0, 0, 1, 0]), 0);
+  assert.equal(rank([0, 1, 1]), 100);
+  assert.equal(rank([0, 1, 2, 1]), 50);
+  assert.equal(rank([2, 2, 2]), 50);
+  assert.equal(rank([2]), 50);
 });

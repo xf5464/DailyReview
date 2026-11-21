@@ -3583,6 +3583,18 @@
     refs.shareholderClose.focus({ preventScroll: true });
   }
 
+  function stockMarginPercentile(items, value, endDate, years, includeNonPositive, startOverride) {
+    var result = pePercentile(items, value, endDate, years, includeNonPositive, startOverride);
+    if (!result) return null;
+    var samples = items.filter(function (item) { return item.date >= result.start && item.date <= result.end; });
+    var below = samples.filter(function (item) { return item.value < value; }).length;
+    var equal = samples.filter(function (item) { return item.value === value; }).length;
+    // Endpoints remain 0/100 even with tied minima/maxima; a flat window is neutral.
+    result.value = equal === samples.length ? 50 : below === 0 ? 0 :
+      below + equal === samples.length ? 100 : (below + (equal - 1) / 2) / (samples.length - 1) * 100;
+    return result;
+  }
+
   function stockMarginStatistics(items, stock) {
     var byDate = new Map();
     (items || []).forEach(function (item) {
@@ -3593,13 +3605,13 @@
     var latest = history.at(-1);
     var cap = stock && hasNumericValue(stock.totalMarketCap) ? Number(stock.totalMarketCap) : null;
     return { ratio: latest && cap > 0 ? latest.value / cap * 100 : null,
-      rankWeek: latest ? pePercentile(history, latest.value, latest.date, 0, true,
+      rankWeek: latest ? stockMarginPercentile(history, latest.value, latest.date, 0, true,
         new Date(Date.parse(latest.date) - 7 * 86400000).toISOString().slice(0, 10)) : null,
-      rankMonth: latest ? pePercentile(history, latest.value, latest.date, 1 / 12, true) : null,
-      rankQuarter: latest ? pePercentile(history, latest.value, latest.date, 0.25, true) : null,
-      rankHalf: latest ? pePercentile(history, latest.value, latest.date, 0.5, true) : null,
-      rank1: latest ? pePercentile(history, latest.value, latest.date, 1, true) : null,
-      rank3: latest ? pePercentile(history, latest.value, latest.date, 3, true) : null };
+      rankMonth: latest ? stockMarginPercentile(history, latest.value, latest.date, 1 / 12, true) : null,
+      rankQuarter: latest ? stockMarginPercentile(history, latest.value, latest.date, 0.25, true) : null,
+      rankHalf: latest ? stockMarginPercentile(history, latest.value, latest.date, 0.5, true) : null,
+      rank1: latest ? stockMarginPercentile(history, latest.value, latest.date, 1, true) : null,
+      rank3: latest ? stockMarginPercentile(history, latest.value, latest.date, 3, true) : null };
   }
 
   function renderShareholderHistory() {
@@ -3670,7 +3682,7 @@
         refs['shareholderMarginRank' + years + 'Note'].textContent = rank ?
           rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' + period.label : '') : '暂无有效历史';
         refs['shareholderMarginRank' + years].title = rank ? rank.start + ' 至 ' + rank.end +
-          '；' + rank.count + ' 个交易日' + (rank.short ? '，历史不足' + period.label : '') + '；融资余额金额中秩百分位：(低于当前余额的样本数 + 相同余额样本数的一半) ÷ 有效样本数。以最新融资日期为截止日。' : '';
+          '；' + rank.count + ' 个交易日' + (rank.short ? '，历史不足' + period.label : '') + '；融资余额金额排名百分位：最低0%，最高100%，中间并列值取平均排名；窗口内余额相同或仅1条样本时为50%。以最新融资日期为截止日。' : '';
       });
       refs.shareholderMessage.textContent = latestSummary + ' · ' +
         RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';
