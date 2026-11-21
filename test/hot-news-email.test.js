@@ -181,13 +181,13 @@ test("reuses an existing Chinese title without calling the translation service",
   assert.deepEqual(await require("../scripts/send-hot-news-email").addChineseTranslations(items), items);
 });
 
-test("best-effort translation mode can return an untranslated item for caller fallback", async () => {
+test("translation failure defaults to preserving the original fresh item", async () => {
   const items = [{ title: "Needs translation", titleZh: "", source: "Example" }];
   const originalFetch = global.fetch;
   global.fetch = async () => { throw new Error("offline"); };
   try {
     assert.deepEqual(
-      await require("../scripts/send-hot-news-email").addChineseTranslations(items, 450, { strict: false }),
+      await require("../scripts/send-hot-news-email").addChineseTranslations(items),
       items,
     );
   } finally {

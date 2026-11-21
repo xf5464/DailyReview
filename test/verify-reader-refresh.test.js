@@ -29,11 +29,25 @@ test('rejects a successful-looking snapshot that retained a cached category', ()
   assert.throws(() => verifyReaderRefresh(value, now), /market: 10\/10 cached items/);
 });
 
-test('rejects stale fetch timestamps and untranslated titles', () => {
+test('rejects stale fetch timestamps even when original titles are allowed', () => {
   const value = archive();
   const item = value.items.find((entry) => entry.category === 'youtube');
   item.fetchedAt = '2026-09-08T02:00:00Z';
   item.sourceUpdatedAt = item.fetchedAt;
   item.titleZh = '';
-  assert.throws(() => verifyReaderRefresh(value, now), /youtube: 1\/10 stale fetch timestamps; youtube: 1\/10 untranslated titles/);
+  assert.throws(() => verifyReaderRefresh(value, now), /youtube: 1\/10 stale fetch timestamps/);
+});
+
+
+test('accepts fresh original titles across every category when translation is unavailable', () => {
+  const value = archive();
+  value.items.forEach(item => { item.titleZh = ''; });
+  assert.equal(verifyReaderRefresh(value, now), true);
+});
+
+test('still rejects missing titles', () => {
+  const value = archive();
+  value.items[0].title = '';
+  value.items[0].titleZh = '';
+  assert.throws(() => verifyReaderRefresh(value, now), /missing titles/);
 });

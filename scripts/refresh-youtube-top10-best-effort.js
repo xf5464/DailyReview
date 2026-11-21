@@ -53,28 +53,14 @@ async function main() {
     ...item,
     titleZh: knownTranslations.get(item.url) || '',
   })), 450, { strict: false });
-  const untranslated = attempted.filter((item) => !containsChinese(item.title) && !containsChinese(item.titleZh));
   const fetchedAt = new Date(now).toISOString();
-  let freshYoutube;
-  if (untranslated.length) {
-    const translatedPrevious = previousYoutube
-      .filter((item) => containsChinese(item.title) || containsChinese(item.titleZh))
-      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
-      .slice(0, MAX_ITEMS);
-    if (translatedPrevious.length !== MAX_ITEMS) {
-      throw new Error(`Refusing to publish ${untranslated.length} untranslated YouTube title(s) without a complete translated fallback.`);
-    }
-    freshYoutube = translatedPrevious.map((item) => ({ ...item, isCached: true }));
-    console.warn(`YouTube translation failed for ${untranslated.length} item(s); reused the previous translated Top 10.`);
-  } else {
-    freshYoutube = attempted.map((item) => ({
-      ...item,
-      id: itemId(item.url),
-      fetchedAt,
-      sourceUpdatedAt: fetchedAt,
-      isCached: false,
-    }));
-  }
+  const freshYoutube = attempted.map((item) => ({
+    ...item,
+    id: itemId(item.url),
+    fetchedAt,
+    sourceUpdatedAt: fetchedAt,
+    isCached: false,
+  }));
 
   const hadCachedYoutubeFallback = previousYoutube.length === MAX_ITEMS && previousYoutube.every((item) => item.isCached);
   archive.items = [...(archive.items || []).filter((item) => item.category !== 'youtube'), ...freshYoutube];
@@ -82,7 +68,7 @@ async function main() {
   archive.updatedAt = fetchedAt;
   archive.refreshAttemptedAt = fetchedAt;
   fs.writeFileSync(ARCHIVE_PATH, `${JSON.stringify(archive, null, 2)}\n`, 'utf8');
-  console.log('Saved YouTube Top 10; all displayed titles have Chinese translations.');
+  console.log('Saved fresh YouTube Top 10; original titles retained when translation is unavailable.');
 }
 
 if (require.main === module) {

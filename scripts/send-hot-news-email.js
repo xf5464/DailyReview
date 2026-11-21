@@ -529,7 +529,7 @@ function assertChineseTranslations(items) {
   return items;
 }
 
-async function addChineseTranslations(items, maxBatchBytes = 450, { strict = true } = {}) {
+async function addChineseTranslations(items, maxBatchBytes = 450, { strict = false } = {}) {
   const output = items.map((item) => ({
     ...item,
     titleZh: String(item.titleZh || "").trim() || (containsChinese(item.title) ? item.title : ""),
@@ -550,7 +550,7 @@ async function addChineseTranslations(items, maxBatchBytes = 450, { strict = tru
       await Promise.all(indexes.map(async (index) => {
         try { output[index].titleZh = await translateTitleWithRetry(items[index].title); }
         catch (fallbackError) {
-          console.warn(`Could not translate title from ${language}: MyMemory: ${error.message}; Google fallback: ${fallbackError.message}`);
+          console.log(`Translation unavailable for ${language}; keeping the fresh original title.`);
         }
       }));
     }
@@ -743,17 +743,7 @@ async function collectHotNews(
     titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || "",
   }));
   const translateWithSnapshotFallback = async (items, category) => {
-    const attempted = await addChineseTranslations(reuseTranslations(items), 450, { strict: false });
-    const missing = attempted.filter((item) => !containsChinese(item.title) && !containsChinese(item.titleZh));
-    if (!missing.length) return attempted;
-    const previous = [...knownSourceItems.values()]
-      .filter((item) => item.category === category && (containsChinese(item.title) || containsChinese(item.titleZh)))
-      .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
-      .slice(0, MAX_ITEMS);
-    if (previous.length !== MAX_ITEMS) return assertChineseTranslations(attempted);
-    failureCount += 1;
-    console.warn(`${category} title translation failed for ${missing.length} item(s); reused the previous translated Top 10.`);
-    return previous;
+    return addChineseTranslations(reuseTranslations(items));
   };
   const [tech, market] = await Promise.all([
     translateWithSnapshotFallback(resolvedTech.items.sort((a, b) => a.sourceOrder - b.sourceOrder), "tech"),

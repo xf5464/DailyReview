@@ -196,28 +196,9 @@ async function translateItems(items, knownTranslations, previousBySource, baseli
     titleZh: knownTranslations.get(item.url) || knownTranslations.get(item.googleNewsUrl) || item.titleZh || '',
   }));
   const translatedItems = await addChineseTranslations(prepared, 450, { strict: false });
-  const output = translatedItems.flatMap((translated, index) => {
-    if (containsChinese(translated.titleZh) || containsChinese(translated.title)) return [polishChineseTitle(translated)];
-    const item = items[index];
-    const fallback = previousBySource.get(item.sourceKey) || baselineBySource.get(item.sourceKey);
-    if (fallback && containsChinese(fallback.titleZh) && isAcceptableHeadline(item.category, fallback.title, fallback.url)) {
-      console.warn(`${item.source} translation failed; kept its previous translated headline as explicit cache.`);
-      return [polishChineseTitle(cachedMetadata({ ...fallback, category: item.category, source: item.source, sourceKey: item.sourceKey, sourceOrder: item.sourceOrder }))];
-    }
-    console.warn(`${item.source} translation failed and no translated fallback was usable; source omitted.`);
-    return [];
-  });
-  if (output.length === 10) return output;
-  const category = items[0]?.category;
-  const previous = [...previousBySource.values()]
-    .filter((item) => item.category === category && (containsChinese(item.title) || containsChinese(item.titleZh)))
-    .sort((left, right) => Number(left.sourceOrder) - Number(right.sourceOrder))
-    .slice(0, 10);
-  if (previous.length === 10) {
-    console.warn(`${category} refresh produced only ${output.length}/10 translated items; reused the previous translated Top 10.`);
-    return previous.map((item) => polishChineseTitle(cachedMetadata(item)));
-  }
-  return output;
+  return translatedItems.map((item) => containsChinese(item.titleZh) || containsChinese(item.title)
+    ? polishChineseTitle(item)
+    : { ...item, title: cleanHeadlineText(item.title), titleZh: '' });
 }
 
 function techTokens(title) {
@@ -350,4 +331,4 @@ async function main() {
   if (!environmentFlag(process.env.HOT_NEWS_REFRESH_ONLY)) console.log('refresh-reader-news.js is intended for reader refresh mode; no email was sent.');
 }
 if (require.main === module) main().catch((error) => { console.error(error.stack || error.message); process.exitCode = 1; });
-module.exports = { TECH_SOURCES, cleanHeadlineText, collectTechTop10, hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, rankTechClusters, sameTechEvent };
+module.exports = { TECH_SOURCES, cleanHeadlineText, collectTechTop10, hasReadableHeadlineShape, isClearlyNonTechHeadline, parseSectionHeadline, polishChineseTitle, translateItems, rankTechClusters, sameTechEvent };
