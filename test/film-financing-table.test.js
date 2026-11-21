@@ -84,6 +84,24 @@ test('column clicks sort numbers in both directions, keep missing values last, a
     assert.equal(body()[0].children[index].textContent, '+10.13');
     assert.equal(body().at(-1).children[index].textContent, '--');
   }
+  const extract = name => {const a=app.indexOf('  function '+name+'(');return app.slice(a,app.indexOf('\n  function ',a+10));};
+  domContext.hasNumericValue = value => value != null && value !== '' && Number.isFinite(Number(value));
+  vm.runInContext(['shiftMonths','pePercentile','stockMarginPercentile','stockMarginStatistics'].map(extract).join(''), domContext);
+  for (const stock of stocks) stock.history = stock.code === 'C' ? [] : [
+    {date:'2026-11-10',value:stock.code === 'A' ? 0 : 10},
+    {date:'2026-11-17',value:stock.code === 'A' ? 10 : 0},
+  ];
+  domContext.filmFinancingView = 'percentiles';
+  domContext.filmFinancingSortKey = 'rankWeek';
+  domContext.filmFinancingSortDirection = 'descending';
+  domContext.renderFilmFinancingTable(container, stocks);
+  assert.equal(headers()[2].children[0].textContent, '1周 ↓');
+  assert.deepEqual(body().map(row => row.children[2].textContent), ['100.0', '0.0', '0.0', '--']);
+  headers()[2].children[0].events.click();
+  assert.deepEqual(body().map(row => row.children[2].textContent), ['0.0', '0.0', '100.0', '--']);
+  stocks[0].inactive = true;
+  domContext.renderFilmFinancingTable(container, stocks);
+  assert.equal(body().find(row => row.children[0].children[0].textContent === '十').children[2].textContent, '--');
 });
 
 test('existing saved configurations gain the A-share entry and normal lazy loading joins movie rows with margin data', async () => {
@@ -122,4 +140,13 @@ test('existing saved configurations gain the A-share entry and normal lazy loadi
   assert.equal(calls.length, 2);
   await api.loadChartById('filmFinancing');
   assert.equal(calls.length, 2);
+});
+
+
+test('confirmed removals are historical-only until observations resume after the removal date', () => {
+  const stocks = {'000802':[{date:'2021-04-30',value:2.38}], '300027':[{date:'2026-04-29',value:3.36}]};
+  const movies = [{code:'000802',name:'北京文化'},{code:'300027',name:'ST华谊'}];
+  assert.ok(rows(movies,stocks).every(row => row.inactive));
+  stocks['300027'].push({date:'2026-11-20',value:1});
+  assert.equal(rows(movies,stocks)[1].inactive,false);
 });

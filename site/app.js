@@ -2997,6 +2997,10 @@
     orientationButton.hidden = !filmFinancing;
     orientationButton.textContent = landscape ? '切换竖屏' : '切换横屏';
     orientationButton.setAttribute('aria-pressed', String(landscape));
+    var viewButton = document.getElementById('filmFinancingViewButton');
+    viewButton.hidden = !filmFinancing;
+    viewButton.textContent = filmFinancingView === 'percentiles' ? '融资变化' : '余额百分位';
+    viewButton.setAttribute('aria-pressed', String(filmFinancingView === 'percentiles'));
     var customTableChart = filmFinancing || stockTableChart || wideEtfTableChart || economicCalendarChart;
     var valuationTableChart = activeDetailId === 'aSharePe';
     customTableChart = customTableChart || valuationTableChart;
@@ -3011,7 +3015,9 @@
     if (filmFinancing) {
       renderFilmFinancingTable(financingWrap, sourceChart.rows);
       refs.detailMessage.textContent = stockMarginState && stockMarginState.error ||
-        sourceChart.rows.length + '只股票 · N日变化＝数据日期余额－N个交易日前余额 · 单位亿 · 点击列标题排序';
+        sourceChart.rows.length + (filmFinancingView === 'percentiles'
+          ? '只股票 · 融资余额金额百分位（%）· 最低0，最高100 · *历史不足 · 点击列标题排序'
+          : '只股票 · N日变化＝数据日期余额－N个交易日前余额 · 单位亿 · 点击列标题排序');
       return;
     }
     if (valuationTableChart) {
@@ -3413,6 +3419,11 @@
   }
 
   var filmFinancingPeriods = [1, 3, 5, 10, 20, 30];
+  var filmFinancingView = 'changes';
+  var filmFinancingRanks = [{key:'rankWeek',label:'1周'}, {key:'rankMonth',label:'1月'},
+    {key:'rankQuarter',label:'3月'}, {key:'rankHalf',label:'6月'}, {key:'rank1',label:'1年'}, {key:'rank3',label:'3年'}];
+  // Verified exchange removals; dates and sources are documented in system-design.md.
+  var filmFinancingRemovals = {'000802':'2021-05-06', '300027':'2026-04-30'};
   var filmFinancingSortKey = 'change1';
   var filmFinancingSortDirection = 'descending';
 
@@ -3429,7 +3440,9 @@
       var latest = items.at(-1);
       var byDate = new Map(items.map(function (item) { return [item.date, Number(item.value)]; }));
       var latestIndex = dates.indexOf(latest.date);
-      var row = {code: stock.code, name: stock.name, date: latest.date, balance: Number(latest.value)};
+      var removal = filmFinancingRemovals[stock.code];
+      var row = {code: stock.code, name: stock.name, date: latest.date, balance: Number(latest.value),
+        history: items, inactive: Boolean(removal && latest.date < removal), removalDate: removal || null};
       filmFinancingPeriods.forEach(function (days) {
         var previous = byDate.get(dates[latestIndex - days]);
         row['change' + days] = previous === undefined ? null : row.balance - previous;
@@ -3453,8 +3466,17 @@
   }
 
   function renderFilmFinancingTable(container, rows) {
-    var columns = [{key: 'name', label: '股票'}, {key: 'date', label: '数据日期'}]
-      .concat(filmFinancingPeriods.map(function (days) { return {key: 'change' + days, label: days + '日'}; }));
+    var percentileView = filmFinancingView === 'percentiles';
+    if (percentileView) rows = rows.map(function (row) {
+      var stats = stockMarginStatistics(row.history || [], {});
+      var copy = Object.assign({}, row, {ranks: stats});
+      filmFinancingRanks.forEach(function (period) {
+        copy[period.key] = !row.inactive && stats[period.key] ? stats[period.key].value : null;
+      });
+      return copy;
+    });
+    var periods = percentileView ? filmFinancingRanks : filmFinancingPeriods.map(function (days) { return {key:'change' + days,label:days + '日'}; });
+    var columns = [{key: 'name', label: '股票'}, {key: 'date', label: '数据日期'}].concat(periods);
     var table = createElement('table', 'film-financing-table');
     var head = document.createElement('thead');
     var headers = document.createElement('tr');
@@ -3477,7 +3499,7 @@
     head.append(headers);
     var body = document.createElement('tbody');
     var sorted = rows.slice().sort(function (left, right) {
-      var a = left[filmFinancingSortKey], b = right[filmFinancingSortKey];
+      var a = left[filmFinancingSortKey] ?? null, b = right[filmFinancingSortKey] ?? null;
       if (a === null || b === null) return a === b ? left.code.localeCompare(right.code) : a === null ? 1 : -1;
       var difference = typeof a === 'number' ? a - b : String(a).localeCompare(String(b), 'zh-CN');
       return (filmFinancingSortDirection === 'ascending' ? difference : -difference) || left.code.localeCompare(right.code);
@@ -3493,13 +3515,24 @@
         renderShareholderHistory();
       });
       name.append(button, createElement('small', '', stock.code));
+      if (stock.inactive) {
+        var status = createElement('small', 'film-financing-inactive', '已调出');
+        status.title = stock.removalDate + ' 起调出融资融券标的；仅保留截至 ' + stock.date + ' 的历史数据。';
+        name.append(status);
+      }
       row.append(name, createElement('td', '', stock.date));
-      filmFinancingPeriods.forEach(function (days) {
-        var value = stock['change' + days];
-        var rounded = value === null ? null : Number(value.toFixed(2));
+      periods.forEach(function (period) {
+        var value = stock[period.key];
+        var digits = percentileView ? 1 : 2;
+        var rounded = value == null ? null : Number(value.toFixed(digits));
         var cell = createElement('td', 'number-cell', rounded === null ? '--' :
-          (rounded > 0 ? '+' : '') + rounded.toFixed(2));
-        if (rounded) cell.classList.add(rounded > 0 ? 'is-positive' : 'is-negative');
+          (percentileView ? '' : rounded > 0 ? '+' : '') + rounded.toFixed(digits));
+        if (!percentileView && rounded) cell.classList.add(rounded > 0 ? 'is-positive' : 'is-negative');
+        if (percentileView && stock.ranks[period.key]) {
+          var rank = stock.ranks[period.key];
+          if (rank.short && rounded !== null) cell.textContent += '*';
+          cell.title = stock.inactive ? '已调出，仅保留历史记录，不展示当前百分位' : rank.start + ' 至 ' + rank.end + ' · ' + rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' : '');
+        }
         row.append(cell);
       });
       body.append(row);
@@ -5328,6 +5361,12 @@
       button.addEventListener('click', function () {
         document.querySelector('#' + button.dataset.close).close();
       });
+    });
+    document.getElementById('filmFinancingViewButton').addEventListener('click', function () {
+      filmFinancingView = filmFinancingView === 'percentiles' ? 'changes' : 'percentiles';
+      filmFinancingSortKey = filmFinancingView === 'percentiles' ? 'rank3' : 'change1';
+      filmFinancingSortDirection = 'descending';
+      renderDetail();
     });
     document.getElementById('filmFinancingOrientationButton').addEventListener('click', function () {
       refs.detailDialog.classList.toggle('film-financing-landscape');

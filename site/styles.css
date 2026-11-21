@@ -4608,3 +4608,5 @@ body {
 .shareholder-margin-percentile-row strong { font-size:clamp(10px,2.8vw,16px); white-space:nowrap; overflow-wrap:normal; }
 .shareholder-margin-percentiles > small { display:block; margin-top:8px; }
 .shareholder-margin-percentiles [hidden] { display:none !important; }
+
+.film-financing-inactive { color:#8a5b22; font-size:11px; }
