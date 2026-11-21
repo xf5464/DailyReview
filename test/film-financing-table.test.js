@@ -122,7 +122,8 @@ test('existing saved configurations gain the A-share entry and normal lazy loadi
     fetch: async url => {
       calls.push(url);
       return {ok: true, json: async () => url.includes('film-stock-margin') ? snapshot : {
-        id: 'filmCinemaShareholders', items: [], rows: [{code: '600977', name: '中国电影'}, {code: 'NO_DATA', name: '无融资'}],
+        id: 'filmCinemaShareholders', items: [], rows: [{code: '600977', name: '中国电影'}, {code: 'NO_DATA', name: '无融资'},
+          {code: '000802', name: '北京文化'}, {code: '300027', name: 'ST华谊'}],
       }};
     },
   });

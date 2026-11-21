@@ -3453,7 +3453,8 @@
 
   function filmFinancingChart() {
     var movies = data && data.charts && data.charts.find(function (chart) { return chart.id === 'filmCinemaShareholders'; });
-    var rows = filmFinancingRows(movies && movies.rows || [], stockMarginState && stockMarginState.stocks || {});
+    var rows = filmFinancingRows(movies && movies.rows || [], stockMarginState && stockMarginState.stocks || {})
+      .filter(function (row) { return !row.inactive; });
     var latestDate = rows.map(function (row) { return row.date; }).sort().at(-1);
     return {
       id: 'filmFinancing', title: '电影融资', chartType: 'filmFinancingTable',
