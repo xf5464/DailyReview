@@ -520,12 +520,18 @@
           <div><span>融资余额</span><strong id="shareholderMarginLatestBalance">--</strong></div>
           <div><span>股价</span><strong id="shareholderMarginLatestPrice">--</strong></div>
           <div><span>融资占总市值</span><strong id="shareholderMarginCapRatio">--</strong><small id="shareholderMarginCapNote"></small></div>
-          <div><span>近1周百分位</span><strong id="shareholderMarginRankWeek">--</strong><small id="shareholderMarginRankWeekNote"></small></div>
-          <div><span>近1个月百分位</span><strong id="shareholderMarginRankMonth">--</strong><small id="shareholderMarginRankMonthNote"></small></div>
-          <div><span>近3个月百分位</span><strong id="shareholderMarginRankQuarter">--</strong><small id="shareholderMarginRankQuarterNote"></small></div>
-          <div><span>近6个月百分位</span><strong id="shareholderMarginRankHalf">--</strong><small id="shareholderMarginRankHalfNote"></small></div>
-          <div><span>近12个月百分位</span><strong id="shareholderMarginRank1">--</strong><small id="shareholderMarginRank1Note"></small></div>
-          <div><span>近36个月百分位</span><strong id="shareholderMarginRank3">--</strong><small id="shareholderMarginRank3Note"></small></div>
+          <section class="shareholder-margin-percentiles" aria-label="融资余额金额百分位">
+            <h4>融资余额金额百分位<span>（%）</span></h4>
+            <div class="shareholder-margin-percentile-row">
+              <div><span>1周</span><strong id="shareholderMarginRankWeek">--</strong><small id="shareholderMarginRankWeekNote" hidden></small></div>
+              <div><span>1月</span><strong id="shareholderMarginRankMonth">--</strong><small id="shareholderMarginRankMonthNote" hidden></small></div>
+              <div><span>3月</span><strong id="shareholderMarginRankQuarter">--</strong><small id="shareholderMarginRankQuarterNote" hidden></small></div>
+              <div><span>6月</span><strong id="shareholderMarginRankHalf">--</strong><small id="shareholderMarginRankHalfNote" hidden></small></div>
+              <div><span>1年</span><strong id="shareholderMarginRank1">--</strong><small id="shareholderMarginRank1Note" hidden></small></div>
+              <div><span>3年</span><strong id="shareholderMarginRank3">--</strong><small id="shareholderMarginRank3Note" hidden></small></div>
+            </div>
+            <small id="shareholderMarginPercentileNote" hidden>* 历史不足，按已有数据计算</small>
+          </section>
         </div>
         <p class="overall-config-message" id="shareholderHistoryMessage" role="status"></p>
         <svg class="overall-detail-chart overall-chart" id="shareholderHistoryChart" role="img" aria-label="股票季度股东人数图"></svg>

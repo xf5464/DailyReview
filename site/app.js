@@ -574,6 +574,7 @@
     shareholderMarginLatestPrice: document.querySelector('#shareholderMarginLatestPrice'),
     shareholderMarginCapRatio: document.querySelector('#shareholderMarginCapRatio'),
     shareholderMarginCapNote: document.querySelector('#shareholderMarginCapNote'),
+    shareholderMarginPercentileNote: document.querySelector('#shareholderMarginPercentileNote'),
     shareholderMarginRankWeek: document.querySelector('#shareholderMarginRankWeek'),
     shareholderMarginRankWeekNote: document.querySelector('#shareholderMarginRankWeekNote'),
     shareholderMarginRankMonth: document.querySelector('#shareholderMarginRankMonth'),
@@ -3618,6 +3619,7 @@
     if (shareholderHistoryMode === 'margin') refs.shareholderMarginDailySection.hidden = true;
     if (shareholderHistoryMode === 'margin') {
       ['Date', 'Balance', 'Price'].forEach(function (key) { refs['shareholderMarginLatest' + key].textContent = '--'; });
+      refs.shareholderMarginPercentileNote.hidden = true;
       ['CapRatio', 'CapNote', 'RankWeek', 'RankWeekNote', 'RankMonth', 'RankMonthNote', 'RankQuarter', 'RankQuarterNote', 'RankHalf', 'RankHalfNote', 'Rank1', 'Rank1Note', 'Rank3', 'Rank3Note'].forEach(function (key) { refs['shareholderMargin' + key].textContent = '--'; });
       if (!stockMarginState) loadStockMargin();
       if (stockMarginState.loading) {
@@ -3663,11 +3665,12 @@
       [{key: 'Week', label: '1周'}, {key: 'Month', label: '1个月'}, {key: 'Quarter', label: '3个月'}, {key: 'Half', label: '6个月'}, {key: '1', label: '12个月'}, {key: '3', label: '36个月'}].forEach(function (period) {
         var years = period.key;
         var rank = stats['rank' + years];
-        refs['shareholderMarginRank' + years].textContent = rank ? rank.value.toFixed(1) + '%' : '--';
+        if (rank && rank.short) refs.shareholderMarginPercentileNote.hidden = false;
+        refs['shareholderMarginRank' + years].textContent = rank ? rank.value.toFixed(1) + (rank.short ? '*' : '') : '--';
         refs['shareholderMarginRank' + years + 'Note'].textContent = rank ?
           rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' + period.label : '') : '暂无有效历史';
         refs['shareholderMarginRank' + years].title = rank ? rank.start + ' 至 ' + rank.end +
-          '；中秩百分位：(低于当前余额的样本数 + 相同余额样本数的一半) ÷ 有效样本数。以最新融资日期为截止日。' : '';
+          '；' + rank.count + ' 个交易日' + (rank.short ? '，历史不足' + period.label : '') + '；融资余额金额中秩百分位：(低于当前余额的样本数 + 相同余额样本数的一半) ÷ 有效样本数。以最新融资日期为截止日。' : '';
       });
       refs.shareholderMessage.textContent = latestSummary + ' · ' +
         RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';

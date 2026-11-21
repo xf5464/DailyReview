@@ -4598,3 +4598,13 @@ body {
 }
 
 .shareholder-margin-latest small { font-size:11px; line-height:1.5; color:var(--muted, #64748b); overflow-wrap:anywhere; }
+
+/* Financing balance percentiles: six compact cells share one row, including phones. */
+.shareholder-margin-percentiles { grid-column:1 / -1; min-width:0; padding:10px 8px; border:1px solid var(--border-color,#d1d5db); border-radius:8px; }
+.shareholder-margin-percentiles h4 { margin:0 0 9px; font-size:12px; font-weight:600; }
+.shareholder-margin-percentile-row { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:2px; }
+.shareholder-margin-percentile-row > div { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; }
+.shareholder-margin-percentile-row span { font-size:11px; white-space:nowrap; }
+.shareholder-margin-percentile-row strong { font-size:clamp(10px,2.8vw,16px); white-space:nowrap; overflow-wrap:normal; }
+.shareholder-margin-percentiles > small { display:block; margin-top:8px; }
+.shareholder-margin-percentiles [hidden] { display:none !important; }
