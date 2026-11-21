@@ -574,6 +574,14 @@
     shareholderMarginLatestPrice: document.querySelector('#shareholderMarginLatestPrice'),
     shareholderMarginCapRatio: document.querySelector('#shareholderMarginCapRatio'),
     shareholderMarginCapNote: document.querySelector('#shareholderMarginCapNote'),
+    shareholderMarginRankWeek: document.querySelector('#shareholderMarginRankWeek'),
+    shareholderMarginRankWeekNote: document.querySelector('#shareholderMarginRankWeekNote'),
+    shareholderMarginRankMonth: document.querySelector('#shareholderMarginRankMonth'),
+    shareholderMarginRankMonthNote: document.querySelector('#shareholderMarginRankMonthNote'),
+    shareholderMarginRankQuarter: document.querySelector('#shareholderMarginRankQuarter'),
+    shareholderMarginRankQuarterNote: document.querySelector('#shareholderMarginRankQuarterNote'),
+    shareholderMarginRankHalf: document.querySelector('#shareholderMarginRankHalf'),
+    shareholderMarginRankHalfNote: document.querySelector('#shareholderMarginRankHalfNote'),
     shareholderMarginRank1: document.querySelector('#shareholderMarginRank1'),
     shareholderMarginRank1Note: document.querySelector('#shareholderMarginRank1Note'),
     shareholderMarginRank3: document.querySelector('#shareholderMarginRank3'),
@@ -1396,9 +1404,9 @@
     return aSharePeRefreshPromise;
   }
 
-  function pePercentile(items, value, endDate, years, includeNonPositive) {
+  function pePercentile(items, value, endDate, years, includeNonPositive, startOverride) {
     if (!hasNumericValue(value) || !endDate || !items || !items.length) return null;
-    var start = shiftMonths(new Date(endDate + 'T00:00:00Z'), -12 * Number(years)).toISOString().slice(0, 10);
+    var start = startOverride || shiftMonths(new Date(endDate + 'T00:00:00Z'), -12 * Number(years)).toISOString().slice(0, 10);
     var samples = items.filter(function (item) { return item.date >= start && item.date <= endDate && hasNumericValue(item.value) && (includeNonPositive || Number(item.value) > 0); });
     if (!samples.length) return null;
     var below = samples.filter(function (item) { return Number(item.value) < Number(value); }).length;
@@ -3584,6 +3592,11 @@
     var latest = history.at(-1);
     var cap = stock && hasNumericValue(stock.totalMarketCap) ? Number(stock.totalMarketCap) : null;
     return { ratio: latest && cap > 0 ? latest.value / cap * 100 : null,
+      rankWeek: latest ? pePercentile(history, latest.value, latest.date, 0, true,
+        new Date(Date.parse(latest.date) - 7 * 86400000).toISOString().slice(0, 10)) : null,
+      rankMonth: latest ? pePercentile(history, latest.value, latest.date, 1 / 12, true) : null,
+      rankQuarter: latest ? pePercentile(history, latest.value, latest.date, 0.25, true) : null,
+      rankHalf: latest ? pePercentile(history, latest.value, latest.date, 0.5, true) : null,
       rank1: latest ? pePercentile(history, latest.value, latest.date, 1, true) : null,
       rank3: latest ? pePercentile(history, latest.value, latest.date, 3, true) : null };
   }
@@ -3605,7 +3618,7 @@
     if (shareholderHistoryMode === 'margin') refs.shareholderMarginDailySection.hidden = true;
     if (shareholderHistoryMode === 'margin') {
       ['Date', 'Balance', 'Price'].forEach(function (key) { refs['shareholderMarginLatest' + key].textContent = '--'; });
-      ['CapRatio', 'CapNote', 'Rank1', 'Rank1Note', 'Rank3', 'Rank3Note'].forEach(function (key) { refs['shareholderMargin' + key].textContent = '--'; });
+      ['CapRatio', 'CapNote', 'RankWeek', 'RankWeekNote', 'RankMonth', 'RankMonthNote', 'RankQuarter', 'RankQuarterNote', 'RankHalf', 'RankHalfNote', 'Rank1', 'Rank1Note', 'Rank3', 'Rank3Note'].forEach(function (key) { refs['shareholderMargin' + key].textContent = '--'; });
       if (!stockMarginState) loadStockMargin();
       if (stockMarginState.loading) {
         refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
@@ -3647,11 +3660,12 @@
       refs.shareholderMarginCapNote.textContent = stats.ratio === null ? '总市值暂不可用' :
         '总市值 ' + Number(stock.totalMarketCap).toFixed(2) + ' 亿 · ' + stock.marketCapDate + (stock.marketCapIsCached ? '（缓存）' : '');
       refs.shareholderMarginCapNote.title = '最新融资余额 ÷ 最新可用总市值 × 100%；融资与市值日期可能不同。' + (stock.marketCapSource || '');
-      [1, 3].forEach(function (years) {
+      [{key: 'Week', label: '1周'}, {key: 'Month', label: '1个月'}, {key: 'Quarter', label: '3个月'}, {key: 'Half', label: '6个月'}, {key: '1', label: '12个月'}, {key: '3', label: '36个月'}].forEach(function (period) {
+        var years = period.key;
         var rank = stats['rank' + years];
         refs['shareholderMarginRank' + years].textContent = rank ? rank.value.toFixed(1) + '%' : '--';
         refs['shareholderMarginRank' + years + 'Note'].textContent = rank ?
-          rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' + years + '年' : '') : '暂无有效历史';
+          rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' + period.label : '') : '暂无有效历史';
         refs['shareholderMarginRank' + years].title = rank ? rank.start + ' 至 ' + rank.end +
           '；中秩百分位：(低于当前余额的样本数 + 相同余额样本数的一半) ÷ 有效样本数。以最新融资日期为截止日。' : '';
       });

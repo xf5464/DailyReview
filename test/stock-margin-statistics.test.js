@@ -48,3 +48,45 @@ test('calendar windows rank latest balance with ties, zero and short-history dis
   assert.equal(short.rank1.value, 50);
   assert.equal(short.rank3.short, true);
 });
+
+
+test('3, 6, 12 and 36 month windows rank the balance itself, including exact calendar boundaries', () => {
+  const result = stats([
+    {date:'2023-11-20', value:10}, {date:'2025-11-20', value:9},
+    {date:'2026-05-19', value:8}, {date:'2026-05-20', value:7},
+    {date:'2026-08-19', value:6}, {date:'2026-08-20', value:1},
+    {date:'2026-10-20', value:2}, {date:'2026-11-20', value:3},
+  ], {});
+  assert.equal(result.rankQuarter.count, 3);
+  assert.equal(result.rankHalf.count, 5);
+  assert.equal(result.rank1.count, 7);
+  assert.equal(result.rank3.count, 8);
+  assert.ok(Math.abs(result.rankQuarter.value - 250 / 3) < 1e-10);
+  assert.equal(result.rankHalf.value, 50);
+  assert.ok(Math.abs(result.rank1.value - 250 / 7) < 1e-10);
+  assert.equal(result.rank3.value, 31.25);
+  assert.equal(result.rankQuarter.short, false);
+  const short = stats([{date:'2026-11-20', value:3}], {});
+  for (const key of ['rankQuarter','rankHalf','rank1','rank3']) assert.equal(short[key].short, true);
+});
+
+
+test('week and month balance percentiles use calendar cutoffs and preserve empty history', () => {
+  const result = stats([
+    {date:'2026-09-01', value:20}, {date:'2026-10-20', value:9},
+    {date:'2026-10-21', value:0}, {date:'2026-11-13', value:1},
+    {date:'2026-11-16', value:2}, {date:'2026-11-20', value:3},
+  ], {});
+  assert.equal(result.rankWeek.count, 3);
+  assert.equal(result.rankWeek.start, '2026-11-13');
+  assert.ok(Math.abs(result.rankWeek.value - 250 / 3) < 1e-10);
+  assert.equal(result.rankMonth.count, 5);
+  assert.equal(result.rankMonth.start, '2026-10-20');
+  assert.equal(result.rankMonth.value, 70);
+  assert.equal(result.rankWeek.short, false);
+  assert.equal(stats([], {}).rankWeek, null);
+  assert.equal(stats([], {}).rankMonth, null);
+  const short = stats([{date:'2026-11-20', value:3}], {});
+  assert.equal(short.rankWeek.short, true);
+  assert.equal(short.rankMonth.short, true);
+});
