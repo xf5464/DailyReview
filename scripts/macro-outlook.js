@@ -1,3 +1,4 @@
+const { fetchStockMarketCap } = require('./stock-market-cap');
 const DEFAULT_MONTH_COUNT = 12;
 const { queryEtfPremium159941 } = require('./etf-premium-159941');
 const { queryOfficialPremium159941 } = require('./etf-official-premium-159941');
@@ -2422,7 +2423,15 @@ async function queryMacroOutlook(options = {}) {
       const previousPricesByCode = new Map(
         (historicalChartCache.filmCinemaShareholders?.rows || []).map((row) => [row.code, row.priceItems || []])
       );
+      const previousRowsByCode = new Map((historicalChartCache.filmCinemaShareholders?.rows || []).map(row => [row.code, row]));
       const rows = await mapWithConcurrency(constituents, 5, async (stock) => {
+        const marketCapPromise = fetchStockMarketCap(stock.code, fetchImpl).catch(() => {
+          const previous = previousRowsByCode.get(stock.code);
+          return previous?.totalMarketCap > 0 && previous.marketCapDate
+            ? { totalMarketCap: previous.totalMarketCap, marketCapDate: previous.marketCapDate,
+              marketCapSource: previous.marketCapSource, marketCapIsCached: true }
+            : { totalMarketCap: null, marketCapDate: null };
+        });
         let history = [];
         let historySource = '同花顺 F10';
         let error = null;
@@ -2472,7 +2481,7 @@ async function queryMacroOutlook(options = {}) {
           ? previousPrices : freshPrices;
         const scheduledDisclosureDate = await fetchAppointment(stock.code);
         return {
-          ...stock, scheduledDisclosureDate, scheduledDisclosureReportDate,
+          ...stock, ...await marketCapPromise, scheduledDisclosureDate, scheduledDisclosureReportDate,
           latestDate: latest?.date || null, latestValue: latest?.value ?? null,
           quarterlyItems: attachQuarterlyPrices(quarterlyHolderItems(history), priceItems),
           priceItems, historySource, error,

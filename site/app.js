@@ -572,6 +572,12 @@
     shareholderMarginLatestDate: document.querySelector('#shareholderMarginLatestDate'),
     shareholderMarginLatestBalance: document.querySelector('#shareholderMarginLatestBalance'),
     shareholderMarginLatestPrice: document.querySelector('#shareholderMarginLatestPrice'),
+    shareholderMarginCapRatio: document.querySelector('#shareholderMarginCapRatio'),
+    shareholderMarginCapNote: document.querySelector('#shareholderMarginCapNote'),
+    shareholderMarginRank1: document.querySelector('#shareholderMarginRank1'),
+    shareholderMarginRank1Note: document.querySelector('#shareholderMarginRank1Note'),
+    shareholderMarginRank3: document.querySelector('#shareholderMarginRank3'),
+    shareholderMarginRank3Note: document.querySelector('#shareholderMarginRank3Note'),
     shareholderMessage: document.querySelector('#shareholderHistoryMessage'),
     shareholderChart: document.querySelector('#shareholderHistoryChart'),
     shareholderBarsDialog: document.querySelector('#shareholderBarChartsDialog'),
@@ -3568,6 +3574,20 @@
     refs.shareholderClose.focus({ preventScroll: true });
   }
 
+  function stockMarginStatistics(items, stock) {
+    var byDate = new Map();
+    (items || []).forEach(function (item) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(item.date) && hasNumericValue(item.value) && Number(item.value) >= 0)
+        byDate.set(item.date, {date: item.date, value: Number(item.value)});
+    });
+    var history = Array.from(byDate.values()).sort(function (a, b) { return a.date.localeCompare(b.date); });
+    var latest = history.at(-1);
+    var cap = stock && hasNumericValue(stock.totalMarketCap) ? Number(stock.totalMarketCap) : null;
+    return { ratio: latest && cap > 0 ? latest.value / cap * 100 : null,
+      rank1: latest ? pePercentile(history, latest.value, latest.date, 1, true) : null,
+      rank3: latest ? pePercentile(history, latest.value, latest.date, 3, true) : null };
+  }
+
   function renderShareholderHistory() {
     var chart = chartById('filmCinemaShareholders');
     var stock = chart && (chart.rows || []).find(function (row) { return row.code === activeShareholderCode; });
@@ -3584,6 +3604,8 @@
     refs.shareholderTitle.textContent = stock.name + '（' + stock.code + '）';
     if (shareholderHistoryMode === 'margin') refs.shareholderMarginDailySection.hidden = true;
     if (shareholderHistoryMode === 'margin') {
+      ['Date', 'Balance', 'Price'].forEach(function (key) { refs['shareholderMarginLatest' + key].textContent = '--'; });
+      ['CapRatio', 'CapNote', 'Rank1', 'Rank1Note', 'Rank3', 'Rank3Note'].forEach(function (key) { refs['shareholderMargin' + key].textContent = '--'; });
       if (!stockMarginState) loadStockMargin();
       if (stockMarginState.loading) {
         refs.shareholderMessage.textContent = '正在获取该股票融资余额历史...';
@@ -3620,6 +3642,19 @@
       refs.shareholderMarginLatestDate.textContent = latestMargin.date;
       refs.shareholderMarginLatestBalance.textContent = Number(latestMargin.value).toFixed(2) + ' 亿元';
       refs.shareholderMarginLatestPrice.textContent = priceLabel;
+      var stats = stockMarginStatistics(marginItems, stock);
+      refs.shareholderMarginCapRatio.textContent = stats.ratio === null ? '--' : stats.ratio.toFixed(2) + '%';
+      refs.shareholderMarginCapNote.textContent = stats.ratio === null ? '总市值暂不可用' :
+        '总市值 ' + Number(stock.totalMarketCap).toFixed(2) + ' 亿 · ' + stock.marketCapDate + (stock.marketCapIsCached ? '（缓存）' : '');
+      refs.shareholderMarginCapNote.title = '最新融资余额 ÷ 最新可用总市值 × 100%；融资与市值日期可能不同。' + (stock.marketCapSource || '');
+      [1, 3].forEach(function (years) {
+        var rank = stats['rank' + years];
+        refs['shareholderMarginRank' + years].textContent = rank ? rank.value.toFixed(1) + '%' : '--';
+        refs['shareholderMarginRank' + years + 'Note'].textContent = rank ?
+          rank.count + ' 个交易日' + (rank.short ? ' · 历史不足' + years + '年' : '') : '暂无有效历史';
+        refs['shareholderMarginRank' + years].title = rank ? rank.start + ' 至 ' + rank.end +
+          '；中秩百分位：(低于当前余额的样本数 + 相同余额样本数的一半) ÷ 有效样本数。以最新融资日期为截止日。' : '';
+      });
       refs.shareholderMessage.textContent = latestSummary + ' · ' +
         RANGES[refs.shareholderRange.value].label + ' · 东方财富个股融资融券明细';
       renderShareholderMarginDaily(marginItems, refs.shareholderRange.value);

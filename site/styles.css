@@ -4596,3 +4596,5 @@ body {
     transform: translate(-50%, -50%) rotate(90deg);
   }
 }
+
+.shareholder-margin-latest small { font-size:11px; line-height:1.5; color:var(--muted, #64748b); overflow-wrap:anywhere; }
