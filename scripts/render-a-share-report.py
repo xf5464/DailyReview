@@ -4,6 +4,7 @@ import calendar
 import datetime as dt
 import json
 import math
+import re
 from pathlib import Path
 
 import matplotlib
@@ -73,15 +74,43 @@ def render(payload, report, output):
         values = [p["value"] for p in s["items"]]
         end = dates[-1]
         start = end.replace(year=end.year-1, day=min(end.day, calendar.monthrange(end.year-1, end.month)[1]))
-        fig, ax = plt.subplots(figsize=(9, 5.6), dpi=160)
+        metric = s["code"] in {m[0] for m in METRICS}
+        fig, ax = plt.subplots(figsize=(9, 8.4 if metric else 5.6), dpi=160)
         fig.set_facecolor("#f8fafc")
         ax.set_facecolor("#ffffff")
-        fig.subplots_adjust(left=.105, right=.965, bottom=.18, top=.76)
+        fig.subplots_adjust(left=.105, right=.965, bottom=.14 if metric else .18, top=.59 if metric else .76)
         metric = s["code"] in {m[0] for m in METRICS}
         title = s["name"] if metric else f'{s["name"]}  {s["code"]}'
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
-        fig.text(.105, .92, title, fontsize=23, weight="bold", color="#0f172a")
-        fig.text(.105, .85, f'{subtitle}   {start} 至 {end}', fontsize=12, color="#475569")
+        fig.text(.105, .94 if metric else .92, title, fontsize=23, weight="bold", color="#0f172a")
+        if metric:
+            section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
+            rank_rows = re.findall(r"^([^\n｜]+)｜([0-9]+(?:\.[0-9]+)?%\*?|暂缺)$", section, re.M)
+            labels = ["１个月", "３个月", "６个月", " １年 ", " ３年 "]
+            if [r[0] for r in rank_rows] != labels:
+                raise ValueError("Expected all five verified percentiles for the indicator image")
+            value_text = f'{values[-1]:,.2f}' if s["decimals"] == 2 else format(math.floor(values[-1] + .5), ",")
+            fig.text(.105, .865, value_text, fontsize=32, weight="bold", color=color)
+            fig.text(.105, .823, s["unit"], fontsize=14, color="#475569")
+            fig.text(.105, .765, f'数据日期：{end}', fontsize=13, color="#334155")
+            fig.text(.105, .706, '近一年历史曲线', fontsize=13, weight="bold", color="#334155")
+            fig.text(.105, .668, f'{start} 至 {end}', fontsize=11, color="#64748b")
+            table_ax = fig.add_axes([.60, .655, .36, .235])
+            table_ax.axis("off")
+            table = table_ax.table(cellText=[[l.strip().translate(str.maketrans("１３６", "136")), v] for l, v in rank_rows],
+                                   colLabels=["时间", "百分位"], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+            table.auto_set_font_size(False)
+            table.set_fontsize(13)
+            for (r, c), cell in table.get_celld().items():
+                cell.set_edgecolor("#e2e8f0")
+                cell.set_linewidth(.6)
+                cell.set_facecolor("#e2e8f0" if r == 0 else "#ffffff" if r % 2 else "#f1f5f9")
+                cell.get_text().set_color("#334155")
+                cell.get_text().set_weight("bold" if r == 0 or c == 1 else "normal")
+            if any(v.endswith("*") for _, v in rank_rows):
+                fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
+        else:
+            fig.text(.105, .85, f'{subtitle}   {start} 至 {end}', fontsize=12, color="#475569")
         ax.plot(dates, values, color=color, linewidth=1.7)
         ax.scatter([end], [values[-1]], color=color, s=30, zorder=4)
         label = f'{values[-1]:,.2f}' if s.get('decimals') == 2 else f'{values[-1]:,.0f}'
