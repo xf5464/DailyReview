@@ -78,10 +78,11 @@ def render(payload, report, output):
         end = dates[-1]
         start = end.replace(year=end.year-1, day=min(end.day, calendar.monthrange(end.year-1, end.month)[1]))
         metric = s["code"] in {m[0] for m in METRICS}
-        fig, ax = plt.subplots(figsize=(9, 10.8 if metric else 9.8), dpi=160)
+        point_ranks = not metric and MARKET == "a"
+        fig, ax = plt.subplots(figsize=(9, 10.8 if metric or point_ranks else 9.8), dpi=160)
         fig.set_facecolor("#f8fafc")
         ax.set_facecolor("#ffffff")
-        fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.41 if metric else .46)
+        fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.39 if metric or point_ranks else .46)
         title = s["name"] if metric else f'{s["name"]}  {s["code"]}'
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
         fig.text(.105, .95, title, fontsize=23, weight="bold", color="#0f172a")
@@ -108,10 +109,10 @@ def render(payload, report, output):
             fig.text(.105, .85, s["unit"], fontsize=14, color="#475569")
             fig.text(.105, .805, f'数据日期：{end}', fontsize=13, color="#334155")
             fig.text(.105, .76, f'当前回落（近3年）：{drawdown:.2f}%', fontsize=13, color="#334155")
-            fig.text(.105, .715, f'近3年最高：{number(high)}{s["unit"]}', fontsize=12, color="#475569")
-            fig.text(.105, .675, f'最高值日期：{ref["date"]}', fontsize=12, color="#475569")
-            fig.text(.105, .63, '回落基准：近3年最高值', fontsize=10, color="#64748b")
-            table_ax = fig.add_axes([.61, .655, .35, .245])
+            fig.text(.61, .89, f'近3年最高：{number(high)}{s["unit"]}', fontsize=11, color="#475569")
+            fig.text(.61, .855, f'最高值日期：{ref["date"]}', fontsize=11, color="#475569")
+            fig.text(.61, .82, '回落基准：近3年最高值', fontsize=10, color="#64748b")
+            table_ax = fig.add_axes([.61, .61, .35, .185])
             table_ax.axis("off")
             cell_rows = [[("已达 · " if drawdown >= level else "下一档 · " if level == next_level else "") + f'跌{level}%', number(high * (1-level/100))] for level in levels]
             table = table_ax.table(cellText=cell_rows, colLabels=["回落档位", f'对应数值（{s["unit"]}）'], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
@@ -126,8 +127,8 @@ def render(payload, report, output):
                 cell.get_text().set_weight("bold" if r == 0 or c == 1 else "normal")
             if next_level is not None:
                 distance = (1 - high * (1-next_level/100) / current) * 100
-                fig.text(.61, .62, f'至跌{next_level}%档还需跌 {distance:.2f}%', fontsize=11, color="#92400e")
-            rank_ax = fig.add_axes([.105, .51, .86, .08])
+                fig.text(.61, .585, f'至跌{next_level}%档还需跌 {distance:.2f}%', fontsize=11, color="#92400e")
+            rank_ax = fig.add_axes([.105, .47, .86, .08])
             rank_ax.axis("off")
             rank_table = rank_ax.table(cellText=[[v for _, v in rank_rows]], colLabels=["百分位 · " + l.strip().translate(str.maketrans("１３６", "136")) for l, _ in rank_rows], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
             rank_table.auto_set_font_size(False)
@@ -138,7 +139,7 @@ def render(payload, report, output):
                 cell.set_facecolor("#e2e8f0" if r == 0 else "#ffffff")
                 cell.get_text().set_color("#334155")
                 cell.get_text().set_weight("bold" if r else "normal")
-            fig.text(.105, .455, f'近一年历史曲线（{s["unit"]}）  {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
+            fig.text(.105, .425, f'近一年历史曲线（{s["unit"]}）  {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
             if any(v.endswith("*") for _, v in rank_rows):
                 fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
         else:
@@ -154,13 +155,15 @@ def render(payload, report, output):
             fig.text(.105, .752, 'PE（TTM）：' + field("PE（TTM）："), fontsize=13, color="#334155")
             drawdown_label = '当前回撤：' if MARKET == 'us' else '当前回撤（近3年）：'
             fig.text(.105, .709, drawdown_label + field(drawdown_label), fontsize=13, color="#334155")
-            reference_label = '上一交易日收盘：' if MARKET == 'us' else '近3年最高：'
-            fig.text(.105, .661, reference_label + field(reference_label), fontsize=11, color="#475569")
-            fig.text(.105, .619, '历史最高：' + field("历史最高："), fontsize=11, color="#475569")
+            if MARKET == "us":
+                fig.text(.105, .661, '上一交易日收盘：' + field("上一交易日收盘："), fontsize=11, color="#475569")
+            else:
+                fig.text(.61, .89, '近3年最高：' + field("近3年最高："), fontsize=10, color="#475569")
+            fig.text(.61, .855 if MARKET == "a" else .89, '历史最高：' + field("历史最高："), fontsize=10, color="#475569")
             rows = re.findall(r"^([🟢🟡⚪]) 跌(\d+)%：([0-9,]+)(?:（还需跌 ([0-9.]+)%）)?$", section, re.M)
             if len(rows) != 5:
                 raise ValueError("Expected all five verified index drawdown levels")
-            table_ax = fig.add_axes([.61, .635, .35, .255])
+            table_ax = fig.add_axes([.61, .61, .35, .185])
             table_ax.axis("off")
             table = table_ax.table(cellText=[[("已达 · " if light == "🟢" else "下一档 · " if light == "🟡" else "") + f'跌{level}%', value] for light, level, value, distance in rows],
                                    colLabels=["回撤档位", "对应点位"], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
@@ -175,10 +178,43 @@ def render(payload, report, output):
                 cell.get_text().set_weight("bold" if r == 0 or c == 1 else "normal")
             distance = next(((level, d) for light, level, value, d in rows if light == "🟡" and d), None)
             if distance:
-                fig.text(.61, .598, f'至跌{distance[0]}%档还需跌 {distance[1]}%', fontsize=11, color="#92400e")
+                fig.text(.61, .585, f'至跌{distance[0]}%档还需跌 {distance[1]}%', fontsize=11, color="#92400e")
             basis = '回撤基准：历史最高收盘' if MARKET == 'us' else '回撤基准：近3年最高收盘；历史最高仅供参考'
-            fig.text(.105, .558, basis, fontsize=10, color="#64748b")
-            fig.text(.105, .508, f'{subtitle}   {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
+            if MARKET == "a":
+                basis = '回撤基准：近3年最高收盘'
+            fig.text(.61, .82, basis, fontsize=9, color="#64748b")
+            if point_ranks:
+                ranks = s["pointPercentiles"]
+                if [r["months"] for r in ranks] != [1, 3, 6, 12, 36]:
+                    raise ValueError("Expected five closing-index percentile windows")
+                for rank in ranks:
+                    months = rank["months"]
+                    y, m = divmod(end.year*12 + end.month-1-months, 12)
+                    m += 1
+                    expected_start = dt.date(y, m, min(end.day, calendar.monthrange(y, m)[1])).isoformat()
+                    if (rank["startDate"] != expected_start or rank["endDate"] != str(end) or rank["sampleCount"] < 2
+                            or not isinstance(rank["value"], (int, float)) or not math.isfinite(rank["value"]) or not 0 <= rank["value"] <= 100):
+                        raise ValueError("Invalid index percentile metadata")
+                    if months <= 12:
+                        samples = [p["value"] for p in s["items"] if p["date"] >= expected_start]
+                        calculated = (sum(v < values[-1] for v in samples) + sum(v == values[-1] for v in samples)/2) / len(samples)*100
+                        if len(samples) != rank["sampleCount"] or abs(calculated - rank["value"]) > 1e-8:
+                            raise ValueError("Index percentile does not match its verified close history")
+                rank_ax = fig.add_axes([.105, .47, .86, .08])
+                rank_ax.axis("off")
+                rank_table = rank_ax.table(cellText=[[f'{r["value"]:.1f}%' + ('*' if r.get("short") else '') for r in ranks]],
+                                           colLabels=["百分位 · " + l for l in ["1个月", "3个月", "6个月", "1年", "3年"]], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+                rank_table.auto_set_font_size(False)
+                rank_table.set_fontsize(11)
+                for (r, c), cell in rank_table.get_celld().items():
+                    cell.set_edgecolor("#e2e8f0")
+                    cell.set_linewidth(.6)
+                    cell.set_facecolor("#e2e8f0" if r == 0 else "#ffffff")
+                    cell.get_text().set_color("#334155")
+                    cell.get_text().set_weight("bold" if r else "normal")
+                if any(r.get("short") for r in ranks):
+                    fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
+            fig.text(.105, .425 if point_ranks else .508, f'{subtitle}   {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
         ax.plot(dates, values, color=color, linewidth=1.7)
         ax.scatter([end], [values[-1]], color=color, s=30, zorder=4)
         label = f'{values[-1]:,.2f}' if s.get('decimals') == 2 else f'{values[-1]:,.0f}'
