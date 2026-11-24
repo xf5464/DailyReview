@@ -17,6 +17,8 @@ INDICES = [("000985", "中证全指"), ("000016", "上证50"),
            ("000300", "沪深300"), ("000688", "科创50")]
 
 
+MARKET = "a"
+
 METRICS = [("aShareTurnover", "全A成交额", "亿元", 0),
            ("aShareMarginBalance", "全A融资余额（沪深北三市）", "亿元", 0),
            ("aShareActiveMarketValueThs", "A股活跃市值（同花顺公式版）", "亿元", 0),
@@ -24,12 +26,13 @@ METRICS = [("aShareTurnover", "全A成交额", "亿元", 0),
 
 def validate(payload, report):
     report_date = dt.date.fromisoformat(payload["reportDate"])
-    if report.splitlines()[0] != f"A股指数日报｜北京时间{report_date}":
+    expected_header = f"北京时间报告日期：{report_date}" if MARKET == "us" else f"A股指数日报｜北京时间{report_date}"
+    if report.splitlines()[0] != expected_header:
         raise ValueError("Chart payload and text report dates differ")
     series = payload["indices"]
     if [(s["code"], s["name"]) for s in series] != INDICES:
         raise ValueError("Expected exactly the four configured price indices in order")
-    metrics = payload["metrics"]
+    metrics = payload.get("metrics", []) if MARKET == "us" else payload["metrics"]
     if [(s["code"], s["name"], s["unit"], s["decimals"]) for s in metrics] != METRICS:
         raise ValueError("Expected four configured market indicators and their correct units")
     series = series + metrics
@@ -53,7 +56,7 @@ def validate(payload, report):
             if f'数值：{expected}{s["unit"]}\n' not in text_section or f"数据日期：{end}\n" not in text_section:
                 raise ValueError("Text indicator and chart value/date differ")
         else:
-            text_section = report.split(f'{s["name"]}（{s["code"]}）', 1)[1].split("\n\n", 1)[0]
+            text_section = report.split((s["name"] if MARKET == "us" else f'{s["name"]}（{s["code"]}）'), 1)[1].split("\n\n", 1)[0]
             expected = format(math.floor(latest + 0.5), ",")
             if f"当前点位：{expected}\n" not in text_section or str(end) not in report:
                 raise ValueError("Text close and chart close differ")
@@ -109,7 +112,7 @@ def render(payload, report, output):
             if any(v.endswith("*") for _, v in rank_rows):
                 fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
         else:
-            section = report.split(f'{s["name"]}（{s["code"]}）', 1)[1].split("\n\n", 1)[0]
+            section = report.split((s["name"] if MARKET == "us" else f'{s["name"]}（{s["code"]}）'), 1)[1].split("\n\n", 1)[0]
             lines = section.strip().splitlines()
             def field(prefix):
                 return next((l[len(prefix):] for l in lines if l.startswith(prefix)), "暂缺")
@@ -119,8 +122,10 @@ def render(payload, report, output):
             change_color = "#059669" if change.startswith("🟢") else "#dc2626" if change.startswith("🔴") else "#475569"
             fig.text(.105, .795, change.lstrip("🟢🔴⚪ "), fontsize=13, weight="bold", color=change_color)
             fig.text(.105, .752, 'PE（TTM）：' + field("PE（TTM）："), fontsize=13, color="#334155")
-            fig.text(.105, .709, '当前回撤（近3年）：' + field("当前回撤（近3年）："), fontsize=13, color="#334155")
-            fig.text(.105, .661, '近3年最高：' + field("近3年最高："), fontsize=11, color="#475569")
+            drawdown_label = '当前回撤：' if MARKET == 'us' else '当前回撤（近3年）：'
+            fig.text(.105, .709, drawdown_label + field(drawdown_label), fontsize=13, color="#334155")
+            reference_label = '上一交易日收盘：' if MARKET == 'us' else '近3年最高：'
+            fig.text(.105, .661, reference_label + field(reference_label), fontsize=11, color="#475569")
             fig.text(.105, .619, '历史最高：' + field("历史最高："), fontsize=11, color="#475569")
             rows = re.findall(r"^([🟢🟡⚪]) 跌(\d+)%：([0-9,]+)(?:（还需跌 ([0-9.]+)%）)?$", section, re.M)
             if len(rows) != 5:
@@ -141,7 +146,8 @@ def render(payload, report, output):
             distance = next(((level, d) for light, level, value, d in rows if light == "🟡" and d), None)
             if distance:
                 fig.text(.61, .598, f'至跌{distance[0]}%档还需跌 {distance[1]}%', fontsize=11, color="#92400e")
-            fig.text(.105, .558, '回撤基准：近3年最高收盘；历史最高仅供参考', fontsize=10, color="#64748b")
+            basis = '回撤基准：历史最高收盘' if MARKET == 'us' else '回撤基准：近3年最高收盘；历史最高仅供参考'
+            fig.text(.105, .558, basis, fontsize=10, color="#64748b")
             fig.text(.105, .508, f'{subtitle}   {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
         ax.plot(dates, values, color=color, linewidth=1.7)
         ax.scatter([end], [values[-1]], color=color, s=30, zorder=4)
@@ -160,7 +166,8 @@ def render(payload, report, output):
             spine.set_visible(False)
         source = s.get('sourceLabel', '中证指数官网 · 日度收盘')
         fig.text(.105, .07, f'数据：{source} · 数据日期 {end}', fontsize=10, color="#64748b")
-        file = output / f'a-share-{s["code"]}-1y.png'
+        prefix = 'us-index' if MARKET == 'us' else 'a-share'
+        file = output / f'{prefix}-{s["code"]}-1y.png'
         fig.savefig(file, dpi=160, facecolor=fig.get_facecolor())
         plt.close(fig)
         if not 0 < file.stat().st_size < 2 * 1024 * 1024:
@@ -173,8 +180,13 @@ def render(payload, report, output):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
+    p.add_argument("--market", choices=["a", "us"], default="a")
     p.add_argument("--data", default="reports/a-share-chart-data.json")
     p.add_argument("--report", default="reports/a-share-daily.txt")
     p.add_argument("--output", default="report-images")
     a = p.parse_args()
+    if a.market == "us":
+        MARKET = "us"
+        INDICES = [("SPX", "标普500指数"), ("COMP", "纳斯达克综合指数"), ("NDX", "纳斯达克100指数")]
+        METRICS = []
     render(json.loads(Path(a.data).read_text(encoding="utf-8")), Path(a.report).read_text(encoding="utf-8"), Path(a.output))
