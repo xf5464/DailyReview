@@ -51,8 +51,13 @@ jobs:
             if (boundary < 0) throw new Error('Missing separate market indicators section');
             const chunks = [content.slice(0, boundary).trim(), content.slice(boundary).trim()];
             if (chunks.some(p => !p || Buffer.byteLength(p, 'utf8') > 2000)) throw new Error('Invalid text length');
-            if (/^(?:[１３６]个月| １年 )｜/m.test(chunks[1])) throw new Error('Only three-year percentiles are allowed');
-            if ((chunks[1].match(/^ ３年 ｜/gm) || []).length !== 4) throw new Error('Expected four three-year percentile rows');
+            const percentileLabels = ['１个月', '３个月', '６个月', ' １年 ', ' ３年 '];
+            const percentileTables = chunks[1].split(' 时间 ｜百分位').slice(1);
+            if (percentileTables.length !== 4) throw new Error('Expected four market percentile tables');
+            for (const table of percentileTables) {
+              const labels = table.split('\n').filter(line => line.includes('｜')).map(line => line.split('｜')[0]);
+              if (JSON.stringify(labels) !== JSON.stringify(percentileLabels)) throw new Error('Expected 1/3/6-month and 1/3-year percentiles in order');
+            }
             const manifest = JSON.parse(fs.readFileSync('report-images/manifest.json', 'utf8'));
             const expectedCodes = ['000985', '000016', '000300', '000688'];
             if (JSON.stringify(manifest.map(m => m.code)) !== JSON.stringify(expectedCodes)) throw new Error('Invalid chart order');
