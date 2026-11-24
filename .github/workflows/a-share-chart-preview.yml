@@ -45,25 +45,30 @@ jobs:
           (async () => {
             const request = JSON.parse(fs.readFileSync('reports/a-share-preview.json', 'utf8'));
             const permitted = ['000985', '000016', '000300', '000688', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs'];
-            if (!permitted.includes(request.code)) throw new Error('Invalid preview indicator');
+            const selected = request.codes || [request.code];
+            if (!Array.isArray(selected) || selected.length < 1 || selected.length > 4 || new Set(selected).size !== selected.length || selected.some(c => !permitted.includes(c))) throw new Error('Invalid preview selection');
             const data = JSON.parse(fs.readFileSync('reports/a-share-chart-data.json', 'utf8'));
             if (request.reportDate !== data.reportDate) throw new Error('Preview report date does not match chart data');
             const manifest = JSON.parse(fs.readFileSync('report-images/manifest.json', 'utf8'));
-            const entry = manifest.find(m => m.code === request.code);
-            if (!entry || entry.file !== 'a-share-' + request.code + '-1y.png') throw new Error('Preview image missing');
-            const bytes = fs.readFileSync('report-images/' + entry.file);
-            if (!bytes.length || bytes.length >= 2 * 1024 * 1024 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Invalid PNG');
+            const messages = selected.map(code => {
+              const entry = manifest.find(m => m.code === code);
+              if (!entry || entry.file !== 'a-share-' + code + '-1y.png') throw new Error('Preview image missing');
+              const bytes = fs.readFileSync('report-images/' + entry.file);
+              if (!bytes.length || bytes.length >= 2 * 1024 * 1024 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Invalid PNG');
+              return {msgtype: 'image', image: {base64: bytes.toString('base64'), md5: crypto.createHash('md5').update(bytes).digest('hex')}};
+            });
             const hook = process.env.WECHAT_WEBHOOK;
             if (!hook) throw new Error('MARKET_WECHAT_WEBHOOK is not configured');
-            const payload = {msgtype: 'image', image: {base64: bytes.toString('base64'), md5: crypto.createHash('md5').update(bytes).digest('hex')}};
-            let response;
-            try {
-              response = await fetch(hook, {method: 'POST', headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload), signal: AbortSignal.timeout(20000)});
-            } catch { throw new Error('WeCom preview request failed; verify delivery before retrying'); }
-            if (!response.ok) throw new Error('WeCom HTTP ' + response.status);
-            const result = await response.json();
-            if (result.errcode !== 0) throw new Error('WeCom rejected preview, code ' + result.errcode);
-            console.log('WeCom chart preview ' + request.code + ' image 1/1 sent successfully (errcode=0).');
+            for (let i = 0; i < messages.length; i++) {
+              let response;
+              try {
+                response = await fetch(hook, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify(messages[i]), signal: AbortSignal.timeout(20000)});
+              } catch { throw new Error('WeCom preview request failed; verify delivery before retrying'); }
+              if (!response.ok) throw new Error('WeCom HTTP ' + response.status);
+              const result = await response.json();
+              if (result.errcode !== 0) throw new Error('WeCom rejected preview, code ' + result.errcode);
+              console.log('WeCom chart preview ' + selected[i] + ' image ' + (i + 1) + '/' + messages.length + ' sent successfully (errcode=0).');
+            }
           })().catch(e => { console.error(e.message); process.exitCode = 1; });
           NODE
