@@ -1,0 +1,59 @@
+name: Send film financing report to dedicated WeCom group
+
+on:
+  push:
+    branches: [codex/market-report-wecom]
+    paths:
+      - reports/film-financing-daily.txt
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: film-financing-report-wecom
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send film financing report
+        env:
+          WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+          (async () => {
+            const hook = process.env.WECHAT_WEBHOOK;
+            if (!hook) throw new Error("MARKET_WECHAT_WEBHOOK is not configured; add the dedicated market group webhook in repository Actions secrets");
+            const content = fs.readFileSync("reports/film-financing-daily.txt", "utf8").trim();
+            if (!content) throw new Error("Empty film financing report");
+            const chunks = [];
+            let chunk = "";
+            for (const character of content) {
+              if (Buffer.byteLength(chunk + character, "utf8") > 2000) {
+                chunks.push(chunk); chunk = "";
+              }
+              chunk += character;
+            }
+            if (chunk) chunks.push(chunk);
+            for (let i = 0; i < chunks.length; i++) {
+              let response;
+              try {
+                response = await fetch(hook, {
+                  method: "POST",
+                  headers: {"Content-Type": "application/json"},
+                  body: JSON.stringify({msgtype:"text", text:{content:chunks[i]}}),
+                  signal: AbortSignal.timeout(20000)
+                });
+              } catch { throw new Error("WeCom request failed; check group before retrying"); }
+              if (!response.ok) throw new Error("WeCom HTTP " + response.status);
+              const result = await response.json();
+              if (result.errcode !== 0) throw new Error("WeCom rejected message, code " + result.errcode);
+              console.log("WeCom report part " + (i + 1) + "/" + chunks.length + " sent successfully (errcode=0).");
+            }
+          })().catch(e => { console.error(e.message); process.exitCode = 1; });
+          NODE
