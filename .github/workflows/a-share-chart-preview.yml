@@ -1,4 +1,4 @@
-name: Send single A-share indicator image preview
+name: Send single A-share image preview
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
           name: a-share-indicator-image-preview
           path: report-images/
           retention-days: 14
-      - name: Send exactly one indicator image
+      - name: Send exactly one selected image
         env:
           WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
         run: |
@@ -44,7 +44,7 @@ jobs:
           const crypto = require('node:crypto');
           (async () => {
             const request = JSON.parse(fs.readFileSync('reports/a-share-preview.json', 'utf8'));
-            const permitted = ['aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs'];
+            const permitted = ['000985', '000016', '000300', '000688', 'aShareTurnover', 'aShareMarginBalance', 'aShareActiveMarketValueThs', 'aShareSentimentThs'];
             if (!permitted.includes(request.code)) throw new Error('Invalid preview indicator');
             const data = JSON.parse(fs.readFileSync('reports/a-share-chart-data.json', 'utf8'));
             if (request.reportDate !== data.reportDate) throw new Error('Preview report date does not match chart data');
@@ -64,6 +64,6 @@ jobs:
             if (!response.ok) throw new Error('WeCom HTTP ' + response.status);
             const result = await response.json();
             if (result.errcode !== 0) throw new Error('WeCom rejected preview, code ' + result.errcode);
-            console.log('WeCom indicator preview ' + request.code + ' image 1/1 sent successfully (errcode=0).');
+            console.log('WeCom chart preview ' + request.code + ' image 1/1 sent successfully (errcode=0).');
           })().catch(e => { console.error(e.message); process.exitCode = 1; });
           NODE
