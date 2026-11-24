@@ -36,7 +36,7 @@ jobs:
           name: a-share-one-year-charts
           path: report-images/
           retention-days: 14
-      - name: Send A-share report and eight charts
+      - name: Send eight integrated A-share images
         env:
           WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
         run: |
@@ -67,7 +67,7 @@ jobs:
               if (!bytes.length || bytes.length >= 2 * 1024 * 1024 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Invalid PNG');
               return {msgtype: 'image', image: {base64: bytes.toString('base64'), md5: crypto.createHash('md5').update(bytes).digest('hex')}};
             });
-            const messages = [...chunks.map(content => ({msgtype: 'text', text: {content}})), ...images];
+            const messages = images;
             // Validate every payload before sending; do not retry uncertain deliveries.
             for (let i = 0; i < messages.length; i++) {
               let response;
