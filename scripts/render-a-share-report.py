@@ -24,6 +24,20 @@ METRICS = [("aShareTurnover", "全A成交额", "亿元", 0),
            ("aShareActiveMarketValueThs", "A股活跃市值（同花顺公式版）", "亿元", 0),
            ("aShareSentimentThs", "同花顺情绪指数", "点", 2)]
 
+
+def draw_peak_text(fig, x, y, label, value, suffix):
+    """Keep each peak and date on one baseline; emphasize only its number."""
+    renderer = fig.canvas.get_renderer()
+    numeric = bool(re.search(r"[0-9]", value))
+    for text, color, weight in [(label, "#334155", "normal"),
+                                (value, "#047857" if numeric else "#334155", "bold" if numeric else "normal"),
+                                (suffix, "#334155", "normal")]:
+        item = fig.text(x, y, text, fontsize=13, color=color, weight=weight)
+        x += item.get_window_extent(renderer).width / fig.bbox.width
+    if x > .985:
+        raise ValueError("Peak value and date exceed the available single-line width")
+
+
 def validate(payload, report):
     report_date = dt.date.fromisoformat(payload["reportDate"])
     expected_header = f"北京时间报告日期：{report_date}" if MARKET == "us" else f"A股指数日报｜北京时间{report_date}"
@@ -109,10 +123,9 @@ def render(payload, report, output):
             fig.text(.105, .85, s["unit"], fontsize=14, color="#475569")
             fig.text(.105, .805, f'数据日期：{end}', fontsize=13, color="#334155")
             fig.text(.105, .76, f'当前回落（近3年）：{drawdown:.2f}%', fontsize=13, color="#334155")
-            fig.text(.61, .90, f'近3年最高：{number(high)}{s["unit"]}', fontsize=13, color="#047857")
-            fig.text(.61, .86, f'最高值日期：{ref["date"]}', fontsize=13, color="#047857")
-            fig.text(.61, .81, '回落基准：近3年最高值', fontsize=11, color="#64748b")
-            table_ax = fig.add_axes([.61, .595, .35, .165])
+            draw_peak_text(fig, .61, .89, '近3年最高：', number(high), f'{s["unit"]}（{ref["date"]}）')
+            fig.text(.61, .845, '回落基准：近3年最高值', fontsize=11, color="#64748b")
+            table_ax = fig.add_axes([.61, .595, .35, .185])
             table_ax.axis("off")
             cell_rows = [[("已达 · " if drawdown >= level else "下一档 · " if level == next_level else "") + f'跌{level}%', number(high * (1-level/100))] for level in levels]
             table = table_ax.table(cellText=cell_rows, colLabels=["回落档位", f'对应数值（{s["unit"]}）'], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
@@ -157,21 +170,20 @@ def render(payload, report, output):
             fig.text(.105, .709, drawdown_label + field(drawdown_label), fontsize=13, color="#334155")
             if MARKET == "us":
                 fig.text(.105, .661, '上一交易日收盘：' + field("上一交易日收盘："), fontsize=11, color="#475569")
-            def peak_lines(label, value, y):
+            def peak_line(label, value, y):
                 match = re.fullmatch(r"(.*?)（(\d{4}-\d{2}-\d{2}|日期暂缺)）", value)
                 number_text = match.group(1) if match else value
-                date_text = match.group(2) if match else "暂缺"
-                fig.text(.61, y, label + number_text, fontsize=13, color="#047857")
-                fig.text(.61, y-.033, '日期：' + date_text, fontsize=12, color="#047857")
+                suffix = f'（{match.group(2)}）' if match else ''
+                draw_peak_text(fig, .61, y, label, number_text, suffix)
             if MARKET == "a":
-                peak_lines('近3年最高：', field("近3年最高："), .90)
-                peak_lines('历史最高：', field("历史最高："), .834)
+                peak_line('近3年最高：', field("近3年最高："), .89)
+                peak_line('历史最高：', field("历史最高："), .845)
             else:
-                peak_lines('历史最高：', field("历史最高："), .90)
+                peak_line('历史最高：', field("历史最高："), .89)
             rows = re.findall(r"^([🟢🟡⚪]) 跌(\d+)%：([0-9,]+)(?:（还需跌 ([0-9.]+)%）)?$", section, re.M)
             if len(rows) != 5:
                 raise ValueError("Expected all five verified index drawdown levels")
-            table_ax = fig.add_axes([.61, .595, .35, .165])
+            table_ax = fig.add_axes([.61, .595, .35, .185])
             table_ax.axis("off")
             table = table_ax.table(cellText=[[("已达 · " if light == "🟢" else "下一档 · " if light == "🟡" else "") + f'跌{level}%', value] for light, level, value, distance in rows],
                                    colLabels=["回撤档位", "对应点位"], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
@@ -190,7 +202,7 @@ def render(payload, report, output):
             basis = '回撤基准：历史最高收盘' if MARKET == 'us' else '回撤基准：近3年最高收盘；历史最高仅供参考'
             if MARKET == "a":
                 basis = '回撤基准：近3年最高收盘'
-            fig.text(.61, .775, basis, fontsize=11, color="#64748b")
+            fig.text(.61, .805, basis, fontsize=11, color="#64748b")
             if point_ranks:
                 ranks = s["pointPercentiles"]
                 if [r["months"] for r in ranks] != [1, 3, 6, 12, 36]:
