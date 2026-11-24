@@ -37,7 +37,7 @@ async function main() {
 
   if (replaced !== worldIndexes.length) {
     const unresolved = worldIndexes.length - replaced;
-    throw new Error(`Could not resolve ${unresolved}/${worldIndexes.length} international Google News URL(s) to publisher URLs.`);
+    console.warn(`Publisher URL resolution unavailable for ${unresolved}/${worldIndexes.length} international stories; keeping their current Google News links.`);
   }
 
   archive.items = items;

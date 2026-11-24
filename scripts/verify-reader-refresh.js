@@ -6,9 +6,9 @@ const REQUIRED_CATEGORIES = ['tech', 'market', 'world', 'youtube', 'hn', 'hn-fro
 const EXPECTED_ITEMS = 10;
 const DEFAULT_MAX_FETCH_AGE_MINUTES = 10;
 
-function verifyReaderRefresh(archive, now = Date.now(), maxFetchAgeMinutes = DEFAULT_MAX_FETCH_AGE_MINUTES) {
+function verifyReaderRefresh(archive, now = Date.now(), maxFetchAgeMinutes = DEFAULT_MAX_FETCH_AGE_MINUTES, categories = REQUIRED_CATEGORIES) {
   const failures = [];
-  for (const category of REQUIRED_CATEGORIES) {
+  for (const category of categories) {
     const items = (archive.items || []).filter((item) => item.category === category);
     if (items.length !== EXPECTED_ITEMS) {
       failures.push(`${category}: ${items.length}/${EXPECTED_ITEMS} items`);

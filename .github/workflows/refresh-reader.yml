@@ -70,12 +70,7 @@ jobs:
           HOT_NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '30' }}
           HOT_NEWS_REFRESH_ONLY: "true"
           HOT_NEWS_ARCHIVE_PATH: site/reader/data/recent.json
-        run: |
-          node --require ./scripts/register-source-cache.js scripts/refresh-reader-aggregated.js
-          node --require ./scripts/register-source-cache.js scripts/refresh-youtube-top10-best-effort.js
-          node --require ./scripts/register-source-cache.js scripts/resolve-world-original-urls.js
-          node --require ./scripts/register-source-cache.js scripts/add-hacker-news-top10.js
-          node --require ./scripts/register-source-cache.js scripts/verify-reader-refresh.js
+        run: node scripts/refresh-reader-resilient.js
 
       - name: Save the reader news archive
         run: |
