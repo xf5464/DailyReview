@@ -85,7 +85,7 @@ def render(payload, report, output):
         fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.39 if metric or point_ranks else .46)
         title = s["name"] if metric else f'{s["name"]}  {s["code"]}'
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
-        fig.text(.105, .95, title, fontsize=23, weight="bold", color="#0f172a")
+        fig.text(.5, .95, title, ha="center", fontsize=23, weight="bold", color="#0f172a")
         if metric:
             section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
             rank_rows = re.findall(r"^([^\n｜]+)｜([0-9]+(?:\.[0-9]+)?%\*?|暂缺)$", section, re.M)
