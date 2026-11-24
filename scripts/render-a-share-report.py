@@ -109,8 +109,8 @@ def render(payload, report, output):
             fig.text(.105, .85, s["unit"], fontsize=14, color="#475569")
             fig.text(.105, .805, f'数据日期：{end}', fontsize=13, color="#334155")
             fig.text(.105, .76, f'当前回落（近3年）：{drawdown:.2f}%', fontsize=13, color="#334155")
-            fig.text(.61, .89, f'近3年最高：{number(high)}{s["unit"]}', fontsize=11, color="#475569")
-            fig.text(.61, .855, f'最高值日期：{ref["date"]}', fontsize=11, color="#475569")
+            fig.text(.61, .89, f'近3年最高：{number(high)}{s["unit"]}', fontsize=11, color="#047857")
+            fig.text(.61, .855, f'最高值日期：{ref["date"]}', fontsize=11, color="#047857")
             fig.text(.61, .82, '回落基准：近3年最高值', fontsize=10, color="#64748b")
             table_ax = fig.add_axes([.61, .61, .35, .185])
             table_ax.axis("off")
@@ -158,8 +158,8 @@ def render(payload, report, output):
             if MARKET == "us":
                 fig.text(.105, .661, '上一交易日收盘：' + field("上一交易日收盘："), fontsize=11, color="#475569")
             else:
-                fig.text(.61, .89, '近3年最高：' + field("近3年最高："), fontsize=10, color="#475569")
-            fig.text(.61, .855 if MARKET == "a" else .89, '历史最高：' + field("历史最高："), fontsize=10, color="#475569")
+                fig.text(.61, .89, '近3年最高：' + field("近3年最高："), fontsize=10, color="#047857")
+            fig.text(.61, .855 if MARKET == "a" else .89, '历史最高：' + field("历史最高："), fontsize=10, color="#047857")
             rows = re.findall(r"^([🟢🟡⚪]) 跌(\d+)%：([0-9,]+)(?:（还需跌 ([0-9.]+)%）)?$", section, re.M)
             if len(rows) != 5:
                 raise ValueError("Expected all five verified index drawdown levels")
