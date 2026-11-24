@@ -17,42 +17,63 @@ concurrency:
 jobs:
   send:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Send A-share report
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install chart dependencies
+        run: |
+          python -m pip install matplotlib==3.10.8
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Render one-year closing-index charts
+        run: python scripts/render-a-share-report.py
+      - name: Save report charts
+        uses: actions/upload-artifact@v4
+        with:
+          name: a-share-one-year-charts
+          path: report-images/
+          retention-days: 14
+      - name: Send A-share report and four charts
         env:
           WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
         run: |
           node <<'NODE'
-          const fs = require("node:fs");
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
           (async () => {
             const hook = process.env.WECHAT_WEBHOOK;
-            if (!hook) throw new Error("MARKET_WECHAT_WEBHOOK is not configured; add the dedicated market group webhook in repository Actions secrets");
-            const content = fs.readFileSync("reports/a-share-daily.txt", "utf8").trim();
-            if (!content) throw new Error("Empty market report");
-            const marker = /^A股市场指标｜/m;
-            const boundary = content.search(marker);
-            if (boundary < 0) throw new Error("Missing separate market indicators section");
+            if (!hook) throw new Error('MARKET_WECHAT_WEBHOOK is not configured');
+            const content = fs.readFileSync('reports/a-share-daily.txt', 'utf8').trim();
+            const boundary = content.search(/^A股市场指标｜/m);
+            if (boundary < 0) throw new Error('Missing separate market indicators section');
             const chunks = [content.slice(0, boundary).trim(), content.slice(boundary).trim()];
-            // Validate both messages before sending either one.
-            if (chunks.some(part => !part || Buffer.byteLength(part, "utf8") > 2000)) {
-              throw new Error("Each A-share report section must be nonempty and at most 2000 UTF-8 bytes");
-            }
-            for (let i = 0; i < chunks.length; i++) {
+            if (chunks.some(p => !p || Buffer.byteLength(p, 'utf8') > 2000)) throw new Error('Invalid text length');
+            if (/^(?:[１３６]个月| １年 )｜/m.test(chunks[1])) throw new Error('Only three-year percentiles are allowed');
+            if ((chunks[1].match(/^ ３年 ｜/gm) || []).length !== 4) throw new Error('Expected four three-year percentile rows');
+            const manifest = JSON.parse(fs.readFileSync('report-images/manifest.json', 'utf8'));
+            const expectedCodes = ['000985', '000016', '000300', '000688'];
+            if (JSON.stringify(manifest.map(m => m.code)) !== JSON.stringify(expectedCodes)) throw new Error('Invalid chart order');
+            const images = manifest.map(m => {
+              if (m.file !== 'a-share-' + m.code + '-1y.png') throw new Error('Invalid chart filename');
+              const bytes = fs.readFileSync('report-images/' + m.file);
+              if (!bytes.length || bytes.length >= 2 * 1024 * 1024 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Invalid PNG');
+              return {msgtype: 'image', image: {base64: bytes.toString('base64'), md5: crypto.createHash('md5').update(bytes).digest('hex')}};
+            });
+            const messages = [...chunks.map(content => ({msgtype: 'text', text: {content}})), ...images];
+            // Validate every payload before sending; do not retry uncertain deliveries.
+            for (let i = 0; i < messages.length; i++) {
               let response;
               try {
-                response = await fetch(hook, {
-                  method: "POST",
-                  headers: {"Content-Type": "application/json"},
-                  body: JSON.stringify({msgtype:"text", text:{content:chunks[i]}}),
-                  signal: AbortSignal.timeout(20000)
-                });
-              } catch { throw new Error("WeCom request failed; check group before retrying"); }
-              if (!response.ok) throw new Error("WeCom HTTP " + response.status);
+                response = await fetch(hook, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify(messages[i]), signal: AbortSignal.timeout(20000)});
+              } catch { throw new Error('WeCom request failed at message ' + (i + 1) + '; check delivery before retrying'); }
+              if (!response.ok) throw new Error('WeCom HTTP ' + response.status + ' at message ' + (i + 1));
               const result = await response.json();
-              if (result.errcode !== 0) throw new Error("WeCom rejected message, code " + result.errcode);
-              console.log("WeCom report part " + (i + 1) + "/" + chunks.length + " sent successfully (errcode=0).");
+              if (result.errcode !== 0) throw new Error('WeCom rejected message ' + (i + 1) + ', code ' + result.errcode);
+              console.log('WeCom ' + messages[i].msgtype + ' ' + (i + 1) + '/' + messages.length + ' sent successfully (errcode=0).');
             }
           })().catch(e => { console.error(e.message); process.exitCode = 1; });
           NODE
