@@ -1,5 +1,10 @@
 {
-  "code": "000985",
+  "codes": [
+    "aShareTurnover",
+    "aShareMarginBalance",
+    "aShareActiveMarketValueThs",
+    "aShareSentimentThs"
+  ],
   "reportDate": "2026-11-24",
-  "request": "integrated-index-quote-drawdown-preview"
+  "request": "resend-four-market-indicators-with-index-style-drawdown-levels"
 }
