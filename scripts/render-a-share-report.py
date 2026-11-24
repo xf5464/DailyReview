@@ -75,14 +75,13 @@ def render(payload, report, output):
         end = dates[-1]
         start = end.replace(year=end.year-1, day=min(end.day, calendar.monthrange(end.year-1, end.month)[1]))
         metric = s["code"] in {m[0] for m in METRICS}
-        fig, ax = plt.subplots(figsize=(9, 8.4 if metric else 5.6), dpi=160)
+        fig, ax = plt.subplots(figsize=(9, 8.4 if metric else 9.8), dpi=160)
         fig.set_facecolor("#f8fafc")
         ax.set_facecolor("#ffffff")
-        fig.subplots_adjust(left=.105, right=.965, bottom=.14 if metric else .18, top=.59 if metric else .76)
-        metric = s["code"] in {m[0] for m in METRICS}
+        fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.59 if metric else .46)
         title = s["name"] if metric else f'{s["name"]}  {s["code"]}'
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
-        fig.text(.105, .94 if metric else .92, title, fontsize=23, weight="bold", color="#0f172a")
+        fig.text(.105, .94 if metric else .95, title, fontsize=23, weight="bold", color="#0f172a")
         if metric:
             section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
             rank_rows = re.findall(r"^([^\n｜]+)｜([0-9]+(?:\.[0-9]+)?%\*?|暂缺)$", section, re.M)
@@ -110,7 +109,40 @@ def render(payload, report, output):
             if any(v.endswith("*") for _, v in rank_rows):
                 fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
         else:
-            fig.text(.105, .85, f'{subtitle}   {start} 至 {end}', fontsize=12, color="#475569")
+            section = report.split(f'{s["name"]}（{s["code"]}）', 1)[1].split("\n\n", 1)[0]
+            lines = section.strip().splitlines()
+            def field(prefix):
+                return next((l[len(prefix):] for l in lines if l.startswith(prefix)), "暂缺")
+            fig.text(.105, .88, field("当前点位："), fontsize=32, weight="bold", color=color)
+            fig.text(.105, .84, f'收盘日期：{end}', fontsize=12, color="#475569")
+            change = next((l for l in lines if "较上一日：" in l), "较上一日：暂缺")
+            change_color = "#059669" if change.startswith("🟢") else "#dc2626" if change.startswith("🔴") else "#475569"
+            fig.text(.105, .795, change.lstrip("🟢🔴⚪ "), fontsize=13, weight="bold", color=change_color)
+            fig.text(.105, .752, 'PE（TTM）：' + field("PE（TTM）："), fontsize=13, color="#334155")
+            fig.text(.105, .709, '当前回撤（近3年）：' + field("当前回撤（近3年）："), fontsize=13, color="#334155")
+            fig.text(.105, .661, '近3年最高：' + field("近3年最高："), fontsize=11, color="#475569")
+            fig.text(.105, .619, '历史最高：' + field("历史最高："), fontsize=11, color="#475569")
+            rows = re.findall(r"^([🟢🟡⚪]) 跌(\d+)%：([0-9,]+)(?:（还需跌 ([0-9.]+)%）)?$", section, re.M)
+            if len(rows) != 5:
+                raise ValueError("Expected all five verified index drawdown levels")
+            table_ax = fig.add_axes([.61, .635, .35, .255])
+            table_ax.axis("off")
+            table = table_ax.table(cellText=[[("已达 · " if light == "🟢" else "下一档 · " if light == "🟡" else "") + f'跌{level}%', value] for light, level, value, distance in rows],
+                                   colLabels=["回撤档位", "对应点位"], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+            table.auto_set_font_size(False)
+            table.set_fontsize(12)
+            for (r, c), cell in table.get_celld().items():
+                light = rows[r-1][0] if r else ""
+                cell.set_edgecolor("#e2e8f0")
+                cell.set_linewidth(.6)
+                cell.set_facecolor("#e2e8f0" if r == 0 else "#ecfdf5" if light == "🟢" else "#fef3c7" if light == "🟡" else "#ffffff")
+                cell.get_text().set_color("#047857" if light == "🟢" else "#92400e" if light == "🟡" else "#334155")
+                cell.get_text().set_weight("bold" if r == 0 or c == 1 else "normal")
+            distance = next(((level, d) for light, level, value, d in rows if light == "🟡" and d), None)
+            if distance:
+                fig.text(.61, .598, f'至跌{distance[0]}%档还需跌 {distance[1]}%', fontsize=11, color="#92400e")
+            fig.text(.105, .558, '回撤基准：近3年最高收盘；历史最高仅供参考', fontsize=10, color="#64748b")
+            fig.text(.105, .508, f'{subtitle}   {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
         ax.plot(dates, values, color=color, linewidth=1.7)
         ax.scatter([end], [values[-1]], color=color, s=30, zorder=4)
         label = f'{values[-1]:,.2f}' if s.get('decimals') == 2 else f'{values[-1]:,.0f}'
