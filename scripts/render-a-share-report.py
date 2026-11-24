@@ -78,37 +78,67 @@ def render(payload, report, output):
         end = dates[-1]
         start = end.replace(year=end.year-1, day=min(end.day, calendar.monthrange(end.year-1, end.month)[1]))
         metric = s["code"] in {m[0] for m in METRICS}
-        fig, ax = plt.subplots(figsize=(9, 8.4 if metric else 9.8), dpi=160)
+        fig, ax = plt.subplots(figsize=(9, 10.8 if metric else 9.8), dpi=160)
         fig.set_facecolor("#f8fafc")
         ax.set_facecolor("#ffffff")
-        fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.59 if metric else .46)
+        fig.subplots_adjust(left=.105, right=.965, bottom=.14, top=.41 if metric else .46)
         title = s["name"] if metric else f'{s["name"]}  {s["code"]}'
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
-        fig.text(.105, .94 if metric else .95, title, fontsize=23, weight="bold", color="#0f172a")
+        fig.text(.105, .95, title, fontsize=23, weight="bold", color="#0f172a")
         if metric:
             section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
             rank_rows = re.findall(r"^([^\n｜]+)｜([0-9]+(?:\.[0-9]+)?%\*?|暂缺)$", section, re.M)
             labels = ["１个月", "３个月", "６个月", " １年 ", " ３年 "]
             if [r[0] for r in rank_rows] != labels:
                 raise ValueError("Expected all five verified percentiles for the indicator image")
-            value_text = f'{values[-1]:,.2f}' if s["decimals"] == 2 else format(math.floor(values[-1] + .5), ",")
-            fig.text(.105, .865, value_text, fontsize=32, weight="bold", color=color)
-            fig.text(.105, .823, s["unit"], fontsize=14, color="#475569")
-            fig.text(.105, .765, f'数据日期：{end}', fontsize=13, color="#334155")
-            fig.text(.105, .706, '近一年历史曲线', fontsize=13, weight="bold", color="#334155")
-            fig.text(.105, .668, f'{start} 至 {end}', fontsize=11, color="#64748b")
-            table_ax = fig.add_axes([.60, .655, .36, .235])
+            ref = s["drawdownReference"]
+            reference_start = end.replace(year=end.year-3, day=min(end.day, calendar.monthrange(end.year-3, end.month)[1])).isoformat()
+            if (ref["windowStart"] != reference_start or ref["windowEnd"] != str(end)
+                    or not reference_start <= ref["date"] <= str(end) or ref["sampleCount"] < 700
+                    or not math.isfinite(ref["value"]) or ref["value"] <= 0 or ref["value"] < max(values)):
+                raise ValueError("Invalid or incomplete three-year indicator high reference")
+            high = ref["value"]
+            current = values[-1]
+            drawdown = (1 - current / high) * 100
+            levels = [10, 15, 20, 25, 30] if drawdown < 30 else [30, 35, 40, 45, 50] if drawdown < 50 else [50, 55, 60, 65, 70]
+            next_level = next((v for v in levels if v > drawdown), None)
+            def number(v):
+                return f'{v:,.2f}' if s["decimals"] == 2 else format(math.floor(v + .5), ",")
+            fig.text(.105, .89, number(current), fontsize=32, weight="bold", color=color)
+            fig.text(.105, .85, s["unit"], fontsize=14, color="#475569")
+            fig.text(.105, .805, f'数据日期：{end}', fontsize=13, color="#334155")
+            fig.text(.105, .76, f'当前回落（近3年）：{drawdown:.2f}%', fontsize=13, color="#334155")
+            fig.text(.105, .715, f'近3年最高：{number(high)}{s["unit"]}', fontsize=12, color="#475569")
+            fig.text(.105, .675, f'最高值日期：{ref["date"]}', fontsize=12, color="#475569")
+            fig.text(.105, .63, '回落基准：近3年最高值', fontsize=10, color="#64748b")
+            table_ax = fig.add_axes([.61, .655, .35, .245])
             table_ax.axis("off")
-            table = table_ax.table(cellText=[[l.strip().translate(str.maketrans("１３６", "136")), v] for l, v in rank_rows],
-                                   colLabels=["时间", "百分位"], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+            cell_rows = [[("已达 · " if drawdown >= level else "下一档 · " if level == next_level else "") + f'跌{level}%', number(high * (1-level/100))] for level in levels]
+            table = table_ax.table(cellText=cell_rows, colLabels=["回落档位", f'对应数值（{s["unit"]}）'], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
             table.auto_set_font_size(False)
-            table.set_fontsize(13)
+            table.set_fontsize(11.5)
             for (r, c), cell in table.get_celld().items():
+                status = "green" if r and drawdown >= levels[r-1] else "yellow" if r and levels[r-1] == next_level else "other"
                 cell.set_edgecolor("#e2e8f0")
                 cell.set_linewidth(.6)
-                cell.set_facecolor("#e2e8f0" if r == 0 else "#ffffff" if r % 2 else "#f1f5f9")
-                cell.get_text().set_color("#334155")
+                cell.set_facecolor("#e2e8f0" if r == 0 else "#ecfdf5" if status == "green" else "#fef3c7" if status == "yellow" else "#ffffff")
+                cell.get_text().set_color("#047857" if status == "green" else "#92400e" if status == "yellow" else "#334155")
                 cell.get_text().set_weight("bold" if r == 0 or c == 1 else "normal")
+            if next_level is not None:
+                distance = (1 - high * (1-next_level/100) / current) * 100
+                fig.text(.61, .62, f'至跌{next_level}%档还需跌 {distance:.2f}%', fontsize=11, color="#92400e")
+            rank_ax = fig.add_axes([.105, .51, .86, .08])
+            rank_ax.axis("off")
+            rank_table = rank_ax.table(cellText=[[v for _, v in rank_rows]], colLabels=["百分位 · " + l.strip().translate(str.maketrans("１３６", "136")) for l, _ in rank_rows], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+            rank_table.auto_set_font_size(False)
+            rank_table.set_fontsize(11)
+            for (r, c), cell in rank_table.get_celld().items():
+                cell.set_edgecolor("#e2e8f0")
+                cell.set_linewidth(.6)
+                cell.set_facecolor("#e2e8f0" if r == 0 else "#ffffff")
+                cell.get_text().set_color("#334155")
+                cell.get_text().set_weight("bold" if r else "normal")
+            fig.text(.105, .455, f'近一年历史曲线（{s["unit"]}）  {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
             if any(v.endswith("*") for _, v in rank_rows):
                 fig.text(.105, .045, '* 历史不足对应年限，按实际覆盖计算', fontsize=9, color="#64748b")
         else:
