@@ -46,7 +46,7 @@ jobs:
           (async () => {
             const hook = process.env.WECHAT_WEBHOOK;
             if (!hook) throw new Error('MARKET_WECHAT_WEBHOOK is not configured');
-            const content = fs.readFileSync('reports/a-share-daily.txt', 'utf8').trim();
+            const content = fs.readFileSync('reports/market-daily.txt', 'utf8').trim();
             const boundary = content.search(/^VIX/m);
             if (boundary < 0) throw new Error('Missing VIX supplemental indicators section');
             const data = JSON.parse(fs.readFileSync('reports/us-market-chart-data.json', 'utf8'));
