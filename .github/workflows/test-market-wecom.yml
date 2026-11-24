@@ -17,43 +17,63 @@ concurrency:
 jobs:
   send:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Send market report
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install chart dependencies
+        run: |
+          python -m pip install matplotlib==3.10.8
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Render integrated US index images
+        run: python scripts/render-a-share-report.py --market us --data reports/us-market-chart-data.json --report reports/market-daily.txt --output us-report-images
+      - name: Save report charts
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-index-integrated-images
+          path: us-report-images/
+          retention-days: 14
+      - name: Send three integrated US index images and supplemental indicators
         env:
           WECHAT_WEBHOOK: ${{ secrets.MARKET_WECHAT_WEBHOOK }}
         run: |
           node <<'NODE'
-          const fs = require("node:fs");
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
           (async () => {
             const hook = process.env.WECHAT_WEBHOOK;
-            if (!hook) throw new Error("MARKET_WECHAT_WEBHOOK is not configured; add the dedicated market group webhook in repository Actions secrets");
-            const content = fs.readFileSync("reports/market-daily.txt", "utf8").trim();
-            if (!content) throw new Error("Empty market report");
-            const chunks = [];
-            let chunk = "";
-            for (const character of content) {
-              if (Buffer.byteLength(chunk + character, "utf8") > 2000) {
-                chunks.push(chunk); chunk = "";
-              }
-              chunk += character;
-            }
-            if (chunk) chunks.push(chunk);
-            for (let i = 0; i < chunks.length; i++) {
+            if (!hook) throw new Error('MARKET_WECHAT_WEBHOOK is not configured');
+            const content = fs.readFileSync('reports/a-share-daily.txt', 'utf8').trim();
+            const boundary = content.search(/^VIX/m);
+            if (boundary < 0) throw new Error('Missing VIX supplemental indicators section');
+            const data = JSON.parse(fs.readFileSync('reports/us-market-chart-data.json', 'utf8'));
+            const supplemental = '美股市场指标｜北京时间' + data.reportDate + '\n' + content.slice(boundary).trim();
+            if (!supplemental.includes('CNN') || !supplemental.includes('159941')) throw new Error('Missing existing supplemental indicators');
+            if (Buffer.byteLength(supplemental, 'utf8') > 2000) throw new Error('Supplemental indicators exceed text limit');
+            const manifest = JSON.parse(fs.readFileSync('us-report-images/manifest.json', 'utf8'));
+            const expectedCodes = ['SPX', 'COMP', 'NDX'];
+            if (JSON.stringify(manifest.map(m => m.code)) !== JSON.stringify(expectedCodes)) throw new Error('Invalid chart order');
+            const images = manifest.map(m => {
+              if (m.file !== 'us-index-' + m.code + '-1y.png') throw new Error('Invalid chart filename');
+              const bytes = fs.readFileSync('us-report-images/' + m.file);
+              if (!bytes.length || bytes.length >= 2 * 1024 * 1024 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Invalid PNG');
+              return {msgtype: 'image', image: {base64: bytes.toString('base64'), md5: crypto.createHash('md5').update(bytes).digest('hex')}};
+            });
+            const messages = [...images, {msgtype: 'text', text: {content: supplemental}}];
+            // Validate every payload before sending; do not retry uncertain deliveries.
+            for (let i = 0; i < messages.length; i++) {
               let response;
               try {
-                response = await fetch(hook, {
-                  method: "POST",
-                  headers: {"Content-Type": "application/json"},
-                  body: JSON.stringify({msgtype:"text", text:{content:chunks[i]}}),
-                  signal: AbortSignal.timeout(20000)
-                });
-              } catch { throw new Error("WeCom request failed; check group before retrying"); }
-              if (!response.ok) throw new Error("WeCom HTTP " + response.status);
+                response = await fetch(hook, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify(messages[i]), signal: AbortSignal.timeout(20000)});
+              } catch { throw new Error('WeCom request failed at message ' + (i + 1) + '; check delivery before retrying'); }
+              if (!response.ok) throw new Error('WeCom HTTP ' + response.status + ' at message ' + (i + 1));
               const result = await response.json();
-              if (result.errcode !== 0) throw new Error("WeCom rejected message, code " + result.errcode);
-              console.log("WeCom report part " + (i + 1) + "/" + chunks.length + " sent successfully (errcode=0).");
+              if (result.errcode !== 0) throw new Error('WeCom rejected message ' + (i + 1) + ', code ' + result.errcode);
+              console.log('WeCom ' + messages[i].msgtype + ' ' + (i + 1) + '/' + messages.length + ' sent successfully (errcode=0).');
             }
           })().catch(e => { console.error(e.message); process.exitCode = 1; });
           NODE
