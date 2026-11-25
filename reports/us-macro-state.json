@@ -3,14 +3,7 @@
   "notified_release_ids": [
     "PCE:2026-10:2026-11-25T13:30:00Z"
   ],
-  "pending": {
-    "release_ids": [
-      "PCE:2026-10:2026-11-25T13:30:00Z"
-    ],
-    "delivery_kind": "user_requested_resend_with_consensus",
-    "message": "美国2026年10月PCE物价指数｜补充市场预期版\n发布时间：2026年11月25日21:30（北京时间）\n\n总体PCE同比：实际3.8%，预期3.8%，符合预期（差0.0个百分点）；上期3.7%（修订前值，原公布3.6%），较上期上升0.1个百分点。\n总体PCE环比（季调）：实际0.3%，预期0.3%，符合预期（差0.0个百分点）；上期0.5%，较上期下降0.2个百分点。\n核心PCE同比：实际3.3%，预期3.2%，高于预期0.1个百分点；上期3.1%，较上期上升0.2个百分点。\n核心PCE环比（季调）：实际0.3%，预期0.3%，符合预期（差0.0个百分点）；上期0.3%，较上期持平（0.0个百分点）。\n\n市场预期采用发布前Econoday调查共识。",
-    "report_commit_sha": "2c8798f9ebb30a7ee8fe62913e66b604852d614c"
-  },
+  "pending": null,
   "last_delivery": {
     "report_commit_sha": "b2ff2ddeb32821c3d0efab18e7d300208af6b426",
     "workflow_path": ".github/workflows/us-macro-wecom.yml",
@@ -18,5 +11,18 @@
     "job_id": 139244206485,
     "errcode": 0,
     "confirmed_at": "2026-11-25T13:37:10Z"
-  }
+  },
+  "supplemental_deliveries": [
+    {
+      "release_ids": [
+        "PCE:2026-10:2026-11-25T13:30:00Z"
+      ],
+      "delivery_kind": "user_requested_resend_with_consensus",
+      "report_commit_sha": "2c8798f9ebb30a7ee8fe62913e66b604852d614c",
+      "workflow_path": ".github/workflows/us-macro-wecom.yml",
+      "run_id": 45625961282,
+      "job_id": 139246097166,
+      "errcode": 0
+    }
+  ]
 }
