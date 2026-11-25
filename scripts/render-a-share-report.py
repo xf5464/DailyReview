@@ -38,9 +38,32 @@ def draw_peak_text(fig, x, y, label, value, suffix):
         raise ValueError("Peak value and date exceed the available single-line width")
 
 
+COMMODITIES = [("NG=F", "天然气", "美元/MMBtu", 3),
+               ("BZ=F", "布伦特原油", "美元/桶", 2),
+               ("gold", "黄金", "美元/盎司", 2),
+               ("SI=F", "白银", "美元/盎司", 2),
+               ("HG=F", "铜", "美元/磅", 4)]
+
+
+def metric_section(report, series):
+    header = "商品价格日报｜" if MARKET == "commodity" else "A股市场指标｜"
+    return report.split(header, 1)[1].split(series["name"] + "\n", 1)[1].split("\n\n", 1)[0]
+
+
+def metric_number(value, decimals):
+    return f"{value:,.{decimals}f}" if decimals else format(math.floor(value + .5), ",")
+
+
+def drawdown_levels(current, high):
+    # Compare prices directly so exact 30%/50% boundaries switch groups reliably.
+    levels = [50, 55, 60, 65, 70] if current <= high * .5 else [30, 35, 40, 45, 50] if current <= high * .7 else [10, 15, 20, 25, 30]
+    reached = {level for level in levels if current <= high * (1-level/100)}
+    return levels, reached, next((level for level in levels if level not in reached), None)
+
+
 def validate(payload, report):
     report_date = dt.date.fromisoformat(payload["reportDate"])
-    expected_header = f"北京时间报告日期：{report_date}" if MARKET == "us" else f"A股指数日报｜北京时间{report_date}"
+    expected_header = f"商品价格日报｜北京时间{report_date}" if MARKET == "commodity" else f"北京时间报告日期：{report_date}" if MARKET == "us" else f"A股指数日报｜北京时间{report_date}"
     if report.splitlines()[0] != expected_header:
         raise ValueError("Chart payload and text report dates differ")
     series = payload["indices"]
@@ -64,9 +87,16 @@ def validate(payload, report):
                for d, p in zip(dates, s["items"])):
             raise ValueError("Invalid closing-index observations")
         latest = s["items"][-1]["value"]
+        if MARKET == "commodity":
+            for key in ["instrument", "quoteTime", "priceBasis", "historyBasis", "sourceUrl", "sourceLabel"]:
+                if not isinstance(s.get(key), str) or not s[key].strip() or "\n" in s[key]:
+                    raise ValueError("Missing commodity quote identity: " + key)
+            text_section = metric_section(report, s)
+            if any(s[key] not in text_section for key in ["instrument", "quoteTime", "priceBasis", "historyBasis"]):
+                raise ValueError("Commodity identity differs between text and chart")
         if s["code"] in {m[0] for m in METRICS}:
-            text_section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
-            expected = f'{latest:,.2f}' if s["decimals"] == 2 else format(math.floor(latest + 0.5), ",")
+            text_section = metric_section(report, s)
+            expected = metric_number(latest, s["decimals"])
             if f'数值：{expected}{s["unit"]}\n' not in text_section or f"数据日期：{end}\n" not in text_section:
                 raise ValueError("Text indicator and chart value/date differ")
         else:
@@ -101,7 +131,7 @@ def render(payload, report, output):
         subtitle = f'近一年历史曲线（{s["unit"]}）' if metric else '近一年收盘点位'
         fig.text(.5, .95, title, ha="center", fontsize=23, weight="bold", color="#0f172a")
         if metric:
-            section = report.split("A股市场指标｜", 1)[1].split(s["name"] + "\n", 1)[1].split("\n\n", 1)[0]
+            section = metric_section(report, s)
             rank_rows = re.findall(r"^([^\n｜]+)｜([0-9]+(?:\.[0-9]+)?%\*?|暂缺)$", section, re.M)
             labels = ["１个月", "３个月", "６个月", " １年 ", " ３年 "]
             if [r[0] for r in rank_rows] != labels:
@@ -115,24 +145,26 @@ def render(payload, report, output):
             high = ref["value"]
             current = values[-1]
             drawdown = (1 - current / high) * 100
-            levels = [10, 15, 20, 25, 30] if drawdown < 30 else [30, 35, 40, 45, 50] if drawdown < 50 else [50, 55, 60, 65, 70]
-            next_level = next((v for v in levels if v > drawdown), None)
+            levels, reached, next_level = drawdown_levels(current, high)
             def number(v):
-                return f'{v:,.2f}' if s["decimals"] == 2 else format(math.floor(v + .5), ",")
+                return metric_number(v, s["decimals"])
             fig.text(.105, .89, number(current), fontsize=32, weight="bold", color=color)
             fig.text(.105, .85, s["unit"], fontsize=14, color="#475569")
             fig.text(.105, .805, f'数据日期：{end}', fontsize=13, color="#334155")
             fig.text(.105, .76, f'当前回落（近3年）：{drawdown:.2f}%', fontsize=13, color="#334155")
-            draw_peak_text(fig, .61, .89, '近3年最高：', number(high), f'{s["unit"]}（{ref["date"]}）')
+            if MARKET == "commodity":
+                for y, text in zip([.72, .685, .65, .615], [s["instrument"], s["quoteTime"], s["priceBasis"], s["historyBasis"]]):
+                    fig.text(.105, y, text, fontsize=10, color="#475569")
+            draw_peak_text(fig, .61, .89, '近3年最高：', number(high), f'（{ref["date"]}）' if MARKET == "commodity" else f'{s["unit"]}（{ref["date"]}）')
             fig.text(.61, .845, '回落基准：近3年最高值', fontsize=11, color="#64748b")
             table_ax = fig.add_axes([.61, .595, .35, .185])
             table_ax.axis("off")
-            cell_rows = [[("已达 · " if drawdown >= level else "下一档 · " if level == next_level else "") + f'跌{level}%', number(high * (1-level/100))] for level in levels]
-            table = table_ax.table(cellText=cell_rows, colLabels=["回落档位", f'对应数值（{s["unit"]}）'], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
+            cell_rows = [[("已达 · " if level in reached else "下一档 · " if level == next_level else "") + f'跌{level}%', number(high * (1-level/100))] for level in levels]
+            table = table_ax.table(cellText=cell_rows, colLabels=["回落档位", "对应价格" if MARKET == "commodity" else f'对应数值（{s["unit"]}）'], cellLoc="center", colLoc="center", bbox=[0, 0, 1, 1])
             table.auto_set_font_size(False)
             table.set_fontsize(11.5)
             for (r, c), cell in table.get_celld().items():
-                status = "green" if r and drawdown >= levels[r-1] else "yellow" if r and levels[r-1] == next_level else "other"
+                status = "green" if r and levels[r-1] in reached else "yellow" if r and levels[r-1] == next_level else "other"
                 cell.set_edgecolor("#e2e8f0")
                 cell.set_linewidth(.6)
                 cell.set_facecolor("#e2e8f0" if r == 0 else "#ecfdf5" if status == "green" else "#fef3c7" if status == "yellow" else "#ffffff")
@@ -237,13 +269,13 @@ def render(payload, report, output):
             fig.text(.105, .425 if point_ranks else .508, f'{subtitle}   {start} 至 {end}', fontsize=12, weight="bold", color="#334155")
         ax.plot(dates, values, color=color, linewidth=1.7)
         ax.scatter([end], [values[-1]], color=color, s=30, zorder=4)
-        label = f'{values[-1]:,.2f}' if s.get('decimals') == 2 else f'{values[-1]:,.0f}'
+        label = metric_number(values[-1], s.get("decimals", 0))
         ax.annotate(label, (end, values[-1]), xytext=(-10, 15),
                     textcoords="offset points", ha="right", color=color, weight="bold",
                     bbox={"facecolor": "white", "edgecolor": "none", "alpha": .9})
         ax.set_xlim(start, end)
         ax.margins(y=.16)
-        ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("{x:,.0f}"))
+        ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("{x:,." + str(s.get("decimals", 0) if MARKET == "commodity" else 0) + "f}"))
         ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
         ax.grid(axis="y", color="#e2e8f0", linewidth=.8)
@@ -252,7 +284,7 @@ def render(payload, report, output):
             spine.set_visible(False)
         source = s.get('sourceLabel', '中证指数官网 · 日度收盘')
         fig.text(.105, .07, f'数据：{source} · 数据日期 {end}', fontsize=10, color="#64748b")
-        prefix = 'us-index' if MARKET == 'us' else 'a-share'
+        prefix = 'commodity' if MARKET == 'commodity' else 'us-index' if MARKET == 'us' else 'a-share'
         file = output / f'{prefix}-{s["code"]}-1y.png'
         fig.savefig(file, dpi=160, facecolor=fig.get_facecolor())
         plt.close(fig)
@@ -266,7 +298,7 @@ def render(payload, report, output):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("--market", choices=["a", "us"], default="a")
+    p.add_argument("--market", choices=["a", "us", "commodity"], default="a")
     p.add_argument("--data", default="reports/a-share-chart-data.json")
     p.add_argument("--report", default="reports/a-share-daily.txt")
     p.add_argument("--output", default="report-images")
@@ -275,4 +307,8 @@ if __name__ == "__main__":
         MARKET = "us"
         INDICES = [("SPX", "标普500指数"), ("COMP", "纳斯达克综合指数"), ("NDX", "纳斯达克100指数")]
         METRICS = []
+    elif a.market == "commodity":
+        MARKET = "commodity"
+        INDICES = []
+        METRICS = COMMODITIES
     render(json.loads(Path(a.data).read_text(encoding="utf-8")), Path(a.report).read_text(encoding="utf-8"), Path(a.output))
